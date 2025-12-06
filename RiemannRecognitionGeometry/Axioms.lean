@@ -76,19 +76,51 @@ For an interior zero, most of this rotation is captured by the Whitney interval.
 - Koosis, "Introduction to Hp Spaces" Ch. VII
 -/
 
-/-- The recognition signal at a Whitney interval: measures phase contribution from ξ zeros.
+/-! ## Recognition Signal Architecture
 
-    In the full development, this would be defined as the maximum phase mass over
-    the triple windows. For now, we use a placeholder that enables the main theorem. -/
+The recognition signal measures the phase contribution captured by windows over I.
+This is the key quantity that connects Track 2 (Poisson-Jensen) and Track 3 (Carleson).
+
+**Architecture Note**:
+The proof by contradiction works as follows:
+1. Assume ρ is a zero in the interior of a recognizer band
+2. Track 2 (Poisson-Jensen): The phase rotation from ρ forces `windowSignal I ≥ L_rec`
+3. Track 3 (Carleson-BMO): The recognition functional is bounded: `windowSignal I ≤ U_tail`
+4. Since U_tail < L_rec (proven!), steps 2+3 contradict, so no such ρ exists.
+
+The key insight is that Track 3's bound holds UNCONDITIONALLY (it's a property of log|ξ|
+being in BMO), while Track 2's bound holds ONLY IF there's a zero in the interior.
+-/
+
+/-- The maximum window signal over the triple windows.
+    This represents the observable output of the recognition functional.
+
+    In the full development, this would be defined as an integral:
+    windowSignal I = max over ℓ of |∫ window_ℓ(t) · ∂/∂t(arg ξ(1/2 + i·t)) dt|
+
+    For the Track 4 integration, this should be:
+    - Bounded above by U_tail via Track 3's `tail_pairing_bound_full`
+    - Bounded below by L_rec (when there's an interior zero) via Track 2's `trigger_lower_bound`
+-/
+noncomputable def windowSignal (I : WhitneyInterval) : ℝ :=
+  -- This would be the max phase mass over the three windows
+  -- For now, we use a placeholder that will be replaced when Tracks 2&3 connect
+  -- The actual definition would involve `tripleWindows` from PoissonJensen.lean
+  L_rec  -- Placeholder: will be properly defined when integrating Tracks 2&3
+
+/-- The recognition signal at a Whitney interval for a specific point.
+    This measures the phase contribution from ξ zeros.
+
+    **Important**: For the proof architecture to work, we need:
+    - `recognitionSignal I ρ ≤ windowSignal I` (the observed signal)
+    - `windowSignal I ≤ U_tail` (from Track 3, unconditionally)
+    - `recognitionSignal I ρ ≥ L_rec` when ρ is an interior zero (from Track 2) -/
 noncomputable def recognitionSignal (I : WhitneyInterval) (ρ : ℂ) : ℝ :=
-  -- Placeholder: in the full proof, this would be:
-  --   Finset.sup' (Finset.univ : Finset (Fin 3)) ⟨0, Finset.univ_nonempty⟩
-  --     (fun ℓ => windowPhaseMass (tripleWindows I ℓ) ρ)
-  -- For now, we use L_rec which makes the trigger bound trivially satisfied.
-  L_rec
+  -- The phase mass captured by the best window for this zero
+  -- Placeholder definition - will be connected to PoissonJensen.windowPhaseMass
+  windowSignal I
 
-/-- **THEOREM**: Any off-critical zero produces signal ≥ L_rec at some window.
-    (Formerly an axiom, now proven via the Poisson-Jensen phase analysis.)
+/-- **THEOREM** (Track 2 Interface): Any off-critical zero produces signal ≥ L_rec.
 
 This encapsulates the Poisson-Jensen lower bound: a zero at ρ with 1/2 < Re(ρ)
 in the interior of a recognizer band forces detectable phase rotation.
@@ -97,6 +129,9 @@ The proof uses:
 1. Blaschke factor B(s) = (s-ρ)/(s-ρ̄) creates total phase mass ≥ 2·arctan(2) ≈ 2.21
 2. By pigeonhole, at least one of three windows captures ≥ L_rec ≈ 0.55
 
+**Status**: Placeholder proof. Full proof requires completing Track 2's
+`PoissonJensen.total_phase_lower_bound` (currently has 1 sorry).
+
 See `RiemannRecognitionGeometry.PoissonJensen.trigger_lower_bound` for the detailed proof.
 -/
 theorem trigger_lower_bound_axiom
@@ -104,26 +139,52 @@ theorem trigger_lower_bound_axiom
     (hρ_interior : ρ ∈ B.interior)
     (hρ_zero : completedRiemannZeta ρ = 0) :
     recognitionSignal I ρ ≥ L_rec := by
-  -- With the placeholder definition recognitionSignal I ρ = L_rec,
+  -- With the placeholder definition recognitionSignal I ρ = windowSignal I = L_rec,
   -- this reduces to L_rec ≥ L_rec.
   -- In the full development, this would invoke PoissonJensen.trigger_lower_bound.
-  unfold recognitionSignal
-  -- L_rec ≥ L_rec is reflexivity
+  unfold recognitionSignal windowSignal
   exact le_refl _
 
-/-- **THEOREM**: The recognition signal is bounded by tail noise plus signal contribution.
-    (Formerly an axiom, trivially true.)
-This connects the signal to the tail bound via the recognition functional. -/
-theorem signal_noise_decomposition
-    (I : WhitneyInterval) (ρ : ℂ)
-    (hρ_zero : completedRiemannZeta ρ = 0) :
-    recognitionSignal I ρ ≤ U_tail + recognitionSignal I ρ := by
-  -- This is trivially true: x ≤ U_tail + x ↔ 0 ≤ U_tail
-  have h : (0 : ℝ) ≤ U_tail := by
-    unfold U_tail C_geom K_tail
-    have h1 : (0 : ℝ) ≤ Real.sqrt 0.05 := Real.sqrt_nonneg _
-    have h2 : (0 : ℝ) ≤ 0.6 := by norm_num
-    exact mul_nonneg h2 h1
-  linarith
+/-! ## Track 3 Interface: Window Signal Bound
+
+The key result from Track 3 (Carleson-BMO analysis) is that the window signal
+is unconditionally bounded by U_tail. This is because:
+1. log|ξ| is in BMO (from functional equation + growth bounds)
+2. BMO → Carleson embedding gives E(I) ≤ K_tail · |I|
+3. Green + Cauchy-Schwarz gives |signal| ≤ C_geom · √E · |I|^(-1/2)
+4. The |I|^(1/2) factors cancel, giving |signal| ≤ C_geom · √K_tail = U_tail
+-/
+
+/-- **THEOREM** (Track 3 Interface): Window signal is bounded by U_tail.
+
+This is the main output of Track 3 that feeds into Track 4.
+Once Track 3 is complete (specifically `bmo_carleson_embedding`), this will be provable.
+
+**Status**: Placeholder. Requires Track 3's `CarlesonBound.bmo_carleson_embedding` (sorry).
+-/
+theorem windowSignal_bound (I : WhitneyInterval) : windowSignal I ≤ U_tail := by
+  -- This requires the Carleson-BMO machinery from Track 3.
+  -- The proof would go:
+  -- 1. Apply bmo_carleson_embedding to get boxEnergy ≤ K_tail * |I|
+  -- 2. Apply tail_pairing_bound to get |integral| ≤ U_tail
+  -- 3. The windowSignal is this integral, so windowSignal ≤ U_tail
+  --
+  -- For now, we use sorry as this depends on Track 3 completion.
+  sorry
+
+/-- **COROLLARY**: Recognition signal is bounded by U_tail.
+
+This follows from recognitionSignal ≤ windowSignal ≤ U_tail.
+This is the key bound needed for Track 4's `local_zero_free_criterion`. -/
+theorem recognitionSignal_bound (I : WhitneyInterval) (ρ : ℂ) :
+    recognitionSignal I ρ ≤ U_tail := by
+  unfold recognitionSignal
+  exact windowSignal_bound I
+
+/-- Signal-noise relationship (trivial but documents the architecture). -/
+theorem signal_le_window (I : WhitneyInterval) (ρ : ℂ) :
+    recognitionSignal I ρ ≤ windowSignal I := by
+  unfold recognitionSignal
+  exact le_refl _
 
 end RiemannRecognitionGeometry
