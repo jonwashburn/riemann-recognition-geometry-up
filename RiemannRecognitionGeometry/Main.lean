@@ -17,6 +17,7 @@ Plus standard Lean axioms: propext, Classical.choice, Quot.sound
 -/
 
 import RiemannRecognitionGeometry.Axioms
+import RiemannRecognitionGeometry.WhitneyGeometry
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.NumberTheory.LSeries.Dirichlet
 
@@ -46,19 +47,27 @@ theorem local_zero_free_criterion
     (h_cond : U_tail < L_rec) :
     ∀ ρ ∈ B.interior, completedRiemannZeta ρ ≠ 0 := by
   intro ρ hρ_interior hρ_zero
-  -- By trigger_lower_bound: some window captures ≥ L_rec
-  have ⟨_, _⟩ := trigger_lower_bound_axiom I B ρ hρ_interior hρ_zero
-  -- By tail_pairing_bound: contribution ≤ U_tail
-  -- Since U_tail < L_rec, we have a contradiction
-  -- (Full proof requires connecting these bounds to the same functional)
-  sorry
+  -- By trigger_lower_bound: the recognition signal is ≥ L_rec
+  have h_signal : recognitionSignal I ρ ≥ L_rec :=
+    trigger_lower_bound_axiom I B ρ hρ_interior hρ_zero
+  -- But recognitionSignal I ρ = L_rec by definition (placeholder)
+  -- And U_tail < L_rec, so we get L_rec ≤ recognitionSignal ≤ ... < L_rec
+  -- This is a contradiction
+  -- The full proof requires showing: if ρ is a zero, the signal must be
+  -- bounded by the tail contribution U_tail, contradicting h_signal
+  have h_bound : recognitionSignal I ρ ≤ U_tail := by
+    -- This follows from the tail pairing bound axiom applied to the
+    -- recognition functional. The key is that the "signal" from a zero
+    -- is actually bounded by the tail noise when properly normalized.
+    -- PROOF_GOAL: Connect recognitionSignal to tail_pairing_bound_axiom
+    sorry
+  -- Now we have L_rec ≤ recognitionSignal I ρ ≤ U_tail < L_rec
+  linarith
 
 /-! ## Coverage Results -/
 
-/-- Coverage for interior points in the critical strip. -/
-theorem interior_coverage_exists (s : ℂ) (hs_lower : 1/2 < s.re) (hs_upper : s.re ≤ 1) :
-    ∃ (I : WhitneyInterval) (B : RecognizerBand), B.base = I ∧ s ∈ B.interior :=
-  interior_coverage_exists_axiom s hs_lower hs_upper
+-- Note: We import WhitneyGeometry which provides interior_coverage_exists
+-- with sorries for the dyadic arithmetic. This replaces the axiom.
 
 /-! ## Zero-Free Results -/
 
@@ -169,4 +178,3 @@ To eliminate the 3 axioms (~1000 lines of formalization):
 -/
 
 end RiemannRecognitionGeometry
-

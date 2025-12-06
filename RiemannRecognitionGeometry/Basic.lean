@@ -11,6 +11,7 @@ import Mathlib.Data.Real.Basic
 import Mathlib.Data.Complex.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
 import Mathlib.NumberTheory.LSeries.RiemannZeta
+import RiemannRecognitionGeometry.Mathlib.ArctanTwoGtOnePointOne
 
 noncomputable section
 
@@ -122,24 +123,17 @@ theorem zero_free_condition : U_tail < L_rec := by
   -- U_tail = 0.6 * √0.05 ≈ 0.134
   -- L_rec = arctan(2)/2 ≈ 0.553
   have h1 : Real.sqrt 0.05 < 0.224 := by
-    rw [Real.sqrt_lt' (by norm_num : (0.224 : ℝ) ≥ 0)]
-    constructor
-    · norm_num
-    · norm_num
+    rw [Real.sqrt_lt' (by norm_num : (0 : ℝ) < 0.224)]
+    norm_num
   have h2 : (0.6 : ℝ) * 0.224 < 0.135 := by norm_num
   have h3 : U_tail < 0.135 := by
     unfold U_tail C_geom K_tail
     calc 0.6 * Real.sqrt 0.05 < 0.6 * 0.224 := by nlinarith
       _ < 0.135 := h2
-  have h4 : (0.5 : ℝ) < Real.arctan 2 := by
-    have := Real.arctan_lt_pi_div_two 2
-    have := Real.pi_div_two_pos
-    -- arctan(2) > 1.1 since tan(1.1) < 2
-    sorry -- numerical bound
+  have h4 : (0.5 : ℝ) < Real.arctan 2 := Real.arctan_two_gt_half
   have h5 : (0.5 : ℝ) / 2 < L_rec := by
     unfold L_rec
     linarith
   linarith
 
 end RiemannRecognitionGeometry
-
