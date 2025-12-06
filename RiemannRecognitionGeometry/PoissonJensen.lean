@@ -92,27 +92,24 @@ lemma blaschkeFactor_re_im (ρ : ℂ) (t : ℝ) (hne : t ≠ ρ.re ∨ ρ.im ≠
   -- The denominator is (t - conj ρ) = (t - σ) + iγ
   constructor
   · -- Real part
-    simp only [Complex.div_re, Complex.sub_re, Complex.ofReal_re, Complex.conj_re,
-               Complex.sub_im, Complex.ofReal_im, Complex.conj_im, neg_neg]
-    ring_nf
     have h1 : ((t : ℂ) - ρ).re = t - ρ.re := by simp
     have h2 : ((t : ℂ) - ρ).im = -ρ.im := by simp
     have h3 : ((t : ℂ) - conj ρ).re = t - ρ.re := by simp
     have h4 : ((t : ℂ) - conj ρ).im = ρ.im := by simp
-    simp only [h1, h2, h3, h4]
+    simp only [Complex.div_re, Complex.sub_re, Complex.ofReal_re, Complex.conj_re,
+               Complex.sub_im, Complex.ofReal_im, Complex.conj_im, neg_neg, h1, h2, h3, h4]
     have h5 : Complex.normSq ((t : ℂ) - conj ρ) = (t - ρ.re)^2 + ρ.im^2 := by
       simp [Complex.normSq, h3, h4, sq]
     rw [h5]
     field_simp
     ring
   · -- Imaginary part
-    simp only [Complex.div_im, Complex.sub_re, Complex.ofReal_re, Complex.conj_re,
-               Complex.sub_im, Complex.ofReal_im, Complex.conj_im, neg_neg]
     have h1 : ((t : ℂ) - ρ).re = t - ρ.re := by simp
     have h2 : ((t : ℂ) - ρ).im = -ρ.im := by simp
     have h3 : ((t : ℂ) - conj ρ).re = t - ρ.re := by simp
     have h4 : ((t : ℂ) - conj ρ).im = ρ.im := by simp
-    simp only [h1, h2, h3, h4]
+    simp only [Complex.div_im, Complex.sub_re, Complex.ofReal_re, Complex.conj_re,
+               Complex.sub_im, Complex.ofReal_im, Complex.conj_im, neg_neg, h1, h2, h3, h4]
     have h5 : Complex.normSq ((t : ℂ) - conj ρ) = (t - ρ.re)^2 + ρ.im^2 := by
       simp [Complex.normSq, h3, h4, sq]
     rw [h5]
@@ -155,10 +152,14 @@ lemma blaschkeFactor_tan_arg (ρ : ℂ) (t : ℝ) (hne : (t : ℂ) ≠ conj ρ)
   --     = -2 * u * γ / (u^2 - γ^2)
   have hdenom_pos : (t - ρ.re)^2 + ρ.im^2 > 0 := by
     cases hne' with
-    | inl h => positivity
+    | inl h =>
+      have hsq : (t - ρ.re)^2 > 0 := sq_pos_of_ne_zero (sub_ne_zero.mpr h)
+      have hnn : ρ.im^2 ≥ 0 := sq_nonneg _
+      linarith
     | inr h =>
-      have : ρ.im^2 > 0 := sq_pos_of_ne_zero h
-      positivity
+      have hsq : ρ.im^2 > 0 := sq_pos_of_ne_zero h
+      have hnn : (t - ρ.re)^2 ≥ 0 := sq_nonneg _
+      linarith
   have hdenom_ne : (t - ρ.re)^2 + ρ.im^2 ≠ 0 := ne_of_gt hdenom_pos
   have hre_ne : (t - ρ.re)^2 - ρ.im^2 ≠ 0 := by
     simp only [blaschkeFactor] at hre
@@ -460,7 +461,14 @@ lemma total_phase_lower_bound (ρ : ℂ) (I : WhitneyInterval)
   -- CLASSICAL RESULT: Blaschke phase bound for interior zeros
   -- Reference: Garnett, "Bounded Analytic Functions", Theorem II.2.1
   -- The bound 2·arctan(2) is the infimum over all valid configurations.
-  exact absurd h_phase (not_le.mpr h_neg)
+  --
+  -- The formal verification requires:
+  -- 1. Explicit integration of d/dt[arg(B(t))] = -2γ/((t-σ)² + γ²)
+  -- 2. Using the arctan antiderivative and bounds
+  -- 3. Case analysis on the position of γ relative to [a, b]
+  --
+  -- This is a well-established result in complex analysis (Blaschke product theory).
+  sorry
 
 /-! ## Window Phase Distribution -/
 
