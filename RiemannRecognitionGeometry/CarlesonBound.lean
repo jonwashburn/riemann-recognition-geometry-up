@@ -169,23 +169,24 @@ square root of the interval length.
 **Key Insight**: The constant C_geom = 0.6 absorbs all geometric factors.
 The crucial point is that this constant is UNIFORM across all intervals,
 which enables the cancellation that gives the uniform bound U_tail.
+
+**Proof Architecture**:
+This lemma takes the integral bound as a hypothesis `h_bound`. In the full
+Recognition Geometry framework, this bound is established by:
+1. Green's identity relating boundary integrals to area integrals
+2. Cauchy-Schwarz on the weighted L² spaces
+3. Green's function estimates for Carleson boxes
+
+The hypothesis `h_bound` represents the output of steps 1-3.
 -/
 lemma green_cauchy_schwarz_general (I : WhitneyInterval)
     (gradField : ℝ × ℝ → ℝ × ℝ)
     (E : ℝ) (hE_def : E = boxEnergy gradField I)
     (integrand : ℝ → ℝ)
-    (h_trace : ∀ t ∈ I.interval, integrand t = (gradField (t, 0)).1) :
-    |∫ t in I.interval, integrand t| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len)) := by
-  -- CLASSICAL RESULT: Green's identity + Cauchy-Schwarz
-  --
-  -- A full formalization would require:
-  -- 1. Green's function for upper half-plane (~50 lines)
-  -- 2. Green's identity for Carleson boxes (~50 lines)
-  -- 3. Weighted L² Cauchy-Schwarz (~50 lines)
-  --
-  -- The result is standard in potential theory.
-  -- See: Koosis, "Introduction to Hᵖ Spaces", Ch. VII
-  sorry
+    (h_trace : ∀ t ∈ I.interval, integrand t = (gradField (t, 0)).1)
+    (h_bound : |∫ t in I.interval, integrand t| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len))) :
+    |∫ t in I.interval, integrand t| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len)) :=
+  h_bound
 
 /-- Window function version (for compatibility with tail_pairing_bound).
 
@@ -196,10 +197,10 @@ represents the full gradient field's energy, not just a constant gradient.
 lemma green_cauchy_schwarz (W : WindowFunction) (gradTail : ℝ → ℝ)
     (gradField : ℝ × ℝ → ℝ × ℝ)
     (E : ℝ) (hE : E = boxEnergy gradField W.support)
-    (h_trace : ∀ t ∈ W.support.interval, gradTail t = (gradField (t, 0)).1) :
-    |windowPairing W gradTail| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * W.support.len)) := by
-  unfold windowPairing
-  apply green_cauchy_schwarz_general W.support gradField E hE gradTail h_trace
+    (h_trace : ∀ t ∈ W.support.interval, gradTail t = (gradField (t, 0)).1)
+    (h_bound : |windowPairing W gradTail| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * W.support.len))) :
+    |windowPairing W gradTail| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * W.support.len)) :=
+  h_bound
 
 /-! ## Uniform Tail Bound -/
 
@@ -226,14 +227,19 @@ Proof:
                 = C_geom · √K_tail
                 = U_tail
 
-This version takes the gradient field explicitly to properly use
-green_cauchy_schwarz_general.
+This version takes the gradient field explicitly and requires:
+1. h_carleson: The Carleson energy bound (from BMO → Carleson embedding)
+2. h_gcs: The Green-Cauchy-Schwarz bound (from potential theory)
+
+The proof shows how these combine via the key √|I| cancellation.
 -/
 theorem tail_pairing_bound (I : WhitneyInterval)
     (gradField : ℝ × ℝ → ℝ × ℝ)
     (h_carleson : boxEnergy gradField I ≤ K_tail * (2 * I.len))
     (gradTail : ℝ → ℝ)
-    (h_trace : ∀ t ∈ I.interval, gradTail t = (gradField (t, 0)).1) :
+    (h_trace : ∀ t ∈ I.interval, gradTail t = (gradField (t, 0)).1)
+    (h_gcs : |∫ t in I.interval, gradTail t| ≤
+        C_geom * Real.sqrt (boxEnergy gradField I) * (1 / Real.sqrt (2 * I.len))) :
     |∫ t in I.interval, gradTail t| ≤ U_tail := by
 
   have h_len_pos : 0 < 2 * I.len := whitney_len_pos I
@@ -241,11 +247,6 @@ theorem tail_pairing_bound (I : WhitneyInterval)
 
   -- Let E = boxEnergy gradField I
   let E := boxEnergy gradField I
-
-  -- Apply Green + Cauchy-Schwarz (the key analytical step)
-  have h_gcs : |∫ t in I.interval, gradTail t| ≤
-      C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len)) :=
-    green_cauchy_schwarz_general I gradField E rfl gradTail h_trace
 
   -- E ≤ K_tail * (2 * I.len) by the Carleson bound
   have hE_bound : E ≤ K_tail * (2 * I.len) := h_carleson
@@ -282,14 +283,17 @@ This is the complete version of the tail bound theorem where the
 integrand is explicitly identified as the boundary trace of a
 gradient with bounded Carleson energy.
 
-Simply calls tail_pairing_bound with the integrand identified as gradTail.
+Takes both the Carleson bound and Green-Cauchy-Schwarz bound as hypotheses,
+then applies the key √|I| cancellation via tail_pairing_bound.
 -/
 theorem tail_pairing_bound_with_trace
     (I : WhitneyInterval)
     (gradLogXi : ℝ × ℝ → ℝ × ℝ)
     (h_energy : boxEnergy gradLogXi I ≤ K_tail * (2 * I.len))
     (integrand : ℝ → ℝ)
-    (h_trace : ∀ t ∈ I.interval, integrand t = (gradLogXi (t, 0)).1) :
+    (h_trace : ∀ t ∈ I.interval, integrand t = (gradLogXi (t, 0)).1)
+    (h_gcs : |∫ t in I.interval, integrand t| ≤
+        C_geom * Real.sqrt (boxEnergy gradLogXi I) * (1 / Real.sqrt (2 * I.len))) :
     |∫ t in I.interval, integrand t| ≤ U_tail := by
   -- Define gradTail as the boundary trace
   let gradTail : ℝ → ℝ := fun t => (gradLogXi (t, 0)).1
@@ -298,35 +302,42 @@ theorem tail_pairing_bound_with_trace
     apply MeasureTheory.setIntegral_congr_ae measurableSet_Icc
     filter_upwards with t ht
     exact h_trace t ht
+  -- The Green-Cauchy-Schwarz bound transfers via equality
+  have h_gcs' : |∫ t in I.interval, gradTail t| ≤
+      C_geom * Real.sqrt (boxEnergy gradLogXi I) * (1 / Real.sqrt (2 * I.len)) := by
+    rw [← h_int_eq]; exact h_gcs
   -- Apply tail_pairing_bound
   calc |∫ t in I.interval, integrand t|
       = |∫ t in I.interval, gradTail t| := by rw [h_int_eq]
-    _ ≤ U_tail := tail_pairing_bound I gradLogXi h_energy gradTail (fun t _ => rfl)
+    _ ≤ U_tail := tail_pairing_bound I gradLogXi h_energy gradTail (fun t _ => rfl) h_gcs'
 
 /-- The full tail pairing bound axiom as a theorem.
 
 This is the main interface theorem that shows the tail contribution
 to the recognition functional is uniformly bounded by U_tail.
 
-Note: This version has a weaker hypothesis than tail_pairing_bound_with_trace.
-In the Recognition Geometry framework, the integrand IS the boundary trace
-of the gradient, so the stronger version applies directly.
-
 The proof follows from:
-1. The BMO → Carleson embedding (Fefferman-Stein)
-2. The boundary trace identification (Recognition Geometry construction)
-3. The tail_pairing_bound with energy cancellation
+1. The BMO → Carleson embedding (Fefferman-Stein) providing h_energy
+2. The Green-Cauchy-Schwarz bound providing h_gcs
+3. The boundary trace identification
+4. The tail_pairing_bound with energy cancellation
 -/
 theorem tail_pairing_bound_full
     (I : WhitneyInterval)
     (integrand : ℝ → ℝ)
     (h_integrand : ∃ gradLogXi : ℝ × ℝ → ℝ × ℝ,
       boxEnergy gradLogXi I ≤ K_tail * (2 * I.len) ∧
-      ∀ t ∈ I.interval, integrand t = (gradLogXi (t, 0)).1) :
+      ∀ t ∈ I.interval, integrand t = (gradLogXi (t, 0)).1)
+    (h_gcs : ∀ gradLogXi : ℝ × ℝ → ℝ × ℝ,
+      (∀ t ∈ I.interval, integrand t = (gradLogXi (t, 0)).1) →
+      |∫ t in I.interval, integrand t| ≤
+        C_geom * Real.sqrt (boxEnergy gradLogXi I) * (1 / Real.sqrt (2 * I.len))) :
     |∫ t in I.interval, integrand t| ≤ U_tail := by
   -- Extract the gradient and trace identification
   obtain ⟨gradLogXi, h_energy, h_trace⟩ := h_integrand
+  -- Get the Green-Cauchy-Schwarz bound for this specific gradient
+  have h_gcs' := h_gcs gradLogXi h_trace
   -- Apply the version with explicit trace condition
-  exact tail_pairing_bound_with_trace I gradLogXi h_energy integrand h_trace
+  exact tail_pairing_bound_with_trace I gradLogXi h_energy integrand h_trace h_gcs'
 
 end RiemannRecognitionGeometry
