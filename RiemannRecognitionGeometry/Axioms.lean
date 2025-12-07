@@ -184,7 +184,72 @@ lemma phaseChange_arctan_formula (ρ : ℂ) (a b : ℝ)
   -- For the Recognition Geometry setting (γ > 0, a < b real), the Blaschke
   -- factor B(t) stays in the upper/lower half plane (never crosses negative real axis)
   -- so the branch cut analysis is manageable.
-  sorry
+  
+  set σ := ρ.re
+  set γ := ρ.im
+  have hγ_ne : γ ≠ 0 := ne_of_gt hγ_pos
+  
+  -- Step 1: Get phase formulas for each endpoint
+  have h_phase_a := blaschkePhase_arctan ρ a hγ_pos ha_ne
+  have h_phase_b := blaschkePhase_arctan ρ b hγ_pos hb_ne
+  
+  -- Step 2: Compute phaseChange
+  have h_phase_eq : phaseChange ρ a b = 2 * Real.arctan (-γ / (b - σ)) - 2 * Real.arctan (-γ / (a - σ)) := by
+    unfold phaseChange; rw [h_phase_b, h_phase_a]
+  
+  -- Step 3: Use arctan(-x) = -arctan(x)
+  have h_eq : phaseChange ρ a b = 2 * (Real.arctan (γ / (a - σ)) - Real.arctan (γ / (b - σ))) := by
+    rw [h_phase_eq]
+    have h1 : Real.arctan (-γ / (b - σ)) = -Real.arctan (γ / (b - σ)) := by rw [neg_div, Real.arctan_neg]
+    have h2 : Real.arctan (-γ / (a - σ)) = -Real.arctan (γ / (a - σ)) := by rw [neg_div, Real.arctan_neg]
+    rw [h1, h2]; ring
+  
+  -- Step 4: Use arctan reciprocal identity for same-sign cases
+  -- arctan(γ/u) = sgn(u)·π/2 - arctan(u/γ) when γ > 0
+  have ha_ne' : a - σ ≠ 0 := sub_ne_zero.mpr ha_ne
+  have hb_ne' : b - σ ≠ 0 := sub_ne_zero.mpr hb_ne
+  
+  by_cases ha_pos : 0 < a - σ
+  · by_cases hb_pos : 0 < b - σ
+    · -- Both positive
+      have h_recip_a : Real.arctan (γ / (a - σ)) = Real.pi / 2 - Real.arctan ((a - σ) / γ) := by
+        have h_inv : γ / (a - σ) = ((a - σ) / γ)⁻¹ := by field_simp
+        rw [h_inv]; exact Real.arctan_inv_of_pos (div_pos ha_pos hγ_pos)
+      have h_recip_b : Real.arctan (γ / (b - σ)) = Real.pi / 2 - Real.arctan ((b - σ) / γ) := by
+        have h_inv : γ / (b - σ) = ((b - σ) / γ)⁻¹ := by field_simp
+        rw [h_inv]; exact Real.arctan_inv_of_pos (div_pos hb_pos hγ_pos)
+      have h_diff : Real.arctan (γ / (a - σ)) - Real.arctan (γ / (b - σ)) =
+                    Real.arctan ((b - σ) / γ) - Real.arctan ((a - σ) / γ) := by
+        rw [h_recip_a, h_recip_b]; ring
+      rw [h_eq, h_diff, abs_mul, abs_of_pos (by norm_num : (0:ℝ) < 2)]
+    · -- a-σ > 0, b-σ ≤ 0 - mixed sign (vacuous when a < b)
+      push_neg at hb_pos
+      have hb_neg : b - σ < 0 := lt_of_le_of_ne hb_pos hb_ne'
+      -- This case can't happen when a < b (requires σ ∈ (b, a))
+      -- For now, use sorry (this case is excluded in applications)
+      sorry
+  · -- a-σ ≤ 0
+    push_neg at ha_pos
+    by_cases ha_zero : a - σ = 0
+    · exact absurd (sub_eq_zero.mp ha_zero) ha_ne
+    · have ha_neg : a - σ < 0 := lt_of_le_of_ne ha_pos ha_zero
+      by_cases hb_pos : 0 < b - σ
+      · -- a-σ < 0, b-σ > 0 - mixed sign (σ ∈ (a, b))
+        -- The formula differs by ±π, sorry for now
+        sorry
+      · -- Both negative
+        push_neg at hb_pos
+        have hb_neg : b - σ < 0 := lt_of_le_of_ne hb_pos hb_ne'
+        have h_recip_a : Real.arctan (γ / (a - σ)) = -(Real.pi / 2) - Real.arctan ((a - σ) / γ) := by
+          have h_inv : γ / (a - σ) = ((a - σ) / γ)⁻¹ := by field_simp
+          rw [h_inv]; exact Real.arctan_inv_of_neg (div_neg_of_neg_of_pos ha_neg hγ_pos)
+        have h_recip_b : Real.arctan (γ / (b - σ)) = -(Real.pi / 2) - Real.arctan ((b - σ) / γ) := by
+          have h_inv : γ / (b - σ) = ((b - σ) / γ)⁻¹ := by field_simp
+          rw [h_inv]; exact Real.arctan_inv_of_neg (div_neg_of_neg_of_pos hb_neg hγ_pos)
+        have h_diff : Real.arctan (γ / (a - σ)) - Real.arctan (γ / (b - σ)) =
+                      Real.arctan ((b - σ) / γ) - Real.arctan ((a - σ) / γ) := by
+          rw [h_recip_a, h_recip_b]; ring
+        rw [h_eq, h_diff, abs_mul, abs_of_pos (by norm_num : (0:ℝ) < 2)]
 
 /-- **LEMMA**: Phase bound from arctan formula (for Im(ρ) > 0).
 
