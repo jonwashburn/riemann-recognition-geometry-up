@@ -487,26 +487,24 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         -- Δ = arctan((b-σ)/γ) + arctan((σ-a)/γ)
         --
         -- With x + |y| = (b-a)/γ ≤ 10 (from h_width_upper):
-        -- - Maximum Δ occurs when x = |y| = (b-a)/(2γ) ≤ 7
-        -- - Δ_max = 2*arctan(7) ≈ 2.856
-        -- - |phaseChange|_min = 2(π - Δ_max) ≈ 2(0.286) ≈ 0.57 > L_rec ≈ 0.55
+        -- - Maximum Δ occurs when x = |y| = 5
+        -- - Δ_max = 2*arctan(5) ≈ 2.747
+        -- - |phaseChange|_min = 2(π - Δ_max) ≈ 2(0.395) ≈ 0.79 > L_rec ≈ 0.55
         --
-        -- The key numerical bound: 2*arctan(7) < π - L_rec/2
-        -- This requires proving: arctan(7) < (π - arctan(2)/4)/2 ≈ 1.433
+        -- The key numerical bound: 2*arctan(5) < π - L_rec/2
+        -- Since arctan(5) ≈ 1.373 and π - L_rec/2 ≈ 2.865:
+        -- 2*1.373 = 2.746 < 2.865 ✓ (margin: 0.12)
         --
-        -- For now, we use the edge case bound. When σ approaches a or b,
-        -- the phase change approaches π (proven in edge cases).
-        -- By the intermediate value theorem, the phase stays > L_rec.
-
-        -- Use the edge cases: at σ = a+ and σ = b-, |phaseChange| ≈ π
-        -- The minimum is in the interior, but still > L_rec by numerical check
+        -- Proof strategy: Show arctan(5) < 1.38 and π - L_rec/2 > 2.76
         have h_phase_bound : |phaseChange ρ a b| ≥ L_rec := by
-          -- Technical: This requires either:
-          -- 1. Explicit computation of |phaseChange| = 2(π - Δ) and bounding Δ
-          -- 2. Or using the derivative to show minimum > L_rec
-          --
-          -- The mathematical fact is verified: 2*arctan(7) ≈ 2.856 < π - L_rec/2 ≈ 2.867
-          -- So 2(π - 2.856) = 0.57 > L_rec ≈ 0.55
+          -- Key facts:
+          -- 1. arctan(5) = π/2 - arctan(1/5) < π/2 - 1/6 (since arctan(1/5) > 1/6)
+          -- 2. arctan(1/5) > 1/5 - (1/5)³/3 = 1/5 - 1/375 > 0.197
+          -- 3. So arctan(5) < π/2 - 0.197 ≈ 1.374
+          -- 4. 2*arctan(5) < 2.748
+          -- 5. π - L_rec/2 = π - arctan(2)/4 > 3.14 - 0.28 = 2.86
+          -- 6. 2.748 < 2.86, so Δ < π - L_rec/2
+          -- 7. |phaseChange| = 2(π - Δ) > 2*L_rec/2 = L_rec
           sorry
 
         exact h_phase_bound
