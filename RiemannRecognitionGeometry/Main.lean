@@ -73,7 +73,7 @@ lemma whitney_interval_width (ρ : ℂ) (I : WhitneyInterval)
     (hρ_re_lower : 1/2 < ρ.re) (hρ_re_upper : ρ.re ≤ 1)
     (hρ_im : ρ.im ∈ I.interval)
     (hI_covers : ∃ B : RecognizerBand, B.base = I ∧ ρ ∈ B.interior) :
-    (2 * I.len ≥ |ρ.im|) ∧ (2 * I.len ≤ 14 * |ρ.im|) := by
+    (2 * I.len ≥ |ρ.im|) ∧ (2 * I.len ≤ 10 * |ρ.im|) := by
   -- **Proof**: Whitney covering property
   --
   -- For a point ρ in the interior of a RecognizerBand B with base I:

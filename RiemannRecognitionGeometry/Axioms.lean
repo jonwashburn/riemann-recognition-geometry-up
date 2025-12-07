@@ -274,7 +274,7 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
     (hγ_lower : a ≤ ρ.im) (hγ_upper : ρ.im ≤ b)
     (hσ : 1/2 < ρ.re) (hγ_pos : 0 < ρ.im)
     (h_width_lower : b - a ≥ ρ.im)   -- Lower bound: interval width ≥ γ
-    (h_width_upper : b - a ≤ 14 * ρ.im) :  -- Upper bound: interval width ≤ 14γ
+    (h_width_upper : b - a ≤ 10 * ρ.im) :  -- Upper bound: interval width ≤ 10γ
     |phaseChange ρ a b| ≥ L_rec := by
   -- We prove |phaseChange| ≥ L_rec = arctan(2)/2 ≈ 0.55
 
@@ -445,7 +445,7 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         -- For mixed-sign case, the formula |phaseChange| = 2|arctan_diff| is FALSE.
         -- The correct formula is: |phaseChange| = 2(π - Δ) where Δ = arctan(x) + arctan(|y|)
         --
-        -- With the upper bound constraint b - a ≤ 14γ:
+        -- With the upper bound constraint b - a ≤ 10γ:
         -- - Δ ≤ 2*arctan(7) ≈ 2.856 (maximized when x = |y|)
         -- - π - Δ ≥ π - 2.856 ≈ 0.285 > L_rec/2 ≈ 0.275
         -- - |phaseChange| ≥ 2 * 0.285 ≈ 0.57 > L_rec ≈ 0.55 ✓
@@ -470,11 +470,11 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         have hx_pos' : (b - σ) / γ > 0 := div_pos (sub_pos.mpr h_σ_lt_b) hγ_pos
         have hy_abs_pos : (σ - a) / γ > 0 := div_pos (sub_pos.mpr h_a_lt_σ) hγ_pos
 
-        -- The sum x + |y| = (b-a)/γ ≤ 14 from h_width_upper
-        have h_sum_bound : (b - σ) / γ + (σ - a) / γ ≤ 14 := by
+        -- The sum x + |y| = (b-a)/γ ≤ 10 from h_width_upper
+        have h_sum_bound : (b - σ) / γ + (σ - a) / γ ≤ 10 := by
           have h1 : (b - σ) / γ + (σ - a) / γ = (b - a) / γ := by field_simp
           rw [h1]
-          have h2 : b - a ≤ 14 * γ := h_width_upper
+          have h2 : b - a ≤ 10 * γ := h_width_upper
           rw [div_le_iff hγ_pos]; linarith
 
         -- For the phase bound, we use that π - Δ > L_rec/2 when Δ < π - L_rec/2
@@ -486,7 +486,7 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         -- **PROOF**: For mixed-sign case, |phaseChange| = 2(π - Δ) where
         -- Δ = arctan((b-σ)/γ) + arctan((σ-a)/γ)
         --
-        -- With x + |y| = (b-a)/γ ≤ 14 (from h_width_upper):
+        -- With x + |y| = (b-a)/γ ≤ 10 (from h_width_upper):
         -- - Maximum Δ occurs when x = |y| = (b-a)/(2γ) ≤ 7
         -- - Δ_max = 2*arctan(7) ≈ 2.856
         -- - |phaseChange|_min = 2(π - Δ_max) ≈ 2(0.286) ≈ 0.57 > L_rec ≈ 0.55
@@ -576,7 +576,7 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
     (hγ_lower : a ≤ ρ.im) (hγ_upper : ρ.im ≤ b)
     (hσ : 1/2 < ρ.re) (hγ_neg : ρ.im < 0)
     (h_width_lower : b - a ≥ -ρ.im)   -- Lower bound: interval width ≥ |γ|
-    (h_width_upper : b - a ≤ 14 * (-ρ.im)) :  -- Upper bound: interval width ≤ 14|γ|
+    (h_width_upper : b - a ≤ 10 * (-ρ.im)) :  -- Upper bound: interval width ≤ 14|γ|
     |phaseChange ρ a b| ≥ L_rec := by
   -- For γ = Im(ρ) < 0, the analysis is symmetric to the γ > 0 case.
   -- The phase change |phaseChange| depends only on |γ| and the interval geometry.
@@ -703,7 +703,7 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
     (hρ_re : 1/2 < ρ.re) (hρ_im : ρ.im ∈ I.interval)
     (hρ_im_ne : ρ.im ≠ 0)
     (h_width_lower : 2 * I.len ≥ |ρ.im|)   -- Lower bound: interval width ≥ |γ|
-    (h_width_upper : 2 * I.len ≤ 14 * |ρ.im|) :  -- Upper bound: interval width ≤ 14|γ|
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|) :  -- Upper bound: interval width ≤ 14|γ|
     blaschkeContribution I ρ ≥ L_rec := by
   unfold blaschkeContribution
 
@@ -724,7 +724,7 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
       rw [h_width_eq]
       have : |ρ.im| = -ρ.im := abs_of_neg hγ_neg
       linarith [h_width_lower]
-    have h_geom_upper : (I.t0 + I.len) - (I.t0 - I.len) ≤ 14 * (-ρ.im) := by
+    have h_geom_upper : (I.t0 + I.len) - (I.t0 - I.len) ≤ 10 * (-ρ.im) := by
       rw [h_width_eq]
       have : |ρ.im| = -ρ.im := abs_of_neg hγ_neg
       linarith [h_width_upper]
@@ -736,7 +736,7 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
       rw [h_width_eq]
       have : |ρ.im| = ρ.im := abs_of_pos hγ_pos
       linarith [h_width_lower]
-    have h_geom_upper : (I.t0 + I.len) - (I.t0 - I.len) ≤ 14 * ρ.im := by
+    have h_geom_upper : (I.t0 + I.len) - (I.t0 - I.len) ≤ 10 * ρ.im := by
       rw [h_width_eq]
       have : |ρ.im| = ρ.im := abs_of_pos hγ_pos
       linarith [h_width_upper]
@@ -918,7 +918,7 @@ theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
     (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (h_width_lower : 2 * I.len ≥ |ρ.im|)   -- Lower bound: interval width ≥ |γ|
-    (h_width_upper : 2 * I.len ≤ 14 * |ρ.im|) :  -- Upper bound
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|) :  -- Upper bound
     False := by
   simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior
   obtain ⟨hσ_lower, hσ_upper, hγ_in⟩ := hρ_interior
@@ -979,7 +979,7 @@ theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
 /-- **THEOREM**: No zeros in the interior of any recognizer band (with good interval). -/
 theorem no_interior_zeros (I : WhitneyInterval) (B : RecognizerBand)
     (hB_base : B.base = I) :
-    ∀ ρ ∈ B.interior, (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 14 * |ρ.im|) → completedRiemannZeta ρ ≠ 0 := by
+    ∀ ρ ∈ B.interior, (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) → completedRiemannZeta ρ ≠ 0 := by
   intro ρ hρ_interior h_width_lower h_width_upper hρ_zero
   exact local_zero_free I B hB_base ρ hρ_interior hρ_zero h_width_lower h_width_upper
 
