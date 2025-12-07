@@ -235,6 +235,25 @@ theorem arctan_two_gt_half : (0.5 : ℝ) < Real.arctan 2 := by
   have h := arctan_two_gt_one_point_one
   linarith
 
+/-- Lower bound: `arctan (1/2) > 2/5 = 0.4`.
+
+    From the Taylor series: arctan(1/2) > 1/2 - 1/24 + 1/160 - 1/896
+                                        = (448 - 37.33 + 5.6 - 1)/896
+                                        ≈ 0.464 > 0.4 -/
+theorem arctan_half_gt_two_fifths : (2 : ℝ) / 5 < Real.arctan ((1 : ℝ) / 2) := by
+  obtain ⟨h_lower, _⟩ := arctan_half_between_partial_sums
+  -- The 4-term partial sum is a lower bound
+  -- Sum = 1/2 - 1/24 + 1/160 - 1/896
+  have h_eval : arctanPartialSum ((1 : ℝ) / 2) 4 = 1/2 - 1/24 + 1/160 - 1/896 := by
+    unfold arctanPartialSum arctanSeriesTerm
+    have : (Finset.range 4 : Finset ℕ) = {0,1,2,3} := by decide
+    simp [this, pow_succ, pow_add, two_mul]; ring
+  have h_lower' : 1/2 - 1/24 + 1/160 - 1/896 ≤ Real.arctan ((1 : ℝ) / 2) := by
+    rw [← h_eval]; exact h_lower
+  -- Now prove 2/5 < 1/2 - 1/24 + 1/160 - 1/896
+  have h_num : (2 : ℝ) / 5 < 1/2 - 1/24 + 1/160 - 1/896 := by norm_num
+  linarith
+
 end
 
 end Real
