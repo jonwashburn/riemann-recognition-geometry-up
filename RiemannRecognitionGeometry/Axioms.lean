@@ -138,9 +138,26 @@ lemma arctan_args_opposite_signs (σ γ a b : ℝ) (hγ_pos : 0 < γ)
     - Therefore |phaseChange (conj ρ) a b| = |phaseChange ρ a b| -/
 lemma phaseChange_abs_conj (ρ : ℂ) (a b : ℝ) :
     |phaseChange (starRingEnd ℂ ρ) a b| = |phaseChange ρ a b| := by
-  -- The phase change for conj(ρ) equals the negative of phase change for ρ
-  -- |x| = |-x| gives the result
-  sorry -- Phase conjugation symmetry
+  -- Step 1: blaschkeFactor (conj ρ) t = 1 / blaschkeFactor ρ t
+  -- blaschkeFactor (conj ρ) t = (t - conj ρ) / (t - conj(conj ρ)) = (t - conj ρ) / (t - ρ)
+  -- This is the reciprocal of blaschkeFactor ρ t = (t - ρ) / (t - conj ρ)
+
+  -- Step 2: arg(1/z) = -arg(z) for unimodular z
+  -- So blaschkePhase (conj ρ) t = -blaschkePhase ρ t
+
+  -- Step 3: phaseChange (conj ρ) a b = blaschkePhase (conj ρ) b - blaschkePhase (conj ρ) a
+  --       = -blaschkePhase ρ b - (-blaschkePhase ρ a) = -phaseChange ρ a b
+
+  -- Step 4: |phaseChange (conj ρ) a b| = |-phaseChange ρ a b| = |phaseChange ρ a b|
+  have h_neg : phaseChange (starRingEnd ℂ ρ) a b = -phaseChange ρ a b := by
+    simp only [phaseChange, blaschkePhase, blaschkeFactor]
+    -- blaschkeFactor (conj ρ) t = (t - conj ρ) / (t - conj(conj ρ)) = (t - conj ρ) / (t - ρ)
+    simp only [starRingEnd_apply, star_star]
+    -- Now we have: arg((b - conj ρ)/(b - ρ)) - arg((a - conj ρ)/(a - ρ))
+    -- vs: -(arg((b - ρ)/(b - conj ρ)) - arg((a - ρ)/(a - conj ρ)))
+    -- Using arg(z⁻¹) = -arg(z) for the Blaschke factor
+    sorry -- Phase conjugation: arg((t - conj ρ)/(t - ρ)) = -arg((t - ρ)/(t - conj ρ))
+  rw [h_neg, abs_neg]
 
 /-- **LEMMA**: Phase change equals twice the arctan difference.
 
