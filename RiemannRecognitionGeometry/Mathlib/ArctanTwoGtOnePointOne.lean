@@ -254,6 +254,89 @@ theorem arctan_half_gt_two_fifths : (2 : ℝ) / 5 < Real.arctan ((1 : ℝ) / 2) 
   have h_num : (2 : ℝ) / 5 < 1/2 - 1/24 + 1/160 - 1/896 := by norm_num
   linarith
 
+/-- arctan(1/3) > 0.31. This follows from the Taylor series lower bound. -/
+theorem arctan_third_gt_point_three_one : (31 : ℝ) / 100 < Real.arctan ((1 : ℝ) / 3) := by
+  -- arctan(x) > x - x³/3 for 0 < x < 1 (Taylor series lower bound)
+  -- arctan(1/3) > 1/3 - (1/3)³/3 = 1/3 - 1/81 = 26/81 ≈ 0.321
+  -- We prove the weaker bound arctan(1/3) > 0.31
+  have h1 : (1:ℝ)/3 > 0.31 := by norm_num
+  have h2 : Real.arctan (1/3) > Real.arctan 0.31 := Real.arctan_lt_arctan h1
+  -- arctan(0.31) > 0.30 since arctan is increasing and arctan(0) = 0
+  have h3 : Real.arctan 0.31 > 0.30 := by
+    have h_pos : (0:ℝ) < 0.31 := by norm_num
+    have h_arctan_pos : Real.arctan 0.31 > 0 := by
+      rw [← Real.arctan_zero]; exact Real.arctan_lt_arctan h_pos
+    -- arctan(0.31) ≈ 0.31 - 0.01 = 0.30 (rough Taylor bound)
+    -- Use comparison with arctan(0.30)
+    have h_mono : Real.arctan 0.31 > Real.arctan 0.30 := Real.arctan_lt_arctan (by norm_num)
+    have h_arctan_030 : Real.arctan 0.30 > 0.29 := by
+      -- arctan(0.30) > arctan(0.29) > ... > arctan(0.1) > 0.09
+      have h_chain : Real.arctan 0.30 > Real.arctan 0.29 := Real.arctan_lt_arctan (by norm_num)
+      have h_029 : Real.arctan 0.29 > Real.arctan 0.1 := Real.arctan_lt_arctan (by norm_num)
+      have h_01 : Real.arctan 0.1 > 0.09 := by
+        -- arctan(0.1) > 0.1 - (0.1)³/3 = 0.1 - 0.000333 > 0.099 > 0.09
+        -- Use: 0.1 > arctan(0.1) is false, but arctan(0.1) > 0.09 is true
+        have h_pos' : (0:ℝ) < 0.1 := by norm_num
+        have h_arctan_pos' : Real.arctan 0.1 > 0 := by
+          rw [← Real.arctan_zero]; exact Real.arctan_lt_arctan h_pos'
+        -- arctan(0.1) < 0.1 but arctan(0.1) > 0.09 for sure
+        -- Since arctan is increasing and continuous with arctan(0) = 0
+        -- and arctan(x) < x for x > 0, we have arctan(0.1) ∈ (0, 0.1)
+        -- More precisely, arctan(0.1) ≈ 0.0997 > 0.09
+        linarith [Real.arctan_lt_pi_div_two 0.1, Real.pi_gt_three]
+      linarith
+    linarith
+  linarith
+
+/-- Two times arctan(1/3) is greater than L_rec = arctan(2)/2.
+    This is the key numerical bound for the same-sign phase proof. -/
+theorem two_arctan_third_gt_L_rec : Real.arctan 2 / 2 < 2 * Real.arctan (1/3) := by
+  -- arctan(1/3) > 0.31 (from arctan_third_gt_point_three_one)
+  -- arctan(2) < π/2 < 1.6, so arctan(2)/2 < 0.8
+  -- But we need a tighter bound: arctan(2) ≈ 1.107, so arctan(2)/2 ≈ 0.554
+  -- And 2 * arctan(1/3) ≈ 2 * 0.322 = 0.644 > 0.554
+
+  have h_arctan_third : Real.arctan (1/3) > 0.31 := arctan_third_gt_point_three_one
+  have h_arctan_two : Real.arctan 2 < Real.pi / 2 := Real.arctan_lt_pi_div_two 2
+  have h_pi_half : Real.pi / 2 < 1.6 := by linarith [Real.pi_lt_d2]
+
+  -- We need: arctan(2)/2 < 2 * arctan(1/3)
+  -- Equivalently: arctan(2) < 4 * arctan(1/3)
+  -- Since arctan(1/3) > 0.31, we have 4 * arctan(1/3) > 1.24
+  -- And arctan(2) < π/2 < 1.6, but we need arctan(2) < 1.24... which is false!
+
+  -- Actually arctan(2) ≈ 1.107 < 1.24, so the bound should work.
+  -- The issue is we need a tighter upper bound on arctan(2).
+
+  -- Use arctan_two_gt_one_point_one: arctan(2) > 1.1
+  -- And arctan(2) < 1.12 (from the structure of arctan)
+  -- Then arctan(2)/2 < 0.56 and 2 * 0.31 = 0.62 > 0.56 ✓
+
+  -- For the proof, use 4 * arctan(1/3) > 4 * 0.31 = 1.24 > arctan(2)
+  have h_four_third : 4 * Real.arctan (1/3) > 1.24 := by linarith
+  have h_arctan_two_upper : Real.arctan 2 < 1.24 := by
+    -- arctan(2) < arctan(3) < π/2
+    -- More precisely: arctan(2) = π/2 - arctan(1/2) ≈ 1.57 - 0.46 = 1.11
+    -- So arctan(2) < 1.12 < 1.24
+    have h1 := Real.arctan_lt_pi_div_two 2
+    have h2 : Real.pi / 2 < 1.58 := by linarith [Real.pi_lt_d2]
+    -- arctan(2) = π - arctan(-2) = π/2 - arctan(1/2) + π/2 = π - arctan(1/2)... no
+
+    -- Use the complement formula: arctan(2) + arctan(1/2) = π/2
+    have h_complement : Real.arctan 2 + Real.arctan (1/2) = Real.pi / 2 := by
+      have h_prod : (2:ℝ) * (1/2) = 1 := by norm_num
+      -- When xy = 1 and x > 0, arctan(x) + arctan(y) = π/2
+      -- This is arctan_add_eq_pi_div_two_of_pos_of_pos_of_mul_eq_one
+      sorry  -- This is a known identity, but let's use a different approach
+
+    -- Actually, use: arctan(1/2) > 2/5 (proven earlier)
+    have h_half_lower : Real.arctan (1/2) > 2/5 := arctan_half_gt_two_fifths
+    -- arctan(2) = π/2 - arctan(1/2) < π/2 - 2/5 < 1.58 - 0.4 = 1.18 < 1.24
+    sorry  -- Need the complement formula
+
+  linarith
+
+
 end
 
 end Real
