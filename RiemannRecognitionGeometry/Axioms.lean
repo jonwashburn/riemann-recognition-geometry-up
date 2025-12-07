@@ -517,15 +517,37 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         --
         -- Proof strategy: Show arctan(5) < 1.38 and π - L_rec/2 > 2.76
         have h_phase_bound : |phaseChange ρ a b| ≥ L_rec := by
-          -- Key facts:
-          -- 1. arctan(5) = π/2 - arctan(1/5) < π/2 - 1/6 (since arctan(1/5) > 1/6)
-          -- 2. arctan(1/5) > 1/5 - (1/5)³/3 = 1/5 - 1/375 > 0.197
-          -- 3. So arctan(5) < π/2 - 0.197 ≈ 1.374
-          -- 4. 2*arctan(5) < 2.748
-          -- 5. π - L_rec/2 = π - arctan(2)/4 > 3.14 - 0.28 = 2.86
-          -- 6. 2.748 < 2.86, so Δ < π - L_rec/2
-          -- 7. |phaseChange| = 2(π - Δ) > 2*L_rec/2 = L_rec
-          sorry
+          -- The mixed-sign phase bound:
+          -- |phaseChange| = 2(π - Δ) where Δ = arctan(x) + arctan(|y|) ≤ 2*arctan(5)
+          -- 2*arctan(5) = π - 2*arctan(1/5), so |phaseChange| ≥ 4*arctan(1/5) > L_rec
+
+          -- arctan(5) = π/2 - arctan(1/5)
+          have h_arctan_5_eq : Real.arctan 5 = Real.pi / 2 - Real.arctan (1/5) := by
+            have h_pos : (0:ℝ) < 5 := by norm_num
+            have h_inv := Real.arctan_inv_of_pos h_pos
+            have h_eq : (5:ℝ)⁻¹ = 1/5 := by norm_num
+            rw [h_eq] at h_inv
+            linarith
+
+          have h_two_arctan_5 : 2 * Real.arctan 5 = Real.pi - 2 * Real.arctan (1/5) := by
+            linarith [h_arctan_5_eq]
+
+          -- Key: |phaseChange| ≥ 4*arctan(1/5)
+          -- This follows from the mixed-sign arctan formula:
+          -- phaseChange = 2(arctan(x) - arctan(y)) where x > 0, y < 0
+          -- = 2(arctan(x) + arctan(|y|) - π) (when x|y| < 1 is violated)
+          -- = 2(π - arctan(x) - arctan(|y|)) (by sign)
+          -- ≥ 2(π - 2*arctan(max(x,|y|))) ≥ 2(π - 2*arctan(5))
+          -- = 4*arctan(1/5) (using complement)
+          have h_phaseChange_lower : |phaseChange ρ a b| ≥ 4 * Real.arctan (1/5) := by
+            sorry -- Mixed-sign formula: |phaseChange| = 2(π - Δ) ≥ 4*arctan(1/5)
+
+          -- 4*arctan(1/5) > L_rec
+          have h_four_arctan := Real.four_arctan_fifth_gt_L_rec
+          unfold L_rec
+          calc |phaseChange ρ a b|
+              ≥ 4 * Real.arctan (1/5) := h_phaseChange_lower
+            _ ≥ Real.arctan 2 / 2 := le_of_lt h_four_arctan
 
         exact h_phase_bound
 
