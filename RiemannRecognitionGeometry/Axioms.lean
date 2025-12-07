@@ -274,6 +274,22 @@ lemma phaseChange_arctan_formula (ρ : ℂ) (a b : ℝ)
     - For σ ∈ [a,b]: arctan(x) - arctan(y) ≥ 2·arctan(1/2) ≈ 0.927 (mixed signs)
     - phaseChange ≈ 2·(arctan(x) - arctan(y)) gives |phaseChange| ≥ L_rec
 -/
+-- Helper: arctan subtraction formula for positive arguments
+-- arctan(x) - arctan(y) = arctan((x-y)/(1+xy)) when x, y > 0
+lemma arctan_sub_of_pos {x y : ℝ} (hx : 0 < x) (hy : 0 < y) :
+    Real.arctan x - Real.arctan y = Real.arctan ((x - y) / (1 + x * y)) := by
+  have hxy : x * (-y) < 1 := by nlinarith
+  have h1 : Real.arctan x + Real.arctan (-y) = Real.arctan ((x + (-y)) / (1 - x * (-y))) :=
+    Real.arctan_add hxy
+  rw [Real.arctan_neg] at h1
+  -- h1: arctan x + (-arctan y) = arctan ((x + (-y)) / (1 - x * (-y)))
+  -- which is: arctan x - arctan y = arctan ((x - y) / (1 + xy))
+  have h2 : (x + (-y)) / (1 - x * (-y)) = (x - y) / (1 + x * y) := by ring
+  calc Real.arctan x - Real.arctan y
+      = Real.arctan x + (-Real.arctan y) := by ring
+    _ = Real.arctan ((x + (-y)) / (1 - x * (-y))) := h1
+    _ = Real.arctan ((x - y) / (1 + x * y)) := by rw [h2]
+
 lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
     (hγ_lower : a ≤ ρ.im) (hγ_upper : ρ.im ≤ b)
     (hσ : 1/2 < ρ.re) (hγ_pos : 0 < ρ.im)
