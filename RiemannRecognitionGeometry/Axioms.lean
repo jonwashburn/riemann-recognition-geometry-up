@@ -569,7 +569,59 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         · linarith
         · linarith
       have h_formula := phaseChange_arctan_formula ρ a b hab hγ_pos (by linarith : a ≠ σ) (by linarith : b ≠ σ) h_same_sign
-      sorry -- Requires Whitney interval geometric constraints
+
+      -- Key bound: y = (a-σ)/γ < 1 since σ < a ≤ γ
+      have hy_lt_one : y < 1 := by
+        simp only [y]
+        rw [div_lt_one hγ_pos]
+        have h1 : a - σ < a := by linarith
+        have h2 : a ≤ γ := hγ_lower
+        linarith
+
+      -- For x - y ≥ 1 and y < 1: xy ≤ 1 + (x - y)
+      have hxy_bound : x * y ≤ 1 + (x - y) := by
+        -- x = y + (x-y), so xy = y² + (x-y)y ≤ 1 + (x-y) since y < 1
+        have h1 : x * y = y^2 + (x - y) * y := by ring
+        have h2 : y^2 < 1 := by nlinarith [hy_lt_one, hy_pos]
+        have h3 : (x - y) * y < (x - y) * 1 := by nlinarith [hy_lt_one, hy_pos, h_spread]
+        nlinarith
+
+      -- (x-y)/(1+xy) ≥ 1/3 when xy ≤ 1 + (x-y) and x - y ≥ 1
+      have h_arg_bound : (x - y) / (1 + x * y) ≥ 1/3 := by
+        have h1 : 1 + x * y > 0 := by nlinarith [hx_pos, hy_pos]
+        have h2 : 1 + x * y ≤ 2 + (x - y) := by linarith [hxy_bound]
+        have h3 : (x - y) / (2 + (x - y)) ≥ 1/3 := by
+          rw [ge_iff_le, le_div_iff (by linarith [h_spread] : 2 + (x - y) > 0)]
+          nlinarith [h_spread]
+        calc (x - y) / (1 + x * y) ≥ (x - y) / (2 + (x - y)) := by
+              apply div_le_div_of_nonneg_left (by linarith [h_spread]) h1 h2
+          _ ≥ 1/3 := h3
+
+      -- Use arctan subtraction formula
+      have h_arctan_sub := arctan_sub_of_pos hx_pos hy_pos
+
+      -- arctan((x-y)/(1+xy)) ≥ arctan(1/3)
+      have h_arctan_bound : Real.arctan ((x - y) / (1 + x * y)) ≥ Real.arctan (1/3) :=
+        Real.arctan_le_arctan h_arg_bound
+
+      -- arctan(x) - arctan(y) > 0
+      have h_diff_pos : Real.arctan x - Real.arctan y > 0 := by
+        rw [h_arctan_sub]
+        have h_arctan_third_pos : Real.arctan (1/3) > 0 := by
+          rw [← Real.arctan_zero]; exact Real.arctan_lt_arctan (by norm_num : (0:ℝ) < 1/3)
+        linarith [h_arctan_bound]
+
+      -- 2 * arctan(1/3) > L_rec
+      have h_two_arctan_third_gt_L_rec : 2 * Real.arctan (1/3) > L_rec := by
+        unfold L_rec
+        exact Real.two_arctan_third_gt_half_arctan_two
+
+      calc |phaseChange ρ a b|
+          = 2 * |Real.arctan x - Real.arctan y| := h_formula
+        _ = 2 * (Real.arctan x - Real.arctan y) := by rw [abs_of_pos h_diff_pos]
+        _ = 2 * Real.arctan ((x - y) / (1 + x * y)) := by rw [h_arctan_sub]
+        _ ≥ 2 * Real.arctan (1/3) := by linarith [h_arctan_bound]
+        _ ≥ L_rec := le_of_lt h_two_arctan_third_gt_L_rec
 
     · -- σ > b: both x, y < 0
       have hx_neg : x < 0 := by
