@@ -304,6 +304,47 @@ theorem two_arctan_third_gt_half_arctan_two : arctan 2 / 2 < 2 * arctan (1/3) :=
   -- 2 * 0.31 = 0.62 > 1.18/2 = 0.59 > arctan(2)/2
   linarith
 
+/-- 2 * arctan(1/5) = arctan(5/12) using the arctan addition formula. -/
+theorem two_arctan_fifth_eq : 2 * arctan ((1:ℝ)/5) = arctan (5/12) := by
+  have h_prod : (1:ℝ)/5 * (1/5) < 1 := by norm_num
+  have h_add := arctan_add h_prod
+  have h_eq : ((1:ℝ)/5 + 1/5) / (1 - 1/5 * (1/5)) = 5/12 := by norm_num
+  rw [h_eq] at h_add
+  linarith
+
+/-- 4 * arctan(1/5) = arctan(120/119) using the arctan addition formula. -/
+theorem four_arctan_fifth_eq : 4 * arctan ((1:ℝ)/5) = arctan (120/119) := by
+  have h1 := two_arctan_fifth_eq
+  have h_prod : (5:ℝ)/12 * (5/12) < 1 := by norm_num
+  have h_add := arctan_add h_prod
+  have h_eq : ((5:ℝ)/12 + 5/12) / (1 - 5/12 * (5/12)) = 120/119 := by norm_num
+  rw [h_eq] at h_add
+  calc 4 * arctan (1/5)
+      = 2 * (2 * arctan (1/5)) := by ring
+    _ = 2 * arctan (5/12) := by rw [h1]
+    _ = arctan (120/119) := by linarith
+
+/-- arctan(120/119) > arctan(2)/2.
+    Since 120/119 > 1 and arctan(2) < π/2, we have arctan(2)/2 < π/4 = arctan(1) < arctan(120/119). -/
+theorem arctan_120_119_gt_half_arctan_two : arctan 2 / 2 < arctan (120/119) := by
+  -- arctan(120/119) > arctan(1) = π/4 since 120/119 > 1
+  have h1 : arctan (120/119) > arctan 1 := arctan_lt_arctan (by norm_num : (1:ℝ) < 120/119)
+  have h2 : arctan 1 = Real.pi / 4 := arctan_one
+  -- arctan(2) < π/2, so arctan(2)/2 < π/4
+  have h3 : arctan 2 < Real.pi / 2 := arctan_lt_pi_div_two 2
+  have h4 : arctan 2 / 2 < Real.pi / 4 := by linarith
+  -- Combine: arctan(2)/2 < π/4 = arctan(1) < arctan(120/119)
+  calc arctan 2 / 2
+      < Real.pi / 4 := h4
+    _ = arctan 1 := h2.symm
+    _ < arctan (120/119) := h1
+
+/-- Four times arctan(1/5) is greater than L_rec = arctan(2)/2.
+    This is used for the mixed-sign phase bound. -/
+theorem four_arctan_fifth_gt_L_rec : 4 * arctan ((1:ℝ)/5) > arctan 2 / 2 := by
+  rw [four_arctan_fifth_eq]
+  exact arctan_120_119_gt_half_arctan_two
+
 end
 
 end Real
