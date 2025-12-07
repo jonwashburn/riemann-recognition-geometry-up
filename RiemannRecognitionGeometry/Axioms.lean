@@ -546,7 +546,13 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
       --
       -- Technical: requires detailed Whitney interval analysis
       -- The formula connection gives |phaseChange| = 2*|arctan(x) - arctan(y)|
-      have h_formula := phaseChange_arctan_formula ρ a b hab hγ_pos (by linarith : a ≠ σ) (by linarith : b ≠ σ)
+      -- Both (a-σ) and (b-σ) are positive since σ < a < b
+      have h_same_sign : (a - σ < 0 ∧ b - σ < 0) ∨ (a - σ > 0 ∧ b - σ > 0) := by
+        right
+        constructor
+        · linarith
+        · linarith
+      have h_formula := phaseChange_arctan_formula ρ a b hab hγ_pos (by linarith : a ≠ σ) (by linarith : b ≠ σ) h_same_sign
       sorry -- Requires Whitney interval geometric constraints
 
     · -- σ > b: both x, y < 0
@@ -567,7 +573,13 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
       -- |phaseChange| = 2*|arctan(x) - arctan(y)| = 2*(arctan(x) - arctan(y))
       --
       -- The bound requires geometric constraints from Whitney interval structure
-      have h_formula := phaseChange_arctan_formula ρ a b hab hγ_pos (by linarith : a ≠ σ) (by linarith : b ≠ σ)
+      -- Both (a-σ) and (b-σ) are negative since a < b < σ
+      have h_same_sign : (a - σ < 0 ∧ b - σ < 0) ∨ (a - σ > 0 ∧ b - σ > 0) := by
+        left
+        constructor
+        · linarith
+        · linarith
+      have h_formula := phaseChange_arctan_formula ρ a b hab hγ_pos (by linarith : a ≠ σ) (by linarith : b ≠ σ) h_same_sign
       sorry -- Requires Whitney interval geometric constraints
 
 /-- **LEMMA**: Phase bound for negative imaginary part.
