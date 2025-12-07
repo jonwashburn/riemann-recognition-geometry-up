@@ -254,6 +254,56 @@ theorem arctan_half_gt_two_fifths : (2 : ℝ) / 5 < Real.arctan ((1 : ℝ) / 2) 
   have h_num : (2 : ℝ) / 5 < 1/2 - 1/24 + 1/160 - 1/896 := by norm_num
   linarith
 
+/-- The sum of arctan(1/3) and arctan(1/2) equals π/4.
+    This follows from the arctan addition formula since (1/3)*(1/2) = 1/6 < 1
+    and (1/3 + 1/2)/(1 - 1/6) = (5/6)/(5/6) = 1. -/
+theorem arctan_third_add_arctan_half : arctan (1/3) + arctan (1/2) = Real.pi / 4 := by
+  have h_prod : (1:ℝ)/3 * (1/2) < 1 := by norm_num
+  have h_add := arctan_add h_prod
+  have h_eq : ((1:ℝ)/3 + 1/2) / (1 - 1/3 * (1/2)) = 1 := by norm_num
+  rw [h_eq] at h_add
+  rw [arctan_one] at h_add
+  exact h_add
+
+/-- arctan(1/3) > 0.31. This follows from arctan(1/3) = π/4 - arctan(1/2)
+    and the bounds π > 3.14 and arctan(1/2) < 464/1000. -/
+theorem arctan_third_gt_point_three_one : arctan ((1:ℝ)/3) > 31/100 := by
+  have h_sum := arctan_third_add_arctan_half
+  have h_arctan_half_upper : arctan (1/2) < 464/1000 := arctan_half_lt_0464
+  -- π > 3.14, so π/4 > 0.785
+  have h_pi_quarter_lower : Real.pi / 4 > 785/1000 := by
+    have h_pi := Real.pi_gt_d2  -- π > 3.14
+    linarith
+  -- arctan(1/3) = π/4 - arctan(1/2) > 0.785 - 0.464 = 0.321 > 0.31
+  linarith
+
+/-- Two times arctan(1/3) is greater than L_rec = arctan(2)/2.
+    Since arctan(1/3) > 0.31, we have 2*arctan(1/3) > 0.62.
+    And arctan(2) = π/2 - arctan(1/2) < 1.58 - 0.4 = 1.18,
+    so arctan(2)/2 < 0.59 < 0.62. -/
+theorem two_arctan_third_gt_half_arctan_two : arctan 2 / 2 < 2 * arctan (1/3) := by
+  have h_arctan_third : arctan (1/3) > 31/100 := arctan_third_gt_point_three_one
+  have h_arctan_half_lower : arctan (1/2) > 2/5 := arctan_half_gt_two_fifths
+  have h_pi_half : Real.pi / 2 < 158/100 := by linarith [Real.pi_lt_d2]
+
+  -- Use arctan(x⁻¹) = π/2 - arctan(x) for x > 0
+  have h_complement : arctan (2⁻¹) = Real.pi / 2 - arctan 2 := by
+    exact arctan_inv_of_pos (by norm_num : (0:ℝ) < 2)
+
+  -- arctan(1/2) = π/2 - arctan(2), so arctan(2) = π/2 - arctan(1/2)
+  have h_arctan_two_eq : arctan 2 = Real.pi / 2 - arctan (1/2) := by
+    have h_inv : (2:ℝ)⁻¹ = 1/2 := by norm_num
+    rw [h_inv] at h_complement
+    linarith
+
+  -- arctan(2) = π/2 - arctan(1/2) < 1.58 - 0.4 = 1.18
+  have h_arctan_two_upper : arctan 2 < 118/100 := by
+    rw [h_arctan_two_eq]
+    linarith
+
+  -- 2 * 0.31 = 0.62 > 1.18/2 = 0.59 > arctan(2)/2
+  linarith
+
 end
 
 end Real
