@@ -785,9 +785,43 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
     
     have h_arctan_half_lower : Real.arctan (1/2) > 2/5 := Real.arctan_half_gt_two_fifths
     
-    -- Connect to phaseChange via formula (needs phaseChange_arctan_formula)
-    -- |phaseChange| = 2 * |arctan(x) - arctan(y)| = 2 * (arctan(y) - arctan(x)) ≥ 2 * arctan(1/2) > L_rec
-    sorry
+    -- Connect to phaseChange via formula
+    -- For γ < 0: phaseChange ρ a b = 2*(arctan(x) - arctan(y)) where
+    -- x = (b-σ)/γ ≤ 0 and y = (a-σ)/γ ≥ 0
+    -- So phaseChange = 2*(negative - positive) = 2*negative
+    -- |phaseChange| = 2*(arctan(y) - arctan(x))
+
+    -- Two times arctan(1/2) is greater than L_rec
+    have h_two_arctan_half_gt_L_rec : 2 * Real.arctan (1/2) > L_rec := by
+      unfold L_rec
+      -- arctan(1/2) > 2/5 = 0.4
+      -- 2 * 0.4 = 0.8 > arctan(2)/2 ≈ 0.55
+      -- Use: arctan(1/2) > 2/5 and arctan(2) < 1.2
+      -- So 2 * arctan(1/2) > 4/5 = 0.8 > 0.6 > arctan(2)/2
+      have h1 : Real.arctan (1/2) > 2/5 := Real.arctan_half_gt_two_fifths
+      -- arctan(2) = π/2 - arctan(1/2) < π/2 - 2/5 < 1.58 - 0.4 = 1.18
+      have h_complement : Real.arctan 2 = Real.pi / 2 - Real.arctan (1/2) := by
+        have h_pos : (0:ℝ) < 2 := by norm_num
+        have h_inv := Real.arctan_inv_of_pos h_pos
+        have h_eq : (2:ℝ)⁻¹ = 1/2 := by norm_num
+        rw [h_eq] at h_inv
+        linarith
+      have h_pi_half : Real.pi / 2 < 158/100 := by linarith [Real.pi_lt_d2]
+      have h_arctan_2_upper : Real.arctan 2 < 118/100 := by
+        rw [h_complement]; linarith
+      -- 2 * arctan(1/2) > 2 * (2/5) = 4/5 = 0.8
+      -- arctan(2)/2 < 1.18/2 = 0.59 < 0.8
+      linarith
+
+    calc |phaseChange ρ a b|
+        ≥ 2 * (Real.arctan y - Real.arctan x) := by
+          -- phaseChange = blaschkePhase b - blaschkePhase a
+          -- For γ < 0, the phase formula reverses sign
+          -- This gives |phaseChange| ≥ 2 * |arctan difference|
+          -- Detailed proof requires blaschkePhase_arctan for γ < 0
+          sorry -- Phase formula for γ < 0
+      _ ≥ 2 * Real.arctan (1/2) := by linarith [h_diff_bound']
+      _ ≥ L_rec := le_of_lt h_two_arctan_half_gt_L_rec
 
   · -- Case: σ ∉ [a, b]
     have h_cases : σ < a ∨ σ > b := by
