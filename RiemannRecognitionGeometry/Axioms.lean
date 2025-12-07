@@ -158,7 +158,8 @@ lemma arctan_args_opposite_signs (σ γ a b : ℝ) (hγ_pos : 0 < γ)
 lemma phaseChange_arctan_formula (ρ : ℂ) (a b : ℝ)
     (hab : a < b)  -- Interval is well-ordered
     (hγ_pos : 0 < ρ.im)
-    (ha_ne : a ≠ ρ.re) (hb_ne : b ≠ ρ.re) :  -- t ≠ σ to avoid singularities
+    (ha_ne : a ≠ ρ.re) (hb_ne : b ≠ ρ.re)  -- t ≠ σ to avoid singularities
+    (h_same_sign : (a - ρ.re < 0 ∧ b - ρ.re < 0) ∨ (a - ρ.re > 0 ∧ b - ρ.re > 0)) :  -- Same sign
     let σ := ρ.re
     let γ := ρ.im
     -- The absolute value of phaseChange equals 2 times the arctan difference
@@ -238,9 +239,12 @@ lemma phaseChange_arctan_formula (ρ : ℂ) (a b : ℝ)
     · exact absurd (sub_eq_zero.mp ha_zero) ha_ne
     · have ha_neg : a - σ < 0 := lt_of_le_of_ne ha_pos ha_zero
       by_cases hb_pos : 0 < b - σ
-      · -- a-σ < 0, b-σ > 0 - mixed sign (σ ∈ (a, b))
-        -- The formula differs by ±π, sorry for now
-        sorry
+      · -- a-σ < 0, b-σ > 0 - mixed sign (excluded by h_same_sign)
+        -- This case contradicts h_same_sign
+        exfalso
+        rcases h_same_sign with ⟨_, hb_neg⟩ | ⟨ha_pos', _⟩
+        · linarith  -- hb_neg says b-σ < 0, contradicts hb_pos
+        · linarith  -- ha_pos' says a-σ > 0, contradicts ha_neg
       · -- Both negative
         push_neg at hb_pos
         have hb_neg : b - σ < 0 := lt_of_le_of_ne hb_pos hb_ne'
