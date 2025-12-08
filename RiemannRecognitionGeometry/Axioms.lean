@@ -1056,12 +1056,41 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
     -- The proof requires:
     -- 1. Generalization of blaschkePhase_arctan to γ ≠ 0 (same formula works)
     -- 2. Edge case handling when a = σ or b = σ (|phaseChange| = |π - phase| ≥ π/2 > L_rec)
-    calc |phaseChange ρ a b|
-        ≥ 2 * (Real.arctan y - Real.arctan x) := by
-          -- By the generalized phase formula for γ ≠ 0
-          -- The mixed-sign analysis shows |phaseChange| = 2|arctan x - arctan y|
-          sorry -- γ < 0 phase formula (symmetric to γ > 0)
-      _ ≥ 2 * Real.arctan (1/2) := by linarith [h_diff_bound']
+    -- **Key formula for γ < 0**:
+    -- The Blaschke factor B(t) = (t - ρ)/(t - conj ρ) is unimodular.
+    -- For γ < 0, y ≥ 0 ≥ x, and:
+    --   |phaseChange ρ a b| = 2 * (arctan y - arctan x)
+    --
+    -- **Proof via conjugation**:
+    -- 1. B_{conj ρ}(t) = 1/B_ρ(t) (blaschkeFactor_conj_eq_inv)
+    -- 2. For |z| = 1 with arg(z) ≠ π: arg(1/z) = -arg(z)
+    -- 3. phaseChange (conj ρ) a b = -phaseChange ρ a b
+    -- 4. For conj ρ with Im = -γ > 0, the γ > 0 mixed-sign formula gives:
+    --    phaseChange (conj ρ) a b = 2*(arctan(x') - arctan(y'))
+    --    where x' = (b-σ)/(-γ) = -x ≥ 0 and y' = (a-σ)/(-γ) = -y ≤ 0
+    -- 5. arctan(-x) = -arctan(x), so:
+    --    phaseChange (conj ρ) a b = 2*(-arctan(x) - (-arctan(y))) = 2*(arctan(y) - arctan(x))
+    -- 6. phaseChange ρ a b = -phaseChange (conj ρ) a b = -2*(arctan(y) - arctan(x))
+    -- 7. |phaseChange ρ a b| = 2*(arctan(y) - arctan(x))
+    --
+    -- The bound then follows from h_diff_bound'.
+    -- y > x follows from y - x ≥ 1
+    have hy_gt_x : y > x := by linarith [h_spread]
+
+    have h_phase_eq_arctan : |phaseChange ρ a b| = 2 * (Real.arctan y - Real.arctan x) := by
+      -- This is the γ < 0 phase formula, symmetric to γ > 0 via conjugation
+      -- The proof requires Complex.arg analysis for the Blaschke factor
+      have hy_ge_x : Real.arctan y ≥ Real.arctan x := by
+        apply Real.arctan_le_arctan
+        exact le_of_lt hy_gt_x
+      have h_diff_nn : Real.arctan y - Real.arctan x ≥ 0 := by linarith
+      -- The formula |phaseChange| = 2|arctan x - arctan y| = 2(arctan y - arctan x)
+      -- follows from the Blaschke factor analysis and arctan properties
+      -- (Full proof requires extending phaseChange_arctan_formula to γ ≠ 0)
+      sorry -- Symmetric to γ > 0 mixed-sign case via conjugation
+    rw [h_phase_eq_arctan]
+    calc 2 * (Real.arctan y - Real.arctan x)
+        ≥ 2 * Real.arctan (1/2) := by linarith [h_diff_bound']
       _ ≥ L_rec := le_of_lt h_two_arctan_half_gt_L_rec
 
   · -- Case: σ ∉ [a, b]
