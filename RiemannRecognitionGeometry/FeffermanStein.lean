@@ -317,15 +317,95 @@ theorem logAbsXi_growth :
       have h1 : c_lo * (1 + |t|) ^ (-B) > 0 := by positivity
       linarith
 
-    -- The bound derivation requires careful log manipulations
-    -- log|ξ| is bounded by polynomial growth in log(1+|t|) due to the polynomial bounds
-    -- The technical details involve:
-    -- 1. |log|ξ|| ≤ |log C| + A*|log(1+|t|)| (from upper bound)
-    -- 2. |log|ξ|| ≤ |log c| + B*|log(1+|t|)| (from lower bound)
-    -- 3. max of these ≤ K * (1 + log(1+|t|)) for large enough K
-    --
-    -- This is a standard but tedious calculation with logarithms.
-    sorry
+    -- Key bounds from axioms (applied to t)
+    have h_up := h_upper t
+    have h_lo := h_lower t
+
+    -- 1 + |t| ≥ 1, so log(1 + |t|) ≥ 0
+    have h_one_plus_t_ge : 1 + |t| ≥ 1 := by linarith [abs_nonneg t]
+    have h_log_nonneg : Real.log (1 + |t|) ≥ 0 := Real.log_nonneg h_one_plus_t_ge
+
+    -- log|ξ| = Real.log (Complex.abs (xiOnCriticalLine t))
+    set xi_abs := Complex.abs (xiOnCriticalLine t)
+
+    -- From upper bound: xi_abs ≤ C_up * (1 + |t|)^A
+    -- => log(xi_abs) ≤ log(C_up) + A * log(1 + |t|)
+    have h_log_upper : Real.log xi_abs ≤ log_C + A * Real.log (1 + |t|) := by
+      have h1 : xi_abs ≤ C_up * (1 + |t|) ^ A := h_up
+      have h2 : xi_abs > 0 := h_abs_pos
+      have h3 : C_up * (1 + |t|) ^ A > 0 := by positivity
+      calc Real.log xi_abs
+          ≤ Real.log (C_up * (1 + |t|) ^ A) := Real.log_le_log h2 h1
+        _ = Real.log C_up + Real.log ((1 + |t|) ^ A) := Real.log_mul (ne_of_gt hC_up_pos) (by positivity)
+        _ = Real.log C_up + A * Real.log (1 + |t|) := by rw [Real.log_rpow (by linarith : 1 + |t| > 0)]
+
+    -- From lower bound: xi_abs ≥ c_lo * (1 + |t|)^(-B)
+    -- => log(xi_abs) ≥ log(c_lo) - B * log(1 + |t|)
+    have h_log_lower : Real.log xi_abs ≥ log_c - B * Real.log (1 + |t|) := by
+      have h1 : xi_abs ≥ c_lo * (1 + |t|) ^ (-B) := h_lo
+      have h2 : xi_abs > 0 := h_abs_pos
+      have h3 : c_lo * (1 + |t|) ^ (-B) > 0 := by positivity
+      calc Real.log xi_abs
+          ≥ Real.log (c_lo * (1 + |t|) ^ (-B)) := Real.log_le_log h3 h1
+        _ = Real.log c_lo + Real.log ((1 + |t|) ^ (-B)) := Real.log_mul (ne_of_gt hc_lo_pos) (by positivity)
+        _ = Real.log c_lo + (-B) * Real.log (1 + |t|) := by rw [Real.log_rpow (by linarith : 1 + |t| > 0)]
+        _ = log_c - B * Real.log (1 + |t|) := by ring
+
+    -- Bound |log(xi_abs)| using both inequalities
+    -- Case 1: log(xi_abs) ≥ 0 => |log| = log ≤ log_C + A * log(1+|t|)
+    -- Case 2: log(xi_abs) < 0 => |log| = -log ≤ -log_c + B * log(1+|t|)
+    have h_abs_bound : |Real.log xi_abs| ≤ K * (1 + Real.log (1 + |t|)) := by
+      -- Key bounds: K = max(...) + 1, so max(...) = K - 1
+      have h_K_bound1 : |log_C| + A ≤ K - 1 := by
+        calc |log_C| + A ≤ max (|log_C| + A) (|log_c| + B) := le_max_left _ _
+          _ = K - 1 := by simp only [K]; ring
+      have h_K_bound2 : |log_c| + B ≤ K - 1 := by
+        calc |log_c| + B ≤ max (|log_C| + A) (|log_c| + B) := le_max_right _ _
+          _ = K - 1 := by simp only [K]; ring
+      have h_K_pos : K > 0 := by
+        have h_abs1 : |log_C| ≥ 0 := abs_nonneg _
+        have h_abs2 : |log_c| ≥ 0 := abs_nonneg _
+        have h_sum1 : |log_C| + A ≥ 0 := by linarith [le_of_lt hA_pos]
+        have h_max : max (|log_C| + A) (|log_c| + B) ≥ 0 := le_max_of_le_left h_sum1
+        linarith
+
+      rcases le_or_lt 0 (Real.log xi_abs) with h_pos | h_neg
+      · -- Case: log ≥ 0
+        rw [_root_.abs_of_nonneg h_pos]
+        have step1 : Real.log xi_abs ≤ |log_C| + A * Real.log (1 + |t|) := by
+          calc Real.log xi_abs ≤ log_C + A * Real.log (1 + |t|) := h_log_upper
+            _ ≤ |log_C| + A * Real.log (1 + |t|) := by linarith [le_abs_self log_C]
+        have step2 : |log_C| + A * Real.log (1 + |t|) ≤ K * (1 + Real.log (1 + |t|)) := by
+          have h1 : |log_C| ≤ K - 1 := by linarith [h_K_bound1, le_of_lt hA_pos]
+          have h2 : A ≤ K - 1 := by linarith [h_K_bound1, abs_nonneg log_C]
+          calc |log_C| + A * Real.log (1 + |t|)
+              ≤ (K - 1) + (K - 1) * Real.log (1 + |t|) := by
+                have := mul_le_mul_of_nonneg_right h2 h_log_nonneg
+                linarith
+            _ = (K - 1) * (1 + Real.log (1 + |t|)) := by ring
+            _ ≤ K * (1 + Real.log (1 + |t|)) := by
+                apply mul_le_mul_of_nonneg_right _ (by linarith)
+                linarith
+        linarith
+      · -- Case: log < 0
+        rw [_root_.abs_of_neg h_neg]
+        have h1 : -Real.log xi_abs ≤ -log_c + B * Real.log (1 + |t|) := by linarith [h_log_lower]
+        have step1 : -Real.log xi_abs ≤ |log_c| + B * Real.log (1 + |t|) := by
+          linarith [neg_le_abs log_c]
+        have step2 : |log_c| + B * Real.log (1 + |t|) ≤ K * (1 + Real.log (1 + |t|)) := by
+          have h1 : |log_c| ≤ K - 1 := by linarith [h_K_bound2, le_of_lt hB_pos]
+          have h2 : B ≤ K - 1 := by linarith [h_K_bound2, abs_nonneg log_c]
+          calc |log_c| + B * Real.log (1 + |t|)
+              ≤ (K - 1) + (K - 1) * Real.log (1 + |t|) := by
+                have := mul_le_mul_of_nonneg_right h2 h_log_nonneg
+                linarith
+            _ = (K - 1) * (1 + Real.log (1 + |t|)) := by ring
+            _ ≤ K * (1 + Real.log (1 + |t|)) := by
+                apply mul_le_mul_of_nonneg_right _ (by linarith)
+                linarith
+        linarith
+
+    exact h_abs_bound
 
 /-- log|ξ| is in BMO. Direct from axiom. -/
 theorem log_xi_in_BMO : InBMO logAbsXi := logAbsXi_in_BMO_axiom
