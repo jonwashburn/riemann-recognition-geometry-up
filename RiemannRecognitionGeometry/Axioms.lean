@@ -1125,6 +1125,19 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
 
 /-! ## Non-trivial zeros have nonzero imaginary part -/
 
+/-- **AXIOM**: ζ(s) ≠ 0 for real s ∈ (0, 1).
+
+    **Classical proof** (not in Mathlib):
+    1. ζ(s) = (1-2^{1-s})⁻¹ · η(s) where η(s) = Σ(-1)^{n-1}/n^s (Dirichlet eta)
+    2. For s ∈ (0, 1): 2^{1-s} > 1, so (1-2^{1-s}) < 0
+    3. The alternating series η(s) > 0 for s > 0
+    4. Therefore ζ(s) = negative × positive < 0 for s ∈ (0, 1)
+
+    This is NOT circular with RH - it concerns only REAL zeros on the real line.
+    The RH concerns complex zeros with Im ≠ 0. -/
+axiom riemannZeta_ne_zero_of_real_in_unit_interval :
+    ∀ s : ℝ, 0 < s → s < 1 → riemannZeta (s : ℂ) ≠ 0
+
 /-- **LEMMA**: Non-trivial zeros have nonzero imaginary part.
     If ξ(ρ) = 0 and Re(ρ) > 1/2, then Im(ρ) ≠ 0. -/
 lemma zero_has_nonzero_im (ρ : ℂ)
@@ -1147,31 +1160,8 @@ lemma zero_has_nonzero_im (ρ : ℂ)
     have hζ_ne : riemannZeta ρ ≠ 0 := riemannZeta_ne_zero_of_one_le_re h_re_ge_one
     exact hζ_ne hζ_zero
 
-  · -- 1/2 < Re < 1: ζ has no real zeros in this interval
+  · -- 1/2 < Re < 1: ζ has no real zeros in this interval (use axiom)
     push_neg at h_re_ge_one
-    -- **Classical result**: ζ(s) ≠ 0 for real s ∈ (0, 1)
-    --
-    -- **Proof sketch**:
-    -- 1. For real s ∈ (0, 1), we have ζ(s) < 0 (well-known fact)
-    -- 2. Specifically: ζ(s) = (1-2^{1-s})^{-1} ∑ (-1)^{n-1}/n^s for s > 0, s ≠ 1
-    -- 3. The alternating series is positive for s > 0
-    -- 4. The factor (1-2^{1-s}) is negative for s < 1
-    -- 5. So ζ(s) = negative × positive < 0
-    --
-    -- This is NOT circular with RH as it concerns only REAL zeros.
-    -- The RH concerns the imaginary parts of complex zeros.
-    --
-    -- **Mathlib note**: Proving ζ(s) < 0 for s ∈ (0, 1) requires
-    -- the Dirichlet eta function representation:
-    -- ζ(s) = (1-2^{1-s})^{-1} η(s) where η(s) = ∑ (-1)^{n-1}/n^s
-
-    -- For now, we assert this classical fact
-    have h_zeta_neg_on_interval : ∀ s : ℝ, 0 < s → s < 1 → riemannZeta (s : ℂ) ≠ 0 := by
-      intro s hs_pos hs_lt_one
-      -- The Riemann zeta function is real and negative on (0,1)
-      -- ζ(s) < 0 for s ∈ (0, 1), hence nonzero
-      sorry
-
     have hρ_ne_zero : ρ ≠ 0 := by
       intro h; rw [h, Complex.zero_re] at hρ_re; linarith
     have h_eq := riemannZeta_def_of_ne_zero hρ_ne_zero
@@ -1180,7 +1170,7 @@ lemma zero_has_nonzero_im (ρ : ℂ)
     have hζ_zero : riemannZeta ρ = 0 := by
       rw [h_eq, hρ_zero, zero_div]
     have hρ_pos : 0 < ρ.re := by linarith
-    have hζ_ne := h_zeta_neg_on_interval ρ.re hρ_pos h_re_ge_one
+    have hζ_ne := riemannZeta_ne_zero_of_real_in_unit_interval ρ.re hρ_pos h_re_ge_one
     rw [h_real] at hζ_zero
     exact hζ_ne hζ_zero
 
