@@ -784,22 +784,21 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         _ ≥ 2 * Real.arctan (1/3) := by linarith [h_arctan_bound]
         _ ≥ L_rec := le_of_lt h_two_arctan_third_gt_L_rec
 
-    · -- σ > b: both x, y < 0
-      -- This case applies when Re(ρ) = σ > b, which means σ > Im(ρ) = γ.
-      -- This only happens for zeros with small imaginary parts (γ < σ ≤ 1).
+    · -- σ > b: both x, y < 0 (since (t - σ)/γ < 0 for t ≤ b < σ and γ > 0)
+      -- This case requires σ > b but γ = Im(ρ) ≤ b < σ = Re(ρ).
+      -- The analysis mirrors the σ < a case with signs reversed.
       --
-      -- For this case, the phase bound |phaseChange| ≥ L_rec follows from:
-      -- 1. arctan(x) - arctan(y) = arctan((x-y)/(1+xy)) for x, y < 0
-      -- 2. With x - y = (b-a)/γ ≥ 1 and bounded xy
-      -- 3. The arctan difference is ≥ arctan(1/3) when xy is appropriately bounded
+      -- **Proof structure**:
+      -- 1. x = (b-σ)/γ < 0 and y = (a-σ)/γ < 0 (both negative)
+      -- 2. x > y (since b > a and dividing by positive γ)
+      -- 3. Same-sign case: |phaseChange| = 2|arctan(x) - arctan(y)|
+      -- 4. arctan subtraction formula: arctan(x) - arctan(y) = arctan((x-y)/(1+xy))
+      -- 5. Bound (x-y)/(1+xy) ≥ 1/3 using xy > 0 and x - y ≥ 1
+      -- 6. Conclude |phaseChange| ≥ 2*arctan(1/3) > L_rec
       --
-      -- The key geometric constraint is that for zeros in the critical strip,
-      -- the phase contribution remains bounded below by L_rec.
-      --
-      -- **NOTE**: This case requires careful analysis of when σ > b can occur
-      -- for zeros with 1/2 < σ < 1 and γ ∈ [a,b]. Since γ ≤ b, this requires
-      -- small imaginary parts where the Whitney geometry gives specific bounds.
-      sorry -- σ > b case: requires Whitney geometry analysis for small Im(ρ)
+      -- **Technical note**: The bound xy ≤ constant requires geometric constraints
+      -- from the Whitney interval structure. This is the same style as σ < a case.
+      sorry
 
 /-- **LEMMA**: Phase bound for negative imaginary part.
     By symmetry of the Blaschke factor, the phase bound holds for γ < 0 as well.
@@ -1125,13 +1124,31 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
 
 /-! ## Non-trivial zeros have nonzero imaginary part -/
 
+/-- The factor (1 - 2^{1-s}) is negative for s < 1.
+    This is step 2 of the proof that ζ(s) < 0 on (0, 1). -/
+lemma zeta_eta_factor_neg (s : ℝ) (hs : s < 1) : 1 - (2 : ℝ)^(1-s) < 0 := by
+  have h1 : 1 - s > 0 := by linarith
+  have h2 : (2 : ℝ)^(1-s) > 1 := by
+    rw [← Real.rpow_zero 2]
+    apply Real.rpow_lt_rpow_of_exponent_lt
+    · norm_num
+    · linarith
+  linarith
+
 /-- **AXIOM**: ζ(s) ≠ 0 for real s ∈ (0, 1).
 
-    **Classical proof** (not in Mathlib):
-    1. ζ(s) = (1-2^{1-s})⁻¹ · η(s) where η(s) = Σ(-1)^{n-1}/n^s (Dirichlet eta)
-    2. For s ∈ (0, 1): 2^{1-s} > 1, so (1-2^{1-s}) < 0
-    3. The alternating series η(s) > 0 for s > 0
-    4. Therefore ζ(s) = negative × positive < 0 for s ∈ (0, 1)
+    **Classical proof** (requires Dirichlet eta function, not in Mathlib):
+    1. ζ(s) = η(s) / (1-2^{1-s}) where η(s) = Σ(-1)^{n-1}/n^s (Dirichlet eta)
+    2. For s < 1: (1-2^{1-s}) < 0 ← PROVEN above as `zeta_eta_factor_neg`
+    3. For s > 0: η(s) > 0 (alternating series with decreasing positive terms)
+    4. Therefore ζ(s) = positive / negative < 0 for s ∈ (0, 1)
+
+    **Proof of step 3** (not formalized):
+    η(s) = 1 - 1/2^s + 1/3^s - 1/4^s + ...
+    For s > 0, the terms 1/n^s are positive and decreasing.
+    By the alternating series test, the partial sums satisfy:
+    S_2 < S_4 < ... < η(s) < ... < S_3 < S_1
+    Since S_2 = 1 - 1/2^s > 0 for s > 0, we have η(s) > 0.
 
     This is NOT circular with RH - it concerns only REAL zeros on the real line.
     The RH concerns complex zeros with Im ≠ 0. -/
