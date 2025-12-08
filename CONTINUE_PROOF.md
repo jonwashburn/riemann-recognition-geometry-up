@@ -3,9 +3,9 @@
 ## Goal
 Complete a fully unconditional Lean 4 proof of the Riemann Hypothesis using Recognition Geometry. No `sorry`s or custom axioms allowed.
 
-## Current Status
-- **Build**: ✅ Compiles successfully
-- **Sorries**: 9 remaining (was 12+, progress being made)
+## Current Status (Updated Dec 8, 2025)
+- **Build**: ✅ Compiles successfully  
+- **Sorries**: 13 remaining across 10 declarations
 - **Architecture**: Sound - correct Recognition Geometry argument
 
 ## The Proof Structure
@@ -24,74 +24,60 @@ IF zero ρ exists with Re(ρ) > 1/2:
   └── Contradiction! B is part of R, but |B| > 4 * |R| is impossible
 ```
 
-## Remaining Sorries (9 total)
+## Remaining Sorries (13 total)
 
-### Phase Formula Sorries (3)
-- `Axioms.lean:187` - `phaseChange_arctan_formula` mixed-sign case
-- `Axioms.lean:329` - vacuous case (a>σ>b with a<b)  
-- `Axioms.lean:335` - general mixed-sign case
+### Axioms.lean (8 sorries in 5 declarations)
 
-### Phase Bound Sorries (3)
-- `Axioms.lean:582` - `phase_bound_from_arctan` general case (needs formula)
-- `Axioms.lean:592-594` - `phase_bound_neg_im` σ outside [a,b] cases
+| Line | Declaration | Content |
+|------|-------------|---------|
+| 189, 192 | `phaseChange_abs_conj` | Edge cases where arg = π |
+| 824 | `phase_bound_from_arctan` | σ > b case (Whitney geometry) |
+| 973 | `phase_bound_neg_im` | Phase formula for γ < 0 mixed-sign |
+| 1009 | `phase_bound_neg_im` | γ < 0, σ < a same-sign case |
+| 1081 | `phase_bound_neg_im` | γ < 0, σ > b same-sign case |
+| 1180 | `zero_has_nonzero_im` | ζ(s) ≠ 0 on (0,1) |
+| 1269 | `blaschke_dominates_total` | Type unification for helper |
 
-### Classical Analysis Sorries (2)
-- `Axioms.lean:679` - `zero_has_nonzero_im`: ζ(s) ≠ 0 on (0,1)
-  - Requires: Dirichlet eta function η(s) > 0 for s > 0
-  - Reference: Edwards "Riemann's Zeta Function"
-  
-- `Axioms.lean:785` - `blaschke_dominates_total`: BMO→Carleson embedding
-  - Requires: ~300 lines of Fefferman-Stein theory
-  - Reference: Garnett "Bounded Analytic Functions" Ch. II
+### FeffermanStein.lean (5 sorries in 5 declarations)
 
-### Whitney Geometry Sorry (1)
-- `Main.lean:98` - `whitney_interval_width`: 2 * I.len ≥ |ρ.im|
-  - Requires: Whitney covering properties
+| Line | Declaration | Content |
+|------|-------------|---------|
+| 85 | `avg_in_osc_ball` | Integration bound for interval average |
+| 100 | `meanOscillation_le_sup_osc` | BMO bound |
+| 174 | `logAbsXi_growth` | Polynomial bound combination |
+| 245 | `actualPhaseSignal_bound` | Carleson embedding |
+| 285 | `phase_decomposition_exists` | Weierstrass tail bound |
 
-## What's Already Proven ✅
+## What's Proven ✅
 
-### Key Lemmas in PoissonJensen.lean
+### Key Results
+- `phaseChange_abs_conj` main case (generic arg ≠ π)
+- `phase_bound_from_arctan` for σ < a, γ > 0 (complete arctan analysis)
+- `blaschke_lower_bound` structure
+- All numerical bounds (arctan(2) > 1.1, etc.)
+
+### Proven Lemmas
 - `arg_unit_circle_arctan`: arg(z) = 2*arctan(Im(z)/(1+Re(z))) for |z|=1
 - `blaschkePhase_arctan`: arg(B(t)) = 2*arctan(-γ/(t-σ))
-- `blaschkeFactor_at_re`: B(σ) = -1 at the singularity
-- `blaschkePhase_at_re`: arg(B(σ)) = π
+- `blaschkeFactor_at_re`: B(σ) = -1
+- `arctan_sub_of_pos`: arctan subtraction formula
 
-### Edge Cases in phase_bound_from_arctan
-- a = σ case: Uses blaschkePhase_at_re, gives |phaseChange| > π > L_rec ✅
-- b = σ case: Uses blaschkePhase_at_re, gives |phaseChange| ≥ π/2 > L_rec ✅
+## Priority Order
 
-### Numerical Bounds
-- `U_tail < L_rec` ✅
-- `L_rec > 4 * U_tail` ✅  
-- `arctan(2) > 1.1` ✅
-- `arctan(1/2) > 2/5` ✅ (via Taylor series)
-- `2 * arctan(1/2) > L_rec` ✅
-
-## Remote Repository Resources
-
-The `jonwashburn/riemann` repository has relevant formalization:
-- Whitney geometry: `Riemann/RS/WhitneyGeometryDefs.lean`
-- Poisson kernel: `Riemann/RS/PoissonKernelDyadic.lean`
-- Schur functions: `Riemann/RS/OffZerosBridge.lean`
-- CR-Green: `Riemann/RS/CRGreenOuter.lean`
-
-## Priority Order for Completion
-
-1. **Phase bounds** (~50 lines) - Close the remaining arctan cases
-2. **Whitney geometry** (~20 lines) - Prove interval width constraint  
-3. **ζ ≠ 0 on (0,1)** (~50 lines) - Dirichlet eta formalization
-4. **BMO theory** (~300 lines) - `blaschke_dominates_total`
+1. **Phase bounds** - The γ < 0 cases are symmetric to γ > 0
+2. **Edge cases** - arg = π only at t = Re(ρ), measure zero
+3. **FeffermanStein** - Integration bounds are standard Mathlib
+4. **Classical results** - ζ ≠ 0 on (0,1) is well-known
 
 ## Instructions
 
-Continue working on eliminating the remaining `sorry`s. Focus on:
-1. The phase bound cases that only need the phaseChange_arctan_formula connection
-2. The classical results that have clear mathematical content
+Continue eliminating sorries. Focus on:
+1. The γ < 0 phase bounds (computationally identical to γ > 0)
+2. The FeffermanStein integration bounds (should use Mathlib)
 
-Use `lake build` to verify changes compile. Check sorry count with:
+Build and check:
 ```bash
-grep -n "^[^-]*sorry$" RiemannRecognitionGeometry/Axioms.lean RiemannRecognitionGeometry/Main.lean
+lake build 2>&1 | grep "sorry"
 ```
 
-We cannot stop before an unconditional proven proof.
-
+We cannot stop until the proof is unconditional.
