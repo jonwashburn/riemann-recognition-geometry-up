@@ -285,9 +285,47 @@ axiom fefferman_stein_axiom :
     Combined: |log|ξ|| ≤ K(1 + log(1+|t|)) for K = max(|log C|+A, |log c|+B) + 1 -/
 theorem logAbsXi_growth :
     ∃ C : ℝ, C > 0 ∧ ∀ t : ℝ, |logAbsXi t| ≤ C * (1 + Real.log (1 + |t|)) := by
-  -- Standard result combining polynomial bounds via logarithms
-  -- The full derivation uses log properties and careful bound chaining
-  sorry
+  -- Get the polynomial bounds from axioms
+  obtain ⟨C_up, A, hC_up_pos, hA_pos, h_upper⟩ := xi_polynomial_growth_axiom
+  obtain ⟨c_lo, B, hc_lo_pos, hB_pos, h_lower⟩ := xi_polynomial_lower_bound_axiom
+
+  -- Choose K = max(|log C| + A, |log c| + B) + 1
+  let log_C := Real.log C_up
+  let log_c := Real.log c_lo
+  let K := max (|log_C| + A) (|log_c| + B) + 1
+  use K
+  constructor
+  · -- K > 0: max(...) ≥ 0 and we add 1
+    have h1 : |log_C| ≥ 0 := abs_nonneg _
+    have h2 : |log_c| ≥ 0 := abs_nonneg _
+    have hA_nn : A ≥ 0 := le_of_lt hA_pos
+    have hB_nn : B ≥ 0 := le_of_lt hB_pos
+    have h3 : |log_C| + A ≥ 0 := by linarith
+    have h4 : |log_c| + B ≥ 0 := by linarith
+    have h5 : max (|log_C| + A) (|log_c| + B) ≥ 0 := le_max_of_le_left h3
+    calc K = max (|log_C| + A) (|log_c| + B) + 1 := rfl
+      _ ≥ 0 + 1 := by linarith
+      _ = 1 := by ring
+      _ > 0 := by norm_num
+  · intro t
+    -- logAbsXi t = log|ξ(1/2+it)|
+    simp only [logAbsXi, xiOnCriticalLine]
+
+    -- Upper bound: |ξ| ≤ C(1+|t|)^A => log|ξ| ≤ log C + A*log(1+|t|)
+    have h_abs_pos : Complex.abs (xiOnCriticalLine t) > 0 := by
+      have h_lo := h_lower t
+      have h1 : c_lo * (1 + |t|) ^ (-B) > 0 := by positivity
+      linarith
+
+    -- The bound derivation requires careful log manipulations
+    -- log|ξ| is bounded by polynomial growth in log(1+|t|) due to the polynomial bounds
+    -- The technical details involve:
+    -- 1. |log|ξ|| ≤ |log C| + A*|log(1+|t|)| (from upper bound)
+    -- 2. |log|ξ|| ≤ |log c| + B*|log(1+|t|)| (from lower bound)
+    -- 3. max of these ≤ K * (1 + log(1+|t|)) for large enough K
+    --
+    -- This is a standard but tedious calculation with logarithms.
+    sorry
 
 /-- log|ξ| is in BMO. Direct from axiom. -/
 theorem log_xi_in_BMO : InBMO logAbsXi := logAbsXi_in_BMO_axiom
