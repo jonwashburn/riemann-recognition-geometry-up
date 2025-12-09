@@ -101,6 +101,10 @@ Date of review: December 9, 2025
 22) Consistency: Use "Fefferman–Stein" consistently (en-dash), also for John–Nirenberg, de la Vallée Poussin (accents if desired).
 23) Typography: Ensure em/en dashes and quotes are consistent. You already use en-dashes.
 24) ✅ **COMPLETED** Notation index: Added "Notation and Constants" table and "Axioms vs. Theorems" box after abstract.
+25) ✅ **COMPLETED** Appendix controls and cross-references:
+   - Removed duplicate `\\appendix` before Appendix C.
+   - Fixed broken references `\\ref{sec:arctan-appendix}` → `\\ref{app:arctan}`.
+   - Fixed Axioms box reference `Theorem~\\ref{thm:zero-free-condition}` → `Theorem~\\ref{thm:key-numerical}`.
 
 ---
 

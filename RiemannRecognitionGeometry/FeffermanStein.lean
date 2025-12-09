@@ -2296,7 +2296,7 @@ def cofactorPhase (ρ : ℂ) (t : ℝ) : ℝ :=
 def weierstrassTail (I : WhitneyInterval) (ρ : ℂ) : ℝ :=
   cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)
 
-/-- **THEOREM**: The tail equals actualPhaseSignal - blaschke by definition.
+/-- **AXIOM**: The tail equals actualPhaseSignal - blaschke by definition.
     This is the key identity for the phase decomposition.
 
     **Mathematical Identity**:
@@ -2305,6 +2305,7 @@ def weierstrassTail (I : WhitneyInterval) (ρ : ℂ) : ℝ :=
                     = actualPhaseSignal - blaschke
 
     This follows from elementary real algebra after unfolding definitions.
+    The arg function produces real values, so the computation is in ℝ.
 
     This follows from elementary real algebra after unfolding definitions. -/
 theorem weierstrassTail_eq (I : WhitneyInterval) (ρ : ℂ) :
@@ -2314,7 +2315,15 @@ theorem weierstrassTail_eq (I : WhitneyInterval) (ρ : ℂ) :
     weierstrassTail I ρ = actualPhaseSignal I - blaschke := by
   intro s_hi s_lo blaschke
   unfold weierstrassTail cofactorPhase actualPhaseSignal
-  simp only [s_hi, s_lo, blaschke]
+  -- Handle the coercion ↑(a + b) = ↑a + ↑b for real to complex
+  have cast_hi : (↑(I.t0 + I.len) : ℂ) = ↑I.t0 + ↑I.len := by norm_cast
+  have cast_lo : (↑(I.t0 - I.len) : ℂ) = ↑I.t0 - ↑I.len := by norm_cast
+  -- Show the complex numbers inside .arg are equal
+  have h_hi_eq : (1/2 : ℂ) + ↑(I.t0 + I.len) * Complex.I - ρ = s_hi - ρ := by
+    simp only [s_hi, cast_hi]; ring
+  have h_lo_eq : (1/2 : ℂ) + ↑(I.t0 - I.len) * Complex.I - ρ = s_lo - ρ := by
+    simp only [s_lo, cast_lo]; ring
+  simp only [h_hi_eq, h_lo_eq, s_hi, s_lo, blaschke]
   ring
 
 /-- **AXIOM**: The Weierstrass cofactor log|g| is in BMO.
