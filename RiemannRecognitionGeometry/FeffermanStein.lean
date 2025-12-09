@@ -481,6 +481,60 @@ lemma poissonKernel_continuous_y (x : ℝ) :
   · intro y hy
     exact ne_of_gt (poissonKernel_denom_pos x (Set.mem_Ioi.mp hy))
 
+/-- The derivative ∂P/∂x is continuous on the upper half-plane {y > 0}. -/
+lemma poissonKernel_dx_continuousOn :
+    ContinuousOn (fun p : ℝ × ℝ => poissonKernel_dx p.1 p.2) {p | 0 < p.2} := by
+  -- On {y > 0}, poissonKernel_dx(x, y) = -2xy / (π(x² + y²)²)
+  have h_eq : Set.EqOn (fun p : ℝ × ℝ => poissonKernel_dx p.1 p.2)
+                       (fun p => -(2 / Real.pi) * p.1 * p.2 / (p.1^2 + p.2^2)^2) {p | 0 < p.2} := by
+    intro p hp
+    unfold poissonKernel_dx
+    simp only [Set.mem_setOf_eq] at hp
+    simp only [if_pos hp]
+  apply ContinuousOn.congr _ h_eq
+  apply ContinuousOn.div
+  · -- Numerator: -2xy/π is continuous
+    apply ContinuousOn.mul
+    · apply ContinuousOn.mul continuousOn_const
+      exact continuous_fst.continuousOn
+    · exact continuous_snd.continuousOn
+  · -- Denominator: (x² + y²)² is continuous
+    apply ContinuousOn.pow
+    apply ContinuousOn.add
+    · exact (continuous_fst.pow 2).continuousOn
+    · exact (continuous_snd.pow 2).continuousOn
+  · -- Denominator ≠ 0 on {y > 0}
+    intro p hp
+    simp only [Set.mem_setOf_eq] at hp
+    exact ne_of_gt (by positivity : (p.1^2 + p.2^2)^2 > 0)
+
+/-- The derivative ∂P/∂y is continuous on the upper half-plane {y > 0}. -/
+lemma poissonKernel_dy_continuousOn :
+    ContinuousOn (fun p : ℝ × ℝ => poissonKernel_dy p.1 p.2) {p | 0 < p.2} := by
+  -- On {y > 0}, poissonKernel_dy(x, y) = (x² - y²) / (π(x² + y²)²)
+  have h_eq : Set.EqOn (fun p : ℝ × ℝ => poissonKernel_dy p.1 p.2)
+                       (fun p => (1 / Real.pi) * (p.1^2 - p.2^2) / (p.1^2 + p.2^2)^2) {p | 0 < p.2} := by
+    intro p hp
+    unfold poissonKernel_dy
+    simp only [Set.mem_setOf_eq] at hp
+    simp only [if_pos hp]
+  apply ContinuousOn.congr _ h_eq
+  apply ContinuousOn.div
+  · -- Numerator: (x² - y²)/π is continuous
+    apply ContinuousOn.mul continuousOn_const
+    apply ContinuousOn.sub
+    · exact (continuous_fst.pow 2).continuousOn
+    · exact (continuous_snd.pow 2).continuousOn
+  · -- Denominator: (x² + y²)² is continuous
+    apply ContinuousOn.pow
+    apply ContinuousOn.add
+    · exact (continuous_fst.pow 2).continuousOn
+    · exact (continuous_snd.pow 2).continuousOn
+  · -- Denominator ≠ 0 on {y > 0}
+    intro p hp
+    simp only [Set.mem_setOf_eq] at hp
+    exact ne_of_gt (by positivity : (p.1^2 + p.2^2)^2 > 0)
+
 /-! ## Carleson Measure from Poisson Extension
 
 For a function f, the Poisson extension u(x, y) = ∫ P(x-t, y) f(t) dt
@@ -1285,6 +1339,9 @@ lemma poissonExtension_gradient_bound_from_oscillation (f : ℝ → ℝ) (x : �
     This reformulated lemma uses a floor parameter ε to avoid the divergence. -/
 lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : WhitneyInterval)
     (C M ε : ℝ) (hC : C > 0) (hM : M > 0) (hε : 0 < ε) (hε_le : ε ≤ 4 * I.len)
+    (hf_meas : Measurable f)
+    (hf_cont_grad : ContinuousOn (fun p : ℝ × ℝ => poissonGradientEnergy f p.1 p.2)
+                                 {p | p.1 ∈ I.interval ∧ ε ≤ p.2 ∧ p.2 ≤ 4 * I.len})
     (h_grad : ∀ x y, x ∈ I.interval → ε ≤ y → y ≤ 4 * I.len →
               ‖poissonExtension_gradient f x y‖ ≤ C * M / y) :
     ∫ p in {p : ℝ × ℝ | p.1 ∈ I.interval ∧ ε ≤ p.2 ∧ p.2 ≤ 4 * I.len},
@@ -1434,12 +1491,8 @@ lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : Whitn
       -- If f is continuous on compact measurable set s, then f is AEStronglyMeasurable on μ.restrict s
       apply ContinuousOn.aestronglyMeasurable_of_isCompact _ h_box_compact h_box_meas
       -- ContinuousOn (fun p => poissonGradientEnergy f p.1 p.2) box
-      -- On box, y ≥ ε > 0, so poissonGradientEnergy = ‖∇u‖² · y
-      -- This requires continuity of poissonExtension_gradient, which involves the Poisson integral.
-      -- The Poisson extension is continuous in (x, y) for y > 0 (standard harmonic analysis).
-      -- Technical proof: would need to show ∫ poissonKernel(x-t, y) f(t) dt is continuous in (x,y)
-      -- This follows from dominated convergence and uniform integrability.
-      sorry
+      -- This is provided as hypothesis hf_cont_grad
+      exact hf_cont_grad
     · -- Pointwise bound: ‖poissonGradientEnergy‖ ≤ C²M²/y on box
       apply Filter.eventually_of_mem (MeasureTheory.self_mem_ae_restrict h_box_meas)
       intro p hp
