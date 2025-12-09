@@ -1187,8 +1187,8 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
         -- Spread x' - y' = (b-a)/γ' ≥ 1
         have h_spread' : x' - y' ≥ 1 := by
           have hγ'_ne : γ' ≠ 0 := ne_of_gt hγ'_pos
-          simp only [x', y']
-          rw [div_sub_div_eq_sub_div, ge_iff_le, le_div_iff hγ'_pos, hγ'_def]
+          have h1 : x' - y' = (b - a) / γ' := by simp only [x', y']; field_simp [hγ'_ne]
+          rw [h1, ge_iff_le, le_div_iff hγ'_pos, hγ'_def]
           linarith [h_width_lower]
 
         -- xy' bound: x' * y' ≤ 1 + (x' - y') since y' < 1
