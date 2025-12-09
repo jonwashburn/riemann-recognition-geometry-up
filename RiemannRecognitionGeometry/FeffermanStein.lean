@@ -1319,8 +1319,13 @@ lemma poissonExtension_dx_bound_for_bounded (f : ℝ → ℝ) (x : ℝ) {y : ℝ
     |∫ t : ℝ, poissonKernel_dx (x - t) y * f t| ≤ (2 / Real.pi) * M / y := by
   -- The proof uses the bound ∫|∂P/∂x(s,y)|ds ≤ 2/(πy) (proven above)
   have h_key : ∫ s, |poissonKernel_dx s y| ≤ 2 / (Real.pi * y) := poissonKernel_dx_integral_bound hy
-  -- Technical steps: triangle inequality, translation invariance, integrability
-  sorry  -- Standard integration techniques
+  -- **Proof outline** (standard integration techniques):
+  -- 1. |∫ K·f| ≤ ∫ |K·f| (triangle inequality for integrals)
+  -- 2. |K·f| ≤ |K|·|f| ≤ |K|·M (pointwise bound)
+  -- 3. ∫ |K·f| ≤ M · ∫ |K| (integral monotonicity + pull out constant)
+  -- 4. ∫ |K(x-t)| dt = ∫ |K(s)| ds (translation invariance)
+  -- 5. Apply h_key: ≤ M · (2/(πy)) = (2/π) · M/y
+  sorry  -- Standard integration: triangle ineq + monotonicity + translation
 
 /-- The Poisson extension gradient component bound via convolution (BMO case).
 
@@ -1330,19 +1335,23 @@ lemma poissonExtension_dx_bound_for_bounded (f : ℝ → ℝ) (x : ℝ) {y : ℝ
     Using Minkowski's inequality and the bounded oscillation assumption:
     |∂u/∂x(x,y)| ≤ ∫ |∂P/∂x(x-t, y)| · |f(t)| dt
 
-    For BMO functions with bounded oscillation, this gives a bound of O(M/y). -/
+    For BMO functions with bounded oscillation, this gives a bound of O(M/y).
+
+    **Key Dependency**: Uses the John-Nirenberg inequality.
+    See `RiemannRecognitionGeometry.JohnNirenberg` for the infrastructure.
+
+    **See also**: `poissonExtension_dx_bound_for_bounded` for the simpler bounded case. -/
 lemma poissonExtension_gradient_bound_from_oscillation (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)
     (M : ℝ) (hM : M ≥ 0)
     (h_osc : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M) :
     ‖poissonExtension_gradient f x y‖ ≤ (2 / Real.pi) * M / y := by
-  -- The key steps are:
-  -- 1. Write ∂u/∂x = ∫ ∂P/∂x(x-t, y) · (f(t) - f_avg) dt
-  --    (the constant f_avg integrates to 0 since ∫∂P/∂x dt = 0)
-  -- 2. Apply Minkowski: |∂u/∂x| ≤ ∫ |∂P/∂x(x-t, y)| · |f(t) - f_avg| dt
-  -- 3. Use the BMO condition: |f(t) - f_avg| ≤ M (in a suitable averaged sense)
-  -- 4. Integrate: ∫ |∂P/∂x(x-t, y)| dt ≤ C/y
-  --
-  -- The rigorous proof requires the John-Nirenberg inequality for BMO.
+  -- **Proof using John-Nirenberg** (see JohnNirenberg.lean):
+  -- 1. Write ∂u/∂x = ∫ ∂P/∂x(x-t, y) · (f(t) - f_I) dt where I is centered at x
+  -- 2. Apply triangle: |∂u/∂x| ≤ ∫ |∂P/∂x(x-t, y)| · |f(t) - f_I| dt
+  -- 3. John-Nirenberg gives: |{|f - f_I| > t}| ≤ C|I|exp(-ct/M)
+  --    This implies ∫|f - f_I| ≤ C·M (effective L^∞ from exponential decay)
+  -- 4. Use poissonKernel_dx_integral_bound: ∫|∂P/∂x| ≤ 2/(πy)
+  -- 5. Combine: |∂u/∂x| ≤ C·M · 2/(πy) = O(M/y)
   sorry
 
 /-- **NOTE**: The original formulation of this lemma had incorrect hypotheses.
