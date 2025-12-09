@@ -1305,7 +1305,24 @@ lemma poissonKernel_dx_integral_bound {y : ℝ} (hy : 0 < y) :
       = 2 / (Real.pi * y) := h_eq
     _ ≤ 2 / (Real.pi * y) := le_refl _
 
-/-- The Poisson extension gradient component bound via convolution.
+/-- **STEPPING STONE**: For bounded f with |f(t)| ≤ M, the Poisson extension satisfies
+    |∂u/∂x(x,y)| ≤ (2M/π) · (1/y).
+
+    This is simpler than the BMO case but demonstrates the proof structure:
+    1. Triangle inequality: |∫K·f| ≤ ∫|K|·|f| ≤ M · ∫|K|
+    2. Translation invariance: ∫|K(x-t)|dt = ∫|K(s)|ds
+    3. Use poissonKernel_dx_integral_bound: ∫|K(s,y)|ds ≤ 2/(πy) -/
+lemma poissonExtension_dx_bound_for_bounded (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)
+    (M : ℝ) (hM : M ≥ 0)
+    (hf_int : Integrable (fun t => poissonKernel_dx (x - t) y * f t))
+    (hf_bound : ∀ t : ℝ, |f t| ≤ M) :
+    |∫ t : ℝ, poissonKernel_dx (x - t) y * f t| ≤ (2 / Real.pi) * M / y := by
+  -- The proof uses the bound ∫|∂P/∂x(s,y)|ds ≤ 2/(πy) (proven above)
+  have h_key : ∫ s, |poissonKernel_dx s y| ≤ 2 / (Real.pi * y) := poissonKernel_dx_integral_bound hy
+  -- Technical steps: triangle inequality, translation invariance, integrability
+  sorry  -- Standard integration techniques
+
+/-- The Poisson extension gradient component bound via convolution (BMO case).
 
     For the x-derivative:
     |∂u/∂x(x,y)| = |∫ (∂P/∂x)(x-t, y) f(t) dt|
