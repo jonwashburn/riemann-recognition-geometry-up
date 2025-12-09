@@ -32,6 +32,9 @@ import Mathlib.Analysis.Calculus.Deriv.Comp
 import Mathlib.Analysis.Calculus.ParametricIntegral
 import Mathlib.Analysis.SpecialFunctions.Integrals
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
+import Mathlib.Order.Filter.AtTopBot.Group
+import Mathlib.Order.Filter.AtTopBot.Ring
+import Mathlib.Order.Filter.AtTopBot.Archimedean
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 
 noncomputable section
@@ -928,14 +931,38 @@ lemma intervalIntegral_u_div_one_add_sq_sq (a : ℝ) (ha : 0 ≤ a) :
     **Proof**: lim_{a→∞} [1/2 - 1/(2(1+a²))] = 1/2 - 0 = 1/2 -/
 lemma integral_Ioi_u_div_one_add_sq_sq :
     ∫ u in Set.Ioi (0:ℝ), u / (1 + u^2)^2 = 1/2 := by
-  -- The improper integral is the limit of interval integrals
-  -- ∫_0^∞ f = lim_{a→∞} ∫_0^a f
-  -- By intervalIntegral_u_div_one_add_sq_sq: ∫_0^a = 1/2 - 1/(2(1+a²))
-  -- As a → ∞: 1/(2(1+a²)) → 0, so the limit is 1/2
-  --
-  -- The formal proof uses MeasureTheory.AECover or similar machinery
-  -- for improper integrals in Mathlib.
-  sorry
+  -- Use FTC for improper integrals:
+  -- g(u) = -1/(2(1+u²)), g'(u) = u/(1+u²)²
+  -- g(0) = -1/2, lim g(u) = 0
+  -- So ∫_0^∞ g' = 0 - (-1/2) = 1/2
+  have hderiv : ∀ x ∈ Set.Ici (0:ℝ), HasDerivAt (fun u => -1 / (2 * (1 + u^2))) (x / (1 + x^2)^2) x := by
+    intro x _
+    exact hasDerivAt_neg_inv_two_one_add_sq x
+  have hpos : ∀ x ∈ Set.Ioi (0:ℝ), 0 ≤ x / (1 + x^2)^2 := by
+    intro x hx
+    apply div_nonneg (le_of_lt hx)
+    positivity
+  have hlim : Filter.Tendsto (fun u : ℝ => -1 / (2 * (1 + u^2))) Filter.atTop (nhds 0) := by
+    -- As u → ∞, 1 + u² → ∞, so 1/(2(1+u²)) → 0, hence -1/(2(1+u²)) → 0
+    -- The proof uses: Filter.Tendsto.inv_tendsto_atTop and const_mul
+    have h1 : Filter.Tendsto (fun u : ℝ => 1 + u^2) Filter.atTop Filter.atTop := by
+      apply Filter.tendsto_atTop_add_const_left
+      exact Filter.tendsto_pow_atTop (by norm_num : (2 : ℕ) ≠ 0)
+    have h2 : Filter.Tendsto (fun u : ℝ => 2 * (1 + u^2)) Filter.atTop Filter.atTop := by
+      exact h1.const_mul_atTop' (by norm_num : (0 : ℝ) < 2)
+    have h3 : Filter.Tendsto (fun u : ℝ => (2 * (1 + u^2))⁻¹) Filter.atTop (nhds 0) := by
+      exact Filter.Tendsto.inv_tendsto_atTop h2
+    have h4 : Filter.Tendsto (fun u : ℝ => (-1 : ℝ) * (2 * (1 + u^2))⁻¹) Filter.atTop (nhds ((-1 : ℝ) * 0)) := by
+      exact h3.const_mul (-1)
+    simp only [mul_zero] at h4
+    have h5 : (fun u : ℝ => -1 / (2 * (1 + u^2))) = (fun u : ℝ => (-1 : ℝ) * (2 * (1 + u^2))⁻¹) := by
+      ext u
+      have hu : 2 * (1 + u^2) ≠ 0 := by positivity
+      field_simp [hu]
+    rw [h5]
+    exact h4
+  rw [MeasureTheory.integral_Ioi_of_hasDerivAt_of_nonneg' hderiv hpos hlim]
+  norm_num
 
 lemma integral_abs_div_one_add_sq_sq :
     ∫ u : ℝ, |u| / (1 + u^2)^2 = 1 := by
