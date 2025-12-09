@@ -500,19 +500,81 @@ lemma poissonKernel_grad_sq_simplified (x : ℝ) {y : ℝ} (hy : 0 < y) :
     - |∂P/∂x| = (2/π) · |x| · y / (x² + y²)²
     - |∂P/∂y| = (1/π) · |x² - y²| / (x² + y²)²
     - Both are bounded by 1/(π·y²) using x² + y² ≥ y² and AM-GM -/
+lemma poissonKernel_dx_bound {y : ℝ} (hy : 0 < y) (x : ℝ) :
+    |poissonKernel_dx x y| ≤ 1 / (Real.pi * y^2) := by
+  unfold poissonKernel_dx
+  simp only [if_pos hy]
+  have h_sum_pos : x^2 + y^2 > 0 := by positivity
+  have h_sum_ge_y : x^2 + y^2 ≥ y^2 := by linarith [sq_nonneg x]
+  have h_denom_pos : (x^2 + y^2)^2 > 0 := by positivity
+  have h_pi_pos : Real.pi > 0 := Real.pi_pos
+  -- |∂P/∂x| = |-(2/π) · x · y / (x² + y²)²| = (2/π) · |x| · y / (x² + y²)²
+  have h_eq : |-(2 / Real.pi) * x * y / (x^2 + y^2)^2| =
+              (2 / Real.pi) * |x| * y / (x^2 + y^2)^2 := by
+    rw [abs_div, abs_mul, abs_mul, abs_neg]
+    simp only [abs_of_pos (by positivity : 2 / Real.pi > 0), abs_of_pos hy, abs_of_pos h_denom_pos]
+  rw [h_eq]
+  -- AM-GM: 2|x|y ≤ x² + y²
+  have h_am_gm : 2 * |x| * y ≤ x^2 + y^2 := by nlinarith [_root_.sq_abs x, sq_nonneg (|x| - y)]
+  have h_step1 : 2 / Real.pi * |x| * y ≤ 2 / Real.pi * ((x^2 + y^2) / 2) := by
+    have : |x| * y ≤ (x^2 + y^2) / 2 := by linarith
+    have h2pi_pos : 2 / Real.pi > 0 := by positivity
+    calc 2 / Real.pi * |x| * y = 2 / Real.pi * (|x| * y) := by ring
+      _ ≤ 2 / Real.pi * ((x^2 + y^2) / 2) := mul_le_mul_of_nonneg_left this (le_of_lt h2pi_pos)
+  calc 2 / Real.pi * |x| * y / (x^2 + y^2)^2
+      ≤ 2 / Real.pi * ((x^2 + y^2) / 2) / (x^2 + y^2)^2 := by {
+        apply div_le_div_of_nonneg_right h_step1 (by positivity)
+      }
+    _ = (1 / Real.pi) / (x^2 + y^2) := by field_simp [ne_of_gt h_pi_pos]; ring
+    _ ≤ (1 / Real.pi) / y^2 := by {
+        apply div_le_div_of_nonneg_left _ (sq_pos_of_pos hy) h_sum_ge_y
+        positivity
+      }
+    _ = 1 / (Real.pi * y^2) := by rw [div_div]
+
+lemma poissonKernel_dy_bound {y : ℝ} (hy : 0 < y) (x : ℝ) :
+    |poissonKernel_dy x y| ≤ 1 / (Real.pi * y^2) := by
+  unfold poissonKernel_dy
+  simp only [if_pos hy]
+  have h_sum_pos : x^2 + y^2 > 0 := by positivity
+  have h_sum_ge_y : x^2 + y^2 ≥ y^2 := by linarith [sq_nonneg x]
+  have h_denom_pos : (x^2 + y^2)^2 > 0 := by positivity
+  have h_pi_pos : Real.pi > 0 := Real.pi_pos
+  -- |∂P/∂y| = |(1/π) · (x² - y²) / (x² + y²)²| = (1/π) · |x² - y²| / (x² + y²)²
+  have h_eq : |(1 / Real.pi) * (x^2 - y^2) / (x^2 + y^2)^2| =
+              (1 / Real.pi) * |x^2 - y^2| / (x^2 + y^2)^2 := by
+    rw [abs_div, abs_mul]
+    simp only [abs_of_pos (by positivity : 1 / Real.pi > 0), abs_of_pos h_denom_pos]
+  rw [h_eq]
+  -- |x² - y²| ≤ x² + y² (since both x² and y² are nonneg)
+  have h_bound : |x^2 - y^2| ≤ x^2 + y^2 := by
+    rw [abs_le]
+    constructor
+    · linarith [sq_nonneg x, sq_nonneg y]
+    · linarith [sq_nonneg x, sq_nonneg y]
+  have h_step1 : 1 / Real.pi * |x^2 - y^2| ≤ 1 / Real.pi * (x^2 + y^2) := by
+    apply mul_le_mul_of_nonneg_left h_bound (by positivity)
+  calc 1 / Real.pi * |x^2 - y^2| / (x^2 + y^2)^2
+      ≤ 1 / Real.pi * (x^2 + y^2) / (x^2 + y^2)^2 := by {
+        apply div_le_div_of_nonneg_right h_step1 (by positivity)
+      }
+    _ = (1 / Real.pi) / (x^2 + y^2) := by field_simp [ne_of_gt h_pi_pos]; ring
+    _ ≤ (1 / Real.pi) / y^2 := by {
+        apply div_le_div_of_nonneg_left _ (sq_pos_of_pos hy) h_sum_ge_y
+        positivity
+      }
+    _ = 1 / (Real.pi * y^2) := by rw [div_div]
+
 lemma poissonKernel_grad_bounded {y : ℝ} (hy : 0 < y) (x : ℝ) :
     ‖poissonKernel_grad x y‖ ≤ 1 / (Real.pi * y^2) := by
   unfold poissonKernel_grad
   simp only [Prod.norm_mk]
   -- For sup norm: ‖(a, b)‖ = |a| ⊔ |b|
   apply sup_le
-  -- Each component bound follows from:
-  -- |∂P/∂x| ≤ (2/π) · |x|·y / (x² + y²)² ≤ 1/(π(x² + y²)) ≤ 1/(πy²)
-  -- |∂P/∂y| ≤ (1/π) · (x² + y²) / (x² + y²)² = 1/(π(x² + y²)) ≤ 1/(πy²)
-  all_goals {
-    simp only [poissonKernel_dx, poissonKernel_dy, if_pos hy, Real.norm_eq_abs]
-    sorry -- Detailed inequality manipulation
-  }
+  · simp only [Real.norm_eq_abs]
+    exact poissonKernel_dx_bound hy x
+  · simp only [Real.norm_eq_abs]
+    exact poissonKernel_dy_bound hy x
 
 /-- The gradient energy density is nonnegative. -/
 lemma poissonGradientEnergy_nonneg (f : ℝ → ℝ) (x y : ℝ) :
