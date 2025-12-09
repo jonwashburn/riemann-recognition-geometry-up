@@ -867,13 +867,28 @@ The full proof requires:
 The following lemmas establish bounds on the gradient of the Poisson extension
 in terms of the BMO norm of the boundary function. -/
 
+/-- The integral ∫_{-∞}^{∞} |u| / (u² + 1)² du = 1.
+
+    **Proof**:
+    - By symmetry: = 2 ∫_0^∞ u / (u² + 1)² du
+    - Substitution v = u² + 1, dv = 2u du:
+      = 2 · (1/2) ∫_1^∞ v⁻² dv = [-v⁻¹]_1^∞ = 0 - (-1) = 1 -/
+lemma integral_abs_div_one_add_sq_sq :
+    ∫ u : ℝ, |u| / (1 + u^2)^2 = 1 := by
+  -- This is a standard calculus integral.
+  -- The proof uses:
+  -- 1. Symmetry to reduce to ∫_0^∞
+  -- 2. Substitution v = u² + 1
+  -- 3. Direct computation
+  sorry
+
 /-- The integral of |∂P/∂x| over ℝ scales like 1/y.
 
     ∫_{-∞}^{∞} |∂P/∂x(t, y)| dt = (2/π) ∫ |t|·y / (t² + y²)² dt
                                  = (2/π) · (1/y) · ∫ |u| / (u² + 1)² du
-                                 = C / y
+                                 = 2/(πy)
 
-    where C = (2/π) · ∫ |u| / (u² + 1)² du = 2/π (computed via substitution). -/
+    where ∫ |u| / (u² + 1)² du = 1 (by integral_abs_div_one_add_sq_sq). -/
 lemma poissonKernel_dx_integral_bound {y : ℝ} (hy : 0 < y) :
     ∫ t : ℝ, |poissonKernel_dx t y| ≤ 2 / (Real.pi * y) := by
   -- The integral is (2/π) · y · ∫ |t| / (t² + y²)² dt
@@ -899,7 +914,21 @@ lemma poissonKernel_dx_integral_bound {y : ℝ} (hy : 0 < y) :
     simp only [abs_of_pos h_denom_pos]
   simp_rw [h_integrand]
   -- Now we need ∫ (2/π) · |t| · y / (t² + y²)² dt ≤ 2/(πy)
-  -- This requires the Mathlib integral machinery
+  --
+  -- **Computation (verified):**
+  -- 1. Factor out constants: (2y/π) · ∫ |t| / (t² + y²)² dt
+  -- 2. Substitution u = t/y, dt = y·du:
+  --    = (2y/π) · ∫ |yu| / (y²u² + y²)² · y du
+  --    = (2y/π) · ∫ y|u| / y⁴(u² + 1)² · y du
+  --    = (2y/π) · (1/y²) · ∫ |u| / (u² + 1)² du
+  --    = (2/(πy)) · ∫ |u| / (u² + 1)² du
+  -- 3. The integral ∫_{-∞}^∞ |u|/(u²+1)² du = 2∫_0^∞ u/(u²+1)² du
+  --    With v = u² + 1: = 2 · (1/2) · ∫_1^∞ v⁻² dv = [-v⁻¹]_1^∞ = 1
+  -- 4. Result: (2/(πy)) · 1 = 2/(πy) ✓
+  --
+  -- The formal Lean proof would use:
+  -- - MeasureTheory.integral_comp_mul_left for substitution
+  -- - A lemma for ∫ |u|/(u²+1)² du = 1 (or compute via fundamental theorem)
   sorry
 
 /-- The Poisson extension gradient component bound via convolution.
