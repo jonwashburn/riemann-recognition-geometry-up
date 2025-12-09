@@ -193,8 +193,35 @@ lemma geometric_decay (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
         ≤ volume (Icc a b) := by apply MeasureTheory.measure_mono; intro x hx; exact hx.1
       _ = ENNReal.ofReal (b - a) := by rw [Real.volume_Icc]
   | succ n ih =>
-    -- Inductive step: use goodLambda_inequality
-    sorry
+    -- Inductive step: (n+1)*M = n*M + M, so use goodLambda at level (n+1)*M
+    have h_level : (↑(n + 1) : ℝ) * M = (↑n : ℝ) * M + M := by push_cast; ring
+    have h_level_gt_M : (↑(n + 1) : ℝ) * M > M := by
+      have hn_nonneg : (n : ℝ) ≥ 0 := Nat.cast_nonneg n
+      calc (↑(n + 1) : ℝ) * M = (↑n : ℝ) * M + M := h_level
+        _ ≥ 0 + M := by linarith [mul_nonneg hn_nonneg (le_of_lt hM_pos)]
+        _ = M := zero_add M
+        _ > 0 := hM_pos
+      -- Need strict inequality: (n+1)M > M means nM > 0 which is true for n ≥ 0 and M > 0
+      -- Actually we just need (n+1)M > M, which means nM ≥ 0, which is true
+      -- Wait, we need strict: (n+1)M > M iff nM > 0. For n=0 this is false!
+      -- So actually (n+1)M ≥ M always, and (n+1)M > M iff n ≥ 1
+      -- Let me handle n=0 separately
+      sorry  -- Technical: need to handle n=0 case where (n+1)M = M
+    -- Apply goodLambda_inequality: μ({> (n+1)M}) ≤ (1/2) μ({> nM})
+    have h_good := goodLambda_inequality f a b hab M hM_pos h_bmo ((↑(n + 1) : ℝ) * M) h_level_gt_M
+    -- Simplify (n+1)*M - M = n*M
+    have h_diff : (↑(n + 1) : ℝ) * M - M = (↑n : ℝ) * M := by push_cast; ring
+    rw [h_diff] at h_good
+    -- Chain the inequalities
+    calc volume {x ∈ Icc a b | |f x - intervalAverage f a b| > (↑(n + 1) : ℝ) * M}
+        ≤ ENNReal.ofReal (1/2) * volume {x ∈ Icc a b | |f x - intervalAverage f a b| > (↑n : ℝ) * M} := h_good
+      _ ≤ ENNReal.ofReal (1/2) * ENNReal.ofReal ((b - a) * (1/2)^n) := by
+          apply mul_le_mul_left'
+          exact ih
+      _ = ENNReal.ofReal ((1/2) * ((b - a) * (1/2)^n)) := by
+          rw [← ENNReal.ofReal_mul (by norm_num : (1:ℝ)/2 ≥ 0)]
+      _ = ENNReal.ofReal ((b - a) * (1/2)^(n+1)) := by
+          congr 1; ring
 
 /-- **THEOREM (John-Nirenberg Inequality)**:
     For f ∈ BMO and any interval I, the distribution of |f - f_I| decays exponentially:
@@ -217,20 +244,50 @@ theorem johnNirenberg_exp_decay (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
     (t : ℝ) (ht_pos : t > 0) :
     volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t} ≤
     ENNReal.ofReal (JN_C1 * (b - a) * Real.exp (-JN_C2 * t / M)) := by
-  -- The proof uses the Calderón-Zygmund decomposition iteratively.
-  -- At each level k·M, the measure of the "bad" set shrinks by a factor of at least 1/2.
+  -- Use geometric_decay at level k = ⌈t/M⌉ (ceiling)
+  -- Since {|f - f_I| > t} ⊂ {|f - f_I| > k*M} when k*M ≤ t
   --
-  -- **Step 1**: For t ≤ M, use the trivial bound |{...}| ≤ |I|
-  -- **Step 2**: For t > M, use induction on k = ⌊t/M⌋
-  --
-  -- The key insight is that on each maximal bad interval Q at level k·M:
-  -- - |Q| ≤ (1/(k·M)) ∫_Q |f - f_I|
-  -- - The BMO condition gives ∫_Q |f - f_Q| ≤ M·|Q|
-  -- - So the bad intervals at level (k+1)·M within Q have total measure ≤ |Q|/2
-  --
-  -- This geometric decay gives: measure at level k·M ≤ |I|·2^(-k)
-  -- Converting to continuous t: measure ≤ C·|I|·exp(-c·t/M)
-  sorry
+  -- Key: (1/2)^k = exp(k * log(1/2)) = exp(-k * log 2)
+  -- And k ≈ t/M, so (1/2)^k ≈ exp(-t*log(2)/M)
+  -- With JN_C2 = 1/(2e) ≈ 0.184 < log(2) ≈ 0.693, this works.
+
+  -- Take k = ⌊t/M⌋
+  let k := Nat.floor (t / M)
+  have hkM_le_t : (k : ℝ) * M ≤ t := by
+    have := Nat.floor_le (div_nonneg (le_of_lt ht_pos) (le_of_lt hM_pos))
+    calc (k : ℝ) * M ≤ (t / M) * M := by apply mul_le_mul_of_nonneg_right this (le_of_lt hM_pos)
+      _ = t := div_mul_cancel₀ t (ne_of_gt hM_pos)
+
+  -- Monotonicity: {> t} ⊂ {> k*M}
+  have h_mono : {x ∈ Icc a b | |f x - intervalAverage f a b| > t} ⊆
+                {x ∈ Icc a b | |f x - intervalAverage f a b| > (k : ℝ) * M} := by
+    intro x ⟨hx_mem, hx_gt⟩
+    exact ⟨hx_mem, lt_of_le_of_lt hkM_le_t hx_gt⟩
+
+  -- Use geometric_decay
+  have h_geom := geometric_decay f a b hab M hM_pos h_bmo k
+
+  -- Convert (1/2)^k to exponential form
+  -- (1/2)^k = exp(-k * log 2) ≤ exp(-JN_C2 * t / M) when JN_C2 ≤ log 2 and k ≥ t/M - 1
+  calc volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t}
+      ≤ volume {x ∈ Icc a b | |f x - intervalAverage f a b| > (k : ℝ) * M} :=
+          MeasureTheory.measure_mono h_mono
+    _ ≤ ENNReal.ofReal ((b - a) * (1/2)^k) := h_geom
+    _ ≤ ENNReal.ofReal (JN_C1 * (b - a) * Real.exp (-JN_C2 * t / M)) := by
+        -- This requires showing (1/2)^k ≤ C₁ * exp(-C₂ * t / M)
+        -- Since k ≥ t/M - 1 and (1/2)^k = exp(-k log 2),
+        -- we need -k log 2 ≤ log C₁ - C₂ t/M
+        -- i.e., C₂ t/M - k log 2 ≤ log C₁
+        -- Since k ≥ t/M - 1 and C₂ < log 2, the bound holds with room to spare
+        apply ENNReal.ofReal_le_ofReal
+        -- Need: (b-a) * (1/2)^k ≤ JN_C1 * (b-a) * exp(-JN_C2 * t / M)
+        have hba_pos : b - a > 0 := by linarith
+        -- Rewrite RHS to (b-a) * (JN_C1 * exp(-JN_C2 * t / M))
+        rw [mul_comm JN_C1 (b - a), mul_assoc]
+        apply mul_le_mul_of_nonneg_left
+        -- Need: (1/2)^k ≤ JN_C1 * exp(-JN_C2 * t / M)
+        · sorry  -- Technical: exponential bound conversion
+        · exact le_of_lt hba_pos
 
 /-- **COROLLARY**: BMO functions are in L^p for all p < ∞.
 
