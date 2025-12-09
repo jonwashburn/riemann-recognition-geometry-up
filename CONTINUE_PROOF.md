@@ -8,39 +8,50 @@ Complete a fully unconditional Lean 4 proof of the Riemann Hypothesis using Reco
 - **Sorries**: 3 sorry calls in 2 declarations
 - **FeffermanStein.lean**: ✅ SORRY-FREE!
 
-## Session Progress ✅
-
-### Theorems Proven This Session
-1. **`phaseChange_abs_conj`** - Both edge cases proven! (6 → 4 sorries)
-   - Key: Im(B) = 0 iff t = Re(ρ), contradicting hypotheses
-   - Uses blaschkeFactor_re_im and Complex.arg_eq_pi_iff
-
-2. **`phase_bound_neg_im` σ < a case** - Fully proven! (4 → 3 sorries)
-   - Uses conjugation symmetry + key bound y' < 1
-   - σ > 1/2 > 0 > a + γ gives y' = (a-σ)/(-γ) < 1
-
 ## Remaining Sorries (3 sorry calls, 2 declarations)
 
-| Line | Declaration | Case | Mathematical Content |
-|------|-------------|------|---------------------|
-| 903 | `phase_bound_from_arctan` | σ > b, γ > 0 | Whitney geometry with σ ≤ 1 |
-| 1128 | `phase_bound_neg_im` | mixed-sign, γ < 0 | Via conjugation to γ > 0 mixed |
-| 1309 | `phase_bound_neg_im` | σ > b, γ < 0 | Via conjugation to γ > 0, σ > b |
+| Line | Declaration | Case | Blocker |
+|------|-------------|------|---------|
+| 903 | `phase_bound_from_arctan` | σ > b, γ > 0 | `nlinarith` on bound `1/3 ≤ (x-y)/(1+xy)` |
+| 1128 | `phase_bound_neg_im` | σ ∈ [a,b], γ < 0 | `simp` failures, type mismatches |
+| 1309 | `phase_bound_neg_im` | σ > b, γ < 0 | Same as line 903 |
 
-## Key Mathematical Insight
+## Technical Analysis
 
-All 3 remaining sorries require the **critical strip constraint σ ≤ 1** (already in lemma signature).
+### σ > b Case (Lines 903, 1309)
+The bound `(x-y)/(1+xy) ≥ 1/3` requires showing `1 + xy ≤ 3(x-y)`.
 
-### σ > b Cases
-For both x, y < 0 (γ > 0, σ > b) or both x, y > 0 (γ < 0, σ > b):
-- Need: `(x-y)/(1+xy) ≥ 1/3`
-- This requires: `1 + xy ≤ 3(x-y)`
-- With σ ≤ 1, the bound `xy ≤ 3(x-y) - 1` follows from geometry
+**Variables:**
+- `x = (b-σ)/γ < 0`, `y = (a-σ)/γ < 0`, `x > y`
+- `x - y = (b-a)/γ ≥ 1` (from `h_spread`)
+- `xy = (b-σ)(a-σ)/γ² > 0`
 
-### Mixed-Sign Case (γ < 0)
-- Use `phaseChange_abs_conj`: `|phaseChange ρ| = |phaseChange (conj ρ)|`
-- For conj ρ with -γ > 0 and σ ∈ [a,b], this is γ > 0 mixed-sign
-- Bound: `|phaseChange| ≥ 4·arctan(1/5) > L_rec`
+**Available constraint:** `hσ_upper : ρ.re ≤ 1` (critical strip)
+
+**Derived bounds:**
+- `σ - b ≤ 1 - b ≤ 1 - γ` (since `b ≥ γ` from `hγ_upper`)
+- `|x| = (σ-b)/γ ≤ (1-γ)/γ`
+
+**Why `nlinarith` fails:** The inequality `xy ≤ 3(x-y) - 1` requires polynomial reasoning that `nlinarith` can't find with the available hypotheses. Need to manually derive intermediate bounds.
+
+### Mixed-Sign Case (Line 1128)
+For γ < 0 with σ ∈ [a, b]:
+- `x = (b-σ)/γ ≤ 0` and `y = (a-σ)/γ ≥ 0`
+- Need `|phaseChange| ≥ 4·arctan(1/5) > L_rec`
+
+**Approach:** Use `phaseChange_abs_conj` to reduce to γ > 0 case.
+**Blockers:**
+1. `simp` not simplifying `starRingEnd` correctly
+2. Type mismatches with `blaschkePhase_arctan` hypotheses
+3. Edge case handling when σ = a or σ = b (singular points)
+
+## Suggested Approach
+
+1. **Add lemma hypotheses:** Explicitly require `a < σ < b` (strict) for mixed-sign case to avoid edge case issues.
+
+2. **Use `polyrith` or `nlinarith` with explicit terms:** For σ > b case, may need to provide explicit intermediate bounds that nlinarith can use.
+
+3. **Factor out reusable lemmas:** Create helper lemmas for the arctan bounds that can be proven separately.
 
 ## Build Commands
 
@@ -53,5 +64,5 @@ grep -n "sorry" RiemannRecognitionGeometry/Axioms.lean
 
 - DirichletEta.lean being developed in separate session (`zero_has_nonzero_im`)
 - FeffermanStein.lean is completely proven (with 5 axioms)
-- Progress: 6 sorries → 3 sorries (50% reduction this session!)
-- All remaining sorries use the σ ≤ 1 constraint (lines 400, 931)
+- The σ ≤ 1 constraint is now available in lemma signatures (recently added)
+- All 3 remaining sorries have similar structure: arctan bounds from Whitney geometry
