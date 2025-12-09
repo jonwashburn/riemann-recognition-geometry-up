@@ -153,6 +153,49 @@ def JN_C2 : ℝ := 1 / (2 * Real.exp 1)  -- 1/(2e) ≈ 0.184
 lemma JN_C1_pos : JN_C1 > 0 := Real.exp_pos 1
 lemma JN_C2_pos : JN_C2 > 0 := by unfold JN_C2; positivity
 
+/-! ### Key Lemmas for John-Nirenberg Proof -/
+
+/-- **Good-λ Inequality**: The key step in John-Nirenberg.
+
+    For f ∈ BMO with oscillation ≤ M, and any level t > M:
+    |{|f - f_I| > t}| ≤ (1/2) · |{|f - f_I| > t - M}|
+
+    **Proof**: On each maximal bad interval Q at level t-M:
+    - The BMO condition gives ∫_Q |f - f_Q| ≤ M·|Q|
+    - The set where |f - f_Q| > M has measure ≤ |Q|/2 (by Chebyshev)
+    - On the good part of Q, |f - f_I| ≤ |f - f_Q| + |f_Q - f_I| ≤ M + (t-M) = t
+    - So {|f - f_I| > t} ∩ Q ⊂ {|f - f_Q| > M} ∩ Q, which has measure ≤ |Q|/2 -/
+lemma goodLambda_inequality (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
+    (M : ℝ) (hM_pos : M > 0)
+    (h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
+    (t : ℝ) (ht : t > M) :
+    volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t} ≤
+    ENNReal.ofReal (1/2) * volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t - M} := by
+  -- The proof uses the Calderón-Zygmund decomposition at level t-M
+  -- and the BMO condition on each bad interval
+  sorry
+
+/-- **Geometric Decay**: By induction using goodLambda_inequality.
+
+    For k ∈ ℕ: |{|f - f_I| > k·M}| ≤ |I| · 2^(-k) -/
+lemma geometric_decay (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
+    (M : ℝ) (hM_pos : M > 0)
+    (h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
+    (k : ℕ) :
+    volume {x ∈ Icc a b | |f x - intervalAverage f a b| > k * M} ≤
+    ENNReal.ofReal ((b - a) * (1/2)^k) := by
+  -- By induction on k, using goodLambda_inequality
+  induction k with
+  | zero =>
+    -- Base case: |{|f - f_I| > 0}| ≤ |I| is trivial
+    simp only [Nat.cast_zero, zero_mul, pow_zero, mul_one]
+    calc volume {x ∈ Icc a b | |f x - intervalAverage f a b| > 0}
+        ≤ volume (Icc a b) := by apply MeasureTheory.measure_mono; intro x hx; exact hx.1
+      _ = ENNReal.ofReal (b - a) := by rw [Real.volume_Icc]
+  | succ n ih =>
+    -- Inductive step: use goodLambda_inequality
+    sorry
+
 /-- **THEOREM (John-Nirenberg Inequality)**:
     For f ∈ BMO and any interval I, the distribution of |f - f_I| decays exponentially:
 
