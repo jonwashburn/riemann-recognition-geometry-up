@@ -456,15 +456,71 @@ this measure μ is a Carleson measure with:
 for every Carleson box Q(I).
 -/
 
+/-- The gradient of the Poisson extension.
+    ∇u(x,y) = (∂u/∂x, ∂u/∂y) where u = P[f].
+
+    By differentiating under the integral sign:
+    ∂u/∂x = ∫ (∂P/∂x)(x-t, y) f(t) dt
+    ∂u/∂y = ∫ (∂P/∂y)(x-t, y) f(t) dt  -/
+def poissonExtension_gradient (f : ℝ → ℝ) (x y : ℝ) : ℝ × ℝ :=
+  if y > 0 then
+    (∫ t : ℝ, poissonKernel_dx (x - t) y * f t,
+     ∫ t : ℝ, poissonKernel_dy (x - t) y * f t)
+  else (0, 0)
+
 /-- The gradient squared energy density of the Poisson extension.
-    This is |∇u(x, y)|² · y, the density of the Carleson measure. -/
+    This is |∇u(x, y)|² · y, the density of the Carleson measure.
+
+    For the Fefferman-Stein theorem, we need to show that this
+    defines a Carleson measure when f ∈ BMO. -/
 def poissonGradientEnergy (f : ℝ → ℝ) (x y : ℝ) : ℝ :=
   if y > 0 then
-    -- The gradient of the Poisson extension is ∫ ∇P(x-t, y) f(t) dt
-    -- |∇u|² ≤ (∫ |∇P| |f|)² ≤ ∫ |∇P|² · y by Cauchy-Schwarz
-    -- For now, we define this abstractly
-    ‖poissonKernel_grad x y‖^2 * (poissonExtension f x y)^2 * y
+    ‖poissonExtension_gradient f x y‖^2 * y
   else 0
+
+/-- The gradient squared simplifies to 1/(π²(x²+y²)²).
+    The numerator 4x²y² + (x² - y²)² = (x² + y²)². -/
+lemma poissonKernel_grad_sq_simplified (x : ℝ) {y : ℝ} (hy : 0 < y) :
+    poissonKernel_grad_sq x y = 1 / (Real.pi^2 * (x^2 + y^2)^2) := by
+  rw [poissonKernel_grad_sq_formula x hy]
+  have h_denom_pos : (x^2 + y^2)^4 > 0 := by positivity
+  have h_denom_ne : (x^2 + y^2)^4 ≠ 0 := ne_of_gt h_denom_pos
+  have h_pi_sq_ne : Real.pi^2 ≠ 0 := ne_of_gt (sq_pos_of_pos Real.pi_pos)
+  -- Key algebraic identity: 4x²y² + (x² - y²)² = (x² + y²)²
+  have h_num : 4 * x^2 * y^2 + (x^2 - y^2)^2 = (x^2 + y^2)^2 := by ring
+  rw [h_num]
+  have h_sq_ne : (x^2 + y^2)^2 ≠ 0 := by positivity
+  field_simp [h_pi_sq_ne, h_sq_ne]
+  ring
+
+/-- The Poisson kernel gradient is bounded.
+    |∇P(x,y)| ≤ 1/(π·y²).
+
+    This follows from:
+    - |∂P/∂x| = (2/π) · |x| · y / (x² + y²)²
+    - |∂P/∂y| = (1/π) · |x² - y²| / (x² + y²)²
+    - Both are bounded by 1/(π·y²) using x² + y² ≥ y² and AM-GM -/
+lemma poissonKernel_grad_bounded {y : ℝ} (hy : 0 < y) (x : ℝ) :
+    ‖poissonKernel_grad x y‖ ≤ 1 / (Real.pi * y^2) := by
+  unfold poissonKernel_grad
+  simp only [Prod.norm_mk]
+  -- For sup norm: ‖(a, b)‖ = |a| ⊔ |b|
+  apply sup_le
+  -- Each component bound follows from:
+  -- |∂P/∂x| ≤ (2/π) · |x|·y / (x² + y²)² ≤ 1/(π(x² + y²)) ≤ 1/(πy²)
+  -- |∂P/∂y| ≤ (1/π) · (x² + y²) / (x² + y²)² = 1/(π(x² + y²)) ≤ 1/(πy²)
+  all_goals {
+    simp only [poissonKernel_dx, poissonKernel_dy, if_pos hy, Real.norm_eq_abs]
+    sorry -- Detailed inequality manipulation
+  }
+
+/-- The gradient energy density is nonnegative. -/
+lemma poissonGradientEnergy_nonneg (f : ℝ → ℝ) (x y : ℝ) :
+    poissonGradientEnergy f x y ≥ 0 := by
+  unfold poissonGradientEnergy
+  split_ifs with hy
+  · apply mul_nonneg (sq_nonneg _) (le_of_lt hy)
+  · rfl
 
 /-- The total Carleson energy over a box.
     E(I) = ∫∫_{Q(I)} |∇u|² y dx dy -/
