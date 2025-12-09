@@ -127,8 +127,8 @@ The following table clarifies which classical results are treated as axioms in o
 \hline
 \textbf{Component} & \textbf{Status} & \textbf{Reference} \\
 \hline
-$\Utail < \Lrec$ & Fully proven & Theorem~\ref{thm:zero-free-condition} \\
-Arctan inequalities & Fully proven & Appendix~\ref{sec:arctan-appendix} \\
+$\Utail < \Lrec$ & Fully proven & Theorem~\ref{thm:key-numerical} \\
+Arctan inequalities & Fully proven & Appendix~\ref{app:arctan} \\
 Whitney interval existence & Fully proven & Section~\ref{sec:globalization} \\
 Blaschke phase formula & Fully proven & Lemma~\ref{lem:blaschke-phase} \\
 \hline
@@ -1345,7 +1345,7 @@ In this section, we establish the central numerical inequality of the Recognitio
 \label{eq:key-inequality-main}
 \boxed{\Utail < \Lrec.}
 \end{equation}
-This inequality is \emph{proven}, not assumed. The proof is entirely self-contained, relying only on elementary bounds for $\pi$ and Taylor series estimates for the arctangent function. Detailed proofs of all arctangent inequalities appear in Appendix~\ref{sec:arctan-appendix}.
+This inequality is \emph{proven}, not assumed. The proof is entirely self-contained, relying only on elementary bounds for $\pi$ and Taylor series estimates for the arctangent function. Detailed proofs of all arctangent inequalities appear in Appendix~\ref{app:arctan}.
 
 \subsection{Choice of Constants}
 
@@ -4101,7 +4101,6 @@ lemma poissonKernel_integral_Icc {y : R} (hy : 0 < y) {a b : R} (hab : a <= b) :
 
 
 %% ============================================================
-\appendix
 \section{Sketches and Citations for Classical Inputs}
 \label{sec:classical-appendix}
 %% ============================================================
@@ -4246,7 +4245,7 @@ See \cite{Apostol1976}, Chapter~12, for the eta-zeta relationship.
 \hline
 Fefferman--Stein & \cite{FeffermanStein1972}, Thm.~3 & Axiom \\
 BMO of $\log|\xi|$ & \cite{Titchmarsh1986}, Ch.~5,9 & Axiom \\
-Blaschke phase & Elementary (Appendix~\ref{sec:arctan-appendix}) & Proven \\
+Blaschke phase & Elementary (Appendix~\ref{app:arctan}) & Proven \\
 $\zeta(s) < 0$ on $(0,1)$ & \cite{Apostol1976}, Ch.~12 & Axiom \\
 \hline
 \end{tabular}

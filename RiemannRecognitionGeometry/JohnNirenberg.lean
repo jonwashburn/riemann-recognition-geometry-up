@@ -1296,22 +1296,121 @@ theorem poissonKernel_dy_integrable_zero {y : ℝ} (hy : 0 < y) :
 
 /-- **Theorem**: y-derivative integrability for Poisson kernel (translated).
 
-    Uses translation invariance of Lebesgue measure. -/
+    Uses translation and reflection invariance of Lebesgue measure. -/
 theorem poissonKernel_dy_integrable (x : ℝ) {y : ℝ} (hy : 0 < y) :
     Integrable (fun t => poissonKernel_dy (x - t) y) := by
   -- Use translation invariance: ∫ f(x-t) dt = ∫ f(t) dt
   have h_zero := poissonKernel_dy_integrable_zero hy
-  -- The map t ↦ x - t is a measure-preserving bijection
-  have h_eq : (fun t => poissonKernel_dy (x - t) y) = (fun t => poissonKernel_dy t y) ∘ (fun t => x - t) := by
-    ext t; simp
-  rw [h_eq]
-  exact h_zero.comp_sub_right x
+  -- x - t = -(t - x), so f(x - t) = (f ∘ neg) (t - x)
+  -- Step 1: f ∘ neg is integrable
+  have h_neg : Integrable (fun t => poissonKernel_dy (-t) y) := h_zero.comp_neg
+  -- Step 2: Apply comp_sub_right to get (f ∘ neg) (t - x) integrable
+  have h_shift := h_neg.comp_sub_right x
+  -- Step 3: Show this equals our target
+  convert h_shift using 1
+  ext t
+  simp only [Function.comp_apply, neg_sub]
+
+/-- **Lemma**: The y-derivative of Poisson kernel is even.
+    poissonKernel_dy(-s, y) = poissonKernel_dy(s, y) -/
+lemma poissonKernel_dy_even (s : ℝ) {y : ℝ} (hy : 0 < y) :
+    poissonKernel_dy (-s) y = poissonKernel_dy s y := by
+  unfold poissonKernel_dy
+  simp only [hy, if_true, neg_sq]
+
+/-- **Axiom**: The y-derivative of Poisson kernel integrates to 0.
+
+    This follows from the fact that ∫ P(x,y) dx = 1 for all y > 0,
+    so d/dy(1) = ∫ ∂P/∂y dx = 0.
+
+    **Explicit computation**: ∫ (1/π)(s² - y²)/(s² + y²)² ds
+    = (1/π) · [-s/(s² + y²)]_{-∞}^{∞}
+    = (1/π) · (0 - 0) = 0
+
+    This requires the fundamental theorem of calculus for improper integrals,
+    which is subtle in Lean/Mathlib. -/
+axiom poissonKernel_dy_integral_zero {y : ℝ} (hy : 0 < y) :
+    ∫ s : ℝ, poissonKernel_dy s y = 0
+
+/-- The translated integral ∫ poissonKernel_dy(x-t, y) dt is also 0. -/
+lemma poissonKernel_dy_integral_translated_zero (x : ℝ) {y : ℝ} (hy : 0 < y) :
+    ∫ t : ℝ, poissonKernel_dy (x - t) y = 0 := by
+  have h := integral_sub_left_eq_self (fun s => poissonKernel_dy s y) volume x
+  rw [h]
+  exact poissonKernel_dy_integral_zero hy
 
 /-- **Axiom**: y-derivative integral bound for Poisson kernel.
 
-    ∫ |poissonKernel_dy(t, y)| dt ≤ 2/(π·y), similar to the x-derivative. -/
+    ∫ |poissonKernel_dy(t, y)| dt ≤ 2/(π·y), similar to the x-derivative.
+
+    The exact value is 2/(πy), computed via:
+    ∫ |s² - y²| / (s² + y²)² ds = 2, then divided by π.
+
+    **Sketch**: Split at |s| = y, each half contributes 1 to the integral. -/
 axiom poissonKernel_dy_integral_bound {y : ℝ} (hy : 0 < y) :
     ∫ t : ℝ, |poissonKernel_dy t y| ≤ 2 / (Real.pi * y)
+
+/-- **Poisson y-derivative bound for BMO functions**.
+
+    For BMO f with oscillation ≤ M, the y-derivative integral is bounded:
+    |∫ poissonKernel_dy(x-t, y) f(t) dt| ≤ (2·JN_C1) · M · (2/(πy))
+
+    **Proof**: Same structure as poisson_dx_bound_for_bmo but for the y-derivative. -/
+lemma poisson_dy_bound_for_bmo (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)
+    (M : ℝ) (hM_pos : M > 0)
+    (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
+    (hf_int : Integrable (fun t => poissonKernel_dy (x - t) y * f t))
+    (c : ℝ) :
+    |∫ t : ℝ, poissonKernel_dy (x - t) y * f t| ≤
+    (2 * JN_C1) * M * (2 / (Real.pi * y)) := by
+
+  have hK_int := poissonKernel_dy_integrable x hy
+  have hc_int : Integrable (fun t => poissonKernel_dy (x - t) y * c) := hK_int.mul_const c
+
+  have h_fc_int : Integrable (fun t => poissonKernel_dy (x - t) y * (f t - c)) := by
+    have : (fun t => poissonKernel_dy (x - t) y * (f t - c)) =
+           fun t => poissonKernel_dy (x - t) y * f t - poissonKernel_dy (x - t) y * c := by
+      ext t; ring
+    rw [this]
+    exact hf_int.sub hc_int
+
+  have h_c_zero : ∫ t, poissonKernel_dy (x - t) y * c = 0 := by
+    rw [integral_mul_right]
+    simp only [mul_eq_zero]
+    left
+    exact poissonKernel_dy_integral_translated_zero x hy
+
+  have h_split : ∫ t, poissonKernel_dy (x - t) y * f t =
+                 ∫ t, poissonKernel_dy (x - t) y * (f t - c) := by
+    have h1 : (fun t => poissonKernel_dy (x - t) y * (f t - c)) =
+              fun t => poissonKernel_dy (x - t) y * f t - poissonKernel_dy (x - t) y * c := by
+      ext t; ring
+    rw [h1]
+    have h2 := @integral_sub ℝ ℝ _ _ _ volume
+               (fun t => poissonKernel_dy (x - t) y * f t)
+               (fun t => poissonKernel_dy (x - t) y * c) hf_int hc_int
+    rw [h2, h_c_zero, sub_zero]
+
+  rw [h_split]
+
+  let K' : ℝ → ℝ := fun t => poissonKernel_dy (x - t) y
+
+  have hK'_int : Integrable K' := hK_int
+  have h_bmo_bound := bmo_kernel_bound_axiom f K' M hM_pos h_bmo hK'_int c
+
+  have h_K'_abs_bound : ∫ t, |K' t| ≤ 2 / (Real.pi * y) := by
+    have h_eq : ∫ t, |K' t| = ∫ s, |poissonKernel_dy s y| := by
+      change ∫ t, |poissonKernel_dy (x - t) y| = ∫ s, |poissonKernel_dy s y|
+      exact integral_sub_left_eq_self (fun s => |poissonKernel_dy s y|) volume x
+    rw [h_eq]
+    exact poissonKernel_dy_integral_bound hy
+
+  calc |∫ t, poissonKernel_dy (x - t) y * (f t - c)|
+      = |∫ t, K' t * (f t - c)| := by rfl
+    _ ≤ (2 * JN_C1) * M * ∫ t, |K' t| := h_bmo_bound
+    _ ≤ (2 * JN_C1) * M * (2 / (Real.pi * y)) := by
+        apply mul_le_mul_of_nonneg_left h_K'_abs_bound
+        exact mul_pos (mul_pos (by norm_num : (2:ℝ) > 0) JN_C1_pos) hM_pos |>.le
 
 /-- **Axiom**: Gradient bound combination via kernel estimates.
 
@@ -1322,9 +1421,10 @@ axiom poissonKernel_dy_integral_bound {y : ℝ} (hy : 0 < y) :
     1. |∂u/∂x| = |∫ ∂P/∂x(x-t,y) · (f(t) - f_I) dt|
     2. Apply bmo_kernel_bound: ≤ C_kernel · M · ∫|∂P/∂x| dt
     3. Use poissonKernel_dx_integral_bound: ∫|∂P/∂x| ≤ 2/(πy)
-    4. Combine partial bounds: ‖∇u‖ ≤ √2 · max(|∂u/∂x|, |∂u/∂y|)
+    4. Same for y-derivative
+    5. Combine partial bounds: ‖∇u‖ ≤ √2 · max(|∂u/∂x|, |∂u/∂y|)
 
-    See `poisson_dx_bound_for_bmo` for the x-derivative case.
+    See `poisson_dx_bound_for_bmo` and `poisson_dy_bound_for_bmo`.
 
     Reference: Garnett, "Bounded Analytic Functions", Chapter VI -/
 axiom poisson_gradient_bound_combination_axiom (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)

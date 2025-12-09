@@ -2305,7 +2305,8 @@ def weierstrassTail (I : WhitneyInterval) (ρ : ℂ) : ℝ :=
                     = actualPhaseSignal - blaschke
 
     This follows from elementary real algebra after unfolding definitions.
-    The arg function produces real values, so the computation is in ℝ. -/
+
+    This follows from elementary real algebra after unfolding definitions. -/
 theorem weierstrassTail_eq (I : WhitneyInterval) (ρ : ℂ) :
     let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
@@ -2313,18 +2314,7 @@ theorem weierstrassTail_eq (I : WhitneyInterval) (ρ : ℂ) :
     weierstrassTail I ρ = actualPhaseSignal I - blaschke := by
   intro s_hi s_lo blaschke
   unfold weierstrassTail cofactorPhase actualPhaseSignal
-  -- The key is to unify the complex number representations
-  -- cofactorPhase uses: (1/2 : ℂ) + ↑t * Complex.I - ρ
-  -- s_hi is: 1/2 + (I.t0 + I.len) * Complex.I where I.t0, I.len are NNReal
-  -- Need: ↑(I.t0 + I.len) * Complex.I = (↑I.t0 + ↑I.len) * Complex.I
-  have cast_add_hi : (↑(I.t0 + I.len) : ℂ) = ↑I.t0 + ↑I.len := by push_cast; ring
-  have cast_sub_lo : (↑(I.t0 - I.len) : ℂ) = ↑I.t0 - ↑I.len := by push_cast; ring
-  -- Now show the complex numbers are equal
-  have h_hi : (1/2 : ℂ) + ↑(I.t0 + I.len) * Complex.I - ρ = s_hi - ρ := by
-    simp only [s_hi, cast_add_hi]; ring
-  have h_lo : (1/2 : ℂ) + ↑(I.t0 - I.len) * Complex.I - ρ = s_lo - ρ := by
-    simp only [s_lo, cast_sub_lo]; ring
-  rw [h_hi, h_lo]
+  simp only [s_hi, s_lo, blaschke]
   ring
 
 /-- **AXIOM**: The Weierstrass cofactor log|g| is in BMO.
