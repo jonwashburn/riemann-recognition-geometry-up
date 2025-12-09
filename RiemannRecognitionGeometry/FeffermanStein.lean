@@ -36,6 +36,7 @@ import Mathlib.Order.Filter.AtTopBot.Group
 import Mathlib.Order.Filter.AtTopBot.Ring
 import Mathlib.Order.Filter.AtTopBot.Archimedean
 import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
+import Mathlib.MeasureTheory.Measure.Haar.NormedSpace
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 
 noncomputable section
@@ -1091,10 +1092,131 @@ lemma poissonKernel_dx_integral_bound {y : ℝ} (hy : 0 < y) :
   --    With v = u² + 1: = 2 · (1/2) · ∫_1^∞ v⁻² dv = [-v⁻¹]_1^∞ = 1
   -- 4. Result: (2/(πy)) · 1 = 2/(πy) ✓
   --
-  -- The formal Lean proof would use:
-  -- - MeasureTheory.integral_comp_mul_left for substitution
-  -- - A lemma for ∫ |u|/(u²+1)² du = 1 (or compute via fundamental theorem)
-  sorry
+  -- We will prove this equals exactly 2/(πy), which satisfies the ≤ bound.
+  --
+  -- The key is substitution u = t/y:
+  -- ∫ (2/π)|t|·y/(t²+y²)² dt
+  -- = ∫ (2/π)|yu|·y/(y²u²+y²)² · y du    [t = yu, dt = y·du]
+  -- = ∫ (2/π)·y²|u|·y/y⁴(u²+1)² du
+  -- = ∫ (2/(πy))|u|/(u²+1)² du
+  -- = (2/(πy)) · 1 = 2/(πy)
+  --
+  -- Using integral_comp_mul_left: ∫ g(a·x) dx = |a⁻¹| · ∫ g(y) dy
+  -- With a = y⁻¹: ∫ g(t/y) dt = |y| · ∫ g(u) du = y · ∫ g(u) du
+
+  -- First, show integrability of the scaled function
+  have h_int_scaled : Integrable (fun t => (2 / Real.pi) * |t| * y / (t^2 + y^2)^2) := by
+    -- The function equals (2/(πy²)) · g(t/y) where g(u) = |u|/(1+u²)²
+    -- Since g is integrable (integrable_abs_div_one_add_sq_sq) and scaling by constant
+    -- and composition with division preserves integrability, the result follows.
+    have hy_ne : y ≠ 0 := ne_of_gt hy
+    have hpi_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+
+    -- Step 1: g(u) = |u|/(1+u²)² is integrable
+    have h_g_int := integrable_abs_div_one_add_sq_sq
+
+    -- Step 2: g(t/y) is integrable (by Integrable.comp_div)
+    have h_comp_int : Integrable (fun t => |t / y| / (1 + (t / y)^2)^2) :=
+      h_g_int.comp_div hy_ne
+
+    -- Step 3: Constant multiple is integrable
+    have h_const : Integrable (fun t => (2 / (Real.pi * y^2)) * (|t / y| / (1 + (t / y)^2)^2)) :=
+      h_comp_int.const_mul (2 / (Real.pi * y^2))
+
+    -- Step 4: Our function equals the above (will show ae equality suffices)
+    -- We have: (2/π)|t|y/(t²+y²)² = (2/(πy²)) · |t/y|/(1+(t/y)²)²
+    have h_eq_fn : ∀ t, (2 / Real.pi) * |t| * y / (t^2 + y^2)^2 =
+                       (2 / (Real.pi * y^2)) * (|t / y| / (1 + (t / y)^2)^2) := by
+      intro t
+      rw [abs_div, abs_of_pos hy]
+      have h_inner : 1 + (t / y)^2 = (y^2 + t^2) / y^2 := by field_simp [hy_ne]
+      have h_inner_ne : (y^2 + t^2) / y^2 ≠ 0 := by positivity
+      have h_denom_ne : (t^2 + y^2)^2 ≠ 0 := by positivity
+      rw [h_inner]
+      field_simp [hy_ne, h_denom_ne, h_inner_ne]
+      ring
+
+    apply h_const.congr
+    filter_upwards with t
+    exact (h_eq_fn t).symm
+
+  -- The result follows since the integral equals exactly 2/(πy)
+  --
+  -- **Proof sketch:**
+  -- Using substitution u = t/y (so t = yu, dt = y du):
+  -- ∫ (2/π)|t|y/(t²+y²)² dt
+  -- = ∫ (2/π)|yu|y/((yu)²+y²)² · y du     [substitution]
+  -- = ∫ (2/π)y|u|·y/(y⁴(u²+1)²) · y du   [simplify]
+  -- = ∫ (2/π)y³|u|/(y⁴(u²+1)²) du
+  -- = ∫ (2/π)|u|/(y(u²+1)²) du
+  -- = (2/(πy)) · ∫ |u|/(u²+1)² du
+  -- = (2/(πy)) · 1                        [by integral_abs_div_one_add_sq_sq]
+  -- = 2/(πy)
+  --
+  have h_eq : ∫ t : ℝ, (2 / Real.pi) * |t| * y / (t^2 + y^2)^2 = 2 / (Real.pi * y) := by
+    have hy_ne : y ≠ 0 := ne_of_gt hy
+    have hpi_ne : Real.pi ≠ 0 := Real.pi_ne_zero
+    have hpi_pos : Real.pi > 0 := Real.pi_pos
+
+    -- Define g(u) = |u| / (1 + u²)² (our known integrable function)
+    let g : ℝ → ℝ := fun u => |u| / (1 + u^2)^2
+
+    -- Use integral_comp_div: ∫ g(t/y) dt = |y| · ∫ g(u) du
+    have hsubst := MeasureTheory.Measure.integral_comp_div g y
+    -- hsubst : ∫ g(t/y) dt = |y| · ∫ g(u) du = y · ∫ g(u) du (since y > 0)
+
+    -- Key: our integrand equals (2/(πy)) · g(t/y) · (y²)
+    -- Actually, let's verify:
+    -- g(t/y) = |t/y| / (1 + (t/y)²)²
+    --        = (|t|/y) / ((y² + t²)/y²)²
+    --        = (|t|/y) · y⁴ / (y² + t²)²
+    --        = |t| · y³ / (t² + y²)²
+    -- So (2/π)|t|y/(t²+y²)² = (2/π) · |t|y/(t²+y²)²
+    --                       = (2/π) · g(t/y) · y / y³
+    --                       = (2/π) · g(t/y) / y²
+    --                       = (2/(πy²)) · g(t/y)
+    --
+    -- Therefore: ∫ (2/π)|t|y/(t²+y²)² dt = (2/(πy²)) · ∫ g(t/y) dt
+    --                                     = (2/(πy²)) · y · ∫ g(u) du
+    --                                     = (2/(πy)) · ∫ g(u) du
+    --                                     = (2/(πy)) · 1 = 2/(πy)
+
+    have h_integrand : ∀ t : ℝ, (2 / Real.pi) * |t| * y / (t^2 + y^2)^2 =
+                                (2 / (Real.pi * y^2)) * g (t / y) := by
+      intro t
+      simp only [g]
+      rw [abs_div, abs_of_pos hy]
+      have h_denom_pos : (t^2 + y^2)^2 > 0 := by positivity
+      have h_denom_ne : (t^2 + y^2)^2 ≠ 0 := ne_of_gt h_denom_pos
+      have h_inner : 1 + (t / y)^2 = (y^2 + t^2) / y^2 := by field_simp [hy_ne]
+      rw [h_inner]
+      have h_inner_ne : (y^2 + t^2) / y^2 ≠ 0 := by positivity
+      field_simp [hy_ne, h_denom_ne, h_inner_ne]
+      ring
+
+    calc ∫ t : ℝ, (2 / Real.pi) * |t| * y / (t^2 + y^2)^2
+        = ∫ t : ℝ, (2 / (Real.pi * y^2)) * g (t / y) := by
+          apply MeasureTheory.integral_congr_ae
+          filter_upwards with t
+          exact h_integrand t
+      _ = (2 / (Real.pi * y^2)) * ∫ t : ℝ, g (t / y) := by
+          rw [MeasureTheory.integral_mul_left]
+      _ = (2 / (Real.pi * y^2)) * (|y| • ∫ u : ℝ, g u) := by
+          rw [hsubst]
+      _ = (2 / (Real.pi * y^2)) * (y * ∫ u : ℝ, g u) := by
+          rw [abs_of_pos hy, smul_eq_mul]
+      _ = (2 / (Real.pi * y^2)) * y * ∫ u : ℝ, g u := by ring
+      _ = (2 / (Real.pi * y)) * ∫ u : ℝ, g u := by
+          field_simp [hy_ne, hpi_ne]
+          ring
+      _ = (2 / (Real.pi * y)) * 1 := by
+          simp only [g]
+          rw [integral_abs_div_one_add_sq_sq]
+      _ = 2 / (Real.pi * y) := by ring
+
+  calc ∫ t : ℝ, (2 / Real.pi) * |t| * y / (t^2 + y^2)^2
+      = 2 / (Real.pi * y) := h_eq
+    _ ≤ 2 / (Real.pi * y) := le_refl _
 
 /-- The Poisson extension gradient component bound via convolution.
 
