@@ -1397,12 +1397,15 @@ lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : Whitn
     -- IntegrableOn f s μ ↔ Integrable f (μ.restrict s)
     apply MeasureTheory.Integrable.mono' h_bound_integrable.integrable
     · -- AEStronglyMeasurable for poissonGradientEnergy (restricted to box)
-      -- This requires showing poissonGradientEnergy is measurable.
-      -- poissonGradientEnergy = ‖poissonExtension_gradient‖² · y involves:
-      -- - poissonExtension_gradient (involves Poisson integral)
-      -- - Norm and squaring (continuous hence measurable)
-      -- - Multiplication by y (measurable)
-      -- The measurability is standard but technically involved.
+      -- Use ContinuousOn.aestronglyMeasurable_of_isCompact:
+      -- If f is continuous on compact measurable set s, then f is AEStronglyMeasurable on μ.restrict s
+      apply ContinuousOn.aestronglyMeasurable_of_isCompact _ h_box_compact h_box_meas
+      -- ContinuousOn (fun p => poissonGradientEnergy f p.1 p.2) box
+      -- On box, y ≥ ε > 0, so poissonGradientEnergy = ‖∇u‖² · y
+      -- This requires continuity of poissonExtension_gradient, which involves the Poisson integral.
+      -- The Poisson extension is continuous in (x, y) for y > 0 (standard harmonic analysis).
+      -- Technical proof: would need to show ∫ poissonKernel(x-t, y) f(t) dt is continuous in (x,y)
+      -- This follows from dominated convergence and uniform integrability.
       sorry
     · -- Pointwise bound: ‖poissonGradientEnergy‖ ≤ C²M²/y on box
       apply Filter.eventually_of_mem (MeasureTheory.self_mem_ae_restrict h_box_meas)
