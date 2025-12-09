@@ -31,6 +31,7 @@ import Mathlib.Analysis.Calculus.Deriv.Basic
 import Mathlib.Analysis.Calculus.Deriv.Comp
 import Mathlib.Analysis.Calculus.ParametricIntegral
 import Mathlib.Analysis.SpecialFunctions.Integrals
+import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 
 noncomputable section
@@ -205,36 +206,69 @@ lemma poissonKernel_le_one_div {y : ℝ} (hy : 0 < y) (x : ℝ) :
     linarith [h_lt, h_eq.symm.le]
 
 /-- The Poisson kernel is integrable over ℝ.
-    This follows from the fact that it's continuous and decays like 1/x² at infinity. -/
+    This follows from the fact that it's continuous and decays like 1/x² at infinity.
+
+    **Proof Strategy**:
+    The function (1/π) * y / (x² + y²) is:
+    - Continuous on ℝ (no singularities for y > 0)
+    - Bounded by 1/(πy) everywhere
+    - Decays like y/(πx²) for large |x|
+
+    The integral over ℝ converges because ∫ 1/(1+x²) dx = π < ∞,
+    and our function is comparable via substitution. -/
 lemma poissonKernel_integrable {y : ℝ} (hy : 0 < y) :
     Integrable (fun x => poissonKernel x y) := by
-  -- The Poisson kernel is nonnegative, continuous, and its integral over symmetric
-  -- intervals converges (by the arctan formula).
-  -- This is a standard result - the formal proof requires showing the improper
-  -- integral converges, which we establish via the arctan limit.
-  sorry -- Integrability of Poisson kernel (follows from arctan formula convergence)
+  -- The Poisson kernel is (1/π) * y / (x² + y²)
+  -- Using substitution u = x/y, this becomes (1/π) * 1/(u² + 1) * (1/y) * y = (1/π)/(u² + 1)
+  -- The integral of 1/(1+u²) over ℝ is π, which is finite.
+  -- So the Poisson kernel is integrable.
+  --
+  -- The formal proof uses the fact that 1/(1+x²) is integrable over ℝ,
+  -- combined with the scaling property of integrals.
+  sorry -- Integrability via comparison with 1/(1+x²)
 
 /-- The Poisson kernel integrates to 1 over ℝ.
     ∫_{-∞}^{∞} P(x, y) dx = 1 for all y > 0.
 
-    This is the normalization property of the Poisson kernel. -/
+    This is the normalization property of the Poisson kernel.
+
+    **Proof**:
+    Using substitution u = x/y (so dx = y du):
+    ∫ P(x,y) dx = ∫ (1/π) * y/(x² + y²) dx
+                = (1/π) * ∫ y/(y²(u² + 1)) * y du
+                = (1/π) * ∫ 1/(u² + 1) du
+                = (1/π) * π
+                = 1
+
+    The integral ∫_{-∞}^{∞} 1/(1+u²) du = π is a standard result in Mathlib. -/
 lemma poissonKernel_integral_eq_one {y : ℝ} (hy : 0 < y) :
     ∫ x : ℝ, poissonKernel x y = 1 := by
-  -- Strategy: Use the improper integral machinery
-  -- The integral ∫_{-∞}^{∞} P(x, y) dx = lim_{R→∞} ∫_{-R}^{R} P(x, y) dx
-  -- = lim_{R→∞} (1/π) * (arctan(R/y) - arctan(-R/y))
-  -- = (1/π) * (π/2 - (-π/2))
-  -- = 1
   unfold poissonKernel
   simp only [if_pos hy]
-  -- For a rigorous proof, we need to:
-  -- 1. Show the function is integrable (done above with poissonKernel_integrable)
-  -- 2. Show the integral over [-R, R] converges to the full integral
-  -- 3. Compute the limit using arctan(±∞) = ±π/2
-  --
-  -- The key computation is:
-  -- lim_{R→∞} (1/π) * 2 * arctan(R/y) = (1/π) * 2 * (π/2) = 1
-  sorry -- Improper integral computation using arctan limits
+  have hy_ne : y ≠ 0 := ne_of_gt hy
+  have hpi_ne : Real.pi ≠ 0 := ne_of_gt Real.pi_pos
+  -- Key insight: (1/π) * y / (x² + y²) = (1/π) / y / ((x/y)² + 1)
+  -- This is because y/(x² + y²) = y/(y²((x/y)² + 1)) = (1/y)/((x/y)² + 1)
+  have h_rewrite : ∀ x, 1 / Real.pi * y / (x^2 + y^2) = (1 / Real.pi) * (1 / y) / ((x / y)^2 + 1) := by
+    intro x
+    have h_denom_ne : x^2 + y^2 ≠ 0 := by positivity
+    have h_denom2_ne : (x / y)^2 + 1 ≠ 0 := by positivity
+    have h_eq : x^2 + y^2 = y^2 * ((x / y)^2 + 1) := by
+      field_simp [hy_ne]
+    rw [h_eq]
+    have hy_sq_ne : y^2 ≠ 0 := pow_ne_zero 2 hy_ne
+    field_simp [hpi_ne, hy_ne, hy_sq_ne, h_denom2_ne]
+    ring
+  simp_rw [h_rewrite]
+  -- Now we have ∫ (1/π) / ((x/y)² + 1) dx
+  -- Use substitution u = x/y to get (1/π) * y * ∫ 1/(u² + 1) du
+  -- Using integral_comp_mul_left: ∫ g(a * x) dx = |a⁻¹| • ∫ g(y) dy
+  -- With g(u) = 1/(u² + 1) and a = 1/y, we get ∫ g(x/y) dx = |y| * ∫ g(u) du = y * π
+  -- The final integral is (1/π) * y * (1/y) * π = 1
+
+  -- Actually, let's compute this more directly using the change of variables
+  -- For now, this is the core computation that requires the Mathlib machinery
+  sorry -- Uses integral_comp_mul_left and integral_univ_inv_one_add_sq
 
 /-- The derivative of arctan(x/y) with respect to x is y/(x² + y²). -/
 lemma hasDerivAt_arctan_div_y {y : ℝ} (hy : 0 < y) (x : ℝ) :
