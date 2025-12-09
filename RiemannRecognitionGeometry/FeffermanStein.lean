@@ -35,6 +35,7 @@ import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.Order.Filter.AtTopBot.Group
 import Mathlib.Order.Filter.AtTopBot.Ring
 import Mathlib.Order.Filter.AtTopBot.Archimedean
+import Mathlib.MeasureTheory.Measure.Lebesgue.Integral
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 
 noncomputable section
@@ -1015,17 +1016,31 @@ lemma integral_abs_div_one_add_sq_sq :
     rw [heq, hIoi]
   -- ∫_{Iio 0} = ∫_{Ioi 0} = 1/2 by change of variables u ↦ -u
   have hIio : ∫ u in Set.Iio (0:ℝ), |u| / (1 + u^2)^2 = 1/2 := by
+    -- First: ∫_{Iio 0} = ∫_{Iic 0} (since {0} has measure 0)
+    rw [← MeasureTheory.integral_Iic_eq_integral_Iio]
     -- The function f(u) = |u|/(1+u²)² is even: f(-u) = f(u)
-    -- Change of variables v = -u maps Iio 0 to Ioi 0 bijectively
-    -- Under this substitution: |(-v)|/(1+(-v)²)² = |v|/(1+v²)²
-    --
-    -- Formally: ∫_{Iio 0} f(u) du = ∫_{Ioi 0} f(-v) dv = ∫_{Ioi 0} f(v) dv = 1/2
-    --
-    -- The Lean proof would use:
-    -- - MeasureTheory.Measure.integral_sub_left_eq_self for substitution
-    -- - Show neg '' Ioi 0 = Iio 0
-    -- - Even function property
-    sorry
+    have heven : ∀ u : ℝ, |-u| / (1 + (-u)^2)^2 = |u| / (1 + u^2)^2 := by
+      intro u
+      simp only [abs_neg, neg_sq]
+    -- Use integral_comp_neg_Iic: ∫_{Iic 0} f(-x) = ∫_{Ioi 0} f(x)
+    have hsubst := integral_comp_neg_Iic (0:ℝ) (fun u => |u| / (1 + u^2)^2)
+    simp only [neg_zero] at hsubst
+    -- ∫_{Iic 0} f(u) du
+    -- = ∫_{Iic 0} f(-u) du  (since f(-u) = f(u))
+    -- = ∫_{Ioi 0} f(u) du  (by integral_comp_neg_Iic)
+    -- = 1/2
+    have heq : ∫ u in Set.Iic (0:ℝ), |u| / (1 + u^2)^2 = ∫ u in Set.Iic (0:ℝ), |-u| / (1 + (-u)^2)^2 := by
+      apply MeasureTheory.setIntegral_congr_fun measurableSet_Iic
+      intro u _
+      exact (heven u).symm
+    rw [heq, hsubst]
+    -- Now: ∫_{Ioi 0} |u|/(1+u²)² = ∫_{Ioi 0} u/(1+u²)² = 1/2
+    have heq2 : ∫ u in Set.Ioi (0:ℝ), |u| / (1 + u^2)^2 = ∫ u in Set.Ioi (0:ℝ), u / (1 + u^2)^2 := by
+      apply MeasureTheory.setIntegral_congr_fun measurableSet_Ioi
+      intro u hu
+      simp only [Set.mem_Ioi] at hu
+      simp only [abs_of_pos hu]
+    rw [heq2, hIoi]
   -- Combine: 1/2 + 1/2 = 1
   rw [← hsplit]
   simp only [Set.compl_Ici]
