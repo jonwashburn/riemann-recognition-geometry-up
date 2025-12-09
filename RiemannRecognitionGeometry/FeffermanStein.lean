@@ -1320,13 +1320,20 @@ lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : Whitn
   -- 3. IntegrableOn (fun p => C²M²/p.2) box
   -- 4. Apply Fubini's theorem (MeasureTheory.integral_prod)
 
-  -- The box is measurable (the set {p | p.1 ∈ Icc a b ∧ ε ≤ p.2 ∧ p.2 ≤ h} is measurable)
-  -- This is a product of closed intervals, hence a closed rectangle, which is measurable.
+  -- The box equals the product Icc × Icc
+  have h_box_eq : box = (Set.Icc (I.t0 - I.len) (I.t0 + I.len)) ×ˢ (Set.Icc ε h) := by
+    ext p
+    simp only [box, WhitneyInterval.interval, Set.mem_setOf_eq, Set.mem_prod, Set.mem_Icc]
+    constructor
+    · intro ⟨hx, hy_lo, hy_hi⟩
+      exact ⟨hx, ⟨hy_lo, hy_hi⟩⟩
+    · intro ⟨hx, ⟨hy_lo, hy_hi⟩⟩
+      exact ⟨hx, hy_lo, hy_hi⟩
+
+  -- The box is measurable (product of closed intervals)
   have h_box_meas : MeasurableSet box := by
-    -- The set is Icc(t0-len, t0+len) × Icc(ε, h) which is measurable
-    -- as the product of two closed intervals in ℝ × ℝ.
-    -- Technical: use measurableSet_prod for product of measurable sets
-    sorry
+    rw [h_box_eq]
+    exact MeasurableSet.prod measurableSet_Icc measurableSet_Icc
 
   -- The bound function is non-negative on the box
   have h_bound_nonneg : ∀ p ∈ box, 0 ≤ C^2 * M^2 / p.2 := by
@@ -1348,11 +1355,73 @@ lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : Whitn
 
   -- Final bound via monotonicity and Fubini computation:
   -- ∫_box poissonGradientEnergy ≤ ∫_box C²M²/y = C²M² · (2·I.len) · log(4·I.len/ε)
-  --
-  -- The Fubini computation requires MeasureTheory.integral_prod and
-  -- integral_inv_of_pos. This is technically involved but mathematically
-  -- standard for this bounded rectangular domain.
-  sorry
+
+  -- Step 5: The bound function is integrable on the box
+  -- Since the box is bounded and bounded away from y = 0 (ε ≤ y), 1/y ≤ 1/ε is bounded.
+  -- Bounded functions on finite measure sets are integrable.
+
+  -- The box has finite measure (product of two bounded intervals)
+  have h_box_finite : MeasureTheory.volume box ≠ ⊤ := by
+    rw [h_box_eq]
+    -- volume (Icc × Icc) = volume(Icc) * volume(Icc)
+    -- Both are finite since they are bounded intervals
+    rw [MeasureTheory.Measure.volume_eq_prod, MeasureTheory.Measure.prod_prod]
+    rw [Real.volume_Icc, Real.volume_Icc]
+    exact ENNReal.mul_ne_top ENNReal.ofReal_ne_top ENNReal.ofReal_ne_top
+
+  have h_bound_integrable : IntegrableOn (fun p : ℝ × ℝ => C^2 * M^2 / p.2) box := by
+    -- Apply Measure.integrableOn_of_bounded: bounded functions are integrable on finite measure sets
+    apply MeasureTheory.Measure.integrableOn_of_bounded h_box_finite
+    · -- AEStronglyMeasurable: the function (x,y) ↦ C²M²/y is measurable
+      -- Technical: requires showing continuity on the domain where y ≠ 0
+      sorry
+    · -- Boundedness: |C²M²/y| ≤ C²M²/ε on box (since y ≥ ε > 0)
+      apply Filter.eventually_of_mem (MeasureTheory.self_mem_ae_restrict h_box_meas)
+      intro p hp
+      obtain ⟨_, hy_lo, _⟩ := hp
+      have hy_pos : p.2 > 0 := by linarith
+      rw [Real.norm_eq_abs, _root_.abs_of_nonneg (div_nonneg (by positivity) (le_of_lt hy_pos))]
+      apply div_le_div_of_nonneg_left _ (by positivity) hy_lo
+      positivity
+
+  -- Step 6: Apply setIntegral_mono (pointwise bound → integral bound)
+  -- Since both functions are integrable and f ≤ g pointwise on box,
+  -- we have ∫_box f ≤ ∫_box g
+  have h_mono : ∫ p in box, poissonGradientEnergy f p.1 p.2 ≤ ∫ p in box, C^2 * M^2 / p.2 := by
+    -- The poissonGradientEnergy is bounded by the integrable bound function,
+    -- so it's also integrable on the finite-measure set.
+    -- Then apply setIntegral_mono_on with the pointwise bound h_pointwise.
+    --
+    -- Technical: requires IntegrableOn for both functions and MeasurableSet box
+    sorry
+
+  -- Step 7: Compute ∫_box C²M²/y using Fubini
+  -- ∫∫_{Icc × Icc} C²M²/y dx dy = C²M² · |Icc_x| · ∫_ε^h 1/y dy
+  --                               = C²M² · (2·I.len) · log(h/ε)
+  have h_bound_integral : ∫ p in box, C^2 * M^2 / p.2 = C^2 * M^2 * (2 * I.len) * Real.log (h / ε) := by
+    -- box = Icc(t0-len, t0+len) ×ˢ Icc(ε, h)
+    -- The function (x,y) ↦ C²M²/y factors as const_in_x × 1/y
+    -- Using Fubini (setIntegral_prod): ∫∫ f(x,y) dx dy = ∫_x (∫_y f(x,y) dy) dx
+    --
+    -- Inner integral (over y): ∫_ε^h C²M²/y dy = C²M² · ∫_ε^h 1/y dy = C²M² · log(h/ε)
+    --   (by h_inner_integral and linearity)
+    --
+    -- Outer integral (over x): ∫_I C²M²·log(h/ε) dx = C²M²·log(h/ε)·|I|
+    --                                               = C²M²·log(h/ε)·(2·I.len)
+    --   (by h_interval_len and constant integral)
+    --
+    -- Technical requirements:
+    -- - IntegrableOn for the function (h_bound_integrable)
+    -- - Apply MeasureTheory.setIntegral_prod
+    -- - Use integral_inv_of_pos for inner integral
+    -- - Use setIntegral_const for outer integral
+    sorry
+
+  -- Final: combine the bounds
+  calc ∫ p in box, poissonGradientEnergy f p.1 p.2
+      ≤ ∫ p in box, C^2 * M^2 / p.2 := h_mono
+    _ = C^2 * M^2 * (2 * I.len) * Real.log (h / ε) := h_bound_integral
+    _ = C^2 * M^2 * (2 * I.len) * Real.log (4 * I.len / ε) := by simp only [h]
 
 /-- The Carleson energy over a box is bounded by M² times the interval length
     when the gradient satisfies the BMO-type bound with a floor.
