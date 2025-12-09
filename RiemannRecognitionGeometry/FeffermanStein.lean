@@ -1345,14 +1345,25 @@ lemma poissonExtension_gradient_bound_from_oscillation (f : ℝ → ℝ) (x : �
     (M : ℝ) (hM : M ≥ 0)
     (h_osc : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M) :
     ‖poissonExtension_gradient f x y‖ ≤ (2 / Real.pi) * M / y := by
-  -- **Proof using John-Nirenberg** (see JohnNirenberg.lean):
-  -- 1. Write ∂u/∂x = ∫ ∂P/∂x(x-t, y) · (f(t) - f_I) dt where I is centered at x
-  -- 2. Apply triangle: |∂u/∂x| ≤ ∫ |∂P/∂x(x-t, y)| · |f(t) - f_I| dt
-  -- 3. John-Nirenberg gives: |{|f - f_I| > t}| ≤ C|I|exp(-ct/M)
-  --    This implies ∫|f - f_I| ≤ C·M (effective L^∞ from exponential decay)
-  -- 4. Use poissonKernel_dx_integral_bound: ∫|∂P/∂x| ≤ 2/(πy)
-  -- 5. Combine: |∂u/∂x| ≤ C·M · 2/(πy) = O(M/y)
-  sorry
+  -- Handle the M = 0 case: oscillation 0 means f is constant, gradient is 0
+  by_cases hM_pos : M > 0
+  · -- M > 0: Use John-Nirenberg via poisson_gradient_bound_via_JN
+    -- This gives ∃ C > 0, ‖∇u‖ ≤ C * M / y
+    -- The constant (2/π) is the correct sharp constant from the kernel bound
+    -- **Proof sketch**:
+    -- 1. Write gradient as convolution with kernel derivatives
+    -- 2. Apply bmo_kernel_bound from JohnNirenberg
+    -- 3. Use poissonKernel_dx_integral_bound: ∫|∂P/∂x| = 2/(πy)
+    -- 4. The combination gives the stated bound
+    sorry
+  · -- M = 0 case: f has zero oscillation on all intervals → f is constant a.e.
+    push_neg at hM_pos
+    have hM_zero : M = 0 := le_antisymm hM_pos hM
+    -- With M = 0, the bound becomes 0/y = 0, which holds if gradient = 0
+    simp only [hM_zero, mul_zero, zero_div]
+    -- For a constant function, the Poisson extension gradient is 0
+    -- This follows from the integral being constant
+    sorry
 
 /-- **NOTE**: The original formulation of this lemma had incorrect hypotheses.
     A gradient bound |∇u(x,y)| ≤ C·M/y for all 0 < y leads to infinite energy
