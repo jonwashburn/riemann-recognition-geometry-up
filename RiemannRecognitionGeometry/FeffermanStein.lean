@@ -970,7 +970,31 @@ lemma integral_Ioi_u_div_one_add_sq_sq :
 lemma integrable_abs_div_one_add_sq_sq :
     Integrable (fun u : ℝ => |u| / (1 + u^2)^2) := by
   -- |u|/(1+u²)² ≤ (1+u²)/(1+u²)² = 1/(1+u²) which is integrable
-  sorry
+  apply Integrable.mono' integrable_inv_one_add_sq
+  · -- AEStronglyMeasurable: the function is continuous
+    apply Continuous.aestronglyMeasurable
+    have habs : Continuous (fun u : ℝ => |u|) := continuous_abs
+    apply Continuous.div habs
+    · exact (continuous_const.add (continuous_id.pow 2)).pow 2
+    · intro u; positivity
+  · -- Pointwise bound: |u|/(1+u²)² ≤ 1/(1+u²)
+    filter_upwards with u
+    rw [Real.norm_eq_abs, abs_div, _root_.abs_abs]
+    have h1 : 1 + u^2 > 0 := by positivity
+    have h2 : (1 + u^2)^2 > 0 := by positivity
+    rw [abs_of_pos h2]
+    -- Need: |u|/(1+u²)² ≤ 1/(1+u²), i.e., |u| ≤ 1+u²
+    have hbound : |u| ≤ 1 + u^2 := by
+      have hab : |u| ≤ 1 + |u|^2 := by nlinarith [abs_nonneg u]
+      calc |u| ≤ 1 + |u|^2 := hab
+        _ = 1 + u^2 := by rw [_root_.sq_abs]
+    calc |u| / (1 + u^2)^2
+        ≤ (1 + u^2) / (1 + u^2)^2 := by
+          apply div_le_div_of_nonneg_right hbound (le_of_lt h2)
+      _ = (1 + u^2)⁻¹ := by
+          have hne : 1 + u^2 ≠ 0 := ne_of_gt h1
+          field_simp [hne]
+          ring
 
 lemma integral_abs_div_one_add_sq_sq :
     ∫ u : ℝ, |u| / (1 + u^2)^2 = 1 := by
