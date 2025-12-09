@@ -1287,34 +1287,71 @@ lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : Whitn
       _ = C^2 * M^2 / p.2^2 * p.2 := by ring
       _ = C^2 * M^2 / p.2 := by field_simp; ring
 
-  -- Step 2: Apply integral monotonicity
+  -- Step 2: The inner integral ∫_ε^h 1/y dy = log(h/ε) (using integral_inv_of_pos)
+  have h_inner_integral : ∫ y in ε..h, y⁻¹ = Real.log (h / ε) := by
+    exact integral_inv_of_pos hε hh_pos
+
+  -- Step 3: The interval length |I| = 2·I.len
+  -- I.interval = Set.Icc (I.t0 - I.len) (I.t0 + I.len), and
+  -- volume (Set.Icc a b) = ENNReal.ofReal (b - a) = ENNReal.ofReal (2 * I.len)
+  have h_interval_len : MeasureTheory.volume I.interval = ENNReal.ofReal (2 * I.len) := by
+    have heq : I.interval = Set.Icc (I.t0 - I.len) (I.t0 + I.len) := rfl
+    rw [heq]
+    -- volume (Icc a b) = ofReal (b - a)
+    simp only [Real.volume_Icc]
+    -- Goal: ofReal ((I.t0 + I.len) - (I.t0 - I.len)) = ofReal (2 * I.len)
+    congr 1
+    ring
+
+  -- Step 4: Apply integral monotonicity and Fubini
   -- Using setIntegral_mono_on: ∫_box f ≤ ∫_box g when f ≤ g on box
   -- The bound function g(x,y) = C²M²/y is integrable on the truncated box
   -- since the box excludes y = 0.
 
-  -- The bound integral evaluates to:
-  -- ∫∫_box C²M²/y dx dy = C²M² · ∫_I (∫_ε^h 1/y dy) dx  (Fubini)
-  --                     = C²M² · ∫_I log(h/ε) dx        (integral_inv_of_pos)
+  -- The bound integral factorizes via Fubini:
+  -- ∫∫_box C²M²/y dx dy = C²M² · ∫_I (∫_ε^h 1/y dy) dx
+  --                     = C²M² · ∫_I log(h/ε) dx
   --                     = C²M² · log(h/ε) · |I|
-  --                     = C²M² · log(h/ε) · (2·I.len)
-  --
-  -- where h = 4·I.len.
+  --                     = C²M² · (2·I.len) · log(4·I.len/ε)
 
-  -- Technical requirements for formal proof:
-  -- 1. MeasurableSet box (product of intervals is measurable)
+  -- Technical requirements:
+  -- 1. MeasurableSet box (product of Icc intervals is measurable)
   -- 2. IntegrableOn (poissonGradientEnergy f) box
   -- 3. IntegrableOn (fun p => C²M²/p.2) box
   -- 4. Apply Fubini's theorem (MeasureTheory.integral_prod)
-  -- 5. Use integral_inv_of_pos for the inner integral
 
-  -- The computation is mathematically standard but requires substantial
-  -- measure theory infrastructure in Lean. We note:
-  -- - The box is bounded and bounded away from y = 0
-  -- - Both functions are continuous on the box
-  -- - The Fubini factorization applies for this product domain
+  -- The box is measurable (the set {p | p.1 ∈ Icc a b ∧ ε ≤ p.2 ∧ p.2 ≤ h} is measurable)
+  -- This is a product of closed intervals, hence a closed rectangle, which is measurable.
+  have h_box_meas : MeasurableSet box := by
+    -- The set is Icc(t0-len, t0+len) × Icc(ε, h) which is measurable
+    -- as the product of two closed intervals in ℝ × ℝ.
+    -- Technical: use measurableSet_prod for product of measurable sets
+    sorry
 
-  -- Final bound:
+  -- The bound function is non-negative on the box
+  have h_bound_nonneg : ∀ p ∈ box, 0 ≤ C^2 * M^2 / p.2 := by
+    intro p hp
+    simp only [Set.mem_setOf_eq, box] at hp
+    obtain ⟨_, hy_lo, _⟩ := hp
+    have hy_pos : p.2 > 0 := by linarith
+    positivity
+
+  -- The integrand is non-negative on the box
+  have h_integrand_nonneg : ∀ p ∈ box, 0 ≤ poissonGradientEnergy f p.1 p.2 := by
+    intro p hp
+    simp only [Set.mem_setOf_eq, box] at hp
+    obtain ⟨_, hy_lo, _⟩ := hp
+    have hy_pos : p.2 > 0 := by linarith
+    unfold poissonGradientEnergy
+    simp only [if_pos hy_pos]
+    positivity
+
+  -- Final bound via monotonicity and Fubini computation:
   -- ∫_box poissonGradientEnergy ≤ ∫_box C²M²/y = C²M² · (2·I.len) · log(4·I.len/ε)
+  --
+  -- The Fubini computation requires MeasureTheory.integral_prod and
+  -- integral_inv_of_pos. This is technically involved but mathematically
+  -- standard for this bounded rectangular domain.
   sorry
 
 /-- The Carleson energy over a box is bounded by M² times the interval length
