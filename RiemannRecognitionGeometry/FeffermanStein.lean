@@ -176,22 +176,43 @@ The main property we need is that ∫_ℝ P(x, y) dx = 1 for all y > 0.
 This makes P_y(x) = P(x, y) an approximate identity as y → 0⁺.
 -/
 
-/-- The Poisson kernel is integrable over ℝ. -/
+/-- Bound on Poisson kernel: P(x,y) ≤ 1/(πy) for all x.
+    This bound follows from x² + y² ≥ y². -/
+lemma poissonKernel_le_one_div {y : ℝ} (hy : 0 < y) (x : ℝ) :
+    poissonKernel x y ≤ 1 / (Real.pi * y) := by
+  have h := poissonKernel_zero hy
+  have h_max := poissonKernel_pos 0 hy
+  -- At x = 0, P(0, y) = 1/(πy), and this is the maximum value
+  -- For x ≠ 0, P(x, y) < P(0, y) since denominator increases
+  by_cases hx : x = 0
+  · rw [hx, poissonKernel_zero hy]
+  · unfold poissonKernel
+    simp only [if_pos hy]
+    have h_denom_pos : x^2 + y^2 > 0 := by positivity
+    have hx_sq_pos : x^2 > 0 := sq_pos_of_ne_zero hx
+    have h_denom_gt : x^2 + y^2 > y^2 := by linarith
+    have hpi_pos : Real.pi > 0 := Real.pi_pos
+    have hpi_y_pos : Real.pi * y > 0 := mul_pos Real.pi_pos hy
+    -- (1/π) * y / (x² + y²) < (1/π) * y / y² = 1/(πy)
+    have h_lt : 1 / Real.pi * y / (x^2 + y^2) < 1 / Real.pi * y / y^2 := by
+      apply div_lt_div_of_pos_left _ (sq_pos_of_pos hy) h_denom_gt
+      apply mul_pos (one_div_pos.mpr hpi_pos) hy
+    have h_eq : 1 / Real.pi * y / y^2 = 1 / (Real.pi * y) := by
+      have hy_ne : y ≠ 0 := ne_of_gt hy
+      have hpi_ne : Real.pi ≠ 0 := ne_of_gt hpi_pos
+      field_simp [hpi_ne, hy_ne]
+      ring
+    linarith [h_lt, h_eq.symm.le]
+
+/-- The Poisson kernel is integrable over ℝ.
+    This follows from the fact that it's continuous and decays like 1/x² at infinity. -/
 lemma poissonKernel_integrable {y : ℝ} (hy : 0 < y) :
     Integrable (fun x => poissonKernel x y) := by
-  unfold poissonKernel
-  simp only [if_pos hy]
-  -- The function (1/π) · y / (x² + y²) is bounded by y/π / (1 + x²) which is integrable
-  -- Key bound: x² + y² ≥ 1 + x² iff y² ≥ 1 (not always true)
-  -- Better: x² + y² ≥ y² > 0, so y/(x² + y²) ≤ y/y² = 1/y
-  -- Even better: for large x, y/(x² + y²) ≤ y/x² which is integrable away from 0
-  --
-  -- The integrability follows from the fact that:
-  -- 1. On compact sets, continuous functions are integrable
-  -- 2. For |x| large, |P(x,y)| ≤ C/x² which is integrable at infinity
-  --
-  -- This is a standard result for the Poisson kernel.
-  sorry -- Integrability of Poisson kernel
+  -- The Poisson kernel is nonnegative, continuous, and its integral over symmetric
+  -- intervals converges (by the arctan formula).
+  -- This is a standard result - the formal proof requires showing the improper
+  -- integral converges, which we establish via the arctan limit.
+  sorry -- Integrability of Poisson kernel (follows from arctan formula convergence)
 
 /-- The Poisson kernel integrates to 1 over ℝ.
     ∫_{-∞}^{∞} P(x, y) dx = 1 for all y > 0.
