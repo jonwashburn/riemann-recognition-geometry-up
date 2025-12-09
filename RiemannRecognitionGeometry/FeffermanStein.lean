@@ -1548,30 +1548,25 @@ lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : Whitn
     _ = C^2 * M^2 * (2 * I.len) * Real.log (h / ε) := h_bound_integral
     _ = C^2 * M^2 * (2 * I.len) * Real.log (4 * I.len / ε) := by simp only [h]
 
-/-- The Carleson energy over a box is bounded by M² times the interval length
-    when the gradient satisfies the BMO-type bound with a floor.
+/-- **DEPRECATED**: This lemma has fundamentally flawed hypotheses.
+    A pointwise gradient bound |∇u(x,y)| ≤ C·M/y for all 0 < y leads to
+    infinite Carleson energy: ∫_0^h |∇u|²·y dy ≥ ∫_0^h C²M²/y dy = ∞.
 
-    **CAVEAT**: The original lemma `carlesonEnergy_bound_from_gradient` had
-    hypotheses that led to infinite integrals. This version uses the truncated
-    box with floor ε, giving a finite bound.
+    Use instead:
+    - `carlesonEnergy_bound_from_gradient_with_floor` for bounds with an ε floor
+    - `fefferman_stein_embedding_bound` for the correct BMO→Carleson result
 
-    The full Fefferman-Stein theorem proves the Carleson measure condition
-    directly without needing a pointwise gradient bound. -/
+    The Fefferman-Stein theorem works by proving the Carleson measure condition
+    μ(Q(I)) ≤ C‖f‖²_BMO · |I| directly using John-Nirenberg, not via pointwise
+    gradient bounds that would lead to divergent integrals. -/
 lemma carlesonEnergy_bound_from_gradient (f : ℝ → ℝ) (I : WhitneyInterval)
     (C M : ℝ) (hC : C > 0) (hM : M > 0)
     (h_grad : ∀ x y, x ∈ I.interval → 0 < y → y ≤ 4 * I.len →
               ‖poissonExtension_gradient f x y‖ ≤ C * M / y) :
     carlesonEnergy f I ≤ C^2 * M^2 * (2 * I.len) * Real.log (4 * I.len) := by
-  -- **NOTE**: This lemma as stated has unprovable hypotheses because
-  -- the gradient bound CM/y for all 0 < y leads to ∫_0^h 1/y dy = ∞.
-  --
-  -- In actual Fefferman-Stein theory, we don't use such pointwise bounds.
-  -- Instead, we prove the Carleson measure condition directly using:
-  -- 1. BMO function properties (John-Nirenberg inequality)
-  -- 2. The specific structure of Poisson extension
-  --
-  -- The bound is stated for consistency with downstream proofs but requires
-  -- a different proof approach than the naive integration.
+  -- This lemma is unprovable as stated: the gradient bound CM/y for 0 < y
+  -- leads to ∫_0^h C²M²/y dy = ∞.
+  -- See docstring for correct alternatives.
   sorry
 
 /-- **THEOREM**: Fefferman-Stein BMO→Carleson Embedding (Partial)
