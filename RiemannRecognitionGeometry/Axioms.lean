@@ -160,61 +160,51 @@ lemma phaseChange_abs_conj (ρ : ℂ) (a b : ℝ)
 
   have h_Ba_arg_ne_pi : (blaschkeFactor ρ a).arg ≠ Real.pi := by
     intro h_eq
-    -- arg = π means B(a) is on negative real axis, so Im(B(a)) = 0
-    -- From blaschkeFactor_re_im: Im(B(a)) = -2 * (a - σ) * γ / ((a - σ)² + γ²)
-    -- Im(B(a)) = 0 iff (a - σ) * γ = 0
-    -- Since γ ≠ 0, this means a - σ = 0, i.e., a = ρ.re
-    -- But ha_ne says a ≠ ρ.re, contradiction
+    -- arg = π means Im(B(a)) = 0 and Re(B(a)) < 0
+    have h_axis := Complex.arg_eq_pi_iff.mp h_eq
+    -- Get the Im formula: Im(B(t)) = -2*(t-σ)*γ / ((t-σ)² + γ²)
     have h_im := (blaschkeFactor_re_im ρ a (Or.inl ha_ne)).2
-    -- arg = π means Im = 0 and Re < 0
-    have h_on_neg_axis := Complex.arg_eq_pi_iff.mp h_eq
-    -- h_on_neg_axis gives: Re < 0 ∧ Im = 0
-    -- From h_im: Im(B(a)) = -2 * (a - ρ.re) * ρ.im / ((a - ρ.re)² + ρ.im²)
+    -- h_axis.2 says Im(B(a)) = 0
     have h_im_zero : -2 * (a - ρ.re) * ρ.im / ((a - ρ.re)^2 + ρ.im^2) = 0 := by
-      rw [← h_im]; exact h_on_neg_axis.2
-    -- Denominator is positive (since a ≠ ρ.re or ρ.im ≠ 0)
+      rw [← h_im]; exact h_axis.2
+    -- Denominator is positive since a ≠ ρ.re
     have h_denom_pos : (a - ρ.re)^2 + ρ.im^2 > 0 := by
       have h1 : (a - ρ.re)^2 > 0 := sq_pos_of_ne_zero (sub_ne_zero.mpr ha_ne)
       positivity
-    -- So numerator must be 0: -2 * (a - ρ.re) * ρ.im = 0
-    have h_num_zero : -2 * (a - ρ.re) * ρ.im = 0 := by
+    -- So numerator = 0
+    have h_num_zero : (a - ρ.re) * ρ.im = 0 := by
       have := div_eq_zero_iff.mp h_im_zero
       cases this with
-      | inl h => exact h
+      | inl h => linarith
       | inr h => linarith [h_denom_pos]
-    -- Since ρ.im ≠ 0, we have a - ρ.re = 0, i.e., a = ρ.re
-    have h_a_eq : a - ρ.re = 0 := by
-      have h_neg2_ne : (-2 : ℝ) ≠ 0 := by norm_num
-      have h_γ_ne : ρ.im ≠ 0 := hγ_ne
-      -- -2 * (a - ρ.re) * ρ.im = 0
-      -- => (a - ρ.re) * ρ.im = 0
-      -- => a - ρ.re = 0 (since ρ.im ≠ 0)
-      have h1 : (a - ρ.re) * ρ.im = 0 := by linarith
-      exact mul_eq_zero.mp h1 |>.resolve_right h_γ_ne
-    exact ha_ne (sub_eq_zero.mp h_a_eq)
+    -- Since ρ.im ≠ 0, we have a - ρ.re = 0
+    have h_a_eq : a = ρ.re := by
+      have := mul_eq_zero.mp h_num_zero
+      cases this with
+      | inl h => exact sub_eq_zero.mp h
+      | inr h => exact absurd h hγ_ne
+    exact ha_ne h_a_eq
 
   have h_Bb_arg_ne_pi : (blaschkeFactor ρ b).arg ≠ Real.pi := by
     intro h_eq
-    -- Same argument as h_Ba_arg_ne_pi
+    have h_axis := Complex.arg_eq_pi_iff.mp h_eq
     have h_im := (blaschkeFactor_re_im ρ b (Or.inl hb_ne)).2
-    have h_on_neg_axis := Complex.arg_eq_pi_iff.mp h_eq
-    -- h_on_neg_axis gives: Re < 0 ∧ Im = 0
     have h_im_zero : -2 * (b - ρ.re) * ρ.im / ((b - ρ.re)^2 + ρ.im^2) = 0 := by
-      rw [← h_im]; exact h_on_neg_axis.2
+      rw [← h_im]; exact h_axis.2
     have h_denom_pos : (b - ρ.re)^2 + ρ.im^2 > 0 := by
       have h1 : (b - ρ.re)^2 > 0 := sq_pos_of_ne_zero (sub_ne_zero.mpr hb_ne)
       positivity
-    have h_num_zero : -2 * (b - ρ.re) * ρ.im = 0 := by
+    have h_num_zero : (b - ρ.re) * ρ.im = 0 := by
       have := div_eq_zero_iff.mp h_im_zero
       cases this with
-      | inl h => exact h
+      | inl h => linarith
       | inr h => linarith [h_denom_pos]
-    have h_b_eq : b - ρ.re = 0 := by
-      have h_neg2_ne : (-2 : ℝ) ≠ 0 := by norm_num
-      have h_γ_ne : ρ.im ≠ 0 := hγ_ne
-      have h1 : (b - ρ.re) * ρ.im = 0 := by linarith
-      exact mul_eq_zero.mp h1 |>.resolve_right h_γ_ne
-    exact hb_ne (sub_eq_zero.mp h_b_eq)
+    have h_b_eq : b = ρ.re := by
+      have := mul_eq_zero.mp h_num_zero
+      cases this with
+      | inl h => exact sub_eq_zero.mp h
+      | inr h => exact absurd h hγ_ne
+    exact hb_ne h_b_eq
 
   -- Now apply the main argument
   unfold phaseChange blaschkePhase
@@ -1126,23 +1116,16 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
     have hy_gt_x : y > x := by linarith [h_spread]
 
     have h_phase_eq_arctan : |phaseChange ρ a b| = 2 * (Real.arctan y - Real.arctan x) := by
-      -- Use conjugation symmetry to reduce to γ > 0 case
-      -- The proof uses phaseChange_abs_conj and the arctan identity
-      --
-      -- For γ < 0, mixed-sign (σ ∈ [a,b]):
-      -- |phaseChange ρ a b| = |phaseChange (conj ρ) a b| by conjugation symmetry
-      -- For conj ρ with Im = -γ > 0, apply the γ > 0 mixed-sign formula
-      -- The arctan arguments transform: x' = -x, y' = -y
-      -- So |phaseChange| = 2|arctan(-x) - arctan(-y)| = 2|arctan(y) - arctan(x)|
-      -- Since y > x: = 2(arctan(y) - arctan(x))
-      --
-      -- **Full proof requires**:
-      -- 1. Show a ≠ σ (otherwise y = 0, but then x ≤ -1 contradicts constraints)
-      -- 2. Show b ≠ σ (otherwise x = 0, but then y ≥ 1 contradicts constraints)
-      -- 3. Apply phaseChange_abs_conj
-      -- 4. Apply γ > 0 mixed-sign formula to conj ρ
-      -- 5. Convert back using arctan(-z) = -arctan(z)
-      sorry
+      -- This is the γ < 0 phase formula, symmetric to γ > 0 via conjugation
+      -- The proof requires Complex.arg analysis for the Blaschke factor
+      have hy_ge_x : Real.arctan y ≥ Real.arctan x := by
+        apply Real.arctan_le_arctan
+        exact le_of_lt hy_gt_x
+      have h_diff_nn : Real.arctan y - Real.arctan x ≥ 0 := by linarith
+      -- The formula |phaseChange| = 2|arctan x - arctan y| = 2(arctan y - arctan x)
+      -- follows from the Blaschke factor analysis and arctan properties
+      -- (Full proof requires extending phaseChange_arctan_formula to γ ≠ 0)
+      sorry -- Symmetric to γ > 0 mixed-sign case via conjugation
     rw [h_phase_eq_arctan]
     calc 2 * (Real.arctan y - Real.arctan x)
         ≥ 2 * Real.arctan (1/2) := by linarith [h_diff_bound']
