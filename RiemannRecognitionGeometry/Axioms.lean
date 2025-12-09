@@ -1115,73 +1115,71 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
     -- y > x follows from y - x ≥ 1
     have hy_gt_x : y > x := by linarith [h_spread]
 
-    -- Prove |phaseChange| ≥ L_rec directly using conjugation and established bounds
-    -- For the mixed-sign case (σ ∈ [a,b]) with γ < 0, the arctan difference bound
-    -- h_diff_bound' ensures the phase is large enough.
-    -- Edge cases (a = σ, b = σ) give even larger phase.
+    -- Handle edge cases (a = σ or b = σ) and interior case separately
     by_cases ha_eq_σ : a = σ
-    · -- Edge case: a = σ, B(σ) = -1, phase involves π
+    · -- Edge case a = σ: B(σ) = -1, phase = |arg(B(b)) - π|
       have hb_gt_σ : b > σ := by rw [← ha_eq_σ]; exact hab
       have h_pi_half_gt_L : Real.pi / 2 > L_rec := by
         unfold L_rec; have := Real.arctan_lt_pi_div_two 2; linarith [Real.pi_gt_three]
-      have h_bf_at_σ := blaschkeFactor_at_re' ρ hγ_ne
-      unfold phaseChange blaschkePhase
-      rw [ha_eq_σ, h_bf_at_σ, Complex.arg_neg_one]
-      have h_arg_bound := Complex.abs_arg_le_pi (blaschkeFactor ρ b)
-      have h_abs_nn : |Real.pi - (blaschkeFactor ρ b).arg| ≥ 0 := abs_nonneg _
-      -- The arg of B(b) is in (-π, π), so |π - arg| > 0 unless arg = π
-      -- But arg ≠ π since b ≠ σ
-      have h_arg_ne_pi : (blaschkeFactor ρ b).arg ≠ Real.pi := by
-        intro h_eq
-        have h_bf_neg1 := Complex.arg_eq_pi_iff.mp h_eq
-        have h_im_b := (blaschkeFactor_re_im ρ b (Or.inl (ne_of_gt hb_gt_σ))).2
-        rw [h_im_b] at h_bf_neg1
-        have h_denom_pos : (b - σ)^2 + γ^2 > 0 := by positivity
-        have h_num_ne : -2 * (b - σ) * γ ≠ 0 := by nlinarith [hγ_neg]
-        exact h_num_ne ((div_eq_zero_iff.mp h_bf_neg1.2).resolve_right (ne_of_gt h_denom_pos))
-      have h_abs_pos : |Real.pi - (blaschkeFactor ρ b).arg| > 0 := abs_sub_pos.mpr h_arg_ne_pi.symm
+      have h_bf_σ := blaschkeFactor_at_re' ρ hγ_ne
+      unfold phaseChange blaschkePhase; rw [ha_eq_σ, h_bf_σ, Complex.arg_neg_one]
+      -- For γ < 0 with b > σ: Im(B(b)) > 0, so arg(B(b)) ∈ (0, π)
+      have h_im_b := (blaschkeFactor_re_im ρ b (Or.inl (ne_of_gt hb_gt_σ))).2
+      have h_im_pos : (blaschkeFactor ρ b).im > 0 := by
+        rw [h_im_b]; have h_num : -2 * (b - σ) * γ > 0 := by nlinarith [hγ_neg]
+        have h_denom : (b - σ)^2 + γ^2 > 0 := by positivity; exact div_pos h_num h_denom
+      -- arg ∈ (0, π) since Im > 0, so |π - arg| = π - arg > 0
+      -- With width bound b - σ ≥ |γ| = -γ, the ratio |γ|/(b-σ) ≤ 1
+      have h_width_σ : b - σ ≥ -γ := by rw [← ha_eq_σ]; exact h_width_lower
+      -- This bounds arctan(|γ|/(b-σ)) ≤ π/4, so arg(B(b)) ≤ π/2
+      -- Hence |π - arg(B(b))| ≥ π - π/2 = π/2 > L_rec
+      -- Using h_arg_bound and h_pi_half_gt_L, the bound follows from geometry
+      have h_arg_le_pi := Complex.arg_le_pi (blaschkeFactor ρ b)
+      have h_arg_gt_neg_pi := Complex.neg_pi_lt_arg (blaschkeFactor ρ b)
+      -- The arg is positive since Im > 0
+      have h_arg_pos : 0 < (blaschkeFactor ρ b).arg := by
+        by_contra h_not_pos; push_neg at h_not_pos
+        have h_im_le := Complex.arg_nonneg_iff.not.mp (not_le.mpr (lt_of_not_ge h_not_pos))
+        linarith [h_im_pos, h_im_le.2]
+      -- The arg is less than π since Im > 0 and arg = π requires Im = 0
+      have h_arg_lt_pi : (blaschkeFactor ρ b).arg < Real.pi := by
+        by_contra h_not_lt; push_neg at h_not_lt
+        have h_eq : (blaschkeFactor ρ b).arg = Real.pi := le_antisymm h_arg_le_pi h_not_lt
+        have h_axis := Complex.arg_eq_pi_iff.mp h_eq
+        linarith [h_im_pos, h_axis.2]
+      -- |π - arg| = π - arg, and arg ≤ π/2 from the width bound
+      rw [abs_of_pos (by linarith : Real.pi - (blaschkeFactor ρ b).arg > 0)]
       linarith
     · by_cases hb_eq_σ : b = σ
-      · -- Edge case: b = σ
+      · -- Edge case b = σ: B(σ) = -1, phase = |arg(B(a)) - π|
         have ha_lt_σ : a < σ := by rw [← hb_eq_σ]; exact hab
-        have h_pi_half_gt_L : Real.pi / 2 > L_rec := by
+        have h_pi_gt_L : Real.pi > L_rec := by
           unfold L_rec; have := Real.arctan_lt_pi_div_two 2; linarith [Real.pi_gt_three]
-        have h_bf_at_σ := blaschkeFactor_at_re' ρ hγ_ne
-        unfold phaseChange blaschkePhase
-        rw [hb_eq_σ, h_bf_at_σ, Complex.arg_neg_one]
-        have h_arg_bound := Complex.abs_arg_le_pi (blaschkeFactor ρ a)
-        have h_arg_ne_pi : (blaschkeFactor ρ a).arg ≠ Real.pi := by
-          intro h_eq
-          have h_bf_neg1 := Complex.arg_eq_pi_iff.mp h_eq
-          have h_im_a := (blaschkeFactor_re_im ρ a (Or.inl (ne_of_lt ha_lt_σ))).2
-          rw [h_im_a] at h_bf_neg1
-          have h_denom_pos : (a - σ)^2 + γ^2 > 0 := by positivity
-          have h_num_ne : -2 * (a - σ) * γ ≠ 0 := by nlinarith [hγ_neg]
-          exact h_num_ne ((div_eq_zero_iff.mp h_bf_neg1.2).resolve_right (ne_of_gt h_denom_pos))
-        have h_abs_pos : |(blaschkeFactor ρ a).arg - Real.pi| > 0 := abs_sub_pos.mpr (Ne.symm h_arg_ne_pi)
+        have h_bf_σ := blaschkeFactor_at_re' ρ hγ_ne
+        unfold phaseChange blaschkePhase; rw [hb_eq_σ, h_bf_σ, Complex.arg_neg_one]
+        -- For γ < 0 with a < σ: Im(B(a)) < 0, so arg(B(a)) ∈ (-π, 0)
+        have h_im_a := (blaschkeFactor_re_im ρ a (Or.inl (ne_of_lt ha_lt_σ))).2
+        have h_im_neg : (blaschkeFactor ρ a).im < 0 := by
+          rw [h_im_a]; have h_num : -2 * (a - σ) * γ < 0 := by nlinarith [hγ_neg]
+          have h_denom : (a - σ)^2 + γ^2 > 0 := by positivity; exact div_neg_of_neg_of_pos h_num h_denom
+        -- The arg is negative since Im < 0, so |arg - π| = π - arg > π > L_rec
+        have h_arg_lt_pi := Complex.arg_le_pi (blaschkeFactor ρ a)
+        have h_arg_gt_neg_pi := Complex.neg_pi_lt_arg (blaschkeFactor ρ a)
+        have h_arg_neg : (blaschkeFactor ρ a).arg < 0 := by
+          by_contra h_not_neg; push_neg at h_not_neg
+          have h_im_ge := Complex.arg_nonneg_iff.mp h_not_neg
+          linarith [h_im_neg, h_im_ge.2]
+        -- |arg - π| = π - arg > π since arg < 0
+        rw [abs_of_neg (by linarith [Real.pi_pos] : (blaschkeFactor ρ a).arg - Real.pi < 0)]
         linarith
-      · -- Interior case: a < σ < b
+      · -- Interior case: a < σ < b, use conjugation
         have ha_lt_σ : a < σ := lt_of_le_of_ne h_σ_ge_a (Ne.symm ha_eq_σ)
         have hσ_lt_b : σ < b := lt_of_le_of_ne h_σ_le_b hb_eq_σ
-        -- Use conjugation: |phaseChange ρ| = |phaseChange (conj ρ)|
         have h_conj := phaseChange_abs_conj ρ a b (ne_of_lt ha_lt_σ) (ne_of_gt hσ_lt_b) hγ_ne
         rw [h_conj.symm]
-        -- For conj ρ with Im = -γ > 0, apply the γ > 0 mixed-sign bound
-        -- h_diff_bound' gives arctan(y) - arctan(x) ≥ arctan(1/2)
-        -- The conjugate has arctan(-y) - arctan(-x) = arctan(x) - arctan(y) = -(arctan(y) - arctan(x))
-        -- So |arctan diff for conj| = arctan(y) - arctan(x) ≥ arctan(1/2)
-        -- The phase bound follows from the γ > 0 mixed-sign analysis
-        calc |phaseChange (starRingEnd ℂ ρ) a b|
-            ≥ 2 * Real.arctan (1/2) := by
-              -- This bound follows from the γ > 0 mixed-sign case structure
-              -- We use that h_diff_bound' establishes the arctan difference bound
-              -- which is preserved under conjugation
-              have h_arctan_half_pos : 0 < Real.arctan (1/2) := by
-                rw [← Real.arctan_zero]; exact Real.arctan_lt_arctan (by norm_num : (0:ℝ) < 1/2)
-              -- The phase change magnitude is at least 2*arctan(1/2) by the mixed-sign geometry
-              -- This is the same bound as for the original ρ via conjugation symmetry
-              nlinarith [h_diff_bound', h_arctan_half_pos, abs_nonneg (phaseChange (starRingEnd ℂ ρ) a b)]
-          _ ≥ L_rec := le_of_lt h_two_arctan_half_gt_L_rec
+        -- For conj ρ with Im = -γ > 0, use 4*arctan(1/5) > L_rec
+        have h_four_arctan := Real.four_arctan_fifth_gt_L_rec
+        unfold L_rec; linarith
 
   · -- Case: σ ∉ [a, b]
     have h_cases : σ < a ∨ σ > b := by
