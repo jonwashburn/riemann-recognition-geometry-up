@@ -906,8 +906,22 @@ lemma hasDerivAt_neg_inv_two_one_add_sq (u : ℝ) :
     - F(a) - F(0) = -1/(2(1+a²)) - (-1/2) = 1/2 - 1/(2(1+a²)) -/
 lemma intervalIntegral_u_div_one_add_sq_sq (a : ℝ) (ha : 0 ≤ a) :
     ∫ u in (0:ℝ)..a, u / (1 + u^2)^2 = 1/2 - 1 / (2 * (1 + a^2)) := by
-  -- Uses hasDerivAt_neg_inv_two_one_add_sq and FTC
-  sorry
+  -- FTC: ∫_0^a f'(u) du = F(a) - F(0) where F(u) = -1/(2(1+u²))
+  have hderiv : ∀ u ∈ Set.uIcc 0 a, HasDerivAt (fun u => -1 / (2 * (1 + u^2))) (u / (1 + u^2)^2) u := by
+    intro u _
+    exact hasDerivAt_neg_inv_two_one_add_sq u
+  -- The integrand is integrable
+  have hint : IntervalIntegrable (fun u => u / (1 + u^2)^2) MeasureTheory.volume 0 a := by
+    apply ContinuousOn.intervalIntegrable
+    apply ContinuousOn.div continuousOn_id
+    · apply ContinuousOn.pow
+      apply ContinuousOn.add continuousOn_const (continuousOn_id.pow 2)
+    · intro u _; positivity
+  -- Apply FTC
+  rw [intervalIntegral.integral_eq_sub_of_hasDerivAt hderiv hint]
+  -- Simplify: F(a) - F(0) = -1/(2(1+a²)) - (-1/(2·1)) = -1/(2(1+a²)) + 1/2
+  -- The result is: -1/(2(1+a²)) - (-1/2) = 1/2 - 1/(2(1+a²))
+  ring_nf
 
 /-- The improper integral ∫_0^∞ u/(1+u²)² du = 1/2.
 
