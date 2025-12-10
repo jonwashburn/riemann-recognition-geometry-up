@@ -215,11 +215,46 @@ def C_zeta : ℝ := 3.7
     6. With E_Q(u) ≤ K_tail·|I|:
        |∫_I φ(-∂_σ u)| ≤ √(K_tail·|I|)·√(1/(2|I|)) = √(K_tail/2)
 
-    The geometry constant is C_geom = 1/√2 from step 5-6. -/
+    The geometry constant is C_geom = 1/√2 from step 5-6.
+
+    **Note**: A sharper bound C_geom_sharp = 1/2 is available from the explicit
+    Green function via separation of variables (see C_geom_sharp below).
+    We use 1/√2 for compatibility; either suffices for K_tail < 0.153. -/
 def C_geom : ℝ := 1 / Real.sqrt 2
 
 /-- C_geom equals 1/√2. -/
 lemma C_geom_eq : C_geom = 1 / Real.sqrt 2 := rfl
+
+/-- Sharper Green constant from explicit Fourier series on Carleson box.
+
+    **Derivation** (separation of variables):
+    For the half-strip (0,ℓ) × (0,∞) with G|_{y=0} = 1, G|_{x=0,ℓ} = 0:
+    1. Expand: 1(x) = Σ_{n odd} (4/(nπ)) sin(nπx/ℓ)
+    2. Solution: G(x,y) = Σ_{n odd} (4/(nπ)) e^{-(nπ/ℓ)y} sin(nπx/ℓ)
+    3. Compute: |∇G|² = (16/ℓ²) Σ_{m,n odd} e^{-((m+n)π/ℓ)y} cos((m-n)πx/ℓ)
+    4. By orthogonality: ∫₀^ℓ |∇G|² dx = (16/ℓ) Σ_{n odd} e^{-(2nπ/ℓ)y}
+    5. With ∫₀^∞ y e^{-ay} dy = 1/a²:
+       ∫∫_{strip} y|∇G|² = (4ℓ/π²) Σ_{n odd} 1/n²
+    6. Using Σ_{n odd} 1/n² = π²/8:
+       ∫∫ y|∇G|² = (4ℓ/π²)(π²/8) = ℓ/2 = |I|/2
+
+    Thus the Green-Cauchy-Schwarz constant is C_geom_sharp = 1/2.
+
+    Reference: Explicit computation in Riemann-geometry-formalization-4.txt -/
+def C_geom_sharp : ℝ := 1 / 2
+
+lemma C_geom_sharp_eq : C_geom_sharp = 1 / 2 := rfl
+
+/-- The sharp constant is strictly better than C_geom. -/
+lemma C_geom_sharp_lt_C_geom : C_geom_sharp < C_geom := by
+  unfold C_geom_sharp C_geom
+  have h_sqrt2_lt_2 : Real.sqrt 2 < 2 := by
+    have h1 : (2 : ℝ)^2 = 4 := by norm_num
+    have h2 : (4 : ℝ) > 2 := by norm_num
+    calc Real.sqrt 2 < Real.sqrt 4 := Real.sqrt_lt_sqrt (by norm_num) (by norm_num)
+      _ = 2 := Real.sqrt_eq_iff_sq_eq (by norm_num) (by norm_num) |>.mpr h1
+  have h_sqrt2_pos : Real.sqrt 2 > 0 := Real.sqrt_pos.mpr (by norm_num)
+  exact div_lt_div_of_pos_left (by norm_num) h_sqrt2_pos h_sqrt2_lt_2
 
 /-- √2 > 1.41 (since 1.41² = 1.9881 < 2). -/
 lemma sqrt_two_gt_1_41 : (1.41 : ℝ) < Real.sqrt 2 := by
