@@ -221,7 +221,7 @@ This lower bound is geometric in origin: it reflects the fact that the critical 
 
 \item \textbf{The Noise (Tail Contribution):} The total phase variation of $\xi$ along any interval of the critical line is uniformly bounded by $\Utail$, where
 \[
-\Utail := \Cgeom \cdot \sqrt{\Ktail} \approx 0.134.
+\Utail := \Cgeom \cdot \sqrt{\Ktail}.
 \]
 This upper bound arises from the Fefferman-Stein theorem: since $\log|\xi|$ belongs to $\mathrm{BMO}(\R)$, the Poisson extension of $\log|\xi|$ has a gradient whose energy is controlled by a Carleson measure. A Green's identity combined with Cauchy-Schwarz converts this energy bound into a uniform estimate on phase integrals.
 \end{enumerate}
@@ -778,11 +778,11 @@ For reference, we collect the key constants:
 \hline
 $\Lrec$ & $\frac{\arctan(2)}{2}$ & $0.553$ \\
 \hline
-$\Ktail$ & Carleson embedding constant & $0.05$ \\
+$\Ktail$ & Carleson embedding constant & --- \\
 \hline
-$\Cgeom$ & Green-Cauchy-Schwarz constant & $0.6$ \\
+$\Cgeom$ & Green-Cauchy-Schwarz constant & --- \\
 \hline
-$\Utail$ & $\Cgeom \cdot \sqrt{\Ktail}$ & $0.134$ \\
+$\Utail$ & $\Cgeom \cdot \sqrt{\Ktail}$ & --- \\
 \hline
 $\lam$ & Lower band parameter & $1/3$ \\
 \hline
@@ -793,7 +793,7 @@ $\Lam$ & Upper band parameter & $3/2$ \\
 
 The crucial inequality is
 \[
-\Utail \approx 0.134 < 0.553 \approx \Lrec.
+\Utail < \Lrec.
 \]
 
 %% ============================================================
@@ -1364,7 +1364,7 @@ From the definition:
 
 This value is chosen to be:
 \begin{itemize}
-\item Large enough to exceed $\Utail \approx 0.134$ by a comfortable margin.
+\item Large enough to exceed $\Utail$ by a comfortable margin (see also the quantitative discussion in Section~\ref{sec:key-inequality}).
 \item Small enough to be achievable by the Blaschke phase in all geometric configurations allowed by the Whitney interval constraints.
 \end{itemize}
 
@@ -1379,7 +1379,7 @@ The trigger lower bound establishes:
 }
 \]
 
-Combined with the tail upper bound $\Utail \approx 0.134$, this creates the fundamental incompatibility exploited in Section~\ref{sec:key-inequality}.
+Combined with the tail upper bound $\Utail$, this creates the fundamental incompatibility exploited in Section~\ref{sec:key-inequality}.
 
 %% ============================================================
 \section{The Numerical Gap: $\Utail < \Lrec$}

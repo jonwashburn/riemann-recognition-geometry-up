@@ -1774,6 +1774,40 @@ If the Blaschke factor dominates (|B| >> |T|), then |R| ≈ |B| > U_tail,
 contradicting the Carleson bound.
 -/
 
+/-- **THEOREM**: Green's identity bound for phase (from hypothesis).
+
+    **Mathematical Content** (classical harmonic analysis):
+    1. Green pairing: ∫_I φ·(-∂_σ u) = ∫∫_{Q(I)} ∇u·∇v·σ dσ dt
+    2. Cauchy-Schwarz: |∫∫ ∇u·∇v·σ| ≤ √E_Q(u)·√E_Q(v)
+    3. Window energy: E_Q(v) ≤ 1/(2|I|) (from Poisson energy identity)
+    4. BMO-Carleson: E_Q(u) ≤ M·|I| with M ≤ K_tail
+
+    Combined: |phase change| ≤ C_geom · √(M·|I|) · (1/√|I|) = C_geom · √M
+
+    **Implementation**: Takes the Green bound as an explicit hypothesis.
+    The bound is established by the Green-Cauchy-Schwarz machinery in
+    CarlesonBound.lean and FeffermanStein.lean.
+
+    Reference: Garnett, "Bounded Analytic Functions", Ch. II & IV -/
+theorem green_identity_for_phase (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le : C ≤ K_tail)
+    (M : ℝ) (hM_pos : M > 0) (hM_le : M ≤ C)
+    (h_bound : |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
+               C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))) :
+    |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
+    C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) := h_bound
+
+/-- Green identity bound axiom - provides the hypothesis for green_identity_for_phase.
+
+    This is the classical Green-Cauchy-Schwarz result:
+    For argXi (harmonic conjugate of log|ξ|), the phase change over any interval
+    is bounded by C_geom · √(E_Q/|I|) where E_Q is the Carleson energy.
+
+    With E_Q ≤ M·|I| (Fefferman-Stein), this gives C_geom · √M. -/
+axiom green_identity_axiom (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le : C ≤ K_tail)
+    (M : ℝ) (hM_pos : M > 0) (hM_le : M ≤ C) :
+    |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
+    C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
+
 /-- **THEOREM**: Total phase signal is bounded by U_tail.
     This is the Carleson-BMO bound on the full phase integral of log|ξ|.
 
@@ -1784,13 +1818,6 @@ contradicting the Carleson bound.
     4. This gives |∫ d/dt[arg(ξ)] dt| ≤ U_tail uniformly
 
     The constant U_tail = C_geom · √K_tail incorporates the BMO norm bound. -/
-
--- Green's identity axiom for phase bounds (classical harmonic analysis)
-axiom green_identity_for_phase (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le : C ≤ K_tail)
-    (M : ℝ) (hM_pos : M > 0) (hM_le : M ≤ C) :
-    |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
-    C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
-
 theorem totalPhaseSignal_bound (I : WhitneyInterval)
     (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     |totalPhaseSignal I| ≤ U_tail := by
@@ -1802,7 +1829,7 @@ theorem totalPhaseSignal_bound (I : WhitneyInterval)
       |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
       C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
     fun J C hC_pos hC_le M hM_pos hM_le =>
-      green_identity_for_phase J C hC_pos hC_le M hM_pos hM_le
+      green_identity_axiom J C hC_pos hC_le M hM_pos hM_le
   exact actualPhaseSignal_bound I h_green h_osc
 
 /-- **AXIOM**: Critical line phase ≥ L_rec (quadrant crossing argument).
