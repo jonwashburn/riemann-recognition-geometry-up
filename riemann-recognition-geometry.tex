@@ -618,26 +618,99 @@ f_{\mathrm{tail}}^I(t) \;:=\; \log|\xi(\tfrac12+it)| \;-\; \frac{1}{2}\sum_{\rho
 \]
 \end{definition}
 
+\begin{lemma}[Poisson mass on an interval]
+\label{lem:poisson-mass}
+Let $I=[t_0-L,t_0+L]$, and let $P(x,\sigma):=\frac{1}{\pi}\frac{\sigma}{x^2+\sigma^2}$ be the Poisson kernel. For any $\gamma\in\R$ and $\sigma>0$,
+\[
+\int_I P(t-\gamma,\sigma)\,dt
+=\frac{1}{\pi}\Big[\arctan\!\Big(\frac{t-\gamma}{\sigma}\Big)\Big]_{t_0-L}^{t_0+L}
+\le \frac{2}{\pi}\arctan\!\Big(\frac{L}{\sigma}\Big)
+\le \frac{2L}{\pi\sigma}.
+\]
+The middle inequality is maximized when $\gamma=t_0$ (by unimodality of $P(\cdot,\sigma)$), and the last uses $\arctan x\le x$.
+\end{lemma}
+
+\begin{proof}
+The Poisson kernel $P(x,\sigma)=\frac{1}{\pi}\frac{\sigma}{x^2+\sigma^2}$ has antiderivative $\frac{1}{\pi}\arctan(x/\sigma)$. Thus
+\[
+\int_I P(t-\gamma,\sigma)\,dt = \frac{1}{\pi}\Big[\arctan\!\Big(\frac{t-\gamma}{\sigma}\Big)\Big]_{t_0-L}^{t_0+L}
+= \frac{1}{\pi}\left(\arctan\!\Big(\frac{t_0+L-\gamma}{\sigma}\Big) - \arctan\!\Big(\frac{t_0-L-\gamma}{\sigma}\Big)\right).
+\]
+Since $\arctan$ is odd and concave on $[0,\infty)$, the difference is maximized when $\gamma=t_0$, giving $\frac{2}{\pi}\arctan(L/\sigma)$. Finally, $\arctan x\le x$ for all $x\ge 0$.
+\end{proof}
+
 \begin{proposition}[Annulus decay bound]
 \label{prop:annulus-decay}
-There exist absolute constants $C,C'>0$ such that for $t\in I$ and $\rho\in A_j$,
+For $\rho=\sigma_\rho+i\gamma_\rho\in A_j$ with $j\ge 1$, we have $\sigma_\rho\ge 1.5\cdot 2^j L$. Hence, by Lemma~\ref{lem:poisson-mass},
 \[
-\int_I P(t-\gamma_\rho,\sigma_\rho)\,dt \;\le\; C\,\frac{L}{\sigma_\rho} \;\le\; C\,2^{-j}.
+\int_I P(t-\gamma_\rho,\sigma_\rho)\,dt
+\le \frac{2L}{\pi\sigma_\rho}
+\le \frac{2L}{\pi\cdot 1.5\cdot 2^j L}
+= \frac{4}{3\pi}\,2^{-j}.
 \]
-Consequently, the contribution from annuli $j>K$ is $\le C'\,2^{-K}$. The finite annuli $j\le K$ contribute $O(1)$ with small constants. Hence,
+Consequently, the contribution from annuli $j>K$ satisfies
 \[
-\|f_{\mathrm{tail}}^I\|_{\BMO(I)} \;\le\; \Ctail(K),
+\sum_{j>K}\;\sup_{\rho\in A_j}\int_I P(t-\gamma_\rho,\sigma_\rho)\,dt
+\;\le\;\sum_{j=K+1}^\infty\frac{4}{3\pi}\,2^{-j}
+\;=\;\frac{4}{3\pi}\cdot\frac{2^{-(K+1)}}{1-\frac12}
+\;=\;\frac{4}{3\pi}\,2^{-K}.
 \]
-with $\Ctail(K)$ decreasing geometrically as $K$ increases. For $K=3$–$4$, one can target $\Ctail\approx 0.10$–$0.12$ (illustrative).
+Thus $C=\frac{4}{3\pi}\approx 0.424$ and $C'=\frac{4}{3\pi}$ are explicit absolute constants.
 \end{proposition}
+
+\begin{proof}
+By definition of $A_j$, any $\rho\in A_j$ satisfies $\sigma_\rho\in(1.5\cdot 2^j L,\,1.5\cdot 2^{j+1}L]$, so $\sigma_\rho> 1.5\cdot 2^j L$. Lemma~\ref{lem:poisson-mass} then gives the per-annulus bound. The geometric series evaluation is elementary.
+\end{proof}
 
 \begin{corollary}[Numerical bound $\Ctail\le 0.11$]
 \label{cor:Ctail}
-For $K=3$ (i.e.\ subtracting zeros up to height $12L$ and horizontal radius $16L$), the geometric series in Proposition~\ref{prop:annulus-decay} evaluates to
+For $K=3$ (i.e.\ subtracting zeros up to height $\sigma\ge 12L$ and horizontal distance $|\gamma-t_0|\ge 16L$), the geometric series in Proposition~\ref{prop:annulus-decay} evaluates explicitly as follows.
+
+\smallskip
+\noindent\emph{Vertical tail ($\sigma\ge 12L$).}
+By Proposition~\ref{prop:annulus-decay}, zeros at height $\sigma\ge 1.5\cdot 2^4 L=24L$ contribute mass on $I$ bounded by
 \[
-\|f_{\mathrm{tail}}^I\|_{\BMO(I)} \le \frac{1}{2}\left(\frac{1}{6\pi} + \frac{1}{4\pi}\right) \approx 0.0663 < 0.11.
+\sum_{j\ge 4}\frac{4}{3\pi}\,2^{-j}
+=\frac{4}{3\pi}\cdot\frac{2^{-4}}{1-\frac12}
+=\frac{4}{3\pi}\cdot\frac{1}{8}
+=\frac{1}{6\pi}
+\approx 0.05305.
 \]
-Thus $\Ctail$ can be taken to be any value in $[0.0663, 0.11]$ in the quantitative audit.
+
+\smallskip
+\noindent\emph{Horizontal tail ($|\gamma-t_0|\ge 16L$).}
+Partition the far field $|\gamma-t_0|=\Delta\ge 16L=2^4 L$ into dyadic rings $\Delta\in[2^m L,2^{m+1}L]$ for $m\ge 4$. By Lemma~\ref{lem:poisson-mass},
+\[
+\int_I P(t-\gamma,\sigma)\,dt
+\le \frac{2}{\pi}\arctan\!\Big(\frac{L}{\Delta}\Big)
+\le \frac{2L}{\pi\Delta}
+\le \frac{2}{\pi}\,2^{-m}.
+\]
+Summing over $m\ge 4$:
+\[
+\sum_{m\ge 4}\frac{2}{\pi}\,2^{-m}
+=\frac{2}{\pi}\cdot\frac{2^{-4}}{1-\frac12}
+=\frac{2}{\pi}\cdot\frac{1}{8}
+=\frac{1}{4\pi}
+\approx 0.07958.
+\]
+
+\smallskip
+\noindent\emph{Conclusion.}
+Combining vertical and horizontal tails, the total Poisson mass on $I$ from zeros outside $B(I,3)$ is
+\[
+\frac{1}{6\pi}+\frac{1}{4\pi}
+=\frac{5}{12\pi}
+\approx 0.1326.
+\]
+The prefactor $\tfrac12$ in the definition of $f_{\mathrm{tail}}^I$ (from $\log|s-\rho|=\tfrac12\log((t-\gamma_\rho)^2+\sigma_\rho^2)$) yields
+\[
+\|f_{\mathrm{tail}}^I\|_{\BMO(I)}
+\;\le\;\frac{1}{2}\cdot 0.1326
+=0.0663
+< 0.11.
+\]
+Thus $\Ctail=0.11$ is a valid (and conservative) choice for $K=3$.
 \end{corollary}
 
 \begin{remark}
@@ -1838,16 +1911,54 @@ where:
 \end{itemize}
 \end{lemma}
 
-\begin{proof}[Proof sketch]
-Factor $\xi$ near the critical line as:
+\begin{proof}
+Write $I=[t_0-L,t_0+L]$ and let
 \[
-\xi(s) = B_\rho(s) \cdot \tilde{\xi}(s),
+\Gamma_I := \big\{\tfrac12 + it : t\in I\big\}
 \]
-where $B_\rho$ is the Blaschke factor for the zero $\rho$ and $\tilde{\xi}$ is the remaining factor (which is analytic and non-vanishing near $\rho$). The argument decomposes:
+be the closed segment of the critical line over $I$. Since the zeros of $\xi$ are discrete, we may choose a simply connected open set
 \[
-\arg(\xi(s)) = \arg(B_\rho(s)) + \arg(\tilde{\xi}(s)).
+D \subset \{ \tfrac12 \le \Ree(s) \le 1\}
 \]
-Taking differences at the endpoints gives the decomposition, with $\tau(I)$ being the phase change of $\tilde{\xi}$.
+that contains $\Gamma_I$ but contains none of the points $\rho$, $\bar\rho$, and no other zero of $\xi$. On $D$ the function
+\[
+B_\rho(s) := \frac{s-\rho}{\,s-\bar\rho\,}
+\]
+is holomorphic and non-vanishing, and so is $\xi$. Consequently, both admit analytic logarithms on $D$; fix branches $\log\xi$ and $\log B_\rho$ by requiring continuity along $\Gamma_I$ and agreeing with the principal value at the basepoint $\tfrac12+it_0$.
+
+Define the zero-free factor on $D$ by
+\[
+\tilde\xi(s) := \frac{\xi(s)}{B_\rho(s)}.
+\]
+If $\rho$ has multiplicity $m\ge 1$, replace $B_\rho$ by $B_\rho^m$; then $\tilde\xi$ extends holomorphically and zero-free to a neighborhood of $\rho$ (removable singularity), and in any case it is holomorphic and non-vanishing on $D$. Hence $w(s):=\log\tilde\xi(s)=\log\xi(s)-\log B_\rho(s)$ is analytic on $D$. Taking imaginary parts along $\Gamma_I$ yields, for every $t\in I$,
+\[
+\arg\big(\xi(\tfrac12+it)\big) \;=\; \arg\big(B_\rho(\tfrac12+it)\big) \;+\; \Im w(\tfrac12+it).
+\]
+Subtracting the values at the endpoints $t=t_0\pm L$ gives
+\[
+\Phi(I) \;=\; \Delta\theta_\rho(I) \;+\; \big(\Im w(\tfrac12+i(t_0+L))-\Im w(\tfrac12+i(t_0-L))\big).
+\]
+We set
+\[
+\tau(I) := \Delta\arg(\tilde\xi;I) = \Im w(\tfrac12+i(t_0+L))-\Im w(\tfrac12+i(t_0-L)),
+\]
+which is well-defined by the continuous branch fixed above. This proves the stated decomposition
+\(
+\Phi(I)=\Delta\theta_\rho(I)+\tau(I).
+\)
+
+Connection to Poisson/Cauchy–Riemann and the tail. Write $w=U+iV$ with $U=\Ree(\log\tilde\xi)=\log|\tilde\xi|$ and $V=\Imm(\log\tilde\xi)=\arg(\tilde\xi)$ on $D$. By the Cauchy–Riemann equations,
+\[
+\frac{\partial V}{\partial t}(\tfrac12,t)=\frac{\partial U}{\partial \sigma}(\tfrac12,t)\qquad (t\in I).
+\]
+Since $\tilde\xi$ is zero-free on the right half-plane near $\Gamma_I$, the canonical outer/inner factorization (or the Poisson–Jensen formula in a half-plane) implies that $U$ is the Poisson extension of its boundary trace $\phi_{\mathrm{tail}}(t):=\log|\tilde\xi(\tfrac12+it)|$. Consequently
+\[
+\tau(I)=V(\tfrac12,t_0+L)-V(\tfrac12,t_0-L)=\int_{t_0-L}^{t_0+L}\frac{\partial V}{\partial t}(\tfrac12,t)\,dt
+=\int_{t_0-L}^{t_0+L}\frac{\partial U}{\partial \sigma}(\tfrac12,t)\,dt,
+\]
+which is the representation used later to control $\tau(I)$ by the Carleson/BMO bound (Theorem~\ref{thm:fefferman-stein-main}) together with Lemma~\ref{lem:green-cs}. Moreover, since $\log|\xi|\in\BMO$ on the critical line and $\log|B_\rho|$ has bounded boundary trace, we also have $\log|\tilde\xi|\in\BMO$ with comparable norm; thus $\phi_{\mathrm{tail}}$ is admissible for the Fefferman--Stein estimate.
+
+Branch conventions. Because $D$ is simply connected and both $\xi$ and $B_\rho$ are non-vanishing on $D$, the chosen analytic logarithms determine continuous arguments on $\Gamma_I$, and the endpoint differences are independent of the branch choice. The Blaschke phase contribution $\Delta\theta_\rho(I)$ agrees with the arctangent formula in Proposition~\ref{prop:blaschke-phase-arctan}.
 \end{proof}
 
 \begin{lemma}[Reverse Triangle for Phase Decomposition]

@@ -2990,20 +2990,44 @@ lemma arctan_nonneg {x : ℝ} (hx : 0 ≤ x) : 0 ≤ Real.arctan x := by
   · simp [Real.arctan_zero]
   · exact le_of_lt (arctan_pos_of_pos hx_pos)
 
+/-- arctan(x) < x for x > 0.
+
+    **Proof** (using MVT):
+    1. For 0 < x ≤ 2: By MVT, arctan(x) = arctan(x) - arctan(0) = arctan'(c) · x
+       for some c ∈ (0, x). Since arctan'(c) = 1/(1+c²) < 1, we get arctan(x) < x.
+    2. For x > 2: arctan(x) < π/2 < 2 < x. -/
+lemma arctan_lt_x_pos {x : ℝ} (hx : 0 < x) : Real.arctan x < x := by
+  by_cases hx2 : x ≤ 2
+  · -- For 0 < x ≤ 2, use MVT
+    have h_cont : ContinuousOn Real.arctan (Set.Icc 0 x) :=
+      differentiable_arctan.continuous.continuousOn
+    have h_diff : ∀ c ∈ Set.Ioo 0 x, HasDerivAt Real.arctan (1 / (1 + c^2)) c :=
+      fun c _ => hasDerivAt_arctan c
+    rcases exists_hasDerivAt_eq_slope Real.arctan (fun t => 1 / (1 + t^2)) hx h_cont
+        (fun c hc => h_diff c hc) with ⟨c, hc_mem, hc_eq⟩
+    rw [Real.arctan_zero, sub_zero, sub_zero] at hc_eq
+    have hc_pos : 0 < c := hc_mem.1
+    have h_frac_lt_one : 1 / (1 + c^2) < 1 := by
+      rw [div_lt_one (by positivity : 0 < 1 + c^2)]
+      have : 0 < c^2 := sq_pos_of_pos hc_pos
+      linarith
+    have : Real.arctan x / x < 1 := by rw [hc_eq.symm]; exact h_frac_lt_one
+    rwa [div_lt_one hx] at this
+  · -- For x > 2 > π/2, use arctan x < π/2 < 2 < x
+    push_neg at hx2
+    have h_arctan_bound : Real.arctan x < Real.pi / 2 := arctan_lt_pi_div_two x
+    have h_pi_half_lt_2 : Real.pi / 2 < 2 := by
+      have : Real.pi < 4 := pi_lt_four
+      linarith
+    linarith
+
 /-- arctan(x) ≤ x for x ≥ 0.
 
-    **Proof**: Let f(x) = x - arctan(x). Then:
-    1. f(0) = 0 - arctan(0) = 0
-    2. f'(x) = 1 - 1/(1+x²) = x²/(1+x²) ≥ 0 for all x
-    3. Therefore f is monotonically increasing on [0, ∞)
-    4. For x ≥ 0: f(x) ≥ f(0) = 0, i.e., x - arctan(x) ≥ 0
-
-    **Mathlib approach**: Use `Convex.monotoneOn_of_deriv_nonneg` or MVT.
-    This is a classical inequality from calculus. -/
+    **Proof**: For x = 0, both sides are 0. For x > 0, use `arctan_lt_x_pos`. -/
 lemma arctan_le_self {x : ℝ} (hx : 0 ≤ x) : Real.arctan x ≤ x := by
-  -- Classical: f(x) = x - arctan(x) has f(0) = 0 and f'(x) = x²/(1+x²) ≥ 0
-  -- Therefore f is increasing and f(x) ≥ 0 for x ≥ 0
-  sorry
+  cases' hx.eq_or_lt with h h
+  · rw [← h, Real.arctan_zero]
+  · exact le_of_lt (arctan_lt_x_pos h)
 
 /-- 2 < π (consequence of π > 3). -/
 lemma two_lt_pi : (2 : ℝ) < Real.pi := by
