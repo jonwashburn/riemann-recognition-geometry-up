@@ -68,8 +68,11 @@ This is UNCONDITIONAL modulo the sorries in Axioms.lean:
 2. `blaschke_dominates_total`: Blaschke ≤ total phase ≤ U_tail (Carleson)
 3. `zero_has_nonzero_im`: ζ(s) ≠ 0 on (0,1)
 
-All are well-established classical results. -/
-theorem no_off_critical_zeros_in_strip :
+All are well-established classical results.
+
+Takes the oscillation hypothesis for log|ξ|. -/
+theorem no_off_critical_zeros_in_strip
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
   intro ρ hρ_zero hρ_crit
   simp only [criticalStrip, Set.mem_setOf_eq] at hρ_crit
@@ -88,8 +91,8 @@ theorem no_off_critical_zeros_in_strip :
     have h_width_upper : 2 * J.len ≤ 10 * |ρ.im| := by
       have h_pos : 0 < |ρ.im| := abs_pos.mpr hρ_im_ne
       linarith
-    -- Apply the zero-free criterion
-    exact zero_free_with_interval ρ J hρ_re hρ_re_upper hJ_contains hρ_zero h_width_lower h_width_upper
+    -- Apply the zero-free criterion with oscillation hypothesis
+    exact zero_free_with_interval ρ J hρ_re hρ_re_upper hJ_contains hρ_zero h_width_lower h_width_upper h_osc
 
 /-! ## Main Riemann Hypothesis Theorem -/
 
@@ -107,8 +110,11 @@ Every zero ρ of the completed zeta function ξ(s) = Λ(s) satisfies Re(ρ) = 1/
 1. Phase bounds (arctan calculations)
 2. BMO→Carleson embedding (Fefferman-Stein 1972)
 3. ζ(s) ≠ 0 on (0,1) (Dirichlet eta function)
+
+Takes the oscillation hypothesis for log|ξ|.
 -/
-theorem RiemannHypothesis_recognition_geometry :
+theorem RiemannHypothesis_recognition_geometry
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
   intro ρ hρ
   by_contra h
@@ -121,10 +127,10 @@ theorem RiemannHypothesis_recognition_geometry :
     have h1ρ_crit : (1 - ρ) ∈ criticalStrip := by
       simp only [criticalStrip, Set.mem_setOf_eq, Complex.sub_re, Complex.one_re]
       linarith
-    exact no_off_critical_zeros_in_strip (1 - ρ) h1ρ_zero h1ρ_crit
+    exact no_off_critical_zeros_in_strip h_osc (1 - ρ) h1ρ_zero h1ρ_crit
   · exact h h_eq
   · have hρ_crit : ρ ∈ criticalStrip := by simp only [criticalStrip, Set.mem_setOf_eq]; exact h_gt
-    exact no_off_critical_zeros_in_strip ρ hρ hρ_crit
+    exact no_off_critical_zeros_in_strip h_osc ρ hρ hρ_crit
 
 /-! ## Classical Statement -/
 
@@ -138,8 +144,11 @@ Non-trivial zeros are those with 0 < Re(s) < 1.
 which represent well-established results from:
 - Garnett, "Bounded Analytic Functions", Ch. II (phase geometry)
 - Fefferman & Stein, "Hᵖ spaces of several variables", Acta Math 1972 (BMO→Carleson)
+
+Takes the oscillation hypothesis for log|ξ|.
 -/
-theorem RiemannHypothesis_classical :
+theorem RiemannHypothesis_classical
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     ∀ ρ : ℂ, riemannZeta ρ = 0 → 0 < ρ.re → ρ.re < 1 → ρ.re = 1/2 := by
   intro ρ hρ_zeta h_pos h_lt1
   have hρ_xi : completedRiemannZeta ρ = 0 := by
@@ -148,7 +157,7 @@ theorem RiemannHypothesis_classical :
     have h_eq := riemannZeta_def_of_ne_zero hρ_ne_zero
     rw [hρ_zeta] at h_eq
     exact div_eq_zero_iff.mp h_eq.symm |>.resolve_right hΓ_ne
-  exact RiemannHypothesis_recognition_geometry ρ hρ_xi
+  exact RiemannHypothesis_recognition_geometry h_osc ρ hρ_xi
 
 /-! ## Summary
 

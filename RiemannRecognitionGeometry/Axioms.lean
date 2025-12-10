@@ -1791,7 +1791,8 @@ axiom green_identity_for_phase (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) 
     |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
     C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
 
-theorem totalPhaseSignal_bound (I : WhitneyInterval) :
+theorem totalPhaseSignal_bound (I : WhitneyInterval)
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     |totalPhaseSignal I| ≤ U_tail := by
   -- totalPhaseSignal is now definitionally equal to actualPhaseSignal
   -- The bound follows from the FeffermanStein machinery in actualPhaseSignal_bound
@@ -1802,7 +1803,7 @@ theorem totalPhaseSignal_bound (I : WhitneyInterval) :
       C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
     fun J C hC_pos hC_le M hM_pos hM_le =>
       green_identity_for_phase J C hC_pos hC_le M hM_pos hM_le
-  exact actualPhaseSignal_bound I h_green
+  exact actualPhaseSignal_bound I h_green h_osc
 
 /-- **AXIOM**: Critical line phase ≥ L_rec (quadrant crossing argument).
 
@@ -1912,21 +1913,24 @@ The proof by contradiction:
     1. blaschke_dominates_total: |totalPhaseSignal| ≥ L_rec - U_tail
     2. totalPhaseSignal_bound: |totalPhaseSignal| ≤ U_tail
     3. zero_free_condition: L_rec > 2 * U_tail, so L_rec - U_tail > U_tail
-    Contradiction! -/
+    Contradiction!
+
+    Takes the oscillation hypothesis for log|ξ|. -/
 theorem zero_free_with_interval (ρ : ℂ) (I : WhitneyInterval)
     (hρ_re : 1/2 < ρ.re) (_hρ_re_upper : ρ.re ≤ 1)
     (hρ_im : ρ.im ∈ I.interval)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (_h_width_lower : 2 * I.len ≥ |ρ.im|)
-    (_h_width_upper : 2 * I.len ≤ 10 * |ρ.im|) :
+    (_h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     False := by
   have hρ_im_ne : ρ.im ≠ 0 := zero_has_nonzero_im ρ hρ_zero hρ_re
 
   -- Lower bound: |totalPhaseSignal| ≥ L_rec - U_tail (from critical line phase)
   have h_dominance := blaschke_dominates_total I ρ hρ_zero hρ_re hρ_im hρ_im_ne
 
-  -- Upper bound: |totalPhaseSignal| ≤ U_tail (from Carleson bound)
-  have h_carleson := totalPhaseSignal_bound I
+  -- Upper bound: |totalPhaseSignal| ≤ U_tail (from Carleson bound, with oscillation hypothesis)
+  have h_carleson := totalPhaseSignal_bound I h_osc
 
   -- Key numerical inequality: L_rec > 2 * U_tail
   have h_l_rec_large : L_rec > 2 * U_tail := by
@@ -1955,14 +1959,17 @@ theorem zero_free_with_interval (ρ : ℂ) (I : WhitneyInterval)
     2 * I.len ≥ |ρ.im|. This is guaranteed by the Whitney covering construction.
 
     The hypothesis hρ_re_upper : ρ.re ≤ 1 comes from the critical strip property:
-    all nontrivial zeros of ξ have real part in (0, 1). -/
+    all nontrivial zeros of ξ have real part in (0, 1).
+
+    Takes the oscillation hypothesis for log|ξ|. -/
 theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
     (hB_base : B.base = I)
     (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (hρ_re_upper : ρ.re ≤ 1)  -- Critical strip constraint
     (h_width_lower : 2 * I.len ≥ |ρ.im|)   -- Lower bound: interval width ≥ |γ|
-    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|) :  -- Upper bound
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)  -- Upper bound
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     False := by
   simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior
   obtain ⟨hσ_lower, hσ_upper, hγ_in⟩ := hρ_interior
@@ -1974,15 +1981,17 @@ theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
 
   have hρ_im : ρ.im ∈ I.interval := by rw [← hB_base]; exact hγ_in
 
-  -- Apply zero_free_with_interval
-  exact zero_free_with_interval ρ I hρ_re hρ_re_upper hρ_im hρ_zero h_width_lower h_width_upper
+  -- Apply zero_free_with_interval with oscillation hypothesis
+  exact zero_free_with_interval ρ I hρ_re hρ_re_upper hρ_im hρ_zero h_width_lower h_width_upper h_osc
 
-/-- **THEOREM**: No zeros in the interior of any recognizer band (with good interval). -/
+/-- **THEOREM**: No zeros in the interior of any recognizer band (with good interval).
+    Takes the oscillation hypothesis for log|ξ|. -/
 theorem no_interior_zeros (I : WhitneyInterval) (B : RecognizerBand)
-    (hB_base : B.base = I) :
+    (hB_base : B.base = I)
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     ∀ ρ ∈ B.interior, ρ.re ≤ 1 → (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) → completedRiemannZeta ρ ≠ 0 := by
   intro ρ hρ_interior hρ_re_upper h_width_lower h_width_upper hρ_zero
-  exact local_zero_free I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower h_width_upper
+  exact local_zero_free I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower h_width_upper h_osc
 
 /-! ## Verification: JohnNirenberg Results Justify FeffermanStein Axioms
 
