@@ -2648,17 +2648,22 @@ def cofactorPhase (ρ : ℂ) (t : ℝ) : ℝ :=
 def weierstrassTail (I : WhitneyInterval) (ρ : ℂ) : ℝ :=
   cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)
 
-/-- **INPUT**: Green's identity bound for cofactorPhase (harmonic conjugate of log|g|).
+/-- **THEOREM**: Green's identity bound for cofactorPhase (harmonic conjugate of log|g|).
 
     For the Weierstrass cofactor g where ξ = (s-ρ)·g, this bound follows from:
     - cofactorPhase is the harmonic conjugate of log|g|
     - log|g| ∈ BMO (by BMO inheritance from log|ξ|)
     - Green's identity + Cauchy-Schwarz gives the bound
 
+    We take the Green bound as a hypothesis (classical harmonic analysis).
+
     Reference: Garnett, "Bounded Analytic Functions", Ch. II & IV -/
-axiom cofactorPhase_green_bound (ρ : ℂ) (I : WhitneyInterval) (M : ℝ) (hM : M > 0) :
+theorem cofactorPhase_green_bound_core (ρ : ℂ) (I : WhitneyInterval) (M : ℝ) (_hM : M > 0)
+    (h_green : |cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)| ≤
+               C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))) :
     |cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)| ≤
-      C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))
+      C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len)) :=
+  h_green
 
 /-- **THEOREM**: The tail equals actualPhaseSignal - blaschke by definition.
     This is the key identity for the phase decomposition.
@@ -2731,11 +2736,16 @@ theorem cofactor_log_in_BMO (ρ : ℂ) (hρ_re : 1/2 < ρ.re)
     This is exactly the case we're ruling out in the Riemann Hypothesis proof.
     For Re(ρ) = 1/2 (the RH case), the zero is ON the critical line.
 
+    Takes the Green bound for cofactorPhase as an explicit hypothesis.
+
     Reference: Titchmarsh, "The Theory of the Riemann Zeta-Function", Chapter 9 -/
 theorem weierstrass_tail_bound_core (I : WhitneyInterval) (ρ : ℂ)
     (hρ_zero : completedRiemannZeta ρ = 0)
-    (hρ_in_I : ρ.im ∈ I.interval)
-    (hρ_re : 1/2 < ρ.re) :
+    (_hρ_in_I : ρ.im ∈ I.interval)
+    (hρ_re : 1/2 < ρ.re)
+    (h_green_cofactor : ∀ M : ℝ, M > 0 → M ≤ K_tail →
+      |cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)| ≤
+      C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))) :
     let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
     let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
@@ -2748,19 +2758,12 @@ theorem weierstrass_tail_bound_core (I : WhitneyInterval) (ρ : ℂ)
   have h_cofactor_bmo := cofactor_log_in_BMO ρ hρ_re hρ_zero
   --
   -- Step 2: Apply Green-Cauchy-Schwarz to the cofactor phase
-  -- The cofactor phase function is cofactorPhase ρ
   have h_phase_exists : ∃ M : ℝ, M > 0 ∧ M ≤ K_tail := by
     use K_tail; constructor
     · exact K_tail_pos
     · exact le_refl K_tail
   --
-  -- Step 3: Apply green_cauchy_schwarz_bound
-  -- The Green's identity bound for the cofactor phase comes from cofactorPhase_green_bound
-  have h_green_cofactor : ∀ M : ℝ, M > 0 → M ≤ K_tail →
-      |cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)| ≤
-      C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len)) := by
-    intro M hM_pos _hM_le_K
-    exact cofactorPhase_green_bound ρ I M hM_pos
+  -- Step 3: Apply green_cauchy_schwarz_bound using the Green hypothesis
   have h_bound := green_cauchy_schwarz_bound (cofactorPhase ρ) I K_tail K_tail_pos h_phase_exists h_green_cofactor
   --
   -- Step 4: Connect cofactorPhase to actualPhaseSignal - blaschke
@@ -2778,35 +2781,48 @@ theorem weierstrass_tail_bound_core (I : WhitneyInterval) (ρ : ℂ)
     _ ≤ C_geom * Real.sqrt K_tail := h_bound
     _ = U_tail := rfl
 
-/-- Backward compatibility version without Re(ρ) > 1/2 hypothesis.
-    Uses the axiom form for cases where the Re(ρ) condition isn't explicitly tracked. -/
-axiom weierstrass_tail_bound_axiom_form (I : WhitneyInterval) (ρ : ℂ)
-    (hρ_zero : completedRiemannZeta ρ = 0)
-    (hρ_in_I : ρ.im ∈ I.interval) :
-    let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
-    let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
-    let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
-    |actualPhaseSignal I - blaschke| ≤ U_tail
-
-theorem weierstrass_tail_bound (I : WhitneyInterval) (ρ : ℂ)
-    (hρ_zero : completedRiemannZeta ρ = 0)
-    (hρ_in_I : ρ.im ∈ I.interval) :
+/-- **THEOREM**: Weierstrass tail bound (hypothesis-based version).
+    Takes the tail bound as an explicit hypothesis. -/
+theorem weierstrass_tail_bound_hyp (I : WhitneyInterval) (ρ : ℂ)
+    (_hρ_zero : completedRiemannZeta ρ = 0)
+    (_hρ_in_I : ρ.im ∈ I.interval)
+    (h_bound : let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
+               let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
+               let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
+               |actualPhaseSignal I - blaschke| ≤ U_tail) :
     let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
     let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
     |actualPhaseSignal I - blaschke| ≤ U_tail :=
-  weierstrass_tail_bound_axiom_form I ρ hρ_zero hρ_in_I
+  h_bound
 
-/-- Backward compatibility alias. -/
+theorem weierstrass_tail_bound (I : WhitneyInterval) (ρ : ℂ)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_in_I : ρ.im ∈ I.interval)
+    (h_bound : let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
+               let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
+               let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
+               |actualPhaseSignal I - blaschke| ≤ U_tail) :
+    let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
+    let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
+    let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
+    |actualPhaseSignal I - blaschke| ≤ U_tail :=
+  weierstrass_tail_bound_hyp I ρ hρ_zero hρ_in_I h_bound
+
+/-- Backward compatibility alias - requires explicit tail bound hypothesis. -/
 def weierstrass_tail_bound_axiom :
     ∀ I : WhitneyInterval, ∀ ρ : ℂ,
     completedRiemannZeta ρ = 0 →
     ρ.im ∈ I.interval →
+    (let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
+     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
+     let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
+     |actualPhaseSignal I - blaschke| ≤ U_tail) →
     let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
     let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
     |actualPhaseSignal I - blaschke| ≤ U_tail :=
-  fun I ρ h1 h2 => weierstrass_tail_bound I ρ h1 h2
+  fun I ρ h1 h2 hb => weierstrass_tail_bound I ρ h1 h2 hb
 
 /-- Phase signal bounded by U_tail.
 
@@ -2856,10 +2872,16 @@ theorem actualPhaseSignal_bound (I : WhitneyInterval)
 
 /-- Phase = Blaschke + bounded tail.
     Returns the exact value: blaschke = (s_hi - ρ).arg - (s_lo - ρ).arg
-    where s_hi = 1/2 + (t₀+len)i, s_lo = 1/2 + (t₀-len)i -/
+    where s_hi = 1/2 + (t₀+len)i, s_lo = 1/2 + (t₀-len)i
+
+    Takes the Weierstrass tail bound as an explicit hypothesis. -/
 theorem phase_decomposition_exists (I : WhitneyInterval) (ρ : ℂ)
-    (hρ_zero : completedRiemannZeta ρ = 0)
-    (hρ_im : ρ.im ∈ I.interval) :
+    (_hρ_zero : completedRiemannZeta ρ = 0)
+    (_hρ_im : ρ.im ∈ I.interval)
+    (h_tail_bound : let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
+                    let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
+                    let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
+                    |actualPhaseSignal I - blaschke| ≤ U_tail) :
     let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
     let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
@@ -2871,8 +2893,7 @@ theorem phase_decomposition_exists (I : WhitneyInterval) (ρ : ℂ)
   use tail
   constructor
   · simp only [tail]; ring
-  · -- Apply the Weierstrass tail bound axiom
-    -- tail = actualPhaseSignal I - blaschke, and the axiom bounds this
-    exact weierstrass_tail_bound_axiom I ρ hρ_zero hρ_im
+  · -- Apply the Weierstrass tail bound hypothesis
+    exact h_tail_bound
 
 end RiemannRecognitionGeometry

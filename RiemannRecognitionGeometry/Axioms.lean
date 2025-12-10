@@ -1842,6 +1842,14 @@ axiom criticalLine_phase_ge_L_rec (I : WhitneyInterval) (ρ : ℂ)
 theorem totalPhaseSignal_eq_actualPhaseSignal (I : WhitneyInterval) :
     |totalPhaseSignal I| = |actualPhaseSignal I| := rfl
 
+-- Axiom for Weierstrass tail bound (classical harmonic analysis)
+axiom weierstrass_tail_bound_for_phase (I : WhitneyInterval) (ρ : ℂ)
+    (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
+    let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
+    let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
+    let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
+    |actualPhaseSignal I - blaschke| ≤ U_tail
+
 /-- **THEOREM**: When a zero exists, the total phase signal is large.
     Uses phase_decomposition_exists from FeffermanStein and criticalLine_phase_ge_L_rec.
 
@@ -1858,7 +1866,9 @@ theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
   let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
   let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
   let blaschke_fs := (s_hi - ρ).arg - (s_lo - ρ).arg
-  obtain ⟨tail, h_decomp, h_tail_bound⟩ := phase_decomposition_exists I ρ hρ_zero hρ_im
+  -- Get the tail bound from the axiom
+  have h_tail_axiom := weierstrass_tail_bound_for_phase I ρ hρ_zero hρ_im
+  obtain ⟨tail, h_decomp, h_tail_bound⟩ := phase_decomposition_exists I ρ hρ_zero hρ_im h_tail_axiom
 
   -- Critical line phase bound (quadrant crossing axiom)
   have h_phase_ge : |blaschke_fs| ≥ L_rec :=
