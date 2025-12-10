@@ -1645,6 +1645,88 @@ lemma sqMinusOneAntideriv_one : sqMinusOneAntideriv 1 = -1/2 := by
 lemma sqMinusOneAntideriv_neg_one : sqMinusOneAntideriv (-1) = 1/2 := by
   unfold sqMinusOneAntideriv; norm_num
 
+/-- On (1, ∞), |u² - 1| = u² - 1 -/
+lemma abs_sq_minus_one_Ioi (u : ℝ) (hu : u ∈ Ioi (1 : ℝ)) : |u^2 - 1| = u^2 - 1 := by
+  have h1 : u > 1 := hu
+  have h2 : u^2 > 1 := by nlinarith [sq_nonneg u, sq_nonneg (u - 1)]
+  exact abs_of_pos (by linarith)
+
+/-- On (-∞, -1], |u² - 1| = u² - 1 -/
+lemma abs_sq_minus_one_Iic (u : ℝ) (hu : u ∈ Iic (-1 : ℝ)) : |u^2 - 1| = u^2 - 1 := by
+  have h1 : u ≤ -1 := hu
+  have h2 : u^2 ≥ 1 := by nlinarith [sq_nonneg u, sq_nonneg (u + 1)]
+  exact abs_of_nonneg (by linarith)
+
+/-- On [-1, 1], |u² - 1| = 1 - u² -/
+lemma abs_sq_minus_one_Icc (u : ℝ) (hu : u ∈ Icc (-1 : ℝ) (1 : ℝ)) : |u^2 - 1| = 1 - u^2 := by
+  have ⟨h1, h2⟩ := hu
+  have h3 : u^2 ≤ 1 := by nlinarith [sq_nonneg u]
+  rw [abs_of_nonpos (by linarith : u^2 - 1 ≤ 0)]
+  ring
+
+/-- **PROVEN**: Integral on (1, ∞) via FTC. ∫_{(1,∞)} (u² - 1)/(1 + u²)² du = 1/2 -/
+theorem integral_Ioi_sq_minus_one :
+    ∫ u : ℝ in Ioi (1 : ℝ), (u^2 - 1) / (1 + u^2)^2 = 1/2 := by
+  have h_deriv : ∀ x ∈ Ici (1 : ℝ), HasDerivAt sqMinusOneAntideriv ((x^2 - 1) / (1 + x^2)^2) x :=
+    fun x _ => hasDerivAt_sqMinusOneAntideriv x
+  have h_int : IntegrableOn (fun u : ℝ => (u^2 - 1) / (1 + u^2)^2) (Ioi (1:ℝ)) volume := by
+    apply Integrable.integrableOn; apply Integrable.mono' integrable_inv_one_add_sq
+    · exact (Continuous.div ((continuous_pow 2).sub continuous_const)
+        ((continuous_const.add (continuous_pow 2)).pow 2) (fun u => by positivity)).aestronglyMeasurable
+    · filter_upwards with u; rw [Real.norm_eq_abs]
+      have h2 : (1 + u^2)^2 > 0 := by positivity
+      have h_num : |u^2 - 1| ≤ 1 + u^2 := by rw [abs_le]; constructor <;> nlinarith [sq_nonneg u]
+      have habs : |(u^2 - 1) / (1 + u^2)^2| = |u^2 - 1| / (1 + u^2)^2 := by
+        rw [abs_div, abs_of_pos h2]
+      rw [habs]
+      calc |u^2 - 1| / (1 + u^2)^2
+          ≤ (1 + u^2) / (1 + u^2)^2 := div_le_div_of_nonneg_right h_num (le_of_lt h2)
+        _ = (1 + u^2)⁻¹ := by field_simp; ring
+  rw [integral_Ioi_of_hasDerivAt_of_tendsto' h_deriv h_int tendsto_sqMinusOneAntideriv_atTop]
+  simp [sqMinusOneAntideriv_one]; norm_num
+
+/-- **PROVEN**: Integral on (-∞, -1] via FTC. ∫_{(-∞,-1]} (u² - 1)/(1 + u²)² du = 1/2 -/
+theorem integral_Iic_sq_minus_one :
+    ∫ u : ℝ in Iic (-1 : ℝ), (u^2 - 1) / (1 + u^2)^2 = 1/2 := by
+  have h_deriv : ∀ x ∈ Iic (-1 : ℝ), HasDerivAt sqMinusOneAntideriv ((x^2 - 1) / (1 + x^2)^2) x :=
+    fun x _ => hasDerivAt_sqMinusOneAntideriv x
+  have h_int : IntegrableOn (fun u : ℝ => (u^2 - 1) / (1 + u^2)^2) (Iic (-1:ℝ)) volume := by
+    apply Integrable.integrableOn; apply Integrable.mono' integrable_inv_one_add_sq
+    · exact (Continuous.div ((continuous_pow 2).sub continuous_const)
+        ((continuous_const.add (continuous_pow 2)).pow 2) (fun u => by positivity)).aestronglyMeasurable
+    · filter_upwards with u; rw [Real.norm_eq_abs]
+      have h2 : (1 + u^2)^2 > 0 := by positivity
+      have h_num : |u^2 - 1| ≤ 1 + u^2 := by rw [abs_le]; constructor <;> nlinarith [sq_nonneg u]
+      have habs : |(u^2 - 1) / (1 + u^2)^2| = |u^2 - 1| / |(1 + u^2)^2| := abs_div _ _
+      rw [habs, abs_of_pos h2]
+      calc |u^2 - 1| / (1 + u^2)^2
+          ≤ (1 + u^2) / (1 + u^2)^2 := div_le_div_of_nonneg_right h_num (le_of_lt h2)
+        _ = (1 + u^2)⁻¹ := by field_simp; ring
+  rw [integral_Iic_of_hasDerivAt_of_tendsto' h_deriv h_int tendsto_sqMinusOneAntideriv_atBot]
+  simp only [sqMinusOneAntideriv_neg_one, sub_zero]
+
+/-- **PROVEN**: Integral on [-1, 1] via FTC. ∫_{[-1,1]} (1 - u²)/(1 + u²)² du = 1 -/
+theorem integral_Icc_one_minus_sq :
+    ∫ u : ℝ in Icc (-1 : ℝ) (1 : ℝ), (1 - u^2) / (1 + u^2)^2 = 1 := by
+  have h_le : (-1 : ℝ) ≤ 1 := by norm_num
+  have h_cont : ContinuousOn sqMinusOneAntideriv (Icc (-1) 1) := by
+    apply Continuous.continuousOn; unfold sqMinusOneAntideriv
+    exact Continuous.div continuous_neg (continuous_const.add (continuous_pow 2)) (fun u => by positivity)
+  have h_deriv : ∀ x ∈ Ioo (-1 : ℝ) 1, HasDerivAt sqMinusOneAntideriv ((x^2 - 1) / (1 + x^2)^2) x :=
+    fun x _ => hasDerivAt_sqMinusOneAntideriv x
+  have h_int : IntervalIntegrable (fun u => (u^2 - 1) / (1 + u^2)^2) volume (-1) 1 := by
+    apply ContinuousOn.intervalIntegrable
+    exact (Continuous.div ((continuous_pow 2).sub continuous_const)
+      ((continuous_const.add (continuous_pow 2)).pow 2) (fun u => by positivity)).continuousOn
+  have h_ftc := intervalIntegral.integral_eq_sub_of_hasDerivAt_of_le h_le h_cont h_deriv h_int
+  calc ∫ u : ℝ in Icc (-1 : ℝ) 1, (1 - u^2) / (1 + u^2)^2
+      = ∫ u : ℝ in Ioc (-1 : ℝ) 1, (1 - u^2) / (1 + u^2)^2 := integral_Icc_eq_integral_Ioc
+    _ = ∫ u : ℝ in (-1 : ℝ)..1, (1 - u^2) / (1 + u^2)^2 := by rw [intervalIntegral.integral_of_le h_le]
+    _ = ∫ u : ℝ in (-1 : ℝ)..1, -((u^2 - 1) / (1 + u^2)^2) := by congr 1; ext u; ring
+    _ = -(∫ u : ℝ in (-1 : ℝ)..1, (u^2 - 1) / (1 + u^2)^2) := by rw [← intervalIntegral.integral_neg]
+    _ = -(sqMinusOneAntideriv 1 - sqMinusOneAntideriv (-1)) := by rw [h_ftc]
+    _ = 1 := by simp [sqMinusOneAntideriv_one, sqMinusOneAntideriv_neg_one]; norm_num
+
 -- **Key Integral Identity**: ∫ |u² - 1|/(1 + u²)² du = 2.
 --
 -- **Verified Computation** via antiderivatives:

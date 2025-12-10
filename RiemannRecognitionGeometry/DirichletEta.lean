@@ -683,64 +683,63 @@ theorem zeta_eta_relation_gt_one (s : ℝ) (hs : 1 < s) :
   -- Step 4: ∑' n, 1/(n+1)^s = (riemannZeta (s : ℂ)).re
   rw [← riemannZeta_re_eq_real_tsum s hs]
 
-/-- **AXIOM**: η(s) = (1 - 2^{1-s}) · ζ(s) for s ∈ (0, 1).
+/-- **CLASSICAL INPUT**: η(s) = (1 - 2^{1-s}) · ζ(s) for s ∈ (0, 1).
 
-    ### Status: CLASSICAL THEOREM (Compatibility of Analytic Continuations)
+    ### Mathematical Status: THEOREM (Analytic Continuation)
 
-    This axiom asserts that **two different constructions** of the Riemann zeta function
-    give the same value for real s ∈ (0, 1):
+    This is the **standard textbook result** connecting the Dirichlet eta function
+    to the Riemann zeta function. It is how ζ(s) is classically extended from
+    Re(s) > 1 to Re(s) > 0.
 
-    1. **Our construction** (via Dirichlet eta):
+    ### Two Constructions of ζ(s)
+
+    1. **Classical construction** (via Dirichlet eta):
        ζ(s) := η(s) / (1 - 2^{1-s})
-       where η(s) = lim_{N→∞} ∑_{n=1}^N (-1)^{n-1}/n^s (alternating series)
+       where η(s) = ∑_{n=1}^∞ (-1)^{n-1}/n^s converges for Re(s) > 0
 
     2. **Mathlib's construction** (via Hurwitz zeta):
-       `riemannZeta s` := analytic continuation of `hurwitzZetaEven 0 s`
-       which is defined via Mellin transforms of Jacobi theta functions
+       `riemannZeta s` := `hurwitzZetaEven 0 s`
+       defined via Mellin transforms of Jacobi theta functions
 
-    ### Mathematical Content
+    ### Proof Outline (Classical)
 
-    **For s > 1**: Both constructions agree, proven as `zeta_eta_relation_gt_one`
-    using absolute convergence of series.
+    **Step 1**: For Re(s) > 1, the series manipulation gives:
+      η(s) = ∑(-1)^{n-1}/n^s = ζ(s) - 2·ζ(s)/2^s = (1 - 2^{1-s})·ζ(s)
+      This is proven in `zeta_eta_relation_gt_one`.
 
-    **For s ∈ (0, 1)**: The equality follows from the **identity principle**:
-    - Both functions are analytic on {Re(s) > 0, s ≠ 1}
-    - They agree on the open set {Re(s) > 1} which has accumulation points
-    - Therefore they agree everywhere on their common domain
+    **Step 2**: The function η(s) = ∑(-1)^{n-1}/n^s converges conditionally
+      for Re(s) > 0 by the alternating series test. This defines an analytic
+      function on {Re(s) > 0}.
 
-    ### Why This Is an Axiom (Not a Bug)
+    **Step 3**: The function (1 - 2^{1-s})·ζ(s) is analytic on {Re(s) > 0, s ≠ 1}
+      because the zero of (1 - 2^{1-s}) at s = 1 cancels the pole of ζ(s).
 
-    The axiom represents **genuine mathematical content**: the equivalence of two
-    different but historically important constructions of ζ(s). Proving this in Lean
-    requires infrastructure not currently in Mathlib:
+    **Step 4**: By the **identity principle**, two analytic functions agreeing
+      on {Re(s) > 1} must agree on all of {Re(s) > 0, s ≠ 1}.
 
-    1. **Analytic theory of Dirichlet series**: Showing our `dirichletEtaReal` extends
-       to a complex analytic function η(s) for Re(s) > 0
+    ### Why This Requires an Axiom in Lean
 
-    2. **Identity principle application**: Connecting our series-based η to Mathlib's
-       Mellin-transform-based definition requires showing both are analytic and agree
-       on an open subset
+    Mathlib lacks the infrastructure to formally verify:
+    1. That alternating Dirichlet series define analytic functions
+    2. The identity principle application connecting different definitions
+    3. That `riemannZeta (s : ℂ)` is real when s is real
 
-    3. **Real-valued verification**: For real s, verifying that both constructions
-       give real values (Mathlib's zeta is complex-valued)
+    This is not a gap in mathematical rigor - it's a gap in Mathlib's
+    formalization of complex analysis for Dirichlet series.
 
     ### Numerical Verification
 
-    For s = 1/2: η(1/2) ≈ 0.6048... and (1 - 2^{1/2}) ≈ -0.4142...
-    So ζ(1/2) ≈ -1.4603... (confirmed by computation)
-
-    ### Use in Main Theorem
-
-    This axiom is used ONCE to prove ζ(s) < 0 for s ∈ (0, 1):
-    - From `dirichletEtaReal_pos`: η(s) > 0
-    - From `zeta_eta_factor_neg`: (1 - 2^{1-s}) < 0
-    - From this axiom: ζ(s) = η(s) / (1 - 2^{1-s}) < 0
+    At s = 1/2:
+    - η(1/2) = 0.6048986434216303...
+    - (1 - √2) = -0.4142135623730951...
+    - ζ(1/2) = -1.4603545088095868...
+    - Check: (1 - √2) · ζ(1/2) = 0.6048986434... = η(1/2) ✓
 
     ### References
     - Hardy & Wright, "An Introduction to the Theory of Numbers", Theorem 25.2
     - Titchmarsh, "The Theory of the Riemann Zeta-Function", Chapter 2, §2.2
     - Apostol, "Introduction to Analytic Number Theory", Section 12.5
-    - Edwards, "Riemann's Zeta Function", Chapter 1 (historical development) -/
+    - Edwards, "Riemann's Zeta Function", Chapter 1 -/
 axiom zeta_eta_relation_lt_one (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
     dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re
 
