@@ -53,10 +53,10 @@ lemma K_tail_pos : (0 : ℝ) < K_tail := by
   unfold K_tail
   norm_num
 
-/-- C_geom is positive. -/
+/-- C_geom is positive (C_geom = 1/√2 > 0). -/
 lemma C_geom_pos : (0 : ℝ) < C_geom := by
   unfold C_geom
-  norm_num
+  apply div_pos one_pos (Real.sqrt_pos.mpr (by norm_num : (0:ℝ) < 2))
 
 /-- sqrt(K_tail) is positive. -/
 lemma sqrt_K_tail_pos : 0 < Real.sqrt K_tail := by

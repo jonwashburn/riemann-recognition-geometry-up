@@ -108,32 +108,99 @@ def L_rec : ℝ := Real.arctan 2 / 2
 /-- K_tail: Carleson embedding constant for tail energy. -/
 def K_tail : ℝ := 0.05
 
-/-- C_geom: Geometric constant from Green + Cauchy-Schwarz. -/
-def C_geom : ℝ := 0.6
+/-- C_geom: Geometric constant from Green + Cauchy-Schwarz.
+
+    **Derived value**: C_geom = 1/√2 ≈ 0.7071
+
+    **Derivation** (Poisson extension energy identity):
+    1. Poisson kernel: P(x,σ) = (1/π)·σ/(x²+σ²)
+    2. For window φ with ∥φ∥₂ ≤ 1/√|I|, Poisson extension v satisfies:
+       ∫∫_{ℍ} |∇v|² σ dσ dx = (1/2)∥φ∥₂² (Fourier computation)
+    3. Thus E_Q(v) ≤ 1/(2|I|) for Carleson box Q = I × (0,2L]
+    4. Green pairing: ∫_I φ·(-∂_σ u) = ∫∫_Q ∇u·∇v·σ dσ dt
+    5. Cauchy-Schwarz: |∫_I φ(-∂_σ u)| ≤ √E_Q(u)·√E_Q(v)
+    6. With E_Q(u) ≤ K_tail·|I|:
+       |∫_I φ(-∂_σ u)| ≤ √(K_tail·|I|)·√(1/(2|I|)) = √(K_tail/2)
+
+    The geometry constant is C_geom = 1/√2 from step 5-6. -/
+def C_geom : ℝ := 1 / Real.sqrt 2
+
+/-- C_geom equals 1/√2. -/
+lemma C_geom_eq : C_geom = 1 / Real.sqrt 2 := rfl
+
+/-- √2 > 1.41 (since 1.41² = 1.9881 < 2). -/
+lemma sqrt_two_gt_1_41 : (1.41 : ℝ) < Real.sqrt 2 := by
+  have h : (1.41 : ℝ)^2 < 2 := by norm_num
+  have h0 : (0 : ℝ) ≤ 1.41 := by norm_num
+  rw [← Real.sqrt_sq h0]
+  exact Real.sqrt_lt_sqrt (sq_nonneg _) h
+
+/-- √2 < 1.42 (since 2 < 1.42² = 2.0164). -/
+lemma sqrt_two_lt_1_42 : Real.sqrt 2 < (1.42 : ℝ) := by
+  have h : (2 : ℝ) < 1.42^2 := by norm_num
+  have h0 : (0 : ℝ) ≤ 2 := by norm_num
+  rw [← Real.sqrt_sq (by norm_num : (0:ℝ) ≤ 1.42)]
+  exact Real.sqrt_lt_sqrt h0 h
+
+/-- C_geom is approximately 0.7071. -/
+lemma C_geom_approx : C_geom < 0.71 ∧ C_geom > 0.7 := by
+  unfold C_geom
+  have h_sqrt2_pos : (0 : ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
+  constructor
+  · -- 1/√2 < 0.71 ⟺ 1 < 0.71 * √2, and √2 > 1.41, so 0.71 * √2 > 0.71 * 1.41 = 1.0011 > 1
+    rw [div_lt_iff h_sqrt2_pos]
+    calc (1 : ℝ) < 0.71 * 1.41 := by norm_num
+      _ < 0.71 * Real.sqrt 2 := by nlinarith [sqrt_two_gt_1_41]
+  · -- 0.7 < 1/√2: use 0.7 * √2 < 1 with √2 < 1.42
+    have h_prod : (0.7 : ℝ) * Real.sqrt 2 < 1 := by
+      calc (0.7 : ℝ) * Real.sqrt 2 < 0.7 * 1.42 := by nlinarith [sqrt_two_lt_1_42]
+        _ < 1 := by norm_num
+    -- 0.7 < 1/√2 ⟺ 0.7 * √2 < 1 (multiply both sides by √2)
+    have h_ne : Real.sqrt 2 ≠ 0 := ne_of_gt h_sqrt2_pos
+    calc (0.7 : ℝ) = 0.7 * Real.sqrt 2 / Real.sqrt 2 := by field_simp
+      _ < 1 / Real.sqrt 2 := by apply div_lt_div_of_pos_right h_prod h_sqrt2_pos
 
 /-- U_tail = C_geom · √K_tail ≈ 0.134: Tail upper bound. -/
 def U_tail : ℝ := C_geom * Real.sqrt K_tail
 
 /-! ## Key Inequality (PROVEN) -/
 
+/-- √0.05 < 0.224 (since 0.05 < 0.224² = 0.050176). -/
+lemma sqrt_005_lt : Real.sqrt 0.05 < (0.224 : ℝ) := by
+  have h : (0.05 : ℝ) < 0.224^2 := by norm_num
+  have h0 : (0 : ℝ) ≤ 0.05 := by norm_num
+  rw [← Real.sqrt_sq (by norm_num : (0:ℝ) ≤ 0.224)]
+  exact Real.sqrt_lt_sqrt h0 h
+
 /-- The crucial closure inequality: U_tail < L_rec.
-    This is PROVEN, not assumed. -/
+    This is PROVEN, not assumed.
+
+    With C_geom = 1/√2:
+    - U_tail = (1/√2) · √0.05 = √(0.05/2) = √0.025 ≈ 0.158
+    - L_rec = arctan(2)/2 ≈ 0.553
+    - So L_rec > U_tail: 0.553 > 0.158 ✓ -/
 theorem zero_free_condition : U_tail < L_rec := by
   unfold U_tail L_rec C_geom K_tail
-  -- U_tail = 0.6 * √0.05 ≈ 0.134
-  -- L_rec = arctan(2)/2 ≈ 0.553
-  have h1 : Real.sqrt 0.05 < 0.224 := by
-    rw [Real.sqrt_lt' (by norm_num : (0 : ℝ) < 0.224)]
-    norm_num
-  have h2 : (0.6 : ℝ) * 0.224 < 0.135 := by norm_num
-  have h3 : U_tail < 0.135 := by
-    unfold U_tail C_geom K_tail
-    calc 0.6 * Real.sqrt 0.05 < 0.6 * 0.224 := by nlinarith
-      _ < 0.135 := h2
-  have h4 : (0.5 : ℝ) < Real.arctan 2 := Real.arctan_two_gt_half
-  have h5 : (0.5 : ℝ) / 2 < L_rec := by
-    unfold L_rec
-    linarith
+  -- U_tail = (1/√2) * √0.05 = √0.05/√2 < 0.224/1.41 < 0.16
+  -- L_rec = arctan(2)/2 > 0.25
+  have h_sqrt2_pos : (0 : ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
+  have h_sqrt2_lower := sqrt_two_gt_1_41
+  have h_sqrt005 := sqrt_005_lt
+  -- (1/√2) * √0.05 = √0.05/√2 < 0.224/1.41 < 0.16
+  have h_utail_bound : (1 / Real.sqrt 2) * Real.sqrt 0.05 < 0.16 := by
+    -- √0.05/√2 < 0.224/√2 < 0.224/1.41 < 0.16
+    have h_div : Real.sqrt 0.05 / Real.sqrt 2 < 0.224 / Real.sqrt 2 := by
+      apply div_lt_div_of_pos_right h_sqrt005 h_sqrt2_pos
+    have h_denom : 0.224 / Real.sqrt 2 < 0.224 / 1.41 := by
+      apply div_lt_div_of_pos_left (by norm_num) (by norm_num) h_sqrt2_lower
+    have h2 : (0.224 : ℝ) / 1.41 < 0.16 := by norm_num
+    calc (1 / Real.sqrt 2) * Real.sqrt 0.05
+        = Real.sqrt 0.05 / Real.sqrt 2 := by ring
+      _ < 0.224 / Real.sqrt 2 := h_div
+      _ < 0.224 / 1.41 := h_denom
+      _ < 0.16 := h2
+  have h_arctan : (0.5 : ℝ) < Real.arctan 2 := Real.arctan_two_gt_half
+  have h_lrec_bound : (0.25 : ℝ) < Real.arctan 2 / 2 := by linarith
   linarith
 
 end RiemannRecognitionGeometry

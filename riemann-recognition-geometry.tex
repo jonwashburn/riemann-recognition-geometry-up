@@ -114,9 +114,9 @@ $L$ & Half-width of a Whitney interval \\
 $\lambda_{\text{rec}}$ & Inner band parameter: $\lambda_{\text{rec}} = 1/3$ \\
 $\Lambda_{\text{rec}}$ & Outer band parameter: $\Lambda_{\text{rec}} = 3/2$ \\
 $\Lrec$ & Trigger lower bound: $\Lrec = \arctan(2)/2 \approx 0.553$ \\
-$\Ktail$ & BMO-Carleson constant: $\Ktail = 0.05$ \\
-$\Cgeom$ & Geometric constant: $\Cgeom = 0.6$ \\
-$\Utail$ & Tail upper bound: $\Utail = \Cgeom \cdot \sqrt{\Ktail} \approx 0.134$ \\
+$\Ktail$ & BMO-Carleson constant (target value $0.05$ under QTH) \\
+$\Cgeom$ & Geometric constant (target value $0.6$ under QTH) \\
+$\Utail$ & Tail upper bound: $\Utail = \Cgeom \cdot \sqrt{\Ktail} \approx 0.134$ (target) \\
 \hline
 \end{tabular}
 \end{center}
@@ -179,6 +179,20 @@ L_{\mathrm{rec}} > 2\, C_{\mathrm{geom}}\,\sqrt{K_{\mathrm{tail}}}
 \]
 then all non-trivial zeros of the Riemann zeta function lie on the critical line. That is, if $\zeta(\rho) = 0$ and $0 < \Ree(\rho) < 1$, then $\Ree(\rho) = 1/2$.
 \end{theorem}
+
+\subsection{Analytic Assumptions and the Quantitative Tail Hypothesis}
+\label{subsec:analytic-assumptions}
+
+For clarity we spell out the classical inputs on which Theorem~\ref{thm:main} rests.
+\begin{enumerate}[label=(A\arabic*)]
+\item \textbf{Functional equation and analytic continuation.} The properties of $\xi$ recalled in Section~\ref{sec:background}, including the symmetry $\xi(s)=\xi(1-s)$ and the Euler product region $\Ree(s)>1$.
+\item \textbf{Zero-free region on $(0,1)$.} Proposition~\ref{prop:zeta-negative-0-1} and Theorem~\ref{thm:no-real-zeros-input}, obtained via the Dirichlet $\eta$ function.
+\item \textbf{Polynomial growth/decay of $\xi$.} Proposition~\ref{prop:xi-growth}, derived from Stirling's formula and Hadamard factorization, with explicit constants.
+\item \textbf{BMO regularity of $\log|\xi|$.} Theorem~\ref{thm:bmo-log-xi-input} applied to the regularized logarithm of $\xi$ on the critical line.
+\item \textbf{Fefferman--Stein BMO$\to$Carleson embedding.} Theorem~\ref{thm:fefferman-stein-input} with a concrete absolute constant $C_{\mathrm{FS}}$.
+\item \textbf{Quantitative Tail Hypothesis (QTH).} There exist explicit constants $C_{\mathrm{geom}}>0$ and $K_{\mathrm{tail}}>0$ satisfying the hypotheses above. Numerically we target $C_{\mathrm{geom}} \le 0.6$ and $K_{\mathrm{tail}} \le 0.05$, which yield $L_{\mathrm{rec}} > 2 C_{\mathrm{geom}} \sqrt{K_{\mathrm{tail}}}$.
+\end{enumerate}
+Items (A1)--(A5) are standard classical theorems; the reduction presented here shows that (A6) is the remaining quantitative inequality needed to deduce RH. Throughout the paper we therefore work \emph{conditionally on QTH}. Once explicit constants verifying (A6) are supplied, every other step is unconditional, and the argument yields a complete proof.
 
 \subsection{The Recognition Geometry Approach}
 
@@ -4323,6 +4337,7 @@ Fefferman--Stein & \cite{FeffermanStein1972}, Thm.~3 & Axiom \\
 BMO of $\log|\xi|$ & \cite{Titchmarsh1986}, Ch.~5,9 & Axiom \\
 Blaschke phase & Elementary (Appendix~\ref{app:arctan}) & Proven \\
 $\zeta(s) < 0$ on $(0,1)$ & \cite{Apostol1976}, Ch.~12 & Axiom \\
+\textbf{Quantitative Tail Hypothesis} & Section~\ref{sec:key-inequality} & Pending explicit constants \\
 \hline
 \end{tabular}
 \end{center}

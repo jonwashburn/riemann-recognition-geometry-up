@@ -1933,17 +1933,32 @@ theorem zero_free_with_interval (ρ : ℂ) (I : WhitneyInterval)
   have h_carleson := totalPhaseSignal_bound I h_osc
 
   -- Key numerical inequality: L_rec > 2 * U_tail
+  -- With C_geom = 1/√2: U_tail = (1/√2)·√0.05 = √0.025 ≈ 0.158
+  -- L_rec ≈ 0.553, so 2*U_tail ≈ 0.316 < 0.553
   have h_l_rec_large : L_rec > 2 * U_tail := by
     unfold L_rec U_tail C_geom K_tail
     have h_arctan : Real.arctan 2 > 1.1 := Real.arctan_two_gt_one_point_one
-    have h_sqrt : Real.sqrt 0.05 < 0.23 := by
-      rw [Real.sqrt_lt' (by norm_num : (0:ℝ) < 0.23)]
-      norm_num
+    have h_sqrt2_pos : (0 : ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
+    have h_sqrt2_lower := sqrt_two_gt_1_41
+    have h_sqrt2_upper := sqrt_two_lt_1_42
+    have h_sqrt005 := sqrt_005_lt
+    -- 2 * U_tail = 2 * (1/√2) * √0.05 = √2 * √0.05 < 1.42 * 0.224 < 0.32
+    have h_bound : 2 * ((1 / Real.sqrt 2) * Real.sqrt 0.05) < 0.32 := by
+      have h1 : 2 * (1 / Real.sqrt 2) = Real.sqrt 2 := by
+        field_simp
+        rw [mul_comm, ← Real.sqrt_sq (by norm_num : (0:ℝ) ≤ 2)]
+        ring_nf
+        rw [Real.sqrt_sq (by norm_num : (0:ℝ) ≤ 2)]
+      calc 2 * ((1 / Real.sqrt 2) * Real.sqrt 0.05)
+          = (2 * (1 / Real.sqrt 2)) * Real.sqrt 0.05 := by ring
+        _ = Real.sqrt 2 * Real.sqrt 0.05 := by rw [h1]
+        _ < 1.42 * 0.224 := by nlinarith
+        _ < 0.32 := by norm_num
     calc Real.arctan 2 / 2
         > 1.1 / 2 := by linarith
       _ = 0.55 := by norm_num
-      _ > 2 * (0.6 * 0.23) := by norm_num
-      _ > 2 * (0.6 * Real.sqrt 0.05) := by nlinarith
+      _ > 0.32 := by norm_num
+      _ > 2 * ((1 / Real.sqrt 2) * Real.sqrt 0.05) := h_bound
 
   -- Derive contradiction:
   -- h_dominance: |totalPhaseSignal I| ≥ L_rec - U_tail
