@@ -502,4 +502,46 @@ lemma K_tail_from_renormalized : C_FS * C_tail^2 < (L_rec / (2 * C_geom))^2 := b
     _ < (1.1 * 1.41 / 4)^2 := by norm_num
     _ < (Real.arctan 2 * Real.sqrt 2 / 4)^2 := h_ratio_sq
 
+/-- **MAIN QUANTITATIVE THEOREM**: The key numerical inequality for the proof.
+
+    This theorem establishes that L_rec - U_tail > 0, which is the central
+    quantitative requirement for proving the Riemann Hypothesis via Recognition Geometry.
+
+    **Interpretation**:
+    - L_rec ≈ 0.553 is the minimum phase signal from any off-critical zero
+    - U_tail ≈ 0.158 is the maximum background phase oscillation
+    - L_rec > U_tail means any off-critical zero would be detectable
+
+    **Constants used**:
+    - L_rec = arctan(2)/2 ≈ 0.553 (from pigeonhole/3-window argument)
+    - U_tail = C_geom · √K_tail = (1/√2) · √0.05 ≈ 0.158
+    - C_geom = 1/√2 (from Green-Cauchy-Schwarz)
+    - K_tail = 0.05 (conservative Carleson embedding)
+
+    **Proof**: By `zero_free_condition`, we have U_tail < L_rec, i.e., L_rec - U_tail > 0. -/
+theorem main_quantitative_threshold : L_rec - U_tail > 0 := by
+  have h := zero_free_condition
+  linarith
+
+/-- The gap L_rec - U_tail is at least 0.39.
+
+    This provides explicit numerical margin:
+    L_rec - U_tail > 0.553 - 0.158 = 0.395 > 0.39 -/
+lemma quantitative_gap : L_rec - U_tail > 0.39 := by
+  have h_utail : U_tail < 0.16 := by
+    unfold U_tail C_geom K_tail
+    have h_sqrt2_pos : (0 : ℝ) < Real.sqrt 2 := Real.sqrt_pos.mpr (by norm_num)
+    have h_sqrt2_lower := sqrt_two_gt_1_41
+    have h_sqrt005 := sqrt_005_lt
+    calc (1 / Real.sqrt 2) * Real.sqrt 0.05
+        = Real.sqrt 0.05 / Real.sqrt 2 := by ring
+      _ < 0.224 / Real.sqrt 2 := by apply div_lt_div_of_pos_right h_sqrt005 h_sqrt2_pos
+      _ < 0.224 / 1.41 := by apply div_lt_div_of_pos_left (by norm_num) (by norm_num) h_sqrt2_lower
+      _ < 0.16 := by norm_num
+  have h_lrec : L_rec > 0.55 := by
+    unfold L_rec
+    have h_arctan : Real.arctan 2 > 1.1 := Real.arctan_two_gt_one_point_one
+    linarith
+  linarith
+
 end RiemannRecognitionGeometry
