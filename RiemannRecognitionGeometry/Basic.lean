@@ -163,23 +163,52 @@ def C_Gamma : ℝ := 1
     **Statement**: For f ∈ BMO(ℝ), the Poisson extension satisfies
     sup_I (1/|I|) ∫∫_{Q(I)} |∇Pf|² σ dσ dx ≤ C_FS · ∥f∥²_BMO
 
-    **Provenance of constants** (refined audit):
-    - John-Nirenberg: C₁ ≈ 2, C₂ ≈ 1 (dyadic CZ proof)
-    - Cone aperture factor: ~2
-    - Kernel L² factor: ~π
-    - Combined: C_FS = 10 (audited; in the 8-12 range) -/
+    **FULL DERIVATION** (from Riemann-geometry-formalization-4.txt):
+
+    Split f = f_I + g + h with g = (f-f_I)·1_I, h = (f-f_I)·1_{I^c}.
+
+    **Local piece** (energy identity):
+    - For Poisson kernel P(x,σ) = (1/π)·σ/(x²+σ²):
+      ∫∫_{ℝ²₊} |∇(P*g)|² σ = (1/2) ∥g∥₂²
+    - John-Nirenberg with C₁=2, C₂=1 gives: ⟨|f-f_I|²⟩_I ≤ 4∥f∥²_BMO
+    - Hence: (2/|I|) ∫∫_{Q(I)} |∇(P*g)|² σ ≤ 4∥f∥²_BMO
+
+    **Tail piece** (annuli decomposition):
+    - Decompose on rings I_k = 2^{k+1}I ∖ 2^k I into mean-zero + constant
+    - Mean-zero (cancellation): geometric decay 4^{-k}, sums to ≤ 2∥f∥²_BMO
+    - Constant (telescoping averages): contributes ≤ (8/π²)∥f∥²_BMO
+    - Combined tail: ≤ 6∥f∥²_BMO after (2/|I|) prefactor
+
+    **Total**: C_FS = 4 + 6 = 10
+
+    **Reference**: Riemann-geometry-formalization-4.txt, Section "Fefferman-Stein
+    constant with numerics" -/
 def C_FS : ℝ := 10
 
 /-- C_tail: Localized BMO norm of the renormalized tail.
 
-    **Definition**: For each Whitney interval I, define
+    **Definition**: For each Whitney interval I = [t₀-L, t₀+L], define
     f_tail^I(t) := log|ξ(1/2+it)| - (1/2)∑_{ρ∈B(I,K)} log((t-γ_ρ)² + σ_ρ²)
-    where B(I,K) collects zeros in K dyadic annuli above I.
+    where B(I,K) = A₀ ∪ ⋯ ∪ A_K collects zeros in K dyadic annuli above I.
 
-    **Derivation**:
-    - Near-zero spikes are removed by subtracting Blaschke factors
-    - Each annulus contributes O(2^{-j}) by Poisson decay
-    - With K=3-4 annuli: C_tail ≈ 0.10-0.12 -/
+    **Annulus structure** (K = 3):
+    - A₀: σ ∈ [0.75L, 1.5L], |γ-t₀| ≤ L
+    - A_j: σ ∈ (1.5·2^j L, 1.5·2^{j+1}L], |γ-t₀| ≤ 2^{j+1}L (j = 1,...,K)
+
+    **FULL DERIVATION** (from Riemann-geometry-formalization-4.txt):
+
+    **Vertical tail** (j ≥ K+1 = 4):
+    - Per-point Poisson mass: ∫_I P ≤ (2/π)·arctan(L/σ) ≤ (4/(3π))·2^{-j}
+    - Sum: ∑_{j≥4} (4/(3π))·2^{-j} = (4/(3π))·(1/8) = 1/(6π) ≈ 0.053
+
+    **Horizontal tail** (|γ-t₀| ≥ 16L):
+    - ∫_I P(t-γ,σ) dt ≤ (2/π)·arctan(L/Δ) ≤ (2/π)·2^{-m} for Δ ∈ [2^m L, 2^{m+1}L]
+    - Sum: (2/π)·(1/8) = 1/(4π) ≈ 0.080
+
+    **Combined tail**: 0.053 + 0.080 = 0.133
+    **With 1/2 factor**: ∥f_tail^I∥_BMO(I) ≤ (1/2)·0.133 = 0.0663 < 0.11
+
+    **Reference**: Riemann-geometry-formalization-4.txt, "Localized renormalized tail" -/
 def C_tail : ℝ := 0.11
 
 /-- K_tail_computed: The formula-based value K_tail = C_FS · C_tail².
