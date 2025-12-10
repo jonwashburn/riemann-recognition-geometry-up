@@ -3386,17 +3386,15 @@ These alternatives might offer different trade-offs between signal and noise bou
 
 \begin{center}
 \renewcommand{\arraystretch}{1.3}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|c|}
 \hline
-\textbf{Parameter} & \textbf{Current} & \textbf{Threshold} & \textbf{Safety Factor} \\
+\textbf{Quantity} & \textbf{Condition for success} \\
 \hline
-$\Ktail$ & 0.05 & $< 0.85$ & $17\times$ \\
+$\Ktail$ & $\Ktail < (\Lrec/(2\Cgeom))^2$ \\
 \hline
-$\Cgeom$ & 0.6 & $< 2.47$ & $4\times$ \\
+$\Cgeom$ & $\Cgeom < \Lrec/\sqrt{\Ktail}$ \\
 \hline
-$\Lrec$ & 0.553 & $> 0.134$ & $4\times$ \\
-\hline
-$R = \Lrec/\Utail$ & 4.1 & $> 1$ & $4\times$ \\
+$R = \Lrec/\Utail$ & $R > 1$ (preferably $R \gg 1$) \\
 \hline
 \end{tabular}
 \end{center}
