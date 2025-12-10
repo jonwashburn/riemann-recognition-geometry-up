@@ -2977,22 +2977,35 @@ def inLocalAnnuli (L t0 : ℝ) (K : ℕ) (σ γ : ℝ) : Prop :=
   (σ ≤ 1.5 * (2 : ℝ)^K * L) ∧
   (|γ - t0| ≤ (2 : ℝ)^(K+1) * L)
 
-/-- The annulus decay bound: contribution from annulus j is O(2^{-j}).
+/-- Annulus decay bound: (2/π) · arctan((1/2)^j / 1.5) < (1/2)^j for j ≥ 1.
 
-    **Statement**: For t ∈ I and ρ ∈ Aⱼ with j ≥ 1:
+    **Context**: For t ∈ I and ρ ∈ Aⱼ with j ≥ 1:
     ∫_I (1/π) · σ / ((t-γ)² + σ²) dt ≤ (2/π) · arctan(L/σ) ≤ C · 2^{-j}
 
     **Proof outline**:
-    1. σ > 1.5 · 2^j · L, so L/σ < 2^{-j} / 1.5
-    2. arctan(x) ≤ x for x ≥ 0
-    3. 2/π < 1
-    4. Combined: (2/π) · arctan(L/σ) < (2/π) · (L/σ) < L/σ < 2^{-j} -/
+    Let x = (1/2)^j / 1.5. For j ≥ 1, we have x ≤ 1/3.
+
+    The key chain of inequalities:
+    1. arctan(x) < x for x > 0 (classical: f(x) = x - arctan(x) has f(0)=0, f'(x) > 0)
+    2. (2/π) · arctan(x) < (2/π) · x (multiply by 2/π > 0)
+    3. (2/π) · x < x (since 2/π ≈ 0.637 < 1)
+    4. x = (1/2)^j / 1.5 < (1/2)^j (since 1/1.5 < 1)
+
+    Combined: (2/π) · arctan((1/2)^j / 1.5) < (2/π) · ((1/2)^j / 1.5) < (1/2)^j / 1.5 < (1/2)^j
+
+    **Numerical verification**:
+    - For j = 1: (2/π)·arctan(1/3) ≈ 0.637 × 0.322 ≈ 0.205 < 0.5 = (1/2)^1 ✓
+    - For j = 2: (2/π)·arctan(1/6) ≈ 0.637 × 0.165 ≈ 0.105 < 0.25 = (1/2)^2 ✓
+    - For j ≥ 3: The bound gets even better as x decreases
+
+    **Mathlib note**: The key inequality arctan(x) ≤ x for x ≥ 0 is classical but requires
+    derivation from tan properties. Taylor series: arctan(x) = x - x³/3 + x⁵/5 - ... < x. -/
 lemma annulus_decay_bound (j : ℕ) (_hj : j ≥ 1) :
     (2 / Real.pi) * Real.arctan ((1/2 : ℝ)^j / 1.5) < (1/2 : ℝ)^j := by
-  -- arctan(x) ≤ x for x ≥ 0, and 2/π < 1
-  -- So (2/π) · arctan(x) < x for x > 0
-  -- With x = (1/2)^j / 1.5 < (1/2)^j, we get the bound
-  sorry  -- Numerical bound
+  -- The proof requires arctan(x) ≤ x for x ≥ 0 (classical Taylor bound).
+  -- Full Mathlib proof would need to derive this from tan properties.
+  -- The numerical verification is provided in the docstring above.
+  sorry
 
 /-- Geometric series bound for far-field contribution.
 

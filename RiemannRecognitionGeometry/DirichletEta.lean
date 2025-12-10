@@ -722,27 +722,59 @@ lemma riemannZeta_im_eq_zero_of_one_lt (s : ℝ) (hs : 1 < s) :
 
 /-- The limit of (1 - 2^{1-s}) * ζ(s) as s → 1 equals log(2).
 
-    Proof: Using riemannZeta_residue_one: (s-1)ζ(s) → 1 as s → 1.
-    Since 1 - 2^{1-s} = log(2)(s-1) + O((s-1)²), the product → log(2). -/
+    **Proof outline**:
+    1. From `riemannZeta_residue_one` in Mathlib: (s-1)·ζ(s) → 1 as s → 1
+    2. Taylor expansion: 1 - 2^{1-s} = 1 - e^{(1-s)·log(2)} = log(2)·(s-1) + O((s-1)²)
+    3. Therefore: (1 - 2^{1-s})/(s-1) → log(2) as s → 1
+    4. Product: (1 - 2^{1-s})·ζ(s) = [(1 - 2^{1-s})/(s-1)] · [(s-1)·ζ(s)] → log(2)·1
+
+    **Mathlib requirements**:
+    - `Tendsto.mul` for product of limits
+    - Taylor expansion of exponential near 0
+    - `riemannZeta_residue_one` (available in Mathlib)
+
+    **Reference**: Edwards, "Riemann's Zeta Function", Ch. 1; Titchmarsh §2.1 -/
 lemma tendsto_factor_mul_zeta_at_one :
     Filter.Tendsto (fun s : ℝ => (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re)
       (nhdsWithin 1 {s | s ≠ 1}) (nhds (Real.log 2)) := by
-  -- This follows from riemannZeta_residue_one and the Taylor expansion of 1 - 2^{1-s}
-  -- (s-1) * ζ(s) → 1 as s → 1, and (1 - 2^{1-s})/(s-1) → log(2)
-  -- So (1 - 2^{1-s}) * ζ(s) = [(1 - 2^{1-s})/(s-1)] * [(s-1) * ζ(s)] → log(2) * 1
+  -- Full proof requires connecting riemannZeta_residue_one with Taylor expansion
+  -- of 2^{1-s} = exp((1-s) log 2). Currently deferred.
   sorry
 
-/-- η(1) = log(2), the alternating harmonic series. -/
+/-- η(1) = log(2), the alternating harmonic series.
+
+    **Statement**: η(1) = 1 - 1/2 + 1/3 - 1/4 + ... = log(2)
+
+    **Proof outline**:
+    This is the Mercator series (1668), also called the alternating harmonic series.
+    The proof uses the Taylor expansion of log(1+x) at x=1:
+    log(2) = log(1+1) = 1 - 1/2 + 1/3 - 1/4 + ...
+
+    This can be proven via:
+    1. The alternating series test shows convergence
+    2. Abel's theorem connects the series to log(1+x) evaluated at x=1
+    3. Integration: ∫₀¹ 1/(1+x) dx = log(2), expand 1/(1+x) as geometric series
+
+    **Reference**: Mercator (1668); Hardy, "A Course of Pure Mathematics" §8.4 -/
 lemma dirichletEtaReal_one : dirichletEtaReal 1 = Real.log 2 := by
-  -- η(1) = 1 - 1/2 + 1/3 - 1/4 + ... = log(2)
-  -- This is a classical result (Mercator series)
+  -- Classical result requiring alternating series theory and Abel's theorem
   sorry
 
-/-- η(s) is continuous at s = 1 from the left.
-    Proof: Alternating series with continuous terms and uniform convergence. -/
+/-- η(s) is continuous on ℝ.
+
+    **Proof outline**:
+    For s > 0, η(s) = ∑_{n=1}^∞ (-1)^{n-1}/n^s is an alternating Dirichlet series.
+
+    1. Each term f_n(s) = (-1)^{n-1}/n^s is continuous in s
+    2. The partial sums converge uniformly on compact subsets of (0, ∞)
+       - For s in [a, b] with a > 0, use the alternating series remainder bound
+       - |∑_{n>N} (-1)^{n-1}/n^s| ≤ 1/(N+1)^a → 0 uniformly as N → ∞
+    3. Uniform limit of continuous functions is continuous
+
+    **Reference**: Apostol, "Introduction to Analytic Number Theory", Ch. 11;
+                   Titchmarsh, "Theory of the Riemann Zeta-Function", §2.1 -/
 lemma continuous_dirichletEtaReal : Continuous dirichletEtaReal := by
-  -- The alternating series sum is continuous in s for s > 0
-  -- This requires showing the partial sums converge uniformly on compact subsets
+  -- Requires uniform convergence theory for Dirichlet series
   sorry
 
 /-- **IDENTITY PRINCIPLE (Specialized)**:
