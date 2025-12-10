@@ -640,8 +640,14 @@ lemma JN_constants_refined_better :
   unfold JN_C1_refined JN_C1 JN_C2_refined JN_C2
   constructor
   · -- 2 < e ≈ 2.718
-    -- exp(1) > 2 is a classical numerical bound
-    sorry
+    -- exp(1) > 2 follows from: 1 + 1 + 1/2 + 1/6 + ... > 2
+    -- Or: exp(0.7) > 2.01 and 0.7 < 1, so exp(1) > exp(0.7) > 2
+    have h1 : Real.exp 0 = 1 := Real.exp_zero
+    have h2 : Real.exp 1 > Real.exp 0 + 1 := by
+      -- exp(x) > 1 + x for x > 0
+      have h_convex := Real.add_one_lt_exp (by norm_num : (1:ℝ) ≠ 0)
+      linarith [h1]
+    linarith [h1]
   · -- 1 > 1/(2e) ≈ 0.184
     have h_e_pos : 0 < Real.exp 1 := Real.exp_pos 1
     have he : Real.exp 1 > 1 := Real.one_lt_exp_iff.mpr (by norm_num : (0:ℝ) < 1)
