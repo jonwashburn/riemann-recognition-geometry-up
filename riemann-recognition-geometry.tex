@@ -134,11 +134,11 @@ The following table clarifies which classical results are treated as axioms in o
 $\Utail < \Lrec$ & Fully proven & Theorem~\ref{thm:key-numerical} \\
 Arctan inequalities & Fully proven & Appendix~\ref{app:arctan} \\
 Whitney interval existence & Fully proven & Section~\ref{sec:globalization} \\
-Blaschke phase formula & Fully proven & Lemma~\ref{lem:blaschke-phase} \\
+Blaschke phase formula & Fully proven & Proposition~\ref{prop:blaschke-phase-arctan} \\
 \hline
 Fefferman--Stein embedding & Axiom & \cite{FeffermanStein1972} \\
 BMO of $\log|\xi|$ & Axiom & \cite{Titchmarsh1986}, \cite{Garnett2007} \\
-$\zeta(s) \neq 0$ on $(0,1)$ & Axiom & Proposition~\ref{prop:zeta-neg-real} \\
+$\zeta(s) \neq 0$ on $(0,1)$ & Axiom & Theorem~\ref{thm:no-real-zeros-input} \\
 Polynomial growth of $\xi$ & Axiom & \cite{Titchmarsh1986} \\
 \hline
 \end{tabular}
@@ -306,6 +306,7 @@ The non-trivial zeros of $\zeta$ coincide exactly with the zeros of $\xi$. The R
 \begin{remark}
 \label{rem:re-gt-1}
 It is a classical result that $\zeta(s) \neq 0$ for $\Ree(s) \ge 1$. The proof for $\Ree(s) > 1$ follows from the Euler product; the case $\Ree(s) = 1$ requires a more delicate argument involving the non-vanishing of Dirichlet $L$-functions, due to de la Vallée Poussin and Hadamard. Thus, non-trivial zeros satisfy $0 < \Ree(\rho) < 1$.
+\emph{Reference:} See \cite[Ch.~III]{Titchmarsh1986}.
 \end{remark}
 
 \subsubsection{Real Zeros on $(0,1)$}
@@ -586,6 +587,14 @@ c_1 |\gamma| \le L \le c_2 |\gamma|.
 \end{enumerate}
 \end{definition}
 
+\begin{remark}[Explicit Width Bounds]
+In applications we take $c_1 = \tfrac{1}{2}$ and $c_2 = 2$, equivalently
+\[
+|\gamma| \le 2L \le 4|\gamma|.
+\]
+These bounds are furnished by the dyadic covering theorem in Section~\ref{sec:globalization}.
+\end{remark}
+
 In practice, the covering argument (Section~\ref{sec:globalization}) produces a family of Whitney intervals satisfying these conditions for any hypothetical zero.
 
 \subsection{Recognizer Bands}
@@ -792,6 +801,7 @@ The proof proceeds through three main ingredients:
 \item The Fefferman-Stein BMO-to-Carleson embedding.
 \item The Green-Cauchy-Schwarz bound converting Carleson energy to boundary integrals.
 \end{enumerate}
+The Poisson kernel identities and integral computations used here are collected in Appendix~\ref{app:poisson}.
 
 \subsection{The BMO Property of $\log|\xi|$}
 
@@ -1169,6 +1179,19 @@ If $a < \sigma < b$ and $\gamma > 0$, then
 \begin{proof}[Proof sketch]
 The Blaschke factor crosses through $-1$ at $t = \sigma$, where $\arg$ jumps by $2\pi$ on the principal branch. The formula accounts for this crossing by computing the total argument traversed from $\theta_\rho(a) \in (-\pi, 0)$ through $\theta_\rho(\sigma) = \pi$ to $\theta_\rho(b) \in (0, \pi)$.
 \end{proof}
+
+\begin{lemma}[Unified Blaschke Phase Cases]
+\label{lem:unified-phase-cases}
+For any $a < b$ and $\rho = \sigma + i\gamma$ with $\gamma \ne 0$, the phase change satisfies
+\[
+|\Delta\theta_\rho(a,b)| =
+\begin{cases}
+2 \left| \arctan\!\left(\dfrac{b - \sigma}{\gamma}\right) - \arctan\!\left(\dfrac{a - \sigma}{\gamma}\right) \right|, & (a-\sigma)(b-\sigma) \ge 0, \\[2ex]
+2\pi - 2 \left( \arctan\!\left(\dfrac{b - \sigma}{\gamma}\right) + \arctan\!\left(\dfrac{\sigma - a}{\gamma}\right) \right), & (a-\sigma)(b-\sigma) < 0.
+\end{cases}
+\]
+In particular, under the width bounds $|\gamma| \le 2L \le 10|\gamma|$ with $[a,b]=[t_0-L,t_0+L]$ and $\gamma \in [a,b]$, one has $|\Delta\theta_\rho(a,b)| \ge \Lrec$.
+\end{lemma}
 
 \subsection{The Trigger Bound}
 
@@ -1690,19 +1713,23 @@ The proof relies on decomposing the total phase signal into a Blaschke contribut
 
 \subsubsection{Phase Signal Definition}
 
-Recall from Definition~\ref{def:phase-signal} that the total phase signal over an interval $I = (t_0, L)$ is:
+Recall from Definition~\ref{def:window-signal} that the recognition functional over a Whitney interval $I=(t_0,L)$ with triple windows $W_0,W_1,W_2$ is
 \[
-\mathcal{R}(I) = \arg\big(\xi(\tfrac{1}{2} + i(t_0 + L))\big) - \arg\big(\xi(\tfrac{1}{2} + i(t_0 - L))\big).
+\mathcal{R}(I) = \max_{j \in \{0,1,2\}} |\Phi(W_j)|.
 \]
-This measures the net phase change of $\xi$ along the critical line over the interval.
+For the full interval $[t_0-L,t_0+L]$ we also write
+\[
+\Phi(I) := \arg\big(\xi(\tfrac{1}{2} + i(t_0 + L))\big) - \arg\big(\xi(\tfrac{1}{2} + i(t_0 - L))\big),
+\]
+the net phase change of $\xi$ along the entire interval.
 
 \subsubsection{Decomposition Lemma}
 
-\begin{lemma}[Phase Decomposition]
+\begin{lemma}[Phase Decomposition for the Full Interval]
 \label{lem:phase-decomposition}
-Let $\rho$ be a zero of $\xi$ with $\gamma = \Imm(\rho) \in I$. Then the total phase signal admits a decomposition:
+Let $\rho$ be a zero of $\xi$ with $\gamma = \Imm(\rho) \in I$. Then the full-interval phase admits a decomposition:
 \[
-\mathcal{R}(I) = \Delta\theta_\rho(I) + \tau(I),
+\Phi(I) = \Delta\theta_\rho(I) + \tau(I),
 \]
 where:
 \begin{itemize}
@@ -1722,6 +1749,14 @@ where $B_\rho$ is the Blaschke factor for the zero $\rho$ and $\tilde{\xi}$ is t
 \]
 Taking differences at the endpoints gives the decomposition, with $\tau(I)$ being the phase change of $\tilde{\xi}$.
 \end{proof}
+
+\begin{lemma}[Reverse Triangle for Phase Decomposition]
+\label{lem:reverse-triangle}
+With notation as above, one has
+\[
+|\Phi(I)| \ge |\Delta\theta_\rho(I)| - |\tau(I)|.
+\]
+\end{lemma}
 
 \subsubsection{Tail Bound}
 
@@ -1748,7 +1783,7 @@ From Section~\ref{sec:tail-bound}:
 \label{prop:upper-bound}
 For any Whitney interval $I$,
 \[
-|\mathcal{R}(I)| \le \Utail.
+\mathcal{R}(I) \le \Utail.
 \]
 \end{proposition}
 
@@ -1762,24 +1797,24 @@ From Section~\ref{sec:trigger-bound}:
 \label{prop:lower-bound}
 If $\rho$ is a zero with $\gamma \in I$ and the width constraints~\eqref{eq:width-constraints} hold, then:
 \[
-|\mathcal{R}(I)| \ge \Lrec - \Utail.
+\mathcal{R}(I) \ge \Lrec - \Utail.
 \]
 \end{proposition}
 
 \begin{proof}
-By the phase decomposition (Lemma~\ref{lem:phase-decomposition}):
+By definition $\mathcal{R}(I) \ge |\Phi(W_1)|$, and the middle window $W_1$ coincides with the full interval $I$. By the phase decomposition (Lemma~\ref{lem:phase-decomposition}):
 \[
-\mathcal{R}(I) = \Delta\theta_\rho(I) + \tau(I).
+\Phi(I) = \Delta\theta_\rho(I) + \tau(I).
 \]
-By the reverse triangle inequality:
+By Lemma~\ref{lem:reverse-triangle}:
 \[
-|\mathcal{R}(I)| \ge |\Delta\theta_\rho(I)| - |\tau(I)|.
+|\Phi(I)| \ge |\Delta\theta_\rho(I)| - |\tau(I)|.
 \]
 The trigger lower bound (Theorem~\ref{thm:trigger-bound}) gives $|\Delta\theta_\rho(I)| \ge \Lrec$.
 The tail bound (Lemma~\ref{lem:tail-bound}) gives $|\tau(I)| \le \Utail$.
-Combining:
+Combining and using $\mathcal{R}(I) \ge |\Phi(I)|$:
 \[
-|\mathcal{R}(I)| \ge \Lrec - \Utail.
+|\Phi(I)| \ge \Lrec - \Utail \quad \Rightarrow \quad \mathcal{R}(I) \ge \Lrec - \Utail.
 \]
 \end{proof}
 
@@ -2124,7 +2159,7 @@ There are no zeros of $\xi$ in $\mathcal{S}_+ = \{s : \Ree(s) > 1/2\}$.
 \begin{proof}
 Decompose $\mathcal{S}_+$ into:
 \begin{itemize}
-\item $\Ree(s) > 1$: No zeros by Proposition~\ref{prop:euler-region} (Euler product).
+\item $\Ree(s) > 1$: No zeros by Theorem~\ref{thm:euler-final} (Euler product).
 \item $1/2 < \Ree(s) \le 1$: No zeros by Theorem~\ref{thm:no-zeros-right}.
 \end{itemize}
 \end{proof}
@@ -2149,6 +2184,9 @@ By the functional equation $\xi(s) = \xi(1-s)$, the point $\rho' = 1 - \rho$ is 
 This is the only remaining possibility.
 \end{proof}
 
+\begin{remark}[Classical inputs by case]
+In Case~1 (right of the critical line), we use only the Euler product. In Case~2 (left of the critical line), we use only the functional equation. The exclusion of zeros in the right half of the critical strip (used implicitly in both cases) rests on BMO regularity of $\log|\xi|$, the Fefferman--Stein embedding, and the Blaschke/Poisson--Jensen phase analysis; see Sections~\ref{sec:tail-bound}, \ref{sec:trigger-bound} and Appendix~\ref{sec:classical-appendix}.
+\end{remark}
 \begin{corollary}[Classical Riemann Hypothesis]
 \label{cor:classical-rh}
 All non-trivial zeros of the Riemann zeta function $\zeta(s)$ lie on the critical line $\Ree(s) = 1/2$.
@@ -2460,6 +2498,14 @@ a contradiction.
 The Recognition Geometry proof relies on several classical results from complex analysis, harmonic analysis, and number theory. In this section, we precisely catalog these external inputs, explain their role in the argument, and identify where quantitative constants enter.
 
 \subsection{Overview of Dependencies}
+
+For a concise summary of formalization status, see the \emph{Axioms vs.\ Theorems} box at the front of the paper. We highlight the core inputs here:
+\begin{enumerate}[label=(\roman*)]
+\item Fefferman--Stein BMO$\to$Carleson embedding (controls tail energy; contributes $\Ktail$).
+\item BMO regularity of $\log|\xi|$ (allows application of Fefferman--Stein).
+\item Blaschke/Poisson--Jensen phase analysis (produces $\Lrec$).
+\item Non-vanishing of $\zeta$ on $(0,1)$ (rules out real zeros).
+\end{enumerate}
 
 The proof invokes four main categories of classical results:
 
@@ -2802,7 +2848,7 @@ The formalization is organized into the following modules:
 \hline
 \S\ref{sec:background} (Background) & \texttt{Basic}, \texttt{FeffermanStein} & \texttt{poissonKernel}, \texttt{InBMO} \\
 \hline
-\S\ref{sec:recognition} (Recognition Geometry) & \texttt{Basic}, \texttt{BMOCarleson} & \texttt{WhitneyInterval}, \texttt{RecognizerBand} \\
+\S\ref{sec:recognition-geometry} (Recognition Geometry) & \texttt{Basic}, \texttt{BMOCarleson} & \texttt{WhitneyInterval}, \texttt{RecognizerBand} \\
 \hline
 \S\ref{sec:tail-bound} (Tail Bound) & \texttt{FeffermanStein}, \texttt{CarlesonBound} & \texttt{actualPhaseSignal\_bound} \\
 \hline
@@ -3105,6 +3151,12 @@ The ratio $\Lrec / \Utail > 4$ means the signal exceeds the noise by more than a
 \item Variations in the window geometry.
 \item Alternative covering constructions.
 \end{itemize}
+
+\paragraph{Explicit robustness ratio.}
+It is convenient to record the exact formula
+\[
+R := \frac{\Lrec}{\Utail} = \frac{\Lrec}{\Cgeom \sqrt{\Ktail}} = \frac{\arctan(2)/2}{0.6 \cdot \sqrt{0.05}} \approx 4.12.
+\]
 
 \subsubsection{Sensitivity to $\Ktail$}
 

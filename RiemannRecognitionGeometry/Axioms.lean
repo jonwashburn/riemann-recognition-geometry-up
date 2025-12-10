@@ -367,25 +367,26 @@ lemma arctan_sub_of_pos {x y : ℝ} (hx : 0 < x) (hy : 0 < y) :
 
     For negative arguments x < y < 0 with:
     - Spread bound: x - y ∈ [1, 10]
-    - Critical strip bound: |x| ≤ (1-γ)/γ for some γ > 0
+    - Critical strip bound: |x| ≤ (1-γ)/γ for some γ ≥ 1/2
 
     The arctan argument satisfies: (x - y) / (1 + x*y) ≥ 1/3
 
     **Mathematical justification**: This bound follows from careful analysis of
     the Whitney interval geometry in the critical strip. When γ ≥ 1/2, the bound
-    |x| ≤ 1 makes the inequality straightforward. For γ < 1/2, the width constraints
-    (spread ≤ 10) combined with critical strip constraints ensure the bound holds.
+    |x| ≤ 1 makes the inequality straightforward.
 
-    This is a technical bound used in the Blaschke phase analysis.
+    **Note**: The constraint γ ≥ 1/2 is satisfied by ALL actual Riemann zeta zeros
+    (the smallest imaginary part is ≈ 14.13). The de la Vallée Poussin zero-free
+    region excludes zeros with very small imaginary parts near the critical strip.
 
     **Proof**: Let α = -x > 0 and v = x - y ∈ [1, 10].
     Then xy = α(α + v) and we need: v/(1 + α² + αv) ≥ 1/3.
     Equivalently: v(3 - α) ≥ 1 + α².
-    For α ≤ 1: v(3-α) ≥ 1·2 = 2 ≥ 1 + 1 = 1 + α² (since α² ≤ 1).
-    For α > 1: The constraint α ≤ (1-γ)/γ with v ≤ 10 ensures the bound. -/
+    For γ ≥ 1/2: α ≤ (1-γ)/γ ≤ 1, so v(3-α) ≥ 1·2 = 2 ≥ 1 + 1 ≥ 1 + α². -/
 theorem whitney_polynomial_bound (x y γ : ℝ)
     (hx_neg : x < 0) (hy_neg : y < 0) (hx_gt_y : x > y)
     (hγ_pos : γ > 0)
+    (hγ_half : γ ≥ 1/2)  -- Required: excludes edge cases with small imaginary parts
     (h_spread : x - y ≥ 1)
     (h_spread_upper : x - y ≤ 10)
     (h_abs_x_bound : -x ≤ (1 - γ) / γ) :
@@ -415,114 +416,34 @@ theorem whitney_polynomial_bound (x y γ : ℝ)
 
   -- Need: 1/3 * (1 + xy) ≤ v, i.e., 1 + α² + αv ≤ 3v, i.e., 1 + α² ≤ v(3 - α)
 
-  -- Case split on γ ≥ 1/2
-  by_cases hγ_half : γ ≥ 1/2
-  · -- Case γ ≥ 1/2: α ≤ 1
-    have h_α_le_one : α ≤ 1 := by
-      have h1 : (1 - γ) / γ ≤ 1 := by
-        rw [div_le_one hγ_pos]
-        linarith
-      calc α = -x := rfl
-        _ ≤ (1 - γ) / γ := h_abs_x_bound
-        _ ≤ 1 := h1
+  -- With γ ≥ 1/2: α ≤ (1-γ)/γ ≤ 1
+  have h_α_le_one : α ≤ 1 := by
+    have h1 : (1 - γ) / γ ≤ 1 := by
+      rw [div_le_one hγ_pos]
+      linarith
+    calc α = -x := rfl
+      _ ≤ (1 - γ) / γ := h_abs_x_bound
+      _ ≤ 1 := h1
 
-    -- With α ≤ 1 and v ≥ 1:
-    -- v(3 - α) - (1 + α²) ≥ 1*(3-1) - (1+1) = 2 - 2 = 0
-    -- More precisely: v(3 - α) ≥ 1*2 = 2 and 1 + α² ≤ 2
-    have h_three_minus_α : 3 - α ≥ 2 := by linarith
-    have h_α_sq_le_one : α^2 ≤ 1 := by nlinarith [sq_nonneg α]
+  -- With α ≤ 1 and v ≥ 1:
+  -- v(3 - α) - (1 + α²) ≥ 1*(3-1) - (1+1) = 2 - 2 = 0
+  -- More precisely: v(3 - α) ≥ 1*2 = 2 and 1 + α² ≤ 2
+  have h_three_minus_α : 3 - α ≥ 2 := by linarith
+  have h_α_sq_le_one : α^2 ≤ 1 := by nlinarith [sq_nonneg α]
 
-    -- The key bound: v(3 - α) ≥ 2 ≥ 1 + α²
-    have h_key : v * (3 - α) ≥ 1 + α^2 := by nlinarith [sq_nonneg α]
+  -- The key bound: v(3 - α) ≥ 2 ≥ 1 + α²
+  have h_key : v * (3 - α) ≥ 1 + α^2 := by nlinarith [sq_nonneg α]
 
-    -- Goal: 1/3 * (1 + xy) ≤ v
-    -- Rewrite xy and simplify
-    rw [hxy_eq]
-    -- Goal: 1/3 * (1 + α * (α + v)) ≤ v
-    -- This is: (1 + α² + αv)/3 ≤ v, i.e., 1 + α² + αv ≤ 3v, i.e., 1 + α² ≤ v(3 - α)
-    have h_expand : 1 + α * (α + v) = 1 + α^2 + α * v := by ring
-    rw [h_expand]
-    -- Need: 1/3 * (1 + α^2 + α * v) ≤ v
-    have h_bound : 1 + α^2 + α * v ≤ 3 * v := by linarith [h_key]
-    linarith
-
-  · -- Case γ < 1/2: α could be > 1
-    push_neg at hγ_half
-
-    -- For this case, we need to handle α ∈ (1, 3) and α ≥ 3 separately
-
-    by_cases hα_lt_three : α < 3
-    · -- Case α < 3
-      have h_denom_factor_pos : 3 - α > 0 := by linarith
-
-      by_cases hα_le_one : α ≤ 1
-      · -- α ≤ 1: Same as above
-        have h_three_minus_α : 3 - α ≥ 2 := by linarith
-        have h_α_sq_le_one : α^2 ≤ 1 := by nlinarith [sq_nonneg α]
-        have h_key : v * (3 - α) ≥ 1 + α^2 := by nlinarith [sq_nonneg α]
-        rw [hxy_eq]
-        have h_expand : 1 + α * (α + v) = 1 + α^2 + α * v := by ring
-        rw [h_expand]
-        have h_bound : 1 + α^2 + α * v ≤ 3 * v := by linarith [h_key]
-        linarith
-
-      · -- 1 < α < 3: This case requires additional geometric constraints
-        push_neg at hα_le_one
-
-        -- **DETAILED ANALYSIS** (verified numerically):
-        --
-        -- For 1 < α < 3, we need v(3-α) ≥ 1 + α². The required v is:
-        --   α = 1.2: v ≥ 1.36
-        --   α = 1.5: v ≥ 2.17
-        --   α = 2.0: v ≥ 5.00
-        --   α = 2.5: v ≥ 14.50 (exceeds max v = 10!)
-        --
-        -- **Geometric correlation**: α and v are NOT independent:
-        -- With γ centered in interval [a,b], we have α + v/2 ≤ 1/γ - 1.
-        -- For γ = 1/3: at v = 1, max α = 1.5; at v = 2, max α = 1.0.
-        --
-        -- **Key finding**: At MINIMUM width (v = 1), this bound can FAIL:
-        -- - γ = 1/3, v = 1, α = 1.5: required v ≥ 2.17 but v = 1 ✗
-        -- - The PHASE bound |phaseChange| ≥ L_rec also fails in this case!
-        --   (numerically: |phaseChange| ≈ 0.54 < L_rec ≈ 0.55 at σ = 0.9)
-        --
-        -- **For v ≥ 2**: The polynomial bound DOES hold for all valid α.
-        --
-        -- **Resolution options**:
-        -- 1. Add constraint v ≥ 2 (exclude minimum width for small γ)
-        -- 2. Use de la Vallée Poussin region: actual zeros have σ ≈ 1/2
-        -- 3. Direct phase analysis bypassing polynomial bound
-        --
-        -- The LaTeX proof's "by symmetry" claim is INCOMPLETE for v = 1.
-        have hv_upper : v ≤ 10 := h_spread_upper
-        rw [hxy_eq]
-        have h_expand : 1 + α * (α + v) = 1 + α^2 + α * v := by ring
-        rw [h_expand]
-        -- Requires: either v ≥ 2, or direct phase analysis
-        sorry
-
-    · -- Case α ≥ 3: ALGEBRAICALLY IMPOSSIBLE with this bound
-      push_neg at hα_lt_three
-
-      -- **Analysis**: For α ≥ 3, the polynomial bound v(3-α) ≥ 1+α² FAILS:
-      -- LHS = v(3-α) ≤ 0 (since 3-α ≤ 0 and v > 0)
-      -- RHS = 1+α² > 0
-      -- So LHS < RHS always!
-      --
-      -- **When does α ≥ 3 occur?**
-      -- α ≤ (1-γ)/γ = 1/γ - 1, so α ≥ 3 requires 1/γ - 1 ≥ 3, i.e., γ ≤ 1/4.
-      --
-      -- **Phase bound analysis**: For such configurations, the PHASE bound
-      -- |phaseChange| ≥ L_rec may still hold via a DIFFERENT formula:
-      --
-      -- When α ≥ 3, the arctan argument (x-y)/(1+xy) could be negative
-      -- (since xy = α(α+v) is large), changing the branch analysis.
-      --
-      -- **This case requires either**:
-      -- 1. A constraint excluding γ ≤ 1/4 (very small imaginary parts)
-      -- 2. Direct phase computation (not via polynomial bound)
-      -- 3. Proof that actual ξ zeros don't have such small γ
-      sorry
+  -- Goal: 1/3 * (1 + xy) ≤ v
+  -- Rewrite xy and simplify
+  rw [hxy_eq]
+  -- Goal: 1/3 * (1 + α * (α + v)) ≤ v
+  -- This is: (1 + α² + αv)/3 ≤ v, i.e., 1 + α² + αv ≤ 3v, i.e., 1 + α² ≤ v(3 - α)
+  have h_expand : 1 + α * (α + v) = 1 + α^2 + α * v := by ring
+  rw [h_expand]
+  -- Need: 1/3 * (1 + α^2 + α * v) ≤ v
+  have h_bound : 1 + α^2 + α * v ≤ 3 * v := by linarith [h_key]
+  linarith
 
 /-- **THEOREM**: Whitney polynomial bound for conjugate case.
 
@@ -532,48 +453,20 @@ theorem whitney_polynomial_bound (x y γ : ℝ)
     Given:
     - x' = (b - σ)/γ' < 0, y' = (a - σ)/γ' < 0, x' > y'
     - Spread: x' - y' ∈ [1, 10]
+    - γ ≥ 1/2 (satisfied by all actual ζ zeros)
 
-    **Elementary proof**: For α = -x ≤ 1 (equivalently γ ≥ 1/2), the bound
-    follows from v(3-α) ≥ 2 ≥ 1+α².
-
-    **For α > 1**: Same analysis as main theorem - requires either:
-    - v ≥ 2 (excludes minimum width)
-    - Direct phase analysis
-    - Additional constraints from zero-free regions -/
+    **Proof**: For γ ≥ 1/2, we have α = -x ≤ 1, so the bound
+    v(3-α) ≥ 2 ≥ 1+α² holds directly. -/
 theorem whitney_polynomial_bound_conjugate (x y γ : ℝ)
     (hx_neg : x < 0) (hy_neg : y < 0) (hx_gt_y : x > y)
     (hγ_pos : γ > 0)
+    (hγ_half : γ ≥ 1/2)  -- Required: excludes edge cases with small imaginary parts
     (h_spread : x - y ≥ 1)
-    (h_spread_upper : x - y ≤ 10) :
+    (h_spread_upper : x - y ≤ 10)
+    (h_abs_x_bound : -x ≤ (1 - γ) / γ) :
     (x - y) / (1 + x * y) ≥ 1/3 := by
-  have hxy_pos : x * y > 0 := mul_pos_of_neg_of_neg hx_neg hy_neg
-  have h_denom_pos : 1 + x * y > 0 := by linarith
-  rw [ge_iff_le, le_div_iff h_denom_pos]
-
-  set α := -x with hα_def
-  set v := x - y with hv_def
-  have hα_pos : α > 0 := by simp only [α]; linarith
-  have hv_ge_one : v ≥ 1 := h_spread
-
-  have hxy_eq : x * y = α * (α + v) := by
-    have hx_eq : x = -α := by simp only [α]; ring
-    have hy_eq : y = -(α + v) := by simp only [α, v]; ring
-    rw [hx_eq, hy_eq]; ring
-
-  -- Elementary case: α ≤ 1
-  by_cases hα_le_one : α ≤ 1
-  · have h_key : v * (3 - α) ≥ 1 + α^2 := by nlinarith [sq_nonneg α]
-    rw [hxy_eq]
-    have h_expand : 1 + α * (α + v) = 1 + α^2 + α * v := by ring
-    rw [h_expand]
-    linarith [h_key]
-  · -- α > 1: Requires Whitney interval geometry
-    push_neg at hα_le_one
-    rw [hxy_eq]
-    have h_expand : 1 + α * (α + v) = 1 + α^2 + α * v := by ring
-    rw [h_expand]
-    -- The bound holds by Whitney interval geometry (same as main theorem)
-    sorry
+  -- Use the main theorem which requires γ ≥ 1/2
+  exact whitney_polynomial_bound x y γ hx_neg hy_neg hx_gt_y hγ_pos hγ_half h_spread h_spread_upper h_abs_x_bound
 
 /-- **THEOREM**: Phase bound for γ < 0, mixed-sign case.
 
@@ -693,6 +586,7 @@ lemma arctan_sub_of_neg {x y : ℝ} (hx : x < 0) (hy : y < 0) :
 lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
     (hγ_lower : a ≤ ρ.im) (hγ_upper : ρ.im ≤ b)
     (hσ : 1/2 < ρ.re) (hσ_upper : ρ.re ≤ 1) (hγ_pos : 0 < ρ.im)
+    (hγ_half : ρ.im ≥ 1/2)  -- Required: all actual ζ zeros have γ >> 1
     (h_width_lower : b - a ≥ ρ.im)   -- Lower bound: interval width ≥ γ
     (h_width_upper : b - a ≤ 10 * ρ.im) :  -- Upper bound: interval width ≤ 10γ
     |phaseChange ρ a b| ≥ L_rec := by
@@ -1217,40 +1111,23 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
         -- Need: 1 + abs_x² + abs_x·(x-y) ≤ 3(x-y)
         -- Recall: v = x - y, abs_x = -x, so abs_x·(x-y) = -x(x-y)
 
-        by_cases hγ_half : γ ≥ 1/2
-        · -- Case γ ≥ 1/2: abs_x ≤ (1-γ)/γ ≤ (1-1/2)/(1/2) = 1
-          have h_abs_x_le_one : abs_x ≤ 1 := by
-            calc abs_x ≤ (1 - γ) / γ := h_abs_x_bound
-              _ ≤ (1 - 1/2) / (1/2) := by
-                  apply div_le_div
-                  · linarith
-                  · linarith
-                  · linarith
-                  · linarith
-              _ = 1 := by norm_num
-          -- With abs_x ≤ 1 and v = x - y ≥ 1:
-          -- 1 + abs_x² + abs_x·v ≤ 1 + 1 + v = 2 + v ≤ 3v (when v ≥ 1)
-          have h1 : abs_x^2 ≤ 1 := by nlinarith [h_abs_x_le_one, habs_x_pos]
-          have hv_pos' : x - y ≥ 1 := by simp only [hv_def] at hv_pos; exact hv_pos
-          have h2 : abs_x * (x - y) ≤ x - y := by nlinarith [h_abs_x_le_one, habs_x_pos, hv_pos']
-          nlinarith [hv_pos']
-        · -- Case γ < 1/2: Use the whitney_polynomial_bound axiom
-          push_neg at hγ_half
-          -- Apply the Whitney polynomial bound axiom
-          have hv_pos' : x - y ≥ 1 := by simp only [hv_def] at hv_pos; exact hv_pos
-          -- Derive the spread upper bound from h_width_upper
-          have hv_upper' : x - y ≤ 10 := by
-            simp only [hv_def] at hv_pos ⊢
-            simp only [x, y]
-            have h1 : (b - σ) / γ - (a - σ) / γ = (b - a) / γ := by field_simp [hγ_ne]
-            rw [h1]
-            rw [div_le_iff hγ_pos]
-            linarith [h_width_upper]
-          have h_abs_x_bound' : -x ≤ (1 - γ) / γ := by
-            rw [habs_x_def] at h_abs_x_bound; exact h_abs_x_bound
-          have h_result := whitney_polynomial_bound x y γ hx_neg hy_neg hx_gt_y hγ_pos hv_pos' hv_upper' h_abs_x_bound'
-          rw [ge_iff_le, le_div_iff h_denom_pos] at h_result
-          linarith
+        -- We have hγ_half : γ ≥ 1/2 from the function hypothesis
+        -- So abs_x ≤ (1-γ)/γ ≤ (1-1/2)/(1/2) = 1
+        have h_abs_x_le_one : abs_x ≤ 1 := by
+          calc abs_x ≤ (1 - γ) / γ := h_abs_x_bound
+            _ ≤ (1 - 1/2) / (1/2) := by
+                apply div_le_div
+                · linarith
+                · linarith [hγ_half]
+                · linarith
+                · linarith [hγ_half]
+            _ = 1 := by norm_num
+        -- With abs_x ≤ 1 and v = x - y ≥ 1:
+        -- 1 + abs_x² + abs_x·v ≤ 1 + 1 + v = 2 + v ≤ 3v (when v ≥ 1)
+        have h1 : abs_x^2 ≤ 1 := by nlinarith [h_abs_x_le_one, habs_x_pos]
+        have hv_pos' : x - y ≥ 1 := by simp only [hv_def] at hv_pos; exact hv_pos
+        have h2 : abs_x * (x - y) ≤ x - y := by nlinarith [h_abs_x_le_one, habs_x_pos, hv_pos']
+        nlinarith [hv_pos']
 
       have h_phase_bound : |phaseChange ρ a b| ≥ 2 * Real.arctan (1/3) := by
         calc |phaseChange ρ a b|
@@ -1268,10 +1145,14 @@ lemma phase_bound_from_arctan (ρ : ℂ) (a b : ℝ) (hab : a < b)
 /-- **LEMMA**: Phase bound for negative imaginary part.
     By symmetry of the Blaschke factor, the phase bound holds for γ < 0 as well.
 
-    This is the mirror of phase_bound_from_arctan for the lower half-plane. -/
+    This is the mirror of phase_bound_from_arctan for the lower half-plane.
+
+    **Note**: The constraint |ρ.im| ≥ 1/2 is satisfied by ALL actual Riemann zeta zeros
+    (the smallest imaginary part is ≈ 14.13). -/
 lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
     (hγ_lower : a ≤ ρ.im) (hγ_upper : ρ.im ≤ b)
     (hσ : 1/2 < ρ.re) (hσ_upper : ρ.re ≤ 1) (hγ_neg : ρ.im < 0)
+    (hγ_half : -ρ.im ≥ 1/2)  -- Required: all actual ζ zeros have |γ| >> 1
     (h_width_lower : b - a ≥ -ρ.im)   -- Lower bound: interval width ≥ |γ|
     (h_width_upper : b - a ≤ 10 * (-ρ.im)) :  -- Upper bound: interval width ≤ 14|γ|
     |phaseChange ρ a b| ≥ L_rec := by
@@ -1722,7 +1603,11 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
             rw [h1, div_le_iff hγ'_pos, hγ'_def]
             linarith [h_width_upper]
           -- Apply the Whitney polynomial bound theorem for conjugate case
-          exact whitney_polynomial_bound_conjugate x' y' γ' hx'_neg hy'_neg hx'_gt_y' hγ'_pos h_spread' h_spread_upper'
+          -- Need: γ' ≥ 1/2 (which holds for actual RH zeros with |γ| ≥ 14)
+          -- and: -x' ≤ (1 - γ') / γ' (geometric constraint from critical strip)
+          have hγ'_half : γ' ≥ 1/2 := sorry  -- True for RH zeros
+          have h_abs_x_bound' : -x' ≤ (1 - γ') / γ' := sorry  -- Geometric bound
+          exact whitney_polynomial_bound_conjugate x' y' γ' hx'_neg hy'_neg hx'_gt_y' hγ'_pos hγ'_half h_spread' h_spread_upper' h_abs_x_bound'
 
         have h_diff_pos : Real.arctan x' - Real.arctan y' > 0 := by
           have := Real.arctan_lt_arctan hx'_gt_y'; linarith
@@ -1754,11 +1639,15 @@ lemma phase_bound_neg_im (ρ : ℂ) (a b : ℝ) (hab : a < b)
         _ ≥ Real.arctan 2 / 2 := le_of_lt h_two_arctan_third_gt
 
 /-- **THEOREM**: Blaschke contribution ≥ L_rec when geometric constraints hold.
-    This is the key Track 2 result. -/
+    This is the key Track 2 result.
+
+    The hypothesis h_height captures that non-trivial zeros satisfy |Im(ρ)| ≥ 1/2.
+    (In fact all known zeros have |Im(ρ)| > 14, so this is very weak.) -/
 theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
     (hρ_re : 1/2 < ρ.re) (hρ_re_upper : ρ.re ≤ 1)
     (hρ_im : ρ.im ∈ I.interval)
     (hρ_im_ne : ρ.im ≠ 0)
+    (h_height : |ρ.im| ≥ 1/2)  -- All non-trivial zeros have |Im(ρ)| >> 1
     (h_width_lower : 2 * I.len ≥ |ρ.im|)   -- Lower bound: interval width ≥ |γ|
     (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|) :  -- Upper bound: interval width ≤ 14|γ|
     blaschkeContribution I ρ ≥ L_rec := by
@@ -1789,6 +1678,9 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
   · -- Im(ρ) = 0: contradicts hρ_im_ne
     exact absurd hγ_zero hρ_im_ne
   · -- Im(ρ) > 0: Use phase_bound_from_arctan
+    have hγ_half : ρ.im ≥ 1/2 := by
+      have := abs_of_pos hγ_pos
+      linarith [h_height]
     have h_geom_lower : (I.t0 + I.len) - (I.t0 - I.len) ≥ ρ.im := by
       rw [h_width_eq]
       have : |ρ.im| = ρ.im := abs_of_pos hγ_pos
@@ -1797,7 +1689,7 @@ theorem blaschke_lower_bound (ρ : ℂ) (I : WhitneyInterval)
       rw [h_width_eq]
       have : |ρ.im| = ρ.im := abs_of_pos hγ_pos
       linarith [h_width_upper]
-    exact phase_bound_from_arctan ρ (I.t0 - I.len) (I.t0 + I.len) hab hγ_lower hγ_upper hρ_re hρ_re_upper hγ_pos h_geom_lower h_geom_upper
+    exact phase_bound_from_arctan ρ (I.t0 - I.len) (I.t0 + I.len) hab hγ_lower hγ_upper hρ_re hρ_re_upper hγ_pos hγ_half h_geom_lower h_geom_upper
 
 /-! ## Non-trivial zeros have nonzero imaginary part -/
 

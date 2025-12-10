@@ -47,6 +47,8 @@ import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 import Mathlib.Topology.Algebra.InfiniteSum.Basic
 import Mathlib.Topology.Algebra.InfiniteSum.Real
 import Mathlib.Analysis.Normed.Group.InfiniteSum
+import Mathlib.Analysis.Complex.Basic
+import Mathlib.Analysis.PSeriesComplex
 import Mathlib.Order.Filter.Basic
 import Mathlib.Topology.Order.Basic
 import Mathlib.Analysis.PSeries
@@ -623,38 +625,90 @@ real for real s > 0 (though this is mathematically true by the Schwarz
 reflection principle).
 -/
 
-/-- **Axiom**: η(s) = (1 - 2^{1-s}) · ζ(s) for s ∈ (0, 1) ∪ (1, ∞).
+/-! ## Real-Complex Bridge for Zeta Function
 
-    ### Classical Proof Sketch
+For real s > 1, we connect the real series ∑ 1/(n+1)^s to Mathlib's complex riemannZeta. -/
 
-    **Step 1** (for Re(s) > 1, where series converge absolutely):
-    ```
-    ζ(s) = Σ_{n=1}^∞ 1/n^s = 1 + 1/2^s + 1/3^s + 1/4^s + ...
+/-- For real s > 1, each term 1/(n+1)^s in the complex zeta series is real.
 
-    Sum over even n only:
-    Σ_{n=1}^∞ 1/(2n)^s = 1/2^s · Σ_{n=1}^∞ 1/n^s = 2^{-s} · ζ(s)
+    This follows from Complex.ofReal_cpow: for x ≥ 0 and real s, x^s (complex) = x^s (real). -/
+lemma zeta_term_real (n : ℕ) (s : ℝ) (_hs : 1 < s) :
+    (1 / ((n : ℂ) + 1) ^ (s : ℂ)).re = 1 / ((n : ℝ) + 1) ^ s := by
+  have h_pos : (0 : ℝ) ≤ (n : ℝ) + 1 := by positivity
+  -- Rewrite using ofReal lemmas to convert complex expression to real
+  simp only [← Complex.ofReal_natCast, ← Complex.ofReal_one, ← Complex.ofReal_add,
+    ← Complex.ofReal_cpow h_pos, ← Complex.ofReal_div, Complex.ofReal_re]
 
-    Therefore:
-    2^{1-s} · ζ(s) = 2 · 2^{-s} · ζ(s) = 2 · Σ 1/(2n)^s
-                   = 2/2^s + 2/4^s + 2/6^s + ...
+/-- The series ∑ 1/(n+1)^s is summable in ℂ for Re(s) > 1. -/
+lemma summable_complex_zeta_series (s : ℝ) (hs : 1 < s) :
+    Summable (fun n : ℕ => 1 / ((n : ℂ) + 1) ^ (s : ℂ)) := by
+  have h_re : 1 < (s : ℂ).re := by simp [hs]
+  -- Transform to match Mathlib's form
+  have h := Complex.summable_one_div_nat_cpow.mpr h_re
+  -- ∑ 1/n^s is summable ↔ ∑ 1/(n+1)^s is summable (shift by 1)
+  rw [← summable_nat_add_iff 1] at h
+  convert h using 1
+  ext n
+  simp only [one_div, Nat.cast_add, Nat.cast_one]
 
-    Subtracting:
-    ζ(s) - 2^{1-s} · ζ(s) = (1 - 2^{1-s}) · ζ(s)
-      = (1 + 1/2^s + 1/3^s + 1/4^s + ...) - (2/2^s + 2/4^s + 2/6^s + ...)
-      = 1 - 1/2^s + 1/3^s - 1/4^s + ...
-      = η(s)
-    ```
+/-- The complex zeta series for real s > 1 has real terms that sum to a real value. -/
+lemma riemannZeta_re_eq_real_tsum (s : ℝ) (hs : 1 < s) :
+    (riemannZeta (s : ℂ)).re = ∑' n : ℕ, 1 / ((n : ℝ) + 1) ^ s := by
+  -- Use Mathlib's zeta_eq_tsum_one_div_nat_add_one_cpow
+  have h_re : 1 < (s : ℂ).re := by simp [hs]
+  rw [zeta_eq_tsum_one_div_nat_add_one_cpow h_re]
+  -- Use Complex.re_tsum to pull out the real part
+  have h_summable := summable_complex_zeta_series s hs
+  rw [Complex.re_tsum h_summable]
+  congr 1
+  ext n
+  exact zeta_term_real n s hs
 
-    **Step 2** (extension to Re(s) > 0, s ≠ 1):
-    Both η(s) (via alternating series) and (1 - 2^{1-s})ζ(s) (via Mathlib's
-    analytic continuation) are analytic on Re(s) > 0, s ≠ 1. Since they agree
-    on Re(s) > 1, they agree everywhere by uniqueness of analytic continuation.
+/-- **THEOREM**: The zeta-eta relation for s > 1 (proven via series manipulation).
+
+    This connects:
+    - Our `dirichletEtaReal` (defined via alternating series limit)
+    - Mathlib's `riemannZeta` (defined via Hurwitz zeta analytic continuation)
+
+    For real s > 1, both series converge absolutely, allowing direct comparison. -/
+theorem zeta_eta_relation_gt_one (s : ℝ) (hs : 1 < s) :
+    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re := by
+  -- Step 1: dirichletEtaReal s = alternatingSeriesLimit ... (by definition)
+  have hs_pos : 0 < s := lt_trans zero_lt_one hs
+  rw [dirichletEtaReal_eq_limit s hs_pos]
+  -- Step 2: alternatingSeriesLimit = ∑' n, (-1)^n / (n+1)^s (for s > 1)
+  rw [alternatingSeriesLimit_eq_tsum s hs]
+  -- Step 3: ∑' n, (-1)^n / (n+1)^s = (1 - 2^{1-s}) * ∑' n, 1/(n+1)^s
+  rw [alternating_eq_factor_mul_zeta_tsum s hs]
+  -- Step 4: ∑' n, 1/(n+1)^s = (riemannZeta (s : ℂ)).re
+  rw [← riemannZeta_re_eq_real_tsum s hs]
+
+/-- **Axiom**: η(s) = (1 - 2^{1-s}) · ζ(s) for s ∈ (0, 1).
+
+    For s > 1, this is proven as `zeta_eta_relation_gt_one` using series manipulation.
+
+    For s ∈ (0, 1), the proof requires **analytic continuation**:
+    - Both η(s) and (1 - 2^{1-s})ζ(s) are analytic on Re(s) > 0, s ≠ 1
+    - They agree on Re(s) > 1 (proven above)
+    - By uniqueness of analytic continuation, they agree everywhere
+
+    This extension requires complex analysis infrastructure not fully available in Mathlib
+    for this specific application.
 
     ### References
     - Hardy & Wright, "An Introduction to the Theory of Numbers", Theorem 25.2
     - Titchmarsh, "The Theory of the Riemann Zeta-Function", Chapter 2 -/
-axiom zeta_eta_relation (s : ℝ) (hs_pos : 0 < s) (hs_ne_one : s ≠ 1) :
+axiom zeta_eta_relation_lt_one (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
     dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re
+
+/-- The full zeta-eta relation: η(s) = (1 - 2^{1-s}) · ζ(s) for s ∈ (0, 1) ∪ (1, ∞). -/
+theorem zeta_eta_relation (s : ℝ) (hs_pos : 0 < s) (hs_ne_one : s ≠ 1) :
+    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re := by
+  by_cases h : s < 1
+  · exact zeta_eta_relation_lt_one s hs_pos h
+  · push_neg at h
+    have hs_gt : 1 < s := lt_of_le_of_ne h (Ne.symm hs_ne_one)
+    exact zeta_eta_relation_gt_one s hs_gt
 
 /-! ## Main Theorem: ζ(s) < 0 on (0, 1) -/
 

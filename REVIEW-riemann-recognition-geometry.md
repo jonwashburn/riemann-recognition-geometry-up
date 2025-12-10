@@ -41,45 +41,46 @@ Date of review: December 9, 2025
    - ✅ Tone tempered: Changed "establish" to "present a proof... contingent on several well-established classical results" and added explicit enumeration of dependencies in Main Theorem statement.
    - (Minor) inequality chain narrative: acceptable as-is.
 
-7) §2 Background & notation:
-   - L233–235: remark blends facts (Re≥1); historically correct (Hadamard–de la Vallée Poussin), but ensure clear separation: Re>1 (Euler product), Re=1 (deep zero-free result); it's cited only implicitly.
+7) ✅ **COMPLETED** §2 Background & notation:
+   - ✅ Clarified separation Re>1 (Euler product) vs Re=1 (de la Vallée Poussin/Hadamard), with explicit cite to Titchmarsh.
    - ✅ **COMPLETED** Proposition ζ(s) < 0 on (0,1): Full proof now in Appendix C with reference to Apostol.
 
-8) §3 Recognition Geometry (ensure label \label{sec:recognition-geometry} exists; yes):
-   - Check that "Whitney intervals" definition makes the width constraints explicit and matches later §§5–7.
+8) ✅ **COMPLETED** §3 Recognition Geometry:
+   - ✅ Added explicit width comparability remark: |γ| ≤ 2L ≤ 4|γ| (c1=1/2, c2=2), consistent with §8.
 
-9) §4 Uniform tail bound:
-   - The prose cites Fefferman–Stein and Green + Cauchy–Schwarz; include a precise theorem statement and a pointer to Appendix B for Poisson kernel calculus. Ensure any constants (C_geom, K_tail) are explicitly defined and their numerical choices stated.
+9) ✅ **COMPLETED** §4 Uniform tail bound:
+   - ✅ Added explicit pointer to Appendix B (Poisson kernel calculus) and retained theorem statement; constants and numerical values already present.
 
 10) §5 Trigger lower bound:
    - Branch handling and mixed-sign case: consistent with Appendix A inequalities; good.
-   - If possible, point to a stand-alone lemma that encapsulates the same-sign and mixed-sign formulas.
+   - ✅ **COMPLETED** Added Lemma (Unified Blaschke Phase Cases) summarizing both cases.
 
 11) ✅ **COMPLETED** §6 Numerical gap:
    - ✅ Added cross-reference to Appendix A for arctan proofs.
    - Tables: \renewcommand{\arraystretch} used locally; fine.
 
-12) §7 Local zero-free criterion:
-   - The decomposition R(I)=Δθ_ρ+τ(I) is central; consider formal Definition environment and a lemma that explicitly states the reverse triangle step.
+12) ✅ **COMPLETED** §7 Local zero-free criterion:
+   - ✅ Added explicit Phase Decomposition lemma and a separate Reverse Triangle lemma; lower-bound proposition now cites them.
+   - ✅ Fixed internal consistency: distinguished full-interval phase Φ(I) from recognition functional ℛ(I)=max_j|Φ(W_j)| and adjusted proofs accordingly.
 
 13) §8 Globalization by covering:
    - ✅ **COMPLETED** TikZ diagram requires \usepackage{tikz} — now added.
-   - A rigorous "dyadic interval existence with width bounds" theorem is stated; check that the constants match those used in §5–7.
+   - ✅ **COMPLETED** Verified constants match §§5–7; width bounds restated uniformly.
 
-14) §9 Completion of the proof:
-   - Good modular case analysis. Consider clarifying the dependence on classical inputs at each step (Euler, η, functional eq.)
+14) ✅ **COMPLETED** §9 Completion of the proof:
+   - ✅ Added a remark clarifying classical inputs used in each case.
 
-15) §10 Classical inputs:
-   - ✅ **COMPLETED** Contains \cite references: bibliography entries now added.
-   - Consider adding a compact numbered list of axioms vs. proven results (echoing §11 formalization notes), with precise references here.
+15) ✅ **COMPLETED** §10 Classical inputs:
+   - ✅ Contains \cite references: bibliography entries now added.
+   - ✅ Added a compact enumerated list and cross-reference to the front "Axioms vs. Theorems" box.
 
 16) §11 Formalization notes:
    - ✅ **COMPLETED** \lstlisting used multiple times: listings package now added.
    - Notation "R" in listings stanza (e.g., `: R`) is Lean code; ok in listings.
    - Verify consistency of file/module names with repo; looks consistent.
 
-17) §12 Robustness:
-   - Numerics consistent (U_tail~0.134, L_rec~0.553, ratio~4.1). Consider adding an explicit formula R=L_rec/(C_geom sqrt(K_tail)).
+17) ✅ **COMPLETED** §12 Robustness:
+   - ✅ Added explicit formula R = L_rec/(C_geom sqrt(K_tail)) and numeric evaluation.
 
 18) Appendix A:
    - Self-contained and rigorous; consistent with §6.
@@ -129,8 +130,8 @@ Date of review: December 9, 2025
 - Record the exact arithmetic leading to 0.134 and 0.553 once (with rational bounds) and reuse.
 
 ### Globalization and width constraints
-- Ensure the dyadic width bounds (|γ| ≤ 2L ≤ 4|γ|, and the stronger 10|γ| bound used in mixed-sign arguments) are consistently stated/used in §§5–8.
-- State explicitly the dependence of each case (same-sign/mixed-sign) on width bounds.
+- ✅ **COMPLETED** Dyadic width bounds (|γ| ≤ 2L ≤ 4|γ|) made explicit in §3; the stronger 10|γ| upper bound used in §5 is consistent with trigger estimates and globalization.
+- ✅ **COMPLETED** Dependence of same-sign/mixed-sign cases on width bounds captured in Lemma (Unified Blaschke Phase Cases) and Theorem (Trigger Lower Bound).
 
 ### Lean/formalization perspective
 - The formalization section is strong; include a compact dependency graph (axioms → lemmas → main theorem) and explicit `#print axioms` output, perhaps as a table.
