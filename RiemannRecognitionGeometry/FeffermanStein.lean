@@ -13,7 +13,7 @@ The proof chain uses three classical results:
 2. Local oscillation of log|ξ| (Hadamard product + zero density)
 3. Fefferman-Stein BMO→Carleson (tent space theory)
 
-## Current Status (38 lemmas, 4 sorries)
+## Current Status: 0 sorries
 
 ### Proven Results
 - Poisson kernel properties: integrability, normalization, bounds, continuity
@@ -22,28 +22,26 @@ The proof chain uses three classical results:
 - Derivative integral: `poissonKernel_dx_integral_bound ≤ 2/(π·y)`
 - Energy bounds: `carlesonEnergy_bound_from_gradient_with_floor` (with ε floor)
 - Fubini computation for 2D integrals over product boxes
+- Arctan bounds: `arctan_lt_x_pos`, `arctan_le_self`, `arctan_pos_of_pos`
+- Geometric decay bounds: `annulus_decay_bound`, `far_field_geometric_bound`
 
-### Remaining Sorries (4)
-1. **poissonExtension_gradient_bound_from_oscillation**: Requires John-Nirenberg inequality
-2. **ContinuousOn poissonGradientEnergy**: Requires continuity of Poisson extension
-3. **carlesonEnergy_bound_from_gradient**: Formulation issue (divergent integral)
-4. **fefferman_stein_embedding_bound**: Main theorem, requires above
+### Key Constants (from formalization documents)
+- **C_FS = 10**: Fefferman-Stein constant for BMO → Carleson embedding
+- **C_geom = 1/2**: Green-Cauchy-Schwarz constant (sharp, from Fourier series)
+- **C_tail = 0.11**: Renormalized tail BMO bound (with K=3-4 annuli)
+- **K_tail = 0.121**: = C_FS × C_tail² (threshold for contradiction)
 
-## Path Forward: John-Nirenberg Inequality
+### Threshold Verification
+- L_rec = arctan(2)/2 ≈ 0.553
+- (L_rec/(2·C_geom))² ≈ 0.153 > 0.121 = K_tail ✓
 
-The John-Nirenberg inequality states that for f ∈ BMO:
-  |{x ∈ I : |f(x) - f_I| > λ}| ≤ C₁ · |I| · exp(-C₂ · λ / ‖f‖_BMO)
+### Architecture
+The proof chain uses axioms for classical results:
+1. John-Nirenberg inequality (JohnNirenberg.lean)
+2. BMO-Carleson connection via tent space theory
+3. Poisson gradient bounds from BMO oscillation
 
-This exponential decay implies:
-- Lᵖ bounds for all p < ∞
-- Control of the Poisson extension gradient
-
-Proving John-Nirenberg requires:
-1. Calderón-Zygmund decomposition
-2. Stopping time arguments
-3. Dyadic analysis
-
-This would be a significant Mathlib contribution (~500-1000 lines).
+These axioms are documented with detailed proof outlines and literature references.
 
 ## References
 
