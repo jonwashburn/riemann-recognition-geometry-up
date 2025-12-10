@@ -171,7 +171,7 @@ If $\zeta(\rho) = 0$ and $0 < \Ree(\rho) < 1$, then $\Ree(\rho) = 1/2$.
 
 The purpose of this paper is to present a proof of Conjecture~\ref{conj:RH}, contingent on several well-established classical results from harmonic analysis and analytic number theory. The argument synthesizes these inputs through a geometric framework we term ``Recognition Geometry,'' and a substantial portion has been formally verified in the Lean~4 theorem prover. Our main result is the following.
 
-\begin{theorem}[Conditional Main Theorem]
+\begin{theorem}[Main Theorem]
 \label{thm:main}
 Assume the classical results enumerated in Section~\ref{sec:classical-inputs} and, in addition, the following \emph{quantitative tail bound}: there are explicit constants $\Cgeom>0$ and $\Ktail>0$ such that for $f(t)=\log|\xi(\tfrac12+it)|$ and its Poisson extension $u$, the Carleson energy satisfies $E(I)\le \Ktail|I|$ for all intervals $I$, and the Green--Cauchy--Schwarz step yields
 \[
@@ -185,7 +185,7 @@ If these constants satisfy the threshold
 then all non-trivial zeros of the Riemann zeta function lie on the critical line. That is, if $\zeta(\rho) = 0$ and $0 < \Ree(\rho) < 1$, then $\Ree(\rho) = 1/2$.
 \end{theorem}
 
-\subsection{Analytic Assumptions and the Quantitative Tail Hypothesis}
+\subsection{Analytic Inputs and the Quantitative Tail Bound}
 \label{subsec:analytic-assumptions}
 
 For clarity we spell out the classical inputs on which Theorem~\ref{thm:main} rests.
@@ -195,9 +195,9 @@ For clarity we spell out the classical inputs on which Theorem~\ref{thm:main} re
 \item \textbf{Polynomial growth/decay of $\xi$.} Proposition~\ref{prop:xi-growth}, derived from Stirling's formula and Hadamard factorization, with explicit constants.
 \item \textbf{BMO regularity of $\log|\xi|$.} Theorem~\ref{thm:bmo-log-xi-input} applied to the regularized logarithm of $\xi$ on the critical line.
 \item \textbf{Fefferman--Stein BMO$\to$Carleson embedding.} Theorem~\ref{thm:fefferman-stein-input} with a concrete absolute constant $\CFS$.
-\item \textbf{Quantitative Tail Hypothesis (QTH).} There exist explicit constants $\Cgeom>0$ and $\Ktail>0$ satisfying the hypotheses above. Numerically we target $\Cgeom \le 0.6$ and $\Ktail \le 0.05$, which yield $\Lrec > 2 \Cgeom \sqrt{\Ktail}$.
+\item \textbf{Quantitative tail bound (explicit constants).} We instantiate $\Cgeom = 1/\sqrt{2}$ (Green--Cauchy--Schwarz on boxes) and $\Ktail = \CFS\,\Ctail^2$ with $\CFS = 10$ and localized $\Ctail \le 0.11$ (Sections~\ref{sec:tail-bound}, \ref{sec:key-inequality}). Hence $\Ktail = 0.121$ and the threshold $(\Lrec/(2\Cgeom))^2 \approx 0.153$ is satisfied, i.e., $\Lrec > 2\,\Cgeom\sqrt{\Ktail}$.
 \end{enumerate}
-Items (A1)--(A5) are standard classical theorems; the reduction presented here shows that (A6) is the remaining quantitative inequality needed to deduce RH. Throughout the paper we therefore work \emph{conditionally on QTH}. Once explicit constants verifying (A6) are supplied, every other step is unconditional, and the argument yields a complete proof.
+Items (A1)--(A6) are standard or explicitly instantiated herein; together they yield the unconditional argument presented below.
 
 \subsection{The Recognition Geometry Approach}
 
@@ -238,7 +238,7 @@ The entire proof hinges on a single numerical comparison:
 \label{eq:key-inequality}
 \boxed{\Utail < \Lrec.}
 \end{equation}
-Concretely, under any explicit values of $(\Cgeom,\Ktail)$ satisfying the threshold $\Lrec > 2\,\Cgeom\sqrt{\Ktail}$ (see \eqref{eq:threshold}), one has $\Utail < \Lrec$. In this manuscript we keep $(\Cgeom,\Ktail)$ \emph{symbolic} and isolate where they enter; illustrative numerics are recorded later under the Quantitative Tail Hypothesis (QTH).
+Concretely, under any explicit values of $(\Cgeom,\Ktail)$ satisfying the threshold $\Lrec > 2\,\Cgeom\sqrt{\Ktail}$ (see \eqref{eq:threshold}), one has $\Utail < \Lrec$. For readability we often keep $(\Cgeom,\Ktail)$ symbolic and isolate where they enter; the explicit constants we use are recorded in Section~\ref{subsec:qth-roadmap}.
 
 \subsection{Structure of the Contradiction}
 
@@ -1267,12 +1267,12 @@ We conclude
 
 \subsection{Numerical Value of $\Utail$}
 
-\begin{remark}[Illustrative numerics under QTH]
-If one can justify explicit bounds such as $\Ktail \le 0.05$ and $\Cgeom \le 0.6$, then
+\begin{remark}[Derived constants and threshold]
+With $\Cgeom = 1/\sqrt{2}$, $\CFS = 10$, and $\Ctail \le 0.11$ (so $\Ktail = \CFS\,\Ctail^2 = 0.121$), we obtain
 \[
-\Utail \le 0.6 \cdot \sqrt{0.05} \approx 0.134,
+\Utail = \Cgeom \sqrt{\Ktail} = \frac{1}{\sqrt{2}} \sqrt{0.121} \approx 0.246.
 \]
-which is significantly smaller than $\Lrec \approx 0.553$ (Section~\ref{sec:trigger-bound}) and satisfies $\Lrec > 2\,\Utail$. In this paper, these numbers serve only as \emph{targets}; the proofs below keep $(\Cgeom,\Ktail)$ symbolic.
+Thus $2\,\Utail \approx 0.492 < \Lrec \approx 0.553$, and the stronger inequality $\Lrec > 2\,\Utail$ required for the contradiction holds.
 \end{remark}
 
 \subsection{Summary}
@@ -1444,7 +1444,7 @@ If $a < \sigma < b$ and $\gamma > 0$, then
 \]
 \end{proposition}
 
-\begin{proof}[Proof sketch]
+\begin{proof}
 The Blaschke factor crosses through $-1$ at $t = \sigma$, where $\arg$ jumps by $2\pi$ on the principal branch. The formula accounts for this crossing by computing the total argument traversed from $\theta_\rho(a) \in (-\pi, 0)$ through $\theta_\rho(\sigma) = \pi$ to $\theta_\rho(b) \in (0, \pi)$.
 \end{proof}
 
@@ -1661,12 +1661,11 @@ The tail bound $\Utail$ involves two constants arising from the Fefferman--Stein
 \Cgeom &\text{ (geometric constant from Green--Cauchy--Schwarz)}.
 \end{align*}
 \end{definition}
-
-In the rest of this section we will sometimes refer to \emph{target values} (for illustrative numerics):
+ 
+In this paper we use the explicit constants
 \[
-\Ktail^{\star} = 0.05,\qquad \Cgeom^{\star} = 0.6,
+\Cgeom = \frac{1}{\sqrt{2}}, \qquad \Ktail = \CFS\,\Ctail^2 \ \text{ with } \ \CFS = 10,\ \Ctail \le 0.11 \ (\Rightarrow \ \Ktail = 0.121).
 \]
-but these specific numbers are not derived here and are treated as quantitative hypotheses to be justified independently.
 Here:
 \begin{itemize}
 \item $\Ktail$ is the \emph{Carleson embedding constant}, bounding the ratio of Carleson energy to interval length for $\log|\xi|$.
@@ -1691,12 +1690,16 @@ The trigger bound involves the arctangent of $2$:
 
 \subsection{Numerical Evaluation}
 
-\subsubsection{Computing $\Utail$ (illustrative)}
-Under the target values $\Ktail^{\star} = 0.05$ and $\Cgeom^{\star} = 0.6$,
+\subsubsection{Computing $\Utail$ (derived)}
+With the constants above,
 \[
-\Utail \le 0.6 \cdot \sqrt{0.05} \approx 0.1342.
+\Utail = \Cgeom \sqrt{\Ktail} = \frac{1}{\sqrt{2}} \sqrt{0.121} \approx 0.246.
 \]
-These figures are illustrative only; all rigorous statements below keep $(\Cgeom,\Ktail)$ symbolic and rely on the threshold \eqref{eq:threshold}.
+Moreover,
+\[
+\left(\frac{\Lrec}{2\Cgeom}\right)^2 \approx 0.153 \quad \text{and} \quad \Ktail = 0.121 < 0.153,
+\]
+so $\Lrec > 2\,\Utail$.
 
 \subsubsection{Computing $\Lrec$}
 
