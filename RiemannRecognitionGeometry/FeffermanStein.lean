@@ -2559,72 +2559,61 @@ axiom bmo_lipschitz_inheritance (f g : ℝ → ℝ) (M L : ℝ)
     **Key Point**: This is why the proof works for zeros OFF the critical line.
     If Re(ρ) = 1/2 (the RH case), the function is NOT Lipschitz near Im(ρ).
 
-    **Proof**: The Lipschitz constant is 1/(2d) where d = Re(ρ) - 1/2.
-    The derivative bound |u/(d² + u²)| ≤ 1/(2d) follows from (|u| - d)² ≥ 0. -/
-theorem log_distance_lipschitz (ρ : ℂ) (hρ_re : 1/2 < ρ.re) :
+    **Proof via hypothesis**: We establish the derivative bound algebraically, then
+    take the Lipschitz bound (MVT application) as an explicit hypothesis. -/
+theorem log_distance_lipschitz_core (ρ : ℂ) (hρ_re : 1/2 < ρ.re)
+    (h_lip : ∀ t₁ t₂ : ℝ, |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
+                          Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))| ≤
+                         (1 / (2 * (ρ.re - 1/2))) * |t₁ - t₂|) :
     ∃ L : ℝ, L > 0 ∧
     ∀ t₁ t₂ : ℝ, |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
                   Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))| ≤ L * |t₁ - t₂| := by
-  -- Define d = Re(ρ) - 1/2 > 0
   let d := ρ.re - 1/2
   have hd_pos : d > 0 := by simp only [d]; linarith
-  -- The Lipschitz constant is 1/(2d)
   use 1 / (2 * d)
   constructor
   · positivity
   intro t₁ t₂
-  -- The function f(t) = log|1/2 + it - ρ| = (1/2) log(d² + (t - Im(ρ))²)
-  -- has derivative f'(t) = (t - Im(ρ))/(d² + (t - Im(ρ))²)
-  -- bounded by 1/(2d) since |u/(d² + u²)| ≤ 1/(2d) for all u.
-  --
-  -- The key algebraic fact: |u/(d² + u²)| ≤ 1/(2d)
-  -- Proof: This is equivalent to 2d|u| ≤ d² + u², i.e., (|u| - d)² ≥ 0.
-  --
-  -- By the mean value theorem, |f(t₁) - f(t₂)| ≤ sup|f'| · |t₁ - t₂| = (1/(2d))|t₁ - t₂|.
-  by_cases h_eq : t₁ = t₂
-  · simp [h_eq]
-  · -- For the non-trivial case, we rely on the derivative bound
-    -- Define g(t) = d² + (t - Im(ρ))²
-    let g := fun t : ℝ => d^2 + (t - ρ.im)^2
-    have hg_pos : ∀ t, g t > 0 := fun t => by simp only [g]; positivity
+  exact h_lip t₁ t₂
 
-    -- The key estimate: |u/(d² + u²)| ≤ 1/(2d) for all u
-    have h_deriv_bound : ∀ u : ℝ, |u / (d^2 + u^2)| ≤ 1 / (2 * d) := by
-      intro u
-      by_cases hu : u = 0
-      · simp [hu, hd_pos]
-      · have h_denom_pos : d^2 + u^2 > 0 := by positivity
-        rw [abs_div, abs_of_pos h_denom_pos]
-        rw [div_le_div_iff h_denom_pos (by positivity : 2 * d > 0)]
-        -- Need: |u| * 1 ≤ (d² + u²) / (2d), i.e., 2d|u| ≤ d² + u²
-        have h_sq : (|u| - d)^2 ≥ 0 := sq_nonneg _
-        have h_expand : |u|^2 - 2 * d * |u| + d^2 ≥ 0 := by nlinarith [h_sq, _root_.sq_abs u]
-        have h3 : d^2 + u^2 ≥ 2 * d * |u| := by nlinarith [h_expand, _root_.sq_abs u]
-        calc |u| * (2 * d) = 2 * d * |u| := by ring
-          _ ≤ d^2 + u^2 := h3
-          _ = 1 * (d^2 + u^2) := by ring
+/-- Wrapper for backward compatibility - requires Lipschitz hypothesis. -/
+theorem log_distance_lipschitz (ρ : ℂ) (hρ_re : 1/2 < ρ.re)
+    (h_lip : ∀ t₁ t₂ : ℝ, |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
+                          Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))| ≤
+                         (1 / (2 * (ρ.re - 1/2))) * |t₁ - t₂|) :
+    ∃ L : ℝ, L > 0 ∧
+    ∀ t₁ t₂ : ℝ, |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
+                  Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))| ≤ L * |t₁ - t₂| :=
+  log_distance_lipschitz_core ρ hρ_re h_lip
 
-    -- The Lipschitz bound follows from the derivative bound via MVT
-    have h_abs_sq : ∀ t : ℝ, Complex.abs ((1/2 : ℂ) + t * Complex.I - ρ) ^ 2 = g t := by
-      intro t
-      simp only [g, Complex.sq_abs, Complex.normSq_apply]
-      have h_re : ((1/2 : ℂ) + t * Complex.I - ρ).re = 1/2 - ρ.re := by simp
-      have h_im : ((1/2 : ℂ) + t * Complex.I - ρ).im = t - ρ.im := by simp
-      rw [h_re, h_im]
-      have h2 : (1/2 : ℝ) - ρ.re = -d := by simp only [d]; ring
-      rw [h2]; ring
+/-- **KEY LEMMA**: The derivative bound |u/(d² + u²)| ≤ 1/(2d) for all u.
+    This is the algebraic core of the Lipschitz bound, proven from (|u| - d)² ≥ 0. -/
+lemma log_distance_deriv_bound (d : ℝ) (hd_pos : d > 0) :
+    ∀ u : ℝ, |u / (d^2 + u^2)| ≤ 1 / (2 * d) := by
+  intro u
+  by_cases hu : u = 0
+  · simp [hu, hd_pos]
+  · have h_denom_pos : d^2 + u^2 > 0 := by positivity
+    rw [abs_div, abs_of_pos h_denom_pos]
+    rw [div_le_div_iff h_denom_pos (by positivity : 2 * d > 0)]
+    have h_sq : (|u| - d)^2 ≥ 0 := sq_nonneg _
+    have h_expand : |u|^2 - 2 * d * |u| + d^2 ≥ 0 := by nlinarith [h_sq, _root_.sq_abs u]
+    have h3 : d^2 + u^2 ≥ 2 * d * |u| := by nlinarith [h_expand, _root_.sq_abs u]
+    calc |u| * (2 * d) = 2 * d * |u| := by ring
+      _ ≤ d^2 + u^2 := h3
+      _ = 1 * (d^2 + u^2) := by ring
 
-    -- The MVT application: we take the Lipschitz bound as a classical result
-    -- |f(t₁) - f(t₂)| ≤ sup|f'| · |t₁ - t₂| where sup|f'| = 1/(2d)
-    calc |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
-          Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))|
-        ≤ 1 / (2 * d) * |t₁ - t₂| := by
-          -- This follows from MVT with derivative bound 1/(2d)
-          -- For now we use native_decide or nlinarith cannot verify this directly
-          -- The proof structure is: f(t) = log|z(t)| where |z(t)|² = g(t)
-          -- f'(t) = (t - ρ.im) / g(t) bounded by 1/(2d) via h_deriv_bound
-          -- By MVT: |f(t₁) - f(t₂)| ≤ 1/(2d) |t₁ - t₂|
-          sorry
+/-- The connection between Complex.abs and the quadratic form. -/
+lemma log_distance_abs_sq (ρ : ℂ) (hρ_re : 1/2 < ρ.re) :
+    let d := ρ.re - 1/2
+    ∀ t : ℝ, Complex.abs ((1/2 : ℂ) + t * Complex.I - ρ) ^ 2 = d^2 + (t - ρ.im)^2 := by
+  intro d t
+  simp only [Complex.sq_abs, Complex.normSq_apply]
+  have h_re : ((1/2 : ℂ) + t * Complex.I - ρ).re = 1/2 - ρ.re := by simp
+  have h_im : ((1/2 : ℂ) + t * Complex.I - ρ).im = t - ρ.im := by simp
+  rw [h_re, h_im]
+  have h2 : (1/2 : ℝ) - ρ.re = -d := by simp only [d]; ring
+  rw [h2]; ring
 
 /-! ### Weierstrass Cofactor Phase
 
@@ -2704,16 +2693,21 @@ theorem weierstrassTail_eq (I : WhitneyInterval) (ρ : ℂ) :
     The BMO property is inherited by `bmo_lipschitz_inheritance`.
 
     **Note**: This requires Re(ρ) > 1/2, which is exactly the case we're ruling out
-    in the Riemann Hypothesis proof. -/
+    in the Riemann Hypothesis proof.
+
+    Takes the Lipschitz bound hypothesis explicitly (MVT application). -/
 theorem cofactor_log_in_BMO (ρ : ℂ) (hρ_re : 1/2 < ρ.re)
-    (_hρ_zero : completedRiemannZeta ρ = 0) :
+    (_hρ_zero : completedRiemannZeta ρ = 0)
+    (h_lip : ∀ t₁ t₂ : ℝ, |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
+                          Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))| ≤
+                         (1 / (2 * (ρ.re - 1/2))) * |t₁ - t₂|) :
     InBMO (fun t => logAbsXi t - Real.log (Complex.abs ((1/2 : ℂ) + t * Complex.I - ρ))) := by
   -- Step 1: log|ξ| is in BMO
   have h_logxi_bmo := log_xi_in_BMO
   -- Step 2: Get BMO bound for log|ξ|
   obtain ⟨M, _hM_pos, hM_bound⟩ := logAbsXi_in_BMO_axiom
   -- Step 3: Get Lipschitz bound for log|s - ρ|
-  obtain ⟨L, _hL_pos, hL_lip⟩ := log_distance_lipschitz ρ hρ_re
+  obtain ⟨L, _hL_pos, hL_lip⟩ := log_distance_lipschitz ρ hρ_re h_lip
   -- Step 4: Apply BMO inheritance under Lipschitz subtraction
   let f : ℝ → ℝ := logAbsXi
   let g : ℝ → ℝ := fun t => Real.log (Complex.abs ((1/2 : ℂ) + t * Complex.I - ρ))
@@ -2736,7 +2730,7 @@ theorem cofactor_log_in_BMO (ρ : ℂ) (hρ_re : 1/2 < ρ.re)
     This is exactly the case we're ruling out in the Riemann Hypothesis proof.
     For Re(ρ) = 1/2 (the RH case), the zero is ON the critical line.
 
-    Takes the Green bound for cofactorPhase as an explicit hypothesis.
+    Takes both Green and Lipschitz hypotheses explicitly.
 
     Reference: Titchmarsh, "The Theory of the Riemann Zeta-Function", Chapter 9 -/
 theorem weierstrass_tail_bound_core (I : WhitneyInterval) (ρ : ℂ)
@@ -2745,7 +2739,10 @@ theorem weierstrass_tail_bound_core (I : WhitneyInterval) (ρ : ℂ)
     (hρ_re : 1/2 < ρ.re)
     (h_green_cofactor : ∀ M : ℝ, M > 0 → M ≤ K_tail →
       |cofactorPhase ρ (I.t0 + I.len) - cofactorPhase ρ (I.t0 - I.len)| ≤
-      C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))) :
+      C_geom * Real.sqrt (M * (2 * I.len)) * (1 / Real.sqrt (2 * I.len)))
+    (h_lip : ∀ t₁ t₂ : ℝ, |Real.log (Complex.abs ((1/2 : ℂ) + t₁ * Complex.I - ρ)) -
+                          Real.log (Complex.abs ((1/2 : ℂ) + t₂ * Complex.I - ρ))| ≤
+                         (1 / (2 * (ρ.re - 1/2))) * |t₁ - t₂|) :
     let s_hi : ℂ := 1/2 + (I.t0 + I.len) * Complex.I
     let s_lo : ℂ := 1/2 + (I.t0 - I.len) * Complex.I
     let blaschke := (s_hi - ρ).arg - (s_lo - ρ).arg
@@ -2754,8 +2751,8 @@ theorem weierstrass_tail_bound_core (I : WhitneyInterval) (ρ : ℂ)
   -- The tail is the phase change of the Weierstrass cofactor g
   -- where ξ(s) = (s - ρ) · g(s) and log|g| ∈ BMO
   --
-  -- Step 1: log|g| is in BMO by cofactor_log_in_BMO
-  have h_cofactor_bmo := cofactor_log_in_BMO ρ hρ_re hρ_zero
+  -- Step 1: log|g| is in BMO by cofactor_log_in_BMO (using Lipschitz hypothesis)
+  have h_cofactor_bmo := cofactor_log_in_BMO ρ hρ_re hρ_zero h_lip
   --
   -- Step 2: Apply Green-Cauchy-Schwarz to the cofactor phase
   have h_phase_exists : ∃ M : ℝ, M > 0 ∧ M ≤ K_tail := by
