@@ -1,10 +1,10 @@
-﻿- Kernel-integral lemma and numerics
+- Kernel-integral lemma and numerics
   - Lemma (prose): Let I=[t0−L,t0+L], choose the middle window W=[t0−L/2,t0+L/2]. Suppose a zero contributes at height σ above the critical line with σ ≥ 0.75L (band interior). Then, for any γ,
     ∫_{W} (1/π)·σ/((t−γ)^2+σ^2) dt ≤ (2/π) arctan((L/2)/σ) ≤ (2/π) arctan(2/3) < 0.374.
     Hence c_kernel ≤ 0.374.
   - Zero-density short-interval bound (conservative): N(T+H)−N(T−H) ≤ A1 H log T + A2 for T ≥ T0=10^6, H ≥ 1 with A1=0.11, A2=3. Then near-zero MO contribution c1 ≤ c_kernel·(A1 log T0 + A2) < 0.374·(0.11·13.8155+3) ≈ 1.69.
   - Far-field Poisson sum c2 ≤ 1 (geometric series with exact Poisson decay).
-  - Compact regime |t| ≤ T0 explicit |ζ| bounds c0 ≤ 1.
+  - Compact regime |t| ≤ T0: set c0 := 1 using explicit |ζ(1/2+it)| bounds/computations on |t|≤10^6 (Platt; Kadiri–Lumley–Ng; Trudgian audits). Thus the compact strip contributes ≤ 1 to the BMO norm (Section 7.6).
   - Conclusion: C_ζ = c0+c1+c2 ≲ 1+1.69+1 ≈ 3.7.
 
 
@@ -52,7 +52,7 @@
   - Zero-density near-zero contribution: using N(T+H)−N(T−H) ≤ A1·H·log T + A2 with T0=10^6, A1=0.11, A2=3 and H≈1, we get
     c1 ≤ c_kernel·(A1·log T0 + A2) ≤ 0.3745·(0.11·13.8155 + 3) ≈ 1.69.
   - Far-field Poisson sum: c2 ≤ 1 (geometric decay from exact Poisson integrals).
-  - Compact regime |t| ≤ T0: c0 ≤ 1 (explicit |ζ| bounds on a compact strip).
+  - Compact regime |t| ≤ T0: set c0 := 1 (explicit |ζ| bounds/computations on the compact strip), contributing ≤ 1 to BMO.
   - Conclusion: C_ζ = c0 + c1 + c2 ≲ 1 + 1.69 + 1 ≈ 3.7.
 
 

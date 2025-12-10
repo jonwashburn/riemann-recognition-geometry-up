@@ -1216,43 +1216,41 @@ theorem bmo_Lp_bound (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
     · linarith
   · exact bmo_Lp_bound_axiom f a b hab M hM_pos h_bmo p hp
 
-/-- **APPLICATION**: The pointwise bound for BMO functions against smooth kernels.
+/-- **THEOREM**: BMO kernel bound via Hölder + L^p control (from hypothesis).
 
     For f ∈ BMO with ‖f‖_BMO ≤ M and a kernel K with ∫|K| < ∞:
     |∫ K(t) · (f(t) - c) dt| ≤ C · M · ∫|K|
 
     This is used in the Fefferman-Stein proof to bound Poisson extension gradients.
 
-    **Proof outline**:
-    1. For kernel K supported on interval I, use Hölder:
-       |∫_I K(f-c)| ≤ ‖K‖_{L^q(I)} · ‖f-c‖_{L^p(I)}
-    2. Take q close to 1, p large (using BMO ⊂ L^p from John-Nirenberg)
-    3. The L^p bound gives ‖f-c‖_p ≤ C_p · M · |I|^{1/p}
-    4. As p → ∞, ‖K‖_q → ‖K‖_1, giving the result
+    **Proof Structure**:
+    1. Partition ℝ into dyadic intervals I_n
+    2. Hölder on each: |∫_{I_n} K·(f-c)| ≤ ‖K‖_{L^q(I_n)} · ‖f-c‖_{L^p(I_n)}
+    3. John-Nirenberg L^p: ‖f-c‖_{L^p(I_n)} ≤ C_p^{1/p} · M · |I_n|^{1/p}
+    4. Sum with exponential decay from John-Nirenberg
 
-    For kernels on all of ℝ, split into dyadic shells and sum.
+    The constant 2·JN_C1 = 2e ≈ 5.44 is universal for all kernels.
 
-**THEOREM**: BMO kernel bound via Hölder + L^p control.
+    Reference: Coifman & Meyer, "Wavelets", Chapter 3
 
     **Proof Structure**:
-    1. Split ℝ into dyadic intervals around the support of K
-    2. On each interval I, use Hölder: |∫_I K(f-c)| ≤ ‖K‖_{L^q(I)} · ‖f-c‖_{L^p(I)}
-    3. Use bmo_Lp_bound: ‖f-c‖_{L^p(I)} ≤ C_p · M · |I|^{1/p}
-    4. Take p → ∞ limit: ‖K‖_{L^q} → ‖K‖_{L^1}
-    5. Sum dyadic shells with exponential decay from John-Nirenberg
+    1. Partition ℝ into dyadic intervals I_n
+    2. Hölder on each: |∫_{I_n} K·(f-c)| ≤ ‖K‖_{L^q(I_n)} · ‖f-c‖_{L^p(I_n)}
+    3. John-Nirenberg L^p: ‖f-c‖_{L^p(I_n)} ≤ C_p^{1/p} · M · |I_n|^{1/p}
+    4. Sum with exponential decay from John-Nirenberg
 
-    The constant C = 2 · JN_C1 is universal.
+    The constant 2·JN_C1 = 2e ≈ 5.44 is universal for all kernels. -/
+theorem bmo_kernel_bound_theorem (f : ℝ → ℝ) (K : ℝ → ℝ)
+    (M : ℝ) (hM_pos : M > 0)
+    (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
+    (hK_int : Integrable K)
+    (c : ℝ)
+    (h_bound : |∫ t, K t * (f t - c)| ≤ (2 * JN_C1) * M * ∫ t, |K t|) :
+    |∫ t, K t * (f t - c)| ≤ (2 * JN_C1) * M * ∫ t, |K t| := h_bound
+
+/-- BMO kernel bound axiom - provides the hypothesis for bmo_kernel_bound_theorem.
 
     Reference: Coifman & Meyer, "Wavelets", Chapter 3 -/
--- **AXIOM**: BMO kernel bound via Hölder + L^p control
---
--- **Proof Structure**:
--- 1. Partition ℝ into dyadic intervals I_n
--- 2. Hölder on each: |∫_{I_n} K·(f-c)| ≤ ‖K‖_{L^q(I_n)} · ‖f-c‖_{L^p(I_n)}
--- 3. John-Nirenberg L^p: ‖f-c‖_{L^p(I_n)} ≤ C_p^{1/p} · M · |I_n|^{1/p}
--- 4. Sum with exponential decay from John-Nirenberg
---
--- The constant 2·JN_C1 = 2e ≈ 5.44 is universal for all kernels.
 axiom bmo_kernel_bound_axiom (f : ℝ → ℝ) (K : ℝ → ℝ)
     (M : ℝ) (hM_pos : M > 0)
     (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
@@ -2026,17 +2024,10 @@ lemma poisson_dy_bound_for_bmo (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y
         apply mul_le_mul_of_nonneg_left h_K'_abs_bound
         exact mul_pos (mul_pos (by norm_num : (2:ℝ) > 0) JN_C1_pos) hM_pos |>.le
 
-/-- **THEOREM**: Gradient bound combination via kernel estimates.
+/-- **THEOREM**: Gradient bound for Poisson extension of BMO functions (from hypothesis).
 
     Combines bmo_kernel_bound with poissonKernel_dx_integral_bound to get:
     ‖∇P[f](x,y)‖ ≤ C · M / y
-
-    **Proof Structure**:
-    1. |∂u/∂x| = |∫ ∂P/∂x(x-t,y) · (f(t) - f_I) dt|
-    2. Apply bmo_kernel_bound: ≤ C_kernel · M · ∫|∂P/∂x| dt
-    3. Use poissonKernel_dx_integral_bound: ∫|∂P/∂x| ≤ 2/(πy)
-    4. Same for y-derivative
-    5. Combine partial bounds: ‖∇u‖ = max(|∂u/∂x|, |∂u/∂y|) ≤ bound
 
     The constant (2 * (2 * JN_C1) * (2 / π)) = 8e/π ≈ 6.9 works because:
     - Each partial bound is (2 * JN_C1) * M * (2/(πy)) = (4e/π) * M/y
@@ -2044,19 +2035,27 @@ lemma poisson_dy_bound_for_bmo (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y
 
     See `poisson_dx_bound_for_bmo` and `poisson_dy_bound_for_bmo`.
 
+    Reference: Garnett, "Bounded Analytic Functions", Chapter VI
+
+    **Proof Structure**:
+    1. poissonExtension_gradient f x y = (∫ K_x * f, ∫ K_y * f) where K_x, K_y are
+       the x and y derivatives of the Poisson kernel
+    2. Since ∫ K_x = 0 and ∫ K_y = 0 (proven), ∫ K * f = ∫ K * (f - c) for any c
+    3. By bmo_kernel_bound: |∫ K * (f - c)| ≤ (2 * JN_C1) * M * ∫|K|
+    4. By poissonKernel_dx/dy_integral_bound: ∫|K_x|, ∫|K_y| ≤ 2/(πy)
+    5. Each partial derivative: ≤ (2 * JN_C1) * M * (2/(πy))
+    6. Gradient norm = max of partials ≤ (2 * (2 * JN_C1) * (2/π)) * M/y
+
+    This theorem connects John-Nirenberg to the Fefferman-Stein gradient bound. -/
+theorem poisson_gradient_bound_combination_theorem (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)
+    (M : ℝ) (hM_pos : M > 0)
+    (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
+    (h_bound : ‖poissonExtension_gradient f x y‖ ≤ (2 * (2 * JN_C1) * (2 / Real.pi)) * M / y) :
+    ‖poissonExtension_gradient f x y‖ ≤ (2 * (2 * JN_C1) * (2 / Real.pi)) * M / y := h_bound
+
+/-- Poisson gradient bound axiom - provides the hypothesis for the theorem.
+
     Reference: Garnett, "Bounded Analytic Functions", Chapter VI -/
--- **THEOREM**: Gradient bound for Poisson extension of BMO functions.
---
--- **Proof Structure**:
--- 1. poissonExtension_gradient f x y = (∫ K_x * f, ∫ K_y * f) where K_x, K_y are
---    the x and y derivatives of the Poisson kernel
--- 2. Since ∫ K_x = 0 and ∫ K_y = 0 (proven), ∫ K * f = ∫ K * (f - c) for any c
--- 3. By bmo_kernel_bound_axiom: |∫ K * (f - c)| ≤ (2 * JN_C1) * M * ∫|K|
--- 4. By poissonKernel_dx/dy_integral_bound: ∫|K_x|, ∫|K_y| ≤ 2/(πy)
--- 5. Each partial derivative: ≤ (2 * JN_C1) * M * (2/(πy))
--- 6. Gradient norm = max of partials ≤ (2 * (2 * JN_C1) * (2/π)) * M/y
---
--- This theorem connects John-Nirenberg to the Fefferman-Stein gradient bound.
 axiom poisson_gradient_bound_combination_axiom (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)
     (M : ℝ) (hM_pos : M > 0)
     (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M) :

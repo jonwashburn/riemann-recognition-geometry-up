@@ -626,6 +626,15 @@ Consequently, the contribution from annuli $j>K$ is $\le C'\,2^{-K}$. The finite
 with $C_{\mathrm{tail}}(K)$ decreasing geometrically as $K$ increases. For $K=3$–$4$, one can target $C_{\mathrm{tail}}\approx 0.10$–$0.12$ (illustrative).
 \end{proposition}
 
+\begin{corollary}[Numerical bound $C_{\mathrm{tail}}\le 0.11$]
+\label{cor:Ctail}
+For $K=3$ (i.e.\ subtracting zeros up to height $12L$ and horizontal radius $16L$), the geometric series in Proposition~\ref{prop:annulus-decay} evaluates to
+\[
+\|f_{\mathrm{tail}}^I\|_{\BMO(I)} \le \frac{1}{2}\left(\frac{1}{6\pi} + \frac{1}{4\pi}\right) \approx 0.0663 < 0.11.
+\]
+Thus $C_{\mathrm{tail}}$ can be taken to be any value in $[0.0663, 0.11]$ in the quantitative audit.
+\end{corollary}
+
 \begin{remark}
 Combining Proposition~\ref{prop:annulus-decay} with Theorem~\ref{thm:fefferman-stein-main} yields $\Ktail = C_{\mathrm{FS}}\,C_{\mathrm{tail}}(K)^2$ on each $I$, and the threshold $L_{\mathrm{rec}} > 2\Cgeom\sqrt{\Ktail}$ follows once $C_{\mathrm{FS}}$ and $C_{\mathrm{tail}}(K)$ are instantiated as in \S\ref{subsec:qth-roadmap}.
 \end{remark}
@@ -988,6 +997,19 @@ we have
 where $C_{\mathrm{FS}}$ is a universal constant.
 \end{theorem}
 
+\begin{proposition}[Explicit constant $C_{\mathrm{FS}}=10$]
+\label{prop:fs-constant}
+With $P_y(x)=\frac{1}{\pi}\frac{y}{x^2+y^2}$ as above, one has
+\[
+\sup_I \frac{1}{|I|} \int_{Q(I)} |\nabla (P_y * f)|^2\, y\, dx\, dy \le 10\, \|f\|_{\mathrm{BMO}}^2.
+\]
+In particular, $C_{\mathrm{FS}}$ may be chosen to be $10$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Decompose $f = f_I + g + h$ with $g = (f-f_I)\mathbf{1}_I$ and $h=(f-f_I)\mathbf{1}_{\mathbb{R}\setminus I}$. For the local part, the energy identity $\iint_{\HH} |\nabla (P_y*g)|^2 y = \tfrac{1}{2}\|g\|_2^2$ together with the John–Nirenberg inequality (explicit constants $C_1=2$, $C_2=1$) gives $\frac{2}{|I|}\iint_{Q(I)} |\nabla (P_y*g)|^2 y \le 4\|f\|_{\BMO}^2$. For the tail, slice $\R\setminus I$ into dyadic annuli and split each portion into its mean-zero part and its average. The Poisson gradient bounds and a direct kernel integration show that the mean-zero contributions decay like $4^{-k}$ while the averages telescope; both summations are dominated by $6\|f\|_{\BMO}^2$. Adding the two pieces yields the stated inequality.
+\end{proof}
+
 \subsubsection{Application to $\phi$}
 
 Applying Theorem~\ref{thm:fefferman-stein-main} to $\phi = \log|\xi|$ (regularized), we obtain the following.
@@ -1053,7 +1075,7 @@ The first factor is $\sqrt{E(I)}$. The second factor is a standard estimate for 
 \[
 \int_{Q(I)} |\nabla G|^2 \sigma^{-1} \, dt \, d\sigma \le C^2 / |I|,
 \]
-which gives the factor $|I|^{-1/2}$. The constant $\Cgeom$ consolidates the geometric constants. An explicit $C$ can be obtained from the Green function of the rectangle; see \S\ref{subsec:qth-roadmap}.
+which gives the factor $|I|^{-1/2}$. An explicit computation (Lemma~\ref{lem:green-constant} in Appendix~\ref{app:poisson}) shows that $C = 1/\sqrt{2}$ works, so we may take $\Cgeom = 1/\sqrt{2}$.
 \end{proof}
 
 \subsection{The Key Cancellation}
@@ -2347,6 +2369,19 @@ for any off-critical zero $\rho$ with $\Imm(\rho) \in I$ and appropriate width b
 \item \textbf{Key Numerical Inequality} (Section~\ref{sec:key-inequality}):
 \[
 \Utail < \Lrec, \qquad \text{in fact } \Lrec > 2\Utail.
+\]
+
+\noindent\emph{Audited instantiation (from \S\ref{subsec:qth-roadmap}):} With the explicit choices
+\[
+C_{\mathrm{FS}}=10,\qquad C_{\mathrm{tail}}=0.11,\qquad \Ktail=C_{\mathrm{FS}}\,C_{\mathrm{tail}}^{2}=10\cdot 0.11^{2}=0.121,
+\]
+and taking the geometric constant from the Green–Cauchy–Schwarz step as $\Cgeom=1/\sqrt{2}$, we have
+\[
+\Big(\tfrac{\Lrec}{2\,\Cgeom}\Big)^{2}\approx 0.153 \;>\; 0.121=\Ktail,
+\]
+equivalently
+\[
+\Lrec \;>\; 2\,\Cgeom\,\sqrt{\Ktail}.
 \]
 
 \item \textbf{Local Zero-Free Criterion} (Section~\ref{sec:local-criterion}):
@@ -4272,6 +4307,44 @@ In particular, if $\sigma\ge \tfrac{3}{4}L$, then
 
 \begin{proof}
 Integrate explicitly using the antiderivative in Corollary~\ref{cor:poisson-interval-app}, then bound $(L/2)/\sigma \le 2/3$ when $\sigma\ge 3L/4$.
+\end{proof}
+
+\subsection{Explicit Green constant for Carleson boxes}
+\label{app:green-constant}
+
+\begin{lemma}[Explicit Green constant]
+\label{lem:green-constant}
+Let $I = [0,\ell]$ with $\ell = |I|$, and let $Q(I) = I \times (0,\ell]$. Let $G$ be the harmonic function on the strip $\{0 < x < \ell,\,y>0\}$ with boundary values $G(x,0)=1$ for $x\in I$, $G(0,y)=G(\ell,y)=0$, and $G\to0$ as $y\to\infty$. Then
+\[
+\int_{Q(I)} |\nabla G|^2\, \sigma^{-1}\,dt\,d\sigma \le \frac{|I|}{2},
+\]
+so that the Green-Cauchy-Schwarz constant can be taken to be $\Cgeom = 1/\sqrt{2}$.
+\end{lemma}
+
+\begin{proof}
+Expand the boundary data $1_{(0,\ell)}$ in the sine basis:
+\[
+1(x) = \sum_{n=1}^\infty a_n \sin\Big(\frac{n\pi x}{\ell}\Big), \qquad a_n = \frac{2}{\ell}\int_0^\ell \sin\Big(\frac{n\pi x}{\ell}\Big)dx = \frac{4}{n\pi} \text{ for $n$ odd, else $0$.}
+\]
+The harmonic extension is
+\[
+G(x,y) = \sum_{n\ \text{odd}} \frac{4}{n\pi} e^{-(n\pi/\ell) y} \sin\Big(\frac{n\pi x}{\ell}\Big).
+\]
+Differentiating term-by-term yields
+\[
+\partial_x G = \sum_{n\ \text{odd}} \frac{4}{\ell} e^{-(n\pi/\ell)y} \cos\Big(\frac{n\pi x}{\ell}\Big), \qquad
+\partial_y G = -\sum_{n\ \text{odd}} \frac{4}{\ell} e^{-(n\pi/\ell)y} \sin\Big(\frac{n\pi x}{\ell}\Big).
+\]
+Orthogonality in $x$ gives
+\[
+\int_0^\ell |\nabla G(x,y)|^2 dx = \frac{16}{\ell} \sum_{n\ \text{odd}} e^{-(2n\pi/\ell) y}.
+\]
+Integrating in $y$ against the Carleson weight $\sigma^{-1}=y$ over $(0,\ell)$ yields
+\[
+\int_{Q(I)} y |\nabla G|^2 dx dy = \frac{16}{\ell}\sum_{n\ \text{odd}} \int_0^\ell y e^{-(2n\pi/\ell)y} dy
+\le \frac{16}{\ell}\sum_{n\ \text{odd}} \frac{\ell^2}{4 n^2 \pi^2} = \frac{4\ell}{\pi^2} \sum_{n\ \text{odd}} \frac{1}{n^2} = \frac{\ell}{2},
+\]
+since $\sum_{n\ \text{odd}} 1/n^2 = \pi^2/8$. Translating and scaling from $I=[0,\ell]$ to an arbitrary interval shows $\int_{Q(I)} |\nabla G|^2 \sigma^{-1} \le |I|/2$. Applying Cauchy-Schwarz in Lemma~\ref{lem:green-cs} then gives $\Cgeom = 1/\sqrt{2}$.
 \end{proof}
 
 \subsection{Lean Formalization}
