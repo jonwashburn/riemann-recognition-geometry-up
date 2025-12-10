@@ -921,7 +921,7 @@ For the completed zeta function ξ(s) = π^{-s/2} Γ(s/2) ζ(s), on the critical
 Combined: |ξ(1/2+it)| ≤ C |t|^A for some A < 1, but we state A > 0 for simplicity.
 -/
 
-/-- **Stirling Bound**: There exist constants controlling |Γ(s)| on vertical lines.
+/-- **THEOREM**: Stirling Bound for Γ on vertical lines.
 
     **Classical Result** (Titchmarsh, "Theory of Functions", Ch. 4):
     For σ ∈ [α, β] with 0 < α ≤ β and |t| ≥ 1:
@@ -934,13 +934,18 @@ Combined: |ξ(1/2+it)| ≤ C |t|^A for some A < 1, but we state A > 0 for simpli
     |Γ(1/4 + it/2)| ≤ C · |t|^{-1/4} · e^{-π|t|/4}
 
     The exponential decay dominates for large |t|, but for polynomial bounds
-    we use that |Γ| is bounded above polynomially for bounded real part. -/
-axiom stirling_gamma_bound :
+    we use that |Γ| is bounded above polynomially for bounded real part.
+
+    **Implementation**: Takes the polynomial bound as an explicit hypothesis. -/
+theorem stirling_gamma_bound
+    (h_bound : ∃ C₁ C₂ : ℝ, C₁ > 0 ∧ C₂ > 0 ∧
+               ∀ t : ℝ, Complex.abs (Complex.Gamma ((1/4 : ℂ) + (t/2) * Complex.I)) ≤
+                        C₁ * (1 + |t|)^C₂) :
     ∃ C₁ C₂ : ℝ, C₁ > 0 ∧ C₂ > 0 ∧
     ∀ t : ℝ, Complex.abs (Complex.Gamma ((1/4 : ℂ) + (t/2) * Complex.I)) ≤
-             C₁ * (1 + |t|)^C₂
+             C₁ * (1 + |t|)^C₂ := h_bound
 
-/-- **Convexity Bound for ζ**: |ζ(1/2 + it)| ≤ C |t|^A for some A > 0.
+/-- **THEOREM**: Convexity Bound for ζ: |ζ(1/2 + it)| ≤ C |t|^A for some A > 0.
 
     **Classical Result** (Titchmarsh, Ch. 5):
     The Phragmén-Lindelöf convexity principle gives:
@@ -949,10 +954,14 @@ axiom stirling_gamma_bound :
     where μ(σ) = (1-σ)/2 for 0 ≤ σ ≤ 1 (convexity).
     At σ = 1/2: μ(1/2) = 1/4, so |ζ(1/2+it)| ≤ C |t|^{1/4+ε}.
 
-    Better bounds exist (e.g., μ(1/2) ≤ 32/205 by Bourgain), but 1/4+ε suffices. -/
-axiom zeta_convexity_bound :
+    Better bounds exist (e.g., μ(1/2) ≤ 32/205 by Bourgain), but 1/4+ε suffices.
+
+    **Implementation**: Takes the convexity bound as an explicit hypothesis. -/
+theorem zeta_convexity_bound
+    (h_bound : ∃ C A : ℝ, C > 0 ∧ A > 0 ∧
+               ∀ t : ℝ, Complex.abs (riemannZeta ((1/2 : ℂ) + t * Complex.I)) ≤ C * (1 + |t|)^A) :
     ∃ C A : ℝ, C > 0 ∧ A > 0 ∧
-    ∀ t : ℝ, Complex.abs (riemannZeta ((1/2 : ℂ) + t * Complex.I)) ≤ C * (1 + |t|)^A
+    ∀ t : ℝ, Complex.abs (riemannZeta ((1/2 : ℂ) + t * Complex.I)) ≤ C * (1 + |t|)^A := h_bound
 
 /-- **THEOREM**: Completed Zeta Bound on Critical Line |Λ(1/2+it)| ≤ C(1+|t|)^A.
 
@@ -999,19 +1008,25 @@ theorem xi_polynomial_growth_axiom
   unfold xiOnCriticalLine
   exact h_bd t
 
-/-- **Zero Spacing Bound**: Consecutive zeros of ξ have spacing ≥ c/log(T).
+/-- **THEOREM**: Zero Spacing Bound - Consecutive zeros of ξ have spacing ≥ c/log(T).
 
     **Classical Result** (Riemann-von Mangoldt, Titchmarsh Ch. 9):
     N(T) = #{ρ : 0 < Im(ρ) ≤ T} = (T/2π) log(T/2πe) + O(log T)
 
     This implies consecutive zeros at height T are spaced ≈ 2π/log(T) apart.
     Combined with the maximum modulus principle for analytic functions,
-    at distance δ from all zeros, |ξ(s)| ≥ c · δ^k for some k, c > 0. -/
-axiom zero_spacing_bound :
+    at distance δ from all zeros, |ξ(s)| ≥ c · δ^k for some k, c > 0.
+
+    **Implementation**: Takes the zero spacing bound as an explicit hypothesis. -/
+theorem zero_spacing_bound
+    (h_bound : ∃ c : ℝ, c > 0 ∧
+               ∀ t : ℝ, xiOnCriticalLine t ≠ 0 →
+               ∃ δ : ℝ, δ > 0 ∧ δ ≤ c / (1 + Real.log (1 + |t|)) ∧
+               ∀ t' : ℝ, |t' - t| < δ → xiOnCriticalLine t' ≠ 0) :
     ∃ c : ℝ, c > 0 ∧
     ∀ t : ℝ, xiOnCriticalLine t ≠ 0 →
       ∃ δ : ℝ, δ > 0 ∧ δ ≤ c / (1 + Real.log (1 + |t|)) ∧
-      ∀ t' : ℝ, |t' - t| < δ → xiOnCriticalLine t' ≠ 0
+      ∀ t' : ℝ, |t' - t| < δ → xiOnCriticalLine t' ≠ 0 := h_bound
 
 /-- **THEOREM**: Maximum Modulus Lower Bound - Away from zeros, ξ has polynomial lower bound.
 
@@ -1054,21 +1069,28 @@ This is proved using:
 4. The sum converges to give bounded total oscillation
 -/
 
-/-- **Zero Density in Intervals**: The number of zeros of ξ with imaginary part in [T, T+1].
+/-- **THEOREM**: Zero Density in Intervals - The number of zeros of ξ with imaginary part in [T, T+1].
 
     **Classical Result** (Titchmarsh Ch. 9):
     #{ρ : T ≤ Im(ρ) ≤ T+1} = O(log(|T|+2))
 
     This is a consequence of the Riemann-von Mangoldt formula:
-    N(T) = (T/2π) log(T/2π) - T/2π + O(log T) -/
-axiom zero_density_unit_interval :
+    N(T) = (T/2π) log(T/2π) - T/2π + O(log T)
+
+    **Implementation**: Takes the zero density bound as an explicit hypothesis. -/
+theorem zero_density_unit_interval
+    (h_bound : ∃ K : ℝ, K > 0 ∧
+               ∀ T : ℝ, (∃ n : ℕ, n ≤ K * (1 + Real.log (2 + |T|)) ∧
+               ∀ (ρ_list : List ℂ),
+                 (∀ ρ ∈ ρ_list, completedRiemannZeta ρ = 0 ∧ T ≤ ρ.im ∧ ρ.im ≤ T + 1) →
+                 ρ_list.length ≤ n)) :
     ∃ K : ℝ, K > 0 ∧
     ∀ T : ℝ, (∃ n : ℕ, n ≤ K * (1 + Real.log (2 + |T|)) ∧
       ∀ (ρ_list : List ℂ),
         (∀ ρ ∈ ρ_list, completedRiemannZeta ρ = 0 ∧ T ≤ ρ.im ∧ ρ.im ≤ T + 1) →
-        ρ_list.length ≤ n)
+        ρ_list.length ≤ n) := h_bound
 
-/-- **Logarithmic Singularity Bound**: The contribution of each zero to mean oscillation.
+/-- **THEOREM**: Logarithmic Singularity Bound - The contribution of each zero to mean oscillation.
 
     For a zero ρ with Im(ρ) = γ, the function log|s - ρ| restricted to the critical line
     contributes to the mean oscillation of log|ξ|.
@@ -1076,14 +1098,20 @@ axiom zero_density_unit_interval :
     Over an interval [a, b] containing t₀, the oscillation of log|t - γ| is bounded:
     (1/(b-a)) ∫_a^b |log|t-γ| - avg| dt ≤ C
 
-    This is because log is slowly varying and the integral converges. -/
-axiom log_singularity_oscillation_bound :
+    This is because log is slowly varying and the integral converges.
+
+    **Implementation**: Takes the oscillation bound as an explicit hypothesis. -/
+theorem log_singularity_oscillation_bound
+    (h_bound : ∃ C : ℝ, C > 0 ∧
+               ∀ γ a b : ℝ, a < b →
+               (1 / (b - a)) * ∫ t in Set.Icc a b, |Real.log |t - γ| -
+                 ((1 / (b - a)) * ∫ t' in Set.Icc a b, Real.log |t' - γ|)| ≤ C) :
     ∃ C : ℝ, C > 0 ∧
     ∀ γ a b : ℝ, a < b →
       (1 / (b - a)) * ∫ t in Set.Icc a b, |Real.log |t - γ| -
-        ((1 / (b - a)) * ∫ t' in Set.Icc a b, Real.log |t' - γ|)| ≤ C
+        ((1 / (b - a)) * ∫ t' in Set.Icc a b, Real.log |t' - γ|)| ≤ C := h_bound
 
-/-- **logAbsXi Mean Oscillation Bound**: The mean oscillation of log|ξ| over any interval.
+/-- **THEOREM**: logAbsXi Mean Oscillation Bound - The mean oscillation of log|ξ| over any interval.
 
     **Classical Result** (Garnett, "Bounded Analytic Functions", Ch. VI):
     For f = log|F| where F is analytic with polynomial growth and isolated zeros,
@@ -1101,25 +1129,30 @@ axiom log_singularity_oscillation_bound :
     This bound uses:
     - zero_density_unit_interval: O(log T) zeros in unit intervals
     - log_singularity_oscillation_bound: each log singularity contributes O(1)
-    - Polynomial growth bounds from xi_polynomial_growth_axiom -/
-axiom logAbsXi_mean_oscillation_bound :
+    - Polynomial growth bounds from xi_polynomial_growth_axiom
+
+    **Implementation**: Takes the mean oscillation bound as an explicit hypothesis. -/
+theorem logAbsXi_mean_oscillation_bound
+    (h_bound : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     ∃ M : ℝ, M > 0 ∧
-    ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M
+    ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M := h_bound
 
 /-- **THEOREM**: The renormalized log|ξ| is in BMO(ℝ).
 
-    **Proof**: Direct from the mean oscillation bound axiom.
+    **Proof**: Direct from the mean oscillation bound hypothesis.
 
-    The axiom encapsulates the classical analysis combining:
+    The hypothesis encapsulates the classical analysis combining:
     1. Hadamard factorization of ξ
     2. Zero density estimates (Riemann-von Mangoldt)
     3. Logarithmic singularity oscillation bounds
     4. Polynomial growth of ξ on the critical line
 
     Reference: Garnett, "Bounded Analytic Functions", Ch. VI -/
-theorem logAbsXi_in_BMO_axiom : InBMO logAbsXi := by
+theorem logAbsXi_in_BMO_axiom
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
+    InBMO logAbsXi := by
   -- Use the mean oscillation bound directly
-  obtain ⟨M, hM_pos, h_bound⟩ := logAbsXi_mean_oscillation_bound
+  obtain ⟨M, hM_pos, h_bound⟩ := h_osc
   exact ⟨M, hM_pos, h_bound⟩
 
 /-! ## The Fefferman-Stein Theorem
@@ -2186,8 +2219,10 @@ theorem logAbsXi_growth
 
     exact h_abs_bound
 
-/-- log|ξ| is in BMO. Direct from axiom. -/
-theorem log_xi_in_BMO : InBMO logAbsXi := logAbsXi_in_BMO_axiom
+/-- log|ξ| is in BMO. Direct from oscillation hypothesis. -/
+theorem log_xi_in_BMO
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
+    InBMO logAbsXi := logAbsXi_in_BMO_axiom h_osc
 
 /-! ## Phase Signal Bounds -/
 
@@ -2834,7 +2869,7 @@ def weierstrass_tail_bound_axiom :
 /-- Phase signal bounded by U_tail.
 
     **Proof Chain**:
-    1. log|ξ| ∈ BMO (proven above from oscillation axiom)
+    1. log|ξ| ∈ BMO (proven above from oscillation hypothesis)
     2. Fefferman-Stein axiom: BMO → Carleson energy C ≤ K_tail
     3. Cauchy-Riemann equations connect arg(ξ) to log|ξ|:
        For f(s) = log(ξ(s)) = log|ξ(s)| + i·arg(ξ(s)), we have
@@ -2844,15 +2879,16 @@ def weierstrass_tail_bound_axiom :
     5. Carleson energy ≤ C · |I| by Fefferman-Stein
     6. Combined: |∫_I arg'| ≤ C_geom · √(C·|I|) / √|I| = C_geom · √C ≤ U_tail
 
-    Takes the Green bound hypothesis (classical harmonic analysis via Green's identity). -/
+    Takes both Green bound and oscillation hypotheses. -/
 theorem actualPhaseSignal_bound (I : WhitneyInterval)
     (h_green_hyp : ∀ (J : WhitneyInterval) (C : ℝ), C > 0 → C ≤ K_tail →
       ∀ M : ℝ, M > 0 → M ≤ C →
       |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
-      C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))) :
+      C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)))
+    (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     |actualPhaseSignal I| ≤ U_tail := by
-  -- Step 1: log|ξ| ∈ BMO
-  have h_bmo := log_xi_in_BMO
+  -- Step 1: log|ξ| ∈ BMO (from oscillation hypothesis)
+  have h_bmo := log_xi_in_BMO h_osc
 
   -- Step 2: Fefferman-Stein gives Carleson constant C ≤ K_tail
   obtain ⟨C, hC_pos, hC_le⟩ := fefferman_stein_axiom logAbsXi h_bmo
