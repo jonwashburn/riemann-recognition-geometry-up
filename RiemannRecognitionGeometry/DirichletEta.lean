@@ -801,33 +801,70 @@ lemma tendsto_factor_div_at_one :
     Filter.Tendsto (fun s : ℝ => (1 - (2 : ℝ)^(1-s)) / (s - 1))
       (nhdsWithin 1 {s | s ≠ 1}) (nhds (Real.log 2)) := by
   have h_deriv := hasDerivAt_one_minus_two_pow_at_one
-  -- The proof uses hasDerivAt_iff_tendsto_slope to convert the derivative
-  -- to a limit statement. The API for slope uses vsub which needs conversion.
-  sorry
+  rw [hasDerivAt_iff_tendsto_slope] at h_deriv
+  have h_f_one : (fun s : ℝ => 1 - (2 : ℝ)^(1-s)) 1 = 0 := by simp
+  have h_slope_eq : ∀ s : ℝ, s ≠ 1 →
+      slope (fun t => 1 - (2 : ℝ)^(1-t)) 1 s = (1 - (2 : ℝ)^(1-s)) / (s - 1) := fun s _ => by
+    simp only [slope, vsub_eq_sub, h_f_one, sub_zero, smul_eq_mul, mul_comm, div_eq_mul_inv]
+  apply Filter.Tendsto.congr' _ h_deriv
+  rw [Filter.EventuallyEq]
+  apply Filter.eventually_of_mem self_mem_nhdsWithin
+  intro s hs
+  simp only [Set.mem_compl_iff, Set.mem_singleton_iff] at hs
+  exact h_slope_eq s hs
 
-/-- **AXIOM**: The limit of (1 - 2^{1-s}) * ζ(s) as s → 1 equals log(2).
+/-- Helper: (s-1) * Re(ζ(s)) → 1 as s → 1 for real s. -/
+lemma tendsto_residue_zeta_real :
+    Filter.Tendsto (fun s : ℝ => (s - 1) * (riemannZeta (s : ℂ)).re)
+      (nhdsWithin 1 {s | s ≠ 1}) (nhds 1) := by
+  have h_complex := riemannZeta_residue_one
+  have h_embed : Filter.Tendsto (fun s : ℝ => (s : ℂ)) (nhdsWithin 1 {s | s ≠ 1})
+      (nhdsWithin 1 {s | s ≠ 1}) :=
+    continuous_ofReal.continuousWithinAt.tendsto_nhdsWithin (fun s hs => by
+      simp only [Set.mem_setOf_eq] at hs ⊢
+      intro h; apply hs; exact Complex.ofReal_injective h)
+  have h_comp := h_complex.comp h_embed
+  have h_re_cont : Filter.Tendsto Complex.re (nhds (1 : ℂ)) (nhds (1 : ℝ)) :=
+    Complex.continuous_re.continuousAt
+  have h_re_limit := h_re_cont.comp h_comp
+  apply h_re_limit.congr
+  intro s
+  simp only [Function.comp_apply, Complex.ofReal_sub, Complex.ofReal_one, Complex.mul_re,
+    Complex.sub_re, Complex.one_re, Complex.ofReal_re, Complex.sub_im, Complex.one_im,
+    Complex.ofReal_im, sub_zero, mul_zero, sub_self, zero_mul]
 
-    **Mathematical content**:
-    1. From `riemannZeta_residue_one` in Mathlib: (s-1)·ζ(s) → 1 as s → 1
-    2. From `tendsto_factor_div_at_one` (proven): (1 - 2^{1-s})/(s-1) → log(2) as s → 1
-    3. Product decomposition:
-       (1 - 2^{1-s})·ζ(s) = [(1 - 2^{1-s})/(s-1)] · [(s-1)·ζ(s)]
-    4. By Tendsto.mul: limit = log(2) · 1 = log(2)
+/-- The limit of (1 - 2^{1-s}) * ζ(s) as s → 1 equals log(2).
 
-    **Why still an axiom**: The composition with riemannZeta_residue_one requires
-    handling the complex → real conversion and the filter composition.
-    The key mathematical steps are proven in `tendsto_factor_div_at_one`.
+    Uses product decomposition:
+    (1 - 2^{1-s})·ζ(s) = [(1 - 2^{1-s})/(s-1)] · [(s-1)·ζ(s)]
+    As s → 1: log(2) · 1 = log(2)
 
     **Reference**: Edwards, "Riemann's Zeta Function", Ch. 1; Titchmarsh §2.1 -/
-axiom tendsto_factor_mul_zeta_at_one_axiom :
+theorem tendsto_factor_mul_zeta_at_one_theorem :
     Filter.Tendsto (fun s : ℝ => (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re)
-      (nhdsWithin 1 {s | s ≠ 1}) (nhds (Real.log 2))
+      (nhdsWithin 1 {s | s ≠ 1}) (nhds (Real.log 2)) := by
+  have h_eq : ∀ s : ℝ, s ≠ 1 →
+      (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re =
+      ((1 - (2 : ℝ)^(1-s)) / (s - 1)) * ((s - 1) * (riemannZeta (s : ℂ)).re) := by
+    intro s hs
+    have h_ne : s - 1 ≠ 0 := sub_ne_zero.mpr hs
+    field_simp; ring
+  have h1 := tendsto_factor_div_at_one
+  have h2 := tendsto_residue_zeta_real
+  have h_prod := h1.mul h2
+  simp only [mul_one] at h_prod
+  apply h_prod.congr'
+  rw [Filter.EventuallyEq]
+  apply Filter.eventually_of_mem self_mem_nhdsWithin
+  intro s hs
+  simp only [Set.mem_compl_iff, Set.mem_singleton_iff] at hs
+  exact (h_eq s hs).symm
 
-/-- The limit theorem (from axiom). -/
+/-- The limit theorem. -/
 lemma tendsto_factor_mul_zeta_at_one :
     Filter.Tendsto (fun s : ℝ => (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re)
       (nhdsWithin 1 {s | s ≠ 1}) (nhds (Real.log 2)) :=
-  tendsto_factor_mul_zeta_at_one_axiom
+  tendsto_factor_mul_zeta_at_one_theorem
 
 /-! ### Proof that η(1) = log(2) via Abel's Limit Theorem
 
@@ -965,10 +1002,33 @@ lemma etaPartialSum_uniform_bound {a : ℝ} (ha : 0 < a) (N : ℕ) (s : ℝ) (hs
     This follows from uniform convergence of partial sums on compact subsets.
     The proof uses ε/3 argument with triangle inequality and uniform bounds. -/
 theorem continuousOn_dirichletEtaReal_Ioi : ContinuousOn dirichletEtaReal (Set.Ioi 0) := by
-  -- Proof uses ε/3 argument with uniform convergence of partial sums.
-  -- Uses etaPartialSum_uniform_bound and continuous_etaPartialSum.
-  -- API for triangle inequality (abs_sub_le) has version variations.
-  sorry
+  apply continuousOn_of_locally_uniform_approx_of_continuousWithinAt
+  intro x hx u hu
+  rw [Metric.mem_uniformity_dist] at hu
+  obtain ⟨ε, hε_pos, hε⟩ := hu
+  have hx_pos : 0 < x := hx
+  set a := x / 2 with ha_def
+  have ha : 0 < a := by simp only [ha_def]; linarith
+  have h_tendsto : Filter.Tendsto (fun N : ℕ => 1 / ((N : ℝ) + 1)^a) Filter.atTop (nhds 0) :=
+    one_div_rpow_tendsto_zero a ha
+  rw [Metric.tendsto_atTop] at h_tendsto
+  obtain ⟨N₀, hN₀⟩ := h_tendsto ε hε_pos
+  refine ⟨Set.Ioi a, ?_, etaPartialSum N₀, ?_, ?_⟩
+  · apply mem_nhdsWithin_of_mem_nhds
+    apply Ioi_mem_nhds
+    simp only [ha_def]; linarith
+  · exact (continuous_etaPartialSum N₀).continuousWithinAt
+  · intro y hy
+    apply hε
+    rw [Real.dist_eq]
+    have hy_ge_a : a ≤ y := le_of_lt hy
+    have h_bound := etaPartialSum_uniform_bound ha N₀ y hy_ge_a
+    have h_N₀_bound : 1 / ((N₀ : ℝ) + 1)^a < ε := by
+      specialize hN₀ N₀ (le_refl N₀)
+      rw [Real.dist_eq, sub_zero] at hN₀
+      have h_pos : 0 < 1 / ((N₀ : ℝ) + 1)^a := one_div_rpow_nat_succ_pos a N₀
+      rwa [abs_of_pos h_pos] at hN₀
+    linarith
 
 /-- η is continuous at any point s > 0. -/
 theorem continuousAt_dirichletEtaReal {s : ℝ} (hs : 0 < s) :

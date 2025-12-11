@@ -544,6 +544,53 @@ theorem czDecomposition_exists (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
     (h_exists : ∃ _cz : CZDecomposition f (Icc a b) t, True) :
     ∃ _cz : CZDecomposition f (Icc a b) t, True := h_exists
 
+/-! ### Calderón-Zygmund Construction Machinery -/
+
+/-- A dyadic interval is "bad" at threshold t if its average exceeds t. -/
+def DyadicInterval.isBadAt (D : DyadicInterval) (f : ℝ → ℝ) (t : ℝ) : Prop :=
+  setAverage (|f ·|) D.toSet > t
+
+/-- A dyadic interval is contained in [a,b]. -/
+def DyadicInterval.isContainedIn (D : DyadicInterval) (a b : ℝ) : Prop :=
+  D.left ≥ a ∧ D.right ≤ b
+
+/-- A dyadic interval is "maximal bad" if bad and parent is good or outside. -/
+def DyadicInterval.isMaximalBadAt (D : DyadicInterval) (f : ℝ → ℝ) (t : ℝ) (a b : ℝ) : Prop :=
+  D.isBadAt f t ∧ D.isContainedIn a b ∧
+  (¬ D.parent.isContainedIn a b ∨ ¬ D.parent.isBadAt f t)
+
+/-- The set of maximal bad dyadic intervals. -/
+def maximalBadIntervals (f : ℝ → ℝ) (a b : ℝ) (t : ℝ) : Set DyadicInterval :=
+  { D | D.isMaximalBadAt f t a b }
+
+/-- Dyadic trichotomy: disjoint, equal, or one contains the other.
+
+    **Proof sketch**:
+    - Same generation, same index → equal
+    - Same generation, different index → disjoint (intervals partition ℝ)
+    - Different generation, overlapping → finer ⊆ coarser -/
+lemma DyadicInterval.trichotomy (D₁ D₂ : DyadicInterval) :
+    Disjoint D₁.toSet D₂.toSet ∨ D₁ = D₂ ∨ D₁.toSet ⊆ D₂.toSet ∨ D₂.toSet ⊆ D₁.toSet := by
+  -- This is a fundamental property of dyadic intervals
+  -- Full proof requires careful case analysis on generations and indices
+  sorry
+
+/-- Maximal bad intervals are pairwise disjoint. -/
+lemma maximalBad_disjoint (f : ℝ → ℝ) (a b : ℝ) (t : ℝ)
+    (D₁ D₂ : DyadicInterval) (hD₁ : D₁.isMaximalBadAt f t a b)
+    (hD₂ : D₂.isMaximalBadAt f t a b) (hne : D₁ ≠ D₂) :
+    Disjoint D₁.toSet D₂.toSet := by
+  rcases DyadicInterval.trichotomy D₁ D₂ with hDisj | hEq | hSub | hSup
+  · exact hDisj
+  · exact absurd hEq hne
+  all_goals { exfalso; sorry }
+
+/-- Dyadic doubling: child average ≤ 2 × parent average. -/
+lemma DyadicInterval.avg_doubling (D : DyadicInterval) (f : ℝ → ℝ) :
+    setAverage (|f ·|) D.leftChild.toSet ≤ 2 * setAverage (|f ·|) D.toSet ∧
+    setAverage (|f ·|) D.rightChild.toSet ≤ 2 * setAverage (|f ·|) D.toSet := by
+  sorry
+
 /-- CZ decomposition theorem (Calderón-Zygmund).
 
     **Proof** (Dyadic Decomposition):
