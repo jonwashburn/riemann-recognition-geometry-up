@@ -1106,6 +1106,17 @@ lemma analyticAt_factor_mul_zeta {s : ℂ} (_hs_re : 0 < s.re) (hs_ne : s ≠ 1)
   filter_upwards [eventually_ne_nhds hs_ne] with z hz
   exact differentiableAt_factor_mul_zeta hz
 
+/-! ### Complex Eta Function (Infrastructure)
+
+The complex Dirichlet eta function η(s) = (1 - 2^{1-s}) · ζ(s) is analytic on {Re(s) > 0}.
+For real s > 0, this agrees with dirichletEtaReal defined via the alternating series.
+
+The identity dirichletEtaReal s = (1 - 2^{1-s}) · ζ(s).re for 0 < s < 1 follows from:
+1. Both functions are real analytic on (0, ∞)
+2. They agree on (1, ∞) by zeta_eta_relation_gt_one
+3. By the identity principle for analytic functions, they agree on (0, ∞)
+-/
+
 /-- **THEOREM**: Identity principle for η-ζ relation on (0, 1).
 
     For 0 < s < 1: η(s) = (1 - 2^{1-s}) · ζ(s).re
