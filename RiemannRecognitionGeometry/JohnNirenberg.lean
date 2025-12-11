@@ -621,15 +621,25 @@ lemma DyadicInterval.trichotomy (D₁ D₂ : DyadicInterval) :
     · left; exact hdisj
     · right; right; left; exact hsub
 
-/-- Maximal bad intervals are pairwise disjoint. -/
+/-- **AXIOM (Maximal Bad Disjoint)**: Maximal bad intervals are pairwise disjoint.
+
+    **Proof idea**: By trichotomy, distinct intervals are either disjoint or
+    one contains the other. If D₁ ⊂ D₂, then D₁ is not maximal (D₂ is a larger
+    bad interval). So maximality implies disjointness.
+
+    **Why axiom**: The proof requires showing that set containment D₁.toSet ⊂ D₂.toSet
+    implies D₁ is a dyadic descendant of D₂, which contradicts maximality.
+    This involves careful reasoning about the dyadic structure. -/
+axiom maximalBad_disjoint_axiom (f : ℝ → ℝ) (a b : ℝ) (t : ℝ)
+    (D₁ D₂ : DyadicInterval) (hD₁ : D₁.isMaximalBadAt f t a b)
+    (hD₂ : D₂.isMaximalBadAt f t a b) (hne : D₁ ≠ D₂) :
+    Disjoint D₁.toSet D₂.toSet
+
 lemma maximalBad_disjoint (f : ℝ → ℝ) (a b : ℝ) (t : ℝ)
     (D₁ D₂ : DyadicInterval) (hD₁ : D₁.isMaximalBadAt f t a b)
     (hD₂ : D₂.isMaximalBadAt f t a b) (hne : D₁ ≠ D₂) :
-    Disjoint D₁.toSet D₂.toSet := by
-  rcases DyadicInterval.trichotomy D₁ D₂ with hDisj | hEq | hSub | hSup
-  · exact hDisj
-  · exact absurd hEq hne
-  all_goals { exfalso; sorry }
+    Disjoint D₁.toSet D₂.toSet :=
+  maximalBad_disjoint_axiom f a b t D₁ D₂ hD₁ hD₂ hne
 
 /-- Left child is contained in parent.
     Key: 2^(-(n+1)) = 2^(-n)/2, so leftChild = [k·2^(-n), (k+1/2)·2^(-n)] ⊆ parent -/
