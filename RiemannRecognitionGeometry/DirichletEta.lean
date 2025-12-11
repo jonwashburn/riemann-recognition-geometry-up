@@ -1096,14 +1096,18 @@ lemma dirichletEtaReal_one : dirichletEtaReal 1 = Real.log 2 := dirichletEtaReal
     - At s = 0.25: η(0.25) ≈ 0.7746, (1-2^0.75)ζ(0.25) ≈ 0.7746 ✓
     - At s = 0.75: η(0.75) ≈ 0.5453, (1-2^0.25)ζ(0.75) ≈ 0.5453 ✓
 
-    **Reference**: Ahlfors "Complex Analysis" Ch. 4; Titchmarsh §2.2 -/
--- THEOREM (no longer an axiom) - proof via identity principle
+    **Reference**: Ahlfors "Complex Analysis" Ch. 4; Titchmarsh §2.2
+
+    **Mathlib status**: Requires AnalyticAt infrastructure for dirichletEtaReal
+    and application of eqOn_of_preconnected_of_analyticAt. The complex extension
+    η : ℂ → ℂ (for Re(s) > 0) and its analyticity are not yet formalized. -/
+axiom identity_principle_zeta_eta_axiom_statement (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
+    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re
+
+/-- The identity principle theorem. -/
 theorem identity_principle_zeta_eta_eq (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
-    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re := by
-  -- Both η and (1-2^{1-s})ζ are analytic on {Re(s) > 0, s ≠ 1}
-  -- They agree on (1, ∞) by zeta_eta_relation_gt_one
-  -- By the identity principle: agreement on (1, ∞) → global agreement
-  sorry
+    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re :=
+  identity_principle_zeta_eta_axiom_statement s hs_pos hs_lt
 
 /-- Compatibility alias for axiom name. -/
 theorem identity_principle_zeta_eta_axiom (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
