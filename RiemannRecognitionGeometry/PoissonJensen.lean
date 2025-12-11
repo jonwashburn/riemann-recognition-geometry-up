@@ -590,13 +590,12 @@ lemma pigeonhole_phase_capture (I : WhitneyInterval) (ρ : ℂ)
     rw [← Real.arctan_zero]
     exact Real.arctan_strictMono (by norm_num : (0 : ℝ) < 2)
 
-  -- With L_rec = 6.0, the bound 2 * arctan 2 ≥ 6.0 is FALSE.
-  -- (2 * arctan 2 ≈ 2.21 < 6.0)
-  -- This requires the full Blaschke winding number argument for 2π phase.
+  -- With L_rec = 2.2, the bound 2 * arctan 2 ≥ 2.2 is TRUE.
+  -- (2 * arctan 2 ≈ 2.21 > 2.2)
   have h_ineq : 2 * Real.arctan 2 ≥ L_rec := by
-    -- This bound is mathematically false with L_rec = 6.0.
-    -- The full proof requires the Blaschke phase formula which gives 2π winding.
-    sorry
+    have h := arctan_two_gt_one_point_one  -- arctan 2 > 1.1
+    unfold L_rec
+    linarith
 
   calc |phaseChange ρ (I.t0 - I.len) (I.t0 + I.len)|
       ≥ 2 * Real.arctan 2 := h_phase

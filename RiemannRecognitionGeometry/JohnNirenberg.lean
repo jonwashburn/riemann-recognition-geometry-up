@@ -585,6 +585,70 @@ lemma maximalBad_disjoint (f : ℝ → ℝ) (a b : ℝ) (t : ℝ)
   · exact absurd hEq hne
   all_goals { exfalso; sorry }
 
+/-- Left child is contained in parent. -/
+lemma DyadicInterval.leftChild_subset (D : DyadicInterval) :
+    D.leftChild.toSet ⊆ D.toSet := by
+  intro x hx
+  simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
+             DyadicInterval.leftChild, Set.mem_Icc] at hx ⊢
+  have h2pow : (2:ℝ)^(-((D.generation + 1):ℤ)) = (2:ℝ)^(-(D.generation:ℤ)) / 2 := by
+    rw [show (-((D.generation + 1):ℤ) : ℤ) = -(D.generation:ℤ) - 1 from by omega]
+    rw [zpow_sub₀ (by norm_num : (2:ℝ) ≠ 0), zpow_one]
+  have hpos : (0:ℝ) < 2^(-(D.generation:ℤ)) := zpow_pos (by norm_num) _
+  have hleft : (2 * D.index : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) =
+               (D.index : ℝ) * (2:ℝ)^(-(D.generation:ℤ)) := by rw [h2pow]; ring
+  have hright : ((2 * D.index + 1) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) =
+                ((D.index : ℝ) + 1/2) * (2:ℝ)^(-(D.generation:ℤ)) := by rw [h2pow]; ring
+  constructor
+  · calc (D.index : ℝ) * (2:ℝ)^(-(D.generation:ℤ))
+        = (2 * D.index : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hleft.symm
+      _ ≤ x := hx.1
+  · calc x ≤ ((2 * D.index + 1) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hx.2
+      _ = ((D.index : ℝ) + 1/2) * (2:ℝ)^(-(D.generation:ℤ)) := hright
+      _ ≤ ((D.index : ℝ) + 1) * (2:ℝ)^(-(D.generation:ℤ)) := by nlinarith
+
+/-- Right child is contained in parent. -/
+lemma DyadicInterval.rightChild_subset (D : DyadicInterval) :
+    D.rightChild.toSet ⊆ D.toSet := by
+  intro x hx
+  simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
+             DyadicInterval.rightChild, Set.mem_Icc] at hx ⊢
+  have h2pow : (2:ℝ)^(-((D.generation + 1):ℤ)) = (2:ℝ)^(-(D.generation:ℤ)) / 2 := by
+    rw [show (-((D.generation + 1):ℤ) : ℤ) = -(D.generation:ℤ) - 1 from by omega]
+    rw [zpow_sub₀ (by norm_num : (2:ℝ) ≠ 0), zpow_one]
+  have hpos : (0:ℝ) < 2^(-(D.generation:ℤ)) := zpow_pos (by norm_num) _
+  have hleft : ((2 * D.index + 1) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) =
+               ((D.index : ℝ) + 1/2) * (2:ℝ)^(-(D.generation:ℤ)) := by rw [h2pow]; ring
+  have hright : ((2 * D.index + 2) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) =
+                ((D.index : ℝ) + 1) * (2:ℝ)^(-(D.generation:ℤ)) := by rw [h2pow]; ring
+  constructor
+  · calc (D.index : ℝ) * (2:ℝ)^(-(D.generation:ℤ))
+        ≤ ((D.index : ℝ) + 1/2) * (2:ℝ)^(-(D.generation:ℤ)) := by nlinarith
+      _ = ((2 * D.index + 1) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hleft.symm
+      _ ≤ x := hx.1
+  · calc x ≤ ((2 * D.index + 1 + 1) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hx.2
+      _ = ((2 * D.index + 2) : ℝ) * (2:ℝ)^(-((D.generation + 1):ℤ)) := by ring_nf
+      _ = ((D.index : ℝ) + 1) * (2:ℝ)^(-(D.generation:ℤ)) := hright
+
+/-- Child has half the measure of parent. -/
+lemma DyadicInterval.child_measure_half (D : DyadicInterval) :
+    volume D.leftChild.toSet = volume D.toSet / 2 ∧
+    volume D.rightChild.toSet = volume D.toSet / 2 := by
+  have h2pow : (2:ℝ)^(-((D.generation + 1):ℤ)) = (2:ℝ)^(-(D.generation:ℤ)) / 2 := by
+    rw [show (-((D.generation + 1):ℤ) : ℤ) = -(D.generation:ℤ) - 1 from by omega]
+    rw [zpow_sub₀ (by norm_num : (2:ℝ) ≠ 0), zpow_one]
+  have hpos : (0:ℝ) < 2^(-(D.generation:ℤ)) := zpow_pos (by norm_num) _
+  -- leftChild length = 2^(-(n+1)) = 2^(-n)/2 = parent.length/2
+  -- Same for rightChild
+  constructor <;> {
+    simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
+               DyadicInterval.leftChild, DyadicInterval.rightChild]
+    rw [Real.volume_Icc, Real.volume_Icc]
+    simp only [ENNReal.ofReal_div_of_pos (by norm_num : (0:ℝ) < 2)]
+    congr 1
+    rw [ENNReal.ofReal_eq_ofReal_iff] <;> nlinarith [h2pow, hpos]
+  }
+
 /-- Dyadic doubling: child average ≤ 2 × parent average.
 
     **Proof**: The child has half the measure of the parent, so

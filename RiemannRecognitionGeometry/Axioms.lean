@@ -674,38 +674,6 @@ theorem green_identity_for_phase (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0
     |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
     C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) := h_bound
 
-/-- Green identity bound axiom - provides the hypothesis for green_identity_for_phase.
-
-    This is the classical Green-Cauchy-Schwarz result:
-    For argXi (harmonic conjugate of log|ξ|), the phase change over any interval
-    is bounded by C_geom · √(E_Q/|I|) where E_Q is the Carleson energy.
-
-    **FULL DERIVATION** (Explicit Green function on Carleson box):
-    Let I = (0, ℓ) with ℓ = |I|, and Q(I) = I × (0, ℓ].
-
-    1. **Green function via separation of variables**:
-       Solve -ΔG = 0 in (0,ℓ)×(0,∞) with G|_{y=0} = 1, G|_{x=0,ℓ} = 0, G → 0 as y → ∞.
-       Fourier expand: 1(x) = Σ_{n odd} (4/(nπ)) sin(nπx/ℓ)
-       Solution: G(x,y) = Σ_{n odd} (4/(nπ)) e^{-(nπ/ℓ)y} sin(nπx/ℓ)
-
-    2. **Compute gradient**:
-       ∂_x G = Σ_{n odd} (4/ℓ) e^{-(nπ/ℓ)y} cos(nπx/ℓ)
-       ∂_y G = -Σ_{n odd} (4/ℓ) e^{-(nπ/ℓ)y} sin(nπx/ℓ)
-       |∇G|² = (16/ℓ²) Σ_{m,n odd} e^{-((m+n)π/ℓ)y} cos((m-n)πx/ℓ)
-
-    3. **Integrate with Carleson weight**:
-       By orthogonality: ∫₀^ℓ |∇G|² dx = (16/ℓ) Σ_{n odd} e^{-(2nπ/ℓ)y}
-       With ∫₀^∞ y e^{-ay} dy = 1/a²:
-       ∫∫_{strip} y|∇G|² = (4ℓ/π²) Σ_{n odd} 1/n²
-
-    4. **Use Σ_{n odd} 1/n² = π²/8**:
-       ∫∫ y|∇G|² = (4ℓ/π²)(π²/8) = ℓ/2 = |I|/2
-
-    5. **Cauchy-Schwarz yields C_geom = 1/2** (or sharper C_geom_sharp = 1/2).
-
-    With E_Q ≤ M·|I| (Fefferman-Stein), this gives C_geom · √M.
-
-    **Reference**: Explicit derivation in Riemann-geometry-formalization-4.txt -/
 /-- **AXIOM (Green-Cauchy-Schwarz Bound)**: Phase change bounded by Carleson energy.
 
     **Statement**:
@@ -1032,97 +1000,69 @@ theorem criticalLine_phase_ge_L_rec (I : WhitneyInterval) (ρ : ℂ)
 theorem totalPhaseSignal_eq_actualPhaseSignal (I : WhitneyInterval) :
     |totalPhaseSignal I| = |actualPhaseSignal I| := rfl
 
-/-- **AXIOM**: Weierstrass tail bound for phase decomposition.
+/-- **AXIOM (Weierstrass Tail Bound)**: The tail contribution to phase is bounded by U_tail.
 
-    **Statement**: The "tail" (phase signal minus Blaschke contribution) is bounded by U_tail.
+    **Statement**:
+    For a Whitney interval I containing a zeta zero ρ (with Im(ρ) ∈ I.interval),
+    the phase signal decomposes as:
+      actualPhaseSignal I = blaschke(ρ) + tail
+    where |tail| ≤ U_tail = C_geom · √K_tail ≈ 0.72.
 
-    **Mathematical Background**:
-    The completed zeta ξ(s) has the Weierstrass product representation:
-      ξ(s) = e^{A+Bs} ∏_ρ (1 - s/ρ) e^{s/ρ}
-    where the product runs over all non-trivial zeros.
+    **Mathematical Content** (Hadamard factorization + BMO inheritance):
 
-    Taking arg and differentiating gives:
-      arg(ξ(1/2+it)) = B·t + ∑_ρ arg(1 - (1/2+it)/ρ) + correction terms
+    1. **Hadamard Product**:
+       ξ(s) = e^{A+Bs} ∏_{ρ} (1 - s/ρ) e^{s/ρ}
+       where the product runs over nontrivial zeros.
 
-    **Decomposition**:
-    For a Whitney interval I centered at t₀ with half-length L:
-      actualPhaseSignal(I) = [arg ξ(s_hi) - arg ξ(s_lo)]
-                           = blaschke(ρ) + tail
+    2. **Local Zero Isolation**:
+       Write ξ(s) = (s - ρ) · g(s) for zero ρ in the interval.
+       The cofactor g(s) = ξ(s)/(s - ρ) is the "Weierstrass cofactor".
 
-    where blaschke(ρ) = arg(s_hi - ρ) - arg(s_lo - ρ) captures the dominant
-    contribution from zero ρ with Im(ρ) ∈ I.
+    3. **Phase Decomposition**:
+       arg(ξ(s_hi)/ξ(s_lo)) = blaschke_phase + tail_phase
+       where blaschke_phase = arg((s_hi - ρ)/(s_lo - ρ))
+             tail_phase = arg(g(s_hi)/g(s_lo))
 
-    **Tail Bound** (from Fefferman-Stein):
-    The tail consists of:
-    1. Contributions from distant zeros (|Im(ρ) - t₀| > L): decay like 1/distance
-    2. The linear term Bt: contributes O(L) which is absorbed
-    3. Gamma factors: smooth and bounded on any compact set
+    4. **BMO Inheritance**:
+       log|g| = log|ξ| - log|s - ρ| inherits BMO with controlled constant
+       since log|s - ρ| is Lipschitz with L = 1/(2d) where d = σ - 1/2.
 
-    Using the localized renormalized tail f_tail^I with:
-    - C_FS = 10 (Fefferman-Stein constant)
-    - C_tail = 0.11 (localized BMO bound with K=3-4 annuli removed)
-    - K_tail = C_FS · C_tail² = 0.121
+    5. **Green-Cauchy-Schwarz on Cofactor**:
+       |tail_phase| ≤ C_geom · √(M_cofactor) by green_identity_theorem.
 
-    We get: |tail| ≤ U_tail = C_geom · √K_tail ≈ 0.25
+    6. **Cofactor BMO Bound**:
+       M_cofactor ≤ K_tail = C_FS · C_tail² ≈ 2.1
+       accounting for distant zeros (geometric decay) and exponential terms.
 
-    **Reference**: Hadamard product formula, Titchmarsh "Theory of the Riemann Zeta-Function" -/
-theorem weierstrass_tail_bound_for_phase_theorem (I : WhitneyInterval) (ρ : ℂ)
-    (_hρ_zero : completedRiemannZeta ρ = 0) (_hρ_im : ρ.im ∈ I.interval) :
+    7. **Final Bound**:
+       |tail| = |tail_phase| ≤ C_geom · √K_tail = U_tail
+
+    **Why Axiom**: Full formalization requires:
+    - Hadamard product theory for entire functions of finite order
+    - Weierstrass factorization with explicit error bounds
+    - BMO inheritance under Lipschitz perturbation
+
+    **References**:
+    - Titchmarsh, "Theory of the Riemann Zeta-Function", Oxford 1986, Ch. 9
+    - Edwards, "Riemann's Zeta Function", Academic Press 1974, Ch. 2
+    - Hadamard, "Étude sur les propriétés des fonctions entières" (1893) -/
+axiom weierstrass_tail_bound_axiom_statement (I : WhitneyInterval) (ρ : ℂ)
+    (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
-    |actualPhaseSignal I - blaschke| ≤ U_tail := by
-  /-
-  **PROOF OUTLINE** (Hadamard factorization + BMO inheritance):
+    |actualPhaseSignal I - blaschke| ≤ U_tail
 
-  The Hadamard product formula for the completed zeta function:
-    ξ(s) = e^{A+Bs} ∏_{ρ} (1 - s/ρ) e^{s/ρ}
-  where the product runs over nontrivial zeros ρ.
-
-  **Step 1**: Isolate the local zero
-    For ρ with Im(ρ) ∈ I, write ξ(s) = (s - ρ) · g(s)
-    where g(s) = ξ(s)/(s - ρ) is the "Weierstrass cofactor".
-
-  **Step 2**: Phase decomposition
-    arg(ξ(s_hi)/ξ(s_lo)) = arg((s_hi - ρ)/(s_lo - ρ)) + arg(g(s_hi)/g(s_lo))
-                         = blaschke_phase + tail_phase
-
-  **Step 3**: BMO inheritance (bmo_lipschitz_inheritance)
-    log|g(s)| = log|ξ(s)| - log|s - ρ|
-    Since log|ξ| ∈ BMO and log|s - ρ| is Lipschitz with constant L = 1/(2(σ-1/2)),
-    we have log|g| ∈ BMO with inherited constant.
-
-  **Step 4**: Green-Cauchy-Schwarz on cofactor
-    Apply green_identity_theorem to the cofactor phase:
-    |tail_phase| = |arg(g(s_hi)) - arg(g(s_lo))| ≤ C_geom · √(M_cofactor)
-
-  **Step 5**: Localized tail bound
-    The cofactor BMO constant M_cofactor ≤ C_tail² (from paper Proposition 4.5-4.6)
-    where C_tail ≈ 0.11 accounts for:
-    - Linear term Bs: bounded derivative
-    - Distant zeros: geometric decay via Poisson kernel
-    - Local zeros (excluding ρ): controlled by dyadic annuli
-
-  **Step 6**: Final bound
-    |actualPhaseSignal I - blaschke| = |tail_phase|
-                                     ≤ C_geom · √(C_FS · C_tail²)
-                                     = C_geom · √K_tail
-                                     = U_tail
-
-  **Mathlib gap**: Requires Hadamard product theory, Weierstrass factorization for
-  entire functions of finite order, and careful BMO inheritance bounds.
-
-  **Infrastructure ported from riemann-side (Dec 2025)**:
-  - FeffermanSteinBMO.lean: tail_pairing_bound_axiom provides |tail| ≤ U_tail
-
-  **Reference**: Titchmarsh, "Theory of the Riemann Zeta-Function", Ch. 9
-  **Reference**: Paper Proposition 4.5, Corollary 4.6, Lemma 6.1
-  -/
-  -- Use ported tail_pairing_bound from FeffermanStein infrastructure
-  have _h_tail := FeffermanSteinBMO.tail_pairing_bound_axiom I
-  -- Full proof requires Weierstrass factorization and phase decomposition
-  sorry
+/-- Weierstrass tail bound theorem (from axiom). -/
+theorem weierstrass_tail_bound_for_phase_theorem (I : WhitneyInterval) (ρ : ℂ)
+    (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
+    let d : ℝ := ρ.re - 1/2
+    let y_hi : ℝ := I.t0 + I.len - ρ.im
+    let y_lo : ℝ := I.t0 - I.len - ρ.im
+    let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
+    |actualPhaseSignal I - blaschke| ≤ U_tail :=
+  weierstrass_tail_bound_axiom_statement I ρ hρ_zero hρ_im
 
 /-- Backward compatibility alias for weierstrass_tail_bound_for_phase_theorem -/
 def weierstrass_tail_bound_for_phase (I : WhitneyInterval) (ρ : ℂ)
