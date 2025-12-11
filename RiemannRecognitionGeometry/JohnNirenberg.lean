@@ -120,7 +120,7 @@ def DyadicInterval.length (D : DyadicInterval) : ℝ :=
 
 /-- The interval as a set. -/
 def DyadicInterval.toSet (D : DyadicInterval) : Set ℝ :=
-  Icc D.left D.right
+  Ico D.left D.right
 
 /-- Dyadic interval length is positive. -/
 lemma DyadicInterval.length_pos (D : DyadicInterval) : D.length > 0 := by
@@ -131,7 +131,7 @@ lemma DyadicInterval.length_pos (D : DyadicInterval) : D.length > 0 := by
 lemma DyadicInterval.measure_pos (D : DyadicInterval) :
     0 < volume D.toSet := by
   unfold DyadicInterval.toSet
-  rw [Real.volume_Icc]
+  rw [Real.volume_Ico]
   apply ENNReal.ofReal_pos.mpr
   unfold DyadicInterval.left DyadicInterval.right
   have hlen := D.length_pos
@@ -149,14 +149,14 @@ lemma DyadicInterval.measure_ne_zero (D : DyadicInterval) :
 lemma DyadicInterval.measure_ne_top (D : DyadicInterval) :
     volume D.toSet ≠ ⊤ := by
   unfold DyadicInterval.toSet
-  rw [Real.volume_Icc]
+  rw [Real.volume_Ico]
   exact ENNReal.ofReal_ne_top
 
 /-- Dyadic intervals are measurable sets. -/
 lemma DyadicInterval.measurable (D : DyadicInterval) :
     MeasurableSet D.toSet := by
   unfold DyadicInterval.toSet
-  exact measurableSet_Icc
+  exact measurableSet_Ico
 
 /-- The parent of a dyadic interval (one level up). -/
 def DyadicInterval.parent (D : DyadicInterval) : DyadicInterval :=
@@ -567,38 +567,75 @@ def maximalBadIntervals (f : ℝ → ℝ) (a b : ℝ) (t : ℝ) : Set DyadicInte
     or contained in any coarser dyadic interval.
 
     This is the fundamental nesting property of dyadic grids:
-    - At generation n, intervals [k·2^(-n), (k+1)·2^(-n)] partition ℝ
+    - At generation n, intervals [k·2^(-n), (k+1)·2^(-n)) partition ℝ
     - A finer interval (generation m > n) fits exactly within one interval of generation n
     - So if a finer interval overlaps a coarser one, it's contained in it
 
-    **Proof idea**: Let D₁ have generation n₁ < n₂ = D₂.generation.
-    D₂ = [k₂·2^(-n₂), (k₂+1)·2^(-n₂)]. The unique generation-n₁ interval containing D₂
-    is [floor(k₂/2^(n₂-n₁))·2^(-n₁), (floor(k₂/2^(n₂-n₁))+1)·2^(-n₁)].
-    If this equals D₁, then D₂ ⊆ D₁. Otherwise D₁ ∩ D₂ = ∅. -/
+    **Proof idea**: Let D₁ have generation n₁ > n₂ = D₂.generation (D₁ is finer).
+    The ancestor of D₁ at generation n₂ is obtained by dividing the index by 2^(n₁-n₂).
+    Either this ancestor equals D₂ (then D₁ ⊆ D₂), or they are different intervals at
+    the same generation n₂ (then disjoint by dyadic_same_gen_disjoint).
+
+    **Why still axiom**: The proof requires careful arithmetic with integer division
+    and the relationship between indices at different generations. The key is showing
+    that if D₁ ∩ D₂ ≠ ∅, then D₁'s ancestor at gen n₂ must equal D₂. -/
 axiom dyadic_nesting (D₁ D₂ : DyadicInterval) (hgen : D₁.generation > D₂.generation) :
     Disjoint D₁.toSet D₂.toSet ∨ D₁.toSet ⊆ D₂.toSet
 
-/-- **AXIOM (Dyadic Same-Gen Disjoint)**: Same-generation dyadic intervals with different indices.
+/-- **THEOREM (Dyadic Same-Gen Disjoint)**: Same-generation dyadic intervals with different
+    indices are disjoint.
 
-    At generation n, intervals [k·2^(-n), (k+1)·2^(-n)] partition ℝ.
+    At generation n, half-open intervals [k·2^(-n), (k+1)·2^(-n)) partition ℝ.
 
-    **Technical note**: With closed intervals `Icc`, adjacent intervals share a boundary point.
-    For measure-theoretic purposes, this intersection has measure zero, so the intervals are
-    "essentially disjoint". The axiom asserts set-theoretic disjointness; alternatively,
-    one could use half-open intervals `Ico` for the dyadic grid.
+    **Proof**: If k₁ ≠ k₂, then wlog k₁ < k₂. Then D₁.right = (k₁+1)·s ≤ k₂·s = D₂.left,
+    so D₁ ∩ D₂ = ∅ since D₁ = [k₁·s, (k₁+1)·s) and D₂ = [k₂·s, (k₂+1)·s).
 
-    **Proof sketch (for Ico)**: If k₁ < k₂, then (k₁+1)·2^(-n) ≤ k₂·2^(-n),
-    so D₁.right ≤ D₂.left, making them disjoint.
-
-    For the harmonic analysis applications (John-Nirenberg), the measure-zero
-    boundary overlap is irrelevant. -/
-axiom dyadic_same_gen_disjoint_axiom (D₁ D₂ : DyadicInterval)
+    Note: This requires half-open intervals `Ico`; with `Icc` adjacent intervals share
+    a boundary point. -/
+theorem dyadic_same_gen_disjoint (D₁ D₂ : DyadicInterval)
     (heq : D₁.generation = D₂.generation) (hidx : D₁.index ≠ D₂.index) :
-    Disjoint D₁.toSet D₂.toSet
-
-lemma dyadic_same_gen_disjoint (D₁ D₂ : DyadicInterval)
-    (heq : D₁.generation = D₂.generation) (hidx : D₁.index ≠ D₂.index) :
-    Disjoint D₁.toSet D₂.toSet := dyadic_same_gen_disjoint_axiom D₁ D₂ heq hidx
+    Disjoint D₁.toSet D₂.toSet := by
+  -- Scale factor s = 2^(-n) where n = D₁.generation = D₂.generation
+  set s := (2:ℝ)^(-(D₁.generation:ℤ)) with hs_def
+  have hs_pos : 0 < s := zpow_pos (by norm_num) _
+  have hs_eq : (2:ℝ)^(-(D₂.generation:ℤ)) = s := by rw [← heq]
+  -- D₁ = [k₁·s, (k₁+1)·s), D₂ = [k₂·s, (k₂+1)·s)
+  -- If k₁ ≠ k₂, wlog k₁ < k₂ (by symmetry)
+  rcases Ne.lt_or_lt hidx with hlt | hlt
+  · -- Case k₁ < k₂: D₁.right ≤ D₂.left
+    rw [Set.disjoint_iff]
+    intro x ⟨hx1, hx2⟩
+    simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
+               Set.mem_Ico] at hx1 hx2
+    -- hx1: k₁·s ≤ x < (k₁+1)·s
+    -- hx2: k₂·s' ≤ x < (k₂+1)·s' where s' = 2^(-gen₂) = s
+    have hx1_upper : x < (D₁.index + 1) * s := hx1.2
+    have hx2_lower : D₂.index * (2:ℝ)^(-(D₂.generation:ℤ)) ≤ x := hx2.1
+    rw [hs_eq] at hx2_lower
+    -- From k₁ < k₂ (natural numbers): k₁ + 1 ≤ k₂
+    have hidx' : D₁.index + 1 ≤ D₂.index := hlt
+    have hcast : (D₁.index + 1 : ℝ) ≤ D₂.index := by
+      exact_mod_cast hidx'
+    -- So (k₁+1)·s ≤ k₂·s
+    have hbound : (D₁.index + 1 : ℝ) * s ≤ D₂.index * s :=
+      mul_le_mul_of_nonneg_right hcast (le_of_lt hs_pos)
+    -- Contradiction: x < (k₁+1)·s ≤ k₂·s ≤ x
+    linarith
+  · -- Case k₂ < k₁: symmetric, D₂.right ≤ D₁.left
+    rw [Set.disjoint_iff]
+    intro x ⟨hx1, hx2⟩
+    simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
+               Set.mem_Ico] at hx1 hx2
+    have hx1_lower : D₁.index * s ≤ x := hx1.1
+    have hx2_upper : x < (D₂.index + 1) * (2:ℝ)^(-(D₂.generation:ℤ)) := hx2.2
+    rw [hs_eq] at hx2_upper
+    -- From k₂ < k₁ (natural numbers): k₂ + 1 ≤ k₁
+    have hidx' : D₂.index + 1 ≤ D₁.index := hlt
+    have hcast : (D₂.index + 1 : ℝ) ≤ D₁.index := by
+      exact_mod_cast hidx'
+    have hbound : (D₂.index + 1 : ℝ) * s ≤ D₁.index * s :=
+      mul_le_mul_of_nonneg_right hcast (le_of_lt hs_pos)
+    linarith
 
 /-- Dyadic trichotomy: disjoint, equal, or one contains the other.
 
@@ -642,16 +679,16 @@ lemma maximalBad_disjoint (f : ℝ → ℝ) (a b : ℝ) (t : ℝ)
   maximalBad_disjoint_axiom f a b t D₁ D₂ hD₁ hD₂ hne
 
 /-- Left child is contained in parent.
-    Key: 2^(-(n+1)) = 2^(-n)/2, so leftChild = [k·2^(-n), (k+1/2)·2^(-n)] ⊆ parent -/
+    Key: 2^(-(n+1)) = 2^(-n)/2, so leftChild = [k·2^(-n), (k+1/2)·2^(-n)) ⊆ parent -/
 lemma DyadicInterval.leftChild_subset (D : DyadicInterval) :
     D.leftChild.toSet ⊆ D.toSet := by
   intro x hx
   simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
-             DyadicInterval.leftChild, Set.mem_Icc] at hx ⊢
+             DyadicInterval.leftChild, Set.mem_Ico] at hx ⊢
   -- Normalize casts for consistent types
   have hx1 : (2 : ℝ) * ↑D.index * (2:ℝ)^(-((D.generation + 1):ℤ)) ≤ x := by
     convert hx.1 using 2; push_cast; ring
-  have hx2 : x ≤ (2 * ↑D.index + 1) * (2:ℝ)^(-((D.generation + 1):ℤ)) := by
+  have hx2 : x < (2 * ↑D.index + 1) * (2:ℝ)^(-((D.generation + 1):ℤ)) := by
     convert hx.2 using 2; push_cast; ring
   have h2pow : (2:ℝ)^(-((D.generation + 1):ℤ)) = (2:ℝ)^(-(D.generation:ℤ)) / 2 := by
     rw [show (-((D.generation + 1):ℤ) : ℤ) = -(D.generation:ℤ) - 1 from by omega]
@@ -665,21 +702,21 @@ lemma DyadicInterval.leftChild_subset (D : DyadicInterval) :
   · calc ↑D.index * (2:ℝ)^(-(D.generation:ℤ))
         = (2 : ℝ) * ↑D.index * (2:ℝ)^(-((D.generation + 1):ℤ)) := hleft.symm
       _ ≤ x := hx1
-  · calc x ≤ (2 * ↑D.index + 1) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hx2
+  · calc x < (2 * ↑D.index + 1) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hx2
       _ = (↑D.index + 1/2) * (2:ℝ)^(-(D.generation:ℤ)) := hright
-      _ ≤ (↑D.index + 1) * (2:ℝ)^(-(D.generation:ℤ)) := by nlinarith
+      _ < (↑D.index + 1) * (2:ℝ)^(-(D.generation:ℤ)) := by nlinarith
 
 /-- Right child is contained in parent.
-    Key: 2^(-(n+1)) = 2^(-n)/2, so rightChild = [(k+1/2)·2^(-n), (k+1)·2^(-n)] ⊆ parent -/
+    Key: 2^(-(n+1)) = 2^(-n)/2, so rightChild = [(k+1/2)·2^(-n), (k+1)·2^(-n)) ⊆ parent -/
 lemma DyadicInterval.rightChild_subset (D : DyadicInterval) :
     D.rightChild.toSet ⊆ D.toSet := by
   intro x hx
   simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
-             DyadicInterval.rightChild, Set.mem_Icc] at hx ⊢
+             DyadicInterval.rightChild, Set.mem_Ico] at hx ⊢
   -- Normalize casts for consistent types
   have hx1 : (2 * ↑D.index + 1) * (2:ℝ)^(-((D.generation + 1):ℤ)) ≤ x := by
     convert hx.1 using 2; push_cast; ring
-  have hx2 : x ≤ (2 * ↑D.index + 2) * (2:ℝ)^(-((D.generation + 1):ℤ)) := by
+  have hx2 : x < (2 * ↑D.index + 2) * (2:ℝ)^(-((D.generation + 1):ℤ)) := by
     convert hx.2 using 2; push_cast; ring
   have h2pow : (2:ℝ)^(-((D.generation + 1):ℤ)) = (2:ℝ)^(-(D.generation:ℤ)) / 2 := by
     rw [show (-((D.generation + 1):ℤ) : ℤ) = -(D.generation:ℤ) - 1 from by omega]
@@ -694,7 +731,7 @@ lemma DyadicInterval.rightChild_subset (D : DyadicInterval) :
         ≤ (↑D.index + 1/2) * (2:ℝ)^(-(D.generation:ℤ)) := by nlinarith
       _ = (2 * ↑D.index + 1) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hleft.symm
       _ ≤ x := hx1
-  · calc x ≤ (2 * ↑D.index + 2) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hx2
+  · calc x < (2 * ↑D.index + 2) * (2:ℝ)^(-((D.generation + 1):ℤ)) := hx2
       _ = (↑D.index + 1) * (2:ℝ)^(-(D.generation:ℤ)) := hright
 
 /-- Child has half the measure of parent.
@@ -710,15 +747,15 @@ lemma DyadicInterval.child_measure_half (D : DyadicInterval) :
   have hvol_parent : volume D.toSet = ENNReal.ofReal D.length := by
     simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
                DyadicInterval.length]
-    rw [Real.volume_Icc]; congr 1; ring
+    rw [Real.volume_Ico]; congr 1; ring
   have hvol_leftChild : volume D.leftChild.toSet = ENNReal.ofReal D.leftChild.length := by
     simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
                DyadicInterval.leftChild, DyadicInterval.length]
-    rw [Real.volume_Icc]; congr 1; push_cast; ring
+    rw [Real.volume_Ico]; congr 1; push_cast; ring
   have hvol_rightChild : volume D.rightChild.toSet = ENNReal.ofReal D.rightChild.length := by
     simp only [DyadicInterval.toSet, DyadicInterval.left, DyadicInterval.right,
                DyadicInterval.rightChild, DyadicInterval.length]
-    rw [Real.volume_Icc]; congr 1; push_cast; ring
+    rw [Real.volume_Ico]; congr 1; push_cast; ring
   have hlen_child : D.leftChild.length = D.length / 2 ∧ D.rightChild.length = D.length / 2 := by
     simp only [DyadicInterval.length, DyadicInterval.leftChild, DyadicInterval.rightChild]
     exact ⟨h2pow, h2pow⟩
