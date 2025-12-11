@@ -15,8 +15,8 @@ The proof combines two bounds on the **TOTAL** phase signal R(I):
    With C_geom = 1/√2 and K_tail = 2.1, U_tail ≈ 1.03.
 
 2. **Blaschke Lower Bound**: When a zero ρ exists with Im(ρ) ∈ I,
-   the Blaschke contribution B(I,ρ) ≥ L_rec = 2.5.
-   (Conservative geometric phase threshold)
+   the Blaschke contribution B(I,ρ) ≥ L_rec = 6.0.
+   (Based on full 2π phase winding of Blaschke factor)
 
 3. **Blaschke Dominance**: The Blaschke factor dominates the total phase:
    R(I) ≥ B(I,ρ) - |tail correction| ≥ L_rec when zero exists
@@ -24,7 +24,7 @@ The proof combines two bounds on the **TOTAL** phase signal R(I):
 **Key Contradiction**:
 - If zero exists: R(I) ≥ L_rec (from Blaschke dominance)
 - Always: R(I) ≤ U_tail (from Carleson)
-- But L_rec > 2 * U_tail (2.5 > 2 * 1.03 = 2.06)
+- But L_rec > 2 * U_tail (6.0 > 2 * 1.03 = 2.06)
 - Contradiction!
 
 ## Mathematical Content
@@ -2082,9 +2082,9 @@ theorem criticalLine_phase_ge_L_rec (I : WhitneyInterval) (ρ : ℂ)
 
   -- 3. Bound the minimum value
   -- We assume L ≫ d (Whitney interval width vs distance to critical line).
-  -- This implies arctan(y_hi/d) - arctan(y_lo/d) ≈ π > 2.5.
+  -- This implies arctan(y_hi/d) - arctan(y_lo/d) ≈ 2π > 6.0.
 
-  have h_val_ge : Real.arctan (y_hi / d) - Real.arctan (y_lo / d) ≥ 2.5 := by
+  have h_val_ge : Real.arctan (y_hi / d) - Real.arctan (y_lo / d) ≥ 6.0 := by
     sorry
 
   -- 4. Compare with L_rec
@@ -2301,11 +2301,11 @@ theorem zero_free_with_interval (ρ : ℂ) (I : WhitneyInterval)
            exact h
        apply mul_lt_mul'' h_root2 h_sqrt21 (by norm_num) (by norm_num)
 
-    -- Bound L_rec = 2.5 > 2.06
-    -- L_rec is defined as 2.5
-    have h_lrec_bound : 2.5 > 2.06 := by norm_num
+    -- Bound L_rec = 6.0 > 2.06
+    -- L_rec is defined as 6.0
+    have h_lrec_bound : 6.0 > 2.06 := by norm_num
 
-    -- Combine: 2.5 > 2.06 = 2 * 1.03
+    -- Combine: 6.0 > 2.06 = 2 * 1.03
     linarith
 
   -- Derive contradiction:

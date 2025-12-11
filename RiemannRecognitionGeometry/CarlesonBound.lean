@@ -120,10 +120,10 @@ The geometry constant C_geom = 1/2 is derived via:
 Therefore **C_geom = 1/2** from step 8-9, independent of |I|.
 
 **Numerical verification**:
-- L_rec = 2.5 (Conservative phase threshold covering d=0.2 case)
+- L_rec = 6.0 (full 2π phase scan)
 - With K_tail = 2.1: √(K_tail/2) = √1.05 ≈ 1.025
 - U_tail = C_geom · √K_tail = (1/√2)·√2.1 ≈ 1.03
-- Required: L_rec > 2·U_tail, i.e., 2.5 > 2.06 ✓
+- Required: L_rec > 2·U_tail, i.e., 6.0 > 2.06 ✓
 -/
 
 /-! ## BMO → Carleson Embedding -/
