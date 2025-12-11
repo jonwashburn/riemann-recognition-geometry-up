@@ -902,42 +902,8 @@ theorem altHarmonic_converges :
   simp_rw [h3]
   exact Antitone.tendsto_alternating_series_of_tendsto_zero h1 h2
 
-/-- **AXIOM**: η(1) = log(2), the alternating harmonic series (Mercator series).
-
-    **Statement**: η(1) = 1 - 1/2 + 1/3 - 1/4 + ... = log(2)
-
-    **Mathematical content**:
-    This is the Mercator series (1668), also called the alternating harmonic series.
-    The proof uses Abel's limit theorem with the power series log(1+x) = ∑ (-1)^(n+1) x^n / n.
-
-    **Proof sketch** (see hasSum_taylorSeries_log and tendsto_tsum_powerSeries_nhdsWithin_lt):
-    1. For |x| < 1: ∑_{n≥1} (-1)^(n+1) x^n / n = log(1+x)
-    2. The series converges at x=1 (alternating series test)
-    3. By Abel's theorem: lim_{x→1⁻} ∑ (-1)^(n+1) x^n / n = ∑ (-1)^(n+1) / n
-    4. By continuity: lim_{x→1⁻} log(1+x) = log(2)
-    5. Therefore: η(1) = ∑ (-1)^(n+1) / n = log(2)
-
-    **Why still an axiom**: The full proof requires connecting the power series representation
-    to our alternatingSeriesLimit definition. The series indexing and complex→real conversion
-    involve API details that vary across Mathlib versions.
-
-    **Reference**: Mercator (1668); Hardy, "A Course of Pure Mathematics" §8.4 -/
--- THEOREM (no longer an axiom) - proof via Abel's limit theorem
-theorem dirichletEtaReal_one_eq : dirichletEtaReal 1 = Real.log 2 := by
-  -- η(1) = 1 - 1/2 + 1/3 - 1/4 + ... = log(2)
-  -- This is the Mercator series, proven via Abel's limit theorem
-  -- connecting to hasSum_taylorSeries_log
-  sorry
-
-/-- Compatibility alias for axiom name. -/
-theorem dirichletEtaReal_one_axiom : dirichletEtaReal 1 = Real.log 2 :=
-  dirichletEtaReal_one_eq
-
-/-- η(1) = log(2) (from axiom). -/
-theorem dirichletEtaReal_one_theorem : dirichletEtaReal 1 = Real.log 2 := dirichletEtaReal_one_eq
-
-/-- η(1) = log(2) (from axiom). -/
-lemma dirichletEtaReal_one : dirichletEtaReal 1 = Real.log 2 := dirichletEtaReal_one_axiom
+-- The theorem dirichletEtaReal_one_eq (η(1) = log(2)) is defined after
+-- continuousAt_dirichletEtaReal to use the continuity result.
 
 /-! ## Continuity of η on (0, ∞)
 
@@ -1055,6 +1021,50 @@ theorem continuousAt_dirichletEtaReal {s : ℝ} (hs : 0 < s) :
 -- - `ContinuousAt dirichletEtaReal s` for any s > 0 - proven above
 --
 -- Both of these are sufficient for all uses in the proof.
+
+/-! ### η(1) = log(2) -/
+
+/-- **THEOREM**: η(1) = log(2), the Mercator series.
+
+    **Proof strategy**: Use continuity at 1 and the zeta-eta relation for s > 1.
+    1. For s > 1: η(s) = (1 - 2^{1-s}) · ζ(s) [from zeta_eta_relation_gt_one]
+    2. As s → 1⁺: (1 - 2^{1-s}) · ζ(s) → log(2) [from tendsto_factor_mul_zeta_at_one]
+    3. η is continuous at 1 [from continuousAt_dirichletEtaReal]
+    4. By uniqueness of limits: η(1) = log(2) -/
+theorem dirichletEtaReal_one_eq : dirichletEtaReal 1 = Real.log 2 := by
+  -- Step 1: For s > 1, η(s) = (1 - 2^{1-s}) * ζ(s).re
+  have h_eq : ∀ s : ℝ, 1 < s → dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re :=
+    fun s hs => zeta_eta_relation_gt_one s hs
+  -- Step 2: As s → 1⁺, (1 - 2^{1-s}) * ζ(s).re → log(2)
+  have h_lim : Filter.Tendsto (fun s : ℝ => (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re)
+      (nhdsWithin 1 (Set.Ioi 1)) (nhds (Real.log 2)) := by
+    have h := tendsto_factor_mul_zeta_at_one
+    apply h.mono_left
+    apply nhdsWithin_mono
+    exact fun s hs => ne_of_gt hs
+  -- Step 3: η(s) → log(2) as s → 1⁺ (combining h_eq and h_lim)
+  have h_eta_lim : Filter.Tendsto dirichletEtaReal (nhdsWithin 1 (Set.Ioi 1)) (nhds (Real.log 2)) := by
+    apply Filter.Tendsto.congr' _ h_lim
+    filter_upwards [self_mem_nhdsWithin] with s hs
+    exact (h_eq s hs).symm
+  -- Step 4: η is continuous at 1, so η(s) → η(1) as s → 1⁺
+  have h_cont : ContinuousAt dirichletEtaReal 1 := continuousAt_dirichletEtaReal one_pos
+  have h_cont_lim : Filter.Tendsto dirichletEtaReal (nhdsWithin 1 (Set.Ioi 1)) (nhds (dirichletEtaReal 1)) :=
+    h_cont.tendsto.mono_left nhdsWithin_le_nhds
+  -- Step 5: By uniqueness of limits
+  exact tendsto_nhds_unique h_cont_lim h_eta_lim
+
+/-- Compatibility alias for axiom name. -/
+theorem dirichletEtaReal_one_axiom : dirichletEtaReal 1 = Real.log 2 :=
+  dirichletEtaReal_one_eq
+
+/-- η(1) = log(2) (from theorem). -/
+theorem dirichletEtaReal_one_theorem : dirichletEtaReal 1 = Real.log 2 := dirichletEtaReal_one_eq
+
+/-- η(1) = log(2). -/
+lemma dirichletEtaReal_one : dirichletEtaReal 1 = Real.log 2 := dirichletEtaReal_one_eq
+
+/-! ### Identity Principle -/
 
 /-- **AXIOM**: Identity principle for zeta-eta relation on (0, 1).
 
