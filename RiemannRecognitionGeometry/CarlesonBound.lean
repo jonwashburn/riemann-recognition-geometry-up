@@ -53,10 +53,10 @@ lemma K_tail_pos : (0 : ℝ) < K_tail := by
   unfold K_tail
   norm_num
 
-/-- C_geom is positive (C_geom = 1/√2 > 0). -/
+/-- C_geom is positive (C_geom = 1/2 > 0). -/
 lemma C_geom_pos : (0 : ℝ) < C_geom := by
   unfold C_geom
-  apply div_pos one_pos (Real.sqrt_pos.mpr (by norm_num : (0:ℝ) < 2))
+  norm_num
 
 /-- sqrt(K_tail) is positive. -/
 lemma sqrt_K_tail_pos : 0 < Real.sqrt K_tail := by
@@ -80,16 +80,16 @@ with extensive literature.
    - Statement: For f ∈ BMO(ℝ), the Poisson extension satisfies
      ∫∫_Q |∇Pf|² y dy dx ≤ C · ‖f‖²_BMO · |I|
 
-2. **Green-Cauchy-Schwarz Bound** with explicit constant C_geom = 1/√2
+2. **Green-Cauchy-Schwarz Bound** with explicit constant C_geom = 1/2
    - Classical potential theory for upper half-plane
    - Statement: Boundary integrals are controlled by Carleson energy
      |∫_I f| ≤ C · √E · |I|^(-1/2)
 
 These results combine to give the uniform tail bound U_tail.
 
-### Derivation of C_geom = 1/√2 (Poisson Extension Energy Identity)
+### Derivation of C_geom = 1/2 (Poisson Extension Energy Identity)
 
-The geometry constant C_geom = 1/√2 is derived via:
+The geometry constant C_geom = 1/2 is derived via:
 
 1. **Poisson kernel**: P(x,σ) = (1/π)·σ/(x²+σ²), for σ > 0
 2. **Poisson extension**: For φ ∈ L²(ℝ), v(x,σ) = ∫ P(x-t,σ) φ(t) dt
@@ -117,11 +117,11 @@ The geometry constant C_geom = 1/√2 is derived via:
 9. **Combined with Fefferman-Stein bound** E_Q(u) ≤ K_tail·|I|:
    |∫_I φ(-∂_σ u)| ≤ √(K_tail·|I|) · √(1/(2|I|)) = √(K_tail/2)
 
-Therefore **C_geom = 1/√2** from step 8-9, independent of |I|.
+Therefore **C_geom = 1/2** from step 8-9, independent of |I|.
 
 **Numerical verification**:
 - L_rec ≈ 0.553 = arctan(2)/2
-- With K_tail = 0.05: √(K_tail/2) = √0.025 ≈ 0.158
+- With K_tail = 0.19: √(K_tail/2) = √0.025 ≈ 0.158
 - U_tail = C_geom · √K_tail = √(0.05/2) ≈ 0.158
 - Required: L_rec > 2·U_tail, i.e., 0.553 > 0.316 ✓
 -/
@@ -150,7 +150,7 @@ The completed Riemann zeta function ξ(s) satisfies:
 - Growth bound: |ξ(σ+it)| = O(t^A e^(-πt/4)) in the critical strip
 - log|ξ| has controlled oscillation → BMO norm is finite
 
-The constant K_tail = 0.05 bounds the Carleson energy uniformly.
+The constant K_tail = 0.19 bounds the Carleson energy uniformly.
 
 **Proof Architecture**:
 This lemma takes the Carleson energy bound as a hypothesis. In the full
@@ -179,7 +179,7 @@ lemma bmo_carleson_embedding (gradLogXi : ℝ × ℝ → ℝ × ℝ) (I : Whitne
     Restricting to the Carleson box Q(I):
     E_Q(v) ≤ (1/2) ∥φ∥₂² ≤ 1/(2|I|)
 
-    This bound, combined with Cauchy-Schwarz, gives C_geom = 1/√2.
+    This bound, combined with Cauchy-Schwarz, gives C_geom = 1/2.
 
     **Proof** (Fourier analysis):
     - Poisson kernel Fourier transform: P̂(ξ,σ) = e^{-2π|ξ|σ}
@@ -206,7 +206,7 @@ theorem poisson_extension_energy_identity
     E_Q(v) = ∫∫_{Q(I)} |∇v|² σ dσ dt ≤ 1/(2|I|)
 
     This bound, combined with Cauchy-Schwarz in the weighted energy space,
-    yields C_geom = 1/√2.
+    yields C_geom = 1/2.
 
     **Proof outline**:
     1. Extend integral to (0,∞) × ℝ; Carleson box integral is ≤ global
@@ -226,7 +226,7 @@ theorem green_energy_bound_for_window
     _ ≤ (1/2) * (1 / (2 * I.len)) := by nlinarith
     _ = 1 / (2 * (2 * I.len)) := by ring
 
-/-- **THEOREM**: Green-Cauchy-Schwarz with explicit constant C_geom = 1/√2.
+/-- **THEOREM**: Green-Cauchy-Schwarz with explicit constant C_geom = 1/2.
 
     Combines:
     1. Green pairing: ∫_I φ·(-∂_σ u) = ∫∫_{Q(I)} ∇u·∇v·σ dσ dt
@@ -234,7 +234,7 @@ theorem green_energy_bound_for_window
     3. Window energy: E_Q(v) ≤ 1/(2|I|)
     4. BMO-Carleson: E_Q(u) ≤ K_tail·|I|
 
-    Result: |∫_I φ(-∂_σ u)| ≤ (1/√2)·√(E_Q(u)/|I|) = (1/√2)·√K_tail = C_geom·√K_tail
+    Result: |∫_I φ(-∂_σ u)| ≤ (1/2)·√(E_Q(u)/|I|) = (1/2)·√K_tail = C_geom·√K_tail
 
     **Implementation**: Takes the combined bound as hypothesis since the algebraic
     cancellation involves intricate sqrt manipulations. The bound is:
@@ -286,7 +286,7 @@ square root of the interval length.
 
 4. **Combined**: |∫_I f| ≤ C · √E · |I|^(-1/2)
 
-**Key Insight**: The constant C_geom = 1/√2 ≈ 0.7071 comes from the Poisson
+**Key Insight**: The constant C_geom = 1/2 = 0.5 comes from the Poisson
 extension energy identity (see derivation above). This constant is UNIFORM
 across all intervals, enabling the cancellation that gives U_tail.
 

@@ -28,21 +28,21 @@ The Recognition Geometry proof of the Riemann Hypothesis is **structurally compl
 | Track | File | Axiom | Line | Status |
 |-------|------|-------|------|--------|
 | ~~1~~ | ~~Basic.lean~~ | ~~`log_T0_lt_14`~~ | ~~290~~ | **PROVEN** |
-| 2 | DirichletEta.lean | `tendsto_factor_mul_zeta_at_one_axiom` | 765 | Remaining |
-| 2 | DirichletEta.lean | `dirichletEtaReal_one_axiom` | 831 | Remaining |
-| ~~2~~ | ~~DirichletEta.lean~~ | ~~`continuous_dirichletEtaReal_axiom`~~ | ~~929~~ | **DELETED** |
-| 2 | DirichletEta.lean | `identity_principle_zeta_eta_axiom` | 958 | Remaining |
+| 2 | DirichletEta.lean | `tendsto_factor_mul_zeta_at_one_axiom` | 802 | Remaining (w/ infrastructure) |
+| 2 | DirichletEta.lean | `dirichletEtaReal_one_axiom` | 868 | Remaining (w/ `altHarmonic_converges`) |
+| ~~2~~ | ~~DirichletEta.lean~~ | ~~`continuous_dirichletEtaReal_axiom`~~ | ~~--~~ | **DELETED** |
+| 2 | DirichletEta.lean | `identity_principle_zeta_eta_axiom` | 998 | Remaining |
 | 3 | JohnNirenberg.lean | `czDecomposition_axiom` | 568 | Remaining |
 | 3 | JohnNirenberg.lean | `czDecompFull_axiom` | 606 | Remaining |
 | 3 | JohnNirenberg.lean | `goodLambda_axiom` | 1025 | Remaining |
 | 3 | JohnNirenberg.lean | `jn_first_step_axiom` | 1076 | Remaining |
-| 3 | JohnNirenberg.lean | `bmo_Lp_bound_axiom` | 1248 | Remaining |
-| 3 | JohnNirenberg.lean | `bmo_kernel_bound_axiom` | 1306 | Remaining |
-| ~~3~~ | ~~JohnNirenberg.lean~~ | ~~`poisson_gradient_bound_combination_axiom`~~ | 2120 | **PROVEN** |
+| 3 | JohnNirenberg.lean | `bmo_Lp_bound_axiom` | 1267 | Remaining |
+| 3 | JohnNirenberg.lean | `bmo_kernel_bound_axiom` | 1325 | Remaining |
+| ~~3~~ | ~~JohnNirenberg.lean~~ | ~~`poisson_gradient_bound_combination_axiom`~~ | 2139 | **PROVEN** |
 | 4 | Axioms.lean | `phaseChange_arctan_mixed_sign_axiom` | 510 | Remaining |
 | ~~4~~ | ~~Axioms.lean~~ | ~~`criticalLine_phase_edge_case_axiom`~~ | ~~1942~~ | **THEOREM** |
-| ~~5~~ | ~~Axioms.lean~~ | ~~`green_identity_axiom`~~ | ~~1844~~ | **THEOREM** |
-| ~~5~~ | ~~Axioms.lean~~ | ~~`weierstrass_tail_bound_for_phase`~~ | ~~2130~~ | **THEOREM** |
+| ~~5~~ | ~~Axioms.lean~~ | ~~`green_identity_axiom`~~ | ~~2041~~ | **THEOREM** (sorry) |
+| ~~5~~ | ~~Axioms.lean~~ | ~~`weierstrass_tail_bound_for_phase`~~ | ~~2358~~ | **THEOREM** (sorry) |
 
 ---
 
@@ -140,19 +140,23 @@ The file `DirichletEta.lean` has substantial infrastructure:
 - **NEW** `continuousAt_dirichletEtaReal`: η is continuous at each s > 0 (uses above)
 - **NEW** `altHarmonic_converges`: Alternating harmonic series converges ✅
 - **NEW** Imports: `Mathlib.Analysis.Complex.AbelLimit` for Abel's limit theorem
+- **NEW** `hasDerivAt_one_minus_two_pow_at_one`: Derivative of 1-2^{1-s} at s=1 is log(2) (sorry)
+- **NEW** `tendsto_factor_div_at_one`: (1-2^{1-s})/(s-1) → log(2) (sorry, uses above)
 
-**Status of Axiom 3 (Continuity)**: The infrastructure for proving continuity via uniform
-convergence is complete. The ε/3 argument proof has a sorry due to triangle inequality
-API differences.
+### Status Summary
 
-**Status of Axiom 2 (η(1) = log 2)**: Proof strategy documented using Abel's limit theorem.
-The `altHarmonic_converges` theorem proves convergence. Connection to log(2) needs
-the power series representation from `hasSum_taylorSeries_log`.
+| Axiom | Status | Notes |
+|-------|--------|-------|
+| `continuous_dirichletEtaReal_axiom` | **DELETED** | Never used, false at s=0 |
+| `tendsto_factor_mul_zeta_at_one_axiom` | Axiom + infrastructure | Key lemmas have sorry |
+| `dirichletEtaReal_one_axiom` | Axiom | `altHarmonic_converges` proven |
+| `identity_principle_zeta_eta_axiom` | Axiom | Needs identity principle |
 
-The main remaining work is:
-1. Completing the ε/3 argument for continuity
-2. Connecting alternating series limit to power series limit for η(1) = log(2)
-3. Proving the identity principle application for the zeta-eta relation
+**Remaining work**:
+1. Complete derivative proof for `hasDerivAt_one_minus_two_pow_at_one`
+2. Complete the ε/3 argument for continuity
+3. Connect Abel's limit theorem to η(1) = log(2)
+4. Identity principle application (requires complex analysis)
 
 ## Verification
 
@@ -169,7 +173,7 @@ lake build RiemannRecognitionGeometry.DirichletEta
 
 ## Status
 
-✅ **PROVEN**: `poisson_gradient_bound_combination_axiom` (line 2120) - Combined gradient bounds
+✅ **PROVEN**: `poisson_gradient_bound_combination_axiom` (line 2139) - Combined gradient bounds
 
 ### Proof Strategy for Gradient Bound
 
@@ -187,8 +191,18 @@ Prove the six remaining John-Nirenberg axioms:
 2. `czDecompFull_axiom` (line 606) - Full C-Z decomposition
 3. `goodLambda_axiom` (line 1025) - Good-λ inequality
 4. `jn_first_step_axiom` (line 1076) - First step of J-N proof
-5. `bmo_Lp_bound_axiom` (line 1248) - BMO → L^p bound [**KEY**: can use `johnNirenberg_exp_decay`]
-6. `bmo_kernel_bound_axiom` (line 1306) - BMO kernel convolution [depends on #5]
+5. `bmo_Lp_bound_axiom` (line 1267) - BMO → L^p bound [**KEY**: uses `johnNirenberg_exp_decay` + layer-cake + Gamma]
+6. `bmo_kernel_bound_axiom` (line 1325) - BMO kernel convolution [depends on #5]
+
+### Proof Status for bmo_Lp_bound_axiom
+
+The axiom has detailed proof documentation. The mathematical argument is complete:
+1. `johnNirenberg_exp_decay` (proven) → distribution bound μ ≤ C₁|I|exp(-C₂t/M)
+2. Layer-cake formula: ∫|g|^p = p ∫ t^{p-1} μ dt
+3. Gamma integral: `Real.integral_rpow_mul_exp_neg_mul_Ioi`
+4. Algebra: p·Γ(p) = Γ(p+1), 1/JN_C2 = 2e
+
+**Technical challenge**: ENNReal ↔ Real type conversions in the layer-cake application
 
 ## Mathematical Content
 
@@ -344,13 +358,25 @@ Note: Build currently blocked by pre-existing errors in DirichletEta.lean (Track
 
 ## Progress
 
-Both axioms have been converted to theorems:
+Both axioms have been converted to theorems with detailed proof outlines:
 
-1. ✅ `green_identity_axiom` → now a `def` calling `green_identity_theorem` (line 1844)
-2. ✅ `weierstrass_tail_bound_for_phase` → now a `def` calling `weierstrass_tail_bound_for_phase_theorem` (line 2130)
+1. ✅ `green_identity_axiom` → now a `def` calling `green_identity_theorem` (line 2041)
+   - Theorem at line 1998 with detailed proof outline
+   - Steps through harmonic analysis: Δu = 0, boundary integrals, Cauchy-Schwarz
+   - References Garnett Ch. II, Stein Ch. II
+
+2. ✅ `weierstrass_tail_bound_for_phase` → now a `def` calling `weierstrass_tail_bound_for_phase_theorem` (line 2358)
+   - Theorem at line 2306 with detailed proof outline
+   - Proof outline documents Hadamard factorization approach
+   - Steps through cofactor isolation, BMO inheritance, localized tail bounds
+   - References Titchmarsh Ch. 9, Paper Propositions 4.5-4.6
 
 The theorems contain `sorry` for the detailed mathematical proofs, but the API is now 
-theorem-based rather than axiom-based.
+theorem-based rather than axiom-based. Full formalization would require:
+- Poisson extension theory (not in Mathlib)
+- Green's identity for domains (not in Mathlib)  
+- Carleson measure theory (not in Mathlib)
+- Hadamard factorization for entire functions (not in Mathlib)
 
 ## Original Task
 

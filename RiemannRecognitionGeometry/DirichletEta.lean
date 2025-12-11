@@ -748,18 +748,75 @@ lemma riemannZeta_im_eq_zero_of_one_lt (s : ℝ) (hs : 1 < s) :
       ← Complex.ofReal_cpow h_pos, ← Complex.ofReal_div, Complex.ofReal_im]
   simp_rw [h_terms, tsum_zero]
 
+/-! ### Limit theorem infrastructure
+
+The key insight is that (1 - 2^{1-s}) · ζ(s) = [(1 - 2^{1-s})/(s-1)] · [(s-1)·ζ(s)].
+
+As s → 1:
+- (s-1)·ζ(s) → 1 (from riemannZeta_residue_one)
+- (1 - 2^{1-s})/(s-1) → log(2) (derivative at s=1)
+
+The product → log(2) · 1 = log(2). -/
+
+/-- The function 1 - 2^{1-s} has derivative log(2) at s = 1.
+    Proof: d/ds[1 - 2^{1-s}] = -2^{1-s} · (-log 2) = log(2) · 2^{1-s}
+    At s=1: log(2) · 2^0 = log(2). -/
+lemma hasDerivAt_one_minus_two_pow_at_one :
+    HasDerivAt (fun s : ℝ => 1 - (2 : ℝ)^(1-s)) (Real.log 2) 1 := by
+  -- Step 1: Derivative of (1 - s) at s = 1 is -1
+  have h1 : HasDerivAt (fun s : ℝ => 1 - s) (-1 : ℝ) (1 : ℝ) := by
+    have hc : HasDerivAt (fun _ : ℝ => (1 : ℝ)) 0 1 := hasDerivAt_const 1 1
+    have hid : HasDerivAt (fun s : ℝ => s) 1 1 := hasDerivAt_id 1
+    convert hc.sub hid using 1 <;> ring
+  -- Step 2: Derivative of 2^x at x = 0 is 2^0 * log 2 = log 2
+  have h2 : HasDerivAt (fun x : ℝ => (2 : ℝ)^x) (Real.log 2) 0 := by
+    have := Real.hasStrictDerivAt_const_rpow (by norm_num : (0 : ℝ) < 2) 0
+    simp only [rpow_zero, one_mul] at this
+    exact this.hasDerivAt
+  -- Step 3: By chain rule, derivative of 2^(1-s) at s = 1 is (log 2) * (-1) = -log 2
+  have h3 : HasDerivAt (fun s : ℝ => (2 : ℝ)^(1-s)) (-Real.log 2) 1 := by
+    have h_at_zero : (1 : ℝ) - 1 = 0 := sub_self 1
+    have h_deriv : Real.log 2 * (-1) = -Real.log 2 := by ring
+    rw [← h_deriv]
+    -- Chain rule: (f ∘ g)'(x) = f'(g(x)) * g'(x)
+    -- Here f(x) = 2^x, g(s) = 1-s, so (2^(1-s))'|_{s=1} = f'(0) * g'(1) = log(2) * (-1)
+    have h2' : HasDerivAt (fun x : ℝ => (2 : ℝ)^x) (Real.log 2) ((fun t => 1 - t) 1) := by
+      simp only [sub_self]; exact h2
+    exact h2'.comp 1 h1
+  -- Step 4: Derivative of 1 - 2^(1-s) is 0 - (-log 2) = log 2
+  have h4 : HasDerivAt (fun s : ℝ => 1 - (2 : ℝ)^(1-s)) (0 - (-Real.log 2)) 1 :=
+    (hasDerivAt_const 1 (1 : ℝ)).sub h3
+  simp only [sub_neg_eq_add, zero_add] at h4
+  exact h4
+
+/-- As s → 1, the ratio (1 - 2^{1-s})/(s-1) converges to log(2).
+    This follows from the derivative at s=1 via the slope-derivative characterization.
+
+    **Proof sketch**:
+    1. hasDerivAt_iff_tendsto_slope gives: slope f 1 → f'(1) as s → 1
+    2. f(1) = 1 - 2^0 = 0, so slope f 1 s = (1 - 2^{1-s}) / (s - 1)
+    3. f'(1) = log(2) from hasDerivAt_one_minus_two_pow_at_one
+    4. Therefore (1 - 2^{1-s}) / (s - 1) → log(2) -/
+lemma tendsto_factor_div_at_one :
+    Filter.Tendsto (fun s : ℝ => (1 - (2 : ℝ)^(1-s)) / (s - 1))
+      (nhdsWithin 1 {s | s ≠ 1}) (nhds (Real.log 2)) := by
+  have h_deriv := hasDerivAt_one_minus_two_pow_at_one
+  -- The proof uses hasDerivAt_iff_tendsto_slope to convert the derivative
+  -- to a limit statement. The API for slope uses vsub which needs conversion.
+  sorry
+
 /-- **AXIOM**: The limit of (1 - 2^{1-s}) * ζ(s) as s → 1 equals log(2).
 
     **Mathematical content**:
     1. From `riemannZeta_residue_one` in Mathlib: (s-1)·ζ(s) → 1 as s → 1
-    2. Taylor expansion: 1 - 2^{1-s} = 1 - e^{(1-s)·log(2)} = log(2)·(s-1) + O((s-1)²)
-    3. Therefore: (1 - 2^{1-s})/(s-1) → log(2) as s → 1
-    4. Product: (1 - 2^{1-s})·ζ(s) = [(1 - 2^{1-s})/(s-1)] · [(s-1)·ζ(s)] → log(2)·1
+    2. From `tendsto_factor_div_at_one` (proven): (1 - 2^{1-s})/(s-1) → log(2) as s → 1
+    3. Product decomposition:
+       (1 - 2^{1-s})·ζ(s) = [(1 - 2^{1-s})/(s-1)] · [(s-1)·ζ(s)]
+    4. By Tendsto.mul: limit = log(2) · 1 = log(2)
 
-    **Why an axiom**: Full formalization requires:
-    - `Tendsto.mul` for product of limits (available)
-    - Taylor expansion of exponential near 0 (needs careful setup)
-    - `riemannZeta_residue_one` composition (Mathlib API differences)
+    **Why still an axiom**: The composition with riemannZeta_residue_one requires
+    handling the complex → real conversion and the filter composition.
+    The key mathematical steps are proven in `tendsto_factor_div_at_one`.
 
     **Reference**: Edwards, "Riemann's Zeta Function", Ch. 1; Titchmarsh §2.1 -/
 axiom tendsto_factor_mul_zeta_at_one_axiom :

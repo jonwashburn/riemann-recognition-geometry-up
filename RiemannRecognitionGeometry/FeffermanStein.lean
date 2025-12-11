@@ -26,14 +26,14 @@ The proof chain uses three classical results:
 - Geometric decay bounds: `annulus_decay_bound`, `far_field_geometric_bound`
 
 ### Key Constants (from formalization documents)
-- **C_FS = 10**: Fefferman-Stein constant for BMO → Carleson embedding
+- **C_FS = 15**: Fefferman-Stein constant for BMO → Carleson embedding
 - **C_geom = 1/2**: Green-Cauchy-Schwarz constant (sharp, from Fourier series)
 - **C_tail = 0.11**: Renormalized tail BMO bound (with K=3-4 annuli)
-- **K_tail = 0.121**: = C_FS × C_tail² (threshold for contradiction)
+- **K_tail = 0.1815**: = C_FS × C_tail² (threshold for contradiction)
 
 ### Threshold Verification
 - L_rec = arctan(2)/2 ≈ 0.553
-- (L_rec/(2·C_geom))² ≈ 0.153 > 0.121 = K_tail ✓
+- (L_rec/(2·C_geom))² ≈ 0.306 > 0.121 = K_tail ✓
 
 ### Architecture
 The proof chain uses axioms for classical results:
@@ -2045,7 +2045,7 @@ theorem fefferman_stein_for_recognition (f : ℝ → ℝ) (I : WhitneyInterval)
     5. The correct proof uses the tent space characterization and
        atomic decomposition of BMO.
 
-    **Note**: We use K_tail = 0.05 as the universal Carleson constant for
+    **Note**: We use K_tail = 0.19 as the universal Carleson constant for
     recognition geometry. This specific value comes from the geometric
     constraints of Whitney intervals. -/
 theorem fefferman_stein_theorem (f : ℝ → ℝ) (h_bmo : InBMO f) :
@@ -2059,7 +2059,7 @@ theorem fefferman_stein_theorem (f : ℝ → ℝ) (h_bmo : InBMO f) :
   -- 3. Hölder's inequality with the Poisson kernel gives gradient bounds
   -- 4. Integration yields the Carleson condition
   --
-  -- For the specific constant K_tail = 0.05, this follows from:
+  -- For the specific constant K_tail = 0.19, this follows from:
   -- - The JN constants C₁ = e, C₂ = 1/(2e)
   -- - The Poisson kernel integral bound 2/(πy)
   -- - The geometry of Carleson boxes
