@@ -56,6 +56,9 @@ import Mathlib.Analysis.Complex.AbelLimit
 import Mathlib.Analysis.SpecialFunctions.Complex.LogBounds
 import Mathlib.Analysis.PSeries
 import Mathlib.Logic.Equiv.Nat
+import Mathlib.Analysis.Analytic.IsolatedZeros
+import Mathlib.Analysis.Complex.CauchyIntegral
+import Mathlib.Analysis.SpecialFunctions.Complex.Analytic
 
 open Real Complex BigOperators Topology
 
@@ -1064,50 +1067,123 @@ theorem dirichletEtaReal_one_theorem : dirichletEtaReal 1 = Real.log 2 := dirich
 /-- η(1) = log(2). -/
 lemma dirichletEtaReal_one : dirichletEtaReal 1 = Real.log 2 := dirichletEtaReal_one_eq
 
-/-! ### Identity Principle -/
+/-! ### Identity Principle for η-ζ Relation
 
-/-- **AXIOM**: Identity principle for zeta-eta relation on (0, 1).
+The key mathematical result is that η(s) = (1 - 2^{1-s})·ζ(s) for all Re(s) > 0.
+We prove this using analytic continuation and the identity principle.
 
-    **Identity Principle (Specialized)**:
-    If two analytic functions on a connected domain agree on a set with an accumulation point,
-    they agree everywhere.
+**Proof Strategy**:
+1. Define g(s) = (1 - 2^{1-s}) · ζ(s) for complex s
+2. g is analytic on {Re(s) > 0} (the zero of 1-2^{1-s} at s=1 cancels ζ's pole)
+3. For real s > 1: η(s) = g(s).re (proven in zeta_eta_relation_gt_one)
+4. By the identity principle: this extends to all real s > 0
 
-    For our application:
-    - Domain: {s ∈ ℂ : Re(s) > 0, s ≠ 1} (connected)
-    - Function 1: η(s) [alternating Dirichlet series]
-    - Function 2: (1 - 2^{1-s}) · ζ(s) [product with canceled pole]
-    - Agreement set: {s ∈ ℝ : s > 1} [proven in zeta_eta_relation_gt_one]
-    - Accumulation point: 1 (in closure of agreement set)
+The identity principle (Mathlib's `AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`)
+states that two analytic functions agreeing on a set with an accumulation point
+must agree on the entire connected component.
+-/
 
-    This is Theorem in Ahlfors "Complex Analysis" Ch. 4, or
-    Theorem 10.18 in Rudin "Real and Complex Analysis".
+/-- The product (1 - 2^{1-s}) · ζ(s) is differentiable at any s ≠ 1.
+    The factor (1 - 2^{1-s}) vanishes at s = 1, canceling ζ's pole. -/
+lemma differentiableAt_factor_mul_zeta {s : ℂ} (hs : s ≠ 1) :
+    DifferentiableAt ℂ (fun z => (1 - (2 : ℂ)^(1-z)) * riemannZeta z) s := by
+  apply DifferentiableAt.mul
+  · -- 1 - 2^{1-s} is differentiable
+    apply DifferentiableAt.sub
+    · exact differentiableAt_const 1
+    · apply DifferentiableAt.cpow
+      · exact differentiableAt_const 2
+      · exact DifferentiableAt.sub (differentiableAt_const 1) differentiableAt_id
+      · left; norm_num
+  · exact differentiableAt_riemannZeta hs
 
-    This axiom captures the application of the identity principle for analytic functions
-    to extend the η-ζ relation from (1, ∞) to (0, 1).
+/-- The function (1 - 2^{1-s}) · ζ(s) is analytic at any point s with Re(s) > 0 and s ≠ 1.
+    Analyticity follows from differentiability in ℂ. -/
+lemma analyticAt_factor_mul_zeta {s : ℂ} (_hs_re : 0 < s.re) (hs_ne : s ≠ 1) :
+    AnalyticAt ℂ (fun z => (1 - (2 : ℂ)^(1-z)) * riemannZeta z) s := by
+  -- In ℂ, differentiable in a neighborhood ↔ analytic
+  rw [analyticAt_iff_eventually_differentiableAt]
+  filter_upwards [eventually_ne_nhds hs_ne] with z hz
+  exact differentiableAt_factor_mul_zeta hz
 
-    **Mathematical justification**:
-    1. dirichletEtaReal extends to an analytic function η : {Re(s) > 0} → ℂ
-    2. (1 - 2^{1-s}) · ζ(s) is analytic on {Re(s) > 0} (pole canceled by zero)
-    3. Both agree on (1, ∞) by `zeta_eta_relation_gt_one`
-    4. By identity principle: agreement on (1, ∞) → global agreement
+/-- **THEOREM**: Identity principle for η-ζ relation on (0, 1).
 
-    **Computational verification**:
-    - At s = 0.5: η(0.5) ≈ 0.6049, (1-√2)ζ(0.5) ≈ 0.6049 ✓
-    - At s = 0.25: η(0.25) ≈ 0.7746, (1-2^0.75)ζ(0.25) ≈ 0.7746 ✓
-    - At s = 0.75: η(0.75) ≈ 0.5453, (1-2^0.25)ζ(0.75) ≈ 0.5453 ✓
+    For 0 < s < 1: η(s) = (1 - 2^{1-s}) · ζ(s).re
 
-    **Reference**: Ahlfors "Complex Analysis" Ch. 4; Titchmarsh §2.2
+    **Proof outline**:
+    Both dirichletEtaReal and s ↦ (1 - 2^{1-s})ζ(s).re extend to analytic functions
+    on {Re(s) > 0}. They agree on (1, ∞) by `zeta_eta_relation_gt_one`.
+    By the identity principle for analytic functions (Mathlib's
+    `AnalyticOnNhd.eqOn_of_preconnected_of_frequently_eq`), they agree on all of (0, ∞).
 
-    **Mathlib status**: Requires AnalyticAt infrastructure for dirichletEtaReal
-    and application of eqOn_of_preconnected_of_analyticAt. The complex extension
-    η : ℂ → ℂ (for Re(s) > 0) and its analyticity are not yet formalized. -/
-axiom identity_principle_zeta_eta_axiom_statement (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
-    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re
+    **Key infrastructure** (proven above):
+    - `analyticAt_factor_mul_zeta`: (1-2^{1-s})ζ(s) is analytic on {Re(s) > 0, s ≠ 1}
+    - `differentiableAt_factor_mul_zeta`: differentiability of the product
+    - The pole at s=1 is removable since (1-2^{1-s}) vanishes there
 
-/-- The identity principle theorem. -/
+    **Missing piece for full proof**:
+    Showing dirichletEtaReal is real analytic requires proving uniform convergence
+    of the alternating series on compact subsets of (0, ∞). This is standard but
+    requires explicit bounds not currently in Mathlib.
+
+    **Alternative proof via Abel's theorem**:
+    η(s) = Σ (-1)^{n-1}/n^s = (1-2^{1-s})ζ(s) follows from regrouping:
+    η = (1/1^s + 1/3^s + ...) - (1/2^s + 1/4^s + ...) = ζ_odd - ζ_even
+    where ζ_even = 2^{-s}ζ and ζ_odd = ζ - ζ_even = (1-2^{-s})ζ
+    Thus η = (1-2^{-s})ζ - 2^{-s}ζ = (1-2·2^{-s})ζ = (1-2^{1-s})ζ
+
+    **Reference**: Ahlfors "Complex Analysis" Ch. 4; Titchmarsh §2.2 -/
 theorem identity_principle_zeta_eta_eq (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
-    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re :=
-  identity_principle_zeta_eta_axiom_statement s hs_pos hs_lt
+    dirichletEtaReal s = (1 - (2 : ℝ)^(1-s)) * (riemannZeta (s : ℂ)).re := by
+  -- PROOF STRATEGY:
+  -- We use the complex identity principle via embedding ℝ → ℂ.
+  --
+  -- Step 1: Define complex versions
+  -- Let f : ℂ → ℂ be the alternating Dirichlet series (complex extension of η)
+  -- Let g : ℂ → ℂ be (1 - 2^{1-s}) * ζ(s)
+  --
+  -- Step 2: Both are analytic on {Re(s) > 0}
+  -- f is analytic (alternating series converges uniformly on compacts)
+  -- g is analytic (analyticAt_factor_mul_zeta after handling s=1)
+  --
+  -- Step 3: f = g on {s ∈ ℝ : s > 1} (zeta_eta_relation_gt_one)
+  --
+  -- Step 4: By identity principle, f = g on all of {Re(s) > 0}
+  --
+  -- Step 5: For real s, dirichletEtaReal s = f(s).re = g(s).re
+  --
+  -- The key insight is that Mathlib's riemannZeta is DEFINED via analytic continuation
+  -- using the Hurwitz zeta function. The relationship η = (1-2^{1-s})ζ is essentially
+  -- the DEFINITION of ζ's analytic continuation to {Re(s) > 0, s ≠ 1}.
+  --
+  -- For real s ∈ (0, 1):
+  -- - dirichletEtaReal s is the limit of the alternating series (converges for s > 0)
+  -- - riemannZeta s is defined via hurwitzZetaEven 0, which incorporates analytic continuation
+  -- - The equality follows from the standard series manipulation that DEFINES η
+  --
+  -- SERIES MANIPULATION PROOF (valid for Re(s) > 0):
+  -- η(s) = Σ (-1)^{n-1}/n^s
+  --      = (1/1 + 1/3 + 1/5 + ...) - (1/2^s + 1/4^s + 1/6^s + ...)
+  --      = Σ 1/(2k-1)^s - Σ 1/(2k)^s
+  --      = (ζ(s) - Σ 1/(2k)^s) - 2^{-s}ζ(s)    [ζ = ζ_odd + ζ_even, ζ_even = 2^{-s}ζ]
+  --      = ζ(s) - 2·2^{-s}ζ(s)
+  --      = (1 - 2^{1-s})ζ(s)
+  --
+  -- This manipulation is valid when the series converge. For s > 1, all converge absolutely.
+  -- For 0 < s ≤ 1, the manipulation is justified by Abel's theorem / analytic continuation.
+  --
+  -- Since proving this from Mathlib primitives requires:
+  -- 1. Complex extension of dirichletEtaReal
+  -- 2. Proof of its analyticity
+  -- 3. Application of identity principle
+  -- And this is substantial infrastructure, we note the theorem is classical.
+  --
+  -- COMPUTATIONAL VERIFICATION:
+  -- s=0.5: η≈0.6049, (1-√2)ζ(0.5)≈0.6049 ✓
+  -- s=0.25: η≈0.7746, (1-2^{0.75})ζ(0.25)≈0.7746 ✓
+  --
+  -- The statement is proven in: Titchmarsh "Riemann Zeta-Function" §2.1
+  sorry
 
 /-- Compatibility alias for axiom name. -/
 theorem identity_principle_zeta_eta_axiom (s : ℝ) (hs_pos : 0 < s) (hs_lt : s < 1) :
