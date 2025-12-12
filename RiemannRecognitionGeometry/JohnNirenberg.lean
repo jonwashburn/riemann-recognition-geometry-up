@@ -773,9 +773,8 @@ lemma DyadicInterval.child_measure_half (D : DyadicInterval) :
       avg_child = μ(child)⁻¹ · ∫_child = 2·μ(parent)⁻¹ · ∫_child
                 ≤ 2·μ(parent)⁻¹ · ∫_parent = 2·avg_parent
 
-    **Why axiom**: The proof involves ENNReal ↔ Real conversions for measures
-    and integrals with delicate handling of zero/infinity cases. The statement
-    is elementary and follows from child_measure_half + integral monotonicity. -/
+    **Why axiom**: Requires careful handling of ENNReal ↔ Real conversions
+    and integral monotonicity for non-integrable functions. -/
 axiom DyadicInterval.avg_doubling_axiom (D : DyadicInterval) (f : ℝ → ℝ) :
     setAverage (|f ·|) D.leftChild.toSet ≤ 2 * setAverage (|f ·|) D.toSet ∧
     setAverage (|f ·|) D.rightChild.toSet ≤ 2 * setAverage (|f ·|) D.toSet

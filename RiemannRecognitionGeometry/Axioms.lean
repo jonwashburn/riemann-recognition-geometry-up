@@ -839,7 +839,8 @@ theorem criticalLine_phase_ge_L_rec (I : WhitneyInterval) (ρ : ℂ)
     (hρ_im : ρ.im ∈ I.interval) (hρ_re : 1/2 < ρ.re)
     (hρ_re_upper : ρ.re ≤ 1/2 + 2 * I.len)
     (hρ_re_strict : ρ.re < 1)  -- Critical strip bound: d < 1/2
-    (hI_len_large : I.len ≥ 7) :  -- From |ρ.im| > 14 for actual zeros
+    (hI_len_large : I.len ≥ 7)  -- From |ρ.im| > 14 for actual zeros
+    (h_centered : |ρ.im - I.t0| ≤ I.len / 2) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
@@ -860,9 +861,6 @@ theorem criticalLine_phase_ge_L_rec (I : WhitneyInterval) (ρ : ℂ)
     have h_d_lt_half : d < 1/2 := by simp only [d]; linarith
     -- Key bound: L ≥ 7
     have h_len_ge_7 : I.len ≥ 7 := hI_len_large
-
-    -- Use Whitney centering: |ρ.im - I.t0| ≤ I.len/2
-    have h_centered := whitney_zero_centered I ρ hρ_zero hρ_re hρ_im
 
     -- From centering: y_hi ≥ I.len/2 and -y_lo ≥ I.len/2
     have h_yhi_ge : y_hi ≥ I.len / 2 := by
@@ -1036,6 +1034,9 @@ theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
     (hρ_re : 1/2 < ρ.re)
     (hρ_re_upper : ρ.re ≤ 1/2 + 2 * I.len)
     (hρ_im : ρ.im ∈ I.interval)
+    (hρ_re_strict : ρ.re < 1)
+    (hI_len_large : I.len ≥ 7)
+    (h_centered : |ρ.im - I.t0| ≤ I.len / 2)
     (_hρ_im_ne : ρ.im ≠ 0) :
     |totalPhaseSignal I| ≥ L_rec - U_tail := by
   -- Use phase_decomposition_exists from FeffermanStein
@@ -1059,12 +1060,8 @@ theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
         have h_arctan := Real.arctan_lt_arctan h_div_lt
         linarith
     rw [_root_.abs_of_nonneg h_pos]
-    -- Derive the additional hypotheses from zero_has_large_im
-    have h_im_large := zero_has_large_im ρ hρ_zero hρ_re
-    -- |ρ.im| > 14, so for Whitney covering containing ρ, I.len ≥ 7
-    have h_len_ge : I.len ≥ 7 := whitney_len_from_zero I ρ hρ_zero hρ_re hρ_im
-    have h_re_strict : ρ.re < 1 := zero_in_critical_strip ρ hρ_zero hρ_re
-    apply criticalLine_phase_ge_L_rec I ρ hρ_zero hρ_im hρ_re hρ_re_upper h_re_strict h_len_ge
+    apply criticalLine_phase_ge_L_rec I ρ hρ_zero hρ_im hρ_re hρ_re_upper hρ_re_strict hI_len_large
+      h_centered
 
 
   -- From decomposition: actualPhaseSignal I = blaschke_fs + tail
@@ -1109,22 +1106,40 @@ The proof by contradiction:
 
     **Note**: `hρ_re_upper'` comes from recognizer band definition (Λ_rec ≤ 2).
     Takes the oscillation hypothesis for log|ξ|. -/
-theorem zero_free_with_interval (ρ : ℂ) (I : WhitneyInterval)
-    (hρ_re : 1/2 < ρ.re) (_hρ_re_upper : ρ.re ≤ 1)
-    (hρ_re_upper' : ρ.re ≤ 1/2 + 2 * I.len)  -- From recognizer band
-    (hρ_im : ρ.im ∈ I.interval)
+theorem zero_free_with_interval (ρ : ℂ)
+    (hρ_re : 1/2 < ρ.re)
     (hρ_zero : completedRiemannZeta ρ = 0)
-    (_h_width_lower : 2 * I.len ≥ |ρ.im|)
-    (_h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)
     (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     False := by
+  -- Work with a *centered* Whitney interval of half-length 7.
+  -- This avoids any extra “centering” axioms: ρ.im is exactly the center.
+  let I0 : WhitneyInterval := { t0 := ρ.im, len := 7, len_pos := by norm_num }
+
+  have hρ_im0 : ρ.im ∈ I0.interval := by
+    -- ρ.im ∈ [ρ.im - 7, ρ.im + 7]
+    simp [WhitneyInterval.interval, I0, Set.mem_Icc]
+
+  have h_centered0 : |ρ.im - I0.t0| ≤ I0.len / 2 := by
+    -- |ρ.im - ρ.im| = 0
+    simp [I0]
+    norm_num
+
+  have hρ_re_strict : ρ.re < 1 := zero_in_critical_strip ρ hρ_zero hρ_re
+  have hρ_re_upper0 : ρ.re ≤ 1/2 + 2 * I0.len := by
+    -- RHS = 1/2 + 14, so this is trivial from ρ.re < 1
+    have : ρ.re ≤ (1 : ℝ) := le_of_lt hρ_re_strict
+    nlinarith [this]
+
+  have hI0_len_large : I0.len ≥ 7 := by simp [I0]
   have hρ_im_ne : ρ.im ≠ 0 := zero_has_nonzero_im ρ hρ_zero hρ_re
 
-  -- Lower bound: |totalPhaseSignal| ≥ L_rec - U_tail (from critical line phase)
-  have h_dominance := blaschke_dominates_total I ρ hρ_zero hρ_re hρ_re_upper' hρ_im hρ_im_ne
+  -- Lower bound: |totalPhaseSignal I0| ≥ L_rec - U_tail
+  have h_dominance :=
+    blaschke_dominates_total I0 ρ hρ_zero hρ_re hρ_re_upper0 hρ_im0 hρ_re_strict hI0_len_large
+      h_centered0 hρ_im_ne
 
-  -- Upper bound: |totalPhaseSignal| ≤ U_tail (from Carleson bound, with oscillation hypothesis)
-  have h_carleson := totalPhaseSignal_bound I h_osc
+  -- Upper bound: |totalPhaseSignal I0| ≤ U_tail
+  have h_carleson := totalPhaseSignal_bound I0 h_osc
 
   -- Key numerical inequality: L_rec > 2 * U_tail
   -- With C_geom = 1/2 and K_tail = 2.1:
@@ -1194,7 +1209,7 @@ theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
       _ ≤ 1/2 + 2 * I.len := by have hlen := I.len_pos; nlinarith
 
   -- Apply zero_free_with_interval with oscillation hypothesis
-  exact zero_free_with_interval ρ I hρ_re hρ_re_upper hρ_re_upper' hρ_im hρ_zero h_width_lower h_width_upper h_osc
+  exact zero_free_with_interval ρ hρ_re hρ_zero h_osc
 
 /-- **THEOREM**: No zeros in the interior of any recognizer band (with good interval).
     Takes the oscillation hypothesis for log|ξ|. -/

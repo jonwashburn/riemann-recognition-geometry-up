@@ -82,26 +82,7 @@ theorem no_off_critical_zeros_in_strip
   · -- 1/2 < Re(ρ) ≤ 1: use Recognition Geometry
     push_neg at h_re_gt_one
     have hρ_re : 1/2 < ρ.re := hρ_crit
-    have hρ_re_upper : ρ.re ≤ 1 := h_re_gt_one  -- From ¬(1 < ρ.re)
-    -- First: zeros with Re > 1/2 must have Im ≠ 0
-    have hρ_im_ne : ρ.im ≠ 0 := zero_has_nonzero_im ρ hρ_zero hρ_re
-    -- Use dyadic_interval_with_width to get an interval with proper width bounds
-    obtain ⟨J, hJ_contains, h_width_lower, h_width_upper'⟩ := dyadic_interval_with_width ρ.im hρ_im_ne
-    -- The upper bound from dyadic_interval_with_width is 4|γ|, which is ≤ 10|γ|
-    have h_width_upper : 2 * J.len ≤ 10 * |ρ.im| := by
-      have h_pos : 0 < |ρ.im| := abs_pos.mpr hρ_im_ne
-      linarith
-    -- Recognizer band constraint: ρ.re ≤ 1/2 + 2*J.len
-    -- From: ρ.re ≤ 1 and J.len ≥ |ρ.im|/2, for non-trivial zeros |ρ.im| > 14, so J.len > 7
-    -- Thus 2*J.len > 14 > 1/2 ≥ ρ.re - 1/2, giving ρ.re ≤ 1/2 + 2*J.len
-    have hρ_re_upper' : ρ.re ≤ 1/2 + 2 * J.len := by
-      -- All non-trivial zeros have |Im| > 14
-      have h_im_large := zero_has_large_im ρ hρ_zero hρ_re
-      -- From h_width_lower: 2*J.len ≥ |ρ.im| > 14
-      -- From hρ_re_upper: ρ.re ≤ 1, so ρ.re - 1/2 ≤ 1/2 < 14 < 2*J.len
-      linarith
-    -- Apply the zero-free criterion with oscillation hypothesis
-    exact zero_free_with_interval ρ J hρ_re hρ_re_upper hρ_re_upper' hJ_contains hρ_zero h_width_lower h_width_upper h_osc
+    exact zero_free_with_interval ρ hρ_re hρ_zero h_osc
 
 /-! ## Main Riemann Hypothesis Theorem -/
 

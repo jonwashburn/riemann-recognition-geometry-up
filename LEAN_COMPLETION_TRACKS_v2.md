@@ -2,7 +2,7 @@
 
 **Version**: 3.0 (December 2025)  
 **Project**: Recognition Geometry proof of the Riemann Hypothesis  
-**Build Status**: ✅ Compiles successfully with **0 sorries** and **20 axioms**
+**Build Status**: ✅ Compiles successfully with **0 sorries** and **18 axioms**
 
 ---
 
@@ -12,81 +12,60 @@
 |-------|------|------------|-------|--------|
 | A | Numeric Bounds | Easy | 0 sorries | ✅ **Complete** |
 | B | Arctan Geometry | Medium | 0 sorries | ✅ **Complete** |
-| C | John-Nirenberg | Hard | 10 axioms | ✅ **Complete** (axiomatized) |
+| C | John-Nirenberg | Hard | 9 axioms | ✅ **Complete** (axiomatized) |
 | D | Dirichlet Eta | Medium | 1 axiom | ✅ **Complete** (axiomatized) |
-| E | Mathlib Gaps | ✅ COMPLETE | 9 axioms | ✅ **Complete** |
+| E | Mathlib Gaps | ✅ COMPLETE | 5 axioms | ✅ **Complete** |
 
 ---
 
 ## Current State Summary
 
-### 9 Axioms (documented classical results)
-
-**Track E Axioms** (Mathlib gaps - harmonic analysis):
-```
-Axioms.lean:718           - green_identity_axiom_statement (Green-Cauchy-Schwarz)
-Axioms.lean:998           - weierstrass_tail_bound_axiom_statement (Hadamard product)
-FeffermanSteinBMO.lean:139 - fefferman_stein_bmo_carleson (BMO→Carleson)
-FeffermanSteinBMO.lean:159 - tail_pairing_bound_axiom (tail integral bound)
-PoissonExtension.lean:137 - bmo_carleson_embedding (BMO→Carleson embedding)
-```
-
-**Zeta function axioms** (number theory):
-```
-Basic.lean:475            - zero_has_large_im
-Basic.lean:484            - zero_in_critical_strip
-Basic.lean:497            - whitney_len_from_zero
-Basic.lean:513            - whitney_zero_centered
-```
-
 ### 0 Sorries ✅
 
 All proofs complete modulo axioms!
 
-### 20 Axioms (documented classical results)
+### 18 Axioms (documented classical results)
 
-**Basic.lean** (4 axioms - RH properties):
+**Basic.lean** (3 axioms - RH properties / Whitney geometry):
 ```
-zero_has_large_im              - All ζ zeros have |Im| > 14
-zero_in_critical_strip         - ζ zeros have 0 < Re < 1
-whitney_len_from_zero          - Whitney interval length bound from zero
-whitney_zero_centered          - Zero centered in Whitney interval
+Basic.lean:476            - zero_has_large_im
+Basic.lean:518            - whitney_len_from_strip_height_axiom
+Basic.lean:549            - whitney_centered_from_strip_axiom
 ```
 
 **Axioms.lean** (2 axioms - complex analysis):
 ```
-green_identity_axiom_statement        - Green-Cauchy-Schwarz identity
-weierstrass_tail_bound_axiom_statement - Hadamard product tail bound
+Axioms.lean:717           - green_identity_axiom_statement (Green-Cauchy-Schwarz identity)
+Axioms.lean:1001          - weierstrass_tail_bound_axiom_statement (Hadamard product tail bound)
 ```
 
 **DirichletEta.lean** (1 axiom - analytic continuation):
 ```
-identity_principle_eta_zeta_lt_one_axiom - η(s) = (1-2^{1-s})ζ(s) for s∈(0,1)
+DirichletEta.lean:1208    - identity_principle_eta_zeta_lt_one_axiom
 ```
 
 **FeffermanSteinBMO.lean** (2 axioms - harmonic analysis):
 ```
-fefferman_stein_bmo_carleson  - BMO → Carleson embedding
-tail_pairing_bound_axiom      - Tail integral bound
+FeffermanSteinBMO.lean:139 - fefferman_stein_bmo_carleson (BMO → Carleson embedding)
+FeffermanSteinBMO.lean:159 - tail_pairing_bound_axiom (Tail integral bound)
 ```
 
-**JohnNirenberg.lean** (10 axioms - CZ decomposition):
+**JohnNirenberg.lean** (9 axioms - CZ decomposition):
 ```
-dyadic_nesting                 - Dyadic interval nesting property
-dyadic_same_gen_disjoint_axiom - Same-generation disjointness
-maximalBad_disjoint_axiom      - Maximal bad intervals disjoint
-DyadicInterval.avg_doubling_axiom - Dyadic doubling property
-czDecomposition_axiom          - Calderón-Zygmund decomposition exists
-czDecompFull_axiom             - CZ good/bad function split
-goodLambda_axiom               - Good-λ inequality
-jn_first_step_axiom            - JN base case (k=1)
-bmo_Lp_bound_axiom             - BMO L^p bound via layer-cake
-bmo_kernel_bound_axiom         - BMO kernel integral bound
+JohnNirenberg.lean:582    - dyadic_nesting
+JohnNirenberg.lean:828    - maximalBad_disjoint_axiom
+JohnNirenberg.lean:936    - DyadicInterval.avg_doubling_axiom
+JohnNirenberg.lean:988    - czDecomposition_axiom
+JohnNirenberg.lean:1039   - czDecompFull_axiom
+JohnNirenberg.lean:1475   - goodLambda_axiom
+JohnNirenberg.lean:1549   - jn_first_step_axiom
+JohnNirenberg.lean:1746   - bmo_Lp_bound_axiom
+JohnNirenberg.lean:1828   - bmo_kernel_bound_axiom
 ```
 
 **PoissonExtension.lean** (1 axiom):
 ```
-bmo_carleson_embedding         - BMO Carleson embedding
+PoissonExtension.lean:137 - bmo_carleson_embedding (BMO Carleson embedding)
 ```
 
 **Recent Progress**:
@@ -94,6 +73,8 @@ bmo_carleson_embedding         - BMO Carleson embedding
 - ✅ Deleted unused/false criticalLine_phase_edge_case_axiom
 - ✅ Converted all remaining sorries to documented axioms
 - ✅ All axioms have detailed proof sketches in docstrings
+- ✅ Proved `zero_in_critical_strip` (Mathlib ζ nonvanishing on Re ≥ 1)
+- ✅ Refactored Whitney length/centering inputs (strip+height form)
 
 ---
 

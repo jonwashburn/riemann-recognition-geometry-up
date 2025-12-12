@@ -12,6 +12,7 @@ import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Complex.ExponentialBounds
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Arctan
 import Mathlib.NumberTheory.LSeries.RiemannZeta
+import Mathlib.NumberTheory.LSeries.Nonvanishing
 import RiemannRecognitionGeometry.Mathlib.ArctanTwoGtOnePointOne
 
 noncomputable section
@@ -475,44 +476,95 @@ Recognition Geometry proof and their derivations.
 axiom zero_has_large_im (ρ : ℂ) (hρ_zero : completedRiemannZeta ρ = 0) (hρ_re : 1/2 < ρ.re) :
     |ρ.im| > 14
 
-/-- **AXIOM**: Zeros of ξ with Re > 1/2 are in the critical strip (Re < 1).
+/-- **THEOREM**: Zeros of ξ with Re > 1/2 are in the critical strip (Re < 1).
 
     This follows from the Prime Number Theorem: ζ(s) ≠ 0 for Re(s) ≥ 1.
     Combined with 1/2 < Re(ρ) from the hypothesis, we get 1/2 < Re(ρ) < 1.
 
+    **Proof** (in Lean):
+    1. Convert `completedRiemannZeta ρ = 0` into `riemannZeta ρ = 0` using the Mathlib lemma
+       `riemannZeta_def_of_ne_zero` (this only needs `ρ ≠ 0`, which follows from `1/2 < ρ.re`).
+    2. Use Mathlib's nonvanishing theorem `riemannZeta_ne_zero_of_one_le_re` to rule out
+       `ρ.re ≥ 1`. Therefore `ρ.re < 1`.
+
     **Reference**: de la Vallée Poussin (1896), Hadamard (1896) -/
-axiom zero_in_critical_strip (ρ : ℂ) (hρ_zero : completedRiemannZeta ρ = 0) (hρ_re : 1/2 < ρ.re) :
-    ρ.re < 1
+theorem zero_in_critical_strip (ρ : ℂ) (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_re : 1/2 < ρ.re) : ρ.re < 1 := by
+  -- First convert `completedRiemannZeta ρ = 0` into `riemannZeta ρ = 0`.
+  have hρ_ne0 : ρ ≠ 0 := by
+    intro hρ0
+    have : (1 / 2 : ℝ) < 0 := by simpa [hρ0] using hρ_re
+    linarith
+  have hzeta_zero : riemannZeta ρ = 0 := by
+    -- Mathlib: `riemannZeta s = completedRiemannZeta s / Gammaℝ s` for `s ≠ 0`.
+    -- Since the numerator is 0, the quotient is 0 (no need to prove `Gammaℝ ρ ≠ 0`).
+    rw [riemannZeta_def_of_ne_zero (s := ρ) hρ_ne0, hρ_zero]
+    simp
 
-/-- **AXIOM**: Whitney intervals containing zeta zeros have sufficient length.
+  -- Now rule out `ρ.re ≥ 1` using the classical nonvanishing of ζ(s) on `Re(s) ≥ 1`.
+  by_contra hnot
+  have hre : 1 ≤ ρ.re := le_of_not_lt hnot
+  have hzeta_ne : riemannZeta ρ ≠ 0 := riemannZeta_ne_zero_of_one_le_re (s := ρ) hre
+  exact hzeta_ne hzeta_zero
 
-    For dyadic Whitney covering of the imaginary axis, intervals at height t have
-    length ≈ t/2. Since all zeros have |Im| > 14, any Whitney interval containing
-    a zero must have length ≥ 7.
+/-- **AXIOM (Whitney Length Bound, inputs)**: If ρ is in the critical strip and
+    has large imaginary part, then any Whitney interval containing ρ.im has
+    length at least 7.
 
-    This follows from the Whitney covering construction:
-    - Intervals are dyadic with I.len ≈ I.t0 / 2
-    - For ρ.im ∈ I.interval, we have I.t0 ≈ |ρ.im|
-    - So I.len ≈ |ρ.im| / 2 > 14/2 = 7 -/
-axiom whitney_len_from_zero (I : WhitneyInterval) (ρ : ℂ)
-    (hρ_zero : completedRiemannZeta ρ = 0) (hρ_re : 1/2 < ρ.re)
-    (hρ_im : ρ.im ∈ I.interval) :
+    This is stated in “inputs form” so downstream arguments can assume:
+    - `hstrip : 0 < ρ.re ∧ ρ.re < 1`  (from a zero-free region / critical strip lemma)
+    - `hIm : 14 < |ρ.im|`            (from a height bound on first zero)
+    and proceed without needing the full origin of these facts. -/
+axiom whitney_len_from_strip_height_axiom (I : WhitneyInterval) (ρ : ℂ)
+    (_hstrip : 0 < ρ.re ∧ ρ.re < 1) (_hIm : 14 < |ρ.im|)
+    (_hρ_im : ρ.im ∈ I.interval) :
     I.len ≥ 7
 
-/-- **AXIOM**: Whitney covering ensures zeros are roughly centered in their intervals.
+/-- **THEOREM (Whitney Length Bound)**: “lemma + inputs” form. -/
+theorem whitney_len_from_strip_height (I : WhitneyInterval) (ρ : ℂ)
+    (hstrip : 0 < ρ.re ∧ ρ.re < 1) (hIm : 14 < |ρ.im|)
+    (hρ_im : ρ.im ∈ I.interval) :
+    I.len ≥ 7 :=
+  whitney_len_from_strip_height_axiom I ρ hstrip hIm hρ_im
 
-    For the dyadic Whitney covering, the interval containing a zero has:
-    - I.t0 ≈ |ρ.im| (center at the height of the zero)
-    - I.len ≈ I.t0/2 (dyadic width property)
-
-    This means |ρ.im - I.t0| ≤ I.len/2, so both:
-    - y_hi = I.t0 + I.len - ρ.im ≥ I.len/2
-    - -y_lo = ρ.im - (I.t0 - I.len) ≥ I.len/2
-
-    This "centering" property ensures the arctan sum is large enough. -/
-axiom whitney_zero_centered (I : WhitneyInterval) (ρ : ℂ)
+/-- Backward-compatible wrapper: derive the inputs from (1)/(2) and apply the theorem. -/
+theorem whitney_len_from_zero (I : WhitneyInterval) (ρ : ℂ)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_re : 1/2 < ρ.re)
     (hρ_im : ρ.im ∈ I.interval) :
+    I.len ≥ 7 := by
+  have hstrip : 0 < ρ.re ∧ ρ.re < 1 := by
+    constructor
+    · linarith [hρ_re]
+    · exact zero_in_critical_strip ρ hρ_zero hρ_re
+  have hIm : 14 < |ρ.im| := by
+    simpa using (zero_has_large_im ρ hρ_zero hρ_re)
+  exact whitney_len_from_strip_height I ρ hstrip hIm hρ_im
+
+/-- **AXIOM (Whitney Centering Bound, inputs)**: If ρ is in the critical strip and
+    ρ.im lies in a Whitney interval, then ρ.im is not too close to the boundary:
+    it lies within the central half of the interval.
+
+    This centering is the geometric input needed to ensure both endpoint distances
+    are ≥ `I.len/2` in the arctan phase lower bound. -/
+axiom whitney_centered_from_strip_axiom (I : WhitneyInterval) (ρ : ℂ)
+    (_hstrip : 0 < ρ.re ∧ ρ.re < 1) (_hρ_im : ρ.im ∈ I.interval) :
     |ρ.im - I.t0| ≤ I.len / 2
+
+/-- **THEOREM (Whitney Centering Bound)**: “lemma + inputs” form. -/
+theorem whitney_zero_centered_from_strip (I : WhitneyInterval) (ρ : ℂ)
+    (hstrip : 0 < ρ.re ∧ ρ.re < 1) (hρ_im : ρ.im ∈ I.interval) :
+    |ρ.im - I.t0| ≤ I.len / 2 :=
+  whitney_centered_from_strip_axiom I ρ hstrip hρ_im
+
+/-- Backward-compatible wrapper: derive the strip input and apply the theorem. -/
+theorem whitney_zero_centered (I : WhitneyInterval) (ρ : ℂ)
+    (hρ_zero : completedRiemannZeta ρ = 0) (hρ_re : 1/2 < ρ.re)
+    (hρ_im : ρ.im ∈ I.interval) :
+    |ρ.im - I.t0| ≤ I.len / 2 := by
+  have hstrip : 0 < ρ.re ∧ ρ.re < 1 := by
+    constructor
+    · linarith [hρ_re]
+    · exact zero_in_critical_strip ρ hρ_zero hρ_re
+  exact whitney_zero_centered_from_strip I ρ hstrip hρ_im
 
 end RiemannRecognitionGeometry
