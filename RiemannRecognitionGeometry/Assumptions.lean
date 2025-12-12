@@ -11,7 +11,7 @@ We separate:
 This file is intentionally lightweight: it packages existing statement-shapes without changing any proofs.
 -/
 
-import RiemannRecognitionGeometry.Conjectures
+import RiemannRecognitionGeometry.Phase
 import RiemannRecognitionGeometry.DirichletEta
 
 noncomputable section
@@ -44,18 +44,5 @@ structure RGAssumptions : Prop where
       let y_lo : ℝ := I.t0 - I.len - ρ.im
       let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
       ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M
-
-namespace Assumptions
-
-/-- Convenience: build `ClassicalAnalysisAssumptions` from the current axiom registry in `Conjectures.lean`. -/
-def classicalFromAxioms : ClassicalAnalysisAssumptions :=
-  ⟨Conjectures.green_identity_axiom_statement, fun s hs_pos hs_lt =>
-    riemannZeta_ne_zero_of_pos_lt_one s hs_pos hs_lt⟩
-
-/-- Convenience: build `RGAssumptions` from the current axiom registry in `Conjectures.lean`. -/
-def rgFromAxioms : RGAssumptions :=
-  ⟨Conjectures.weierstrass_tail_bound_axiom_statement⟩
-
-end Assumptions
 
 end RiemannRecognitionGeometry

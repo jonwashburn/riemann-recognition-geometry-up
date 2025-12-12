@@ -227,20 +227,26 @@ JohnNirenberg.lean:1773   - bmo_kernel_bound_axiom
 
 ## Summary
 
-Track E theorems have been converted to **proper axioms** with comprehensive mathematical 
-documentation suitable for Mathlib submission. These axioms represent classical results 
-from harmonic analysis that require Mathlib infrastructure not yet available.
+Track E statements are now exposed as **theorems** that *project from bundled assumptions*:
+- `ClassicalAnalysisAssumptions` (classical harmonic analysis facts), and
+- `RGAssumptions` (the remaining RG-specific bottleneck estimate).
 
-## E1. Green-Cauchy-Schwarz Bound ✅ AXIOM
+This keeps the main-chain signatures honest while avoiding inconsistent “free axioms”.
 
-**Location**: `Conjectures.lean:24`
+## E1. Green-Cauchy-Schwarz Bound ✅ (bundled classical assumption)
+
+**Location**:
+- wrapper theorem: `RiemannRecognitionGeometry/Conjectures.lean`
+- bundled hypothesis: `RiemannRecognitionGeometry/Assumptions.lean` (`ClassicalAnalysisAssumptions`)
 
 **Statement**:
 ```lean
-axiom green_identity_axiom_statement (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le : C ≤ K_tail)
-    (M : ℝ) (hM_pos : M > 0) (hM_le : M ≤ C) :
-    |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
-    C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
+theorem green_identity_axiom_statement
+    (hCA : ClassicalAnalysisAssumptions)
+    (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
+    (E : ℝ) (hE_pos : E > 0) (hE_le : E ≤ C) :
+    xiPhaseChange J ≤
+      C_geom * Real.sqrt (E * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
 ```
 
 **Mathematical Content** (documented in axiom docstring):
@@ -254,19 +260,23 @@ axiom green_identity_axiom_statement (J : WhitneyInterval) (C : ℝ) (hC_pos : C
 - Stein, "Harmonic Analysis: Real-Variable Methods", Princeton 1993, Ch. II
 - Fefferman & Stein, "Hp Spaces of Several Variables", Acta Math 129 (1972)
 
-## E2. Weierstrass Tail Bound ✅ AXIOM
+## E2. Weierstrass Tail Bound ✅ (bundled RG assumption)
 
-**Location**: `Conjectures.lean:34`
+**Location**:
+- wrapper theorem: `RiemannRecognitionGeometry/Conjectures.lean`
+- bundled hypothesis: `RiemannRecognitionGeometry/Assumptions.lean` (`RGAssumptions`)
 
 **Statement**:
 ```lean
-axiom weierstrass_tail_bound_axiom_statement (I : WhitneyInterval) (ρ : ℂ)
+theorem weierstrass_tail_bound_axiom_statement
+    (hRG : RGAssumptions)
+    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
-    |actualPhaseSignal I - blaschke| ≤ U_tail
+    ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M
 ```
 
 **Mathematical Content** (documented in axiom docstring):

@@ -99,6 +99,12 @@ lemma xiPhaseChangeAngle_sub_rgBlaschkePhaseChangeAngle (I : WhitneyInterval) (�
   simp [xiPhaseChangeAngle, rgBlaschkePhaseChangeAngle, rgBlaschkePhaseChange, rgCofactorPhaseAngle,
     rgBlaschkePhase, sub_eq_add_neg, add_assoc, add_comm, add_left_comm]
 
+/-- Norm-level version of `xiPhaseChangeAngle_sub_rgBlaschkePhaseChangeAngle`. -/
+lemma norm_xiPhaseChangeAngle_sub_rgBlaschkePhaseChangeAngle (I : WhitneyInterval) (ρ : ℂ) :
+    ‖xiPhaseChangeAngle I - rgBlaschkePhaseChangeAngle I ρ‖ =
+      ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ := by
+  simpa using congrArg (fun x : Real.Angle => ‖x‖) (xiPhaseChangeAngle_sub_rgBlaschkePhaseChangeAngle I ρ)
+
 /-- A real-valued size of phase change: the norm on `Real.Angle`.
 
 This is the shortest-distance representative in `[-π, π]`.

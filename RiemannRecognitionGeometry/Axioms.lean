@@ -63,6 +63,9 @@ open Real Complex Set ComplexConjugate MeasureTheory
 
 namespace RiemannRecognitionGeometry
 
+-- Bring the Poisson–Jensen phase primitives into scope.
+open PoissonJensen
+
 /-! ## Core Definitions -/
 
 /-- The Blaschke phase contribution from a zero ρ at interval I.
@@ -722,25 +725,28 @@ theorem green_identity_for_phase (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0
     - Garnett, "Bounded Analytic Functions", Springer GTM 236, Ch. II & IV
     - Stein, "Harmonic Analysis: Real-Variable Methods", Princeton 1993, Ch. II
     - Fefferman & Stein, "Hp Spaces of Several Variables", Acta Math 129 (1972) -/
-theorem green_identity_axiom_statement (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
+theorem green_identity_axiom_statement (hCA : ClassicalAnalysisAssumptions)
+    (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
     (E : ℝ) (hE_pos : E > 0) (hE_le : E ≤ C) :
     xiPhaseChange J ≤
       C_geom * Real.sqrt (E * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
-  Conjectures.green_identity_axiom_statement J C hC_pos E hE_pos hE_le
+  hCA.green_identity_axiom_statement J C hC_pos E hE_pos hE_le
 
 /-- Green identity theorem (from axiom). -/
-theorem green_identity_theorem (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
+theorem green_identity_theorem (hCA : ClassicalAnalysisAssumptions)
+    (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
     (E : ℝ) (hE_pos : E > 0) (hE_le : E ≤ C) :
     xiPhaseChange J ≤
     C_geom * Real.sqrt (E * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
-  green_identity_axiom_statement J C hC_pos E hE_pos hE_le
+  green_identity_axiom_statement (hCA := hCA) J C hC_pos E hE_pos hE_le
 
 /-- Backward compatibility alias for green_identity_theorem -/
-def green_identity_axiom (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
+def green_identity_axiom (hCA : ClassicalAnalysisAssumptions)
+    (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
     (E : ℝ) (hE_pos : E > 0) (hE_le : E ≤ C) :
     xiPhaseChange J ≤
     C_geom * Real.sqrt (E * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
-  green_identity_theorem J C hC_pos E hE_pos hE_le
+  green_identity_theorem (hCA := hCA) J C hC_pos E hE_pos hE_le
 
 /-- **THEOREM**: Total phase signal is bounded by U_tail.
     This is the Carleson-BMO bound on the full phase integral of log|ξ|.
@@ -1025,37 +1031,37 @@ theorem totalPhaseSignal_eq_xiPhaseChange (I : WhitneyInterval) :
     - Titchmarsh, "Theory of the Riemann Zeta-Function", Oxford 1986, Ch. 9
     - Edwards, "Riemann's Zeta Function", Academic Press 1974, Ch. 2
     - Hadamard, "Étude sur les propriétés des fonctions entières" (1893) -/
-theorem weierstrass_tail_bound_axiom_statement (I : WhitneyInterval) (ρ : ℂ)
-    (M : ℝ)
+theorem weierstrass_tail_bound_axiom_statement (hRG : RGAssumptions)
+    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
-  Conjectures.weierstrass_tail_bound_axiom_statement I ρ M hρ_zero hρ_im
+  hRG.weierstrass_tail_bound_axiom_statement I ρ M hρ_zero hρ_im
 
 /-- Weierstrass tail bound theorem (from axiom). -/
-theorem weierstrass_tail_bound_for_phase_theorem (I : WhitneyInterval) (ρ : ℂ)
-    (M : ℝ)
+theorem weierstrass_tail_bound_for_phase_theorem (hRG : RGAssumptions)
+    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
-  weierstrass_tail_bound_axiom_statement I ρ M hρ_zero hρ_im
+  weierstrass_tail_bound_axiom_statement (hRG := hRG) I ρ M hρ_zero hρ_im
 
 /-- Backward compatibility alias for weierstrass_tail_bound_for_phase_theorem -/
 def weierstrass_tail_bound_for_phase (I : WhitneyInterval) (ρ : ℂ)
-    (M : ℝ)
+    (hRG : RGAssumptions) (M : ℝ)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
-  weierstrass_tail_bound_for_phase_theorem I ρ M hρ_zero hρ_im
+  weierstrass_tail_bound_for_phase_theorem (hRG := hRG) I ρ M hρ_zero hρ_im
 
 /-- **THEOREM**: When a zero exists, the total phase signal is large.
     Uses phase_decomposition_exists from FeffermanStein and criticalLine_phase_ge_L_rec.

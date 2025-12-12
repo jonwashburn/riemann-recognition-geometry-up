@@ -51,11 +51,12 @@ lemma bmo_carleson_embedding_zero (a b M : ℝ) (hM_pos : M > 0) :
 
 This is the intended “phase is controlled by the Carleson constant” consequence.
 -/
-lemma green_identity_gives_U_tail (J : WhitneyInterval) (M : ℝ) (hM_pos : 0 < M) :
+lemma green_identity_gives_U_tail (hCA : ClassicalAnalysisAssumptions)
+    (J : WhitneyInterval) (M : ℝ) (hM_pos : 0 < M) :
     xiPhaseChange J ≤ U_tail M := by
   have hC_pos : 0 < K_tail M := K_tail_pos hM_pos
   have h :=
-    Conjectures.green_identity_axiom_statement J (K_tail M) hC_pos (K_tail M) hC_pos (le_rfl)
+    Conjectures.green_identity_axiom_statement hCA J (K_tail M) hC_pos (K_tail M) hC_pos (le_rfl)
   -- Cancel the interval-length normalization.
   have h_cancel :
       Real.sqrt (K_tail M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) = Real.sqrt (K_tail M) := by

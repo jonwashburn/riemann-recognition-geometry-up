@@ -52,10 +52,13 @@ This document is meant to be pasted back into the assistant as a **recursive pro
 
 ## Milestone 1 — Remove inconsistent axioms (hard requirement)
 
-### Known inconsistent module: `RiemannRecognitionGeometry/FeffermanSteinBMO.lean`
-This file currently contains **structurally inconsistent content**:
-- `tail_energy` is defined as `K_tail * I.len` (independent of the function), but `fefferman_stein_bmo_carleson` quantifies over all `f` and all BMO bounds `M`, which immediately conflicts with taking `f := 0` and `M` small.
-- `tail_pairing_bound_axiom` asserts `|∫_I integrand| ≤ U_tail` for **any** integrand on **any** positive-length interval, which contradicts `integrand := 1` on large intervals.
+### Known inconsistent module (historical): `RiemannRecognitionGeometry/FeffermanSteinBMO.lean`
+This module was **deleted** (it contained “uniform bound for arbitrary integrands” style axioms).
+
+The replacement interface is **scale-correct**:
+- introduce `InBMOWithBound f M`
+- define `K_tail(M) := C_FS * M^2` and `U_tail(M) := C_geom * sqrt(K_tail(M))`
+- all Green/Fefferman–Stein/tail bounds now produce `U_tail(M)` (so no fixed universal `U_tail` can be derived from a mere `∃ M`)
 
 - [x] **1.1 Decide: delete or repair `FeffermanSteinBMO.lean`.**
   - Preferred: **delete** it if it is not used anywhere in the main chain.
@@ -80,9 +83,10 @@ This file currently contains **structurally inconsistent content**:
 ## Milestone 2 — Make the project’s claims internally honest
 
 - [x] **2.1 Fix “UNCONDITIONAL” labeling.**
-  - Theorems `RiemannHypothesis_recognition_geometry` and `RiemannHypothesis_classical` currently take `h_osc`.
-  - Update docstrings/comments in `RiemannRecognitionGeometry/Main.lean`, `RiemannRecognitionGeometry/Axioms.lean`, and the bundle text files to clearly state: **RH is proved conditional on `h_osc` (global BMO bound for `logAbsXi`).**
-  - Optional (recommended): rename the theorem(s) to encode the hypothesis, e.g. `RiemannHypothesis_of_logAbsXi_BMO`.
+  - Theorems now take an explicit oscillation certificate, either:
+    - `(M : ℝ) (h_osc : InBMOWithBound logAbsXi M) (hM_le : M ≤ C_tail)`, or
+    - the packaged proposition `OscillationTarget := ∃ M, InBMOWithBound logAbsXi M ∧ M ≤ C_tail`.
+  - Docstrings/comments must state: **RH is proved conditional on this explicit small-oscillation hypothesis.**
 
 - [x] **2.2 Separate “classical assumption” from “RG-specific conjecture”.**
   - Create a single bundled hypothesis structure, e.g.
@@ -230,25 +234,29 @@ All project axioms are currently in the main chain (via `RiemannRecognitionGeome
 | `green_identity_axiom_statement` | `RiemannRecognitionGeometry/Axioms.lean` | ✅ yes |
 | `weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Axioms.lean` | ✅ yes |
 
-#### Update (2025-12-12): `Conjectures.lean` introduced
-- Added `RiemannRecognitionGeometry/Conjectures.lean` and migrated the two “core complex-analysis” axioms into that module’s namespace:
-  - `Conjectures.green_identity_axiom_statement`
-  - `Conjectures.weierstrass_tail_bound_axiom_statement`
-- `RiemannRecognitionGeometry/Axioms.lean` now provides **theorem wrappers** named `green_identity_axiom_statement` and `weierstrass_tail_bound_axiom_statement` so downstream code keeps the same interface.
-- **Note**: the two rows above for `green_identity_axiom_statement` / `weierstrass_tail_bound_axiom_statement` are now wrappers; the actual `axiom` declarations live in `Conjectures.lean`.
+#### Update (2025-12-12): assumptions bundled; `Conjectures.lean` now exports wrappers
+- `RiemannRecognitionGeometry/Assumptions.lean` defines the two bundled assumption structures:
+  - `ClassicalAnalysisAssumptions.green_identity_axiom_statement`
+  - `RGAssumptions.weierstrass_tail_bound_axiom_statement`
+- `RiemannRecognitionGeometry/Conjectures.lean` now provides **theorem wrappers** (no `axiom` declarations):
+  - `Conjectures.green_identity_axiom_statement (hCA : ClassicalAnalysisAssumptions) ...`
+  - `Conjectures.weierstrass_tail_bound_axiom_statement (hRG : RGAssumptions) ...`
+- `RiemannRecognitionGeometry/Axioms.lean` also provides wrappers (for backward compatibility) used by the main chain.
 
-Corrected axiom locations:
+Corrected assumption locations:
 
-| axiom | file | in main chain? |
+| assumption | file | in main chain? |
 |---|---|---|
-| `Conjectures.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Conjectures.lean` | ✅ yes |
-| `Conjectures.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Conjectures.lean` | ✅ yes |
+| `ClassicalAnalysisAssumptions.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `RGAssumptions.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
 
 #### Update (2025-12-12): inconsistent axioms removed from build graph
 - Deleted the inconsistent module `RiemannRecognitionGeometry/FeffermanSteinBMO.lean` and removed its import from `RiemannRecognitionGeometry/Axioms.lean`.
 - Also reduced the axiom surface:
   - Removed `zero_has_large_im`, `whitney_len_from_strip_height_axiom`, `whitney_centered_from_strip_axiom` (Basic.lean now has 0 axioms).
-  - Proved `dyadic_nesting` as a theorem (JohnNirenberg.lean now has 8 axioms, not 9).
+  - Proved `dyadic_nesting` and `DyadicInterval.avg_doubling` as theorems (removed axioms).
+  - Removed the incorrect/unneeded `maximalBad_disjoint_axiom`.
+  - JohnNirenberg CZ surface is now 6 axioms.
 
 Updated main-chain import closure (high-level):
 - `RiemannRecognitionGeometry.Mathlib.ArctanTwoGtOnePointOne`
@@ -260,15 +268,13 @@ Updated main-chain import closure (high-level):
 - `RiemannRecognitionGeometry.FeffermanStein`
 - `RiemannRecognitionGeometry.Main`
 
-Updated axiom surface (all in main chain; total = 12):
+Updated assumption surface (all in main chain; total = 10):
 
-| axiom | file | in main chain? |
+| assumption | file | in main chain? |
 |---|---|---|
-| `Conjectures.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Conjectures.lean` | ✅ yes |
-| `Conjectures.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Conjectures.lean` | ✅ yes |
+| `ClassicalAnalysisAssumptions.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `RGAssumptions.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
 | `identity_principle_eta_zeta_lt_one_axiom` | `RiemannRecognitionGeometry/DirichletEta.lean` | ✅ yes |
-| `maximalBad_disjoint_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
-| `DyadicInterval.avg_doubling_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
 | `czDecomposition_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
 | `czDecompFull_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
 | `goodLambda_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
@@ -284,5 +290,5 @@ Updated axiom surface (all in main chain; total = 12):
 All of the following must be true:
 - **(D1)** `lake build` succeeds.
 - **(D2)** There are **no inconsistent axioms in any compiled module** (especially no “uniform bound for arbitrary integrands” style axioms).
-- **(D3)** The main theorem(s) and docs honestly state all remaining hypotheses (e.g. `h_osc`), and “UNCONDITIONAL” is not claimed unless the hypothesis is actually removed.
+- **(D3)** The main theorem(s) and docs honestly state all remaining hypotheses (e.g. `OscillationTarget` / `InBMOWithBound logAbsXi M ∧ M ≤ C_tail`), and “UNCONDITIONAL” is not claimed unless the hypothesis is actually removed.
 - **(D4)** Phase-related results are stated about a phase object that matches the analytic machinery (continuous lift / harmonic conjugate / log-derivative integral), not principal `Complex.arg`.

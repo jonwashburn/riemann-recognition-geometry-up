@@ -59,6 +59,21 @@ lemma completedRiemannZeta_ne_zero_of_re_gt_one {s : ℂ} (hs : 1 < s.re) :
 /-- The critical strip definition: {s : Re(s) > 1/2}. -/
 def criticalStrip : Set ℂ := {s : ℂ | 1/2 < s.re}
 
+/-!
+## The remaining “unconditional bottleneck” (clean statement)
+
+After the scale-correct refactor:
+- `U_tail` depends on an explicit oscillation bound `M`,
+- the numeric closure is proven for `M₀ := C_tail`,
+so the only remaining analytic target is to prove `M ≤ M₀`.
+
+We package this as a single proposition.
+-/
+
+/-- A single packaged hypothesis expressing “BMO/oscillation is small enough to close RG”. -/
+def OscillationTarget : Prop :=
+  ∃ M : ℝ, InBMOWithBound logAbsXi M ∧ M ≤ C_tail
+
 /-! ## Main Zero-Free Theorem -/
 
 /-- **THEOREM**: No off-critical zeros in {Re s > 1/2}.
@@ -84,6 +99,15 @@ theorem no_off_critical_zeros_in_strip
     push_neg at h_re_gt_one
     have hρ_re : 1/2 < ρ.re := hρ_crit
     exact zero_free_with_interval ρ hCA hRG hρ_re hρ_zero M h_osc hM_le
+
+/-- Same theorem, but taking the single packaged hypothesis `OscillationTarget`. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTarget
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  rcases hT with ⟨M, h_osc, hM_le⟩
+  exact no_off_critical_zeros_in_strip hCA hRG M h_osc hM_le
 
 /-! ## Main Riemann Hypothesis Theorem -/
 
@@ -122,6 +146,15 @@ theorem RiemannHypothesis_recognition_geometry
   · have hρ_crit : ρ ∈ criticalStrip := by simp only [criticalStrip, Set.mem_setOf_eq]; exact h_gt
     exact no_off_critical_zeros_in_strip hCA hRG M h_osc hM_le ρ hρ hρ_crit
 
+/-- Same theorem, but taking the single packaged hypothesis `OscillationTarget`. -/
+theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  rcases hT with ⟨M, h_osc, hM_le⟩
+  exact RiemannHypothesis_recognition_geometry hCA hRG M h_osc hM_le
+
 /-! ## Classical Statement -/
 
 /-- **THEOREM**: Classical Riemann Hypothesis (conditional)
@@ -147,6 +180,15 @@ theorem RiemannHypothesis_classical
     rw [hρ_zeta] at h_eq
     exact div_eq_zero_iff.mp h_eq.symm |>.resolve_right hΓ_ne
   exact RiemannHypothesis_recognition_geometry hCA hRG M h_osc hM_le ρ hρ_xi
+
+/-- Same theorem, but taking the single packaged hypothesis `OscillationTarget`. -/
+theorem RiemannHypothesis_classical_of_oscillationTarget
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, riemannZeta ρ = 0 → 0 < ρ.re → ρ.re < 1 → ρ.re = 1/2 := by
+  rcases hT with ⟨M, h_osc, hM_le⟩
+  exact RiemannHypothesis_classical hCA hRG M h_osc hM_le
 
 /-! ## Summary
 
