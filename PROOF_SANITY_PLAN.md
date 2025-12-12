@@ -67,7 +67,7 @@ This file currently contains **structurally inconsistent content**:
   - Make sure `lake build` does not compile any module that contains an inconsistent axiom.
   - If Lake builds all modules under the library by default, you must delete/repair the file rather than merely avoiding imports.
 
-- [ ] **1.3 Add a “consistency smoke test” module.**
+- [x] **1.3 Add a “consistency smoke test” module.**
   - Create `RiemannRecognitionGeometry/ConsistencySmokeTest.lean`.
   - Prove easy facts that would *immediately* refute the old inconsistent axioms, e.g.
     - For any positive-length interval, `|∫ t in Icc a b, (1:ℝ)| = b-a`.
