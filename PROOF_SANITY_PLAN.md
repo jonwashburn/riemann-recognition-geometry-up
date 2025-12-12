@@ -115,13 +115,13 @@ Right now the main chain uses principal `Complex.arg` on ξ and treats it like a
 
 ## Milestone 4 — Quarantine or remove scaffolding definitions
 
-- [ ] **4.1 Quarantine `BMOCarleson.lean` if it remains definitional scaffolding.**
+- [x] **4.1 Quarantine `BMOCarleson.lean` if it remains definitional scaffolding.**
   - `phaseIntegral := U_tail/3` is not a real integral.
   - Either:
     - remove the module from the library build / imports, or
     - rewrite it to define the genuine integral and prove the bound from the axioms.
 
-- [ ] **4.2 Eliminate “proof-by-definition” from anything imported by `Main.lean`.**
+- [x] **4.2 Eliminate “proof-by-definition” from anything imported by `Main.lean`.**
   - Search for definitions that hard-code desired bounds and ensure they are not used in the main chain.
 
 ---
