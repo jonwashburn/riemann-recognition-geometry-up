@@ -43,6 +43,7 @@ import RiemannRecognitionGeometry.Basic
 import RiemannRecognitionGeometry.PoissonJensen
 import RiemannRecognitionGeometry.CarlesonBound
 import RiemannRecognitionGeometry.FeffermanStein
+import RiemannRecognitionGeometry.Conjectures
 import RiemannRecognitionGeometry.DirichletEta
 import RiemannRecognitionGeometry.JohnNirenberg
 import RiemannRecognitionGeometry.PoissonExtension
@@ -715,10 +716,11 @@ theorem green_identity_for_phase (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0
     - Garnett, "Bounded Analytic Functions", Springer GTM 236, Ch. II & IV
     - Stein, "Harmonic Analysis: Real-Variable Methods", Princeton 1993, Ch. II
     - Fefferman & Stein, "Hp Spaces of Several Variables", Acta Math 129 (1972) -/
-axiom green_identity_axiom_statement (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le : C ≤ K_tail)
-    (M : ℝ) (hM_pos : M > 0) (hM_le : M ≤ C) :
+theorem green_identity_axiom_statement (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
+    (hC_le : C ≤ K_tail) (M : ℝ) (hM_pos : M > 0) (hM_le : M ≤ C) :
     |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
-    C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
+      C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
+  Conjectures.green_identity_axiom_statement J C hC_pos hC_le M hM_pos hM_le
 
 /-- Green identity theorem (from axiom). -/
 theorem green_identity_theorem (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le : C ≤ K_tail)
@@ -993,13 +995,14 @@ theorem totalPhaseSignal_eq_actualPhaseSignal (I : WhitneyInterval) :
     - Titchmarsh, "Theory of the Riemann Zeta-Function", Oxford 1986, Ch. 9
     - Edwards, "Riemann's Zeta Function", Academic Press 1974, Ch. 2
     - Hadamard, "Étude sur les propriétés des fonctions entières" (1893) -/
-axiom weierstrass_tail_bound_axiom_statement (I : WhitneyInterval) (ρ : ℂ)
+theorem weierstrass_tail_bound_axiom_statement (I : WhitneyInterval) (ρ : ℂ)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
-    |actualPhaseSignal I - blaschke| ≤ U_tail
+    |actualPhaseSignal I - blaschke| ≤ U_tail :=
+  Conjectures.weierstrass_tail_bound_axiom_statement I ρ hρ_zero hρ_im
 
 /-- Weierstrass tail bound theorem (from axiom). -/
 theorem weierstrass_tail_bound_for_phase_theorem (I : WhitneyInterval) (ρ : ℂ)

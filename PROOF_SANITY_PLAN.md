@@ -42,7 +42,7 @@ This document is meant to be pasted back into the assistant as a **recursive pro
   - Confirm which axioms are actually in the main chain.
   - Add a short table to this file: **axiom → file → in main chain?**
 
-- [ ] **0.3 Add a repo rule: all axioms live in one place.**
+- [x] **0.3 Add a repo rule: all axioms live in one place.**
   - Create `RiemannRecognitionGeometry/Conjectures.lean`.
   - Move all axioms that are meant to be “classical analysis assumptions” into that file.
   - Re-export them from the existing files (thin wrappers) so downstream code doesn’t break.
@@ -229,6 +229,20 @@ All project axioms are currently in the main chain (via `RiemannRecognitionGeome
 | `bmo_carleson_embedding` | `RiemannRecognitionGeometry/PoissonExtension.lean` | ✅ yes |
 | `green_identity_axiom_statement` | `RiemannRecognitionGeometry/Axioms.lean` | ✅ yes |
 | `weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Axioms.lean` | ✅ yes |
+
+#### Update (2025-12-12): `Conjectures.lean` introduced
+- Added `RiemannRecognitionGeometry/Conjectures.lean` and migrated the two “core complex-analysis” axioms into that module’s namespace:
+  - `Conjectures.green_identity_axiom_statement`
+  - `Conjectures.weierstrass_tail_bound_axiom_statement`
+- `RiemannRecognitionGeometry/Axioms.lean` now provides **theorem wrappers** named `green_identity_axiom_statement` and `weierstrass_tail_bound_axiom_statement` so downstream code keeps the same interface.
+- **Note**: the two rows above for `green_identity_axiom_statement` / `weierstrass_tail_bound_axiom_statement` are now wrappers; the actual `axiom` declarations live in `Conjectures.lean`.
+
+Corrected axiom locations:
+
+| axiom | file | in main chain? |
+|---|---|---|
+| `Conjectures.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Conjectures.lean` | ✅ yes |
+| `Conjectures.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Conjectures.lean` | ✅ yes |
 
 ---
 
