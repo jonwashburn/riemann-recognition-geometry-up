@@ -96,7 +96,7 @@ This file currently contains **structurally inconsistent content**:
 
 Right now the main chain uses principal `Complex.arg` on ξ and treats it like a continuous harmonic conjugate. This mismatch makes the “FTC / Green / Cauchy–Riemann” story **not about the defined objects**.
 
-- [ ] **3.1 Introduce a faithful phase interface.**
+- [x] **3.1 Introduce a faithful phase interface.**
   - Create `RiemannRecognitionGeometry/Phase.lean`.
   - Define a phase-change quantity that matches analysis, e.g. one of:
     - (Preferred) boundary value of the harmonic conjugate (via conjugate Poisson integral / Hilbert transform),
