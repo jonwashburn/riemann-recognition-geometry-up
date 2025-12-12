@@ -84,7 +84,7 @@ This file currently contains **structurally inconsistent content**:
   - Update docstrings/comments in `RiemannRecognitionGeometry/Main.lean`, `RiemannRecognitionGeometry/Axioms.lean`, and the bundle text files to clearly state: **RH is proved conditional on `h_osc` (global BMO bound for `logAbsXi`).**
   - Optional (recommended): rename the theorem(s) to encode the hypothesis, e.g. `RiemannHypothesis_of_logAbsXi_BMO`.
 
-- [ ] **2.2 Separate “classical assumption” from “RG-specific conjecture”.**
+- [x] **2.2 Separate “classical assumption” from “RG-specific conjecture”.**
   - Create a single bundled hypothesis structure, e.g.
     - `structure ClassicalAnalysisAssumptions` (Fefferman–Stein, Green identity, η/ζ identity principle, etc.)
     - `structure RGAssumptions` (the actual bottleneck estimate(s), if any)

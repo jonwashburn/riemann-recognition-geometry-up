@@ -48,6 +48,7 @@ import RiemannRecognitionGeometry.PoissonJensen
 import RiemannRecognitionGeometry.CarlesonBound
 import RiemannRecognitionGeometry.FeffermanStein
 import RiemannRecognitionGeometry.Conjectures
+import RiemannRecognitionGeometry.Assumptions
 import RiemannRecognitionGeometry.DirichletEta
 import RiemannRecognitionGeometry.JohnNirenberg
 import RiemannRecognitionGeometry.PoissonExtension
@@ -609,6 +610,7 @@ theorem riemannZeta_ne_zero_of_real_in_unit_interval :
 /-- **LEMMA**: Non-trivial zeros have nonzero imaginary part.
     If ξ(ρ) = 0 and Re(ρ) > 1/2, then Im(ρ) ≠ 0. -/
 lemma zero_has_nonzero_im (ρ : ℂ)
+    (hCA : ClassicalAnalysisAssumptions)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (hρ_re : 1/2 < ρ.re) :
     ρ.im ≠ 0 := by
@@ -638,7 +640,8 @@ lemma zero_has_nonzero_im (ρ : ℂ)
     have hζ_zero : riemannZeta ρ = 0 := by
       rw [h_eq, hρ_zero, zero_div]
     have hρ_pos : 0 < ρ.re := by linarith
-    have hζ_ne := riemannZeta_ne_zero_of_real_in_unit_interval ρ.re hρ_pos h_re_ge_one
+    have hζ_ne : riemannZeta (ρ.re : ℂ) ≠ 0 :=
+      hCA.zeta_ne_zero_of_real_in_unit_interval ρ.re hρ_pos h_re_ge_one
     rw [h_real] at hζ_zero
     exact hζ_ne hζ_zero
 
@@ -750,6 +753,7 @@ def green_identity_axiom (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0) (hC_le
 
     The constant U_tail = C_geom · √K_tail incorporates the BMO norm bound. -/
 theorem totalPhaseSignal_bound (I : WhitneyInterval)
+    (hCA : ClassicalAnalysisAssumptions)
     (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     |totalPhaseSignal I| ≤ U_tail := by
   -- totalPhaseSignal is now definitionally equal to actualPhaseSignal
@@ -760,7 +764,7 @@ theorem totalPhaseSignal_bound (I : WhitneyInterval)
       |argXi (J.t0 + J.len) - argXi (J.t0 - J.len)| ≤
       C_geom * Real.sqrt (M * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
     fun J C hC_pos hC_le M hM_pos hM_le =>
-      green_identity_axiom J C hC_pos hC_le M hM_pos hM_le
+      hCA.green_identity_axiom_statement J C hC_pos hC_le M hM_pos hM_le
   exact actualPhaseSignal_bound I h_green h_osc
 
 /-! ## Quadrant Crossing Lemmas for Phase Bounds
@@ -1036,6 +1040,7 @@ def weierstrass_tail_bound_for_phase (I : WhitneyInterval) (ρ : ℂ)
 
     **Note**: `hρ_re_upper` comes from recognizer band: σ ≤ 1/2 + Λ_rec*L with Λ_rec ≤ 2. -/
 theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
+    (hRG : RGAssumptions)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (hρ_re : 1/2 < ρ.re)
     (hρ_re_upper : ρ.re ≤ 1/2 + 2 * I.len)
@@ -1051,7 +1056,7 @@ theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
   let y_lo := I.t0 - I.len - ρ.im
   let blaschke_fs := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
   -- Get the tail bound from the axiom
-  have h_tail_axiom := weierstrass_tail_bound_for_phase I ρ hρ_zero hρ_im
+  have h_tail_axiom := hRG.weierstrass_tail_bound_axiom_statement I ρ hρ_zero hρ_im
   obtain ⟨tail, h_decomp, h_tail_bound⟩ := phase_decomposition_exists I ρ hρ_zero hρ_im h_tail_axiom
 
   -- Critical line phase bound (now proven using geometric arctan)
@@ -1113,6 +1118,8 @@ The proof by contradiction:
     **Note**: `hρ_re_upper'` comes from recognizer band definition (Λ_rec ≤ 2).
     Takes the oscillation hypothesis for log|ξ|. -/
 theorem zero_free_with_interval (ρ : ℂ)
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
     (hρ_re : 1/2 < ρ.re)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
@@ -1137,15 +1144,15 @@ theorem zero_free_with_interval (ρ : ℂ)
     nlinarith [this]
 
   have hI0_len_large : I0.len ≥ 7 := by simp [I0]
-  have hρ_im_ne : ρ.im ≠ 0 := zero_has_nonzero_im ρ hρ_zero hρ_re
+  have hρ_im_ne : ρ.im ≠ 0 := zero_has_nonzero_im ρ hCA hρ_zero hρ_re
 
   -- Lower bound: |totalPhaseSignal I0| ≥ L_rec - U_tail
   have h_dominance :=
-    blaschke_dominates_total I0 ρ hρ_zero hρ_re hρ_re_upper0 hρ_im0 hρ_re_strict hI0_len_large
+    blaschke_dominates_total I0 ρ hRG hρ_zero hρ_re hρ_re_upper0 hρ_im0 hρ_re_strict hI0_len_large
       h_centered0 hρ_im_ne
 
   -- Upper bound: |totalPhaseSignal I0| ≤ U_tail
-  have h_carleson := totalPhaseSignal_bound I0 h_osc
+  have h_carleson := totalPhaseSignal_bound I0 hCA h_osc
 
   -- Key numerical inequality: L_rec > 2 * U_tail
   -- With C_geom = 1/2 and K_tail = 2.1:
@@ -1186,6 +1193,8 @@ theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
     (hρ_re_upper : ρ.re ≤ 1)  -- Critical strip constraint
     (h_width_lower : 2 * I.len ≥ |ρ.im|)   -- Lower bound: interval width ≥ |γ|
     (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)  -- Upper bound
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
     (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     False := by
   simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior
@@ -1216,16 +1225,18 @@ theorem local_zero_free (I : WhitneyInterval) (B : RecognizerBand)
       _ ≤ 1/2 + 2 * I.len := by have hlen := I.len_pos; nlinarith
 
   -- Apply zero_free_with_interval with oscillation hypothesis
-  exact zero_free_with_interval ρ hρ_re hρ_zero h_osc
+  exact zero_free_with_interval ρ hCA hRG hρ_re hρ_zero h_osc
 
 /-- **THEOREM**: No zeros in the interior of any recognizer band (with good interval).
     Takes the oscillation hypothesis for log|ξ|. -/
 theorem no_interior_zeros (I : WhitneyInterval) (B : RecognizerBand)
     (hB_base : B.base = I)
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
     (h_osc : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
     ∀ ρ ∈ B.interior, ρ.re ≤ 1 → (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) → completedRiemannZeta ρ ≠ 0 := by
   intro ρ hρ_interior hρ_re_upper h_width_lower h_width_upper hρ_zero
-  exact local_zero_free I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower h_width_upper h_osc
+  exact local_zero_free I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower h_width_upper hCA hRG h_osc
 
 /-! ## Verification: JohnNirenberg Results Justify FeffermanStein Axioms
 
