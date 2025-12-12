@@ -106,7 +106,7 @@ Right now the main chain uses principal `Complex.arg` on ξ and treats it like a
 - [x] **3.2 Refactor `actualPhaseSignal` and downstream lemmas to use the new phase.**
   - Update `RiemannRecognitionGeometry/FeffermanStein.lean` and `RiemannRecognitionGeometry/Axioms.lean` so the “phase bound” theorems/axioms are stated for the new phase object.
 
-- [ ] **3.3 Add explicit “branch / continuity” hypotheses where needed.**
+- [x] **3.3 Add explicit “branch / continuity” hypotheses where needed.**
   - Any statement using a phase difference should either:
     - assume ξ is nonzero on the interval (so a continuous argument lift exists), or
     - work with winding number / `Real.Angle`, then lift.

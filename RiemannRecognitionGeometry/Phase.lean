@@ -29,6 +29,34 @@ At zeros we still take the junk value coming from `arg 0 = 0`.
 def phaseXi (t : ℝ) : Real.Angle :=
   ((xiOnCriticalLine t).arg : Real.Angle)
 
+/-- A real-valued continuous lift of `phaseXi` on an interval `[a, b]`.
+
+This is a *hypothesis object*: we do **not** claim it exists without extra assumptions
+(e.g. that `xiOnCriticalLine` is nonzero on `[a, b]`, so a continuous argument lift exists).
+-/
+structure PhaseLift (a b : ℝ) where
+  /-- Ordering assumption so endpoints belong to `Icc a b`. -/
+  hab : a ≤ b
+  /-- The chosen real-valued lift. -/
+  lift : ℝ → ℝ
+  /-- The lift agrees with `phaseXi` modulo `2π` on `[a, b]`. -/
+  coe_lift_eq : ∀ t : ℝ, t ∈ Set.Icc a b → (lift t : Real.Angle) = phaseXi t
+  /-- Continuity of the chosen lift on `[a, b]`. -/
+  continuousOn_lift : ContinuousOn lift (Set.Icc a b)
+
+/-- The real phase change of a chosen lift on `[a, b]`. -/
+def phaseLiftChange {a b : ℝ} (h : PhaseLift a b) : ℝ :=
+  h.lift b - h.lift a
+
+/-- Coercing the lift phase change to `Real.Angle` recovers the `Real.Angle` phase difference. -/
+lemma coe_phaseLiftChange {a b : ℝ} (h : PhaseLift a b) :
+    (phaseLiftChange h : Real.Angle) = phaseXi b - phaseXi a := by
+  have ha : a ∈ Set.Icc a b := ⟨le_rfl, h.hab⟩
+  have hb : b ∈ Set.Icc a b := ⟨h.hab, le_rfl⟩
+  unfold phaseLiftChange
+  -- `((x - y : ℝ) : Real.Angle) = (x : Real.Angle) - (y : Real.Angle)`.
+  simpa [Real.Angle.coe_sub, h.coe_lift_eq a ha, h.coe_lift_eq b hb]
+
 /-- Phase change across a Whitney interval, valued in `Real.Angle` (i.e. modulo `2π`). -/
 def xiPhaseChangeAngle (I : WhitneyInterval) : Real.Angle :=
   phaseXi (I.t0 + I.len) - phaseXi (I.t0 - I.len)
