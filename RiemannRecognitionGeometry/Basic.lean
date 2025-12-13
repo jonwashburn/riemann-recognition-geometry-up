@@ -444,7 +444,7 @@ theorem zero_free_condition_C_tail : (2 * U_tail C_tail) < L_rec := by
   -- 2*U_tail C_tail < 2*0.75 < L_rec
   nlinarith [h_utail, h075_lt]
 
-/-- Equivalent “half-form” of the numeric closure: `U_tail C_tail < L_rec / 2`. -/
+/-- Repackaging of `zero_free_condition_C_tail` in the form `U_tail(C_tail) < L_rec/2`. -/
 theorem U_tail_C_tail_lt_L_rec_div_two : U_tail C_tail < L_rec / 2 := by
   have h := zero_free_condition_C_tail
   nlinarith

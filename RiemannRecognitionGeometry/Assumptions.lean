@@ -45,4 +45,17 @@ structure RGAssumptions : Prop where
       let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
       ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M
 
+/-- A single packaged hypothesis expressing “BMO/oscillation is small enough to close RG”. -/
+def OscillationTarget : Prop :=
+  ∃ M : ℝ, InBMOWithBound logAbsXi M ∧ M ≤ C_tail
+
+/-- Oscillation/BMO smallness target needed to close the numeric contradiction.
+
+This is the project’s current “unconditional bottleneck”: proving (or otherwise justifying)
+that `logAbsXi` admits a *small enough* mean-oscillation bound.
+-/
+structure OscillationAssumptions : Prop where
+  /-- There exists an explicit oscillation bound `M` with `M ≤ C_tail`. -/
+  oscillationTarget : OscillationTarget
+
 end RiemannRecognitionGeometry

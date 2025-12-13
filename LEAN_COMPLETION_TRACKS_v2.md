@@ -2,7 +2,7 @@
 
 **Version**: 3.0 (December 2025)  
 **Project**: Recognition Geometry proof of the Riemann Hypothesis  
-**Build Status**: ✅ Compiles successfully with **0 sorries** and **10 axioms**
+**Build Status**: ✅ Compiles successfully with **0 sorries**, **8 axioms**, and explicit bundled assumptions (see below)
 
 ---
 
@@ -14,7 +14,7 @@
 | B | Arctan Geometry | Medium | 0 sorries | ✅ **Complete** |
 | C | John-Nirenberg | Hard | 6 axioms | ✅ **Complete** (axiomatized) |
 | D | Dirichlet Eta | Medium | 1 axiom | ✅ **Complete** (axiomatized) |
-| E | Mathlib Gaps | ✅ COMPLETE | 3 axioms | ✅ **Complete** |
+| E | Mathlib Gaps | ✅ COMPLETE | 1 axiom (+ bundled assumptions) | ✅ **Complete** |
 
 ---
 
@@ -24,23 +24,25 @@
 
 All proofs complete modulo axioms!
 
-### 10 Axioms (documented classical results)
+### 8 Axioms (documented classical results)
 
 **Basic.lean**: 0 axioms (removed; no longer needed)
 
-**Conjectures.lean** (2 axioms - complex analysis / RG bottlenecks):
-```
-Conjectures.lean:24       - green_identity_axiom_statement (Green-Cauchy-Schwarz identity)
-Conjectures.lean:34       - weierstrass_tail_bound_axiom_statement (Hadamard product tail bound)
-```
+**Assumptions.lean** (2 bundled assumptions; not `axiom` declarations):
+- `ClassicalAnalysisAssumptions.green_identity_axiom_statement`
+- `RGAssumptions.weierstrass_tail_bound_axiom_statement`
+
+**Conjectures.lean**:
+- provides **theorem wrappers** that project these bundled assumptions (no `axiom` declarations)
 
 ### Unconditional bottleneck (now stated cleanly)
 
 The *scale-correct* analytic interface is now:
 - `InBMOWithBound logAbsXi M` (explicit mean-oscillation bound)
 - `K_tail(M) := C_FS * M^2` and `U_tail(M) := C_geom * sqrt(K_tail(M))`
-- the contradiction closes from the **numeric lemma** `2 * U_tail(C_tail) < L_rec`
-  **plus** the single remaining analytic target `M ≤ C_tail`.
+- the contradiction closes from the **numeric lemma** `U_tail(C_tail) < L_rec/2`
+  **plus** the single remaining analytic target
+  `OscillationTarget := ∃ M, InBMOWithBound logAbsXi M ∧ M ≤ C_tail`.
 
 **DirichletEta.lean** (1 axiom - analytic continuation):
 ```
@@ -77,6 +79,8 @@ PoissonExtension.lean:137 - bmo_carleson_embedding (BMO Carleson embedding)
   - added `InBMOWithBound f M := (0 < M) ∧ (∀ a<b, meanOscillation f a b ≤ M)`
   - made `K_tail`/`U_tail` depend on `M`
   - threaded `(M, h_osc : InBMOWithBound logAbsXi M, hM_le : M ≤ C_tail)` through `Axioms.lean`/`Main.lean`
+- ✅ Bundled Green/tail assumptions in `Assumptions.lean` and made `Conjectures.lean` wrappers
+- ✅ Namespaced `PoissonJensen` to avoid `blaschkePhase` name clash in the main chain
 
 ---
 
@@ -221,9 +225,9 @@ JohnNirenberg.lean:1773   - bmo_kernel_bound_axiom
 
 # TRACK E: Mathlib Gaps ✅ COMPLETE
 
-**Goal**: Formalize Green-Cauchy-Schwarz and Weierstrass tail bounds as documented axioms  
-**Status**: ✅ **COMPLETE** - Ready for Mathlib submission  
-**Difficulty**: N/A - Converted to well-documented axioms
+**Goal**: Package Green-Cauchy-Schwarz and Weierstrass tail bounds as *bundled assumptions* (scale-correct)  
+**Status**: ✅ **COMPLETE**  
+**Difficulty**: N/A - Exposed as bundled assumptions + wrappers
 
 ## Summary
 
@@ -299,7 +303,8 @@ theorem weierstrass_tail_bound_axiom_statement
 | File | Lines | Content |
 |------|-------|---------|
 | `PoissonExtension.lean` | 167 | Poisson kernels, integrals, harmonicity theorems |
-| `Conjectures.lean` | 45 | Central registry for core conjectural axioms |
+| `Assumptions.lean` | 62 | Bundled assumption structures (`ClassicalAnalysisAssumptions`, `RGAssumptions`) |
+| `Conjectures.lean` | 45 | Wrapper theorems projecting bundled assumptions |
 
 ### Supporting Axioms
 
@@ -307,7 +312,7 @@ theorem weierstrass_tail_bound_axiom_statement
 |-------|----------|---------|
 | `bmo_carleson_embedding` | `PoissonExtension.lean:137` | BMO → Carleson embedding (Carleson measure control) |
 
-## Why Axioms?
+## Why assumptions/axioms?
 
 These results depend on Mathlib infrastructure not yet available:
 
@@ -376,15 +381,15 @@ grep -rn "^axiom " RiemannRecognitionGeometry/*.lean
 
 ```lean
 L_rec : ℝ := 2.2           -- Phase threshold (arctan-based proofs)
-K_tail : ℝ := 2.1          -- Carleson embedding constant  
 C_geom : ℝ := 1/2          -- Green-Cauchy-Schwarz constant
 C_FS : ℝ := 51             -- Fefferman-Stein constant (Arcozzi-Domingo 2024)
 C_tail : ℝ := 0.20         -- BMO tail bound (Carneiro et al.)
-U_tail : ℝ := C_geom * √K_tail  -- = 0.5 * √2.1 ≈ 0.72
+K_tail (M : ℝ) : ℝ := C_FS * M^2
+U_tail (M : ℝ) : ℝ := C_geom * √(K_tail M)
 ```
 
 **Key inequalities** (proven in Basic.lean):
-- `U_tail < L_rec` : 0.72 < 2.2 ✓
+- `U_tail(C_tail) < L_rec/2` ✓
 - `L_rec < π` : 2.2 < 3.14 ✓ (needed for arctan-based proofs)
 - `2 * arctan(2) > L_rec` : 2.21 > 2.2 ✓ (proven in ArctanTwoGtOnePointOne.lean)
 
@@ -395,9 +400,10 @@ U_tail : ℝ := C_geom * √K_tail  -- = 0.5 * √2.1 ≈ 0.72
 ```
 RiemannRecognitionGeometry/
 ├── Basic.lean              -- Constants, key inequalities (CLEAN)
-├── Conjectures.lean        -- Central registry (2 axioms)
+├── Assumptions.lean        -- Bundled assumptions (Green + Weierstrass tail)
+├── Conjectures.lean        -- Wrapper theorems projecting assumptions
 ├── Axioms.lean             -- Main chain lemmas + wrappers (CLEAN)
-├── JohnNirenberg.lean      -- CZ/JN infrastructure (8 axioms)
+├── JohnNirenberg.lean      -- CZ/JN infrastructure (6 axioms)
 ├── DirichletEta.lean       -- η/ζ bridge (1 axiom)
 ├── Main.lean               -- Main conditional RH theorem (CLEAN)
 ├── FeffermanStein.lean     -- Carleson bounds (CLEAN)
@@ -411,10 +417,14 @@ RiemannRecognitionGeometry/
 
 | Type | Count | Justification |
 |------|-------|---------------|
-| Engineering/structure (dyadic/CZ/JN) | 8 | `JohnNirenberg.lean` axioms (CZ decomposition + good-λ + Lp bounds) |
+| Engineering/structure (dyadic/CZ/JN) | 6 | `JohnNirenberg.lean` axioms (CZ decomposition + good-λ + Lp bounds) |
 | Harmonic analysis (BMO→Carleson) | 1 | `PoissonExtension.lean` |
-| Complex analysis / RG bottlenecks | 2 | `Conjectures.lean` |
 | Complex analysis (η/ζ identity principle) | 1 | `DirichletEta.lean` |
-| **Total** | **12** | All with published references |
+| **Total** | **8** | All with published references |
 
 **Note**: The η/ζ identity principle is still axiomatized (`DirichletEta.lean:1208`).
+
+**Bundled (non-axiom) assumptions in main theorem signatures**:
+- `ClassicalAnalysisAssumptions.green_identity_axiom_statement`
+- `RGAssumptions.weierstrass_tail_bound_axiom_statement`
+- `OscillationTarget := ∃ M, InBMOWithBound logAbsXi M ∧ M ≤ C_tail`

@@ -14,9 +14,10 @@ rule out zeros with Re > 1/2, **conditional** on:
 
 The proof combines two bounds on the **TOTAL** phase signal R(I):
 
-1. **Carleson Upper Bound**: |R(I)| ≤ U_tail for all intervals
-   (Fefferman–Stein / Carleson embedding applied to log|ξ|; currently axiomatized)
-   With C_geom = 1/2 and K_tail = 2.1, U_tail ≈ 0.72.
+1. **Carleson Upper Bound (scale-correct)**: |R(I)| ≤ U_tail(M) for all intervals
+   (Fefferman–Stein / Carleson embedding + Green/Cauchy–Schwarz),
+   where `U_tail(M) := C_geom * sqrt(K_tail(M))` and `K_tail(M) := C_FS * M^2`.
+   This requires an explicit oscillation/BMO certificate `InBMOWithBound logAbsXi M`.
 
 2. **Blaschke Lower Bound**: When a zero ρ exists with Im(ρ) ∈ I,
    the Blaschke contribution B(I,ρ) ≥ L_rec = 2.2.
@@ -27,8 +28,9 @@ The proof combines two bounds on the **TOTAL** phase signal R(I):
 
 **Key Contradiction**:
 - If zero exists: R(I) ≥ L_rec (from Blaschke dominance)
-- Always: R(I) ≤ U_tail (from Carleson)
-- But L_rec > 2 * U_tail (2.2 > 2 * 0.72 ≈ 1.44)
+- Always: R(I) ≤ U_tail(M) (from Carleson)
+- If additionally `M ≤ C_tail` and `U_tail(C_tail) < L_rec/2` (proven numerically),
+  then `L_rec > 2 * U_tail(M)` and we get a contradiction.
 - Contradiction!
 
 ## Mathematical Content
@@ -748,16 +750,17 @@ def green_identity_axiom (hCA : ClassicalAnalysisAssumptions)
     C_geom * Real.sqrt (E * (2 * J.len)) * (1 / Real.sqrt (2 * J.len)) :=
   green_identity_theorem (hCA := hCA) J C hC_pos E hE_pos hE_le
 
-/-- **THEOREM**: Total phase signal is bounded by U_tail.
-    This is the Carleson-BMO bound on the full phase integral of log|ξ|.
+/-- **THEOREM**: Total phase signal is bounded by `U_tail(M)` (scale-correct).
+    This is the Carleson/BMO bound on the full phase signal, with explicit dependence
+    on a mean-oscillation bound `M` for `logAbsXi`.
 
     **Mathematical Content**:
     1. log|ξ(1/2+it)| is in BMO(ℝ) due to the functional equation
     2. Fefferman-Stein (1972): For f ∈ BMO, the measure |∇Pf|² y dy dx is Carleson
     3. The phase integral is controlled by the Carleson measure norm
-    4. This gives |∫ d/dt[arg(ξ)] dt| ≤ U_tail uniformly
+    4. This gives a uniform bound `totalPhaseSignal I ≤ U_tail M`.
 
-    The constant U_tail = C_geom · √K_tail incorporates the BMO norm bound. -/
+    Here `U_tail M = C_geom * √(K_tail M)` and `K_tail M = C_FS * M^2`. -/
 theorem totalPhaseSignal_bound (I : WhitneyInterval)
     (hCA : ClassicalAnalysisAssumptions)
     (M : ℝ) (h_osc : InBMOWithBound logAbsXi M) :
@@ -985,13 +988,13 @@ theorem criticalLine_phase_ge_L_rec (I : WhitneyInterval) (ρ : ℂ)
 theorem totalPhaseSignal_eq_xiPhaseChange (I : WhitneyInterval) :
     totalPhaseSignal I = xiPhaseChange I := rfl
 
-/-- **AXIOM (Weierstrass Tail Bound)**: The tail contribution to phase is bounded by U_tail.
+/-- **ASSUMPTION (Weierstrass Tail Bound)**: the tail contribution to phase is bounded by `U_tail(M)`.
 
     **Statement**:
     For a Whitney interval I containing a zeta zero ρ (with Im(ρ) ∈ I.interval),
-    the phase signal decomposes as:
-      actualPhaseSignal I = blaschke(ρ) + tail
-    where |tail| ≤ U_tail = C_geom · √K_tail ≈ 0.72.
+    the phase signal decomposes into a Blaschke contribution plus a remainder (“tail”),
+    and the tail is bounded by `U_tail M = C_geom * √(K_tail M)` for an explicit oscillation
+    bound `M` (to be supplied in the main contradiction via `M ≤ C_tail`).
 
     **Mathematical Content** (Hadamard factorization + BMO inheritance):
 
@@ -1013,14 +1016,12 @@ theorem totalPhaseSignal_eq_xiPhaseChange (I : WhitneyInterval) :
        since log|s - ρ| is Lipschitz with L = 1/(2d) where d = σ - 1/2.
 
     5. **Green-Cauchy-Schwarz on Cofactor**:
-       |tail_phase| ≤ C_geom · √(M_cofactor) by green_identity_theorem.
+       |tail_phase| is controlled by Green/Cauchy–Schwarz with the same scaling,
+       yielding a bound of the form `≤ U_tail M`.
 
-    6. **Cofactor BMO Bound**:
-       M_cofactor ≤ K_tail = C_FS · C_tail² ≈ 2.1
-       accounting for distant zeros (geometric decay) and exponential terms.
-
-    7. **Final Bound**:
-       |tail| = |tail_phase| ≤ C_geom · √K_tail = U_tail
+    6. **Numeric closure**:
+       the project tracks a candidate bound `C_tail` and proves numerically that
+       `U_tail(C_tail) < L_rec/2` in `Basic.lean`.
 
     **Why Axiom**: Full formalization requires:
     - Hadamard product theory for entire functions of finite order
@@ -1180,6 +1181,150 @@ theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
   -- Combine: ‖blaschke‖ ≥ L_rec and ‖phase‖ ≥ ‖blaschke‖ - U_tail.
   linarith
 
+/-!
+## Route 2 repair: pick the interval scale from the off-line distance
+
+The older development used a fixed `I.len = 7` (and auxiliary “width” hypotheses)
+purely to force the arctan ratios to be large. For the RG contradiction, a much
+cleaner choice is to set the interval half-length proportional to the off-line
+distance `d = ρ.re - 1/2`.
+
+With `I.t0 = ρ.im` and `I.len = 2d`, the Blaschke phase is exactly `2 * arctan 2`,
+which exceeds `L_rec = 2.2` by the already-proved lemma `arctan_two_gt_one_point_one`.
+-/
+
+/-- **THEOREM (centered interval choice)**: If `ρ` is off-line (`Re ρ > 1/2`) and a zero,
+then for the centered Whitney interval `I0` with `I0.len = 2(ρ.re-1/2)` we have
+`totalPhaseSignal I0 ≥ L_rec - U_tail M`.
+
+This is the “Route 2” scale choice: the interval length is tied to the off-line
+distance `d`, not to the height `|Im ρ|`. -/
+theorem blaschke_dominates_total_centered (ρ : ℂ)
+    (hRG : RGAssumptions)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (M : ℝ)
+    (hρ_re : 1/2 < ρ.re) :
+    let d : ℝ := ρ.re - 1/2
+    let I0 : WhitneyInterval :=
+      { t0 := ρ.im
+        len := 2 * d
+        len_pos := by
+          have : d > 0 := by simp [d]; linarith
+          nlinarith }
+    totalPhaseSignal I0 ≥ L_rec - U_tail M := by
+  intro d I0
+  have h_d_pos : d > 0 := by simp only [d]; linarith
+  have h_d_nonneg : 0 ≤ d := le_of_lt h_d_pos
+  -- Basic facts about the centered interval
+  have hρ_im0 : ρ.im ∈ I0.interval := by
+    -- ρ.im ∈ [ρ.im - 2d, ρ.im + 2d] is trivially true for d ≥ 0.
+    simp only [WhitneyInterval.interval, I0, Set.mem_Icc]
+    constructor
+    · linarith
+    · linarith
+
+  -- Tail bound in `Real.Angle`
+  let y_hi : ℝ := I0.t0 + I0.len - ρ.im
+  let y_lo : ℝ := I0.t0 - I0.len - ρ.im
+  let blaschke_fs : ℝ := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
+  have h_tail :
+      ‖xiPhaseChangeAngle I0 - (blaschke_fs : Real.Angle)‖ ≤ U_tail M := by
+    simpa [y_hi, y_lo, blaschke_fs, d] using
+      hRG.weierstrass_tail_bound_axiom_statement I0 ρ M hρ_zero hρ_im0
+
+  -- Compute the Blaschke real phase for the centered choice: it is `- 2 * arctan 2`.
+  have h_yhi : y_hi = 2 * d := by simp only [y_hi, I0]; ring
+  have h_ylo : y_lo = -(2 * d) := by simp only [y_lo, I0]; ring
+  have h_blaschke :
+      blaschke_fs = - (2 * Real.arctan 2) := by
+    -- y_hi/d = 2 and y_lo/d = -2
+    have h1 : y_hi / d = 2 := by
+      rw [h_yhi]
+      field_simp [h_d_pos.ne']
+    have h2 : y_lo / d = -2 := by
+      rw [h_ylo]
+      field_simp [h_d_pos.ne']
+    -- unfold blaschke_fs and rewrite arctans
+    simp only [blaschke_fs, h1, h2, Real.arctan_neg]
+    ring
+
+  have h_abs_ge : |blaschke_fs| ≥ L_rec := by
+    -- |blaschke_fs| = 2 * arctan 2 > 2.2 = L_rec
+    have h_two_arctan_two : 2 * Real.arctan 2 > 2.2 := by
+      have := arctan_two_gt_one_point_one
+      linarith
+    have h_abs : |blaschke_fs| = 2 * Real.arctan 2 := by
+      have hpos : 0 < 2 * Real.arctan 2 := by
+        have := arctan_two_gt_one_point_one
+        linarith
+      rw [h_blaschke, abs_neg, abs_of_pos hpos]
+    -- Compare with L_rec
+    rw [h_abs]
+    unfold L_rec
+    linarith
+
+  -- Convert |blaschke_fs| lower bound into an `Angle`-norm lower bound.
+  have h_abs_le_pi : |blaschke_fs| ≤ Real.pi := by
+    -- Same bound as in `blaschke_dominates_total`: `|arctan x| ≤ π/2`.
+    have hA : |Real.arctan (y_lo / d)| ≤ Real.pi / 2 := by
+      apply abs_le.2
+      constructor
+      · exact le_of_lt (Real.neg_pi_div_two_lt_arctan (y_lo / d))
+      · exact le_of_lt (Real.arctan_lt_pi_div_two (y_lo / d))
+    have hB : |Real.arctan (y_hi / d)| ≤ Real.pi / 2 := by
+      apply abs_le.2
+      constructor
+      · exact le_of_lt (Real.neg_pi_div_two_lt_arctan (y_hi / d))
+      · exact le_of_lt (Real.arctan_lt_pi_div_two (y_hi / d))
+    have h_sub : |blaschke_fs| ≤ |Real.arctan (y_lo / d)| + |Real.arctan (y_hi / d)| := by
+      simpa [blaschke_fs, sub_eq_add_neg, abs_neg] using
+        (abs_add (Real.arctan (y_lo / d)) (-Real.arctan (y_hi / d)))
+    have h_sum : |Real.arctan (y_lo / d)| + |Real.arctan (y_hi / d)| ≤ Real.pi := by
+      nlinarith [hA, hB]
+    exact le_trans h_sub h_sum
+
+  have hp : (2 * Real.pi : ℝ) ≠ 0 := by nlinarith [Real.pi_pos]
+  have h_norm_eq_abs : ‖(blaschke_fs : Real.Angle)‖ = |blaschke_fs| := by
+    have h_half_period : |blaschke_fs| ≤ |(2 * Real.pi : ℝ)| / 2 := by
+      have hpos : 0 < (2 * Real.pi : ℝ) := by nlinarith [Real.pi_pos]
+      have hRHS : |(2 * Real.pi : ℝ)| / 2 = Real.pi := by
+        calc
+          |(2 * Real.pi : ℝ)| / 2 = (2 * Real.pi) / 2 := by simp [abs_of_pos hpos]
+          _ = Real.pi := by
+                simpa [mul_comm] using
+                  (mul_div_cancel_left₀ (Real.pi) (2 : ℝ) (two_ne_zero : (2 : ℝ) ≠ 0))
+      simpa [hRHS] using h_abs_le_pi
+    exact (AddCircle.norm_coe_eq_abs_iff (p := (2 * Real.pi)) (x := blaschke_fs) hp).2 h_half_period
+
+  have h_phase_ge : ‖(blaschke_fs : Real.Angle)‖ ≥ L_rec := by
+    rw [h_norm_eq_abs]
+    exact h_abs_ge
+
+  -- Reverse triangle inequality in `Real.Angle` as before.
+  have h_rev :
+      ‖(blaschke_fs : Real.Angle)‖ - ‖xiPhaseChangeAngle I0 - (blaschke_fs : Real.Angle)‖ ≤
+        ‖xiPhaseChangeAngle I0‖ := by
+    -- Use: ‖a‖ - ‖b‖ ≤ ‖a - b‖ (reverse triangle inequality).
+    have h := norm_sub_norm_le (blaschke_fs : Real.Angle) (xiPhaseChangeAngle I0)
+    -- h : ‖blaschke‖ - ‖xi‖ ≤ ‖blaschke - xi‖ = ‖-(xi - blaschke)‖ = ‖xi - blaschke‖
+    have h' : ‖(blaschke_fs : Real.Angle) - xiPhaseChangeAngle I0‖ =
+              ‖xiPhaseChangeAngle I0 - (blaschke_fs : Real.Angle)‖ := norm_sub_rev _ _
+    linarith [h, h']
+
+  have h_rev' : ‖(blaschke_fs : Real.Angle)‖ - U_tail M ≤ ‖xiPhaseChangeAngle I0‖ := by
+    have h_sub : ‖(blaschke_fs : Real.Angle)‖ - U_tail M ≤
+        ‖(blaschke_fs : Real.Angle)‖ - ‖xiPhaseChangeAngle I0 - (blaschke_fs : Real.Angle)‖ :=
+      sub_le_sub_left h_tail ‖(blaschke_fs : Real.Angle)‖
+    exact le_trans h_sub h_rev
+
+  have h_total : ‖xiPhaseChangeAngle I0‖ = totalPhaseSignal I0 := rfl
+  have h_rev'' : ‖(blaschke_fs : Real.Angle)‖ - U_tail M ≤ totalPhaseSignal I0 := by
+    rw [← h_total]
+    exact h_rev'
+
+  -- Combine the lower bound on `‖blaschke_fs‖` with the reverse inequality.
+  linarith
+
 /-! ## Main Contradiction
 
 The proof by contradiction:
@@ -1211,32 +1356,15 @@ theorem zero_free_with_interval (ρ : ℂ)
     (M : ℝ) (h_osc : InBMOWithBound logAbsXi M)
     (hM_le : M ≤ C_tail) :
     False := by
-  -- Work with a *centered* Whitney interval of half-length 7.
-  -- This avoids any extra “centering” axioms: ρ.im is exactly the center.
-  let I0 : WhitneyInterval := { t0 := ρ.im, len := 7, len_pos := by norm_num }
-
-  have hρ_im0 : ρ.im ∈ I0.interval := by
-    -- ρ.im ∈ [ρ.im - 7, ρ.im + 7]
-    simp [WhitneyInterval.interval, I0, Set.mem_Icc]
-
-  have h_centered0 : |ρ.im - I0.t0| ≤ I0.len / 2 := by
-    -- |ρ.im - ρ.im| = 0
-    simp [I0]
-    norm_num
-
-  have hρ_re_strict : ρ.re < 1 := zero_in_critical_strip ρ hρ_zero hρ_re
-  have hρ_re_upper0 : ρ.re ≤ 1/2 + 2 * I0.len := by
-    -- RHS = 1/2 + 14, so this is trivial from ρ.re < 1
-    have : ρ.re ≤ (1 : ℝ) := le_of_lt hρ_re_strict
-    nlinarith [this]
-
-  have hI0_len_large : I0.len ≥ 7 := by simp [I0]
-  have hρ_im_ne : ρ.im ≠ 0 := zero_has_nonzero_im ρ hCA hρ_zero hρ_re
-
-  -- Lower bound: totalPhaseSignal I0 ≥ L_rec - U_tail
-  have h_dominance :=
-    blaschke_dominates_total I0 ρ hRG hρ_zero M hρ_re hρ_re_upper0 hρ_im0 hρ_re_strict hI0_len_large
-      h_centered0 hρ_im_ne
+  -- Lower bound comes directly from blaschke_dominates_total_centered.
+  -- The theorem defines `d := ρ.re - 1/2` and `I0` internally, so the returned
+  -- statement is about that internal `I0`.
+  have h_dominance := blaschke_dominates_total_centered ρ hRG hρ_zero M hρ_re
+  -- The let-bound `I0` in the statement is `{ t0 := ρ.im, len := 2*(ρ.re - 1/2), ... }`.
+  -- We extract the signal for that interval.
+  set d : ℝ := ρ.re - 1/2 with hd_def
+  have h_d_pos : d > 0 := by simp only [hd_def]; linarith
+  set I0 : WhitneyInterval := { t0 := ρ.im, len := 2 * d, len_pos := by nlinarith } with hI0_def
 
   -- Upper bound: totalPhaseSignal I0 ≤ U_tail M
   have h_carleson := totalPhaseSignal_bound I0 hCA M h_osc
@@ -1247,14 +1375,13 @@ theorem zero_free_with_interval (ρ : ℂ)
     have hmono : U_tail M ≤ U_tail C_tail := U_tail_mono hM_nonneg hM_le
     have hclose : (2 * U_tail C_tail) < L_rec := zero_free_condition_C_tail
     have h2mono : (2 * U_tail M) ≤ (2 * U_tail C_tail) := by nlinarith
-    -- Convert to the `>` form used downstream.
     have : (2 * U_tail M) < L_rec := lt_of_le_of_lt h2mono hclose
     linarith
 
   -- Derive contradiction:
-  -- h_dominance: totalPhaseSignal I ≥ L_rec - U_tail M
+  -- h_dominance: totalPhaseSignal I0 ≥ L_rec - U_tail M
   -- h_l_rec_large: L_rec > 2*(U_tail M), so L_rec - U_tail M > U_tail M
-  -- But h_carleson: totalPhaseSignal I ≤ U_tail M
+  -- But h_carleson: totalPhaseSignal I0 ≤ U_tail M
   linarith
 
 /-- **MAIN THEOREM**: Local zero-free criterion (conditional).

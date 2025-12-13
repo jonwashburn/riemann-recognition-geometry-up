@@ -18,7 +18,7 @@ The main theorem: all non-trivial zeros of ζ(s) lie on Re(s) = 1/2.
   - Uses phase bound from explicit arctan calculation
 
 **Track 3 (Carleson-BMO)** - Technical content
-  - `blaschke_dominates_total`: Blaschke contribution ≤ total phase ≤ U_tail
+  - `blaschke_dominates_total`: Blaschke contribution ≤ total phase ≤ U_tail(M)
   - Uses Fefferman–Stein / Carleson machinery (currently axiomatized)
 
 **Track 4 (Integration)** ✅ COMPLETE
@@ -26,7 +26,7 @@ The main theorem: all non-trivial zeros of ζ(s) lie on Re(s) = 1/2.
   - Combines Tracks 2 & 3 with key inequality U_tail < L_rec
 
 ## Key Results
-  - `zero_free_condition`: U_tail < L_rec (PROVEN)
+  - `U_tail_C_tail_lt_L_rec_div_two`: U_tail(C_tail) < L_rec/2 (PROVEN)
   - `dyadic_interval_with_width`: Proper width bounds (PROVEN)
   - `RiemannHypothesis_recognition_geometry`: Main theorem (conditional)
 -/
@@ -67,19 +67,16 @@ After the scale-correct refactor:
 - the numeric closure is proven for `M₀ := C_tail`,
 so the only remaining analytic target is to prove `M ≤ M₀`.
 
-We package this as a single proposition.
+This is packaged as `OscillationTarget` in `RiemannRecognitionGeometry/Assumptions.lean`.
 -/
-
-/-- A single packaged hypothesis expressing “BMO/oscillation is small enough to close RG”. -/
-def OscillationTarget : Prop :=
-  ∃ M : ℝ, InBMOWithBound logAbsXi M ∧ M ≤ C_tail
 
 /-! ## Main Zero-Free Theorem -/
 
 /-- **THEOREM**: No off-critical zeros in {Re s > 1/2}.
 
 This theorem is **conditional**:
-- it assumes `h_osc` (a global mean-oscillation / BMO-type bound for `logAbsXi`), and
+- it assumes an explicit small-oscillation hypothesis
+  (either `OscillationTarget` or `(M, InBMOWithBound logAbsXi M, M ≤ C_tail)`), and
 - it relies on additional project-level axioms (see `RiemannRecognitionGeometry/Conjectures.lean`,
   `RiemannRecognitionGeometry/PoissonExtension.lean`, `RiemannRecognitionGeometry/JohnNirenberg.lean`,
   and `RiemannRecognitionGeometry/DirichletEta.lean`; summarized in `PROOF_SANITY_PLAN.md`).
@@ -109,6 +106,15 @@ theorem no_off_critical_zeros_in_strip_of_oscillationTarget
   rcases hT with ⟨M, h_osc, hM_le⟩
   exact no_off_critical_zeros_in_strip hCA hRG M h_osc hM_le
 
+/-- Same theorem, but taking the bundled structure `OscillationAssumptions`. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationAssumptions
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (hOsc : OscillationAssumptions) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  rcases hOsc.oscillationTarget with ⟨M, h_osc, hM_le⟩
+  exact no_off_critical_zeros_in_strip hCA hRG M h_osc hM_le
+
 /-! ## Main Riemann Hypothesis Theorem -/
 
 /-- **THEOREM**: Riemann Hypothesis via Recognition Geometry (conditional)
@@ -122,7 +128,7 @@ Every zero ρ of the completed zeta function ξ(s) = Λ(s) satisfies Re(ρ) = 1/
 - Hence Re(ρ) = 1/2
 
 **Assumptions**:
-- `h_osc`: a global mean-oscillation / BMO-type bound for `logAbsXi`.
+- an explicit small-oscillation hypothesis for `logAbsXi` (see above).
 - Plus the explicit project axioms listed in `PROOF_SANITY_PLAN.md`.
 -/
 theorem RiemannHypothesis_recognition_geometry
@@ -155,6 +161,15 @@ theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget
   rcases hT with ⟨M, h_osc, hM_le⟩
   exact RiemannHypothesis_recognition_geometry hCA hRG M h_osc hM_le
 
+/-- Same theorem, but taking the bundled structure `OscillationAssumptions`. -/
+theorem RiemannHypothesis_recognition_geometry_of_oscillationAssumptions
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (hOsc : OscillationAssumptions) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  rcases hOsc.oscillationTarget with ⟨M, h_osc, hM_le⟩
+  exact RiemannHypothesis_recognition_geometry hCA hRG M h_osc hM_le
+
 /-! ## Classical Statement -/
 
 /-- **THEOREM**: Classical Riemann Hypothesis (conditional)
@@ -164,7 +179,7 @@ All non-trivial zeros of ζ(s) lie on Re(s) = 1/2.
 Non-trivial zeros are those with 0 < Re(s) < 1.
 
 **Assumptions**:
-- `h_osc`: a global mean-oscillation / BMO-type bound for `logAbsXi`.
+- an explicit small-oscillation hypothesis for `logAbsXi` (see above).
 - Plus the explicit project axioms listed in `PROOF_SANITY_PLAN.md`.
 -/
 theorem RiemannHypothesis_classical
@@ -188,6 +203,15 @@ theorem RiemannHypothesis_classical_of_oscillationTarget
     (hT : OscillationTarget) :
     ∀ ρ : ℂ, riemannZeta ρ = 0 → 0 < ρ.re → ρ.re < 1 → ρ.re = 1/2 := by
   rcases hT with ⟨M, h_osc, hM_le⟩
+  exact RiemannHypothesis_classical hCA hRG M h_osc hM_le
+
+/-- Same theorem, but taking the bundled structure `OscillationAssumptions`. -/
+theorem RiemannHypothesis_classical_of_oscillationAssumptions
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (hOsc : OscillationAssumptions) :
+    ∀ ρ : ℂ, riemannZeta ρ = 0 → 0 < ρ.re → ρ.re < 1 → ρ.re = 1/2 := by
+  rcases hOsc.oscillationTarget with ⟨M, h_osc, hM_le⟩
   exact RiemannHypothesis_classical hCA hRG M h_osc hM_le
 
 /-! ## Summary

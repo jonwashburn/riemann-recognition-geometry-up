@@ -283,6 +283,9 @@ Updated assumption surface (all in main chain; total = 10):
 | `bmo_kernel_bound_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
 | `bmo_carleson_embedding` | `RiemannRecognitionGeometry/PoissonExtension.lean` | ✅ yes |
 
+In addition, the main theorem signatures require an explicit **small-oscillation target**
+for `logAbsXi` (now packaged as `Main.OscillationTarget`).
+
 ---
 
 ## Definition of done

@@ -1144,9 +1144,9 @@ theorem log_singularity_oscillation_bound
 
     **Implementation**: Takes the mean oscillation bound as an explicit hypothesis. -/
 theorem logAbsXi_mean_oscillation_bound
-    (h_bound : ∃ M : ℝ, M > 0 ∧ ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M) :
-    ∃ M : ℝ, M > 0 ∧
-    ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M := h_bound
+    (M : ℝ) (h_bound : InBMOWithBound logAbsXi M) :
+    ∀ a b : ℝ, a < b → meanOscillation logAbsXi a b ≤ M :=
+  h_bound.2
 
 /-- **THEOREM**: The renormalized log|ξ| is in BMO(ℝ).
 

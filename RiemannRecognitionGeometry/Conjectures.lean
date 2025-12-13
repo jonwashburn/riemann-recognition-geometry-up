@@ -45,6 +45,11 @@ theorem weierstrass_tail_bound_axiom_statement
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
   hRG.weierstrass_tail_bound_axiom_statement I ρ M hρ_zero hρ_im
 
+/-- **THEOREM (assumption wrapper)**: packaged small-oscillation target for `logAbsXi`. -/
+theorem oscillationTarget (hOsc : OscillationAssumptions) :
+    ∃ M : ℝ, InBMOWithBound logAbsXi M ∧ M ≤ C_tail :=
+  hOsc.oscillationTarget
+
 end Conjectures
 
 end RiemannRecognitionGeometry
