@@ -28,9 +28,10 @@ All proofs complete modulo axioms!
 
 **Basic.lean**: 0 axioms (removed; no longer needed)
 
-**Assumptions.lean** (2 bundled assumptions; not `axiom` declarations):
+**Assumptions.lean** (3 bundled assumptions; not `axiom` declarations):
 - `ClassicalAnalysisAssumptions.green_identity_axiom_statement`
-- `RGAssumptions.weierstrass_tail_bound_axiom_statement`
+- `ClassicalAnalysisAssumptions.cofactor_green_identity_axiom_statement`
+- `RGAssumptions.j_carleson_energy_axiom_statement`
 
 **Conjectures.lean**:
 - provides **theorem wrappers** that project these bundled assumptions (no `axiom` declarations)
@@ -264,7 +265,7 @@ theorem green_identity_axiom_statement
 - Stein, "Harmonic Analysis: Real-Variable Methods", Princeton 1993, Ch. II
 - Fefferman & Stein, "Hp Spaces of Several Variables", Acta Math 129 (1972)
 
-## E2. Weierstrass Tail Bound ✅ (bundled RG assumption)
+## E2. Weierstrass Tail Bound ✅ (derived wrapper; CPM-form RG assumption underneath)
 
 **Location**:
 - wrapper theorem: `RiemannRecognitionGeometry/Conjectures.lean`
@@ -273,8 +274,9 @@ theorem green_identity_axiom_statement
 **Statement**:
 ```lean
 theorem weierstrass_tail_bound_axiom_statement
+    (hCA : ClassicalAnalysisAssumptions)
     (hRG : RGAssumptions)
-    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ)
+    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ) (hM_pos : 0 < M)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
@@ -426,5 +428,6 @@ RiemannRecognitionGeometry/
 
 **Bundled (non-axiom) assumptions in main theorem signatures**:
 - `ClassicalAnalysisAssumptions.green_identity_axiom_statement`
-- `RGAssumptions.weierstrass_tail_bound_axiom_statement`
+- `ClassicalAnalysisAssumptions.cofactor_green_identity_axiom_statement`
+- `RGAssumptions.j_carleson_energy_axiom_statement`
 - `OscillationTarget := ∃ M, InBMOWithBound logAbsXi M ∧ M ≤ C_tail`

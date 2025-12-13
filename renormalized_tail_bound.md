@@ -837,3 +837,208 @@ If you want, I can draft the precise repaired definitions (for \(B(I,K)\), the r
 - To *prove* that assumption unconditionally, one still needs a **packing/Carleson bound** for the distant zeros (Repair #3). That step is exactly the \(\mu\)-Carleson target from Route 1 — no free lunch.
 
 **Takeaway:** the Lean RG chain is now internally consistent at the geometric level (no vacuously true hypotheses about non-existent interval/zero configurations), but the outstanding analytic input is unchanged: \(\mu\)-Carleson (or an equivalent packing statement) for the \(\sigma\)-weighted off-line zero measure.
+
+---
+
+## 8) Route 3 (major rebuild): Weil explicit formula / Li positivity (no Carleson/BMO)
+
+This route **abandons the boundary-Whitney/Carleson infrastructure entirely**.  Instead of trying to control a boundary phase locally (a wedge certificate) via a uniform Carleson-box energy bound, it reframes RH as an **explicit-formula positivity** statement and targets that positivity directly.
+
+### 8.1. What changes (and why it’s genuinely different)
+
+- **Old bottleneck (local)**: prove a *uniform local* packing/energy statement (e.g. \(\mu\)-Carleson or (J-Carleson)) controlling off-line zeros in every Carleson box at every height and scale.
+- **New bottleneck (global)**: prove a *global positivity* statement attached to the Guinand–Weil explicit formula:
+  - positivity of a quadratic form \(f\mapsto W^{(1)}(f*\widetilde{\overline f})\) on a space of test functions (Weil), or
+  - positivity of a countable sequence \((\lambda_n)\) (Li).
+
+The rebuild is conceptual: the “certificate” is no longer a local wedge extracted from harmonic-analysis norms; it is an explicit-formula quadratic form.
+
+### 8.2. Lagarias’ normalization: Mellin transform, convolution, involution, and “nice” tests
+
+We fix the Mellin-transform conventions and the explicit-formula functionals exactly as in Lagarias (2007, §3).
+
+#### 8.2.1. Mellin transform and multiplicative convolution
+
+For \(f:(0,\infty)\to\mathbb C\), define the Mellin transform
+\[
+M[f](s)\ :=\ \int_0^\infty f(x)\,x^{s}\,\frac{dx}{x}\qquad(s\in\mathbb C).
+\]
+
+Define multiplicative convolution by
+\[
+(f*g)(x)\ :=\ \int_0^\infty f\!\left(\frac{x}{y}\right)\,g(y)\,\frac{dy}{y}.
+\]
+Then
+\[
+M[f*g](s)=M[f](s)\,M[g](s).
+\]
+
+#### 8.2.2. Involution
+
+Define the involution
+\[
+\widetilde f(x)\ :=\ \frac{1}{x}\,f\!\left(\frac{1}{x}\right).
+\]
+Then
+\[
+M[\widetilde f](s)=M[f](1-s).
+\]
+
+#### 8.2.3. “Nice” test functions (Lagarias’ class)
+
+In Lagarias’ §3, the explicit formula is stated for test functions \(f:(0,\infty)\to\mathbb C\) that are:
+- piecewise \(C^2\),
+- compactly supported,
+- and satisfy the averaging convention at jump discontinuities:
+\[
+f(x)\ :=\ \frac12\Big(\lim_{t\to x+}f(t)+\lim_{t\to x-}f(t)\Big).
+\]
+
+This class is stable under the map \(f\mapsto f*\widetilde{\overline f}\).
+
+### 8.3. The explicit-formula functionals \(W_{\mathrm{spec}},W_{\mathrm{arith}},W^{(j)}\)
+
+Let \(\xi(s)\) denote the completed zeta function in **Lagarias’ normalization**:
+\[
+\xi(s)\ :=\ \frac12\,s(s-1)\,\pi^{-s/2}\Gamma\!\Big(\frac{s}{2}\Big)\,\zeta(s).
+\]
+It is entire and satisfies \(\xi(s)=\xi(1-s)\); its nontrivial zeros coincide with those of \(\zeta(s)\).
+Let \(\{\rho\}\) be the multiset of nontrivial zeros of \(\xi\), counted with multiplicity.
+
+Define the “spectral” components:
+\[
+W^{(2)}(f)\ :=\ M[f](1),\qquad
+W^{(0)}(f)\ :=\ M[f](0),
+\]
+\[
+W^{(1)}(f)\ :=\ \sum_{\rho\ \text{zero of }\xi} M[f](\rho),
+\]
+where the sum is interpreted in the standard symmetric way (pairing \(\rho\) with \(1-\rho\), or as a limit over \(|\Im\rho|\le T\) as \(T\to\infty\)); for the “nice” class above, Lagarias proves convergence in §3.
+
+Then define the “spectral side”
+\[
+W_{\mathrm{spec}}(f)\ :=\ W^{(2)}(f)\ -\ W^{(1)}(f)\ +\ W^{(0)}(f).
+\]
+
+Define the “arithmetic” components. For a prime \(p\),
+\[
+W_p(f)\ :=\ (\log p)\sum_{n=1}^{\infty}\big(f(p^n)+\widetilde f(p^n)\big).
+\]
+At the archimedean place,
+\[
+W_\infty(f)\ :=\ (\gamma+\log\pi)\,f(1)\ +\ \int_{1}^{\infty}\frac{f(x)+\widetilde f(x)-\frac{2}{x^2}f(1)}{x^2-1}\,x\,dx,
+\]
+where \(\gamma\) is Euler’s constant.
+
+Finally set
+\[
+W_{\mathrm{arith}}(f)\ :=\ W_\infty(f)\ +\ \sum_{p\ \text{prime}} W_p(f).
+\]
+
+### 8.4. Lagarias Theorem 3.1: the explicit formula (Mellin form)
+
+> **Theorem 8.1 (Lagarias 2007, Thm. 3.1).** For any “nice” test function \(f:(0,\infty)\to\mathbb C\),
+> \[
+> W_{\mathrm{spec}}(f)\ =\ W_{\mathrm{arith}}(f).
+> \]
+
+This is the Guinand–Weil explicit formula in Lagarias’ Mellin-transform normalization.
+
+### 8.5. Lagarias Theorem 3.2: Weil positivity (RH as positivity of a quadratic form)
+
+> **Theorem 8.2 (Lagarias 2007, Thm. 3.2; Weil positivity).** The Riemann Hypothesis is equivalent to
+> \[
+> W^{(1)}(f*\widetilde{\overline f})\ \ge\ 0
+> \qquad\text{for all “nice” test functions }f.
+> \]
+
+**Equivalent inequality on the arithmetic side.** Combining Theorem 8.1 with
+\(
+W^{(1)}(g)=W^{(2)}(g)+W^{(0)}(g)-W_{\mathrm{arith}}(g)
+\)
+gives:
+\[
+W^{(1)}(f*\widetilde{\overline f})\ge 0
+\quad\Longleftrightarrow\quad
+W_{\mathrm{arith}}(f*\widetilde{\overline f})\ \le\ W^{(2)}(f*\widetilde{\overline f})+W^{(0)}(f*\widetilde{\overline f}).
+\]
+Since \(M[f*\widetilde{\overline f}](s)=M[f](s)\,\overline{M[f](1-\overline s)}\), one has
+\[
+W^{(2)}(f*\widetilde{\overline f})+W^{(0)}(f*\widetilde{\overline f})
+= 2\,\Re\!\big(M[f](1)\,\overline{M[f](0)}\big),
+\]
+so Weil positivity can be read as a **pure inequality** between the prime-power side \(W_{\mathrm{arith}}\) and the boundary Mellin data \(M[f](0),M[f](1)\).
+
+### 8.6. Li coefficients (countable positivity criterion)
+
+Define Li’s coefficients (Lagarias 2007, §6.3):
+\[
+\lambda_n\ :=\ \frac{1}{(n-1)!}\left.\frac{d^n}{ds^n}\Big(s^{n-1}\log\xi(s)\Big)\right|_{s=1},
+\qquad n\ge 1.
+\]
+
+> **Theorem 8.3 (Li 1997; Lagarias 2007, Thm. 6.5).** RH is equivalent to
+> \[
+> \lambda_n\ \ge\ 0\qquad\text{for all }n\ge 1.
+> \]
+
+#### 8.6.1. Sum over zeros formula (with convergence convention)
+
+There is a standard “sum over zeros” representation (Li; see also Bombieri–Lagarias):
+\[
+\lambda_n\ =\ \sum_{\rho}\left(1-\Big(1-\frac{1}{\rho}\Big)^{\!n}\right),
+\]
+where the sum is over all nontrivial zeros \(\rho\) of \(\xi\), counted with multiplicity, and is interpreted as a symmetric limit over \(|\Im\rho|\le T\) (or equivalently by pairing \(\rho\) with \(1-\rho\)) to ensure convergence.
+
+Under RH, \(\rho=\tfrac12+i\gamma\) implies \(\left|\frac{\rho-1}{\rho}\right|=1\), hence \(\left(1-\frac{1}{\rho}\right)^n\) lies on the unit circle and
+\(\Re\!\left(1-(1-1/\rho)^n\right)=1-\cos(n\theta_\rho)\ge 0\),
+making the forward implication \(\mathrm{RH}\Rightarrow(\lambda_n\ge 0)\) transparent.
+
+#### 8.6.2. Li as a special case of Weil positivity
+
+Lagarias notes (citing Bombieri–Lagarias) that Li’s coefficients can be realized as Weil functionals:
+\[
+\lambda_n\ =\ W^{(1)}\!\big(\phi_n*\widetilde{\overline{\phi_n}}\big)
+\]
+for an explicit sequence \((\phi_n)\) of test functions.
+
+**Caveat (important):** this \((\phi_n)\) falls outside the compact-support class used to state Theorem 8.1 in Lagarias’ §3, but the explicit formula can be extended/justified for these specific \(\phi_n\) (in a slightly modified form) and the identity still holds (Lagarias cites Bombieri–Lagarias for this).
+
+### 8.7. Conrey–Li warning: de Branges shift-positivity is *too strong* (and false)
+
+Conrey–Li (arXiv:math/9812166) analyze positivity conditions arising in de Branges’ Hilbert-space program, e.g. shift-positivity requirements of the schematic form
+\[
+\Re\langle F(z),F(z+i)\rangle_{\mathcal H(E)}\ge 0\quad\text{for all }F,
+\qquad E(z)=\xi(1-iz),
+\]
+and related kernel-shift positivity conditions implying pointwise half-plane inequalities like \(\Re\{W(z)/W(z+i)\}\ge 0\) for certain \(W\) built from \(\xi\).
+
+They give explicit counterexamples showing these **pointwise/shift** positivity conditions fail for \(\zeta\) (and \(L(s,\chi_4)\)).  So a “positivity rebuild” must target **Weil/Li averaged positivity**, not pointwise de Branges shift-positivity.
+
+### 8.8. What would close the proof (minimal analytic input + plausible intermediates)
+
+At this point the proof skeleton is completely explicit:
+
+- **(Weil gate)** Prove Theorem 8.2’s inequality \(W^{(1)}(f*\widetilde{\overline f})\ge 0\) for all “nice” \(f\). Then RH follows.
+- **(Li gate)** Prove \(\lambda_n\ge 0\) for all \(n\ge 1\). Then RH follows.
+
+These are equivalent (both \(\Leftrightarrow\) RH), but they replace the prior **local** \(\mu\)-Carleson bottleneck by a single **global explicit-formula positivity** bottleneck.
+
+Two concrete intermediate targets (still nontrivial, and plausibly “attackable” subproblems) are:
+
+1. **Dense-subclass reduction for Weil positivity.** Show \(f\mapsto W^{(1)}(f*\widetilde{\overline f})\) is continuous in a topology under which smooth compactly supported functions are dense, so it suffices to check Weil positivity on a convenient dense subclass (e.g. \(C_c^\infty\) supported in \([e^{-A},e^{A}]\) with \(A\in\mathbb N\)). This reduces the “for all \(f\)” quantifier to a manageable basis, without changing the bottleneck’s nature.
+
+2. **Explicit prime-power formula for \(\lambda_n\) with a uniform remainder bound.** Starting from Li’s explicit formulas for \(L\)-functions (or from Bombieri–Lagarias), derive a fully explicit prime-power expression for \(\lambda_n\) and prove a lower bound of the form
+\[
+\lambda_n \ \ge\ \frac{n}{2}\log n + c\,n - C\,n^\theta
+\]
+with some \(\theta<1\) and explicit constants \(c,C\). This would imply \(\lambda_n>0\) for all sufficiently large \(n\), reducing RH to verifying finitely many initial \(\lambda_n\) numerically/auditably. (For \(\zeta\), this remains out of reach unconditionally with current technology.)
+
+---
+
+### References (for Route 3)
+- J. C. Lagarias, *The Riemann Hypothesis: Arithmetic and Geometry* (survey article, May 4, 2007): §3 Theorems 3.1–3.2; §6.3 Theorem 6.5.
+- X.-J. Li, “The positivity of a sequence of numbers and the Riemann hypothesis,” *J. Number Theory* **65** (1997), 325–333.
+- E. Bombieri and J. C. Lagarias, “Complements to Li’s criterion for the Riemann hypothesis,” *J. Number Theory* **77** (1999), 274–287.
+- A. Weil, “Sur les ‘formules explicites’ de la théorie des nombres premiers,” *Comm. Sém. Math. Univ. Lund* (1952), 252–265.
+- J. B. Conrey and X.-J. Li, “A note on some positivity conditions related to zeta- and \(L\)-functions,” preprint (1998), `arXiv:math/9812166`.

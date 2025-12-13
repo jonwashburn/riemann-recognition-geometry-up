@@ -319,6 +319,8 @@ Under (P+), \(2\mathcal J\) is Herglotz on zero-free rectangles in \(\Omega\) an
 
 \paragraph{Constants.} The window threshold \(\Upsilon\) is determined by: (i) a plateau constant \(c_0(\psi)>0\) for the test bump; (ii) a removable boundary error constant depending on the aperture; and (iii) a Carleson box constant \(C_{\rm box}^{(\zeta)}=K_0+K_\xi\) combining unconditional tail and neutralized zeros. Choosing a Whitney length \(L\) small enough makes the right-hand side strictly below \(\tfrac12\), closing the wedge.
 
+\paragraph{Alternate explicit-formula gate (Weil/Li).} A genuine major rebuild avoids the boundary-certificate/Carleson machinery altogether and instead takes the Guinand--Weil explicit formula as the central object.  In Lagarias' survey \cite{Lagarias2007} (see also Li \cite{Li1997} and Bombieri--Lagarias \cite{BombieriLagarias1999}), Weil's positivity statement (originating with Weil \cite{Weil1952}) recasts RH as positivity of an explicit-formula quadratic form \(Q(f):=W^{(1)}(f*\widetilde{\overline f})\ge 0\) for all suitable test functions \(f\), and Li's criterion recasts RH as positivity of a countable sequence of Li coefficients \(\lambda_n\ge 0\) for all \(n\ge 1\).  In CPM language, the ``structured object'' is the closed cone \(\{f:Q(f)\ge 0\}\) (or the positive semidefinite quadratic form itself), and the ``defect'' is the negative part \(\Defect(f):=\max\{0,-Q(f)\}\); the global conclusion (RH) is exactly the statement that the defect vanishes for all admissible tests.  This replaces the local \(\mu\)-Carleson/Carleson-energy bottleneck by a global explicit-formula positivity bottleneck.  A cautionary note is that stronger de Branges shift-positivity conditions fail for \(\zeta\) (Conrey--Li \cite{ConreyLi1998}), so the positivity target must be of Weil/Li averaged type rather than pointwise.
+
 \section{Navier--Stokes Instantiation (Critical Vorticity Route)}
 
 \paragraph{Setup.} Let \(\omega=\nabla\times u\). Define a critical vorticity functional \(\mathcal W(x,t;r)=r^{-1}\iint_{Q_r(x,t)} |\omega|^{3/2}\) and its supremum profile. Let the defect aggregate these critical quantities on a final time window. Energy control stems from heat-flow estimates and Calder\'on--Zygmund bounds. The structured set corresponds to small-data regimes characterized by a \(\mathrm{BMO}^{-1}\) time slice.
@@ -587,6 +589,16 @@ W. Duke, J. B. Friedlander, and H. Iwaniec.
 \newblock Equidistribution of roots of a quadratic congruence to prime moduli.
 \newblock \emph{Ann. of Math.}, 141(2):423--441, 1997.
 
+\bibitem[CL98]{ConreyLi1998}
+J. B. Conrey and X.-J. Li.
+\newblock A note on some positivity conditions related to zeta- and $L$-functions.
+\newblock Preprint, 1998. \newblock \texttt{arXiv:math/9812166}.
+
+\bibitem[BL99]{BombieriLagarias1999}
+E. Bombieri and J. C. Lagarias.
+\newblock Complements to Li's criterion for the Riemann hypothesis.
+\newblock \emph{J. Number Theory}, 77 (1999), 274--287.
+
 \bibitem[Gar07]{Garnett2007}
 J. B. Garnett.
 \newblock \emph{Bounded Analytic Functions}.
@@ -597,10 +609,25 @@ K. Kato.
 \newblock P-adic Hodge theory and values of zeta functions of modular forms.
 \newblock \emph{Ast\'erisque}, 295:117--290, 2004.
 
+\bibitem[Lag07]{Lagarias2007}
+J. C. Lagarias.
+\newblock The Riemann Hypothesis: Arithmetic and Geometry.
+\newblock Survey article (May 4, 2007).
+
+\bibitem[Li97]{Li1997}
+X.-J. Li.
+\newblock The positivity of a sequence of numbers and the Riemann hypothesis.
+\newblock \emph{J. Number Theory}, 65 (1997), 325--333.
+
 \bibitem[KT01]{KochTataru2001}
 H. Koch and D. Tataru.
 \newblock Well-posedness for the Navier--Stokes equations.
 \newblock \emph{Adv. Math.}, 157(1):22--35, 2001.
+
+\bibitem[Wei52]{Weil1952}
+A. Weil.
+\newblock Sur les ``formules explicites'' de la th\'eorie des nombres premiers.
+\newblock \emph{Comm. S\'em. Math. Univ. Lund} (1952), 252--265.
 
 \bibitem[MB02]{MajdaBertozzi2002}
 A. Majda and A. Bertozzi.

@@ -18,3 +18,15 @@ Thumbs.db
 *.swp
 *~
 
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.toc
+*.pdf
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bbl
+*.blg
+

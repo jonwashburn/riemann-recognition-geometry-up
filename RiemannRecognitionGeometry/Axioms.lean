@@ -1032,37 +1032,43 @@ theorem totalPhaseSignal_eq_xiPhaseChange (I : WhitneyInterval) :
     - Titchmarsh, "Theory of the Riemann Zeta-Function", Oxford 1986, Ch. 9
     - Edwards, "Riemann's Zeta Function", Academic Press 1974, Ch. 2
     - Hadamard, "Étude sur les propriétés des fonctions entières" (1893) -/
-theorem weierstrass_tail_bound_axiom_statement (hRG : RGAssumptions)
-    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ)
+theorem weierstrass_tail_bound_axiom_statement
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ) (hM_pos : 0 < M)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
-  hRG.weierstrass_tail_bound_axiom_statement I ρ M hρ_zero hρ_im
+  Conjectures.weierstrass_tail_bound_axiom_statement (hCA := hCA) (hRG := hRG)
+    I ρ M hM_pos hρ_zero hρ_im
 
 /-- Weierstrass tail bound theorem (from axiom). -/
-theorem weierstrass_tail_bound_for_phase_theorem (hRG : RGAssumptions)
-    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ)
+theorem weierstrass_tail_bound_for_phase_theorem
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions)
+    (I : WhitneyInterval) (ρ : ℂ) (M : ℝ) (hM_pos : 0 < M)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
-  weierstrass_tail_bound_axiom_statement (hRG := hRG) I ρ M hρ_zero hρ_im
+  weierstrass_tail_bound_axiom_statement (hCA := hCA) (hRG := hRG) I ρ M hM_pos hρ_zero hρ_im
 
 /-- Backward compatibility alias for weierstrass_tail_bound_for_phase_theorem -/
 def weierstrass_tail_bound_for_phase (I : WhitneyInterval) (ρ : ℂ)
-    (hRG : RGAssumptions) (M : ℝ)
+    (hCA : ClassicalAnalysisAssumptions)
+    (hRG : RGAssumptions) (M : ℝ) (hM_pos : 0 < M)
     (hρ_zero : completedRiemannZeta ρ = 0) (hρ_im : ρ.im ∈ I.interval) :
     let d : ℝ := ρ.re - 1/2
     let y_hi : ℝ := I.t0 + I.len - ρ.im
     let y_lo : ℝ := I.t0 - I.len - ρ.im
     let blaschke := Real.arctan (y_lo / d) - Real.arctan (y_hi / d)
     ‖xiPhaseChangeAngle I - (blaschke : Real.Angle)‖ ≤ U_tail M :=
-  weierstrass_tail_bound_for_phase_theorem (hRG := hRG) I ρ M hρ_zero hρ_im
+  weierstrass_tail_bound_for_phase_theorem (hCA := hCA) (hRG := hRG) I ρ M hM_pos hρ_zero hρ_im
 
 /-- **THEOREM**: When a zero exists, the total phase signal is large.
     Uses phase_decomposition_exists from FeffermanStein and criticalLine_phase_ge_L_rec.
@@ -1073,9 +1079,11 @@ def weierstrass_tail_bound_for_phase (I : WhitneyInterval) (ρ : ℂ)
 
     **Note**: `hρ_re_upper` comes from recognizer band: σ ≤ 1/2 + Λ_rec*L with Λ_rec ≤ 2. -/
 theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
+    (hCA : ClassicalAnalysisAssumptions)
     (hRG : RGAssumptions)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (M : ℝ)
+    (hM_pos : 0 < M)
     (hρ_re : 1/2 < ρ.re)
     (hρ_re_upper : ρ.re ≤ 1/2 + 2 * I.len)
     (hρ_im : ρ.im ∈ I.interval)
@@ -1092,7 +1100,8 @@ theorem blaschke_dominates_total (I : WhitneyInterval) (ρ : ℂ)
   have h_tail :
       ‖xiPhaseChangeAngle I - (blaschke_fs : Real.Angle)‖ ≤ U_tail M := by
     simpa [d, y_hi, y_lo, blaschke_fs] using
-      hRG.weierstrass_tail_bound_axiom_statement I ρ M hρ_zero hρ_im
+      Conjectures.weierstrass_tail_bound_axiom_statement (hCA := hCA) (hRG := hRG)
+        I ρ M hM_pos hρ_zero hρ_im
 
   -- Critical line phase bound (now proven using geometric arctan)
   have h_phase_ge_abs : |blaschke_fs| ≥ L_rec := by
@@ -1200,9 +1209,11 @@ then for the centered Whitney interval `I0` with `I0.len = 2(ρ.re-1/2)` we have
 This is the “Route 2” scale choice: the interval length is tied to the off-line
 distance `d`, not to the height `|Im ρ|`. -/
 theorem blaschke_dominates_total_centered (ρ : ℂ)
+    (hCA : ClassicalAnalysisAssumptions)
     (hRG : RGAssumptions)
     (hρ_zero : completedRiemannZeta ρ = 0)
     (M : ℝ)
+    (hM_pos : 0 < M)
     (hρ_re : 1/2 < ρ.re) :
     let d : ℝ := ρ.re - 1/2
     let I0 : WhitneyInterval :=
@@ -1230,7 +1241,8 @@ theorem blaschke_dominates_total_centered (ρ : ℂ)
   have h_tail :
       ‖xiPhaseChangeAngle I0 - (blaschke_fs : Real.Angle)‖ ≤ U_tail M := by
     simpa [y_hi, y_lo, blaschke_fs, d] using
-      hRG.weierstrass_tail_bound_axiom_statement I0 ρ M hρ_zero hρ_im0
+      Conjectures.weierstrass_tail_bound_axiom_statement (hCA := hCA) (hRG := hRG)
+        I0 ρ M hM_pos hρ_zero hρ_im0
 
   -- Compute the Blaschke real phase for the centered choice: it is `- 2 * arctan 2`.
   have h_yhi : y_hi = 2 * d := by simp only [y_hi, I0]; ring
@@ -1359,7 +1371,9 @@ theorem zero_free_with_interval (ρ : ℂ)
   -- Lower bound comes directly from blaschke_dominates_total_centered.
   -- The theorem defines `d := ρ.re - 1/2` and `I0` internally, so the returned
   -- statement is about that internal `I0`.
-  have h_dominance := blaschke_dominates_total_centered ρ hRG hρ_zero M hρ_re
+  have h_dominance :=
+    blaschke_dominates_total_centered (ρ := ρ) (hCA := hCA) (hRG := hRG)
+      (hρ_zero := hρ_zero) (M := M) (hM_pos := h_osc.1) (hρ_re := hρ_re)
   -- The let-bound `I0` in the statement is `{ t0 := ρ.im, len := 2*(ρ.re - 1/2), ... }`.
   -- We extract the signal for that interval.
   set d : ℝ := ρ.re - 1/2 with hd_def

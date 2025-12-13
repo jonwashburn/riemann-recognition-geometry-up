@@ -16,20 +16,19 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
-\usepackage{stmaryrd}
 
 % Layout
 \usepackage[margin=1.0in]{geometry}
 \usepackage{fancyhdr}
-\usepackage{lastpage}
-\usepackage{titlesec}
 \usepackage{parskip}
 \setlength{\emergencystretch}{1em}
-\usepackage{enumitem}
 
 % Links and References
 \usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
-\usepackage[nameinlink]{cleveref}
+% NOTE: `cleveref` is not available in the minimal TeXLive install used by CI.
+% Provide a lightweight fallback so the document still compiles.
+\newcommand{\cref}[1]{\ref{#1}}
+\newcommand{\Cref}[1]{\ref{#1}}
 
 % Code Listings (for Lean code)
 \usepackage{listings}
@@ -64,10 +63,14 @@
   literate={∀}{$\forall$}1 {∃}{$\exists$}1 {→}{$\to$}1 {←}{$\leftarrow$}1 
            {↔}{$\leftrightarrow$}1 {∧}{$\land$}1 {∨}{$\lor$}1 
            {¬}{$\neg$}1 {≠}{$\neq$}1 {≤}{$\leq$}1 {≥}{$\geq$}1
-           {⊆}{$\subseteq$}1 {∈}{$\in$}1 {∉}{$\notin$}1
-           {×}{$\times$}1 {⟨}{$\langle$}1 {⟩}{$\rangle$}1
+           {⊆}{$\subseteq$}1 {∈}{$\in$}1 {∉}{$\notin$}1 {∩}{$\cap$}1 {∪}{$\cup$}1
+           {×}{$\times$}1 {⊗}{$\otimes$}1 {⟨}{$\langle$}1 {⟩}{$\rangle$}1
            {ℕ}{$\mathbb{N}$}1 {ℤ}{$\mathbb{Z}$}1 {ℝ}{$\mathbb{R}$}1
-           {λ}{$\lambda$}1 {∘}{$\circ$}1 {⁻¹}{$^{-1}$}1
+           {λ}{$\lambda$}1 {∘}{$\circ$}1 {⁻¹}{${}^{-1}$}1
+           {₀}{${}_{0}$}1 {₁}{${}_{1}$}1 {₂}{${}_{2}$}1
+           {₃}{${}_{3}$}1 {₄}{${}_{4}$}1 {₅}{${}_{5}$}1
+           {₆}{${}_{6}$}1 {₇}{${}_{7}$}1 {₈}{${}_{8}$}1
+           {₉}{${}_{9}$}1
 }
 
 \lstset{breaklines=true, breakatwhitespace=true}
@@ -78,6 +81,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
 \newtheorem{axiomenv}{Axiom}
 
 \theoremstyle{definition}
@@ -86,7 +90,6 @@
 \newtheorem{remark}[theorem]{Remark}
 
 \numberwithin{equation}{section}
-\setlist{nosep}
 
 % Custom Commands
 \newcommand{\recog}{\mathcal{R}}
@@ -1123,7 +1126,7 @@ theorem sign_distinguishes : ¬Indistinguishable signRecognizer 3 (-3)
 
 \section{Continuous Interval Recognizer}
 
-\begin{example}[Piecewise-constant recognizer on $[0,1]$]
+\begin{example}[Piecewise-constant recognizer on $\lbrack 0,1\rbrack$]
     Let $\config = [0,1]$ and $\events = \{0,1,\ldots,9\}$. Define
     \[
         R(x) = \lfloor 10x \rfloor .
@@ -1316,7 +1319,7 @@ In Recognition Science, time is discrete with period 8. This suggests:
 \end{definition}
 
 \begin{theorem}[Periodicity of Quotient]
-    For a cyclic recognition flow of period $n$, the quotient spaces satisfy $\quotientspace_{t+n} \cong \quotientspace_t$ for all $t$.
+    For a cyclic recognition flow of period $n$, the quotient spaces satisfy $(\quotientspace)_{t+n} \cong (\quotientspace)_t$ for all $t$.
 \end{theorem}
 
 \subsection{Recognition Generators (Outlook)}
@@ -1826,6 +1829,8 @@ This repository also contains an ongoing analytic-number-theory formalization bu
       \quad\text{uniformly over boundary intervals }I.
     \]
     This inequality is isolated as the main remaining analytic input in the boundary-certificate architecture; see \texttt{CPM.tex} and \texttt{renormalized\_tail\_bound.md} (\S5).
+
+    \item \textbf{Alternate major rebuild (explicit formula / Weil--Li positivity).} If the project pivots away from the boundary-certificate/Carleson toolbox entirely, a clean replacement ``gate'' is to recast RH as an \emph{explicit-formula positivity} problem: Weil's criterion (RH \(\Leftrightarrow\) positivity of the explicit-formula quadratic form \(W^{(1)}(f*\widetilde{\overline f})\) for all test functions \(f\)) or, equivalently, Li's criterion (RH \(\Leftrightarrow\) \(\lambda_n\ge 0\) for all Li coefficients). This route is global rather than local and avoids the \(\mu\)-Carleson packing bottleneck; see \texttt{renormalized\_tail\_bound.md} (\S8).  A cautionary note is that stronger de Branges shift-positivity conditions fail for \(\zeta\) (Conrey--Li, arXiv:math/9812166), so the positivity target must be of Weil/Li ``averaged'' type rather than pointwise.
 \end{itemize}
 
 \section{Notation Index}
@@ -1904,4 +1909,5 @@ $\mathcal{F}$ & Sheaf of local recognizers on $\quotientspace$ \\
 
 \end{thebibliography}
 
+\label{LastPage}
 \end{document}

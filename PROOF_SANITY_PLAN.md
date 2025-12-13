@@ -232,15 +232,17 @@ All project axioms are currently in the main chain (via `RiemannRecognitionGeome
 | `tail_pairing_bound_axiom` | `RiemannRecognitionGeometry/FeffermanSteinBMO.lean` | ✅ yes *(problematic)* |
 | `bmo_carleson_embedding` | `RiemannRecognitionGeometry/PoissonExtension.lean` | ✅ yes |
 | `green_identity_axiom_statement` | `RiemannRecognitionGeometry/Axioms.lean` | ✅ yes |
-| `weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Axioms.lean` | ✅ yes |
+| `cofactor_green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `RGAssumptions.j_carleson_energy_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
 
 #### Update (2025-12-12): assumptions bundled; `Conjectures.lean` now exports wrappers
 - `RiemannRecognitionGeometry/Assumptions.lean` defines the two bundled assumption structures:
   - `ClassicalAnalysisAssumptions.green_identity_axiom_statement`
-  - `RGAssumptions.weierstrass_tail_bound_axiom_statement`
+  - `ClassicalAnalysisAssumptions.cofactor_green_identity_axiom_statement`
+  - `RGAssumptions.j_carleson_energy_axiom_statement`
 - `RiemannRecognitionGeometry/Conjectures.lean` now provides **theorem wrappers** (no `axiom` declarations):
   - `Conjectures.green_identity_axiom_statement (hCA : ClassicalAnalysisAssumptions) ...`
-  - `Conjectures.weierstrass_tail_bound_axiom_statement (hRG : RGAssumptions) ...`
+  - `Conjectures.weierstrass_tail_bound_axiom_statement (hCA : ClassicalAnalysisAssumptions) (hRG : RGAssumptions) ...`
 - `RiemannRecognitionGeometry/Axioms.lean` also provides wrappers (for backward compatibility) used by the main chain.
 
 Corrected assumption locations:
@@ -248,7 +250,8 @@ Corrected assumption locations:
 | assumption | file | in main chain? |
 |---|---|---|
 | `ClassicalAnalysisAssumptions.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
-| `RGAssumptions.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `ClassicalAnalysisAssumptions.cofactor_green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `RGAssumptions.j_carleson_energy_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
 
 #### Update (2025-12-12): inconsistent axioms removed from build graph
 - Deleted the inconsistent module `RiemannRecognitionGeometry/FeffermanSteinBMO.lean` and removed its import from `RiemannRecognitionGeometry/Axioms.lean`.
@@ -268,12 +271,13 @@ Updated main-chain import closure (high-level):
 - `RiemannRecognitionGeometry.FeffermanStein`
 - `RiemannRecognitionGeometry.Main`
 
-Updated assumption surface (all in main chain; total = 10):
+Updated assumption surface (all in main chain; total = 11):
 
 | assumption | file | in main chain? |
 |---|---|---|
 | `ClassicalAnalysisAssumptions.green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
-| `RGAssumptions.weierstrass_tail_bound_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `ClassicalAnalysisAssumptions.cofactor_green_identity_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
+| `RGAssumptions.j_carleson_energy_axiom_statement` | `RiemannRecognitionGeometry/Assumptions.lean` | ✅ yes |
 | `identity_principle_eta_zeta_lt_one_axiom` | `RiemannRecognitionGeometry/DirichletEta.lean` | ✅ yes |
 | `czDecomposition_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
 | `czDecompFull_axiom` | `RiemannRecognitionGeometry/JohnNirenberg.lean` | ✅ yes |
