@@ -405,7 +405,7 @@ theorem identity_integral_mellinOnCriticalLine :
   have hg : H.transform g = fun t : ℝ => mellinOnCriticalLine (F := F) g t :=
     H.transform_eq_mellinOnCriticalLine g
   -- Now `simp` under the integral.
-  simpa [toSesqIntegralIdentity, SesqIntegralIdentity.transform, hf, hg] using h
+  simpa [toSesqIntegralIdentity, hf, hg] using h
 
 end Route3SesqIntegralHypBundle
 
