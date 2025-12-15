@@ -1845,10 +1845,14 @@ This repository also contains an ongoing analytic-number-theory formalization bu
         \item \textbf{Cayley bridge hypothesis package} (\texttt{CayleyBridge.lean}): Formalized \texttt{CayleyBridgeAssumptions}, which precisely packages the remaining analytic gap---a candidate \(J\), domain \(S\), positivity \(\Re(2J) \ge 0\) on \(S\), and a bridge axiom to \texttt{ReflectionPositivityRealization}.
 
         \item \textbf{Arithmetic \(J\) definition} (\texttt{ArithmeticJ.lean}): Defined \(J(s) := -\zeta'(s)/\zeta(s)\) and connected to the von Mangoldt L-series for \(\Re s > 1\).
+
+        \item \textbf{Spectral identity as an explicit \(L^2\) / Bochner integral} (\texttt{HilbertRealization.lean}): Introduced companion ``spectral identity'' structures stated both as an \(L^2\) inner product and as a Bochner integral
+        \(W^{(1)}(\mathrm{pair}(f,g)) = \int w(t)\,\overline{F_f(t)}\,F_g(t)\,d\mu(t)\),
+        and proved that the sesquilinear identity yields \texttt{ReflectionPositivityRealization} via the concrete map \(T f := \sqrt{w}\,F_f \in L^2(\mu)\) and \texttt{L2.inner\_def}.
     \end{enumerate}
 
-    \emph{Lean module inventory (14 files):}
-    \texttt{Defs}, \texttt{Lagarias}, \texttt{Li}, \texttt{MainRoute3}, \texttt{MathlibBridge}, \texttt{MulConvolution}, \texttt{Concrete}, \texttt{WFunctionals}, \texttt{WeilPositivityRH}, \texttt{Cayley}, \texttt{CayleyBridge}, \texttt{ArithmeticJ}, \texttt{WeilTestFunction}, \texttt{WeilFunctionals}.
+    \emph{Lean module inventory (15 files):}
+    \texttt{Defs}, \texttt{Lagarias}, \texttt{Li}, \texttt{MainRoute3}, \texttt{MathlibBridge}, \texttt{MulConvolution}, \texttt{HilbertRealization}, \texttt{Concrete}, \texttt{WFunctionals}, \texttt{WeilPositivityRH}, \texttt{Cayley}, \texttt{CayleyBridge}, \texttt{ArithmeticJ}, \texttt{WeilTestFunction}, \texttt{WeilFunctionals}.
 
     \emph{Main problem right now:} prove the \texttt{bridge\_to\_reflection} axiom in \texttt{CayleyBridgeAssumptions}, or directly construct a \texttt{ReflectionPositivityRealization}.
     This requires either showing that arithmetic-side positivity \(\Re(2J(s)) \ge 0\) implies a Hilbert-space representation of the Weil form, or directly constructing such a representation.
