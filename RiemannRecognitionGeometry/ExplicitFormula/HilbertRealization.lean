@@ -385,6 +385,28 @@ def toSesqIntegralIdentity : SesqIntegralIdentity (F := F) (L := L) where
     -- We do it with `simp` using the provided `boundary_limits`.
     simpa [H.boundary_limits] using h
 
+/--
+The spectral identity, stated with the **concrete** critical-line Mellin transform
+`mellinOnCriticalLine` (paper wording).
+-/
+theorem identity_integral_mellinOnCriticalLine :
+    ∀ f g : F,
+      L.W1 (pair (F := F) f g) =
+        ∫ t : ℝ,
+          ((weightOfJ H.J t : ℝ) : ℂ) *
+            ((starRingEnd ℂ (mellinOnCriticalLine (F := F) f t)) *
+              (mellinOnCriticalLine (F := F) g t)) ∂ H.μ := by
+  intro f g
+  -- Start from the packaged identity and rewrite `transform` using the normalization match.
+  have h := (toSesqIntegralIdentity (F := F) (L := L) H).identity_integral (f := f) (g := g)
+  -- Rewrite `H.transform f`/`H.transform g` pointwise.
+  have hf : H.transform f = fun t : ℝ => mellinOnCriticalLine (F := F) f t :=
+    H.transform_eq_mellinOnCriticalLine f
+  have hg : H.transform g = fun t : ℝ => mellinOnCriticalLine (F := F) g t :=
+    H.transform_eq_mellinOnCriticalLine g
+  -- Now `simp` under the integral.
+  simpa [toSesqIntegralIdentity, SesqIntegralIdentity.transform, hf, hg] using h
+
 end Route3SesqIntegralHypBundle
 
 namespace SesqSpectralIdentity
