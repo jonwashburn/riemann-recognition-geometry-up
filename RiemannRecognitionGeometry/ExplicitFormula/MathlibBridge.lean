@@ -132,9 +132,16 @@ lemma mellin_starFun (f : ℝ → ℂ) (s : ℂ) (hf : MellinConvergent f s) :
         (fun t : ℝ => conj ((t : ℂ) ^ (s - 1) • f t)) (Ioi (0 : ℝ)) := by
     intro t ht
     unfold starFun
-    -- On `ℂ`, scalar multiplication is multiplication.
-    -- Use `star_ofReal_cpow` to handle conjugation of the `cpow` factor.
-    simp [smul_eq_mul, mul_assoc, mul_left_comm, mul_comm, star_ofReal_cpow (t := t) ht s]
+    -- On `ℂ`, scalar multiplication is multiplication. After rewriting, `simp` reduces the goal
+    -- to a benign disjunction arising from canceling the common factor `conj (f t)`; we solve it
+    -- by the left disjunct using `star_ofReal_cpow`.
+    have hmul : conj (((t : ℂ) ^ (s - 1)) * f t) =
+        conj ((t : ℂ) ^ (s - 1)) * conj (f t) := by
+      simp
+    have hcpow : conj ((t : ℂ) ^ (s - 1)) = (t : ℂ) ^ (star s - 1) := by
+      simpa using (star_ofReal_cpow (t := t) ht s)
+    -- Rewrite the RHS into the same normal form as the LHS.
+    simp [smul_eq_mul, hmul, hcpow, mul_assoc]
   have hEq :
       (∫ t : ℝ in Ioi (0 : ℝ), (t : ℂ) ^ (star s - 1) • starFun f t)
         = (∫ t : ℝ in Ioi (0 : ℝ), conj ((t : ℂ) ^ (s - 1) • f t)) :=

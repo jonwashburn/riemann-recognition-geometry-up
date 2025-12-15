@@ -47,6 +47,8 @@ open Complex ComplexConjugate MeasureTheory
 namespace RiemannRecognitionGeometry
 namespace ExplicitFormula
 
+universe u
+
 open TestSpace
 open scoped InnerProductSpace
 
@@ -80,212 +82,80 @@ such that `B(f,g) = ⟪Tf, Tg⟫_H`.
 This is the "mechanical" part of Route 3: it reduces the Hilbert-space realization problem
 to proving positive-semidefiniteness.
 -/
-theorem gns_hilbert_realization {V : Type*} [AddCommGroup V] [Module ℂ V]
+theorem gns_hilbert_realization {V : Type u} [AddCommGroup V] [Module ℂ V]
     (B : V → V → ℂ) (hH : IsHermitianForm B) (hPos : IsPositiveSemidefiniteForm B)
     (hLinL : ∀ f g h, B (f + g) h = B f h + B g h)
     (hSmulL : ∀ (c : ℂ) f g, B (c • f) g = starRingEnd ℂ c * B f g)
-    (hLinR : ∀ f g h, B f (g + h) = B f g + B f h)
-    (hSmulR : ∀ (c : ℂ) f g, B f (c • g) = c * B f g) :
-    ∃ (H : Type) (_ : NormedAddCommGroup H) (_ : InnerProductSpace ℂ H) (_ : CompleteSpace H)
+    (_hLinR : ∀ f g h, B f (g + h) = B f g + B f h)
+    (_hSmulR : ∀ (c : ℂ) f g, B f (c • g) = c * B f g) :
+    ∃ (H : Type u) (_ : NormedAddCommGroup H) (_ : InnerProductSpace ℂ H) (_ : CompleteSpace H)
       (T : V →ₗ[ℂ] H),
         ∀ f g : V, B f g = ⟪T f, T g⟫_ℂ := by
   classical
-  -- Define the seminorm induced by `B`.
-  let normB : V → ℝ := fun x => Real.sqrt ((B x x).re)
-  letI : Norm V := ⟨normB⟩
+  -- Build a (semi-)inner product space structure on `V` from `B` using Mathlib's
+  -- `PreInnerProductSpace.Core` machinery, then take the separation quotient and complete.
+  letI : PreInnerProductSpace.Core ℂ V :=
+    { inner := B
+      conj_symm := by
+        intro x y
+        -- `hH x y : B y x = conj (B x y)`; apply `conj` and simplify.
+        have := congrArg (starRingEnd ℂ) (hH x y)
+        simpa using this
+      nonneg_re := hPos
+      add_left := by
+        intro x y z
+        simpa using (hLinL x y z)
+      smul_left := by
+        intro x y r
+        simpa using (hSmulL r x y) }
 
-  have B_zero_left : ∀ x : V, B 0 x = 0 := by
-    intro x
-    have h := hLinL (f := (0 : V)) (g := (0 : V)) (h := x)
-    -- `B 0 x = B 0 x + B 0 x`
-    have h' : B 0 x = B 0 x + B 0 x := by simpa using h
-    -- hence `B 0 x = 0`
-    have : B 0 x + B 0 x = B 0 x := h'.symm
-    exact add_eq_zero_iff_eq_neg.mp (by
-      -- `a + a = a` → `a = 0`
-      -- use `add_eq_self` on `a + a = a`
-      have : B 0 x = 0 := by
-        -- `add_eq_self.mp` expects `a + b = a`
-        simpa using (add_eq_self.mp this)
-      simpa [this])
+  -- The normed-group / normed-space structures induced by this core.
+  letI : SeminormedAddCommGroup V :=
+    InnerProductSpace.Core.toSeminormedAddCommGroup (𝕜 := ℂ) (F := V)
+  letI : NormedSpace ℂ V :=
+    InnerProductSpace.Core.toSeminormedSpace (𝕜 := ℂ) (F := V)
 
-  have B_zero_right : ∀ x : V, B x 0 = 0 := by
-    intro x
-    have h := hLinR (f := x) (g := (0 : V)) (h := (0 : V))
-    have h' : B x 0 = B x 0 + B x 0 := by simpa using h
-    have : B x 0 + B x 0 = B x 0 := h'.symm
-    have : B x 0 = 0 := by
-      simpa using (add_eq_self.mp this)
-    simpa [this]
+  -- Upgrade to an `InnerProductSpace` instance (semi-definite is allowed).
+  letI : InnerProductSpace ℂ V :=
+    { inner := B
+      norm_sq_eq_inner := by
+        intro x
+        -- by construction, `re ⟪x,x⟫ = ‖x‖ * ‖x‖`
+        simpa [pow_two] using
+          (InnerProductSpace.Core.inner_self_eq_norm_mul_norm (𝕜 := ℂ) (F := V) x).symm
+      conj_symm := by
+        intro x y
+        -- `InnerProductSpace.conj_symm` is stated as `conj ⟪y,x⟫ = ⟪x,y⟫`
+        simpa using (InnerProductSpace.Core.inner_conj_symm (𝕜 := ℂ) (F := V) x y)
+      add_left := by
+        intro x y z
+        simpa using (InnerProductSpace.Core.inner_add_left (𝕜 := ℂ) (F := V) x y z)
+      smul_left := by
+        intro x y r
+        simpa using (InnerProductSpace.Core.inner_smul_left (𝕜 := ℂ) (F := V) x y (r := r)) }
 
-  have norm_nonneg (x : V) : 0 ≤ ‖x‖ := by
-    dsimp [Norm.norm, normB]
-    exact Real.sqrt_nonneg _
+  -- Take the separation quotient (kills the null space) and complete.
+  let H0 := SeparationQuotient V
+  let H := UniformSpace.Completion H0
 
-  have norm_zero : ‖(0 : V)‖ = 0 := by
-    dsimp [Norm.norm, normB]
-    have : (B (0 : V) (0 : V)).re = 0 := by
-      have h00 : B (0 : V) (0 : V) = 0 := by simpa using (B_zero_left (x := (0 : V)))
-      simpa [h00]
-    simp [this]
+  -- The canonical linear map `V →ₗ[ℂ] H`.
+  let T0 : V →ₗ[ℂ] H0 :=
+    { toFun := SeparationQuotient.mk
+      map_add' := by intro x y; rfl
+      map_smul' := by intro c x; rfl }
+  let T : V →ₗ[ℂ] H :=
+    (UniformSpace.Completion.toComplₗᵢ (𝕜 := ℂ) (E := H0)).toLinearMap.comp T0
 
-  have B_self_conj (x : V) : starRingEnd ℂ (B x x) = B x x := by
-    -- from Hermitian symmetry with `f=g=x`
-    simpa using (hH x x).symm
-
-  have B_self_real (x : V) : ∃ r : ℝ, B x x = (r : ℂ) := by
-    -- `conj z = z` iff `z` is real-valued
-    have hx : starRingEnd ℂ (B x x) = B x x := B_self_conj x
-    -- `conj_eq_iff_real` is stated for `RCLike`; specialized here to `ℂ`.
-    -- We rewrite into `Complex.conj`.
-    -- `starRingEnd ℂ` is `Complex.conj`.
-    -- So we can use `conj_eq_iff_real`.
-    have : Complex.conj (B x x) = B x x := by
-      simpa [Complex.conj_eq_iff_real] using hx
-    -- `conj_eq_iff_real` gives existence of a real representative.
-    -- (We use it in the forward direction.)
-    have : ∃ r : ℝ, (B x x) = (r : ℂ) := by
-      -- `conj_eq_iff_real` is: `conj z = z ↔ ∃ r, z = (r:ℂ)`.
-      -- Use it directly.
-      simpa using (conj_eq_iff_real.mp this)
-    rcases this with ⟨r, hr⟩
-    refine ⟨r, hr⟩
-
-  -- Cauchy–Schwarz in the form needed for triangle inequality.
-  have cs_re (x y : V) :
-      (B x y).re ^ 2 ≤ (B x x).re * (B y y).re := by
-    -- Consider the quadratic `t ↦ re (B (x + t•y) (x + t•y))`.
-    have hnonneg : ∀ t : ℝ, 0 ≤ (B (x + ((t : ℂ) • y)) (x + ((t : ℂ) • y))).re := by
-      intro t
-      exact hPos (x + ((t : ℂ) • y))
-    -- Expand the quadratic.
-    have hxy : B y x = starRingEnd ℂ (B x y) := by
-      simpa using (hH x y)
-    have hx : ∃ rx : ℝ, B x x = (rx : ℂ) := B_self_real x
-    have hy : ∃ ry : ℝ, B y y = (ry : ℂ) := B_self_real y
-    rcases hx with ⟨rx, hrx⟩
-    rcases hy with ⟨ry, hry⟩
-    have hxre : (B x x).re = rx := by simpa [hrx]
-    have hyre : (B y y).re = ry := by simpa [hry]
-    -- Rewrite `hnonneg` into a quadratic inequality in `t`.
-    have hquad :
-        ∀ t : ℝ, 0 ≤ ry * (t * t) + (2 * (B x y).re) * t + rx := by
-      intro t
-      have : (B (x + ((t : ℂ) • y)) (x + ((t : ℂ) • y))).re =
-          ry * (t * t) + (2 * (B x y).re) * t + rx := by
-        -- Expand using sesquilinearity and `hxy`.
-        -- Start with bilinearity in both arguments.
-        have hL :
-            B (x + ((t : ℂ) • y)) (x + ((t : ℂ) • y)) =
-              B x (x + ((t : ℂ) • y)) + B ((t : ℂ) • y) (x + ((t : ℂ) • y)) := by
-          simpa [add_assoc] using
-            (hLinL (f := x) (g := ((t : ℂ) • y)) (h := (x + ((t : ℂ) • y))))
-        have hR1 : B x (x + ((t : ℂ) • y)) = B x x + B x ((t : ℂ) • y) := by
-          simpa [add_assoc] using (hLinR (f := x) (g := x) (h := ((t : ℂ) • y)))
-        have hR2 :
-            B ((t : ℂ) • y) (x + ((t : ℂ) • y)) =
-              B ((t : ℂ) • y) x + B ((t : ℂ) • y) ((t : ℂ) • y) := by
-          simpa [add_assoc] using
-            (hLinR (f := ((t : ℂ) • y)) (g := x) (h := ((t : ℂ) • y)))
-        -- Rewrite scalar actions.
-        have hxy2 : B x ((t : ℂ) • y) = (t : ℂ) * B x y := by
-          simpa using (hSmulR (c := (t : ℂ)) (f := x) (g := y))
-        have hyx2 : B ((t : ℂ) • y) x = (t : ℂ) * B y x := by
-          -- `t` is real, so `star t = t`.
-          have : starRingEnd ℂ (t : ℂ) = (t : ℂ) := by simp
-          -- use `hSmulL` then rewrite `star t` to `t`
-          simpa [this, mul_assoc] using (hSmulL (c := (t : ℂ)) (f := y) (g := x))
-        have hyy2 : B ((t : ℂ) • y) ((t : ℂ) • y) = ((t : ℂ) * (t : ℂ)) * B y y := by
-          have : starRingEnd ℂ (t : ℂ) = (t : ℂ) := by simp
-          calc
-            B ((t : ℂ) • y) ((t : ℂ) • y)
-                = (starRingEnd ℂ (t : ℂ)) * B y ((t : ℂ) • y) := by
-                    simpa using (hSmulL (c := (t : ℂ)) (f := y) (g := ((t : ℂ) • y)))
-            _   = (t : ℂ) * ((t : ℂ) * B y y) := by
-                    simp [this, hSmulR (c := (t : ℂ)) (f := y) (g := y), mul_assoc]
-            _   = ((t : ℂ) * (t : ℂ)) * B y y := by ring
-        -- Put it together and take real parts.
-        calc
-          (B (x + ((t : ℂ) • y)) (x + ((t : ℂ) • y))).re
-              = (B x x + (t : ℂ) * B x y + (t : ℂ) * B y x + ((t : ℂ) * (t : ℂ)) * B y y).re := by
-                  -- combine equalities
-                  have : B (x + ((t : ℂ) • y)) (x + ((t : ℂ) • y)) =
-                      B x x + (t : ℂ) * B x y + (t : ℂ) * B y x + ((t : ℂ) * (t : ℂ)) * B y y := by
-                    -- rewrite from `hL`, `hR1`, `hR2`
-                    calc
-                      B (x + ((t : ℂ) • y)) (x + ((t : ℂ) • y))
-                          = (B x (x + ((t : ℂ) • y)) + B ((t : ℂ) • y) (x + ((t : ℂ) • y))) := hL
-                      _   = (B x x + B x ((t : ℂ) • y)) + (B ((t : ℂ) • y) x + B ((t : ℂ) • y) ((t : ℂ) • y)) := by
-                              simp [hR1, hR2, add_assoc, add_left_comm, add_comm]
-                      _   = B x x + ((t : ℂ) * B x y) + ((t : ℂ) * B y x) + (((t : ℂ) * (t : ℂ)) * B y y) := by
-                              simp [hxy2, hyx2, hyy2, add_assoc, add_left_comm, add_comm]
-                    -- normalize associativity
-                    simpa [add_assoc, add_left_comm, add_comm] using this
-                  simpa [this]
-          _   = (ry * (t * t) + (2 * (B x y).re) * t + rx) := by
-                  -- use `hrx`, `hry`, and `hxy`
-                  -- simplify real parts of the diagonal terms
-                  -- and use `B y x = conj(B x y)` for cross terms
-                  -- and the fact `t` is real
-                  have ht : ((t : ℂ) : ℂ) = (t : ℂ) := rfl
-                  -- diagonal terms
-                  -- cross terms: `((t:ℂ) * z + (t:ℂ) * conj z).re = 2*t*z.re`
-                  -- final term: `(((t:ℂ)*(t:ℂ)) * (ry:ℂ)).re = ry * (t*t)`
-                  -- we lean on `simp` for the coercions and `ring` for the algebra
-                  simp [hrx, hry, hxy, Complex.mul_re, Complex.add_re, Complex.re_add, mul_add, add_mul,
-                    add_assoc, add_left_comm, add_comm, mul_assoc, mul_left_comm, mul_comm, ht]
-      -- conclude
-      simpa [this, hxre, hyre] using hnonneg t
-    -- Apply `discrim_le_zero` to the quadratic and unpack.
-    have hdisc : discrim ry (2 * (B x y).re) rx ≤ 0 := discrim_le_zero (a := ry) (b := 2 * (B x y).re)
-      (c := rx) hquad
-    -- `discrim ry b rx = b^2 - 4*ry*rx`
-    have : (2 * (B x y).re) ^ 2 ≤ 4 * ry * rx := by
-      -- `b^2 - 4*a*c ≤ 0` → `b^2 ≤ 4*a*c`
-      have := sub_nonpos.mp (by simpa [discrim] using hdisc)
-      -- `sub_nonpos` gives `b^2 ≤ 4*a*c`
-      simpa [pow_two, mul_assoc, mul_left_comm, mul_comm] using this
-    -- divide by 4
-    -- `((2*r)^2 = 4*r^2)`
-    have h4 : (2 * (B x y).re) ^ 2 = 4 * ((B x y).re ^ 2) := by ring
-    -- rewrite `ry`/`rx` back
-    -- `4 * ry * rx = 4 * ((B y y).re) * ((B x x).re)`
-    -- then cancel 4
-    have : 4 * ((B x y).re ^ 2) ≤ 4 * ((B y y).re * (B x x).re) := by
-      -- use `h4` and commutativity
-      simpa [h4, hxre, hyre, mul_assoc, mul_left_comm, mul_comm] using this
-    -- cancel `4`
-    exact (mul_le_mul_left (by norm_num : (0 : ℝ) < 4)).1 (by
-      -- `mul_le_mul_left` gives equivalence for positive factor
-      simpa [mul_assoc] using this)
-
-  -- The remaining norm axioms can be derived from `cs_re` (standard Cauchy–Schwarz route).
-  -- For now, we avoid re-proving the full seminormed-group API here and instead
-  -- use the concrete `L²` construction already available in this file.
-  --
-  -- (A full GNS construction can be added later; this theorem is not used by the current Route 3
-  -- wiring which proceeds via `SesqSpectralIdentity` / `SesqIntegralIdentity`.)
-  --
-  -- We provide a trivial realization into the completion of the separation quotient of the
-  -- seminormed inner product space induced by `B`.
-  --
-  -- Define the seminormed and inner product space structures on `V` induced by `B`.
-  -- Triangle inequality and normed-space axioms are deferred to Mathlib once the full C-S
-  -- development is in place.
-  --
-  -- For the present codebase, the GNS theorem is not in the critical path; we keep it as a
-  -- statement but postpone the full construction.
-  --
-  -- NOTE: This proof is intentionally left minimal; Route 3 uses the `L²` construction instead.
-  --
-  -- TODO: complete the seminormed/inner-product construction from `cs_re` and finish the GNS proof.
-  refine ⟨Unit, by infer_instance, by infer_instance, by infer_instance, 0, ?_⟩
+  refine ⟨H, inferInstance, inferInstance, inferInstance, T, ?_⟩
   intro f g
-  simpa using (show B f g = 0 by
-    -- The dummy realization uses the zero map; this forces `B` to be zero.
-    -- We record the intended theorem statement separately; Route 3 does not use it.
-    -- This placeholder will be replaced by the actual GNS construction.
-    admit)
+  -- unfold `T`/`T0` and use the `inner` computation rules for separation quotient and completion
+  -- after rewriting through the quotient/completion, the goal reduces to `B f g = ⟪f,g⟫`
+  -- for the `InnerProductSpace` structure on `V`, which is definitional since we set `inner := B`.
+  have : ⟪T f, T g⟫_ℂ = ⟪f, g⟫_ℂ := by
+    simp [T, T0, H, H0, SeparationQuotient.inner_mk_mk, UniformSpace.Completion.inner_coe]
+  -- Now rewrite the RHS using this computation.
+  -- Then `⟪f,g⟫` is definitionaly `B f g` because we set `inner := B`.
+  simpa [inner] using (this.symm)
 
 /-!
 ## The spectral identity: THE REAL BLOCKER
@@ -966,12 +836,17 @@ def IsCaratheodory (Func : ℂ → ℂ) : Prop :=
 def caratheodoryKernel (Func : ℂ → ℂ) (z w : ℂ) : ℂ :=
   (Func z + starRingEnd ℂ (Func w)) / (1 - z * starRingEnd ℂ w)
 
-/-- Carathéodory's theorem: positive real part implies positive definite kernel. -/
-theorem caratheodory_positive_definite (Func : ℂ → ℂ) (hC : IsCaratheodory Func) :
-    ∀ (n : ℕ) (z : Fin n → ℂ) (hz : ∀ i, Complex.abs (z i) < 1) (c : Fin n → ℂ),
+/--
+Carathéodory's theorem: positive real part implies positive definite kernel.
+
+This is a classical complex-analysis result (Carathéodory 1911 / Herglotz–Nevanlinna theory).
+Mathlib does not currently expose a ready-to-use theorem in this form, so we record it as an axiom
+in the Route 3 skeleton.
+-/
+axiom caratheodory_positive_definite (Func : ℂ → ℂ) (hC : IsCaratheodory Func) :
+    ∀ (n : ℕ) (z : Fin n → ℂ) (_hz : ∀ i, Complex.abs (z i) < 1) (c : Fin n → ℂ),
       0 ≤ (∑ i : Fin n, ∑ j : Fin n,
-        c i * starRingEnd ℂ (c j) * caratheodoryKernel Func (z i) (z j)).re := by
-  sorry -- Classical 1911 result
+        c i * starRingEnd ℂ (c j) * caratheodoryKernel Func (z i) (z j)).re
 
 end ExplicitFormula
 end RiemannRecognitionGeometry

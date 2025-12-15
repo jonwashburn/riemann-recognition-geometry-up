@@ -1,0 +1,101 @@
+/-
+# Route 3: sesquilinear integral-identity hypothesis bundle (concrete target)
+
+This file instantiates `Route3SesqIntegralHypBundle` for the concrete target
+
+- `Route3.F := ℝ → ℂ`
+- `Route3.L : LagariasFramework Route3.F` (still abstract)
+
+All genuinely analytic content (Plancherel/spectral identity, boundary limits, and Fubini/Tonelli
+interchanges) remains *axiomatized* here, in one place.
+-/
+
+import RiemannRecognitionGeometry.ExplicitFormula.HilbertRealization
+import RiemannRecognitionGeometry.ExplicitFormula.ArithmeticJ
+import RiemannRecognitionGeometry.ExplicitFormula.Route3Targets
+
+noncomputable section
+
+namespace RiemannRecognitionGeometry
+namespace ExplicitFormula
+
+open MeasureTheory
+open scoped BigOperators
+
+namespace Route3
+
+/-- Route 3 arithmetic field producing the weight `weightOfJ J`. -/
+def J : ℂ → ℂ := ArithmeticJ.J
+
+/-- We take the abstract weight `w` to be the canonical one, so `boundary_limits` is definitional. -/
+abbrev w : ℝ → ℝ := weightOfJ J
+
+/--
+All Route 3 analytic content needed to build the sesquilinear integral identity.
+
+This is the “hard blocker” packaged as a single structure, so downstream theorems can be stated as
+`Assumptions → ...` rather than introducing global axioms.
+-/
+structure Assumptions where
+  /-- The Lagarias explicit-formula framework (`W¹`, etc.). -/
+  L : LagariasFramework F
+  /-- Route 3 boundary transform (assumed ℂ-linear). -/
+  transform : F →ₗ[ℂ] (ℝ → ℂ)
+  /-- (Normalization) `transform` agrees with the critical-line Mellin transform. -/
+  transform_eq_mellinOnCriticalLine :
+    ∀ f : F, transform f = fun t : ℝ => mellinOnCriticalLine (F := F) f t
+  /-- Pointwise nonnegativity of the canonical weight. -/
+  weight_nonneg : ∀ t : ℝ, 0 ≤ weightOfJ J t
+  /-- L² admissibility for the concrete weighted transform. -/
+  memL2 :
+    ∀ f : F,
+      MeasureTheory.Memℒp
+        (fun t : ℝ => ((Real.sqrt (weightOfJ J t) : ℝ) : ℂ) * transform f t) 2 volume
+  /-- (Step 1) The sesquilinear spectral identity with weight `w`. -/
+  normalization_match :
+    ∀ f g : F,
+      L.W1 (pair (F := F) f g) =
+        ∫ t : ℝ,
+          ((w t : ℝ) : ℂ) * ((starRingEnd ℂ (transform f t)) * (transform g t)) ∂ volume
+  /-- (Step 2) Explicit Fubini/Tonelli / dominated convergence obligations used in the derivation. -/
+  fubini_tonelli :
+    Route3FubiniTonelliObligations (F := F) (μ := volume) (w := w) (transform := transform)
+
+/-- Concrete Route 3 hypothesis bundle value, built from `Assumptions`. -/
+def H (A : Assumptions) : Route3SesqIntegralHypBundle (F := F) A.L where
+  μ := volume
+  J := J
+  transform := A.transform
+  transform_eq_mellinOnCriticalLine := A.transform_eq_mellinOnCriticalLine
+  weight_nonneg := A.weight_nonneg
+  memL2 := A.memL2
+  w := w
+  normalization_match := A.normalization_match
+  fubini_tonelli := A.fubini_tonelli
+  boundary_limits := by
+    intro t
+    rfl
+
+/-- Package the Route 3 hypotheses as a `SesqIntegralIdentity`. -/
+def S (A : Assumptions) : SesqIntegralIdentity (F := F) (L := A.L) :=
+  Route3SesqIntegralHypBundle.toSesqIntegralIdentity (F := F) (L := A.L) (H A)
+
+/-- Route 3: the sesquilinear spectral identity yields a reflection-positivity realization. -/
+theorem reflectionPositivityRealization (A : Assumptions) :
+    OptionalTargets.ReflectionPositivityRealization (F := F) (L := A.L) := by
+  classical
+  exact SesqIntegralIdentity.reflectionPositivityRealization (F := F) (L := A.L) (S A)
+
+/-- Route 3: reflection-positivity realization implies the Weil gate `WeilGate`. -/
+theorem WeilGate (A : Assumptions) : A.L.WeilGate :=
+  OptionalTargets.WeilGate_of_reflectionPositivityRealization (F := F) (L := A.L)
+    (reflectionPositivityRealization A)
+
+/-- Route 3: the Weil gate implies `RiemannHypothesis` (Lagarias Thm 3.2, packaged). -/
+theorem RH (A : Assumptions) : RiemannHypothesis :=
+  LagariasFramework.WeilGate_implies_RH (L := A.L) (WeilGate A)
+
+end Route3
+
+end ExplicitFormula
+end RiemannRecognitionGeometry
