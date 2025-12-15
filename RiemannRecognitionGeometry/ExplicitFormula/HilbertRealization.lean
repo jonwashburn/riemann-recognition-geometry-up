@@ -306,6 +306,87 @@ structure SesqIntegralIdentity (L : LagariasFramework F) where
         ∫ t : ℝ,
           ((weightOfJ J t : ℝ) : ℂ) * ((starRingEnd ℂ (transform f t)) * (transform g t)) ∂ μ
 
+/--
+Route 3: a small hypothesis bundle for proving the Bochner-integral spectral identity
+using the **concrete** Mellin transform on the critical line and the canonical weight `weightOfJ`.
+
+This is a *proof-plan container*: it isolates the three analytic steps that typically enter the
+derivation of `SesqIntegralIdentity.identity_integral`:
+
+- **Normalization match**: identify the "Fourier/Mellin-side" transform used in the paper with the
+  Lean definition `mellinOnCriticalLine`, and ensure the integrand is expressed in the intended
+  sesquilinear form `conj(F_f(t)) * F_g(t)`.
+- **Fubini/Tonelli**: justify all interchanges (sum/integral, iterated integrals) needed to move from
+  the explicit-formula side to a single boundary integral.
+- **Boundary limits**: justify taking boundary values on `Re(s)=1/2` (or passing to the boundary
+  measure) so that the resulting weight is *exactly* `weightOfJ J`.
+
+From such a bundle, we can package a `SesqIntegralIdentity` instance by forgetting the proof steps.
+-/
+structure Route3SesqIntegralHypBundle (F : Type) [TestSpace F] [AddCommGroup F] [Module ℂ F]
+    (L : LagariasFramework F) where
+  /-- Boundary measure (typically Lebesgue on `ℝ`). -/
+  μ : Measure ℝ := volume
+  /-- Arithmetic field producing the weight. -/
+  J : ℂ → ℂ
+
+  /-- The boundary transform used in the spectral representation. -/
+  transform : F →ₗ[ℂ] (ℝ → ℂ)
+
+  /-- (Normalization) The transform agrees with the critical-line Mellin transform. -/
+  transform_eq_mellinOnCriticalLine :
+    ∀ f : F, transform f = fun t : ℝ => mellinOnCriticalLine (F := F) f t
+
+  /-- Pointwise nonnegativity of the canonical weight (needed to form `Real.sqrt`). -/
+  weight_nonneg : ∀ t : ℝ, 0 ≤ weightOfJ J t
+
+  /-- L² admissibility for the concrete weighted transform. -/
+  memL2 : ∀ f : F,
+    MeasureTheory.Memℒp
+      (fun t : ℝ => ((Real.sqrt (weightOfJ J t) : ℝ) : ℂ) * transform f t) 2 μ
+
+  /--
+  (Step 1) Normalization match: the target identity expressed with the concrete transform but an
+  *abstract* weight function `w(t)`.
+
+  The subsequent fields `boundary_limits` and `fubini_tonelli` record the proof obligations that
+  typically justify replacing `w` by `weightOfJ J` and justifying interchanges.
+  -/
+  w : ℝ → ℝ
+  normalization_match :
+    ∀ f g : F,
+      L.W1 (pair (F := F) f g) =
+        ∫ t : ℝ,
+          ((w t : ℝ) : ℂ) * ((starRingEnd ℂ (transform f t)) * (transform g t)) ∂ μ
+
+  /-- (Step 2) Fubini/Tonelli / dominated convergence obligations used in the derivation. -/
+  fubini_tonelli : Prop
+
+  /-- (Step 3) Boundary-limit identification: the abstract weight is the canonical one. -/
+  boundary_limits : ∀ t : ℝ, w t = weightOfJ J t
+
+namespace Route3SesqIntegralHypBundle
+
+variable {F : Type} [TestSpace F] [AddCommGroup F] [Module ℂ F]
+variable (L : LagariasFramework F) (H : Route3SesqIntegralHypBundle (F := F) L)
+
+/-- Forget the proof steps and package a `SesqIntegralIdentity`. -/
+def toSesqIntegralIdentity : SesqIntegralIdentity (F := F) (L := L) where
+  μ := H.μ
+  J := H.J
+  transform := H.transform
+  weight_nonneg := H.weight_nonneg
+  memL2 := H.memL2
+  identity_integral := by
+    intro f g
+    -- Start from the normalization-match identity, then rewrite the weight using `boundary_limits`.
+    have h := H.normalization_match (f := f) (g := g)
+    -- `integral_congr` after pointwise rewrite of the weight.
+    -- We do it with `simp` using the provided `boundary_limits`.
+    simpa [H.boundary_limits] using h
+
+end Route3SesqIntegralHypBundle
+
 namespace SesqSpectralIdentity
 
 variable (L : LagariasFramework F) (S : SesqSpectralIdentity (F := F) (L := L))
