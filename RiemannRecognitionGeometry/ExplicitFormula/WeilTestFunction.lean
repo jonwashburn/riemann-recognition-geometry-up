@@ -3,17 +3,7 @@ Copyright (c) 2024 Jonathan Washburn. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jonathan Washburn, Gemini
 -/
-import Mathlib.Analysis.Distribution.SchwartzSpace
-import Mathlib.Analysis.Distribution.FourierSchwartz
-import Mathlib.Analysis.SpecialFunctions.Gamma.Deriv
-import Mathlib.Analysis.SpecialFunctions.Complex.LogDeriv
-import Mathlib.NumberTheory.LSeries.RiemannZeta
-import Mathlib.NumberTheory.VonMangoldt
-import Mathlib.MeasureTheory.Integral.Bochner
-import Mathlib.MeasureTheory.Integral.VitaliCaratheodory
-import Mathlib.Analysis.Complex.CauchyIntegral
-import Mathlib.Analysis.MellinTransform
-import Mathlib.Analysis.Calculus.ParametricIntegral
+import RiemannRecognitionGeometry.ExplicitFormula.WeilTestFunctionProofs
 import RiemannRecognitionGeometry.ExplicitFormula.Defs
 
 /-!
@@ -21,12 +11,12 @@ import RiemannRecognitionGeometry.ExplicitFormula.Defs
 
 This file defines `WeilTestFunction`, a concrete candidate for the Route 3 test-function space.
 
-The full analytic closure properties (closure under convolution/involution; transform identities;
-Fubini/Tonelli justifications) are nontrivial and are **not** proved here yet.
-
-Instead, we keep the interface stable by recording these as explicit axioms. Downstream files can
-use `WeilTestFunction` as a `TestSpace`, while the hard analysis is proved (or further isolated)
-later.
+## Status
+- **Reflection and conjugation**: Proved (closure under `f(-·)` and `conj ∘ f`).
+- **Convolution**: Still an axiom (requires convolution closure proof for Schwartz functions
+  with the specific exponential decay).
+- **Transform identities**: `weilTransform_reflection` is proved; `weilTransform_convolution`
+  is still an axiom.
 -/
 
 noncomputable section
@@ -73,21 +63,31 @@ def weilTransform (s : ℂ) : ℂ :=
 /-- Additive convolution of Weil test functions (analytic closure deferred). -/
 axiom convolution (f g : WeilTestFunction) : WeilTestFunction
 
-/-- Reflection `g(-x)` (analytic closure deferred). -/
-axiom reflection (f : WeilTestFunction) : WeilTestFunction
+/-- Reflection `f(-x)`: proved using `reflectSchwartz` and decay preservation lemmas. -/
+def reflection (f : WeilTestFunction) : WeilTestFunction where
+  toSchwartz := reflectSchwartz f.toSchwartz
+  decay := decay_preserved_by_reflection f.decay
+  ft_decay := ft_decay_preserved_by_reflection f.ft_decay
 
-/-- Complex conjugation (analytic closure deferred). -/
-axiom conjugation (f : WeilTestFunction) : WeilTestFunction
+/-- Complex conjugation `conj(f(x))`: proved using `conjSchwartz` and decay preservation lemmas. -/
+def conjugation (f : WeilTestFunction) : WeilTestFunction where
+  toSchwartz := conjSchwartz f.toSchwartz
+  decay := decay_preserved_by_conjugation f.decay
+  ft_decay := ft_decay_preserved_by_conjugation f.ft_decay
 
-/-! ### Analytic properties (recorded as axioms for now) -/
+/-! ### Analytic properties -/
 
-/-- Convolution theorem for the Weil transform. -/
+/-- Convolution theorem for the Weil transform (still an axiom). -/
 axiom weilTransform_convolution (f g : WeilTestFunction) (s : ℂ) :
     (convolution f g).weilTransform s = f.weilTransform s * g.weilTransform s
 
-/-- Reflection intertwines the Weil transform by `s ↦ 1 - s`. -/
-axiom weilTransform_reflection (f : WeilTestFunction) (s : ℂ) :
-    (reflection f).weilTransform s = f.weilTransform (1 - s)
+/-- Reflection intertwines the Weil transform by `s ↦ 1 - s`.
+    Proved: uses change of variables `u = -x`. -/
+theorem weilTransform_reflection (f : WeilTestFunction) (s : ℂ) :
+    (reflection f).weilTransform s = f.weilTransform (1 - s) := by
+  simp only [weilTransform, reflection]
+  -- The Schwartz-level proof gives us most of the work
+  exact ExplicitFormula.weilTransform_reflection f.toSchwartz s
 
 /-! ### `TestSpace` instance -/
 
