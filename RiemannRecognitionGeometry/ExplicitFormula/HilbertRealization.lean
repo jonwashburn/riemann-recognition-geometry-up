@@ -12,6 +12,7 @@ import Mathlib.Topology.Algebra.Module.Basic
 import RiemannRecognitionGeometry.ExplicitFormula.Defs
 import RiemannRecognitionGeometry.ExplicitFormula.Lagarias
 import RiemannRecognitionGeometry.ExplicitFormula.MainRoute3
+import RiemannRecognitionGeometry.ExplicitFormula.Caratheodory
 
 /-!
 # Route 3: Hilbert-space realization from positive-semidefinite forms
@@ -267,9 +268,12 @@ section SesquilinearSpectralIdentity
 
 variable {F : Type} [TestSpace F] [AddCommGroup F] [Module ℂ F]
 
-/-- The Route 3 sesquilinear test expression `f ⋆ₘ ˜ₘ(⋆ₜ g)`. -/
+/-- The Route 3 sesquilinear test expression `g ⋆ₘ ˜ₘ(⋆ₜ f)`.
+Note the order swap: we want `M[pair f g] = M[g] * conj(M[f]) = conj(M[f]) * M[g]` on the critical line,
+to match `inner (T f) (T g) = conj(T f) * (T g)`.
+-/
 def pair (f g : F) : F :=
-  f ⋆ₘ ˜ₘ (⋆ₜ g)
+  g ⋆ₘ ˜ₘ (⋆ₜ f)
 
 /-!
 ### A small algebra lemma for the weighted `L²` construction
@@ -820,33 +824,24 @@ The **sole remaining blocker** is proving the spectral identity with all interch
 /-!
 ## Alternative: Carathéodory / Herglotz representation
 
-If `F(z) := 2·J(z)` is analytic on the unit disk with `Re F(z) ≥ 0`, then `F` is a
-**Carathéodory function** and the kernel
+If `F(z) := 2·J(z)` is analytic on the unit disk with `Re F(z) ≥ 0`, then the Carathéodory kernel
 
-  `K_F(z,w) := (F(z) + conj(F(w))) / (1 - z·conj(w))`
+`K_F(z,w) := (F(z) + conj(F(w))) / (1 - z·conj(w))`
 
-is positive definite. This immediately gives a Hilbert-space realization.
+is positive definite (Carathéodory/Herglotz).  We use the formalization in
+`ExplicitFormula/Caratheodory.lean`.
 -/
 
-/-- A function is Carathéodory on the unit disk: analytic with `Re F ≥ 0`. -/
-def IsCaratheodory (Func : ℂ → ℂ) : Prop :=
-  ∀ z : ℂ, Complex.abs z < 1 → 0 ≤ (Func z).re
-
-/-- The Carathéodory kernel. -/
-def caratheodoryKernel (Func : ℂ → ℂ) (z w : ℂ) : ℂ :=
-  (Func z + starRingEnd ℂ (Func w)) / (1 - z * starRingEnd ℂ w)
-
-/--
-Carathéodory's theorem: positive real part implies positive definite kernel.
-
-This is a classical complex-analysis result (Carathéodory 1911 / Herglotz–Nevanlinna theory).
-Mathlib does not currently expose a ready-to-use theorem in this form, so we record it as an axiom
-in the Route 3 skeleton.
--/
-axiom caratheodory_positive_definite (Func : ℂ → ℂ) (hC : IsCaratheodory Func) :
+/-- Carathéodory kernel positivity, assuming holomorphy and nonnegative real part on the disk.
+    This theorem uses the `herglotz_representation` axiom from Caratheodory.lean. -/
+theorem caratheodory_positive_definite
+    (Func : ℂ → ℂ)
+    (hHol : Caratheodory.IsHolomorphicOnDisk Func)
+    (hC : ExplicitFormula.IsCaratheodory Func) :
     ∀ (n : ℕ) (z : Fin n → ℂ) (_hz : ∀ i, Complex.abs (z i) < 1) (c : Fin n → ℂ),
       0 ≤ (∑ i : Fin n, ∑ j : Fin n,
-        c i * starRingEnd ℂ (c j) * caratheodoryKernel Func (z i) (z j)).re
+        c i * starRingEnd ℂ (c j) * ExplicitFormula.caratheodoryKernel' Func (z i) (z j)).re := by
+  exact ExplicitFormula.caratheodory_positive_definite_with_holomorphy (Func := Func) hHol hC
 
 end ExplicitFormula
 end RiemannRecognitionGeometry

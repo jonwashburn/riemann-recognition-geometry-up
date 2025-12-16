@@ -34,23 +34,26 @@ open ComplexConjugate
 /-- Involution on the Mellin side: `f(s) ↦ f(1 - s)`. -/
 def tilde (F : MellinSide) : MellinSide := fun s => F (1 - s)
 
-/-- Conjugation on the Mellin side (pointwise). -/
-def star (F : MellinSide) : MellinSide := fun s => conj (F s)
+  /-- Conjugation on the Mellin side: `F*(s) = conj(F(conj s))`. -/
+  def star (F : MellinSide) : MellinSide := fun s => conj (F (conj s))
 
-/-- Convolution on the Mellin side is pointwise multiplication (so Mellin is identity). -/
-def conv (F G : MellinSide) : MellinSide := fun s => F s * G s
+  /-- Convolution on the Mellin side is pointwise multiplication (so Mellin is identity). -/
+  def conv (F G : MellinSide) : MellinSide := fun s => F s * G s
 
-instance : TestSpace MellinSide where
-  Mellin := fun F s => F s
-  conv := conv
-  tilde := tilde
-  star := star
-  mellin_conv := by
-    intro f g s
-    rfl
-  mellin_tilde := by
-    intro f s
-    rfl
+  instance : TestSpace MellinSide where
+    Mellin := fun F s => F s
+    conv := conv
+    tilde := tilde
+    star := star
+    mellin_conv := by
+      intro f g s
+      rfl
+    mellin_tilde := by
+      intro f s
+      rfl
+    mellin_star := by
+      intro f s
+      rfl
 
 end MellinSide
 

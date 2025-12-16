@@ -21,6 +21,9 @@ open scoped BigOperators
 
 namespace Route3
 
+-- `Assumptions` depends on an explicit `TestSpace F` instance.
+variable [TestSpace F]
+
 /- Fix a Route 3 assumption package. -/
 variable (A : Assumptions)
 

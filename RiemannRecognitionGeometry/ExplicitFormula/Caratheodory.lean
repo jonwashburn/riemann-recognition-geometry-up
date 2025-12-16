@@ -98,18 +98,18 @@ lemma mul_conj_eq_normSq (z : ℂ) : z * starRingEnd ℂ z = (Complex.normSq z :
 lemma power_kernel_positive_definite (n : ℕ) :
     IsPositiveDefiniteKernelOn (fun z w => (z * starRingEnd ℂ w) ^ n) unitDisk := by
   intro m x _hx c
+  let s := ∑ i : Fin m, c i * (x i) ^ n
   have h : ∑ i : Fin m, ∑ j : Fin m, c i * starRingEnd ℂ (c j) * (x i * starRingEnd ℂ (x j)) ^ n =
-      (∑ i : Fin m, c i * (x i) ^ n) * starRingEnd ℂ (∑ j : Fin m, c j * (x j) ^ n) := by
+      s * starRingEnd ℂ s := by
     simp only [mul_pow, map_pow]
     conv_lhs =>
       arg 2; ext i; arg 2; ext j
       rw [show c i * starRingEnd ℂ (c j) * ((x i) ^ n * (starRingEnd ℂ (x j)) ^ n) =
           (c i * (x i) ^ n) * starRingEnd ℂ (c j * (x j) ^ n) by
         simp only [map_mul, map_pow]; ring]
-    rw [Finset.sum_comm]
-    simp_rw [← Finset.sum_mul, ← Finset.mul_sum, map_sum]
+    simp only [← Finset.sum_mul, ← Finset.mul_sum]
+    simp only [s, map_sum]
   rw [h]
-  let s := ∑ i : Fin m, c i * (x i) ^ n
   have hsq : s * starRingEnd ℂ s = (Complex.normSq s : ℂ) := mul_conj_eq_normSq s
   rw [hsq]
   simp only [Complex.ofReal_re, Complex.normSq_nonneg]
@@ -225,7 +225,7 @@ def caratheodoryKernel (F : ℂ → ℂ) (z w : ℂ) : ℂ :=
 ## Herglotz Representation
 -/
 
-/-- The Herglotz kernel. -/
+/-- The Herglotz kernel: H_ζ(z) = (ζ+z)/(ζ-z) for |ζ| = 1, |z| < 1. -/
 def herglotzKernel (ζ z : ℂ) : ℂ := (ζ + z) / (ζ - z)
 
 /-- A Herglotz representation. -/
@@ -309,19 +309,18 @@ lemma eval_kernel_positive (ζ : ℂ) (_hζ : Complex.abs ζ = 1) :
           exact hinj (hstar.trans (map_zero (starRingEnd ℂ)).symm)
         field_simp [hne, hconj_ne]
   simp_rw [hfactor]
+  let s := ∑ i : Fin n, c i * (1 / (ζ - x i))
   have h : ∑ i : Fin n, ∑ j : Fin n,
       c i * starRingEnd ℂ (c j) * ((1 / (ζ - x i)) * starRingEnd ℂ (1 / (ζ - x j))) =
-      (∑ i : Fin n, c i * (1 / (ζ - x i))) *
-        starRingEnd ℂ (∑ j : Fin n, c j * (1 / (ζ - x j))) := by
+      s * starRingEnd ℂ s := by
     conv_lhs =>
       arg 2; ext i; arg 2; ext j
       rw [show c i * starRingEnd ℂ (c j) * ((1 / (ζ - x i)) * starRingEnd ℂ (1 / (ζ - x j))) =
           (c i * (1 / (ζ - x i))) * starRingEnd ℂ (c j * (1 / (ζ - x j))) by
         simp only [map_mul]; ring]
-    rw [Finset.sum_comm]
-    simp_rw [← Finset.sum_mul, ← Finset.mul_sum, map_sum]
+    simp only [← Finset.sum_mul, ← Finset.mul_sum]
+    simp only [s, map_sum]
   rw [h]
-  let s := ∑ i : Fin n, c i * (1 / (ζ - x i))
   have hsq : s * starRingEnd ℂ s = (Complex.normSq s : ℂ) := mul_conj_eq_normSq s
   rw [hsq]
   simp only [Complex.ofReal_re, Complex.normSq_nonneg]
@@ -550,15 +549,57 @@ Given the Herglotz representation, the main theorem follows by linearity:
 the Carathéodory kernel factors as an integral of positive point kernels.
 -/
 
-/-- Herglotz representation theorem.
+/-!
+## Herglotz Representation Theorem
 
 This is a fundamental result from classical complex analysis (Herglotz 1911):
 Every holomorphic function F on the unit disk with Re(F) ≥ 0 admits a representation
   F(z) = ∫_{|ζ|=1} (ζ+z)/(ζ-z) dμ(ζ) + i·Im(F(0))
 for a unique positive finite measure μ on the unit circle.
 
-The formalization would require Poisson integral representation, Riesz representation
-theorem for positive linear functionals on C(circle), and Fatou's theorem.
+### Key identity connecting Cauchy and Herglotz kernels:
+For |ζ| = 1 and |z| < 1, the Cauchy kernel relates to the Herglotz kernel by:
+  ζ/(ζ-z) = (H_ζ(z) + 1)/2  where H_ζ(z) = (ζ+z)/(ζ-z)
+
+This identity is the bridge from Cauchy integral formula to Herglotz/Poisson representation.
+-/
+
+/-- The Cauchy-Herglotz identity: ζ/(ζ-z) = (1 + H_ζ(z))/2 for ζ ≠ z. -/
+lemma cauchy_herglotz_identity {ζ z : ℂ} (hne : ζ - z ≠ 0) :
+    ζ / (ζ - z) = (1 + herglotzKernel ζ z) / 2 := by
+  simp only [herglotzKernel]
+  field_simp
+  ring
+
+/-- The Herglotz kernel at z = 0 equals 1 (for any ζ ≠ 0). -/
+lemma herglotzKernel_zero {ζ : ℂ} (hζ : ζ ≠ 0) : herglotzKernel ζ 0 = 1 := by
+  simp only [herglotzKernel, add_zero, sub_zero]
+  exact div_self hζ
+
+/-- The Poisson kernel (real part of Herglotz) at z = 0 equals 1. -/
+lemma poissonKernel_zero {ζ : ℂ} (hζ : Complex.abs ζ = 1) :
+    (herglotzKernel ζ 0).re = 1 := by
+  have hne : ζ ≠ 0 := by
+    intro h
+    rw [h] at hζ
+    simp at hζ
+  rw [herglotzKernel_zero hne]
+  simp
+
+/-!
+### Proof outline (not yet formalized in Mathlib):
+1. For 0 < r < 1, define measures μ_r := (1/2π) · Re F(r·e^{iθ}) dθ on the circle
+2. These are positive measures with total mass Re F(0) (mean value property)
+3. By Banach-Alaoglu (weak-* compactness), extract a subnet converging to measure μ
+4. The Cauchy integral formula transforms to the Herglotz representation in the limit
+
+The formalization would require foundational harmonic analysis not in Mathlib:
+- Poisson integral representation for positive harmonic functions
+- Riesz representation theorem for positive functionals on C(circle)
+- Fatou's theorem for boundary values (or weak-* compactness arguments)
+
+We state this as an axiom representing established mathematical truth (Herglotz 1911).
+The theorem is proven in every complex analysis textbook (Rudin, Ahlfors, etc.).
 -/
 axiom herglotz_representation (F : ℂ → ℂ) (hF : IsCaratheodoryClass F) :
     HerglotzRepresentation F
@@ -601,7 +642,251 @@ theorem caratheodory_positive_definite (F : ℂ → ℂ) (hF : IsCaratheodoryCla
   -- - Fubini for finite sums and integrals
   -- - Positivity of integral of nonnegative function
   -- - Handling the support condition (μ is on the unit circle)
-  sorry
+  --
+  -- We complete the proof using the established algebraic facts.
+  classical
+  letI : MeasureTheory.IsFiniteMeasure μ := _hfinite
+
+  -- From support condition: μ-a.e. |ζ| = 1
+  have hμcircle : ∀ᵐ ζ ∂μ, Complex.abs ζ = 1 := by
+    have h0 : μ ({z : ℂ | Complex.abs z = 1}ᶜ) = 0 := by
+      have := congrArg (fun ν : MeasureTheory.Measure ℂ => ν Set.univ) _hsupport
+      simpa using this
+    exact Filter.eventually_of_mem (MeasureTheory.mem_ae_iff.mpr h0) (fun _ h => h)
+
+  -- The quadratic form for K_{H_ζ} is nonnegative on the unit circle
+  let qH : ℂ → ℂ := fun ζ =>
+    ∑ i : Fin n, ∑ j : Fin n,
+      c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j)
+
+  have hqH_nonneg : 0 ≤ᵐ[μ] fun ζ => (qH ζ).re := by
+    filter_upwards [hμcircle] with ζ hζ
+    exact caratheodoryKernel_herglotz_positive ζ hζ n x hx c
+
+  -- The key step: K_F quadratic form equals ∫ qH dμ
+  -- This follows from the Herglotz representation:
+  -- F(z) = ∫ H_ζ(z) dμ + I·β, so K_F = ∫ K_{H_ζ} dμ (I·β terms cancel)
+  -- Then Fubini swaps finite sums with integral.
+  --
+  -- Rather than prove this in full detail (which requires careful measure theory),
+  -- we observe that the result is a direct consequence of:
+  -- 1. The kernel decomposition K_F = ∫ K_{H_ζ} dμ
+  -- 2. Fubini for finite sums
+  -- 3. ∫ (nonneg) dμ ≥ 0
+  --
+  -- The algebraic work (steps 1-2) is routine given the Herglotz representation axiom.
+  -- We complete the proof by showing the goal equals ∫ (qH ζ).re dμ ≥ 0.
+  -- Integrability: on the unit circle (|ζ| = 1), for |x| < 1, the functions are bounded
+  -- since |ζ - x| ≥ 1 - |x| > 0 keeps the denominator away from zero.
+
+  -- Helper: AEStronglyMeasurable for herglotzKernel
+  have hMeasH : ∀ i : Fin n,
+      MeasureTheory.AEStronglyMeasurable (fun ζ => herglotzKernel ζ (x i)) μ := by
+    intro i
+    -- The function ζ ↦ (ζ + x_i)/(ζ - x_i) is measurable (rational function)
+    simp only [herglotzKernel]
+    apply Measurable.aestronglyMeasurable
+    exact (measurable_id.add_const _).div (measurable_id.sub_const _)
+
+  -- Step 1: H_ζ(x_i) = (ζ + x_i)/(ζ - x_i) is bounded on support
+  have hIntH : ∀ i : Fin n, MeasureTheory.Integrable (fun ζ => herglotzKernel ζ (x i)) μ := by
+    intro i
+    -- On the unit circle: |H_ζ(x_i)| ≤ (1 + |x_i|)/(1 - |x_i|) which is finite
+    have hxi_lt : Complex.abs (x i) < 1 := hx i
+    have hdenom_pos : 0 < 1 - Complex.abs (x i) := by linarith
+    let M := (1 + Complex.abs (x i)) / (1 - Complex.abs (x i))
+    have hbound : ∀ᵐ ζ ∂μ, ‖herglotzKernel ζ (x i)‖ ≤ M := by
+      filter_upwards [hμcircle] with ζ hζ
+      simp only [herglotzKernel, norm_div]
+      -- ‖ζ + x_i‖ ≤ ‖ζ‖ + ‖x_i‖ = 1 + |x_i|
+      have hnum : ‖ζ + x i‖ ≤ 1 + Complex.abs (x i) := by
+        calc ‖ζ + x i‖ ≤ ‖ζ‖ + ‖x i‖ := norm_add_le ζ (x i)
+          _ = Complex.abs ζ + Complex.abs (x i) := by simp only [Complex.norm_eq_abs]
+          _ = 1 + Complex.abs (x i) := by rw [hζ]
+      -- ‖ζ - x_i‖ ≥ |‖ζ‖ - ‖x_i‖| ≥ 1 - |x_i|
+      have hdenom : 1 - Complex.abs (x i) ≤ ‖ζ - x i‖ := by
+        calc 1 - Complex.abs (x i)
+            = Complex.abs ζ - Complex.abs (x i) := by rw [hζ]
+          _ ≤ Complex.abs (ζ - x i) := AbsoluteValue.le_sub Complex.abs ζ (x i)
+          _ = ‖ζ - x i‖ := by simp only [Complex.norm_eq_abs]
+      have hζxi_ne : ζ - x i ≠ 0 := by
+        intro h
+        simp only [sub_eq_zero] at h
+        rw [h] at hζ
+        rw [hζ] at hxi_lt
+        exact (lt_irrefl 1) hxi_lt
+      have hdenom_pos' : 0 < ‖ζ - x i‖ := norm_pos_iff.mpr hζxi_ne
+      calc ‖ζ + x i‖ / ‖ζ - x i‖ ≤ (1 + Complex.abs (x i)) / ‖ζ - x i‖ := by
+            apply div_le_div_of_nonneg_right hnum (le_of_lt hdenom_pos')
+        _ ≤ (1 + Complex.abs (x i)) / (1 - Complex.abs (x i)) := by
+            have hpos : 0 ≤ 1 + Complex.abs (x i) := by positivity
+            exact div_le_div_of_nonneg_left hpos hdenom_pos hdenom
+    have htop : MeasureTheory.Memℒp (fun ζ => herglotzKernel ζ (x i)) ⊤ μ :=
+      MeasureTheory.memℒp_top_of_bound (hMeasH i) M hbound
+    exact htop.integrable le_top
+
+  -- Step 2: conj(H_ζ(x_j)) is also integrable (same bound)
+  have hIntHconj : ∀ j : Fin n,
+      MeasureTheory.Integrable (fun ζ => starRingEnd ℂ (herglotzKernel ζ (x j))) μ := by
+    intro j
+    -- conj preserves norms, so same bound works
+    have hxi_lt : Complex.abs (x j) < 1 := hx j
+    have hdenom_pos : 0 < 1 - Complex.abs (x j) := by linarith
+    let M := (1 + Complex.abs (x j)) / (1 - Complex.abs (x j))
+    have hMeasConj : MeasureTheory.AEStronglyMeasurable
+        (fun ζ => starRingEnd ℂ (herglotzKernel ζ (x j))) μ :=
+      Complex.continuous_conj.comp_aestronglyMeasurable (hMeasH j)
+    have hbound : ∀ᵐ ζ ∂μ, ‖starRingEnd ℂ (herglotzKernel ζ (x j))‖ ≤ M := by
+      filter_upwards [hμcircle] with ζ hζ
+      rw [Complex.norm_eq_abs, Complex.abs_conj, ← Complex.norm_eq_abs]
+      simp only [herglotzKernel, norm_div]
+      have hnum : ‖ζ + x j‖ ≤ 1 + Complex.abs (x j) := by
+        calc ‖ζ + x j‖ ≤ ‖ζ‖ + ‖x j‖ := norm_add_le ζ (x j)
+          _ = Complex.abs ζ + Complex.abs (x j) := by simp only [Complex.norm_eq_abs]
+          _ = 1 + Complex.abs (x j) := by rw [hζ]
+      have hdenom : 1 - Complex.abs (x j) ≤ ‖ζ - x j‖ := by
+        calc 1 - Complex.abs (x j)
+            = Complex.abs ζ - Complex.abs (x j) := by rw [hζ]
+          _ ≤ Complex.abs (ζ - x j) := AbsoluteValue.le_sub Complex.abs ζ (x j)
+          _ = ‖ζ - x j‖ := by simp only [Complex.norm_eq_abs]
+      have hζxj_ne : ζ - x j ≠ 0 := by
+        intro h
+        simp only [sub_eq_zero] at h
+        rw [h] at hζ
+        rw [hζ] at hxi_lt
+        exact (lt_irrefl 1) hxi_lt
+      have hdenom_pos' : 0 < ‖ζ - x j‖ := norm_pos_iff.mpr hζxj_ne
+      calc ‖ζ + x j‖ / ‖ζ - x j‖ ≤ (1 + Complex.abs (x j)) / ‖ζ - x j‖ := by
+            apply div_le_div_of_nonneg_right hnum (le_of_lt hdenom_pos')
+        _ ≤ (1 + Complex.abs (x j)) / (1 - Complex.abs (x j)) := by
+            have hpos : 0 ≤ 1 + Complex.abs (x j) := by positivity
+            exact div_le_div_of_nonneg_left hpos hdenom_pos hdenom
+    have htop : MeasureTheory.Memℒp (fun ζ => starRingEnd ℂ (herglotzKernel ζ (x j))) ⊤ μ :=
+      MeasureTheory.memℒp_top_of_bound hMeasConj M hbound
+    exact htop.integrable le_top
+
+  -- Step 3: K_{H_ζ}(x_i, x_j) is integrable (product of bounded functions, finite measure)
+  have hIntK : ∀ i j : Fin n,
+      MeasureTheory.Integrable (fun ζ => caratheodoryKernel (herglotzKernel ζ) (x i) (x j)) μ := by
+    intro i j
+    -- K_{H_ζ}(x_i, x_j) = (H_ζ(x_i) + conj(H_ζ(x_j))) / (1 - x_i·conj(x_j))
+    -- The denominator is a nonzero constant, so dividing by it preserves integrability
+    simp only [caratheodoryKernel]
+    apply MeasureTheory.Integrable.div_const
+    exact (hIntH i).add (hIntHconj j)
+
+  -- Step 4: The kernel decomposition K_F(x_i,x_j) = ∫ K_{H_ζ}(x_i,x_j) dμ
+  have hKernel : ∀ i j : Fin n,
+      caratheodoryKernel F (x i) (x j) =
+        ∫ ζ, caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ := by
+    intro i j
+    have hFi := _hrep (x i) (hx i)
+    have hFj := _hrep (x j) (hx j)
+    -- F(x_i) + conj(F(x_j)) using integral_conj
+    have hNumer : F (x i) + starRingEnd ℂ (F (x j)) =
+        (∫ ζ, herglotzKernel ζ (x i) ∂μ) +
+        (∫ ζ, starRingEnd ℂ (herglotzKernel ζ (x j)) ∂μ) := by
+      rw [hFi, hFj]
+      -- conj(∫ f + I·β) = ∫ conj(f) + conj(I·β)
+      have hconj : starRingEnd ℂ ((∫ ζ, herglotzKernel ζ (x j) ∂μ) + Complex.I * _β) =
+          (∫ ζ, starRingEnd ℂ (herglotzKernel ζ (x j)) ∂μ) - Complex.I * _β := by
+        simp only [map_add, map_mul]
+        -- Use integral_conj: ∫ conj(f) = conj(∫ f)
+        rw [integral_conj]
+        simp [Complex.conj_I]
+        ring
+      rw [hconj]
+      ring
+    simp only [caratheodoryKernel]
+    rw [hNumer]
+    rw [← MeasureTheory.integral_add (hIntH i) (hIntHconj j)]
+    have hIntSum : MeasureTheory.Integrable
+        (fun ζ => herglotzKernel ζ (x i) + starRingEnd ℂ (herglotzKernel ζ (x j))) μ :=
+      (hIntH i).add (hIntHconj j)
+    -- Factor out constant denominator: (∫ f) / c = ∫ (f / c)
+    rw [(MeasureTheory.integral_div _ _).symm]
+
+  -- Step 5: The quadratic form equals the integral
+  have hQuadEq : (∑ i : Fin n, ∑ j : Fin n,
+      c i * starRingEnd ℂ (c j) * caratheodoryKernel F (x i) (x j)) =
+      ∫ ζ, qH ζ ∂μ := by
+    -- Rewrite each K_F term using hKernel
+    have hStep1 : (∑ i : Fin n, ∑ j : Fin n,
+        c i * starRingEnd ℂ (c j) * caratheodoryKernel F (x i) (x j)) =
+        (∑ i : Fin n, ∑ j : Fin n,
+          c i * starRingEnd ℂ (c j) * ∫ ζ, caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ) := by
+      congr 1
+      ext i
+      congr 1
+      ext j
+      rw [hKernel i j]
+    rw [hStep1]
+    -- Pull constants into integrals
+    have hIntKc : ∀ i j : Fin n,
+        MeasureTheory.Integrable
+          (fun ζ => c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j)) μ :=
+      fun i j => (hIntK i j).const_mul _
+    have hStep2 : (∑ i : Fin n, ∑ j : Fin n,
+        c i * starRingEnd ℂ (c j) * ∫ ζ, caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ) =
+        (∑ i : Fin n, ∑ j : Fin n,
+          ∫ ζ, c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ) := by
+      congr 1
+      ext i
+      congr 1
+      ext j
+      rw [← MeasureTheory.integral_mul_left]
+    rw [hStep2]
+    -- Use Fubini: ∑∑∫ = ∫∑∑
+    -- First swap inner sum with integral: ∑_j ∫ = ∫ ∑_j
+    have hStep3a : ∀ i : Fin n,
+        (∑ j : Fin n, ∫ ζ, c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ) =
+        ∫ ζ, ∑ j : Fin n, c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ := by
+      intro i
+      symm
+      apply MeasureTheory.integral_finset_sum
+      intro j _
+      exact hIntKc i j
+    have hStep3 : (∑ i : Fin n, ∑ j : Fin n,
+        ∫ ζ, c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ) =
+        (∑ i : Fin n, ∫ ζ, ∑ j : Fin n,
+          c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ) := by
+      congr 1
+      ext i
+      exact hStep3a i
+    rw [hStep3]
+    -- Then swap outer sum with integral: ∑_i ∫ = ∫ ∑_i
+    have hIntInner : ∀ i : Fin n, MeasureTheory.Integrable
+        (fun ζ => ∑ j : Fin n, c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j)) μ := by
+      intro i
+      apply MeasureTheory.integrable_finset_sum
+      intro j _
+      exact hIntKc i j
+    symm
+    calc ∫ ζ, qH ζ ∂μ
+        = ∫ ζ, ∑ i : Fin n, ∑ j : Fin n,
+            c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ := rfl
+      _ = ∑ i : Fin n, ∫ ζ, ∑ j : Fin n,
+            c i * starRingEnd ℂ (c j) * caratheodoryKernel (herglotzKernel ζ) (x i) (x j) ∂μ := by
+          rw [MeasureTheory.integral_finset_sum Finset.univ (fun i _ => hIntInner i)]
+
+  -- Step 6: Take real parts
+  have hIntqH : MeasureTheory.Integrable qH μ := by
+    -- qH = ∑∑ c_i · conj(c_j) · K_{H_ζ}(x_i, x_j), a finite sum of integrable functions
+    apply MeasureTheory.integrable_finset_sum
+    intro i _
+    apply MeasureTheory.integrable_finset_sum
+    intro j _
+    exact (hIntK i j).const_mul _
+
+  have hQuadEqRe : (∑ i : Fin n, ∑ j : Fin n,
+      c i * starRingEnd ℂ (c j) * caratheodoryKernel F (x i) (x j)).re =
+      ∫ ζ, (qH ζ).re ∂μ := by
+    rw [hQuadEq, ← RCLike.re_eq_complex_re]
+    exact (integral_re hIntqH).symm
+
+  -- Conclusion
+  rw [hQuadEqRe]
+  exact MeasureTheory.integral_nonneg_of_ae hqH_nonneg
 
 end Caratheodory
 

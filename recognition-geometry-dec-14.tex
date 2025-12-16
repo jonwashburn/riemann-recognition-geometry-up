@@ -138,7 +138,7 @@ Assuming axioms RG0--RG7, we present the complete foundations of the subject, pr
 
 We formally define a \textit{Configuration Space} (RG0) and a \textit{Locality Structure} (RG1), upon which \textit{Recognizers} (RG2) operate to produce observable \textit{Events}. We define the fundamental \textit{Indistinguishability Relation} (RG3) and construct the \textit{Recognition Quotient}, proving that it captures exactly the observable structure determined by $R$. We further develop \textit{Finite Resolution} (RG4), \textit{Local Regularity} (RG5), \textit{Composite Recognizers} (RG6), and \textit{Comparative Recognizers} (RG7), showing that when finite-resolution recognizers exist, injectivity fails and smooth structure can only arise as a refinement limit.
 
-Finally, we illustrate how these results ground Recognition Science explanations of spacetime dimension, gauge symmetries, and metric structure. \textbf{All definitions and 50+ theorems have been formalized and verified in the Lean 4 interactive theorem prover} (approximately 3,100 lines of code across 16 modules).
+Finally, we illustrate how these results ground Recognition Science explanations of spacetime dimension, gauge symmetries, and metric structure. \textbf{Lean formalizations accompany this work}: the RG0--RG7 core is maintained in a companion library, and this repository contains the RH instantiation under \texttt{RiemannRecognitionGeometry/} (37 project modules, 17{,}082 lines).
 \end{abstract}
 
 \vspace{0.5cm}
@@ -496,7 +496,7 @@ def quotientEventMap (r : Recognizer C E) : RecognitionQuotient r → E :=
 theorem quotientEventMap_injective (r : Recognizer C E) :
     Function.Injective (quotientEventMap r)
 \end{lstlisting}
-\emph{Lean reference:} \texttt{IndisputableMonolith/RecogGeom/Quotient.lean}.
+\emph{Lean reference (companion RG library):} \texttt{IndisputableMonolith/RecogGeom/Quotient.lean}.
 
 This result is physically profound. It says that in the quotient space---the space of physical observables---states are uniquely identified by their event values. There is no ``hidden state'' in $\quotientspace$. The geometry of $\quotientspace$ is exactly the geometry of the information accessible to the recognizer.
 
@@ -563,7 +563,7 @@ theorem refinement_theorem (r₁ : Recognizer C E₁) (r₂ : Recognizer C E₂)
     Function.Surjective (quotientMapLeft r₁ r₂) ∧
     Function.Surjective (quotientMapRight r₁ r₂)
 \end{lstlisting}
-\emph{Lean reference:} \texttt{IndisputableMonolith/RecogGeom/Composition.lean}.
+\emph{Lean reference (companion RG library):} \texttt{IndisputableMonolith/RecogGeom/Composition.lean}.
 
 This theorem formalizes the intuition that ``more measurement yields more geometry.'' As we add recognizers, the quotient space unfolds, revealing more detail.
 
@@ -669,7 +669,7 @@ theorem no_injection_on_infinite_finite (c : C) (U : Set C) (hU : U ∈ L.N c)
     (hinf : Set.Infinite U) (hfin : (r.R '' U).Finite) :
     ¬Function.Injective (r.R ∘ Subtype.val : U → E)
 \end{lstlisting}
-\emph{Lean reference:} \texttt{IndisputableMonolith/RecogGeom/FiniteResolution.lean}.
+\emph{Lean reference (companion RG library):} \texttt{IndisputableMonolith/RecogGeom/FiniteResolution.lean}.
 
 This explains why we see ``resolution cells'' rather than points. The underlying continuum (if it exists) is forced to ``clump'' into observable quanta. This provides a geometric origin for quantization.
 
@@ -949,7 +949,7 @@ theorem eight_tick_implies_RG4 [RSConfigSpace L]
     (h8 : EightTickFiniteResolution L E rs m) :
     HasFiniteResolution (toLocalConfigSpace rs) (toRecognizer m)
 \end{lstlisting}
-\emph{Lean reference:} \texttt{IndisputableMonolith/RecogGeom/RSBridge.lean}.
+\emph{Lean reference (companion RG library):} \texttt{IndisputableMonolith/RecogGeom/RSBridge.lean}.
 
 This is the rigorous derivation of physical discreteness. Discreteness is not postulated ad hoc; it is a theorem.
 
@@ -1028,7 +1028,7 @@ This was proved as the No-Injection Theorem (\Cref{thm:no-injection}).
 theorem fundamental_theorem (r : Recognizer C E) (c₁ c₂ : C) :
     recognitionQuotientMk r c₁ = recognitionQuotientMk r c₂ ↔ r.R c₁ = r.R c₂
 \end{lstlisting}
-\emph{Lean reference:} \texttt{IndisputableMonolith/RecogGeom/Foundations.lean}.
+\emph{Lean reference (companion RG library):} \texttt{IndisputableMonolith/RecogGeom/Foundations.lean}.
 
 This is the cornerstone: observable space $=$ $\config / \{\text{same events}\}$.
 
@@ -1057,7 +1057,7 @@ theorem universal_property (r : Recognizer C E) :
     Function.Injective (quotientEventMap r) ∧
     (∀ c, r.R c = quotientEventMap r (recognitionQuotientMk r c))
 \end{lstlisting}
-\emph{Lean reference:} \texttt{IndisputableMonolith/RecogGeom/Foundations.lean}.
+\emph{Lean reference (companion RG library):} \texttt{IndisputableMonolith/RecogGeom/Foundations.lean}.
 
 This says: $\quotientspace$ is characterized by a universal property, not just a construction. It is THE canonical quotient for recognition.
 
@@ -1734,7 +1734,7 @@ We have presented Recognition Geometry, a complete mathematical framework in whi
     \item \textbf{Symmetries} are recognition-preserving maps.
 \end{enumerate}
 
-The framework is axiomatically minimal (4 core axioms: RG0--RG3) with 4 optional structural axioms (RG4--RG7). All definitions and 50+ theorems have been formalized in Lean 4.
+The framework is axiomatically minimal (4 core axioms: RG0--RG3) with 4 optional structural axioms (RG4--RG7). A Lean~4 formalization of the RG0--RG7 core is maintained in a companion library; the Lean development in this repository focuses on the RH instantiation under \texttt{RiemannRecognitionGeometry/}.
 
 \section{The Central Message}
 
@@ -1766,7 +1766,10 @@ The author thanks the Mathlib community and Lean~4 developers for their tooling 
 
 \section*{Code Availability}
 \addcontentsline{toc}{section}{Code Availability}
-All formal statements and key constructions are implemented in Lean~4 across 16 modules under \texttt{IndisputableMonolith/RecogGeom}. The codebase totals $\sim$3{,}100 lines with 5 justified \texttt{sorry}s; see the Appendix for a module-by-module summary.
+This paper references two Lean developments:
+(i) a companion Recognition Geometry core library (RG0--RG7) under \texttt{IndisputableMonolith/RecogGeom} (not vendored in this repository snapshot), and
+(ii) the analytic-number-theory instantiation contained \emph{in this repository} under \texttt{RiemannRecognitionGeometry/}.
+At the time of writing, \texttt{RiemannRecognitionGeometry/} consists of 37 project modules (17{,}082 lines), with 11 explicit \texttt{axiom} declarations and one remaining \texttt{sorry} (in \texttt{RiemannRecognitionGeometry/ExplicitFormula/Caratheodory.lean}); see the Appendix and the Route~3 addendum for details.
 
 % ======================================================================
 % APPENDIX
@@ -1778,7 +1781,11 @@ All formal statements and key constructions are implemented in Lean~4 across 16 
 
 \section{Lean 4 Formalization Summary}
 
-The complete formalization consists of 16 modules totaling approximately 3,107 lines of verified Lean 4 code:
+We summarize the Lean status of (A) the companion Recognition Geometry core library referenced in Parts~II--VII, and (B) the RH instantiation that lives in this repository.
+
+\subsection*{A. Recognition Geometry core (companion library)}
+
+The companion RG0--RG7 library consists of 16 modules totaling approximately 3,107 lines of verified Lean 4 code:
 
 \begin{center}
 \begin{tabular}{|l|l|l|}
@@ -1807,7 +1814,68 @@ Integration.lean & -- & $\sim$200 \\
 \end{tabular}
 \end{center}
 
-Only 5 justified \texttt{sorry}s remain, all requiring deep topological machinery (invariance of domain) or physical axioms beyond the scope of pure geometry.
+\subsection*{B. Riemann Hypothesis instantiation (this repository)}
+
+The RH formalization lives under \texttt{RiemannRecognitionGeometry/} and currently comprises 37 project modules (17{,}082 lines) split into:
+(i) the Route~1 Recognition Geometry chain, and (ii) the Route~3 explicit-formula skeleton.
+
+\begin{center}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Route 1 file} & \textbf{Lines} \\
+\hline
+\texttt{Assumptions.lean} & 86 \\
+\texttt{AxiomSanityTests.lean} & 100 \\
+\texttt{Axioms.lean} & 1{,}526 \\
+\texttt{BMODefs.lean} & 112 \\
+\texttt{Basic.lean} & 571 \\
+\texttt{CarlesonBound.lean} & 475 \\
+\texttt{Conjectures.lean} & 108 \\
+\texttt{ConsistencySmokeTest.lean} & 84 \\
+\texttt{DirichletEta.lean} & 1{,}392 \\
+\texttt{FeffermanStein.lean} & 3{,}134 \\
+\texttt{JohnNirenberg.lean} & 2{,}748 \\
+\texttt{Main.lean} & 237 \\
+\texttt{Phase.lean} & 132 \\
+\texttt{PoissonExtension.lean} & 179 \\
+\texttt{PoissonJensen.lean} & 645 \\
+\texttt{WhitneyGeometry.lean} & 450 \\
+\texttt{Mathlib/ArctanTwoGtOnePointOne.lean} & 350 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Route 3 file (\texttt{ExplicitFormula/})} & \textbf{Lines} \\
+\hline
+\texttt{ArithmeticJ.lean} & 62 \\
+\texttt{Caratheodory.lean} & 642 \\
+\texttt{Cayley.lean} & 99 \\
+\texttt{CayleyBridge.lean} & 100 \\
+\texttt{Concrete.lean} & 58 \\
+\texttt{Defs.lean} & 62 \\
+\texttt{HilbertRealization.lean} & 852 \\
+\texttt{Lagarias.lean} & 150 \\
+\texttt{Li.lean} & 126 \\
+\texttt{MainRoute3.lean} & 239 \\
+\texttt{MathlibBridge.lean} & 153 \\
+\texttt{MulConvolution.lean} & 216 \\
+\texttt{Route3FubiniTonelliLemmas.lean} & 93 \\
+\texttt{Route3HypBundle.lean} & 101 \\
+\texttt{Route3Targets.lean} & 55 \\
+\texttt{WFunctionals.lean} & 71 \\
+\texttt{WeilFunctionals.lean} & 69 \\
+\texttt{WeilPositivityRH.lean} & 159 \\
+\texttt{WeilTestFunction.lean} & 346 \\
+\texttt{WeilTestFunctionProofs.lean} & 1{,}100 \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+\textbf{Current Lean status (this repository)}: 11 explicit \texttt{axiom} declarations and 1 remaining \texttt{sorry} (in \texttt{ExplicitFormula/Caratheodory.lean}).
 
 \section{Addendum: Boundary Certificate Program (Zeta) --- Project Status}
 
@@ -1834,7 +1902,7 @@ This repository also contains an ongoing analytic-number-theory formalization bu
     \emph{Current status (Route 3):} This ``explicit-formula gate'' route is now instantiated as a mechanically checkable Lean skeleton under \texttt{RiemannRecognitionGeometry/ExplicitFormula/}.
     It fixes Lagarias' Mellin normalization, defines the involution \(\widetilde f\), multiplicative convolution \(f*g\) on \((0,\infty)\), and connects these to Mathlib's \texttt{mellin}.
     The Lean development proves the gate-shape implications (e.g.\ ``Weil gate \(\Rightarrow\) \texttt{RiemannHypothesis}'' and the Li specialization), and formalizes the algebraic heart of the easy direction (RH \(\Rightarrow\) finite-sum positivity) including the required conjugation/symmetry manipulations.
-    We also proved a concrete Mellin--convolution multiplicativity lemma for the multiplicative convolution, \emph{under an explicit Fubini/Tonelli integrability hypothesis}; this replaces an opaque axiom with a standard analytic obligation.
+    We proved a concrete Mellin--convolution multiplicativity lemma for the multiplicative convolution, \emph{under an explicit Fubini/Tonelli integrability hypothesis}, reducing the remaining analytic gap to verifying the needed integrability for the chosen test-function class (the concrete \texttt{TestSpace} instance in \texttt{Route3Targets.lean} still treats Mellin multiplicativity as an axiom for now).
 
     \emph{Recent advances (December 2025):}
     \begin{enumerate}
@@ -1851,8 +1919,11 @@ This repository also contains an ongoing analytic-number-theory formalization bu
         and proved that the sesquilinear identity yields \texttt{ReflectionPositivityRealization} via the concrete map \(T f := \sqrt{w}\,F_f \in L^2(\mu)\) and \texttt{L2.inner\_def}.
     \end{enumerate}
 
-    \emph{Lean module inventory (15 files):}
-    \texttt{Defs}, \texttt{Lagarias}, \texttt{Li}, \texttt{MainRoute3}, \texttt{MathlibBridge}, \texttt{MulConvolution}, \texttt{HilbertRealization}, \texttt{Concrete}, \texttt{WFunctionals}, \texttt{WeilPositivityRH}, \texttt{Cayley}, \texttt{CayleyBridge}, \texttt{ArithmeticJ}, \texttt{WeilTestFunction}, \texttt{WeilFunctionals}.
+    \emph{Lean module inventory (20 files, \texttt{RiemannRecognitionGeometry/ExplicitFormula/}):}
+    \texttt{Defs}, \texttt{MathlibBridge}, \texttt{MulConvolution}, \texttt{Route3Targets}, \texttt{Route3HypBundle}, \texttt{Route3FubiniTonelliLemmas},
+    \texttt{Lagarias}, \texttt{Li}, \texttt{WeilFunctionals}, \texttt{WFunctionals}, \texttt{WeilPositivityRH},
+    \texttt{WeilTestFunction}, \texttt{WeilTestFunctionProofs}, \texttt{MainRoute3}, \texttt{HilbertRealization}, \texttt{Caratheodory}, \texttt{Concrete},
+    \texttt{ArithmeticJ}, \texttt{Cayley}, \texttt{CayleyBridge}.
 
     \emph{Main problem right now:} prove the \texttt{bridge\_to\_reflection} axiom in \texttt{CayleyBridgeAssumptions}, or directly construct a \texttt{ReflectionPositivityRealization}.
     This requires either showing that arithmetic-side positivity \(\Re(2J(s)) \ge 0\) implies a Hilbert-space representation of the Weil form, or directly constructing such a representation.

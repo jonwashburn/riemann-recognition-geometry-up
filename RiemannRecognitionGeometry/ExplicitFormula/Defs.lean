@@ -40,8 +40,11 @@ class TestSpace (F : Type u) where
   /-- Mellin intertwines the involution by `s ↦ 1 - s`. -/
   mellin_tilde : ∀ (f : F) (s : ℂ),
     Mellin (tilde f) s = Mellin f (1 - s)
+  /-- Mellin intertwines conjugation by `s ↦ conj s` (M[f*](s) = conj(M[f](conj s))). -/
+  mellin_star : ∀ (f : F) (s : ℂ),
+    Mellin (star f) s = starRingEnd ℂ (Mellin f (starRingEnd ℂ s))
 
-attribute [simp] TestSpace.mellin_conv TestSpace.mellin_tilde
+attribute [simp] TestSpace.mellin_conv TestSpace.mellin_tilde TestSpace.mellin_star
 
 namespace TestSpace
 
@@ -59,4 +62,3 @@ end TestSpace
 
 end ExplicitFormula
 end RiemannRecognitionGeometry
-

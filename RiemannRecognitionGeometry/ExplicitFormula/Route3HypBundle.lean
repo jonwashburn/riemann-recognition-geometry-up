@@ -12,6 +12,7 @@ interchanges) remains *axiomatized* here, in one place.
 
 import RiemannRecognitionGeometry.ExplicitFormula.HilbertRealization
 import RiemannRecognitionGeometry.ExplicitFormula.ArithmeticJ
+import RiemannRecognitionGeometry.ExplicitFormula.CompletedJ
 import RiemannRecognitionGeometry.ExplicitFormula.Route3Targets
 
 noncomputable section
@@ -24,8 +25,21 @@ open scoped BigOperators
 
 namespace Route3
 
-/-- Route 3 arithmetic field producing the weight `weightOfJ J`. -/
-def J : ℂ → ℂ := ArithmeticJ.J
+-- We keep the concrete target type `F := ℝ → ℂ`, but the `TestSpace F` structure is an explicit
+-- parameter (no global instance/axiom).
+variable [TestSpace F]
+
+/--
+Route 3 candidate “transfer field” producing the spectral weight `weightOfJ J`.
+
+We keep the *ζ-only* choice available as `Jζ`, but the contour/spectral derivation naturally
+produces the logarithmic derivative of the **completed** ξ-function. Accordingly, the default
+Route 3 weight is built from `CompletedJ.J`.
+-/
+def Jζ : ℂ → ℂ := ArithmeticJ.J
+
+/-- The default Route 3 transfer field: the completed-channel `Jξ`. -/
+def J : ℂ → ℂ := CompletedJ.J
 
 /-- We take the abstract weight `w` to be the canonical one, so `boundary_limits` is definitional. -/
 abbrev w : ℝ → ℝ := weightOfJ J
