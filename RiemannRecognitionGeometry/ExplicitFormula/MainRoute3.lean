@@ -207,8 +207,8 @@ is literally the inner product `⟪T f, T g⟫`.
 
 Once such a representation exists, Weil positivity `Re(W¹(f ⋆ₘ ˜ₘ(⋆ₜ f))) ≥ 0` is immediate.
 
-  Mathematically, proving existence of such a representation is equivalent to proving that the kernel
-  defined by the explicit formula is positive definite (a GNS/Bochner–Schwartz style statement). -/
+Mathematically, proving existence of such a representation is equivalent to proving that the kernel
+defined by the explicit formula is positive definite (a GNS/Bochner–Schwartz style statement). -/
 def ReflectionPositivityRealization : Prop :=
   ∃ (H : Type) (_ : NormedAddCommGroup H) (_ : InnerProductSpace ℂ H) (_ : CompleteSpace H)
     (T : F →ₗ[ℂ] H),

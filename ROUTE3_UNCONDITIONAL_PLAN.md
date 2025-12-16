@@ -135,6 +135,16 @@ This is the only place the “new physics” is allowed to do real work.
 **What is RH‑equivalent here:**
 - For classical ξ, \(\Re\Phi(z)\ge0\) on \(\Re z>0\) is essentially “no zeros to the right of \(\Re(s)=\tfrac12\)”, i.e. RH‑level content. RS must supply the physical reason it holds.
 
+**Splice option (if you want RS-free positivity): import passivity from the boundary-certificate route**
+- The active boundary product-certificate manuscript (`Riemann-active.txt`) constructs an explicit ratio
+  \(\mathcal J(s)=\det_2(I-A(s))/(\mathcal O(s)\,\xi(s))\) on \(\Omega=\{\Re s>\tfrac12\}\), sets \(F(s)=2\mathcal J(s)\),
+  proves the a.e. boundary wedge \((\mathrm P^+)\): \(\Re F(\tfrac12+it)\ge0\) a.e., and then pushes it into \(\Omega\) by Poisson
+  and globalizes by the Schur–Herglotz pinch.
+- That supplies exactly the “positive‑real” hypothesis that Step 3 otherwise asks RS to justify.
+- Once \(\Re F\ge0\) on \(\Omega\), the step “positive‑real ⇒ positive boundary measure” is standard Herglotz/Nevanlinna theory.
+- **Caveat (still needed):** Route‑3 still needs the spectral identity identifying the Lagarias/Weil form \(W^{(1)}\) with an
+  \(L^2(\mu)\) pairing against that boundary measure. This is Step 2 (“identity part”).
+
 ---
 
 ### Step 4 — Fire the existing Route‑3 plumbing (Lean)

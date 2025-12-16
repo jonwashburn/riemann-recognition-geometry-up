@@ -81,6 +81,24 @@ Set
 
 **Where RH hides:** \(\Re\Phi(z)\ge0\) on \(\Re z>0\) is essentially equivalent to “no ξ‑zeros with \(\Re(s)>\tfrac12\)” (i.e. RH‑level content). This is why the “passivity” statement must carry real mathematical weight.
 
+#### Splice option: import the positivity from the boundary-certificate manuscript
+
+The boundary-certificate route (see `Riemann-active.txt`) constructs the explicit ratio
+\[
+\mathcal J(s)=\frac{\det_2(I-A(s))}{\mathcal O(s)\,\xi(s)},\qquad F(s)=2\mathcal J(s),
+\]
+and proves the a.e. **boundary wedge** \((\mathrm P^+)\): \(\Re F(\tfrac12+it)\ge0\) a.e., then pushes it into \(\Omega\) by Poisson
+and globalizes by the Schur–Herglotz pinch. In other words, it supplies exactly the “positive‑real / passivity” hypothesis that Route‑3
+otherwise treats as RH‑equivalent input.
+
+Given \(\Re F\ge0\) on \(\Omega\), the remaining step “positive‑real ⇒ positive boundary measure” is classical (Herglotz/Nevanlinna).
+The certificate route also produces an explicit candidate spectral boundary measure via the phase–velocity identity
+(\(-w'=\pi\,\mu+\pi\sum m_\gamma\delta_\gamma\) in the notation of `Riemann-active.txt`), so \(\mu\ge0\) is automatic.
+
+**Honest caveat (still needed for Route‑3):** this splice supplies the **sign** input (\(\mu\ge0\)), but it does not by itself prove the
+Route‑3 **spectral identity** identifying the Lagarias/Weil form \(W^{(1)}\) with an \(L^2(\mu)\) pairing. That identification is the
+“identity part” documented in `ROUTE3_IDENTITY_PART.md`.
+
 ---
 
 ### RS (Recognition Science) interpretation: what must be proven

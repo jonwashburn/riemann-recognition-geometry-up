@@ -10,6 +10,10 @@
 
 \geometry{margin=1in}
 
+% Theorem environments (lightweight; used only for the bridge statements below)
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+
 \title{Route 3 (Explicit Formula): Most Recent Proof Sketch}
 \author{Jonathan Washburn}
 \date{December 2025}
@@ -179,6 +183,59 @@ This already forces a Hilbert-space realization from \(\Re F\ge 0\). The remaini
 \subsection{Half-plane side (Nevanlinna/Herglotz)}
 
 Same story with different formulas: analytic functions with \(\Re F\ge 0\) on a half-plane admit a Herglotz/Nevanlinna representation with a positive measure on the boundary. That measure gives a canonical Hilbert space (typically \(L^2(\mu)\)).
+
+\begin{theorem}[Herglotz--Poisson representation on the shifted half-plane]
+Let \(\Omega:=\{s\in\mathbb C:\Re s>\tfrac12\}\). Let \(F\) be holomorphic on \(\Omega\) and assume
+\[
+  \Re F(s)\ge 0 \qquad (s\in\Omega).
+\]
+Write \(s=\tfrac12+\sigma+it\) with \(\sigma>0\). Then there exist a constant \(a\ge 0\) and a finite positive Borel measure
+\(\mu\) on \(\mathbb R\) such that
+\[
+  \Re F\!\bigl(\tfrac12+\sigma+it\bigr)
+  \;=\;
+  a\,\sigma
+  \;+\;
+  \frac{1}{\pi}\int_{\mathbb R}\frac{\sigma}{(t-u)^2+\sigma^2}\,d\mu(u)
+  \qquad (\sigma>0,\ t\in\mathbb R).
+\]
+In particular, \(\Re F(\tfrac12+it)\) is (in the nontangential sense) the boundary trace of the Poisson integral of a positive
+measure.
+\end{theorem}
+
+\begin{proof}
+Define \(H(w):= i\,F(\tfrac12 - i w)\). Then \(H\) is holomorphic on the upper half-plane and \(\Im H(w)\ge 0\)
+(since \(\Im(i z)=\Re(z)\)). By the classical Nevanlinna representation for such functions, there exist \(a\ge 0\), \(b\in\mathbb R\),
+and a finite positive Borel measure \(\nu\) on \(\mathbb R\) such that
+\[
+  \Im H(x+iy) \;=\; a\,y \;+\; \frac{1}{\pi}\int_{\mathbb R}\frac{y}{(x-u)^2+y^2}\,d\nu(u)
+  \qquad (y>0).
+\]
+Undoing the change of variables \(w=i(s-\tfrac12)\) gives the stated Poisson formula for \(\Re F\), after pushing \(\nu\) forward
+under \(u\mapsto -u\) to express the kernel in the form \((t-u)^2+\sigma^2\).
+\end{proof}
+
+\begin{corollary}[Reflection-positivity realization from a Herglotz spectral identity]
+Let \(\mathcal T\) be a complex vector space of test functions and suppose there is a linear transform
+\(f\mapsto F_f\in L^2(\mu)\) such that the Weil pairing satisfies
+\[
+  W^{(1)}\!\bigl(f\star_m\widetilde{\overline g}\bigr)
+  \;=\;
+  \int_{\mathbb R}\overline{F_f(u)}\,F_g(u)\,d\mu(u)
+  \qquad (f,g\in\mathcal T),
+\]
+where \(\mu\) is a positive measure as in the theorem above. Then \(W^{(1)}\!\bigl(f\star_m\widetilde{\overline f}\bigr)\ge 0\)
+for all \(f\in\mathcal T\), and there is a Hilbert space \(H\) and linear map \(T:\mathcal T\to H\) such that
+\[
+  W^{(1)}\!\bigl(f\star_m\widetilde{\overline g}\bigr)\;=\;\langle Tf,Tg\rangle_H.
+\]
+\end{corollary}
+
+\begin{proof}
+Define a sesquilinear form \(B(f,g):=\int_{\mathbb R}\overline{F_f}\,F_g\,d\mu\). Since \(\mu\ge 0\), we have \(B(f,f)\ge 0\).
+Let \(N:=\{f\in\mathcal T: B(f,f)=0\}\). Then \(B\) descends to an inner product on \(\mathcal T/N\).
+Let \(H\) be the completion of \(\mathcal T/N\) and \(T\) the quotient map; then \(B(f,g)=\langle Tf,Tg\rangle_H\).
+\end{proof}
 
 Either way, the conceptual bridge is identical:
 \[
