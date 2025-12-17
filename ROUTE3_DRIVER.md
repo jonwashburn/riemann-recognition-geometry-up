@@ -24,12 +24,12 @@
 | Metric | Value |
 |--------|-------|
 | Global `axiom` declarations in `ExplicitFormula/*` | 1 (`mellin_dirichlet_fourier_inversion` in `ZetaInstantiation.lean`) |
-| Sorry in ExplicitFormula/*.lean | 0 ✅ |
+| Sorry in ExplicitFormula/*.lean | ⚠️ Needs Mathlib API fixes (LSeries.term, digamma) |
 | Hypothesis bundles (classical analysis) | AllComponentAssumptions, RightEdgePhaseLimitAssumptions, contour-limit hyps |
 | Component identities needed | 3 (`det2`, `outer`, `ratio`) |
 | Component identities proved | 3/3 fully proved ✅ (det2 ✅, outer ✅, ratio ✅) |
 | Assembly theorem | ✅ PROVED |
-| Last `lake build` | ✅ |
+| Last `lake build` | ❌ (Mathlib API changes broke ExplicitFormulaCancellationSkeleton.lean) |
 | “Unconditional” blockers to audit | Verify ζ-instantiation hypotheses are not RH-strength; `PSCComponents.det2_ne_zero` now only requires **Re(s) > 1** |
 
 ---
@@ -104,6 +104,15 @@ The proof chain is complete with 0 sorry. Remaining work: instantiate hypothesis
   - ✅ xi_zeta_differentiable
   - ✅ logDeriv_zeta_eq_neg_vonMangoldt_LSeries
   - Remaining inputs: `ZetaPSCHypotheses` fields (see Assumption Ledger)
+- [ ] **FIX MATHLIB API BREAKS**: Update ExplicitFormulaCancellationSkeleton.lean for new Mathlib version:
+  - [ ] Replace `Mathlib.NumberTheory.ZetaFunction` import with `Mathlib.NumberTheory.LSeries.RiemannZeta`
+  - [ ] Add `Mathlib.NumberTheory.VonMangoldt` and `Mathlib.NumberTheory.LSeries.Basic` imports
+  - [ ] Update LSeries API: use `LSeries.term` instead of direct `f n * n^{-s}` form
+  - [ ] Replace `ArithmeticFunction.vonMangoldt_zero` with `ArithmeticFunction.map_zero`
+  - [ ] Remove `(F := F)` explicit type params (causes shadowing with local `let F :=` bindings)
+  - [ ] Define or work around missing `Complex.digamma`
+  - [ ] Replace `ext n` with `funext n` or `tsum_congr` for tsum equality proofs
+  - [ ] Replace `omega` with explicit proofs for Real comparisons (use `Nat.cast_pos.mpr` etc)
 - [ ] **Reconcile `det2_zeta` vs prime-sum identity**: make `det2_zeta` compatible with `Det2PrimeTermAssumptions.logDeriv_det2_eq_neg_vonMangoldt`
 - [x] **Eliminate / replace RH-strength `det2_ne_zero_strip`**: fixed by restricting `PSCComponents.det2_ne_zero` to `Re(s) > 1` and removing `det2_ne_zero_strip`
 - [ ] **Instantiate Det2PrimeTermAssumptions for ζ**: Still needs Fourier inversion axiom proof.
@@ -201,5 +210,13 @@ lake env lean /tmp/test.lean 2>&1 | tail -30
 - Axiom reduction path: prove test function regularity → apply `mellin_inversion`.
 - Added an Assumption Ledger to prevent “hidden axioms” (bundle fields) from being mistaken as progress toward unconditional RH; flagged `det2_zeta` vs prime-sum mismatch and RH-strength `det2_ne_zero_strip`.
 - Removed the RH-strength `det2_ne_zero_strip` circularity by weakening `PSCComponents.det2_ne_zero` to only require `Re(s) > 1` (right-edge region).
+- **BUILD BREAK**: Mathlib version change broke several imports:
+  1. `Mathlib.NumberTheory.ZetaFunction` → use `Mathlib.NumberTheory.LSeries.RiemannZeta`
+  2. LSeries API changed: `LSeries f s` now uses `term f s n` (with `/n^s`) not `f n * n^{-s}`
+  3. `ArithmeticFunction.vonMangoldt_zero` renamed to `ArithmeticFunction.map_zero`
+  4. `Complex.digamma` doesn't exist in current Mathlib (needs definition or alternative)
+  5. `(F := F)` explicit type params cause shadowing issues with local let-bindings
+- Attempted fixes reduced errors from 52 to 21 but issues remain. Reverted to working commit.
+- **Next step**: Fix Mathlib API changes in ExplicitFormulaCancellationSkeleton.lean
 
 

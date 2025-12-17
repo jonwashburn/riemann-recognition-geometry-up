@@ -16,7 +16,7 @@ Once these are constructed, `RH_ofContourToBoundary` fires and yields `RiemannHy
 
 import RiemannRecognitionGeometry.ExplicitFormula.ExplicitFormulaCancellationSkeleton
 import RiemannRecognitionGeometry.ExplicitFormula.PSCSplice
-import Mathlib.NumberTheory.ZetaFunction
+import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.NumberTheory.VonMangoldt
 import Mathlib.NumberTheory.LSeries.Basic
 import Mathlib.NumberTheory.LSeries.Dirichlet

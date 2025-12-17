@@ -2,6 +2,8 @@ import RiemannRecognitionGeometry.ExplicitFormula.LagariasContour
 import RiemannRecognitionGeometry.ExplicitFormula.ContourToBoundary
 import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
+import Mathlib.NumberTheory.VonMangoldt
+import Mathlib.NumberTheory.LSeries.Basic
 
 /-!
 # Route 3: Explicit-formula cancellation (contour skeleton lemmas)
