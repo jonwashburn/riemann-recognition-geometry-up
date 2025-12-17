@@ -259,11 +259,14 @@ the normalization appearing in `splice_completion_with_normalization`.
 def IntegralAssumptions.ofContourToBoundary
     (P : ContourToBoundary.PSCComponents)
     (L : LagariasFramework F)
-    (μ_spec : Measure ℝ)
     (transform : F →ₗ[ℂ] (ℝ → ℂ))
     (transform_eq_mellinOnCriticalLine :
       ∀ f : F, transform f = fun t : ℝ => mellinOnCriticalLine (F := F) f t)
-    (memL2 : ∀ f : F, MeasureTheory.Memℒp (transform f) 2 μ_spec)
+    (memL2 : ∀ f : F, MeasureTheory.Memℒp (transform f) 2 P.μ_spec)
+    (h_explicit :
+      ∀ f g : F,
+        ContourToBoundary.explicit_formula_cancellation
+          (L := L) (P := P) (h := pair (F := F) f g))
     (h_integrable_F : ∀ f g : F, Integrable (pairTransform transform f g) volume)
     (h_integrable_vol :
       ∀ f g : F,
@@ -272,14 +275,14 @@ def IntegralAssumptions.ofContourToBoundary
             pairTransform transform f g t *
               ((deriv (ContourToBoundary.boundaryPhaseFunction P) t : ℝ) : ℂ))
           volume)
-    (h_integrable_μ : ∀ f g : F, Integrable (pairTransform transform f g) μ_spec) :
+    (h_integrable_μ : ∀ f g : F, Integrable (pairTransform transform f g) P.μ_spec) :
     IntegralAssumptions :=
 by
   -- First, prove the `1/2`-normalized identity for all `f,g`.
   have identity_half :
       ∀ f g : F,
         L.W1 (pair (F := F) f g) =
-          (1 / 2 : ℂ) * ∫ t : ℝ, pairTransform transform f g t ∂ μ_spec := by
+          (1 / 2 : ℂ) * ∫ t : ℝ, pairTransform transform f g t ∂ P.μ_spec := by
     intro f g
     -- Instantiate `splice_completion_with_normalization` at `F_h := conj(F_f) * F_g`.
     have h_explicit :
@@ -294,7 +297,8 @@ by
               ∫ t : ℝ,
                 -(M[pair (F := F) f g](1/2 + Complex.I * t) *
                     ((deriv (ContourToBoundary.boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume := by
-        simpa using (ContourToBoundary.explicit_formula_cancellation (L := L) (P := P) (h := pair (F := F) f g))
+        -- `explicit_formula_cancellation` is now a hypothesis (`Prop`), so extract it from `h_explicit`.
+        simpa [ContourToBoundary.explicit_formula_cancellation] using (h_explicit f g)
       -- Rewrite `M[pair f g](1/2+it)` as `conj(M[f](1/2+it)) * M[g](1/2+it)`, then use the supplied
       -- `transform = mellinOnCriticalLine` normalization to convert to `pairTransform`.
       have hpair_mellin :
@@ -312,7 +316,12 @@ by
           -- `simp` handles conjugation of `I`, `t`, and rational scalars.
           simp [sub_eq_add_neg, add_assoc, add_left_comm, add_comm, mul_assoc, mul_left_comm, mul_comm]
           -- Close the remaining rational identity `1 - 1/2 = 1/2`.
-          norm_num
+          have hconj2 : (starRingEnd ℂ) (2 : ℂ) = (2 : ℂ) := by
+            -- `simp` doesn't always reduce `starRingEnd` on numerals, so unfold via `Complex.conj`.
+            simpa [starRingEnd] using (Complex.conj_ofReal (2 : ℝ))
+          -- Rewrite `conj(2)` and finish by ring normalization.
+          rw [hconj2]
+          ring_nf
         have hm :
             M[pair (F := F) f g](s) =
               (M[g](s)) * (starRingEnd ℂ (M[f](s))) := by
@@ -369,7 +378,6 @@ by
         (P := P)
         (F_h := pairTransform transform f g)
         (W1_h := L.W1 (pair (F := F) f g))
-        (μ_spec := μ_spec)
         (h_explicit := h_explicit)
         (h_integrable_F := h_integrable_F f g)
         (h_integrable_vol := h_integrable_vol f g)
@@ -377,7 +385,7 @@ by
   -- Absorb the factor `1/2` into the measure.
   exact IntegralAssumptions.ofHalfScalarMulIntegral
     (L := L)
-    (μ_spec := μ_spec)
+    (μ_spec := P.μ_spec)
     (transform := transform)
     (transform_eq_mellinOnCriticalLine := transform_eq_mellinOnCriticalLine)
     (memL2 := memL2)
@@ -393,11 +401,14 @@ pipeline.
 theorem RH_ofContourToBoundary
     (P : ContourToBoundary.PSCComponents)
     (L : LagariasFramework F)
-    (μ_spec : Measure ℝ)
     (transform : F →ₗ[ℂ] (ℝ → ℂ))
     (transform_eq_mellinOnCriticalLine :
       ∀ f : F, transform f = fun t : ℝ => mellinOnCriticalLine (F := F) f t)
-    (memL2 : ∀ f : F, MeasureTheory.Memℒp (transform f) 2 μ_spec)
+    (memL2 : ∀ f : F, MeasureTheory.Memℒp (transform f) 2 P.μ_spec)
+    (h_explicit :
+      ∀ f g : F,
+        ContourToBoundary.explicit_formula_cancellation
+          (L := L) (P := P) (h := pair (F := F) f g))
     (h_integrable_F : ∀ f g : F, Integrable (pairTransform transform f g) volume)
     (h_integrable_vol :
       ∀ f g : F,
@@ -406,15 +417,16 @@ theorem RH_ofContourToBoundary
             pairTransform transform f g t *
               ((deriv (ContourToBoundary.boundaryPhaseFunction P) t : ℝ) : ℂ))
           volume)
-    (h_integrable_μ : ∀ f g : F, Integrable (pairTransform transform f g) μ_spec) :
+    (h_integrable_μ : ∀ f g : F, Integrable (pairTransform transform f g) P.μ_spec) :
     RiemannHypothesis :=
 by
   -- Build the integral-form splice assumptions and fire the existing pipeline.
   exact RHμ_spec_integral
     (A := IntegralAssumptions.ofContourToBoundary
-      (P := P) (L := L) (μ_spec := μ_spec) (transform := transform)
+      (P := P) (L := L) (transform := transform)
       (transform_eq_mellinOnCriticalLine := transform_eq_mellinOnCriticalLine)
       (memL2 := memL2)
+      (h_explicit := h_explicit)
       (h_integrable_F := h_integrable_F)
       (h_integrable_vol := h_integrable_vol)
       (h_integrable_μ := h_integrable_μ))

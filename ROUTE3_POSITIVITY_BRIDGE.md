@@ -7,11 +7,16 @@
 This document is part of the Route‑3 plan. When executing:
 
 1. **Context:** This is the RH-equivalent positivity step — all other parts are "standard analysis"
-2. **Current status:** Positivity comes from PSC → Herglotz → μ ≥ 0 (already axiomatized)
+2. **Current status:** Positivity comes from PSC → Herglotz → μ ≥ 0. In Lean, `herglotz_representation` has been refactored into an explicit **hypothesis** (no global `axiom`); remaining work is to prove it (or import the required Poisson/Riesz infrastructure).
 3. **Remaining work:** See `ROUTE3_LEMMA_COMPLETION_LOOP.md` for detailed axiom status
 4. **Key insight:** The splice brings μ_spec from `Riemann-active.txt` into Route-3
 
 **Anti-stall rule:** If a positivity bridge lemma is blocked (Herglotz/Carathéodory), try one smaller lemma extraction (e.g. “positive-definite kernel → measure” in a restricted setting) before declaring a blocker.
+
+**Plan-maintenance rule:** If you refactor/remove an axiom (e.g. by converting it to an explicit hypothesis or proving it), immediately update:
+- this file’s “Current status” line,
+- `ROUTE3_LEMMA_COMPLETION_LOOP.md` (execution queue + axiom counts),
+- and `ROUTE3_MOST_RECENT_PROOF.tex` if the paper’s axiom table changes.
 
 ---
 

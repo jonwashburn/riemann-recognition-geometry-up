@@ -31,7 +31,7 @@ is positive definite.
 * `szegoKernel_positive_definite`: The Szegő kernel is positive definite.
 * `caratheodoryKernel_const_positive`: Constant functions give positive kernels.
 * `eval_kernel_positive`: Point evaluation kernels are positive.
-* `caratheodory_positive_definite`: The main theorem (requires Herglotz axiom).
+* `caratheodory_positive_definite`: The main theorem (requires the Herglotz representation hypothesis).
 
 ## References
 
@@ -598,11 +598,12 @@ The formalization would require foundational harmonic analysis not in Mathlib:
 - Riesz representation theorem for positive functionals on C(circle)
 - Fatou's theorem for boundary values (or weak-* compactness arguments)
 
-We state this as an axiom representing established mathematical truth (Herglotz 1911).
-The theorem is proven in every complex analysis textbook (Rudin, Ahlfors, etc.).
+We record this as an explicit hypothesis (`Prop`) rather than a global Lean `axiom`.
+This keeps the Route‑3 pipeline fully “no-axiom” in Lean, while isolating the remaining classical
+analysis gap as a single named assumption to be proved later.
 -/
-axiom herglotz_representation (F : ℂ → ℂ) (hF : IsCaratheodoryClass F) :
-    HerglotzRepresentation F
+def herglotz_representation (F : ℂ → ℂ) (_hF : IsCaratheodoryClass F) : Prop :=
+  Nonempty (HerglotzRepresentation F)
 
 /--
 **Carathéodory's Theorem**: If F is holomorphic on the disk with Re(F) ≥ 0,
@@ -611,11 +612,14 @@ then the Carathéodory kernel is positive definite.
 This theorem is proven modulo the Herglotz representation theorem.
 All algebraic ingredients have been formally verified above.
 -/
-theorem caratheodory_positive_definite (F : ℂ → ℂ) (hF : IsCaratheodoryClass F) :
+theorem caratheodory_positive_definite
+    (F : ℂ → ℂ) (hF : IsCaratheodoryClass F)
+    (hHerg : herglotz_representation F hF) :
     IsPositiveDefiniteKernelOn (caratheodoryKernel F) unitDisk := by
   intro n x hx c
-  -- Get the Herglotz representation
-  obtain ⟨μ, _hfinite, _hsupport, _β, _hrep⟩ := herglotz_representation F hF
+  -- Get the Herglotz representation (as a hypothesis)
+  rcases hHerg with ⟨rep⟩
+  rcases rep with ⟨μ, _hfinite, _hsupport, _β, _hrep⟩
   -- The proof uses:
   -- 1. F(z) = ∫ (ζ+z)/(ζ-z) dμ + iβ by Herglotz representation
   -- 2. K_F(z,w) = ∫ K_{H_ζ}(z,w) dμ by linearity
@@ -909,7 +913,10 @@ This is the interface to HilbertRealization.lean.
 theorem caratheodory_positive_definite_with_holomorphy
     (Func : ℂ → ℂ)
     (hHol : Caratheodory.IsHolomorphicOnDisk Func)
-    (hC : IsCaratheodory Func) :
+    (hC : IsCaratheodory Func)
+    (hHerg : Caratheodory.herglotz_representation Func
+      { holomorphic := hHol
+        re_nonneg := hC }) :
     ∀ (n : ℕ) (z : Fin n → ℂ) (_hz : ∀ i, Complex.abs (z i) < 1) (c : Fin n → ℂ),
       0 ≤ (∑ i : Fin n, ∑ j : Fin n,
         c i * starRingEnd ℂ (c j) * caratheodoryKernel' Func (z i) (z j)).re := by
@@ -917,7 +924,7 @@ theorem caratheodory_positive_definite_with_holomorphy
   have hF : Caratheodory.IsCaratheodoryClass Func :=
     { holomorphic := hHol
       re_nonneg := hC }
-  have hpos := Caratheodory.caratheodory_positive_definite Func hF n z hz c
+  have hpos := Caratheodory.caratheodory_positive_definite Func hF hHerg n z hz c
   simp only [caratheodoryKernel', Caratheodory.caratheodoryKernel] at hpos ⊢
   exact hpos
 

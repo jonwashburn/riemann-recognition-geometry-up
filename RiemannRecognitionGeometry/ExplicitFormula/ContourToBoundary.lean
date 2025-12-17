@@ -39,6 +39,7 @@ import Mathlib.Analysis.Calculus.LogDeriv
 import Mathlib.Analysis.Complex.RealDeriv
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 import RiemannRecognitionGeometry.ExplicitFormula.Lagarias
+import RiemannRecognitionGeometry.ExplicitFormula.ContourW1
 
 noncomputable section
 
@@ -86,6 +87,12 @@ structure PSCComponents where
     ∀ᵐ t : ℝ ∂volume,
       det2 (1/2 + I * t) / (outer (1/2 + I * t) * xi (1/2 + I * t)) =
         Complex.exp (I * boundaryPhase t)
+  /-- PSC spectral boundary measure on `ℝ` (positive by definition of `Measure`). -/
+  μ_spec : Measure ℝ := volume
+  /-- PSC phase–velocity identity for the chosen boundary phase and spectral measure. -/
+  phase_velocity_identity :
+    ∀ φ : ℝ → ℝ, Integrable φ volume →
+      ∫ t : ℝ, φ t * deriv boundaryPhase t ∂volume = - Real.pi * ∫ t : ℝ, φ t ∂ μ_spec
 
 /-- The PSC ratio J = det₂/(O·ξ). -/
 def PSCRatio (P : PSCComponents) (s : ℂ) : ℂ := P.det2 s / (P.outer s * P.xi s)
@@ -303,7 +310,7 @@ We do **not** include it as an axiom; the current contour-to-boundary chain dire
  -/
 -- (No declaration here on purpose; see note above.)
 
-/--
+/-
 **Axiom (Explicit formula cancellation)**: When the contour integral for W^{(1)} is
 moved to the critical line, the det₂ and outer O terms cancel against W_arith, W², W⁰.
 
@@ -324,35 +331,35 @@ where θ is the boundary phase from `boundaryPhaseFunction`.
 This is the key calculation that reduces the contour integral to a boundary pairing
 against the phase derivative.
 
-**Status:** Stated as axiom because formalizing the contour integral definition of W^{(1)}
-and the residue calculus that produces W_arith requires significant Mathlib infrastructure.
+-- **Status:** This is carried as a hypothesis (`explicit_formula_cancellation`) because formalizing the contour integral definition of W^{(1)}
+-- and the residue calculus that produces W_arith requires significant Mathlib infrastructure.
+
+ -/
+
+/-!
+### Explicit-formula cancellation (hypothesis, not a global axiom)
+
+This is the (non-RH-equivalent) bookkeeping identity that reduces the contour definition of `W¹`
+to a critical-line boundary pairing against the derivative of the PSC boundary phase.
+
+We *do not* declare this as a global Lean `axiom`; instead it is carried as an explicit hypothesis
+where needed (e.g. in `PSCSplice.IntegralAssumptions.ofContourToBoundary`).
 -/
-axiom explicit_formula_cancellation
+def explicit_formula_cancellation
     {F : Type} [TestSpace F]
     (L : LagariasFramework F)
     (P : PSCComponents)
-    (h : F) :
+    (h : F) : Prop :=
     -- W^{(1)}(h) equals the boundary phase pairing against the critical-line Mellin transform
     L.W1 h = (1 / (2 * Real.pi)) *
       ∫ t : ℝ, -(M[h](1/2 + I * t) * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume
 
-/--
-**Axiom (PSC phase-velocity identity)**: The boundary phase satisfies -w' = π μ_spec.
+/-!
+## PSC phase–velocity input
 
-This is the main result from `Riemann-active.txt` (Theorem: phase-velocity identity).
-
-**Mathematical content:** For the PSC ratio J = det₂/(O·ξ), the boundary phase
-w(t) := arg J(1/2+it) satisfies -w' = π μ_spec as distributions on ℝ,
-where μ_spec is the spectral boundary measure from the phase-velocity calculation.
+The phase–velocity identity is now bundled as the field `PSCComponents.phase_velocity_identity`,
+relating `deriv P.boundaryPhase` to the spectral measure `P.μ_spec`.
 -/
-axiom psc_phase_velocity_identity
-    (P : PSCComponents)
-    (w : ℝ → ℝ)
-    (μ_spec : Measure ℝ) :
-    -- -w' = π μ_spec, stated as: for all smooth compactly supported φ,
-    -- ∫ φ · w' = -π ∫ φ dμ_spec
-    ∀ φ : ℝ → ℝ, Integrable φ volume →
-      ∫ t : ℝ, φ t * deriv w t ∂volume = - Real.pi * ∫ t : ℝ, φ t ∂ μ_spec
 
 /-!
 ## The main splice completion theorem
@@ -375,12 +382,11 @@ and recombine.
 theorem complex_phase_velocity_identity
     (P : PSCComponents)
     (F_h : ℝ → ℂ)
-    (μ_spec : Measure ℝ)
     (h_integrable_F : Integrable F_h volume)
     (h_integrable_vol : Integrable (fun t => F_h t * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) volume)
-    (h_integrable_μ : Integrable F_h μ_spec) :
+    (h_integrable_μ : Integrable F_h P.μ_spec) :
     ∫ t : ℝ, F_h t * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ) ∂ volume =
-      - Real.pi * ∫ t : ℝ, F_h t ∂ μ_spec := by
+      - Real.pi * ∫ t : ℝ, F_h t ∂ P.μ_spec := by
   let θ' := deriv (boundaryPhaseFunction P)
   -- Split F_h into real and imaginary parts
   let u := fun t => (F_h t).re
@@ -391,8 +397,11 @@ theorem complex_phase_velocity_identity
   have h_int_v : Integrable v volume := h_integrable_F.im
 
   -- Apply real identity to u and v
-  have h_real_u := psc_phase_velocity_identity P (boundaryPhaseFunction P) μ_spec u h_int_u
-  have h_real_v := psc_phase_velocity_identity P (boundaryPhaseFunction P) μ_spec v h_int_v
+  have h_real_u : ∫ t : ℝ, u t * θ' t ∂volume = - Real.pi * ∫ t : ℝ, u t ∂ P.μ_spec := by
+    -- `phase_velocity_identity` is bundled in `P`; rewrite `deriv boundaryPhase` as `θ'`.
+    simpa [boundaryPhaseFunction, θ'] using P.phase_velocity_identity u h_int_u
+  have h_real_v : ∫ t : ℝ, v t * θ' t ∂volume = - Real.pi * ∫ t : ℝ, v t ∂ P.μ_spec := by
+    simpa [boundaryPhaseFunction, θ'] using P.phase_velocity_identity v h_int_v
 
   -- Expand LHS integral
   -- integral_re_add_im splits ∫ (f) into ↑(∫ f.re) + I * ↑(∫ f.im)
@@ -401,12 +410,12 @@ theorem complex_phase_velocity_identity
   · exact h_integrable_vol
 
   -- Simplify LHS terms using RCLike to match integral_re_add_im
-  have h_lhs_re : ∫ t, RCLike.re (F_h t * (θ' t : ℂ)) ∂volume = -Real.pi * ∫ t, u t ∂μ_spec := by
+  have h_lhs_re : ∫ t, RCLike.re (F_h t * (θ' t : ℂ)) ∂volume = -Real.pi * ∫ t, u t ∂P.μ_spec := by
     have h_eq : (fun t => RCLike.re (F_h t * (θ' t : ℂ))) = fun t => u t * θ' t := by
       ext t; dsimp [RCLike.re]; simp [u, θ']
     rw [h_eq, h_real_u]
 
-  have h_lhs_im : ∫ t, RCLike.im (F_h t * (θ' t : ℂ)) ∂volume = -Real.pi * ∫ t, v t ∂μ_spec := by
+  have h_lhs_im : ∫ t, RCLike.im (F_h t * (θ' t : ℂ)) ∂volume = -Real.pi * ∫ t, v t ∂P.μ_spec := by
     have h_eq : (fun t => RCLike.im (F_h t * (θ' t : ℂ))) = fun t => v t * θ' t := by
       ext t; dsimp [RCLike.im]; simp [u, v, θ']
     rw [h_eq, h_real_v]
@@ -442,17 +451,16 @@ theorem splice_completion_with_normalization
     (P : PSCComponents)
     (F_h : ℝ → ℂ)
     (W1_h : ℂ)
-    (μ_spec : Measure ℝ)
     (h_explicit : W1_h = (1 / (2 * Real.pi)) *
         ∫ t : ℝ, -(F_h t * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume)
     (h_integrable_F : Integrable F_h volume)
     (h_integrable_vol : Integrable (fun t => F_h t * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) volume)
-    (h_integrable_μ : Integrable F_h μ_spec) :
-    W1_h = (1 / 2 : ℂ) * ∫ t : ℝ, F_h t ∂ μ_spec := by
+    (h_integrable_μ : Integrable F_h P.μ_spec) :
+    W1_h = (1 / 2 : ℂ) * ∫ t : ℝ, F_h t ∂ P.μ_spec := by
   -- Use h_explicit and complex_phase_velocity_identity
   rw [h_explicit]
   -- ∫ -F_h·θ' = - ∫ F_h·θ' = -(-π ∫ F_h dμ_spec) = π ∫ F_h dμ_spec
-  have h_phase := complex_phase_velocity_identity P F_h μ_spec h_integrable_F h_integrable_vol h_integrable_μ
+  have h_phase := complex_phase_velocity_identity P F_h h_integrable_F h_integrable_vol h_integrable_μ
   -- Simplify the negation: ∫ (-f) = - ∫ f
   rw [integral_neg]
   -- After simp: (1/(2π)) * (- ∫ F_h·θ')
@@ -484,13 +492,13 @@ The actual proof would combine:
 2. `log_deriv_decomposition` (theorem) to write ξ'/ξ = ... - J'/J
 3. `logDeriv_unimodular_real` (theorem) to identify J'/J = θ' (real) on the boundary, under trace regularity
 4. `explicit_formula_cancellation` to show W^{(1)}(h) = (1/2π) ∫ F_h · (-θ') dt
-5. `psc_phase_velocity_identity` to connect -θ' = π μ_spec (using w = -θ convention)
+5. `PSCComponents.phase_velocity_identity` (bundled in `P`) to connect -θ' = π μ_spec (using w = -θ convention)
 6. Normalization tracking (handled in `splice_completion_with_normalization`)
 
 **Chain summary:**
 ```
 W^{(1)}(h) = (1/2π) ∫ F_h · (-θ') dt     [explicit_formula_cancellation]
-           = (1/2π) ∫ F_h · π dμ_spec    [psc_phase_velocity_identity with w = -θ]
+           = (1/2π) ∫ F_h · π dμ_spec    [`P.phase_velocity_identity` with w = -θ]
            = (1/2) ∫ F_h dμ_spec          [algebra]
 ```
 

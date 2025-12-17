@@ -7,11 +7,13 @@
 This document is part of the Route‑3 plan. When executing:
 
 1. **Context:** This is the "standard analysis" identity part — no RH-equivalent content here
-2. **Current status:** Proof sketch complete (SC1-SC3), axioms in `ContourToBoundary.lean`
-3. **Remaining work:** Prove axioms using Mathlib's contour/residue infrastructure
+2. **Current status:** Proof sketch complete (SC1-SC3). In Lean, `ContourToBoundary.lean` now contains **no global `axiom`s** for this chain; the remaining “analysis gaps” are carried as explicit hypotheses/fields (e.g. `explicit_formula_cancellation` is a hypothesis `Prop`).
+3. **Remaining work:** Prove/replace the remaining analysis hypotheses using Mathlib contour/residue infrastructure (or split them into smaller provable lemmas). Note: this ultimately requires making `L.W1` concrete (the current `LagariasFramework` keeps `W1` abstract).
 4. **Key result:** W^{(1)}(pair(f,g)) = ∫ conj(F_f) · F_g dμ_spec
 
 **Anti-stall rule:** If an identity sub-lemma looks blocked in Mathlib (contour/limits/distributions), try one “derived axiom → theorem” refactor (or split an axiom) before declaring a blocker.
+
+**Plan-maintenance rule:** If you refactor a global axiom into a hypothesis (or prove one), immediately update `ROUTE3_UNCONDITIONAL_PLAN.md`, `ROUTE3_LEMMA_COMPLETION_LOOP.md`, and (if needed) `ROUTE3_MOST_RECENT_PROOF.tex`.
 
 ---
 
@@ -131,6 +133,10 @@ Once (SC1)–(SC3) are discharged, the Lean target is literally `PSCSplice.Integ
 ---
 
 ### Definition of the symmetric zero-sum via contour integrals (preferred “precise” definition)
+
+**Lean note:** The canonical contour scaffolding now lives in:
+- `RiemannRecognitionGeometry/ExplicitFormula/ContourW1.lean` (rectangle boundary integral + `W1Trunc`)
+- `RiemannRecognitionGeometry/ExplicitFormula/LagariasContour.lean` (packages a `LagariasFramework` with a `W1 = lim W1Trunc` hypothesis)
 
 Fix \(c>1\). For \(T>0\), let \(R_{c,T}\) be the rectangle with vertices
 \(c\pm iT\) and \(1-c\pm iT\), oriented positively.
@@ -349,7 +355,11 @@ Therefore:
 W^{(1)}(h) \;=\; -\frac{1}{2\pi} \int_{\mathbb R} F_h(t) \cdot \pi\, \mu_{\mathrm{spec}}(t)\, dt \;=\; -\frac{1}{2} \int_{\mathbb R} F_h(t)\, d\mu_{\mathrm{spec}}(t).
 \]
 
-**Wait—there's a sign/factor issue.** Let me recheck.
+**Normalization note:** In Lean, this bookkeeping is implemented as the theorem
+`ContourToBoundary.splice_completion_with_normalization`, which yields a real prefactor `1/2`.
+That prefactor is then absorbed into the measure by rescaling (see
+`PSCSplice.IntegralAssumptions.ofHalfScalarMulIntegral`), so the final Route‑3 Bochner identity has
+no stray `i` factors.
 
 #### Corrected calculation
 

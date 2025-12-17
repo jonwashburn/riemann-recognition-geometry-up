@@ -1064,15 +1064,18 @@ is positive definite (Carathéodory/Herglotz).  We use the formalization in
 -/
 
 /-- Carathéodory kernel positivity, assuming holomorphy and nonnegative real part on the disk.
-    This theorem uses the `herglotz_representation` axiom from Caratheodory.lean. -/
+    The remaining classical-analysis input is the existence of a Herglotz representation (threaded as a hypothesis). -/
 theorem caratheodory_positive_definite
     (Func : ℂ → ℂ)
     (hHol : Caratheodory.IsHolomorphicOnDisk Func)
-    (hC : ExplicitFormula.IsCaratheodory Func) :
+    (hC : ExplicitFormula.IsCaratheodory Func)
+    (hHerg : Caratheodory.herglotz_representation Func
+      { holomorphic := hHol
+        re_nonneg := hC }) :
     ∀ (n : ℕ) (z : Fin n → ℂ) (_hz : ∀ i, Complex.abs (z i) < 1) (c : Fin n → ℂ),
       0 ≤ (∑ i : Fin n, ∑ j : Fin n,
         c i * starRingEnd ℂ (c j) * ExplicitFormula.caratheodoryKernel' Func (z i) (z j)).re := by
-  exact ExplicitFormula.caratheodory_positive_definite_with_holomorphy (Func := Func) hHol hC
+  exact ExplicitFormula.caratheodory_positive_definite_with_holomorphy (Func := Func) hHol hC hHerg
 
 end ExplicitFormula
 end RiemannRecognitionGeometry

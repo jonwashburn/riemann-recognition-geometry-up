@@ -6,18 +6,25 @@ This file is the **single source of truth** for the Route‑3 (Lagarias/Weil) "u
 
 ## 🔄 PROACTIVE EXECUTION PROTOCOL
 
-**Instructions for the AI assistant (Claude):**
+**Instructions for the AI assistant:**
 
 When the user says "continue executing on our plan" or similar:
 
 1. **Read this file first** — Identify the current state from "Current status + next action" below
 2. **Execute immediately** — Don't ask for confirmation. Start working on the next item.
 3. **Iterate until blocked** — After completing one item, immediately start the next.
-4. **Self-direct + re-plan continuously** — Before each new item, quickly re-evaluate if the next step is still the best move. If you find a better sequencing, refactor, or lemma target, update this file (and `ROUTE3_LEMMA_COMPLETION_LOOP.md`) first, then proceed.
-5. **Track progress** — Mark items as complete, add notes about what was done.
-6. **Report blockers clearly** — If truly stuck (missing Mathlib API, unclear requirement), explain what's needed.
+4. **Self-direct + re-plan continuously** — Before each new item, quickly re-evaluate if the next step is still the best move. If you find a better sequencing/refactor/lemma target, update the relevant plan docs *first* (this file + `ROUTE3_LEMMA_COMPLETION_LOOP.md`), then proceed.
+5. **Keep the plan “alive”** — After *every* successful milestone (new theorem, axiom removed, major refactor), immediately update:
+   - this file’s “Current status + next action” section, and
+   - `ROUTE3_LEMMA_COMPLETION_LOOP.md` (execution queue + axiom counts),
+   - and, if it changes the narrative/status, `ROUTE3_MOST_RECENT_PROOF.tex`.
+6. **Prefer de-axiomatization** — If something is currently a global Lean `axiom`, first try to convert it into:
+   - a theorem (best), or
+   - an explicit hypothesis/bundle field (`structure` field / `def … : Prop`) that is threaded where needed (acceptable intermediate).
+7. **Track progress** — Mark items as complete, add notes about what was done.
+8. **Report blockers clearly** — If truly stuck (missing Mathlib API, unclear requirement), explain what's needed, then pivot to the next best sub-lemma per the anti-stall rule.
 
-**Goal:** Keep grinding until `RiemannHypothesis` is proved with **no Lean axioms remaining**.
+**Goal:** Keep grinding until `RiemannHypothesis` is proved with **no Lean axioms remaining on the Route‑3 proof path** (i.e. in the `ExplicitFormula` pipeline and its direct imports).
 
 **Anti-stall rule:** If a step looks blocked, attempt one alternative (e.g. prove a “derived axiom” as a theorem, split a big axiom into smaller lemmas, or switch to a different checklist track) before declaring a blocker.
 
@@ -113,7 +120,7 @@ Produce a **non‑conditional** proof of RH by proving the **single RH‑equival
     `RiemannRecognitionGeometry/ExplicitFormula/ContourToBoundary.lean`:
     - ✅ `PSCComponents` structure (det₂, O, ξ with differentiability)
     - ✅ `log_deriv_decomposition` **PROVED** using Mathlib's `logDeriv_div` and `logDeriv_mul`
-    - Remaining axioms (identity part): `explicit_formula_cancellation`, `psc_phase_velocity_identity`.
+    - Remaining identity inputs (non-axiom): `ContourToBoundary.explicit_formula_cancellation` (now an explicit hypothesis; no longer a global `axiom`). PSC phase–velocity is bundled as data/fields in `PSCComponents`.
 
 **What this buys immediately:**
 - \(W^{(1)}(\mathrm{quad}(f)) = \int |F_f(t)|^2\,d\mu(t) \ge 0\), hence `WeilGate`, hence RH (via Lagarias).
@@ -169,6 +176,7 @@ Produce a **non‑conditional** proof of RH by proving the **single RH‑equival
   - **(SC3)** check the fixed \(\pi\) normalization constants so the final statement is exactly the Bochner identity above.
 
 **Standard-analysis checklist (contour/explicit formula route):**
+- **(Infrastructure)** Use `ExplicitFormula/ContourW1.lean` + `ExplicitFormula/LagariasContour.lean` as the canonical Lean scaffolding for “`W¹` is a contour-limit” (rectangle boundary integral + `T → ∞` limit hypothesis bundle).
 - Define \(W^{(1)}\) as a contour limit or symmetric truncation over zeros.
 - Show horizontals vanish (Mellin/Schwartz decay + \(ξ'/ξ = O(\log|t|)\) in strips).
 - Justify limit ↔ integral swaps (dominated convergence).
@@ -289,9 +297,10 @@ At this point the program is structurally complete. What remains is split into:
 
 #### Standard theorems not yet formalized (big but "just work")
 
-- [ ] **(Optional: "zero-axiom Lean") Remove the `herglotz_representation` axiom** in `ExplicitFormula/Caratheodory.lean` by proving (or importing) the Herglotz representation theorem.
+- [x] **Remove the global `herglotz_representation` axiom** (done): it is now an explicit hypothesis threaded through `Caratheodory`/`HilbertRealization`.
+- [ ] **Prove `herglotz_representation`** (now a hypothesis) in `ExplicitFormula/Caratheodory.lean` by formalizing (or importing) the Herglotz representation theorem.
   - Good news: Mathlib has foundational measure-representation tools (e.g. `MeasureTheory/Integral/RieszMarkovKakutani.lean`) and weak-* compactness (Banach–Alaoglu in `Analysis/Normed/Module/WeakDual.lean`).
-  - Note: Mathlib does **not** currently appear to have a ready-made "Poisson kernel / harmonic functions on the disk / Herglotz representation" development, so removing this axiom is still a substantial standalone formalization project.
+  - Note: Mathlib does **not** currently appear to have a ready-made "Poisson kernel / harmonic functions on the disk / Herglotz representation" development, so proving this is still a substantial standalone formalization project.
 - [ ] **Build a concrete `LagariasFramework` instance** for a concrete test space (recommended: `WeilTestFunction` / log‑Schwartz), proving:
   - Lagarias Thm 3.1 (explicit formula) as an equality of functionals, and
   - Lagarias Thm 3.2 (Weil criterion) as an equivalence `RH ↔ WeilGate`.

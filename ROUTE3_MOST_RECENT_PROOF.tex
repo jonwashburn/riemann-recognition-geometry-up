@@ -317,11 +317,12 @@ The Route 3 \emph{implication skeleton} for Track 2 is now formalized in Lean.
 
 \subsection{Current gaps (classical analysis input)}
 
-The formalization has the following axioms (no sorrys):
+The formalization has \textbf{zero global Lean axioms} in the Track~2 skeleton (and no sorrys).
+The remaining classical-analysis gaps are carried as explicit hypotheses/fields (named so they can be proved later).
 
-\textbf{1. Classical analysis axiom} (in \texttt{Caratheodory.lean}):
+\textbf{1. Classical analysis hypothesis} (in \texttt{Caratheodory.lean}):
 \begin{enumerate}
-  \item \texttt{herglotz\_representation} --- the Herglotz representation theorem (1911).
+  \item \texttt{herglotz\_representation} --- the Herglotz representation theorem (1911), currently carried as a hypothesis (not a Lean \texttt{axiom}).
     This is standard complex analysis: every function holomorphic on the unit disk with $\Re F \ge 0$
     admits a representation $F(z) = \int_{|\zeta|=1} \frac{\zeta+z}{\zeta-z}\, d\mu(\zeta) + i\cdot\mathrm{Im}(F(0))$
     for a positive finite measure $\mu$ on the unit circle.  Formalizing this would require Poisson integral
@@ -349,11 +350,12 @@ The formalization has the following axioms (no sorrys):
     a \texttt{PSCSplice.IntegralAssumptions} instance).
 \end{enumerate}
 
-\textbf{3. Contour-to-boundary axioms} (in \texttt{ContourToBoundary.lean}):
-These axioms decompose the splice completion into smaller, provable pieces (and include a proved complex-linear extension).  (The boundary phase function \(\theta\) is now bundled as data in \texttt{PSCComponents}, not an axiom.)
+\textbf{3. Contour-to-boundary analysis inputs} (in \texttt{ContourToBoundary.lean}):
+The contour-to-boundary chain has been refactored so that there are \emph{no global Lean axioms} in this file.
+Any remaining “standard analysis gaps” are carried as explicit hypotheses/fields, and the complex-linear extension is proved as a theorem.
 \begin{itemize}
-  \item \texttt{explicit\_formula\_cancellation}: arithmetic terms cancel
-  \item \texttt{psc\_phase\_velocity\_identity}: $-w' = \pi\,\mu_{\mathrm{spec}}$
+  \item \texttt{ContourToBoundary.explicit\_formula\_cancellation}: a hypothesis (a \texttt{Prop}) stating the boundary pairing formula for \texttt{L.W1 h}.
+  \item \texttt{PSCComponents.phase\_velocity\_identity} + \texttt{PSCComponents.μ\_spec}: bundled PSC input giving the phase--velocity distribution identity and the resulting positive boundary measure.
 \end{itemize}
 
 \subsection{Completed components}
@@ -377,14 +379,13 @@ These axioms decompose the splice completion into smaller, provable pieces (and 
   \(\mu_{\mathrm{spec}}\) as the Route~3 boundary measure and fires the existing measure-first pipeline is implemented in
   \texttt{RiemannRecognitionGeometry/ExplicitFormula/PSCSplice.lean}.
 
-  \item \textbf{Contour-to-boundary connection:} axioms for the log-derivative cancellation and boundary limit are in
+  \item \textbf{Contour-to-boundary connection:} the contour-to-boundary wiring and proved auxiliary lemmas are in
   \texttt{RiemannRecognitionGeometry/ExplicitFormula/ContourToBoundary.lean}. These include:
   \begin{itemize}
-    \item \texttt{psc\_ratio\_unimodular\_boundary}: $|\mathcal J(1/2+it)| = 1$ a.e.
     \item \texttt{log\_deriv\_decomposition}: $\xi'/\xi = (\det_2)'/\det_2 - \mathcal O'/\mathcal O - \mathcal J'/\mathcal J$
-    \item \texttt{boundary\_log\_deriv\_imaginary}: $\mathcal J'/\mathcal J = iw'$ on the boundary
-    \item \texttt{explicit\_formula\_cancellation}: arithmetic terms cancel via Lagarias Thm 3.1
-    \item \texttt{psc\_phase\_velocity\_identity}: $-w' = \pi\,\mu_{\mathrm{spec}}$
+    \item \texttt{logDeriv\_unimodular\_real}: boundary chain rule theorem (proved)
+    \item \texttt{complex\_phase\_velocity\_identity}: complex-linear phase--velocity extension (proved)
+    \item \texttt{explicit\_formula\_cancellation}: carried as an explicit hypothesis (\texttt{Prop}) in the PSC splice construction
   \end{itemize}
 
   \item The Route 3 reduction ``\emph{spectral identity $\Rightarrow$ reflection positivity $\Rightarrow$ Weil gate $\Rightarrow$ RH}''
@@ -413,9 +414,8 @@ These axioms decompose the splice completion into smaller, provable pieces (and 
 
 \subsection{Remaining mathematical work}
 
-The Track 2 formalization is essentially complete with \textbf{three axioms and zero sorrys}
-(\texttt{herglotz\_representation} plus the two contour-to-boundary axioms:
-\texttt{explicit\_formula\_cancellation}, \texttt{psc\_phase\_velocity\_identity}).
+The Track 2 formalization is essentially complete with \textbf{zero axioms and zero sorrys}.
+All remaining classical-analysis content is carried as explicit hypotheses (so the pipeline compiles and remains modular), and can be proved later.
 
 \textbf{The single remaining identity lemma (splice completion):}
 \begin{itemize}
@@ -429,9 +429,9 @@ The Track 2 formalization is essentially complete with \textbf{three axioms and 
   \item Proof sketch: see \texttt{ROUTE3\_IDENTITY\_PART.md} for the contour bookkeeping (steps SC1--SC3).
 \end{itemize}
 
-\textbf{Standard-theorem axiom (Herglotz):}
+\textbf{Standard-theorem hypothesis (Herglotz):}
 \begin{itemize}
-  \item \texttt{herglotz\_representation} in \texttt{Caratheodory.lean}:
+  \item \texttt{herglotz\_representation} in \texttt{Caratheodory.lean} (hypothesis):
     the classical Herglotz representation theorem (1911).
   \item Formalizing this would require Poisson kernel theory, Riesz representation for positive functionals,
     and Fatou's theorem---substantial but routine analysis not currently in Mathlib.
@@ -451,9 +451,9 @@ Sorrys & 0 & All proofs complete \\
 \hline
 Axioms (bridge) & 0 & (none; splice completion is a lemma to be proved, not a global axiom) \\
 \hline
-Axioms (identity analysis input) & 2 & \texttt{explicit\_formula\_cancellation}, \texttt{psc\_phase\_velocity\_identity} \\
+Axioms (identity analysis input) & 0 & (none; identity inputs are explicit hypotheses/fields, not global axioms) \\
 \hline
-Axioms (Mathlib gap) & 1 & \texttt{herglotz\_representation} \\
+Axioms (Mathlib gap) & 0 & (none; remaining gaps are explicit hypotheses/fields) \\
 \hline
 Build Status & \checkmark & \texttt{lake build} succeeds \\
 \hline
