@@ -8,8 +8,15 @@ This document is part of the Route‑3 plan. When executing:
 
 1. **Context:** This is the "standard analysis" identity part — no RH-equivalent content here
 2. **Current status:** Proof sketch complete (SC1-SC3). In Lean, `ContourToBoundary.lean` now contains **no global `axiom`s** for this chain; the remaining “analysis gaps” are carried as explicit hypotheses/fields (e.g. `explicit_formula_cancellation` is a hypothesis `Prop`).
+   - **New:** `ExplicitFormulaCancellationSkeleton.lean` now reduces the “explicit formula cancellation” step to a single named full-line integral identity `rightEdge_integral_identity` (plus routine integrability + horizontal-vanishing).
 3. **Remaining work:** Prove/replace the remaining analysis hypotheses using Mathlib contour/residue infrastructure (or split them into smaller provable lemmas). Note: this ultimately requires making `L.W1` concrete (the current `LagariasFramework` keeps `W1` abstract).
 4. **Key result:** W^{(1)}(pair(f,g)) = ∫ conj(F_f) · F_g dμ_spec
+5. **Execution rule:** When the user says “continue”, do the **first unchecked** `[ ]` item in `ROUTE3_LEMMA_COMPLETION_LOOP.md` (this identity document should be treated as the source of proof obligations for that queue item).
+6. **Run the build:** After any substantive Lean edit, run `lake build` and fix errors immediately.
+
+**Proactive planning loop (must follow every time):**
+- Treat the current blocker as a *decomposition problem*: keep splitting `explicit_formula_cancellation` into smaller, Lean-checkable statements until one is provable with existing Mathlib API.
+- Every time you create a new “last missing hypothesis”, name it (as a `def`/`structure` field) and add it as a checkbox in `ROUTE3_LEMMA_COMPLETION_LOOP.md`.
 
 **Anti-stall rule:** If an identity sub-lemma looks blocked in Mathlib (contour/limits/distributions), try one “derived axiom → theorem” refactor (or split an axiom) before declaring a blocker.
 

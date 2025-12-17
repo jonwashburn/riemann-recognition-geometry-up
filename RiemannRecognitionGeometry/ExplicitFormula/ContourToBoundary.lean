@@ -39,6 +39,7 @@ import Mathlib.Analysis.Calculus.LogDeriv
 import Mathlib.Analysis.Complex.RealDeriv
 import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 import RiemannRecognitionGeometry.ExplicitFormula.Lagarias
+import RiemannRecognitionGeometry.ExplicitFormula.LagariasContour
 import RiemannRecognitionGeometry.ExplicitFormula.ContourW1
 
 noncomputable section
@@ -353,6 +354,49 @@ def explicit_formula_cancellation
     -- W^{(1)}(h) equals the boundary phase pairing against the critical-line Mellin transform
     L.W1 h = (1 / (2 * Real.pi)) *
       ∫ t : ℝ, -(M[h](1/2 + I * t) * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume
+
+/--
+Variant of `explicit_formula_cancellation` phrased for a `LagariasContourFramework`.
+
+This lets us work with a *concrete* contour-limit definition of `W¹` (via `ContourW1.W1Trunc`)
+while keeping the main Route-3 pipeline statement unchanged.
+-/
+def explicit_formula_cancellation_contour
+    {F : Type} [TestSpace F]
+    (LC : LagariasContourFramework F)
+    (P : PSCComponents)
+    (h : F) : Prop :=
+  LC.contourW1.W1 h = (1 / (2 * Real.pi)) *
+    ∫ t : ℝ, -(M[h](1/2 + I * t) * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume
+
+theorem explicit_formula_cancellation_contour_of_tendsto_W1Trunc
+    {F : Type} [TestSpace F]
+    (LC : LagariasContourFramework F)
+    (P : PSCComponents)
+    (h : F)
+    (hLim :
+      Filter.Tendsto (fun T : ℝ => ContourW1.W1Trunc (F := F) LC.xi LC.c T h) Filter.atTop
+        (nhds ((1 / (2 * Real.pi)) *
+          ∫ t : ℝ, -(M[h](1/2 + I * t) * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume))) :
+    explicit_formula_cancellation_contour (LC := LC) (P := P) h := by
+  -- Convert the computed limit into an equality for the packaged `W¹`.
+  dsimp [explicit_formula_cancellation_contour]
+  simpa using
+    (ContourW1.W1_eq_of_tendsto_W1Trunc (xi := LC.xi) (c := LC.c) (A := LC.contourW1)
+      (f := h) (z := ((1 / (2 * Real.pi)) *
+        ∫ t : ℝ, -(M[h](1/2 + I * t) * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume))
+      hLim)
+
+theorem explicit_formula_cancellation_of_contour
+    {F : Type} [TestSpace F]
+    (LC : LagariasContourFramework F)
+    (P : PSCComponents)
+    (h : F)
+    (H : explicit_formula_cancellation_contour (LC := LC) (P := P) h) :
+    explicit_formula_cancellation (L := LC.L) P h := by
+  -- rewrite `LC.L.W1` using the contour-compatibility field
+  dsimp [explicit_formula_cancellation, explicit_formula_cancellation_contour] at *
+  simpa [LC.W1_eq] using H
 
 /-!
 ## PSC phase–velocity input

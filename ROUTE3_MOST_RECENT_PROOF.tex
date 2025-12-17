@@ -35,6 +35,25 @@ and that the representing object is \emph{positive} for the arithmetic \(\xi/\ze
 
 After that, the Hilbert-space realization drops out by a standard construction (GNS / OS / RKHS flavor).
 
+\paragraph{Implementation status (identity side).}
+On the Lean side, the remaining “explicit formula cancellation” work has now been reduced to a single
+named full-line integral identity (a statement about the right-edge vertical integral, plus a routine
+improper-integral limit lemma). This is recorded in
+\texttt{ExplicitFormula/ExplicitFormulaCancellationSkeleton.lean} as
+\texttt{rightEdge\_integral\_identity}.
+
+\subsection*{Proactive execution protocol (for repeated prompting)}
+
+This document is kept in sync with the Lean repo. When the user says “continue”:
+\begin{itemize}
+  \item Read \texttt{ROUTE3\_LEMMA\_COMPLETION\_LOOP.md} and do the \textbf{first unchecked} \texttt{[ ]} item.
+  \item After any substantive Lean edit, run \texttt{lake build} and fix errors immediately.
+  \item After each milestone (new lemma/theorem, refactor, hypothesis reduction), update:
+  \texttt{ROUTE3\_UNCONDITIONAL\_PLAN.md}, \texttt{ROUTE3\_LEMMA\_COMPLETION\_LOOP.md}, and this \texttt{.tex} file if the narrative/axiom table changes.
+  \item Anti-stall rule: if a step is blocked, split it into smaller provable lemmas and keep grinding (don’t stop after one failed attempt).
+  \item Proactive planning loop: always keep a named “next smallest lemma” in the queue; if you discover a better sequencing, update the plan docs \emph{first}, then proceed.
+\end{itemize}
+
 \subsection*{Critical correction (important)}
 For the standard completed Riemann--Lagarias \(\xi\)-function, one has \(\xi(\tfrac12+it)\in\mathbb{R}\) for real \(t\),
 hence \(\xi'(\tfrac12+it)\in i\mathbb{R}\) away from zeros and therefore

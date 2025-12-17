@@ -10,6 +10,13 @@ This document is part of the Route‑3 plan. When executing:
 2. **Current status:** Positivity comes from PSC → Herglotz → μ ≥ 0. In Lean, `herglotz_representation` has been refactored into an explicit **hypothesis** (no global `axiom`); remaining work is to prove it (or import the required Poisson/Riesz infrastructure).
 3. **Remaining work:** See `ROUTE3_LEMMA_COMPLETION_LOOP.md` for detailed axiom status
 4. **Key insight:** The splice brings μ_spec from `Riemann-active.txt` into Route-3
+5. **Execution rule:** When the user says “continue”, do the **first unchecked** `[ ]` item in `ROUTE3_LEMMA_COMPLETION_LOOP.md` (default to the identity-side queue unless the user explicitly asks to focus on positivity).
+6. **Run the build:** After any substantive Lean edit, run `lake build` and fix errors immediately.
+
+**Proactive planning loop (must follow every time):**
+- Start each “continue” with a short micro-plan + the exact next checkbox you’re executing.
+- If progress stalls, immediately create a smaller sub-lemma checkbox in `ROUTE3_LEMMA_COMPLETION_LOOP.md` and switch to that.
+- Keep this doc’s “Current status” line synchronized with what the codebase actually proves.
 
 **Anti-stall rule:** If a positivity bridge lemma is blocked (Herglotz/Carathéodory), try one smaller lemma extraction (e.g. “positive-definite kernel → measure” in a restricted setting) before declaring a blocker.
 

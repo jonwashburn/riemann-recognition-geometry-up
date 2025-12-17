@@ -22,7 +22,13 @@ When the user says "continue executing on our plan" or similar:
    - a theorem (best), or
    - an explicit hypothesis/bundle field (`structure` field / `def … : Prop`) that is threaded where needed (acceptable intermediate).
 7. **Track progress** — Mark items as complete, add notes about what was done.
-8. **Report blockers clearly** — If truly stuck (missing Mathlib API, unclear requirement), explain what's needed, then pivot to the next best sub-lemma per the anti-stall rule.
+8. **Run the build** — After any substantive Lean edit, run `lake build`. If it fails, fix the errors before doing anything else.
+9. **Report blockers clearly** — If truly stuck (missing Mathlib API, unclear requirement), explain what's needed, then pivot to the next best sub-lemma per the anti-stall rule.
+
+**Proactive planning loop (must follow every time):**
+- At the start of each “continue”, write a 2–4 line **micro-plan** (what you will do next + what files you’ll touch).
+- Before coding, ensure the next action is a **single smallest lemma/definition**; if not, split it into new checkboxes in `ROUTE3_LEMMA_COMPLETION_LOOP.md`.
+- Never end a session with “next step unclear”: if needed, create the next checkbox item(s) yourself.
 
 **Goal:** Keep grinding until `RiemannHypothesis` is proved with **no Lean axioms remaining on the Route‑3 proof path** (i.e. in the `ExplicitFormula` pipeline and its direct imports).
 

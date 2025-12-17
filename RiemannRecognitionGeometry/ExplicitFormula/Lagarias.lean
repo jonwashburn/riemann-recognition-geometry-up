@@ -11,6 +11,8 @@ No Carleson/BMO/Whitney infrastructure is imported here.
 -/
 
 import Mathlib.NumberTheory.LSeries.RiemannZeta
+import Mathlib.Analysis.Calculus.LogDeriv
+import Mathlib.Analysis.Calculus.Deriv.Shift
 import RiemannRecognitionGeometry.ExplicitFormula.Defs
 
 noncomputable section
@@ -37,6 +39,37 @@ lemma xiLagarias_one_sub (s : ℂ) : xiLagarias (1 - s) = xiLagarias s := by
   rw [completedRiemannZeta_one_sub s]
   -- The remaining equality is just commutative-ring algebra in `s`.
   ring_nf
+
+lemma deriv_xiLagarias_one_sub (s : ℂ) : deriv xiLagarias (1 - s) = - deriv xiLagarias s := by
+  -- Differentiate the functional equation `xiLagarias (1 - z) = xiLagarias z`.
+  have hfun : (fun z : ℂ => xiLagarias (1 - z)) = xiLagarias := by
+    funext z
+    simpa using xiLagarias_one_sub z
+  -- Use `deriv_comp_const_sub` to compute the derivative of the left side.
+  have hcomp :
+      deriv (fun z : ℂ => xiLagarias (1 - z)) s = - deriv xiLagarias (1 - s) := by
+    -- `1 - z` is `1 - z` (a const-sub), so this is exactly `deriv_comp_const_sub`.
+    simpa [sub_eq_add_neg] using (deriv_comp_const_sub (f := xiLagarias) (a := (1 : ℂ)) (x := s))
+  -- Rewrite using `hfun` and rearrange.
+  have : deriv xiLagarias s = - deriv xiLagarias (1 - s) := by
+    simpa [hfun] using hcomp
+  -- Flip sides by negating the equality.
+  have hneg : -deriv xiLagarias s = deriv xiLagarias (1 - s) := by
+    simpa using congrArg (fun z : ℂ => -z) this
+  simpa using hneg.symm
+
+lemma logDeriv_xiLagarias_one_sub (s : ℂ) : logDeriv xiLagarias (1 - s) = - logDeriv xiLagarias s := by
+  -- Expand `logDeriv` and rewrite using the functional equation and the derivative identity.
+  -- Then it is just the algebraic identity `(-a)/b = -(a/b)`.
+  simp [logDeriv, deriv_xiLagarias_one_sub, xiLagarias_one_sub, neg_div]
+
+/-- The functional-equation log-derivative identity specialized to vertical-line points `c - it`. -/
+lemma logDeriv_xiLagarias_leftEdge (c t : ℝ) :
+    logDeriv xiLagarias (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      - logDeriv xiLagarias ((c : ℂ) + ((-t : ℝ) : ℂ) * I) := by
+  -- Apply `logDeriv_xiLagarias_one_sub` to `s = c - it` and simplify `1 - (c - it)`.
+  simpa [sub_eq_add_neg, add_assoc, add_left_comm, add_comm, mul_assoc, mul_left_comm, mul_comm] using
+    (logDeriv_xiLagarias_one_sub (s := (c : ℂ) + ((-t : ℝ) : ℂ) * I))
 
 /-!
 ## Zeros: relating `xiLagarias` and `riemannZeta` (basic correspondence lemmas)
@@ -147,4 +180,3 @@ end LagariasFramework
 
 end ExplicitFormula
 end RiemannRecognitionGeometry
-

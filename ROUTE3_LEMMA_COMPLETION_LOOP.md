@@ -47,6 +47,32 @@ When the user says “continue”, do the **first unchecked** `[ ]` item below.
   - [x] Add a Lean definition template for the truncated contour functional `W1Trunc` (rectangular boundary integral) in `ExplicitFormula/ContourW1.lean`
   - [x] Add a Lean hypothesis bundle `ContourW1.W1LimitAssumptions` packaging `W1 = lim_{T→∞} W1Trunc`
   - [x] Add `LagariasContourFramework` (`ExplicitFormula/LagariasContour.lean`) to package `LagariasFramework` + contour definition of `W¹`
+  - [x] Prove the formal left-vertical-edge rewrite lemma `ContourW1.vertLeft_eq_neg_vertRight_tilde` (setup for functional-equation cancellation)
+  - [x] Prove `ContourW1.vertDiff_eq_vertRight_add_vertRight_tilde` (algebraic functional-equation cancellation on the vertical edges)
+  - [x] Prove `ContourW1.tendsto_vertRight_add_vertRight_tilde_of_horizontal_vanish` (combine FE edge rewrite + horizontal vanishing + `W1Trunc` limit algebra)
+  - [x] Add `ContourW1.mellin_leftEdge_eq_tilde_rightEdge` (derive the Mellin edge identity from `TestSpace.mellin_tilde`)
+  - [x] Add `ContourW1.vertLeft_eq_neg_vertRight_tilde_of_mellin` / `ContourW1.vertDiff_eq_vertRight_add_vertRight_tilde_of_mellin` (remove `hM` hypothesis from the FE edge lemmas)
+  - [x] Add `ContourW1.vertLeft_eq_neg_vertRight_tilde_of_mellin_and_logDeriv_one_sub` / `ContourW1.vertDiff_eq_vertRight_add_vertRight_tilde_of_mellin_and_logDeriv_one_sub` (package FE as `hFE : logDeriv xi (1-s) = -logDeriv xi s`)
+  - [x] Add `ExplicitFormula/ExplicitFormulaCancellationSkeleton.lean` (packages contour-limit + horizontal-vanishing + FE edge cancellation as a reusable `Tendsto` lemma for `LagariasContourFramework`)
+  - [x] Add `ExplicitFormulaCancellationSkeleton.explicit_formula_cancellation_contour_of_tendsto_vertRight_add_vertRight_tilde_xiLagarias` (reduces `explicit_formula_cancellation` to a single explicit right-edge `Tendsto` hypothesis)
+  - [x] Add `ExplicitFormulaCancellationSkeleton.RightEdgePhaseLimitAssumptions` (names the single remaining analytic “right-edge limit = boundary-phase pairing” hypothesis as a bundle)
+  - [x] Decompose the right-edge `Tendsto` further: add `tendsto_vertRight_of_integrable` and `rightEdge_phase_limit_of_integrable_and_integral_identity` (reduces the remaining gap to a single full-line integral identity)
+  - [x] Add `explicit_formula_cancellation_contour_of_integrable_and_integral_identity_xiLagarias` (compose the reductions: integrability + the single full-line integral identity + horizontal vanishing ⇒ `explicit_formula_cancellation_contour`)
+  - [x] Name the remaining gap explicitly: add `rightEdge_integral_identity` + `RightEdgeIntegralIdentityAssumptions` (so “what remains” is a single checkable identity statement)
+  - [x] Add PSC decomposition rewrite: `rightEdgeIntegrand_decomp` + `rightEdgeIntegrand_eq_decomp` (reduces the remaining identity to det₂/outer/PSCRatio bookkeeping once `xi` is identified and nonvanishing on `Re=c`)
+  - [x] Split the remaining full-line identity into PSC pieces: add `rightEdge_integral_identity_decomp`, `rightEdge_integral_identity_iff_decomp`, and the component integrands `rightEdgeIntegrand_det2/outer/ratio`
+  - [x] Reduce `rightEdge_integral_identity_decomp` to a component-form identity (det₂/outer/ratio) under explicit integrability assumptions:
+    `rightEdge_integral_identity_decomp_iff_components`
+  - [ ] Next: isolate/prove the **three component identities** needed to establish `rightEdge_integral_identity_components`:
+    - det₂ component (prime-power / arithmetic term)
+    - outer component (archimedean / Γ-term)
+    - PSCRatio component (boundary phase term)
+  - [x] Add `ContourToBoundary.explicit_formula_cancellation_contour` + `explicit_formula_cancellation_of_contour` (bridge between contour-defined `W¹` and the existing `explicit_formula_cancellation` statement)
+  - [x] Add `ContourToBoundary.explicit_formula_cancellation_contour_of_tendsto_W1Trunc` (reduce contour cancellation to a `Tendsto` computation using `ContourW1.W1_eq_of_tendsto_W1Trunc`)
+  - [x] Add `ContourW1.W1_eq_of_tendsto_W1Trunc` (convert a computed `Tendsto` limit into an equality for the packaged `W1`)
+  - [x] Prove `Lagarias.logDeriv_xiLagarias_one_sub` (functional-equation log-derivative identity for `xiLagarias`: `logDeriv ξ(1-s) = -logDeriv ξ(s)`)
+  - [x] Prove `Lagarias.logDeriv_xiLagarias_leftEdge` (specialize the FE log-derivative identity to the rectangle vertical edges)
+  - [x] Add `ExplicitFormulaCancellationSkeleton.tendsto_vertRight_add_vertRight_tilde_of_horizontal_vanish_xiLagarias` (discharge FE log-derivative hypothesis via `xiLagarias`)
 - [x] Remove global `psc_phase_velocity_identity` by bundling `μ_spec` + phase–velocity identity into `PSCComponents`
 - [x] Remove the global `herglotz_representation` axiom (refactor it into an explicit hypothesis and thread it through `Caratheodory`/`HilbertRealization`)
 - [ ] Prove `herglotz_representation` (now a hypothesis; full Herglotz/Poisson/Riesz formalization)

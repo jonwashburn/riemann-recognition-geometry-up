@@ -1,5 +1,6 @@
 import Mathlib.Analysis.Complex.CauchyIntegral
 import Mathlib.Analysis.Calculus.LogDeriv
+import Mathlib.Topology.Separation.Hausdorff
 import RiemannRecognitionGeometry.ExplicitFormula.Defs
 
 /-!
@@ -211,10 +212,6 @@ theorem vertLeft_eq_neg_vertRight_tilde
             M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) * logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I))
             = ∫ t : ℝ in (-T)..T, (- g (-t)) := hIntEq
         _ = - ∫ t : ℝ in (-T)..T, g (-t) := hNeg
-        _ = - ∫ t : ℝ in (-T)..T, g t := by
-              -- Use `hcomp` (symmetry) under `neg`.
-              -- `hcomp : ∫ g(-t) = ∫ g(t)` so `-∫ g(-t) = -∫ g(t)`.
-              simpa using congrArg (fun z : ℂ => -z) hcomp
     -- symmetry on `[-T,T]`
     have hSymm : (∫ t : ℝ in (-T)..T, g (-t)) = ∫ t : ℝ in (-T)..T, g t := by
       simpa using (intervalIntegral.integral_comp_neg (a := (-T)) (b := T) (f := g))
@@ -225,15 +222,117 @@ theorem vertLeft_eq_neg_vertRight_tilde
       I * ∫ t : ℝ in (-T)..T,
           M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) * logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
         -(I * ∫ t : ℝ in (-T)..T, g t) := by
-    -- multiply `ha` by `I` and pull out the minus sign
-    calc
-      I * ∫ t : ℝ in (-T)..T,
-            M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) * logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I)
-          = I * (-(∫ t : ℝ in (-T)..T, g t)) := by
-              simpa [ha]
-      _ = -(I * ∫ t : ℝ in (-T)..T, g t) := by ring
+    -- Multiply `ha` by `I` and simplify `I * (-a) = -(I * a)`.
+    have hmul : I * (∫ t : ℝ in (-T)..T,
+        M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) * logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I)) =
+          I * (-∫ t : ℝ in (-T)..T, g t) := congrArg (fun z : ℂ => I * z) ha
+    -- turn `I * (-x)` into `-(I * x)`
+    simpa [mul_assoc] using hmul
   -- Unfold `vertLeft`/`vertRight` and rewrite `g`.
-  simpa [vertLeft, vertRight, g, hI, mul_assoc, mul_left_comm, mul_comm]
+  simpa [vertLeft, vertRight, g] using hI
+
+/-- A convenient specialization of `TestSpace.mellin_tilde` for the rectangle left/right edges. -/
+lemma mellin_leftEdge_eq_tilde_rightEdge
+    {F : Type} [TestSpace F] (f : F) (c t : ℝ) :
+    M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      M[(TestSpace.tilde (F := F) f)]((c : ℂ) + ((-t : ℝ) : ℂ) * I) := by
+  -- Start from `M[˜ₘ f](s) = M[f](1 - s)` with `s = c - it`.
+  have h :=
+    (TestSpace.mellin_tilde (f := f) (s := (c : ℂ) + ((-t : ℝ) : ℂ) * I))
+  -- Rearrange and simplify `1 - (c - it) = (1-c) + it`.
+  -- We also normalize `(-t : ℂ) * I` to `-(t : ℂ) * I` for simp.
+  have h' :
+      M[(TestSpace.tilde (F := F) f)]((c : ℂ) + ((-t : ℝ) : ℂ) * I) =
+        M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) := by
+    -- `simp` can see `sub_eq_add_neg` and basic ring simplifications in `ℂ`.
+    simpa [sub_eq_add_neg, add_assoc, add_left_comm, add_comm, mul_assoc, mul_left_comm, mul_comm] using h
+  simpa using h'.symm
+
+/-- `vertLeft_eq_neg_vertRight_tilde` with the Mellin edge identity discharged automatically. -/
+theorem vertLeft_eq_neg_vertRight_tilde_of_mellin
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (f : F) (c T : ℝ)
+    (hLog : ∀ t : ℝ, logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      - logDeriv xi ((c : ℂ) + ((-t : ℝ) : ℂ) * I)) :
+    vertLeft (fun s : ℂ => M[f](s) * logDeriv xi s) c T =
+      - vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T := by
+  refine vertLeft_eq_neg_vertRight_tilde (xi := xi) (f := f) (c := c) (T := T)
+    (hM := ?_) (hLog := hLog)
+  intro t
+  simpa using mellin_leftEdge_eq_tilde_rightEdge (f := f) (c := c) (t := t)
+
+/--
+`vertLeft_eq_neg_vertRight_tilde` with the Mellin involution discharged automatically and the
+log-derivative functional equation supplied as `logDeriv xi (1 - s) = - logDeriv xi s`.
+-/
+theorem vertLeft_eq_neg_vertRight_tilde_of_mellin_and_logDeriv_one_sub
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (f : F) (c T : ℝ)
+    (hFE : ∀ s : ℂ, logDeriv xi (1 - s) = - logDeriv xi s) :
+    vertLeft (fun s : ℂ => M[f](s) * logDeriv xi s) c T =
+      - vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T := by
+  refine vertLeft_eq_neg_vertRight_tilde_of_mellin (xi := xi) (f := f) (c := c) (T := T) (hLog := ?_)
+  intro t
+  -- Apply the FE identity to `s = c - it` and simplify `1 - (c - it) = (1-c) + it`.
+  simpa [sub_eq_add_neg, add_assoc, add_left_comm, add_comm, mul_assoc, mul_left_comm, mul_comm] using
+    (hFE ((c : ℂ) + ((-t : ℝ) : ℂ) * I))
+
+/--
+Under the same Mellin/functional-equation hypotheses as `vertLeft_eq_neg_vertRight_tilde`,
+the *vertical difference* on the rectangle equals a sum of right-edge integrals for `f` and `˜ₘf`.
+
+This is the algebraic “functional equation cancellation” on the left edge.
+-/
+theorem vertDiff_eq_vertRight_add_vertRight_tilde
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (f : F) (c T : ℝ)
+    (hM : ∀ t : ℝ, M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      M[(TestSpace.tilde (F := F) f)]((c : ℂ) + ((-t : ℝ) : ℂ) * I))
+    (hLog : ∀ t : ℝ, logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      - logDeriv xi ((c : ℂ) + ((-t : ℝ) : ℂ) * I)) :
+    vertDiff (fun s : ℂ => M[f](s) * logDeriv xi s) c T =
+      vertRight (fun s : ℂ => M[f](s) * logDeriv xi s) c T +
+        vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T := by
+  -- Expand `vertDiff` and rewrite `vertLeft` using the previous lemma.
+  have hleft :
+      vertLeft (fun s : ℂ => M[f](s) * logDeriv xi s) c T =
+        - vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T :=
+    vertLeft_eq_neg_vertRight_tilde (xi := xi) (f := f) (c := c) (T := T) hM hLog
+  -- Now `right - left = right - (-right_tilde) = right + right_tilde`.
+  simp [vertDiff, hleft, sub_eq_add_neg, add_assoc, add_left_comm, add_comm]
+
+/--
+`vertDiff_eq_vertRight_add_vertRight_tilde` with the Mellin involution discharged automatically and
+the log-derivative functional equation supplied as `logDeriv xi (1 - s) = - logDeriv xi s`.
+-/
+theorem vertDiff_eq_vertRight_add_vertRight_tilde_of_mellin_and_logDeriv_one_sub
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (f : F) (c T : ℝ)
+    (hFE : ∀ s : ℂ, logDeriv xi (1 - s) = - logDeriv xi s) :
+    vertDiff (fun s : ℂ => M[f](s) * logDeriv xi s) c T =
+      vertRight (fun s : ℂ => M[f](s) * logDeriv xi s) c T +
+        vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T := by
+  refine vertDiff_eq_vertRight_add_vertRight_tilde (xi := xi) (f := f) (c := c) (T := T)
+    (hM := ?_) (hLog := ?_)
+  · intro t
+    simpa using mellin_leftEdge_eq_tilde_rightEdge (f := f) (c := c) (t := t)
+  · intro t
+    simpa [sub_eq_add_neg, add_assoc, add_left_comm, add_comm, mul_assoc, mul_left_comm, mul_comm] using
+      (hFE ((c : ℂ) + ((-t : ℝ) : ℂ) * I))
+
+/-- `vertDiff_eq_vertRight_add_vertRight_tilde` with Mellin involution discharged automatically. -/
+theorem vertDiff_eq_vertRight_add_vertRight_tilde_of_mellin
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (f : F) (c T : ℝ)
+    (hLog : ∀ t : ℝ, logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      - logDeriv xi ((c : ℂ) + ((-t : ℝ) : ℂ) * I)) :
+    vertDiff (fun s : ℂ => M[f](s) * logDeriv xi s) c T =
+      vertRight (fun s : ℂ => M[f](s) * logDeriv xi s) c T +
+        vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T := by
+  refine vertDiff_eq_vertRight_add_vertRight_tilde (xi := xi) (f := f) (c := c) (T := T)
+    (hM := ?_) (hLog := hLog)
+  intro t
+  simpa using mellin_leftEdge_eq_tilde_rightEdge (f := f) (c := c) (t := t)
 
 /-- The truncated contour functional \(W^{(1)}_{c,T}\) for a given `xi` (via `logDeriv xi`). -/
 def W1Trunc {F : Type} [TestSpace F] (xi : ℂ → ℂ) (c T : ℝ) (f : F) : ℂ :=
@@ -261,6 +360,18 @@ structure W1LimitAssumptions {F : Type} [TestSpace F] (xi : ℂ → ℂ) (c : �
   tendsto_W1Trunc :
     ∀ f : F,
       Filter.Tendsto (fun T : ℝ => W1Trunc (F := F) xi c T f) Filter.atTop (nhds (W1 f))
+
+/-- Uniqueness of the `T → ∞` limit of `W1Trunc` in `ℂ`. -/
+theorem W1_eq_of_tendsto_W1Trunc
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (c : ℝ)
+    (A : W1LimitAssumptions (F := F) xi c)
+    (f : F) (z : ℂ)
+    (hz : Filter.Tendsto (fun T : ℝ => W1Trunc (F := F) xi c T f) Filter.atTop (nhds z)) :
+    A.W1 f = z := by
+  -- `ℂ` is a T₂ space, so limits are unique.
+  have h1 := A.tendsto_W1Trunc f
+  exact tendsto_nhds_unique h1 hz
 
 /--
 If the horizontal edge contributions vanish as `T → ∞`, then the *vertical* contour contribution
@@ -350,6 +461,50 @@ theorem tendsto_vertDiff_of_horizontal_vanish
   have := hSum.sub hHoriz
   -- Simplify `((horiz + vertDiff) - horiz) = vertDiff`.
   simpa [vertDiff, sub_eq_add_neg, add_assoc, add_left_comm, add_comm, a, twoPiI, vertRight, vertLeft] using this
+
+/-!
+### Combining functional-equation edge cancellation with the limit algebra
+-/
+
+/--
+If:
+- `W1` is the `T → ∞` limit of `W1Trunc`,
+- the horizontal edge integrals vanish as `T → ∞`, and
+- the left vertical edge can be rewritten using Mellin involution + functional equation
+  (as in `vertDiff_eq_vertRight_add_vertRight_tilde`),
+then the *sum* of right-edge integrals for `f` and `˜ₘf` converges to `(2πi) * W1(f)`.
+-/
+theorem tendsto_vertRight_add_vertRight_tilde_of_horizontal_vanish
+    {F : Type} [TestSpace F]
+    (xi : ℂ → ℂ) (c : ℝ)
+    (A : W1LimitAssumptions (F := F) xi c)
+    (f : F)
+    (hBot : Filter.Tendsto
+      (fun T : ℝ => horizBottom (fun s : ℂ => M[f](s) * logDeriv xi s) c T)
+      Filter.atTop (nhds 0))
+    (hTop : Filter.Tendsto
+      (fun T : ℝ => horizTop (fun s : ℂ => M[f](s) * logDeriv xi s) c T)
+      Filter.atTop (nhds 0))
+    (hM : ∀ t : ℝ, M[f](((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      M[(TestSpace.tilde (F := F) f)]((c : ℂ) + ((-t : ℝ) : ℂ) * I))
+    (hLog : ∀ t : ℝ, logDeriv xi (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =
+      - logDeriv xi ((c : ℂ) + ((-t : ℝ) : ℂ) * I)) :
+    Filter.Tendsto
+      (fun T : ℝ =>
+        vertRight (fun s : ℂ => M[f](s) * logDeriv xi s) c T +
+          vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T)
+      Filter.atTop (nhds (((2 * Real.pi : ℂ) * I) * A.W1 f)) := by
+  have hVertDiff :=
+    tendsto_vertDiff_of_horizontal_vanish (xi := xi) (c := c) (A := A) (f := f) hBot hTop
+  have hEq :
+      (fun T : ℝ => vertDiff (fun s : ℂ => M[f](s) * logDeriv xi s) c T) =
+        fun T : ℝ =>
+          vertRight (fun s : ℂ => M[f](s) * logDeriv xi s) c T +
+            vertRight (fun s : ℂ => M[(TestSpace.tilde (F := F) f)](s) * logDeriv xi s) c T := by
+    funext T
+    simpa using
+      vertDiff_eq_vertRight_add_vertRight_tilde (xi := xi) (f := f) (c := c) (T := T) hM hLog
+  simpa [hEq] using hVertDiff
 
 end ContourW1
 
