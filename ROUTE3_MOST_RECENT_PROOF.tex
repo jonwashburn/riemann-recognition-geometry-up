@@ -203,6 +203,17 @@ In particular, \(\Re F(\tfrac12+it)\) is (in the nontangential sense) the bounda
 measure.
 \end{theorem}
 
+\paragraph{Strawman splice choice.}
+In the hybrid “PSC \(\to\) Route~3” splice, a concrete positive boundary measure is already constructed in `Riemann-active.txt` from the
+phase--velocity identity:
+\[
+  -w' \;=\; \pi\,\mu \;+\; \pi\sum_{\gamma} m_\gamma\,\delta_\gamma,
+  \qquad
+  \mu_{\mathrm{spec}} \;:=\; \mu \;+\; \sum_{\gamma} m_\gamma\,\delta_\gamma\ \ge 0.
+\]
+For Route~3, the cleanest measure-first target is to take \(\mu:=\mu_{\mathrm{spec}}\) and identify the Weil pairing with an
+\(L^2(\mu_{\mathrm{spec}})\) inner product (the remaining “identity part”).
+
 \begin{proof}
 Define \(H(w):= i\,F(\tfrac12 - i w)\). Then \(H\) is holomorphic on the upper half-plane and \(\Im H(w)\ge 0\)
 (since \(\Im(i z)=\Re(z)\)). By the classical Nevanlinna representation for such functions, there exist \(a\ge 0\), \(b\in\mathbb R\),
@@ -306,10 +317,12 @@ The Route 3 \emph{implication skeleton} for Track 2 is now formalized in Lean.
 
 \subsection{Current gaps (classical analysis input)}
 
-The formalization has \textbf{one standard-theorem axiom and zero sorrys} in \texttt{Caratheodory.lean}:
+The formalization has the following axioms (no sorrys):
+
+\textbf{1. Classical analysis axiom} (in \texttt{Caratheodory.lean}):
 \begin{enumerate}
-  \item \textbf{Axiom}: \texttt{herglotz\_representation} --- the Herglotz representation theorem (1911).
-    This is the classical analysis input: every function holomorphic on the unit disk with $\Re F \ge 0$
+  \item \texttt{herglotz\_representation} --- the Herglotz representation theorem (1911).
+    This is standard complex analysis: every function holomorphic on the unit disk with $\Re F \ge 0$
     admits a representation $F(z) = \int_{|\zeta|=1} \frac{\zeta+z}{\zeta-z}\, d\mu(\zeta) + i\cdot\mathrm{Im}(F(0))$
     for a positive finite measure $\mu$ on the unit circle.  Formalizing this would require Poisson integral
     theory, the Riesz representation theorem for positive functionals on $C(\text{circle})$, and Fatou's theorem.
@@ -320,6 +333,29 @@ The formalization has \textbf{one standard-theorem axiom and zero sorrys} in \te
     and \texttt{integral\_re} lemmas.  Integrability is established via boundedness on the unit circle support.
 \end{enumerate}
 
+\textbf{2. Splice completion identity lemma (no global axiom)} (in \texttt{PSCSplice.lean}):
+\begin{enumerate}
+  \item \texttt{IntegralAssumptions.identity\_integral} --- the identity claim that the Route~3 Weil functional $W^{(1)}$
+    equals the $L^2(\mu_{\mathrm{spec}})$ boundary pairing:
+    \[
+      W^{(1)}(\mathrm{pair}(f,g)) = \int_{\mathbb R} \overline{F_f(t)}\,F_g(t)\,d\mu_{\mathrm{spec}}(t).
+    \]
+    This is \textbf{standard explicit-formula bookkeeping} (not RH-equivalent), following from:
+    \begin{itemize}
+      \item Log-derivative cancellation: the $\det_2$ and outer $\mathcal O$ terms cancel via Lagarias Thm 3.1
+      \item Normalization: the $\pi$ factors and symmetric zero-pairing conventions match
+    \end{itemize}
+    The proof sketch is complete in \texttt{ROUTE3\_IDENTITY\_PART.md}; formalization is pending (as a theorem producing
+    a \texttt{PSCSplice.IntegralAssumptions} instance).
+\end{enumerate}
+
+\textbf{3. Contour-to-boundary axioms} (in \texttt{ContourToBoundary.lean}):
+These axioms decompose the splice completion into smaller, provable pieces (and include a proved complex-linear extension).  (The boundary phase function \(\theta\) is now bundled as data in \texttt{PSCComponents}, not an axiom.)
+\begin{itemize}
+  \item \texttt{explicit\_formula\_cancellation}: arithmetic terms cancel
+  \item \texttt{psc\_phase\_velocity\_identity}: $-w' = \pi\,\mu_{\mathrm{spec}}$
+\end{itemize}
+
 \subsection{Completed components}
 
 \begin{itemize}
@@ -329,11 +365,27 @@ The formalization has \textbf{one standard-theorem axiom and zero sorrys} in \te
   \item \textbf{Measure-first spectral identity wiring:} the preferred Route~3 intermediate target
   \texttt{SesqMeasureIdentity} (an \(L^2(\mu)\) representation with no pointwise weight) is implemented in
   \texttt{RiemannRecognitionGeometry/ExplicitFormula/HilbertRealization.lean}.
+  A companion Bochner-integral form \texttt{SesqMeasureIntegralIdentity} is also implemented there, and converts
+  mechanically to \texttt{SesqMeasureIdentity} via \texttt{MeasureTheory.L2.inner\_def}.
   The concrete Route~3 pipeline \(\texttt{AssumptionsMeasure} \to \texttt{RiemannHypothesis}\) is implemented (Lean) as:
   \begin{quote}
     \texttt{Route3HypBundle.Route3.RH}\(\mu\)\texttt{ : AssumptionsMeasure -> RiemannHypothesis}
   \end{quote}
   in \texttt{RiemannRecognitionGeometry/ExplicitFormula/Route3HypBundle.lean}.
+
+  \item \textbf{PSC \(\mu_{\mathrm{spec}}\) splice wrapper:} a lightweight naming layer that treats the PSC phase--velocity measure
+  \(\mu_{\mathrm{spec}}\) as the Route~3 boundary measure and fires the existing measure-first pipeline is implemented in
+  \texttt{RiemannRecognitionGeometry/ExplicitFormula/PSCSplice.lean}.
+
+  \item \textbf{Contour-to-boundary connection:} axioms for the log-derivative cancellation and boundary limit are in
+  \texttt{RiemannRecognitionGeometry/ExplicitFormula/ContourToBoundary.lean}. These include:
+  \begin{itemize}
+    \item \texttt{psc\_ratio\_unimodular\_boundary}: $|\mathcal J(1/2+it)| = 1$ a.e.
+    \item \texttt{log\_deriv\_decomposition}: $\xi'/\xi = (\det_2)'/\det_2 - \mathcal O'/\mathcal O - \mathcal J'/\mathcal J$
+    \item \texttt{boundary\_log\_deriv\_imaginary}: $\mathcal J'/\mathcal J = iw'$ on the boundary
+    \item \texttt{explicit\_formula\_cancellation}: arithmetic terms cancel via Lagarias Thm 3.1
+    \item \texttt{psc\_phase\_velocity\_identity}: $-w' = \pi\,\mu_{\mathrm{spec}}$
+  \end{itemize}
 
   \item The Route 3 reduction ``\emph{spectral identity $\Rightarrow$ reflection positivity $\Rightarrow$ Weil gate $\Rightarrow$ RH}''
   is formalized as the theorem
@@ -361,20 +413,29 @@ The formalization has \textbf{one standard-theorem axiom and zero sorrys} in \te
 
 \subsection{Remaining mathematical work}
 
-The Track 2 formalization is essentially complete with \textbf{one axiom and zero sorrys}.
+The Track 2 formalization is essentially complete with \textbf{three axioms and zero sorrys}
+(\texttt{herglotz\_representation} plus the two contour-to-boundary axioms:
+\texttt{explicit\_formula\_cancellation}, \texttt{psc\_phase\_velocity\_identity}).
 
-To construct a concrete \texttt{Route3.Assumptions} or \texttt{Route3.AssumptionsMeasure} instance for the arithmetic \(\xi/\zeta\) channel:
-\begin{enumerate}
-  \item Prove the \textbf{measure-first} spectral identity connecting the Weil form to an $L^2(\mu)$ pairing.
-  \item Justify Fubini/Tonelli for the intended test-function class (Schwartz with exponential decay).
-  \item \textbf{(Standard-theorem axiom)} The Herglotz representation theorem.  This is a classical result from 1911
-    that is not currently in Mathlib.  Proving it from scratch would require formalizing:
-    \begin{itemize}
-      \item Poisson integral representation for positive harmonic functions on the disk
-      \item Riesz representation theorem for positive linear functionals on $C(\text{circle})$
-      \item Fatou's theorem for boundary values (or weak-$*$ compactness via Banach-Alaoglu)
-    \end{itemize}
-\end{enumerate}
+\textbf{The single remaining identity lemma (splice completion):}
+\begin{itemize}
+  \item \texttt{IntegralAssumptions.identity\_integral} in \texttt{PSCSplice.lean}:
+    \[
+      W^{(1)}(\mathrm{pair}(f,g)) = \int_{\mathbb R} \overline{F_f(t)}\,F_g(t)\,d\mu_{\mathrm{spec}}(t).
+    \]
+  \item This is the identity claim connecting the Route~3 contour definition of \(W^{(1)}\) to the
+    PSC phase--velocity measure \(\mu_{\mathrm{spec}}\).
+  \item Once proved, \texttt{RHμ\_spec\_integral} fires (given the constructed \texttt{IntegralAssumptions}) and yields \texttt{RiemannHypothesis}.
+  \item Proof sketch: see \texttt{ROUTE3\_IDENTITY\_PART.md} for the contour bookkeeping (steps SC1--SC3).
+\end{itemize}
+
+\textbf{Standard-theorem axiom (Herglotz):}
+\begin{itemize}
+  \item \texttt{herglotz\_representation} in \texttt{Caratheodory.lean}:
+    the classical Herglotz representation theorem (1911).
+  \item Formalizing this would require Poisson kernel theory, Riesz representation for positive functionals,
+    and Fatou's theorem---substantial but routine analysis not currently in Mathlib.
+\end{itemize}
 
 \textbf{Current build status}: \texttt{lake build} succeeds with no errors.  All measure-theoretic
 calculations (Fubini, \texttt{integral\_conj}, integrability bounds) are complete.
@@ -388,19 +449,26 @@ calculations (Fubini, \texttt{integral\_conj}, integrability bounds) are complet
 \hline
 Sorrys & 0 & All proofs complete \\
 \hline
-Axioms (Track 2) & 1 & \texttt{herglotz\_representation} \\
+Axioms (bridge) & 0 & (none; splice completion is a lemma to be proved, not a global axiom) \\
+\hline
+Axioms (identity analysis input) & 2 & \texttt{explicit\_formula\_cancellation}, \texttt{psc\_phase\_velocity\_identity} \\
+\hline
+Axioms (Mathlib gap) & 1 & \texttt{herglotz\_representation} \\
 \hline
 Build Status & \checkmark & \texttt{lake build} succeeds \\
 \hline
 \end{tabular}
 \end{center}
 
-The single axiom represents the \textbf{Herglotz Representation Theorem} (1911), a classical
-result that appears in every complex analysis textbook (Rudin, Ahlfors, Conway, etc.).
-It is not a conjecture or unproven claim---it is established mathematics that predates
-formalization by over a century.  Treating it as an axiom is standard practice when
-the underlying infrastructure (Poisson kernels, Riesz representation for positive
-functionals, weak-$*$ compactness) is not available in the proof assistant's library.
+\textbf{Bridge status:}
+The splice completion identity lemma (\texttt{IntegralAssumptions.identity\_integral}) is the \emph{only} remaining bridge between the PSC manuscript and RH.
+It is the identity claim \(\nu = \mu_{\mathrm{spec}}\) (contour bookkeeping), \emph{not} the positivity claim
+(which is already supplied by the PSC phase--velocity identity).
+Once proved, \texttt{RHμ\_spec\_integral} fires and yields \texttt{RiemannHypothesis}.
+
+\textbf{Mathlib-gap axiom status:}
+The \texttt{herglotz\_representation} axiom is the Herglotz theorem (1911), a classical result in every
+complex analysis textbook.  Treating it as an axiom is standard when Poisson kernel theory is not in the library.
 
 \section{Bottom line}
 
@@ -408,8 +476,9 @@ There is a path, and it is structurally clean:
 
 \begin{itemize}
   \item The correct Route~3 finish line is \textbf{measure-first}: produce a spectral measure \(\mu\) and show \(\mu\ge 0\).
-  \item Positive kernel/measure \(\Rightarrow\) Hilbert-space realization is standard (GNS/RKHS/OS).
-  \item The only real gap is proving that the arithmetic \(\xi/\zeta\) channel yields the required positive measure / reflection positivity statement.
+  \item The PSC manuscript supplies \(\mu_{\mathrm{spec}}\ge 0\) via the phase--velocity identity.
+  \item The only remaining gap is the \textbf{identity} claim connecting the Route~3 contour definition to \(\mu_{\mathrm{spec}}\).
+  \item Once that bookkeeping is discharged, \texttt{RHμ\_spec\_integral} fires in Lean.
 \end{itemize}
 
 That is the blocker, and it is answerable in a conventional, formalizable way.

@@ -110,6 +110,18 @@ We prove the Riemann Hypothesis via a single boundary route. A quantitative prod
 \item Poisson/Hilbert: $P_a(x)=\tfrac{1}{\pi}\tfrac{a}{a^2+x^2}$; boundary Hilbert transform $\Hilb$ on $\R$.
 \item Windows: $\psi\in C_c^\infty([-2,2])$ even, mass 1; $\varphi_{L,t_0}(t)=L^{-1}\psi((t-t_0)/L)$.
 \item Carleson boxes: $Q(\alpha I)=I\times(0,\alpha|I|]$; $C_{\rm box}$ uses the measure $|\nabla U|^2\,\sigma\,dt\,d\sigma$.
+\item Route~3 spectral measure (canonical): the boundary phase distribution $-w'$ of the unimodular ratio $J$
+decomposes (Theorem~\ref{thm:phase-velocity-quant}) as
+\[
+  -w' \;=\; \pi\,\mu \;+\; \pi\sum_{\gamma} m_\gamma\,\delta_\gamma,
+\]
+where $\mu$ is the (absolutely continuous) Poisson--balayage of off--critical zeros and the sum is the atomic part from critical--line ordinates.
+We define the project’s **measure-first spectral boundary measure**
+\[
+  \mu_{\mathrm{spec}} \;:=\; \mu \;+\; \sum_{\gamma} m_\gamma\,\delta_\gamma \ \ge\ 0,
+  \qquad\text{so that}\qquad -w'=\pi\,\mu_{\mathrm{spec}}.
+\]
+This $\mu_{\mathrm{spec}}$ is the object fed to the Route~3 (Lagarias/Weil) measure-first pipeline.
 \item Constants/macros: $c_0(\psi)=\czeroplateau$, $C_\psi^{(H^1)}=\CpsiHone$, $C_H(\psi)=\CHone$, $K_\xi$, $C_{\rm box}^{(\zeta)}=\CboxZeta$, $M_\psi=\Mpsilocked$, $\Upsilon=\UpsilonLocked$.
 \item Scope convention: throughout, $C_{\rm box}^{(\zeta)}$ denotes the supremum over all boxes $Q(\alpha I)$ with $I\subset\mathbb R$ (fixed $\alpha\in[1,2]$).
 \item Terminology (used once and consistently): PSC = product certificate route (active); AAB = adaptive analytic bandlimit (archival, not used in the main chain); KYP = Kalman–Yakubovich–Popov (appears only in archived material; not used in proofs).
@@ -604,11 +616,9 @@ critical--line ordinates.  Equivalently, in $\mathcal D'(I)$ one may write
 \[
   -w' \;=\; \pi\,\mu \;+\; \pi\sum_{\gamma\in I} m_\gamma\,\delta_\gamma.
 \]
-Define the \emph{spectral boundary measure} on $\R$ by
-\[
-  \mu_{\mathrm{spec}} \;:=\; \mu \;+\; \sum_{\gamma} m_\gamma\,\delta_\gamma,
-\]
-so $\mu_{\mathrm{spec}}$ is a positive Borel measure (locally finite on $\R$) and $L^2(\mu_{\mathrm{spec}})$ is a Hilbert space with
+Recall the \emph{spectral boundary measure} $\mu_{\mathrm{spec}}$ from the Notation section; in particular, on any compact $I\Subset\R$
+one may equivalently write $-w'=\pi\,\mu_{\mathrm{spec}}$ as distributions. Thus $\mu_{\mathrm{spec}}$ is a positive Borel measure
+(locally finite on $\R$) and $L^2(\mu_{\mathrm{spec}})$ is a Hilbert space with
 \[
   \langle h,k\rangle_{L^2(\mu_{\mathrm{spec}})} \;:=\; \int_{\R} \overline{h(t)}\,k(t)\,d\mu_{\mathrm{spec}}(t).
 \]
@@ -640,6 +650,8 @@ The measure-first ``positive measure $\Rightarrow$ Hilbert realization'' plumbin
       (a single bridge axiom producing a \texttt{SesqMeasureIdentity}).
 \item \texttt{RiemannRecognitionGeometry/ExplicitFormula/Route3HypBundle.lean}: the final implication
       \texttt{Route3.RH}\(\mu\)\texttt{ : AssumptionsMeasure -> RiemannHypothesis}.
+\item \texttt{RiemannRecognitionGeometry/ExplicitFormula/PSCSplice.lean}: a lightweight “PSC \(\mu_{\mathrm{spec}}\) naming” wrapper
+      feeding \(\mu_{\mathrm{spec}}\) into the Route~3 measure-first pipeline.
 \end{itemize}
 Thus, from the Route~3 perspective, the content supplied by the certificate route is precisely the \emph{positivity of the boundary measure}
 $\mu_{\mathrm{spec}}\ge 0$; the remaining work is the analytic identification of the Route~3 Weil form with the $L^2(\mu_{\mathrm{spec}})$ pairing.

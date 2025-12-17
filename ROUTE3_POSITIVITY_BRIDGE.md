@@ -1,5 +1,20 @@
 ### Route‑3 Positivity Bridge (RH‑Equivalent Core): RS Passivity → Carathéodory/Herglotz → \(\mu \ge 0\)
 
+---
+
+## 🔄 PROACTIVE EXECUTION PROTOCOL
+
+This document is part of the Route‑3 plan. When executing:
+
+1. **Context:** This is the RH-equivalent positivity step — all other parts are "standard analysis"
+2. **Current status:** Positivity comes from PSC → Herglotz → μ ≥ 0 (already axiomatized)
+3. **Remaining work:** See `ROUTE3_LEMMA_COMPLETION_LOOP.md` for detailed axiom status
+4. **Key insight:** The splice brings μ_spec from `Riemann-active.txt` into Route-3
+
+**Anti-stall rule:** If a positivity bridge lemma is blocked (Herglotz/Carathéodory), try one smaller lemma extraction (e.g. “positive-definite kernel → measure” in a restricted setting) before declaring a blocker.
+
+---
+
 This document isolates the **only RH‑equivalent step** in the Route‑3 program:
 
 - from the identity/bookkeeping representation
@@ -92,8 +107,21 @@ and globalizes by the Schur–Herglotz pinch. In other words, it supplies exactl
 otherwise treats as RH‑equivalent input.
 
 Given \(\Re F\ge0\) on \(\Omega\), the remaining step “positive‑real ⇒ positive boundary measure” is classical (Herglotz/Nevanlinna).
-The certificate route also produces an explicit candidate spectral boundary measure via the phase–velocity identity
-(\(-w'=\pi\,\mu+\pi\sum m_\gamma\delta_\gamma\) in the notation of `Riemann-active.txt`), so \(\mu\ge0\) is automatic.
+The certificate route also produces an explicit **positive** boundary measure via the phase–velocity identity:
+\[
+-w' \;=\; \pi\,\mu \;+\; \pi\sum_{\gamma} m_\gamma\,\delta_\gamma,
+\]
+so defining
+\[
+\mu_{\mathrm{spec}} \;:=\; \mu \;+\; \sum_{\gamma} m_\gamma\,\delta_\gamma
+\]
+gives \(\mu_{\mathrm{spec}}\ge0\) automatically. This \(\mu_{\mathrm{spec}}\) is the cleanest “drop‑in” candidate to feed the Route‑3
+measure-first pipeline (it is already a measure on the boundary parameter \(\mathbb R\), and already includes atoms).
+
+**Lean wiring:** the corresponding “PSC \(\mu_{\mathrm{spec}}\) name → Route‑3 measure-first assumptions” wrapper is
+`RiemannRecognitionGeometry/ExplicitFormula/PSCSplice.lean`.  The identity target is packaged both as:
+- `PSCSplice.IntegralAssumptions` (Bochner form: \(\int \overline{F_f}F_g\,d\mu_{\mathrm{spec}}\)), and
+- `PSCSplice.Assumptions` (Hilbert form: \(\langle F_f, F_g\rangle_{L^2(\mu_{\mathrm{spec}})}\)).
 
 **Honest caveat (still needed for Route‑3):** this splice supplies the **sign** input (\(\mu\ge0\)), but it does not by itself prove the
 Route‑3 **spectral identity** identifying the Lagarias/Weil form \(W^{(1)}\) with an \(L^2(\mu)\) pairing. That identification is the

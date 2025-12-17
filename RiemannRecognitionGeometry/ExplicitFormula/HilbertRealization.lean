@@ -318,6 +318,43 @@ structure SesqMeasureIdentity (L : LagariasFramework F) where
         ⟪(memL2 f).toLp (transform f), (memL2 g).toLp (transform g)⟫_ℂ
 
 /-!
+### Measure-first identity (Bochner-integral form)
+
+For analysis work (and for splicing in a boundary measure such as `μ_spec` from the PSC manuscript),
+it is often more natural to state the measure-first identity directly as a Bochner integral:
+
+`W¹(pair f g) = ∫ conj(F_f(t)) · F_g(t) dμ`.
+
+The Hilbert-space form `SesqMeasureIdentity` then follows mechanically from `MeasureTheory.L2.inner_def`.
+-/
+
+/--
+Measure-first sesquilinear identity (Bochner-integral form):
+
+there is a boundary measure `μ` and a linear boundary transform `transform` such that the Weil pairing is
+the integral pairing against `μ`.
+
+This is the exact target shape for the splice-completion lemma “\(\nu = \mu_{\mathrm{spec}}\)”: prove that
+`W¹(pair f g)` is represented by the PSC boundary measure `μ_spec`.
+-/
+structure SesqMeasureIntegralIdentity (L : LagariasFramework F) where
+  /-- Boundary measure (need not be absolutely continuous). -/
+  μ : Measure ℝ := volume
+  /-- A ℂ-linear boundary transform (typically `t ↦ M[f](1/2+it)` in a concrete instantiation). -/
+  transform : F →ₗ[ℂ] (ℝ → ℂ)
+  /-- L² admissibility: the transformed functions lie in `L²(μ)`. -/
+  memL2 : ∀ f : F, MeasureTheory.Memℒp (transform f) 2 μ
+  /--
+  The sesquilinear identity as a Bochner integral:
+
+  `W¹(pair f g) = ∫ conj(F_f(t)) · F_g(t) dμ`.
+  -/
+  identity_integral :
+    ∀ f g : F,
+      L.W1 (pair (F := F) f g) =
+        ∫ t : ℝ, (starRingEnd ℂ (transform f t)) * (transform g t) ∂ μ
+
+/-!
 ### A small algebra lemma for the weighted `L²` construction
 
 We often want to rewrite `√w · (√w · z)` as `w · z` (and vice versa) when moving between:
@@ -788,6 +825,63 @@ theorem reflectionPositivityRealization (S : SesqMeasureIdentity (F := F) (L := 
   simpa [T] using (S.identity f g)
 
 end SesqMeasureIdentity
+
+namespace SesqMeasureIntegralIdentity
+
+variable (L : LagariasFramework F) (S : SesqMeasureIntegralIdentity (F := F) (L := L))
+
+/--
+Convert the Bochner-integral form of a measure-first identity into the Hilbert-space form
+`SesqMeasureIdentity`, using `MeasureTheory.L2.inner_def`.
+-/
+def toSesqMeasureIdentity : SesqMeasureIdentity (F := F) (L := L) where
+  μ := S.μ
+  transform := S.transform
+  memL2 := S.memL2
+  identity := by
+    intro f g
+    -- Start from the integral identity.
+    have hInt := S.identity_integral (f := f) (g := g)
+    -- Rewrite the `L²` inner product as an integral of pointwise inner products.
+    let u : (ℝ →₂[S.μ] ℂ) := (S.memL2 f).toLp (S.transform f)
+    let v : (ℝ →₂[S.μ] ℂ) := (S.memL2 g).toLp (S.transform g)
+    have hu : (u : ℝ → ℂ) =ᵐ[S.μ] S.transform f := by
+      simpa [u] using (MeasureTheory.Memℒp.coeFn_toLp (μ := S.μ) (hf := S.memL2 f))
+    have hv : (v : ℝ → ℂ) =ᵐ[S.μ] S.transform g := by
+      simpa [v] using (MeasureTheory.Memℒp.coeFn_toLp (μ := S.μ) (hf := S.memL2 g))
+    have hpoint :
+        (fun t : ℝ => ⟪u t, v t⟫_ℂ)
+          =ᵐ[S.μ]
+          (fun t : ℝ => (starRingEnd ℂ (S.transform f t)) * (S.transform g t)) := by
+      filter_upwards [hu, hv] with t htu htv
+      -- On `ℂ`, `⟪a,b⟫ = conj(a) * b`.
+      simpa [u, v, htu, htv]
+    have hInner :
+        ⟪(S.memL2 f).toLp (S.transform f), (S.memL2 g).toLp (S.transform g)⟫_ℂ
+          =
+          ∫ t : ℝ, (starRingEnd ℂ (S.transform f t)) * (S.transform g t) ∂ S.μ := by
+      -- Expand the inner product in `L²` by definition, then replace representatives a.e.
+      calc
+        ⟪(S.memL2 f).toLp (S.transform f), (S.memL2 g).toLp (S.transform g)⟫_ℂ
+            = ⟪u, v⟫_ℂ := by rfl
+        _ = ∫ t : ℝ, ⟪u t, v t⟫_ℂ ∂ S.μ := by
+              simpa [MeasureTheory.L2.inner_def]
+        _ = ∫ t : ℝ, (starRingEnd ℂ (S.transform f t)) * (S.transform g t) ∂ S.μ := by
+              exact MeasureTheory.integral_congr_ae hpoint
+    -- Conclude by rewriting the integral identity into the Hilbert identity.
+    exact hInt.trans hInner.symm
+
+/--
+A measure-first Bochner identity yields a `ReflectionPositivityRealization` by converting to
+`SesqMeasureIdentity` and using the already-proved construction.
+-/
+theorem reflectionPositivityRealization (S : SesqMeasureIntegralIdentity (F := F) (L := L)) :
+    OptionalTargets.ReflectionPositivityRealization (F := F) (L := L) := by
+  classical
+  let S' : SesqMeasureIdentity (F := F) (L := L) := toSesqMeasureIdentity (F := F) (L := L) S
+  exact SesqMeasureIdentity.reflectionPositivityRealization (F := F) (L := L) S'
+
+end SesqMeasureIntegralIdentity
 
 namespace SesqIntegralIdentity
 

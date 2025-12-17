@@ -22,6 +22,7 @@ namespace ExplicitFormula
 
 open MeasureTheory
 open scoped BigOperators
+open scoped InnerProductSpace
 
 namespace Route3
 
@@ -103,6 +104,47 @@ structure AssumptionsMeasure where
       L.W1 (pair (F := F) f g) =
         ⟪(memL2 f).toLp (transform f), (memL2 g).toLp (transform g)⟫_ℂ
 
+/--
+Measure-first Route 3 hypotheses (Bochner-integral form).
+
+This is the same content as `AssumptionsMeasure`, but stated as the classical integral pairing
+`∫ conj(F_f) · F_g dμ`. It converts mechanically to the Hilbert-space form using
+`SesqMeasureIntegralIdentity.toSesqMeasureIdentity`.
+-/
+structure AssumptionsMeasureIntegral where
+  /-- The Lagarias explicit-formula framework (`W¹`, etc.). -/
+  L : LagariasFramework F
+  /-- Boundary measure (need not be absolutely continuous). -/
+  μ : Measure ℝ := volume
+  /-- Route 3 boundary transform (assumed ℂ-linear). -/
+  transform : F →ₗ[ℂ] (ℝ → ℂ)
+  /-- (Normalization) `transform` agrees with the critical-line Mellin transform. -/
+  transform_eq_mellinOnCriticalLine :
+    ∀ f : F, transform f = fun t : ℝ => mellinOnCriticalLine (F := F) f t
+  /-- L² admissibility: the transformed functions lie in `L²(μ)`. -/
+  memL2 : ∀ f : F, MeasureTheory.Memℒp (transform f) 2 μ
+  /-- The measure-first sesquilinear identity as an integral pairing against `μ`. -/
+  identity_integral :
+    ∀ f g : F,
+      L.W1 (pair (F := F) f g) =
+        ∫ t : ℝ, (starRingEnd ℂ (transform f t)) * (transform g t) ∂ μ
+
+/-- Convert Bochner-form measure assumptions into Hilbert-form measure assumptions. -/
+def AssumptionsMeasureIntegral.toAssumptionsMeasure (A : AssumptionsMeasureIntegral) : AssumptionsMeasure where
+  L := A.L
+  μ := A.μ
+  transform := A.transform
+  transform_eq_mellinOnCriticalLine := A.transform_eq_mellinOnCriticalLine
+  memL2 := A.memL2
+  identity := by
+    intro f g
+    let S : SesqMeasureIntegralIdentity (F := F) (L := A.L) :=
+      { μ := A.μ
+        transform := A.transform
+        memL2 := A.memL2
+        identity_integral := A.identity_integral }
+    simpa using (SesqMeasureIntegralIdentity.toSesqMeasureIdentity (F := F) (L := A.L) S).identity f g
+
 /-- Concrete Route 3 hypothesis bundle value, built from `Assumptions`. -/
 def H (A : Assumptions) : Route3SesqIntegralHypBundle (F := F) A.L where
   μ := volume
@@ -160,6 +202,10 @@ theorem WeilGateμ (A : AssumptionsMeasure) : A.L.WeilGate :=
 /-- Route 3 (measure-first): the Weil gate implies `RiemannHypothesis`. -/
 theorem RHμ (A : AssumptionsMeasure) : RiemannHypothesis :=
   LagariasFramework.WeilGate_implies_RH (L := A.L) (WeilGateμ A)
+
+/-- Route 3 (measure-first, integral form): Bochner identity implies RH (via conversion to `AssumptionsMeasure`). -/
+theorem RHμ_integral (A : AssumptionsMeasureIntegral) : RiemannHypothesis :=
+  RHμ (A := AssumptionsMeasureIntegral.toAssumptionsMeasure A)
 
 end Route3
 

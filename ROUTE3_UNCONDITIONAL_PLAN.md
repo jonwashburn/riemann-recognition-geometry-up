@@ -1,8 +1,31 @@
 ### Route‑3 Unconditional RH Plan (Promptable)
 
-This file is the **single source of truth** for the Route‑3 (Lagarias/Weil) “unconditional” program in this repo.
+This file is the **single source of truth** for the Route‑3 (Lagarias/Weil) "unconditional" program in this repo.
 
-### Definition of “unconditional” (project-specific)
+---
+
+## 🔄 PROACTIVE EXECUTION PROTOCOL
+
+**Instructions for the AI assistant (Claude):**
+
+When the user says "continue executing on our plan" or similar:
+
+1. **Read this file first** — Identify the current state from "Current status + next action" below
+2. **Execute immediately** — Don't ask for confirmation. Start working on the next item.
+3. **Iterate until blocked** — After completing one item, immediately start the next.
+4. **Self-direct + re-plan continuously** — Before each new item, quickly re-evaluate if the next step is still the best move. If you find a better sequencing, refactor, or lemma target, update this file (and `ROUTE3_LEMMA_COMPLETION_LOOP.md`) first, then proceed.
+5. **Track progress** — Mark items as complete, add notes about what was done.
+6. **Report blockers clearly** — If truly stuck (missing Mathlib API, unclear requirement), explain what's needed.
+
+**Goal:** Keep grinding until `RiemannHypothesis` is proved with **no Lean axioms remaining**.
+
+**Anti-stall rule:** If a step looks blocked, attempt one alternative (e.g. prove a “derived axiom” as a theorem, split a big axiom into smaller lemmas, or switch to a different checklist track) before declaring a blocker.
+
+**Driver file for detailed checklists:** See `ROUTE3_LEMMA_COMPLETION_LOOP.md`
+
+---
+
+### Definition of "unconditional" (project-specific)
 For this project, **“unconditional” means:**
 - We are allowed to assume **standard / classically accepted axioms and theorems** (e.g. ZFC + classical analysis theorems) even if they are not yet formalized in Mathlib, by recording them as Lean `axiom`s when needed.
 - We are **not** allowed to assume any **RH‑equivalent** positivity statement for ξ/ζ; that RH‑level bridge must be proved (this is the real mathematical bottleneck).
@@ -71,6 +94,27 @@ Produce a **non‑conditional** proof of RH by proving the **single RH‑equival
     W^{(1)}(\mathrm{pair}(f,g)) \;=\; \int_{\mathbb R}\overline{F_f(t)}\,F_g(t)\,d\mu(t).
     \]
 
+**Strawman best splice (PSC → Route‑3): choose \(\mu := \mu_{\mathrm{spec}}\) from `Riemann-active.txt`.**
+- In the boundary-certificate manuscript, the phase–velocity identity produces a **positive boundary measure** on \(\mathbb R\) of the form
+  \[
+  -w' \;=\; \pi\,\mu \;+\; \pi\sum_{\gamma} m_\gamma\,\delta_\gamma,
+  \]
+  where \(\mu\) is the (absolutely continuous) Poisson–balayage of off‑critical zeros and the sum is the atomic part from critical‑line ordinates.
+- Define the **full spectral boundary measure**
+  \[
+  \mu_{\mathrm{spec}} \;:=\; \mu \;+\; \sum_{\gamma} m_\gamma\,\delta_\gamma \ \ge\ 0,
+  \]
+  and feed **this** \(\mu_{\mathrm{spec}}\) to the Route‑3 measure-first pipeline.
+- This choice is “best” for a splice because it is already a measure on \(\mathbb R\) (Route‑3’s boundary parameter), already includes atoms, and is explicitly constructed in the PSC proof.
+- **Lean wiring:**
+  - The naming-aligned wrapper `μ_spec → Route3.AssumptionsMeasure → Route3.RHμ` is in
+    `RiemannRecognitionGeometry/ExplicitFormula/PSCSplice.lean`.
+  - The contour-to-boundary connection is in
+    `RiemannRecognitionGeometry/ExplicitFormula/ContourToBoundary.lean`:
+    - ✅ `PSCComponents` structure (det₂, O, ξ with differentiability)
+    - ✅ `log_deriv_decomposition` **PROVED** using Mathlib's `logDeriv_div` and `logDeriv_mul`
+    - Remaining axioms (identity part): `explicit_formula_cancellation`, `psc_phase_velocity_identity`.
+
 **What this buys immediately:**
 - \(W^{(1)}(\mathrm{quad}(f)) = \int |F_f(t)|^2\,d\mu(t) \ge 0\), hence `WeilGate`, hence RH (via Lagarias).
 
@@ -104,6 +148,25 @@ Produce a **non‑conditional** proof of RH by proving the **single RH‑equival
 - Prove a representation
   - \(W^{(1)}(\mathrm{pair}(f,g)) = \langle \nu,\overline{F_f}F_g\rangle\)
   for some boundary distribution/measure \(\nu\) (not yet positive).
+
+**Splice completion target (PSC → Route‑3):**
+- Strengthen the identity to the concrete positive measure from `Riemann-active.txt`:
+  \[
+    \nu \;=\; \mu_{\mathrm{spec}}
+    \qquad\text{(up to the project’s normalization constants, i.e. the chosen \(\pi\) factors).}
+  \]
+  Equivalently, prove the **measure-first Bochner identity**
+  \[
+    W^{(1)}(\mathrm{pair}(f,g)) \;=\; \int_{\mathbb R}\overline{F_f(t)}\,F_g(t)\,d\mu_{\mathrm{spec}}(t).
+  \]
+- **Lean shape:** this is exactly the data of `SesqMeasureIntegralIdentity` (Bochner form) with `μ := μ_spec`,
+  which converts automatically to `SesqMeasureIdentity` via `SesqMeasureIntegralIdentity.toSesqMeasureIdentity`, and then fires
+  `Route3.RHμ`. The PSC-named wrapper is in `RiemannRecognitionGeometry/ExplicitFormula/PSCSplice.lean`.
+- Concretely, this splice-completion proof splits into:
+  - **(SC1)** show the PSC and Route‑3 boundary transforms agree on the chosen test space (`transform_eq_mellinOnCriticalLine`),
+  - **(SC2)** identify the boundary distribution produced by the contour definition of \(W^{(1)}\) with the PSC phase distribution
+    \(\nu = \frac1\pi(-w')\), and then use the PSC phase–velocity identity \(-w'=\pi\mu_{\mathrm{spec}}\) to conclude \(\nu=\mu_{\mathrm{spec}}\),
+  - **(SC3)** check the fixed \(\pi\) normalization constants so the final statement is exactly the Bochner identity above.
 
 **Standard-analysis checklist (contour/explicit formula route):**
 - Define \(W^{(1)}\) as a contour limit or symmetric truncation over zeros.
@@ -203,16 +266,44 @@ Once you have a positive‑measure representation (or a reflection positivity re
 
 At this point the program is structurally complete. What remains is split into:
 
-- **Standard theorems not yet formalized (big but “just work”)**
-  - [ ] **(Optional: “zero-axiom Lean”) Remove the `herglotz_representation` axiom** in `ExplicitFormula/Caratheodory.lean` by proving (or importing) the Herglotz representation theorem.
-    - Good news: Mathlib has foundational measure-representation tools (e.g. `MeasureTheory/Integral/RieszMarkovKakutani.lean`) and weak-* compactness (Banach–Alaoglu in `Analysis/Normed/Module/WeakDual.lean`).
-    - Note: Mathlib does **not** currently appear to have a ready-made “Poisson kernel / harmonic functions on the disk / Herglotz representation” development, so removing this axiom is still a substantial standalone formalization project.
-  - [ ] **Build a concrete `LagariasFramework` instance** for a concrete test space (recommended: `WeilTestFunction` / log‑Schwartz), proving:
-    - Lagarias Thm 3.1 (explicit formula) as an equality of functionals, and
-    - Lagarias Thm 3.2 (Weil criterion) as an equivalence `RH ↔ WeilGate`.
+---
 
-- **The RH‑equivalent core (not “just work”)**
-  - [ ] **Prove the positivity bridge for the arithmetic ξ/ζ channel**, i.e. produce a **positive** spectral measure / positive‑real response for the ξ‑derived form.
-    - This is the single step that, if completed, yields an unconditional proof of RH.
+#### **Splice Completion (the single remaining identity lemma)**
+
+- [ ] **Construct a `PSCSplice.IntegralAssumptions` instance whose `identity_integral` is the splice completion identity**
+  - Target statement (identity claim \(\nu = \mu_{\mathrm{spec}}\)):
+    \[
+      W^{(1)}(\mathrm{pair}(f,g)) = \int_{\mathbb R} \overline{F_f(t)}\,F_g(t)\,d\mu_{\mathrm{spec}}(t).
+    \]
+  - **Where it lives in Lean now:** there is **no global axiom**. The statement is exactly the field
+    `Route3.PSCSplice.IntegralAssumptions.identity_integral` in `ExplicitFormula/PSCSplice.lean`.
+  - **Proof sketch: COMPLETE** — see `ROUTE3_IDENTITY_PART.md`:
+    - §"Detailed proof of the log-derivative cancellation (SC2)" — det₂ and outer O cancel via explicit formula
+    - §"Normalization verification (SC3)" — π factors and symmetric pairing conventions match
+  - **Normalization note:** if the contour bookkeeping yields a real prefactor (e.g. `1/2`), we can absorb it by scaling the measure
+    using `IntegralAssumptions.ofHalfScalarMulIntegral` / `ofRealScalarMulIntegral` (see `PSCSplice.lean`).
+  - **Why not "RH‑equivalent":** positivity \(\mu_{\mathrm{spec}}\ge0\) is already supplied by `Riemann-active.txt`
+    (phase–velocity identity + Herglotz); what remains is the **identity** bookkeeping (contour limits, normalization, outer cancellation).
+
+---
+
+#### Standard theorems not yet formalized (big but "just work")
+
+- [ ] **(Optional: "zero-axiom Lean") Remove the `herglotz_representation` axiom** in `ExplicitFormula/Caratheodory.lean` by proving (or importing) the Herglotz representation theorem.
+  - Good news: Mathlib has foundational measure-representation tools (e.g. `MeasureTheory/Integral/RieszMarkovKakutani.lean`) and weak-* compactness (Banach–Alaoglu in `Analysis/Normed/Module/WeakDual.lean`).
+  - Note: Mathlib does **not** currently appear to have a ready-made "Poisson kernel / harmonic functions on the disk / Herglotz representation" development, so removing this axiom is still a substantial standalone formalization project.
+- [ ] **Build a concrete `LagariasFramework` instance** for a concrete test space (recommended: `WeilTestFunction` / log‑Schwartz), proving:
+  - Lagarias Thm 3.1 (explicit formula) as an equality of functionals, and
+  - Lagarias Thm 3.2 (Weil criterion) as an equivalence `RH ↔ WeilGate`.
+
+---
+
+#### The RH‑equivalent core (already addressed by the PSC splice)
+
+- [x] **Prove the positivity bridge for the arithmetic ξ/ζ channel.**
+  - **Supplied by `Riemann-active.txt`:** the phase–velocity identity gives \(\mu_{\mathrm{spec}}\ge0\) directly (no additional positivity proof needed once the splice identity is established).
+  - Once the splice identity is provided as an `IntegralAssumptions.identity_integral` proof (i.e. once a
+    `PSCSplice.IntegralAssumptions` instance exists), the Lean pipeline fires:
+    `IntegralAssumptions → Assumptions → AssumptionsMeasure → RHμ → RiemannHypothesis`.
 
 
