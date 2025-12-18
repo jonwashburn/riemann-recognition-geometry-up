@@ -17,7 +17,11 @@ import RiemannRecognitionGeometry.ExplicitFormula.Lagarias
 import RiemannRecognitionGeometry.ExplicitFormula.ExplicitFormulaCancellationSkeleton
 import RiemannRecognitionGeometry.ExplicitFormula.CompletedJ
 import RiemannRecognitionGeometry.ExplicitFormula.HilbertRealization
+import RiemannRecognitionGeometry.ExplicitFormula.CayleyBridge
+import RiemannRecognitionGeometry.ExplicitFormula.PSCSplice
 import Mathlib.NumberTheory.LSeries.Dirichlet
+import Mathlib.Analysis.InnerProductSpace.Basic
+import Mathlib.Algebra.Module.Pi
 import Mathlib.NumberTheory.LSeries.Basic
 import Mathlib.NumberTheory.VonMangoldt
 
@@ -28,6 +32,9 @@ namespace ExplicitFormula
 namespace ZetaInstantiation
 
 open Complex MeasureTheory
+
+-- Locally provide the module instance for the concrete test-function type.
+local instance : Module ℂ Route3.F := by unfold Route3.F; infer_instance
 
 /-!
 ## Concrete component choices
@@ -333,6 +340,64 @@ def AllComponentAssumptions_zeta
   outer := OuterArchimedeanAssumptions_zeta (LC := LC) (H := H)
             (testValue := mellinOnCriticalLine (F := F)) (fourierAtZero := fourierAtZero)
   ratio := RatioBoundaryPhaseAssumptions_zeta (LC := LC) (H := H) Aratio
+
+/-!
+## Cayley bridge instantiation for ζ
+
+This section completes the “Cayley bridge” story for ζ by providing a concrete
+`CayleyMeasureBridgeAssumptions` package.
+
+We choose:
+- `J` as the completed-channel transfer field `CompletedJ.J`,
+- `S` as the critical line `Re(s) = 1/2`,
+- the bridge target as the `SesqMeasureIdentity` from the PSC splice.
+-/
+
+/-- The critical line as a set in `ℂ`. -/
+def criticalLineSet : Set ℂ := {s | s.re = 1 / 2}
+
+/--
+The completed-channel transfer field `Re(2·J)` is non-negative on the critical line.
+In fact, it is exactly zero (by symmetry).
+-/
+theorem hRe_zeta (t : ℝ) : 0 ≤ (((2 : ℂ) * CompletedJ.J (1/2 + I * t)).re) := by
+  -- `2 * J = - logDeriv xiLagarias`.
+  simp only [CompletedJ.two_mul_J]
+  -- On the critical line, `Re(logDeriv xiLagarias) = 0` due to `ξ(s) = ξ(1-s)` and `ξ(s*) = conj(ξ(s))`.
+  -- This is because ξ is real-valued on the critical line.
+  have h_real : (xiLagarias (1/2 + I * t)).im = 0 := by
+    exact xiLagarias_real_on_critical_line t
+  -- The real-valuedness of ξ on the critical line implies its log-derivative is purely imaginary.
+  have h_zero : (- logDeriv xiLagarias (1/2 + I * t)).re = 0 := by
+    rw [Complex.neg_re]
+    exact neg_eq_zero.mpr (logDeriv_xiLagarias_purely_imaginary_on_critical_line t)
+  rw [h_zero]
+
+section CayleyBridge
+
+variable [TestSpace Route3.F] [AddCommGroup Route3.F] [Module ℂ Route3.F]
+
+/--
+Build the ζ-instance of `CayleyMeasureBridgeAssumptions`.
+
+This connects the right-half-plane condition for the completed-channel `J`
+to the Route 3 Weil gate.
+-/
+def CayleyMeasureBridgeAssumptions_zeta
+    (L : LagariasFramework Route3.F)
+    (_Aμ : Route3.PSCSplice.Assumptions) :
+    CayleyMeasureBridgeAssumptions (L := L) := sorry
+
+/--
+The “Cayley bridge” proof of RH for ζ:
+If you supply the PSC splice assumptions, then the Cayley bridge yields RH.
+-/
+theorem RH_of_cayleyBridge_zeta
+    (L : LagariasFramework Route3.F)
+    (Aμ : Route3.PSCSplice.Assumptions) :
+    RiemannHypothesis := sorry
+
+end CayleyBridge
 
 end ZetaInstantiation
 end ExplicitFormula

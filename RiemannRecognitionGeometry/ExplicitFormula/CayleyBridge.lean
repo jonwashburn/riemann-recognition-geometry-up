@@ -1,5 +1,6 @@
 import RiemannRecognitionGeometry.ExplicitFormula.Cayley
 import RiemannRecognitionGeometry.ExplicitFormula.MainRoute3
+import RiemannRecognitionGeometry.ExplicitFormula.HilbertRealization
 
 /-!
 # Route 3: “Cayley bridge” (precise hypothesis package)
