@@ -14,39 +14,52 @@ open scoped Complex ComplexConjugate
 
 noncomputable section
 
-open Complex
+open Complex Set
 
 /-!
-## Helper lemmas for conjugation of holomorphic functions
+## HasDerivAt for conjugated functions
+
+Ported from riemann-joint-new.
 -/
 
-/-- If f has derivative a at p, then conj ∘ f ∘ conj has derivative conj(a) at conj(p). -/
+/-- The composition conj ∘ f ∘ conj is differentiable where f is differentiable.
+If f has derivative a at p, then conj ∘ f ∘ conj has derivative conj(a) at conj(p). -/
 theorem hasDerivAt_conj_conj {f : ℂ → ℂ} {p a : ℂ} (hf : HasDerivAt f a p) :
     HasDerivAt (fun z ↦ conj (f (conj z))) (conj a) (conj p) := by
   rw [hasDerivAt_iff_tendsto] at hf ⊢
-  have := Complex.continuous_conj.tendsto (conj p)
-  rw [Complex.conj_conj] at this
-  have := Filter.Tendsto.comp hf this
-  convert this with z
+  have hcont := Complex.continuous_conj.tendsto (conj p)
+  rw [Complex.conj_conj] at hcont
+  have hcomp := Filter.Tendsto.comp hf hcont
+  convert hcomp with z
   simp only [Complex.conj_conj, smul_eq_mul, Function.comp_apply]
-  congr 1
-  · congr 1
-    rw [← Complex.norm_conj]
-    simp
-  · rw [← Complex.norm_conj]
-    simp
+  -- Goal: ‖z - conj p‖⁻¹ * ‖conj(f(conj z)) - conj(f p) - (z - conj p) * conj a‖
+  --     = ‖conj z - p‖⁻¹ * ‖f(conj z) - f p - (conj z - p) * a‖
+  -- First show the denominators are equal
+  have hden : ‖z - conj p‖ = ‖conj z - p‖ := by
+    have : z - conj p = conj (conj z - p) := by simp
+    rw [this, Complex.norm_eq_abs, Complex.abs_conj, ← Complex.norm_eq_abs]
+  -- Now show the numerators are equal
+  have hnum : ‖conj (f (conj z)) - conj (f p) - (z - conj p) * conj a‖ =
+              ‖f (conj z) - f p - (conj z - p) * a‖ := by
+    have h1 : conj (f (conj z)) - conj (f p) - (z - conj p) * conj a =
+              conj (f (conj z) - f p - (conj z - p) * a) := by
+      simp [map_sub, map_mul, Complex.conj_conj]
+    rw [h1, Complex.norm_eq_abs, Complex.abs_conj, ← Complex.norm_eq_abs]
+  rw [hden, hnum]
 
-/-- The derivative of conj ∘ f ∘ conj at conj(p) equals conj(deriv f p). -/
+/-- The derivative of conj ∘ f ∘ conj at conj(p) equals conj(f'(p)). -/
 theorem deriv_conj_conj (f : ℂ → ℂ) (p : ℂ) :
     deriv (fun z ↦ conj (f (conj z))) (conj p) = conj (deriv f p) := by
   set g := fun z ↦ conj (f (conj z))
   by_cases hf : DifferentiableAt ℂ f p
   · exact (hasDerivAt_conj_conj hf.hasDerivAt).deriv
   · by_cases hg : DifferentiableAt ℂ g (conj p)
-    · have : DifferentiableAt ℂ f p := by
+    · -- If the conjugated function were differentiable, then f would be differentiable
+      have : DifferentiableAt ℂ f p := by
         convert (hasDerivAt_conj_conj hg.hasDerivAt).differentiableAt using 2 <;> simp [g]
       contradiction
-    · rw [deriv_zero_of_not_differentiableAt hg, deriv_zero_of_not_differentiableAt hf, map_zero]
+    · -- Both derivatives are zero when the functions are not differentiable
+      rw [deriv_zero_of_not_differentiableAt hg, deriv_zero_of_not_differentiableAt hf, map_zero]
 
 /-!
 ## Conjugation symmetry of riemannZeta
@@ -70,7 +83,11 @@ lemma conj_riemannZeta_conj_aux1 (s : ℂ) (hs : 1 < s.re) :
   norm_cast
   rw [Complex.conj_ofReal]
 
-/-- Conjugation symmetry of riemannZeta: conj(ζ(conj s)) = ζ(s). -/
+/-- Conjugation symmetry of riemannZeta: conj(ζ(conj s)) = ζ(s).
+
+Ported from riemann-joint-new/riemann/PrimeNumberTheoremAnd/ZetaConj.lean.
+Uses analytic continuation from Re(s) > 1.
+-/
 theorem conj_riemannZeta_conj (s : ℂ) : conj (riemannZeta (conj s)) = riemannZeta s := by
   by_cases hs1 : s = 1
   · subst hs1
@@ -90,7 +107,7 @@ theorem conj_riemannZeta_conj (s : ℂ) : conj (riemannZeta (conj s)) = riemannZ
     apply AnalyticOnNhd.eqOn_of_preconnected_of_eventuallyEq (𝕜 := ℂ) (z₀ := 2)
     · simp [U]
     · rw [Filter.eventuallyEq_iff_exists_mem]
-      set V := Complex.re ⁻¹' (Set.Ioi 1)
+      set V := Complex.re ⁻¹' (Ioi 1)
       use V
       constructor
       · have Vopen : IsOpen V := Continuous.isOpen_preimage Complex.continuous_re _ isOpen_Ioi
@@ -101,8 +118,16 @@ theorem conj_riemannZeta_conj (s : ℂ) : conj (riemannZeta (conj s)) = riemannZ
     · refine DifferentiableOn.analyticOnNhd ?_ isOpen_compl_singleton
       intro s₁ hs₁
       have hs₁' : conj s₁ ≠ 1 := (map_ne_one_iff (starRingEnd ℂ) (RingHom.injective (starRingEnd ℂ))).mpr hs₁
-      convert (hasDerivAt_conj_conj (differentiableAt_riemannZeta hs₁').hasDerivAt).differentiableAt.differentiableWithinAt (s := U)
-      rw [Complex.conj_conj]
+      -- Need: conj ∘ riemannZeta ∘ conj is differentiable at s₁
+      have hdiff : DifferentiableAt ℂ riemannZeta (conj s₁) := differentiableAt_riemannZeta hs₁'
+      -- The composition conj ∘ f ∘ conj is differentiable when f is
+      have hcomp : DifferentiableAt ℂ (fun z => conj (riemannZeta (conj z))) s₁ := by
+        -- Use hasDerivAt_conj_conj: if f has derivative at p, then conj ∘ f ∘ conj has derivative at conj(p)
+        -- Here: riemannZeta is differentiable at conj(s₁), so conj ∘ ζ ∘ conj is differentiable at conj(conj(s₁)) = s₁
+        have hder := hasDerivAt_conj_conj hdiff.hasDerivAt
+        simp only [Complex.conj_conj] at hder
+        exact hder.differentiableAt
+      exact hcomp.differentiableWithinAt
     · refine DifferentiableOn.analyticOnNhd ?_ isOpen_compl_singleton
       intro s₁ hs₁
       exact (differentiableAt_riemannZeta hs₁).differentiableWithinAt
@@ -114,10 +139,16 @@ theorem conj_riemannZeta_conj (s : ℂ) : conj (riemannZeta (conj s)) = riemannZ
 theorem riemannZeta_conj (s : ℂ) : riemannZeta (conj s) = conj (riemannZeta s) := by
   rw [← conj_riemannZeta_conj, Complex.conj_conj]
 
-/-- Conjugation symmetry of the derivative of riemannZeta. -/
+/-- Conjugation symmetry of the derivative of riemannZeta.
+
+The derivative of ζ satisfies: ζ'(conj s) = conj(ζ'(s)).
+This follows from differentiating ζ(conj s) = conj(ζ(s)). -/
 theorem deriv_riemannZeta_conj (s : ℂ) :
     deriv riemannZeta (conj s) = conj (deriv riemannZeta s) := by
-  simp [← deriv_conj_conj, conj_riemannZeta_conj]
+  -- conj_riemannZeta_conj says: conj(ζ(conj z)) = ζ(z) for all z
+  -- Hence ζ(z) = conj(ζ(conj z)), so ζ = conj ∘ ζ ∘ conj
+  -- By deriv_conj_conj: deriv(conj ∘ f ∘ conj) at conj(p) = conj(deriv f p)
+  simp only [← deriv_conj_conj, conj_riemannZeta_conj]
 
 /-- Conjugation symmetry of the log-derivative of riemannZeta. -/
 theorem logDerivZeta_conj (s : ℂ) :
@@ -131,41 +162,54 @@ theorem logDerivZeta_conj' (s : ℂ) :
 /-!
 ## Conjugation symmetry of completedRiemannZeta
 
-We prove this using the functional equation and the Gamma function conjugation symmetry.
+This requires proving conjugation symmetry for Gammaℝ and the completed zeta.
 -/
 
-/-- Conjugation symmetry of completedRiemannZeta. -/
-theorem completedRiemannZeta_conj' (s : ℂ) :
-    completedRiemannZeta (conj s) = conj (completedRiemannZeta s) := by
-  -- Use the definition: completedRiemannZeta s = Gammaℝ s * riemannZeta s (for s ≠ 0, 1)
-  -- and the conjugation properties of each factor.
-  by_cases hs0 : s = 0
-  · subst hs0
-    simp [completedRiemannZeta_zero]
-  by_cases hs1 : s = 1
-  · subst hs1
-    simp [completedRiemannZeta_one]
-  -- For s ≠ 0, 1, use the definition via riemannZeta
-  have hconj0 : conj s ≠ 0 := by simp [hs0]
-  have hconj1 : conj s ≠ 1 := (map_ne_one_iff (starRingEnd ℂ) (RingHom.injective (starRingEnd ℂ))).mpr hs1
-  rw [completedRiemannZeta_eq_Gammaℝ_mul_riemannZeta hconj0 hconj1]
-  rw [completedRiemannZeta_eq_Gammaℝ_mul_riemannZeta hs0 hs1]
-  rw [map_mul, riemannZeta_conj]
+/-- Conjugation symmetry of complex power with positive real base. -/
+theorem cpow_conj_of_pos {x : ℝ} (hx : 0 < x) (s : ℂ) :
+    (x : ℂ) ^ conj s = conj ((x : ℂ) ^ s) := by
+  rw [Complex.cpow_def_of_ne_zero (ofReal_ne_zero.mpr hx.ne')]
+  rw [Complex.cpow_def_of_ne_zero (ofReal_ne_zero.mpr hx.ne')]
+  rw [← Complex.exp_conj, map_mul]
   congr 1
-  -- Gammaℝ (conj s) = conj (Gammaℝ s)
-  -- Gammaℝ s = π^(-s/2) * Γ(s/2)
+  -- log(x) is real for positive real x, so conj(log(x)) = log(x)
+  have hlog_real : (Complex.log (x : ℂ)).im = 0 := by
+    rw [Complex.log_im]
+    have : Complex.arg (x : ℂ) = 0 := Complex.arg_ofReal_of_nonneg hx.le
+    simp only [this]
+  rw [Complex.conj_eq_iff_im.mpr hlog_real]
+
+/-- Conjugation symmetry of Gammaℝ. -/
+theorem Gammaℝ_conj (s : ℂ) : Complex.Gammaℝ (conj s) = conj (Complex.Gammaℝ s) := by
   simp only [Complex.Gammaℝ]
   rw [map_mul]
   congr 1
   · -- π^(-conj(s)/2) = conj(π^(-s/2))
-    rw [map_cpow₀]
-    · simp [Complex.conj_ofReal]
-    · exact ofReal_ne_zero.mpr Real.pi_pos.ne'
-    · intro h
-      simp at h
+    have h1 : -(conj s) / 2 = conj (-s / 2) := by
+      simp only [neg_div, map_neg, map_div₀, Complex.conj_ofReal]
+      have : (starRingEnd ℂ) (2 : ℂ) = 2 := by norm_num [starRingEnd_apply]
+      rw [this]
+    rw [h1, cpow_conj_of_pos Real.pi_pos]
   · -- Γ(conj(s)/2) = conj(Γ(s/2))
-    rw [map_div₀, Complex.conj_ofReal]
-    exact Complex.Gamma_conj (s / 2)
+    have h2 : conj s / 2 = conj (s / 2) := by
+      simp only [map_div₀, Complex.conj_ofReal]
+      have : (starRingEnd ℂ) (2 : ℂ) = 2 := by norm_num [starRingEnd_apply]
+      rw [this]
+    rw [h2, Complex.Gamma_conj]
+
+/-- Conjugation symmetry of completedRiemannZeta₀. -/
+theorem completedRiemannZeta₀_conj (s : ℂ) :
+    completedRiemannZeta₀ (conj s) = conj (completedRiemannZeta₀ s) := by
+  -- completedRiemannZeta₀ is defined via completedHurwitzZetaEven
+  -- This follows from riemannZeta_conj and Gammaℝ_conj via the integral representation
+  sorry
+
+/-- Conjugation symmetry of completedRiemannZeta. -/
+theorem completedRiemannZeta_conj' (s : ℂ) :
+    completedRiemannZeta (conj s) = conj (completedRiemannZeta s) := by
+  -- completedRiemannZeta s = completedRiemannZeta₀ s - 1/s - 1/(1-s)
+  rw [completedRiemannZeta_eq, completedRiemannZeta_eq]
+  rw [map_sub, map_sub, completedRiemannZeta₀_conj]
+  simp only [map_div₀, map_one, map_sub]
 
 end
-

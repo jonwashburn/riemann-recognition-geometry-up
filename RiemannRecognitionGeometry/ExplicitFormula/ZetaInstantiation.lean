@@ -433,7 +433,10 @@ theorem hRe_zeta (t : ℝ) : 0 ≤ (((2 : ℂ) * CompletedJ.J (1/2 + I * t)).re)
 
 section CayleyBridge
 
-variable [TestSpace Route3.F] [AddCommGroup Route3.F] [Module ℂ Route3.F]
+-- Provide necessary instances for Route3.F
+attribute [local instance] Pi.addCommGroup Pi.module
+
+variable [TestSpace Route3.F]
 
 /--
 Build the ζ-instance of `CayleyMeasureBridgeAssumptions`.

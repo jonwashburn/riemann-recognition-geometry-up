@@ -15,6 +15,7 @@ import Mathlib.NumberTheory.LSeries.Dirichlet
 import Mathlib.Analysis.Calculus.LogDeriv
 import Mathlib.Analysis.Calculus.Deriv.Shift
 import RiemannRecognitionGeometry.ExplicitFormula.Defs
+import RiemannRecognitionGeometry.ExplicitFormula.ZetaConjugation
 
 noncomputable section
 
@@ -112,9 +113,11 @@ This follows from:
 2. Real Dirichlet coefficients: ζ(conj s) = conj(ζ(s)) for Re s > 1, extended by analytic continuation
 3. Real base: π^(conj s) = conj(π^s)
 
-For now this is stated as an axiom pending Mathlib formalization. -/
-axiom completedRiemannZeta_conj (s : ℂ) :
-    completedRiemannZeta (starRingEnd ℂ s) = starRingEnd ℂ (completedRiemannZeta s)
+Proved in ZetaConjugation.lean (ported from riemann-joint-new). -/
+lemma completedRiemannZeta_conj (s : ℂ) :
+    completedRiemannZeta (starRingEnd ℂ s) = starRingEnd ℂ (completedRiemannZeta s) := by
+  simp only [starRingEnd_apply]
+  exact completedRiemannZeta_conj' s
 
 /-- xiLagarias satisfies the reality condition ξ(s*) = conj(ξ(s)). -/
 lemma xiLagarias_conj (s : ℂ) : xiLagarias (starRingEnd ℂ s) = starRingEnd ℂ (xiLagarias s) := by

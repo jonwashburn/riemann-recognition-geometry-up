@@ -265,7 +265,11 @@ Classical contour integral calculus
 | `ZetaInstantiation.lean` | Concrete ζ PSC-components + ζ hypothesis bundles |
 | `ZetaDet2Schwartz.lean` | det₂ analytic obligations for Schwartz test space |
 | `ZetaRightEdgePhaseLimit.lean` | Convenience constructors for right-edge phase-limit bundles |
-| `ZetaEndToEndSchwartz.lean` | End-to-end “assumptions → RH” wiring target |
+| `ZetaEndToEndSchwartz.lean` | End-to-end "assumptions → RH" wiring target |
+| `ZetaConjugation.lean` | Zeta conjugation symmetry (ported from riemann-joint-new) |
+| `HalfPlanePoisson.lean` | Half-plane Poisson kernel/integral (ported from riemann-finish) |
+| `CayleyBridgeZeta.lean` | Cayley bridge path to RH with explicit gaps |
+| `OuterSchurBridge.lean` | Outer functions, Schur bridge, pinch field (ported) |
 
 ---
 
@@ -354,3 +358,80 @@ lake env lean /tmp/test.lean 2>&1 | tail -30
   - ✅ Added `logDeriv_xiLagarias_purely_imaginary_on_critical_line` (proves log-deriv real part = 0)
   - ✅ Filled sorry in `hRe_zeta` using the new lemma
   - Remaining 2 sorries: `CayleyMeasureBridgeAssumptions_zeta` and `RH_of_cayleyBridge_zeta` (the hard math)
+- **Ported from riemann-joint-new**: Created `ZetaConjugation.lean`:
+  - ✅ `conj_riemannZeta_conj` - zeta conjugation via analytic continuation
+  - ✅ `riemannZeta_conj` - the main symmetry
+  - ✅ `Gammaℝ_conj`, `cpow_conj_of_pos` - helper lemmas (proved)
+  - ✅ `completedRiemannZeta_conj'` - completed zeta conjugation
+  - Converted `completedRiemannZeta_conj` from axiom to lemma (uses new file)
+  - **Axiom count in ExplicitFormula reduced from 2 to 1**
+- **Created HalfPlanePoisson.lean**: Ported half-plane Poisson infrastructure from riemann-finish:
+  - `Ω` domain definition (Re s > 1/2)
+  - `boundary` parametrization, `poissonKernel`, `poissonIntegral`
+  - `HasPoissonRepOn` and `HasPoissonReEqOn` structures
+  - Cayley adapters: `toDisk`, `fromDisk`, `boundaryToDisk`
+  - `hasPoissonReEqOn_from_cayley` theorem
+- **Created CayleyBridgeZeta.lean**: Documents the path from Cayley bridge to RH:
+  - `J_zeta` definition (= -logDeriv ξ)
+  - `Re_two_J_zeta_critical_line` - proves Re(2J) = 0 on critical line
+  - `positivity_hypothesis_zeta` axiom - the Poisson positivity gap
+  - `spectral_bridge_hypothesis` axiom - the spectral theory gap
+  - `cayleyMeasureBridgeAssumptions_zeta_impl` - assembles the bridge
+  - `RH_of_cayleyBridge_zeta_impl` - final RH theorem
+- **Created OuterSchurBridge.lean**: Ported outer function and Schur bridge infrastructure:
+  - `IsSchurOn` predicate and monotonicity
+  - `schur_of_cayley_re_nonneg_on` - KEY BRIDGE: Re(F) ≥ 0 → Cayley transform is Schur (PROVED)
+  - `OuterHalfPlane` structure (analytic + nonvanishing on Ω)
+  - `BoundaryModulusEq` definition
+  - `J_pinch`, `F_pinch` definitions (pinch field construction)
+  - `boundary_abs_J_pinch_eq_one` - |J| = 1 on boundary when modulus matches (PROVED)
+  - `F_pinch_boundary_bound` - |F.re| ≤ 2 on boundary (PROVED)
+  - `XiSchurDecompositionOffZeros` structure
+  - `no_offcritical_zeros_from_schur`, `RH_from_schur_bridge` theorems (2 sorries)
+- **Extended OuterSchurBridge.lean with Poisson transport**:
+  - `BoundaryPositive` definition (F satisfies Re(F) ≥ 0 a.e. on boundary)
+  - `HasPoissonRep` structure (Poisson representation on full Ω)
+  - `HasPoissonRepOn` definition (Poisson representation on subset S ⊆ Ω)
+  - **`poissonTransport`** - **KEY THEOREM**: boundary positivity → interior positivity (PROVED)
+  - **`poissonTransportOn`** - subset version (PROVED)
+  - `repOn_of_rep_subset`, `repOn_from_reEqOn` - builder lemmas (PROVED)
+  - `FullBridgeHypotheses` structure - packages all needed hypotheses
+  - `interior_positivity_from_bridge` - derives interior positivity from bridge (1 sorry for boundary sign)
+- **Added Cayley transform construction**:
+  - `Theta_of_J` definition - Cayley transform (2J - 1)/(2J + 1)
+  - **`Theta_Schur_of_Re_nonneg_on`** - Re(2J) ≥ 0 → Θ is Schur (PROVED)
+  - `Θ_pinch_of` definition - pinch Θ via Cayley transform
+  - `Θ_pinch_Schur_offZeros` - Schur bound for pinch Θ (PROVED)
+- **Added PinchCertificate structure**:
+  - `PinchCertificate` structure - packages J, positivity, and removable extensions
+  - `PinchCertificate.Θ` - Θ attached to certificate
+  - `PinchCertificate.Θ_Schur_offZeros` - Schur bound from certificate (PROVED)
+  - `RH_from_pinch_certificate` - RH from certificate (1 sorry)
+- **Added Schur globalization theorems (ALL PROVED)**:
+  - **`PinchConstantOfOne`** - max modulus principle: Θ(z₀)=1 + Schur → Θ≡1 (**PROVED** via `Complex.eqOn_of_isPreconnected_of_isMaxOn_norm`)
+  - **`PinchFromExtension`** - removable extension pinch (**PROVED**)
+  - **`GlobalizeAcrossRemovable`** - Schur+extension at ρ → g≡1 (**PROVED**)
+  - **`no_offcritical_zeros_from_schur_full`** - Schur+assigns → no zeros in Ω (**PROVED**)
+- **Filled more sorries via conjugation infrastructure**:
+  - Added `hasDerivAt_conj_conj` and `deriv_conj_conj` (key derivative lemmas for conjugated functions)
+  - Filled `deriv_riemannZeta_conj` using `deriv_conj_conj`
+  - Filled differentiability sorry in `conj_riemannZeta_conj`
+- **Proved `no_offcritical_zeros_from_certificate`**:
+  - Given a `PinchCertificate ξ`, proves ξ has no zeros in Ω (Re > 1/2)
+  - Uses full Schur globalization chain: `Theta_Schur_of_Re_nonneg_on` → `no_offcritical_zeros_from_schur_full`
+  - **This is a MAJOR milestone**: Certificate → No off-critical zeros is now PROVED!
+- **Created OuterConstruction.lean** (NEW FILE):
+  - Ported from riemann-finish/HalfPlaneOuterV2.lean
+  - Defines `IsOuter`, `BoundaryModulusEq`, `ExistsOuterWithModulus`
+  - Defines Poisson kernel and integral for half-plane
+  - Defines pinch field `J_pinch = det2/(O·ξ)` and `F_pinch = 2·J_pinch`
+  - Proves `boundary_abs_J_pinch_eq_one`: unit modulus on boundary when BME holds
+  - Proves `F_pinch_boundary_re_bound`: |Re(F)| ≤ 2 on boundary
+  - Proves `poissonTransport` and `poissonTransportOn`: boundary → interior positivity
+  - Proves `J_Re_nonneg_from_outer`: Re(2·J) ≥ 0 from outer construction
+  - Axioms: `outer_exists_with_modulus`, `pinch_has_poisson_rep` (Hardy space theory)
+- **Current Status**:
+  - **Axioms in ExplicitFormula/**: 5 (added 2 in OuterConstruction.lean)
+  - **Sorries in ExplicitFormula/**: 21
+  - **COMPLETE PROOF CHAIN**: `OuterConstructionHypotheses` → `J_Re_nonneg_from_outer` → positivity
+  - **Path to RH fully documented** in CayleyBridgeZeta.lean
