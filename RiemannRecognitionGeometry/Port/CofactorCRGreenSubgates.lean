@@ -1,5 +1,6 @@
 import RiemannRecognitionGeometry.Port.CofactorEnergy
 import RiemannRecognitionGeometry.Port.CofactorCRGreenAssumptions
+import RiemannRecognitionGeometry.Port.RealPhaseTransfer
 
 noncomputable section
 
@@ -60,6 +61,51 @@ structure CofactorCRGreenSubgatesStrong where
   windowEnergy_sqrt_bound :
     ∀ I : WhitneyInterval,
       Real.sqrt (windowEnergy I) ≤ C_geom * (1 / Real.sqrt (2 * I.len))
+
+/-
+## Default real representative (S1 is already solved in this repo)
+
+We can take the real representative of the cofactor phase change to be the difference of
+`rgCofactorPhaseReal` (see `Port/RealPhaseTransfer.lean`). The `Real.Angle` norm bound
+`‖Δθ_angle‖ ≤ |Δθ_real|` is already proved there as
+`Port.cofactorPhaseChange_le_abs_real`.
+-/
+
+namespace CofactorCRGreenSubgatesStrong
+
+/-- Default real-valued phase-change representative for the cofactor phase. -/
+def phaseChangeReal_default (I : WhitneyInterval) (ρ : ℂ) : ℝ :=
+  rgCofactorPhaseReal ρ (I.t0 + I.len) - rgCofactorPhaseReal ρ (I.t0 - I.len)
+
+/-- Subgate (S1): the `Real.Angle` norm of the cofactor phase change is controlled by the absolute
+value of the default real representative. -/
+lemma angle_le_abs_real_default (I : WhitneyInterval) (ρ : ℂ) :
+    ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
+      |phaseChangeReal_default I ρ| := by
+  simpa [phaseChangeReal_default] using (cofactorPhaseChange_le_abs_real I ρ)
+
+/-- Build the subgate bundle by fixing (S1) to the default real representative. -/
+def of_realPhaseTransfer
+    (windowEnergy : WhitneyInterval → ℝ)
+    (hGreen :
+      ∀ (I : WhitneyInterval) (ρ : ℂ),
+        |phaseChangeReal_default I ρ| ≤
+          Real.sqrt (cofactorEbox_poisson ρ I) * Real.sqrt (windowEnergy I))
+    (hWin :
+      ∀ I : WhitneyInterval,
+        Real.sqrt (windowEnergy I) ≤ C_geom * (1 / Real.sqrt (2 * I.len))) :
+    CofactorCRGreenSubgatesStrong where
+  phaseChangeReal := phaseChangeReal_default
+  angle_le_abs_real := by
+    intro I ρ
+    simpa using angle_le_abs_real_default I ρ
+  windowEnergy := windowEnergy
+  green_pairing_cauchy_schwarz := by
+    intro I ρ
+    simpa using hGreen I ρ
+  windowEnergy_sqrt_bound := hWin
+
+end CofactorCRGreenSubgatesStrong
 
 /-- The subgates imply the strong cofactor CR/Green assumption used by the RG pipeline. -/
 theorem cofactorCRGreenAssumptionsStrong_of_subgates

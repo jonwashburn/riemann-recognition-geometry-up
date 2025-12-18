@@ -89,6 +89,14 @@ directly (no auxiliary `E`) and produces the usual RG tail bound with the √|I|
 It proves `cofactorCRGreenAssumptionsStrong_of_subgates : CofactorCRGreenSubgatesStrong → CofactorCRGreenAssumptionsStrong`.
 So the smallest remaining analytic work is now “prove these two inequalities + the boundary-term gate” in whatever analytic model we choose.
 
+**Further shrink (S1 already discharged):**
+`RiemannRecognitionGeometry/Port/CofactorCRGreenSubgates.lean` now fixes a default choice
+`phaseChangeReal_default(I,ρ) := rgCofactorPhaseReal ρ(t0+len) - rgCofactorPhaseReal ρ(t0-len)`
+and proves `angle_le_abs_real_default` using the existing lemma
+`Port.cofactorPhaseChange_le_abs_real` (`Port/RealPhaseTransfer.lean`).
+So subgate (S1) is *not* part of the analytic wall anymore; the remaining work is exactly:
+(S2) the Green+C–S pairing inequality and (S3) the window-energy scaling bound (plus the boundary-term gate).
+
 **Why A2c2-J\(_{\mathrm{strip}}\) is no longer boxed:** for the repo’s concrete ζ gauge,
 \[
 J(s)=\frac{\det_2(s)}{O(s)\,\xi(s)}=-\frac{\Gamma_{\mathbb R}(1-s)}{\Gamma_{\mathbb R}(s)}
@@ -455,5 +463,6 @@ These are “hard elements” that will take multiple iterations. Keep each item
 - **2025-12-18**: Added `Port.CofactorCRGreenAssumptionsStrong` and the discharge lemma to `HardyDirichletCRGreenStrong cofactorEbox_poisson` (in `RiemannRecognitionGeometry/Port/CofactorCRGreenAssumptions.lean`), so the boxed wall has a single concrete cofactor-side target statement.
 - **2025-12-18**: Added `weierstrass_tail_bound_of_hardyDirichletStrong` to `RiemannRecognitionGeometry/Port/WeierstrassTailBound.lean`, so downstream RG tail bounds can consume the strong energy-form CR/Green wall directly.
 - **2025-12-18**: Added `RiemannRecognitionGeometry/Port/CofactorCRGreenSubgates.lean`, packaging the strong CR/Green wall into two clean analytic sub-inequalities (Green+Cauchy–Schwarz pairing + window-energy scaling) plus the `Real.Angle` representative link, and proved it implies `CofactorCRGreenAssumptionsStrong`.
+- **2025-12-18**: Further discharged the “real representative ⇒ angle norm” subgate (S1) by defining `phaseChangeReal_default` and proving `angle_le_abs_real_default` using `Port.cofactorPhaseChange_le_abs_real` (RealPhaseTransfer). Remaining analytic work is now precisely the Green+C–S pairing inequality (S2) and the window-energy scaling bound (S3), plus the boundary-term gate.
 
 
