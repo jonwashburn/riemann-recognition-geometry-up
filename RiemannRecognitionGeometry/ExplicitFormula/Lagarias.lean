@@ -105,6 +105,97 @@ lemma logDeriv_xiLagarias_one_sub (s : ℂ) : logDeriv xiLagarias (1 - s) = - lo
   -- Then it is just the algebraic identity `(-a)/b = -(a/b)`.
   simp [logDeriv, deriv_xiLagarias_one_sub, xiLagarias_one_sub, neg_div]
 
+/-- `completedRiemannZeta` satisfies the conjugation symmetry.
+
+This follows from:
+1. `Gamma_conj`: Γ(conj s) = conj(Γ(s))
+2. Real Dirichlet coefficients: ζ(conj s) = conj(ζ(s)) for Re s > 1, extended by analytic continuation
+3. Real base: π^(conj s) = conj(π^s)
+
+For now this is stated as an axiom pending Mathlib formalization. -/
+axiom completedRiemannZeta_conj (s : ℂ) :
+    completedRiemannZeta (starRingEnd ℂ s) = starRingEnd ℂ (completedRiemannZeta s)
+
+/-- xiLagarias satisfies the reality condition ξ(s*) = conj(ξ(s)). -/
+lemma xiLagarias_conj (s : ℂ) : xiLagarias (starRingEnd ℂ s) = starRingEnd ℂ (xiLagarias s) := by
+  unfold xiLagarias
+  -- Use the completedRiemannZeta_conj axiom and that starRingEnd is a ring homomorphism.
+  simp only [starRingEnd_apply, map_mul, map_sub, map_one, map_div₀]
+  rw [← starRingEnd_apply, completedRiemannZeta_conj, starRingEnd_apply]
+  -- For real numbers like 2, (starRingEnd ℂ) 2 = 2.
+  norm_cast
+
+/-- The derivative of xiLagarias satisfies the conjugation symmetry.
+
+For a holomorphic f with f(conj s) = conj(f(s)), we have f'(conj s) = conj(f'(s)).
+This can be seen by differentiating f(conj s) = conj(f(s)) along a real parameter. -/
+axiom deriv_xiLagarias_conj (s : ℂ) :
+    deriv xiLagarias (starRingEnd ℂ s) = starRingEnd ℂ (deriv xiLagarias s)
+
+/-- The log-derivative of xiLagarias satisfies the conjugation symmetry.
+
+From deriv ξ (conj s) = conj(deriv ξ s) and ξ(conj s) = conj(ξ s):
+logDeriv ξ (conj s) = deriv ξ (conj s) / ξ(conj s)
+                    = conj(deriv ξ s) / conj(ξ s)
+                    = conj(deriv ξ s / ξ s)
+                    = conj(logDeriv ξ s)
+-/
+lemma logDeriv_xiLagarias_conj (s : ℂ) :
+    logDeriv xiLagarias (starRingEnd ℂ s) = starRingEnd ℂ (logDeriv xiLagarias s) := by
+  simp only [logDeriv, Pi.div_apply]
+  rw [deriv_xiLagarias_conj, xiLagarias_conj]
+  simp only [starRingEnd_apply, map_div₀]
+
+/-- On the critical line, logDeriv xiLagarias is purely imaginary.
+
+This follows from combining:
+1. ξ(1-s) = ξ(s) → logDeriv ξ (1-s) = -logDeriv ξ (s)
+2. ξ(conj s) = conj(ξ(s)) → logDeriv ξ (conj s) = conj(logDeriv ξ (s))
+3. On critical line: 1-s = conj(s)
+
+Combining: conj(logDeriv ξ s) = logDeriv ξ (conj s) = logDeriv ξ (1-s) = -logDeriv ξ s.
+So logDeriv ξ s = -conj(logDeriv ξ s), which means Re(logDeriv ξ s) = 0. -/
+lemma logDeriv_xiLagarias_purely_imaginary_on_critical_line (t : ℝ) :
+    (logDeriv xiLagarias (1/2 + I * t)).re = 0 := by
+  set s : ℂ := 1/2 + I * t
+  -- On the critical line, conj(s) = 1 - s.
+  have h_conj_s : starRingEnd ℂ s = 1 - s := by
+    apply Complex.ext
+    · simp [s]; norm_num
+    · simp [s]
+  -- From functional equation: logDeriv ξ (1-s) = -logDeriv ξ s
+  have h1 : logDeriv xiLagarias (1 - s) = - logDeriv xiLagarias s := logDeriv_xiLagarias_one_sub s
+  -- From conjugation: logDeriv ξ (conj s) = conj(logDeriv ξ s)
+  have h2 : logDeriv xiLagarias (starRingEnd ℂ s) = starRingEnd ℂ (logDeriv xiLagarias s) :=
+    logDeriv_xiLagarias_conj s
+  -- Combining on critical line: conj(logDeriv ξ s) = -logDeriv ξ s
+  have h_anti : starRingEnd ℂ (logDeriv xiLagarias s) = - logDeriv xiLagarias s := by
+    rw [← h2, h_conj_s, h1]
+  -- conj(z) = -z means z = -conj(z).
+  -- Let z = a + bi. Then conj(z) = a - bi = -(a + bi) = -a - bi.
+  -- So a = -a and -b = -b. Hence a = 0.
+  have h_re : (logDeriv xiLagarias s).re = 0 := by
+    have heq := congr_arg Complex.re h_anti
+    rw [starRingEnd_apply, Complex.star_def, Complex.conj_re, Complex.neg_re] at heq
+    -- heq : (logDeriv xiLagarias s).re = -(logDeriv xiLagarias s).re
+    linarith
+  exact h_re
+
+/-- On the critical line, xiLagarias is real-valued. -/
+lemma xiLagarias_real_on_critical_line (t : ℝ) : (xiLagarias (1/2 + I * t)).im = 0 := by
+  set s : ℂ := 1/2 + I * t
+  have h_conj_s : starRingEnd ℂ s = 1 - s := by
+    apply Complex.ext
+    · simp [s]; norm_num
+    · simp [s]
+  have h1 : xiLagarias (starRingEnd ℂ s) = starRingEnd ℂ (xiLagarias s) := xiLagarias_conj s
+  have h2 : xiLagarias (starRingEnd ℂ s) = xiLagarias (1 - s) := by rw [h_conj_s]
+  have h3 : xiLagarias (1 - s) = xiLagarias s := xiLagarias_one_sub s
+  have h_real : starRingEnd ℂ (xiLagarias s) = xiLagarias s := by
+    rw [← h1, h2, h3]
+  -- starRingEnd ℂ z = z iff z.im = 0.
+  simpa using (Complex.conj_eq_iff_im.mp h_real)
+
 /-- The functional-equation log-derivative identity specialized to vertical-line points `c - it`. -/
 lemma logDeriv_xiLagarias_leftEdge (c t : ℝ) :
     logDeriv xiLagarias (((1 - c : ℝ) : ℂ) + (t : ℂ) * I) =

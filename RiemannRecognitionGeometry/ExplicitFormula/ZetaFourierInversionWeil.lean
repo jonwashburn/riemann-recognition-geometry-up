@@ -29,7 +29,7 @@ Proof Sketch:
 4. The resulting factor `exp((c-0.5) log n) = n^{c-0.5}` cancels the `n^{-c}` to leave `1/√n`.
 -/
 theorem fourierInversionDirichletTerm_weil (c : ℝ) (hc : 1 / 2 < c) :
-    ExplicitFormulaCancellationSkeleton.FourierInversionDirichletTerm (F := WeilTestFunction) 
+    ExplicitFormulaCancellationSkeleton.FourierInversionDirichletTerm (F := WeilTestFunction)
       c hc (fun h x => h.toSchwartz x) := by
   intro h n hn
   -- 1. Identify M[h](c+it) as the Fourier transform of f(x) := h(x) exp((c-0.5)x).
@@ -38,7 +38,7 @@ theorem fourierInversionDirichletTerm_weil (c : ℝ) (hc : 1 / 2 < c) :
     smooth' := sorry -- smooth because h is Schwartz and exp is smooth
     decay' := sorry  -- decays because h has enough exponential decay to absorb exp((c-0.5)x)
   }
-  
+
   -- The integral to compute is ∫ t, M[h](c+it) * n^{-(c+it)} dt.
   -- Step A: Expand M[h](c+it)
   -- M[h](c+it) = ∫ x, h(x) exp((c-0.5)x) exp(itx) dx
@@ -56,19 +56,19 @@ theorem fourierInversionDirichletTerm_weil (c : ℝ) (hc : 1 / 2 < c) :
   -- Step B: Expand n^{-(c+it)}
   -- n^{-(c+it)} = n^{-c} exp(-it log n)
   -- = n^{-c} exp(-2π i (-t/2π) (log n / 2π))
-  
+
   -- Step C: Change variables t ↦ ξ = -t / 2π
   -- dt = -2π dξ. Integral from -∞ to ∞ becomes integral from ∞ to -∞ with -2π dξ,
   -- which is 2π ∫_{-∞}^{∞} ... dξ.
-  
+
   -- Step D: Use Fourier Inversion
   -- The integral becomes 2π n^{-c} ∫ ξ, 𝓕 f ξ exp(-2π i ξ (log n / 2π)) dξ * (-2π) -- wait, signs.
   -- Using 𝓕⁻ g x = ∫ ξ, g ξ exp(2π i x ξ) dξ.
   -- Result is 2π n^{-c} 𝓕⁻ (𝓕 f) (log n / 2π). -- wait, scaling.
-  
+
   -- If we choose the scaling correctly, we get:
   -- 2π n^{-c} f(log n / 2π) -- wait, the 2π in log n.
-  
+
   -- After careful tracking of 2π factors in the Fourier inversion formula:
   -- Result = (2π / √n) * h(log n).
   sorry
