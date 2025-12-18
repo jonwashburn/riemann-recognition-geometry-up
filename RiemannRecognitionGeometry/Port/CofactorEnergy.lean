@@ -1,18 +1,17 @@
-/-!
+/-
 # Port step: a concrete candidate for the RG “cofactor box energy” functional
 
-In `REALITY_PORT_PLAN.md` we decided to try the **Fefferman–Stein + BMO inheritance** route first.
+In `REALITY_PORT_PLAN.md` we decided to port the Hardy/Dirichlet pipeline in a statement-driven way.
 To even state that path cleanly, we need a concrete “energy functional” `Ebox ρ I` that represents
-the Carleson-box (Dirichlet) energy of the RG cofactor harmonic field.
+the Carleson-box (Dirichlet) energy of the RG **cofactor** harmonic field.
 
-This file defines one natural candidate in terms of existing primitives in this repo:
+**Important modeling choice**:
+in the half-plane factorization relevant to RG, the “Blaschke factor” attached to an off-line zero
+is an **inner function** with modulus 1 on the boundary line `Re s = 1/2`. Consequently the boundary
+log-modulus of the cofactor agrees with `logAbsXi` (there is no “subtract log|s-ρ|” term on the boundary).
 
-- boundary function: `cofactorLogAbs ρ t = log|ξ(1/2+it)| - log|((1/2+it) - ρ)|`,
-- harmonic extension: Poisson extension of that boundary function (already modeled in `FeffermanStein.lean`),
-- energy: Carleson-box energy of its gradient over the Whitney box `Q(I)` (already modeled in `CarlesonBound.lean`).
-
-This is *not yet* the full “Re log 𝒥” field from the Hardy/Dirichlet product certificate story, but it is a
-reasonable concrete target for the RG cofactor energy budget interface.
+So in this Port layer we model the cofactor boundary log-modulus as just `logAbsXi` (but we keep the
+parameter `ρ` in the signature to match the Hardy/Dirichlet interfaces).
 -/
 
 import RiemannRecognitionGeometry.FeffermanStein
@@ -26,14 +25,14 @@ namespace Port
 
 open Real Complex
 
-/-- Boundary log-modulus for the Weierstrass cofactor `g(s) = ξ(s)/(s-ρ)` on the critical line.
+/-- Boundary log-modulus for the half-plane **inner-factor cofactor**.
 
-This is the obvious “subtract the log singularity” model:
-`log|g(1/2+it)| = log|ξ(1/2+it)| - log|((1/2+it)-ρ)|`.
+Since the associated Blaschke factor has modulus 1 on the boundary line `Re s = 1/2`,
+the boundary log-modulus of the cofactor is exactly `logAbsXi`.
 
-We reuse the existing regularized `logAbsXi` for `log|ξ|` (see `FeffermanStein.lean`). -/
-def cofactorLogAbs (ρ : ℂ) (t : ℝ) : ℝ :=
-  logAbsXi t - Real.log (Complex.abs (((1/2 : ℂ) + t * Complex.I) - ρ))
+We keep the `ρ` parameter only to match the Hardy/Dirichlet interface shapes. -/
+def cofactorLogAbs (_ρ : ℂ) (t : ℝ) : ℝ :=
+  logAbsXi t
 
 /-- Gradient field of the (conjugate) Poisson extension of `cofactorLogAbs ρ`.
 

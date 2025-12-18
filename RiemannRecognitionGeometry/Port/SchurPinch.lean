@@ -1,4 +1,4 @@
-/-!
+/-
 # Port alignment: Schur pinch route (already present via Route 3 infrastructure)
 
 The `reality` blueprint contains a disabled module:
@@ -33,12 +33,10 @@ abbrev PinchCertificate (ξ : ℂ → ℂ) :=
 
 /-- Re-export: “no offcritical zeros” from a pinch certificate (Route 3 Schur globalization). -/
 theorem no_offcritical_zeros_from_certificate {ξ : ℂ → ℂ} (C : PinchCertificate ξ) :
-    ∀ ρ ∈ ExplicitFormula.OuterSchur.Ω, ξ ρ ≠ 0 :=
+    ∀ ρ ∈ ExplicitFormula.HalfPlane.Ω, ξ ρ ≠ 0 :=
   ExplicitFormula.OuterSchur.no_offcritical_zeros_from_certificate (C := C)
 
 end SchurPinch
 
 end Port
 end RiemannRecognitionGeometry
-
-

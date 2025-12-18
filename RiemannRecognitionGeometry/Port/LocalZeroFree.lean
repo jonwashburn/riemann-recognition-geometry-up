@@ -1,4 +1,4 @@
-/-!
+/-
 # Port step: local zero-free (band interior) without `RGAssumptions`
 
 This file mirrors the RG theorem `Axioms.local_zero_free`, but replaces the call to
@@ -53,6 +53,23 @@ theorem local_zero_free_of_inheritance (I : WhitneyInterval) (B : RecognizerBand
       (hρ_re := hρ_re) (hρ_zero := hρ_zero)
       (M := M) (h_osc := h_osc) (hM_le := hM_le)
 
+/-- Convenience wrapper: drive the Port local-zero-free step directly from `OscillationTarget`
+using the trivial cofactor BMO inheritance for the current Port model. -/
+theorem local_zero_free_of_OscillationTarget (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_re_upper : ρ.re ≤ 1)
+    (h_width_lower : 2 * I.len ≥ |ρ.im|)
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)
+    (hCA : ClassicalAnalysisAssumptions)
+    (hOsc : OscillationTarget) :
+    False := by
+  rcases hOsc with ⟨M, h_osc, hM_le⟩
+  exact
+    local_zero_free_of_inheritance I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower h_width_upper
+      hCA cofactorBMOInheritance_trivial M h_osc hM_le
+
 /-- Port analogue of `Axioms.no_interior_zeros` removing the `RGAssumptions` parameter. -/
 theorem no_interior_zeros_of_inheritance (I : WhitneyInterval) (B : RecognizerBand)
     (hB_base : B.base = I)
@@ -69,5 +86,3 @@ theorem no_interior_zeros_of_inheritance (I : WhitneyInterval) (B : RecognizerBa
 
 end Port
 end RiemannRecognitionGeometry
-
-

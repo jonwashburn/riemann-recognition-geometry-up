@@ -30,6 +30,104 @@ This means the real work is to **eliminate the Assumption Ledger** by turning ea
 2. **Structure for progress**: refactor the paper so that each remaining wall is a small, named statement with precise hypotheses.
 3. **Polish**: readability, exposition, formatting, tables, etc. (only after (1)–(2) for the current iteration).
 
+## Session trigger + “no-loops” protocol (to keep momentum)
+
+**Trigger rule:** if the user message is just `@WRITTEN_PROOF_PROMPT.md` (or effectively that), treat it as “run one proof-chipping session now.”
+
+**No-loop rule:** every session must end with at least one concrete artifact:
+- a new lemma/definition/proposition added to `recognition-geometry-dec-18.tex`, or
+- a strictly smaller/clearer hard wall (replace the boxed wall below), or
+- a refactor that removes ambiguity by shrinking an assumption into smaller named subgates, or
+- a “this wall is too strong” adversary/counterexample note that forces a downgrade of the boxed target.
+
+If none of these happens, the session is a failure: immediately downgrade the boxed wall to a smaller/more honest subgate.
+
+## Current hard wall (exactly one boxed target)
+
+\[
+\boxed{
+\textbf{B1′ (CR/Green phase bound from box energy):}\quad
+\forall I,\rho,\ E>0,\ \Bigl(E_{\mathrm{box}}(\rho,I)\le E\cdot(2|I|)\Bigr)\ \Rightarrow\
+\|\Delta\theta_{\mathrm{cofactor}}(\rho;I)\|\ \le\ C_{\mathrm{geom}}\sqrt{E}.
+}
+\]
+
+This is the honest “energy → phase” analytic bottleneck that feeds the boundary-wedge closure.
+In Lean it is exactly the missing interface `Port.HardyDirichletCRGreen cofactorEbox_poisson` (see `RiemannRecognitionGeometry/Port/HardyDirichletCRGreen.lean`).
+
+**Decomposition (now formalized as a reusable lemma):**
+the *algebraic* core “(pairing bound) + (remainder bound) ⇒ (boundary bound)” is now in
+`RiemannRecognitionGeometry/Port/CRGreenAlgebra.lean` (`Port.pairing_whitney_analytic_bound`), ported from
+`riemann-finish`’s `rh/RS/CRGreenOuter.lean`.
+So the boxed wall is now honestly “just” the analytic inputs that feed that lemma (Green trace identity + boundary-term gates + Cauchy–Schwarz/test-energy control), plus the already-existing Carleson budget `Ebox ≤ E·|I|`.
+
+**Stronger target (cleanest statement to prove):**
+`RiemannRecognitionGeometry/Port/HardyDirichletCRGreen.lean` now defines
+`Port.HardyDirichletCRGreenStrong Ebox`, which bounds phase change directly in terms of `sqrt(Ebox ρ I)` (no auxiliary `E`),
+and a lemma `hardyDirichletCRGreen_of_strong` showing it implies the older `Port.HardyDirichletCRGreen Ebox` API.
+So the “honest” analytic wall is really the strong energy-form bound.
+
+**Concrete cofactor-side target (exactly what we need for the boxed wall):**
+`RiemannRecognitionGeometry/Port/CofactorCRGreenAssumptions.lean` now also defines
+`Port.CofactorCRGreenAssumptionsStrong`, and a discharge lemma
+`hardyDirichletCRGreenStrong_of_cofactorCRGreenAssumptionsStrong :
+  CofactorCRGreenAssumptionsStrong → HardyDirichletCRGreenStrong cofactorEbox_poisson`.
+So the current RG wall can be targeted at the *single* cofactor statement:
+prove `CofactorCRGreenAssumptionsStrong` (faithfully, from Green trace + boundary-term gate + C–S).
+
+**End-to-end consumer (so we can actually *use* the strong wall):**
+`RiemannRecognitionGeometry/Port/WeierstrassTailBound.lean` now has
+`weierstrass_tail_bound_of_hardyDirichletStrong`, which consumes `HardyDirichletCRGreenStrong`
+directly (no auxiliary `E`) and produces the usual RG tail bound with the √|I| cancellation.
+
+**Next shrink of the boxed wall (new minimal subgate bundle):**
+`RiemannRecognitionGeometry/Port/CofactorCRGreenSubgates.lean` defines
+`Port.CofactorCRGreenSubgatesStrong`, a faithful decomposition of the strong CR/Green bound into:
+- a real phase-change representative `Δθ_real` controlling the `Real.Angle` norm,
+- a Green+Cauchy–Schwarz pairing inequality `|Δθ_real| ≤ √Ebox · √E_window`,
+- a window-energy scaling bound `√E_window ≤ C_geom · |I|^{-1/2}`.
+It proves `cofactorCRGreenAssumptionsStrong_of_subgates : CofactorCRGreenSubgatesStrong → CofactorCRGreenAssumptionsStrong`.
+So the smallest remaining analytic work is now “prove these two inequalities + the boundary-term gate” in whatever analytic model we choose.
+
+**Why A2c2-J\(_{\mathrm{strip}}\) is no longer boxed:** for the repo’s concrete ζ gauge,
+\[
+J(s)=\frac{\det_2(s)}{O(s)\,\xi(s)}=-\frac{\Gamma_{\mathbb R}(1-s)}{\Gamma_{\mathbb R}(s)}
+\]
+(paper Remark~`\ref{rem:zeta_gauge_J_gamma_ratio}`), so Nevanlinna strip regularity is routine by Stirling and should not be the session bottleneck.
+
+If/when this CR/Green wall is discharged, the next boxed wall should become the remaining RH-adjacent input (`OscillationTarget` for \(\log|\xi|\) or an explicit replacement certificate), unless a smaller subgate is discovered during the proof attempt.
+
+## Notes (no longer boxed): A2c2-J regularity
+
+- **Status (ζ gauge)**: the repo’s concrete ζ instantiation has \(J(s)=-\Gamma_{\mathbb R}(1-s)/\Gamma_{\mathbb R}(s)\), so the Nevanlinna/bounded-characteristic regularity is routine by Stirling (paper Remark~`\ref{rem:zeta_gauge_J_gamma_ratio}`).
+- **Why it still matters**: regularity is what makes the boundary trace / factorization \(J=c(I_1/I_2)\) meaningful (paper Lemma~`\ref{lem:quotient_inner_of_bounded_char_unimodular}`), but it is not the current bottleneck.
+
+**Companion fix (still important):** once A1b is distributional, A1a should also be stated as a \emph{Stieltjes pairing} against \(d\theta\) (not a Lebesgue integral against a pointwise \(\theta'\)).
+Then the splice algebra uses Lemma~`\ref{lem:splice_completion_algebra_distributional}`.
+
+### Optional “easy sufficient condition” (only if true)
+
+If one can additionally prove \(\theta\in W^{1,1}_{\mathrm{loc}}\) and \(\theta'(t)\le 0\) a.e., then A1b'' holds with
+\(d\mu_{\mathrm{spec}}(t)=\frac{1}{\pi}(-\theta'(t))\,dt\).
+
+## Angle-switch menu (use to think creatively when stuck)
+
+When progress stalls on the boxed wall, pick exactly one angle-switch and reframe before downgrading:
+
+- **Herglotz/Carathéodory angle**: express the relevant symbol as (or inside) a holomorphic function with \(\Re F\ge 0\) on a half-plane; apply Herglotz representation to read off \(\mu_{\mathrm{spec}}\).
+- **Schur/Clark angle**: push to the unit disk via Cayley; treat the Schur function’s Clark measure at \(1\) (or another unimodular point) as \(\mu_{\mathrm{spec}}\).
+- **Argument principle / inner-factor angle**: represent the boundary argument derivative as Poisson balayage of zeros plus a singular measure; identify the positive measure directly.
+- **Spectral shift / scattering angle**: interpret \(J\) as a determinant / transfer function and \(\mu_{\mathrm{spec}}\) as the spectral measure or density-of-states object.
+- **Distribution vs a.e. density**: decide explicitly whether you are proving a measure identity in distributions or an a.e. density statement; pick the easier target and then upgrade.
+- **Trace ideals / determinant growth**: if \(\det_2\) is a 2-modified Fredholm determinant \(\det_2(I-A(s))\), use trace-ideal bounds \(\log|\det_2(I-A)|\lesssim \|A\|_{\mathrm{HS}}^2\) to reduce A2c2-BT\(_{\mathrm{Nev}}\) to uniform Hilbert--Schmidt norm control for \(A(\sigma+it)\). This may dovetail with RG energy-budget estimates (B1).
+
+## Micro-goal for the next session (pick ONE; do not do all)
+
+- **CR/Green micro-goal (preferred)**: prove the *smallest analytic subgate* needed to feed `Port.pairing_whitney_analytic_bound` (e.g. a faithful Green trace identity on Whitney boxes, or the test-energy/Cauchy–Schwarz bound), and then derive `Port.HardyDirichletCRGreen cofactorEbox_poisson`.
+- **Boundary-term micro-goal**: isolate and prove the “no boundary term at infinity” gate needed for the Green identity on Whitney boxes (this is usually where hidden assumptions live).
+- **Oscillation micro-goal**: prove `OscillationTarget` for `logAbsXi` (or a strictly weaker replacement certificate that still closes the wedge).
+- **Lean-interface micro-goal**: generalize Lean `phase_velocity_identity` to the distributional/measure form (test functions), so we can stop hard-coding pointwise `deriv boundaryPhase`.
+
 ## Operating procedure (every time you work)
 
 1. **Read context**
@@ -101,6 +199,36 @@ When we hit any of these milestones, create a new dated snapshot `recognition-ge
 - **2025-12-18**: Refactor the Route~3 theorem chain in the paper so the “assumption” matches the splice-completion interface (positive spectral measure + pair factorization + normalization), rather than a generic \(\exists\mu\) spectral identity.
 - **2025-12-18**: Split A1 into A1a–A1d mirroring the splice chain (`explicit_formula_cancellation`, `phase_velocity_identity`, pair factorization, normalization) so each subclaim can be attacked independently in the written proof and in Lean.
 - **2025-12-18**: Make A1b (phase–velocity identity) explicit in the paper/driver in the exact “test function” form used in Lean: \(\int \phi\,\theta' \,dt = -\pi\int \phi\, d\mu_{\mathrm{spec}}\), and record the a.e. density interpretation \(\theta'=-\pi\rho\) when \(\mu_{\mathrm{spec}}\ll dt\).
+- **2025-12-18**: Add a “no-loops” hard-wall chipping protocol (single boxed wall + angle-switch menu) so each session either makes a concrete artifact or explicitly downgrades the current wall.
+- **2025-12-18**: Downgrade the boxed A1b wall to the smallest equivalent “density gate” A1b': \(\theta\in W^{1,1}_{loc}\) and \(\theta'\le0\) a.e. (then \(\mu_{\mathrm{spec}}\) is definitional); add fallback A1b'' (distributional/measure form) if a.e. differentiability is too strong.
+- **2025-12-18**: Add a reality-check note: the ζ concrete stub’s \(\theta=-2\arg\Gamma_{\mathbb R}(1/2+it)-\pi\) has \(\theta'(0)>0\), so A1b' may be false globally; be ready to downgrade to A1b'' (Herglotz/Clark measure form).
+- **2025-12-18**: Actually downgrade the single boxed hard wall to A1b'' (distributional positive-measure form), since A1b' (global \(\theta'\le0\)) is likely false for the ζ gamma-ratio model.
+- **2025-12-18**: Add a paper lemma showing A1b'' follows from a standard \emph{co-inner} hypothesis on \(J\) (canonical factorization / boundary argument BV \(\Rightarrow\) positive measure), so the hard wall becomes: prove \(1/J\) is inner.
+- **2025-12-18**: Add a paper lemma making the subgate explicit: bounded-type + unimodular boundary values \(\Rightarrow\) \(J\) inner \(\Rightarrow\) A1b'' (positive measure).
+- **2025-12-18**: Add a Lean-interface note: `phase_velocity_identity` should be generalized to the distributional/measure form (test functions) to match the honest A1b'' wall and avoid forcing absolute continuity/densities.
+- **2025-12-18**: Record a key reduction: A1b'' likely follows from the A2c2 Hardy/bounded-type package plus unimodular boundary values (bounded-type \(\Rightarrow\) inner \(\Rightarrow\) BV argument \(\Rightarrow\) positive measure).
+- **2025-12-18**: Add paper lemmas spelling out bounded type facts: (i) bounded type \(\Leftrightarrow\) harmonic majorant for \(\log^{+}|J|\), and (ii) closure under products/quotients. Use these to make the A2c2-BT wall more concrete.
+- **2025-12-18**: Re-box the hard wall as the explicit Nevanlinna integral bound for \(J\), and add the paper lemma `\ref{lem:bounded_type_nevanlinna_integral}` equating this to bounded type.
+- **2025-12-18**: Add a one-line sufficient condition: uniform polynomial growth on vertical lines \(\Rightarrow\) Nevanlinna bound (paper Lemma~`\ref{lem:poly_growth_implies_nevanlinna}`), plus a sanity-check remark that the zeta gamma-ratio model satisfies it by Stirling.
+- **2025-12-18**: Add an “operator-theoretic angle” for the bounded-type wall: if \(\det_2=\det_2(I-A)\), trace-ideal bounds reduce the Nevanlinna condition to uniform control of \(\|A(\sigma+it)\|_{\mathrm{HS}}\) (potentially linking Route~3 A2c2-BT to RG energy-budget B1).
+- **2025-12-18**: Add a practical “strip + far-right” reduction note for A2c2-BT\(_{\mathrm{Nev}}\): bound the Nevanlinna integral on \(1/2<\sigma\le\sigma_0\) and separately show uniform boundedness for \(\sigma\ge\sigma_0\) from normalization/absolute convergence/determinant bounds.
+- **2025-12-18**: Add a component-wise reduction note: bounded type for \(J=\det_2/(O\,\xi)\) reduces to bounded type of \(\det_2,O,\xi\) and nonvanishing of \(O,\xi\), so the “truth serum” is growth control for \(\det_2\) (or the underlying operator \(A\)).
+- **2025-12-18**: Fix the component-wise reduction note (again, more honestly): bounded type is a \emph{meromorphic} notion, so we do *not* assume \(\xi\) nonvanishing on \(\Omega\) and we do not require cancellation/removability at \(\xi\)-zeros. Poles are allowed; the Nevanlinna integral bound is the real regularity target.
+- **2025-12-18**: Add a pole sanity-check: \(\xi\) is order 1/genus 1 so its zeros satisfy \(\sum|\rho|^{-2}<\infty\), hence the half-plane Blaschke sum converges; poles of \(J\) at \(\xi\)-zeros do not automatically obstruct bounded type (paper Lemma~`\ref{lem:blaschke_sum_from_genus_one}` + Remark~`\ref{rem:xi_blaschke_condition}`).
+- **2025-12-18**: Fix a paper overclaim: bounded type + unimodular boundary values does *not* imply A1b'' positivity for the (meromorphic) PSC ratio \(J\); it only yields a quotient-of-inner factorization with a signed phase measure. Positivity is the RH-adjacent step that rules out the inner denominator.
+- **2025-12-18**: Add a paper lemma formalizing the “quotient of inner factors” statement for meromorphic bounded characteristic \(J\) with unimodular boundary values (Lemma~`\ref{lem:quotient_inner_of_bounded_char_unimodular}`), so the regularity⇒signed-measure step is pinned down precisely.
+- **2025-12-18**: Add a paper lemma/remark splitting the Nevanlinna strip wall for \(J=\det_2/(O\,\xi)\) into three separate strip-integral bounds via \(\log^{+}\) subadditivity (Lemma~`\ref{lem:logplus_mul}` + Remark~`\ref{rem:logplus_split_J}`).
+- **2025-12-18**: Add a paper lemma packaging this reduction as a single implication: three strip-integral bounds (for \(\det_2\), \(1/O\), \(1/\xi\)) imply the strip Nevanlinna bound for \(J\) (Lemma~`\ref{lem:nevanlinna_strip_from_components}`).
+- **2025-12-18**: Add a paper lemma isolating the outer-factor subgate: under standard outer/Poisson hypotheses and boundary log-integrability, the strip Nevanlinna bound for \(\log^{+}|1/O|\) holds (Lemma~`\ref{lem:outer_inverse_strip_bound}`).
+- **2025-12-18**: Fix an overly-strong decomposition: do not split \(J=\det_2/(O\,\xi)\) into separate \(\det_2\) and \(1/\xi\) Nevanlinna subgates (this ignores cancellation and fails in the \(\zeta\)-gauge). Re-box the wall in terms of the cancellation ratio \(F=\det_2/\xi\) and rewrite the strip reduction accordingly.
+- **2025-12-18**: Fix another over-strengthening: do not re-box the wall in terms of a Nevanlinna strip bound for \(F=\det_2/\xi\) (too strong: outer normalization is designed to cancel \(F\)'s growth). Re-box the wall as the Nevanlinna strip bound for the PSC ratio \(J=\det_2/(O\,\xi)\).
+- **2025-12-18**: Add a standard lemma that a Blaschke-summable inner denominator contributes a controlled Nevanlinna strip term (Lemma~`\ref{lem:blaschke_inverse_strip_nevanlinna}`), so pole contributions are not the main obstruction.
+- **2025-12-18**: Add a ζ-gauge sanity check: in the repo’s concrete ζ instantiation, \(J\) cancels to a pure gamma ratio \(-\Gamma_{\mathbb R}(1-s)/\Gamma_{\mathbb R}(s)\) (paper Remark~`\ref{rem:zeta_gauge_J_gamma_ratio}`), so the Nevanlinna strip wall is routine by Stirling in that gauge.
+- **2025-12-18**: Fix a definition-level mismatch: the boxed wall is about a meromorphic \(J\), so update the paper lemma `\ref{lem:bounded_type_nevanlinna_integral}` to the meromorphic “bounded characteristic” form and stop advertising the holomorphic harmonic-majorant equivalence as an equivalence for \(J\).
+- **2025-12-18**: Re-box the hard wall to the boundary strip \(1/2<\sigma\le 1\) and add a paper lemma handling the far-right region \(\sigma\ge 1\) from a polynomial-growth bound (Lemma~`\ref{lem:nevanlinna_far_right_poly}`).
+- **2025-12-18**: Add a distributional splice note: once A1b is phrased via \(d\theta\), A1a should be phrased as a Stieltjes pairing \(\int F_h\,d\theta\), and the algebraic splice uses Lemma~`\ref{lem:splice_completion_algebra_distributional}`.
+- **2025-12-18**: Re-box the single current hard wall away from Route-3 Nevanlinna regularity (routine in the ζ-gauge) and onto the actual RG analytic bottleneck: the CR/Green “energy → phase” bound `Port.HardyDirichletCRGreen cofactorEbox_poisson`.
+- **2025-12-18**: Mine `riemann-finish`’s `CRGreenOuter.lean` for the minimal subgates (pairing bound + remainder bound ⇒ boundary bound; then Carleson budget ⇒ uniform bound) and port the *algebraic* core into this repo as a reusable lemma.
 
 ## Next edits (short queue)
 
@@ -122,7 +250,7 @@ When we hit any of these milestones, create a new dated snapshot `recognition-ge
 - [x] Add a precise Lagarias (2007) citation in the paper for the explicit-formula cancellation step (A1-cancel) and add the corresponding bibliography entry.
 - [x] Refactor the Route~3 theorem chain assumptions to match splice completion (positive \(\mu_{\mathrm{spec}}\), factorization \(F_{\mathrm{pair}}=\overline{F_f}F_g\), normalization), and update the corresponding assumption labels/ledger text.
 - [x] Split A1 into A1a–A1d (paper + driver), and update A1’s status/plan to track which pieces are “cite Lagarias” vs genuinely new.
-- [ ] Make A1b (phase–velocity) explicit in both driver and paper, matching the Lean interface and clarifying the density interpretation.
+- [x] Make A1b (phase–velocity) explicit in both driver and paper, matching the Lean interface and clarifying the density interpretation.
 
 ## Assumption Ledger (paper-facing map)
 
@@ -210,6 +338,9 @@ Each assumption must have: **ID**, **statement (1–5 lines)**, **where used**, 
       \theta'(t) = -\pi\,\rho(t)\quad \text{a.e.},\qquad \rho(t)\ge0,
     \]
     and then \(\mu_{\mathrm{spec}}=\rho(t)\,dt\).  
+  - **Lean note (current ζ stub)**: `ZetaInstantiation.lean` defines
+    `μ_spec_zeta := volume.withDensity (t ↦ ENNReal.ofReal (-(1/π) * θ'(t)))`;
+    to make the phase–velocity identity tautological (no `ofReal` clipping), it suffices to prove \(\theta'(t)\le 0\) a.e.
   - **Status**: open  
   - **Lean locus**: `.../ContourToBoundary.lean` (`PSCComponents.phase_velocity_identity`, `complex_phase_velocity_identity`)
 
@@ -288,5 +419,41 @@ These are “hard elements” that will take multiple iterations. Keep each item
 - **2025-12-18**: Refactored the Route~3 theorem chain to assume the splice-completion spectral identity directly (positive \(\mu_{\mathrm{spec}}\) and the \(1/2\) normalization), aligning the paper’s assumption with the Lean splice pipeline.
 - **2025-12-18**: Split Route~3 A1 into A1a–A1d (explicit-formula cancellation, phase–velocity identity, pair factorization, normalization) to match the splice-completion pipeline and make the remaining hard steps maximally explicit.
 - **2025-12-18**: Made A1b (phase–velocity identity) explicit in the test-function form used in Lean, and recorded the a.e. density interpretation \(\theta'=-\pi\rho\) when \(\mu_{\mathrm{spec}}\ll dt\).
+- **2025-12-18**: Added a session trigger + “no-loops” protocol; declared a single boxed hard wall (A1b) and an angle-switch menu to force creative reframings before downgrading.
+- **2025-12-18**: Refined the A1b hard wall to emphasize the absolutely-continuous “density” regime: \(d\mu_{\mathrm{spec}}=\frac{1}{\pi}(-\theta')\,dt\), so the remaining content is sign/regularity (\(\theta'\le0\) a.e.) plus integrability.
+- **2025-12-18**: Replaced the boxed hard wall with the strictly smaller A1b' “phase monotonicity/density gate” and added an explicit fallback A1b'' (distributional/Clark/Herglotz measure form) to keep chipping honest if a.e. differentiability is unrealistic.
+- **2025-12-18**: Added an explicit “reality check” warning that A1b' (global \(\theta'\le0\)) may fail for the ζ gamma-ratio model; updated the chipping plan to treat A1b'' (positive measure / Clark/Herglotz) as the likely honest endpoint.
+- **2025-12-18**: Replaced the boxed hard wall with A1b'' (distributional phase–velocity / positive measure), and added micro-goals prioritizing a Clark/Herglotz lemma that produces \(\mu_{\mathrm{spec}}\ge0\) from Schur/Carathéodory hypotheses.
+- **2025-12-18**: Added a paper-facing lemma: A1b'' follows from a co-inner hypothesis on the PSC ratio \(J\) via standard inner-function boundary theory (canonical factorization); updated the driver to treat “prove \(1/J\) is inner” as the next honest subgate.
+- **2025-12-18**: Added a driver note/micro-goal to generalize the Lean `phase_velocity_identity` interface to the distributional/measure form, aligning Lean with the honest A1b'' wall.
+- **2025-12-18**: Added a driver-level reduction showing how A1b'' can plausibly be discharged from A2c2 once the Hardy/bounded-type hypothesis for the PSC ratio \(J\) is proved.
+- **2025-12-18**: Added a driver note and micro-goal to rewrite A1a in distributional/Stieltjes form to match A1b'', so the splice completion becomes pure measure-algebra (no pointwise \(\theta'\) needed).
+- **2025-12-18**: Added Lemma~`\ref{lem:inner_of_bounded_type_unimodular}` to the paper and recorded it in the driver: A2c2 (bounded type + unimodular boundary) should imply \(J\) is inner, which in turn standardly yields A1b''.
+- **2025-12-18**: Added paper Lemma~`\ref{lem:bounded_type_harmonic_majorant}` (bounded type \(\Leftrightarrow\) harmonic majorant for \(\log^{+}|f|\)) and Lemma~`\ref{lem:bounded_type_closed}` (closure under products/quotients), and updated the driver with equivalent bounded-type formulations.
+- **2025-12-18**: Added paper Lemma~`\ref{lem:bounded_type_nevanlinna_integral}` (bounded type \(\Leftrightarrow\) Nevanlinna integral bound) and updated the driver’s boxed hard wall to this explicit inequality for \(J\).
+- **2025-12-18**: Updated paper Lemma~`\ref{lem:bounded_type_nevanlinna_integral}` to the correct meromorphic “bounded characteristic” formulation (since \(J\) is expected meromorphic on \(\Omega\)); updated the driver to treat the Nevanlinna integral as the primary check for \(J\).
+- **2025-12-18**: Re-boxed the Nevanlinna wall to the boundary strip \(1/2<\sigma\le 1\) and added paper Lemma~`\ref{lem:nevanlinna_far_right_poly}` to isolate the far-right \(\sigma\ge 1\) part as a routine growth check.
+- **2025-12-18**: Added paper Lemma~`\ref{lem:poly_growth_implies_nevanlinna}` (uniform polynomial growth \(\Rightarrow\) Nevanlinna bound) and a sanity-check remark for the zeta gamma-ratio model.
+- **2025-12-18**: Added a paper remark linking bounded type for \(J=\det_2/(O\,\xi)\) to trace-ideal growth bounds for a determinant model \(\det_2(I-A)\), and added a corresponding angle-switch in the driver.
+- **2025-12-18**: Added a paper remark explaining the standard “boundary strip vs far-right region” strategy for checking the Nevanlinna supremum, and recorded the same reduction in the driver.
+- **2025-12-18**: Added a paper remark making the bounded-type wall component-wise: \(J\) bounded type follows from bounded type of \(\det_2,O,\xi\) + nonvanishing, sharpening the target to “control \(\det_2\)” (or \(\|A\|_{\mathrm{HS}}\)” in the determinant model.
+- **2025-12-18**: Corrected the component-wise bounded-type remark to avoid smuggling RH \emph{without} adding extra cancellation hypotheses: treat \(J\) as meromorphic bounded type (poles allowed at \(\xi\)-zeros), and separate this regularity wall from the RH-adjacent positivity wall (ruling out an inner denominator).
+- **2025-12-18**: Added a paper lemma/remark that the \(\xi\)-zero set satisfies the half-plane Blaschke summability condition (genus-one implies \(\sum|\rho|^{-2}<\infty\)), and updated the driver with the corresponding pole sanity-check for the bounded-type wall.
+- **2025-12-18**: Corrected the paper narrative to separate bounded-type regularity (Nevanlinna class for meromorphic \(J\)) from the RH-adjacent positivity wall (ruling out an inner denominator); removed the implication “bounded type ⇒ A1b'' positivity” as an overclaim.
+- **2025-12-18**: Added paper Lemma~`\ref{lem:quotient_inner_of_bounded_char_unimodular}` and updated the driver/paper text to cite it where we talk about the canonical factorization \(J=(I_1/I_2)\cdot c\).
+- **2025-12-18**: Added paper Lemma~`\ref{lem:logplus_mul}` and Remark~`\ref{rem:logplus_split_J}` to reduce A2c2-BT\(_{\mathrm{strip}}\) to three explicit strip-integral subgates for \(\det_2\), \(1/O\), and \(1/\xi\).
+- **2025-12-18**: Added paper Lemma~`\ref{lem:nevanlinna_strip_from_components}` formalizing that the three component strip bounds imply A2c2-BT\(_{\mathrm{strip}}\), and updated the driver to cite it.
+- **2025-12-18**: Added paper Lemma~`\ref{lem:outer_inverse_strip_bound}` showing the \(1/O\) strip bound follows from outer-function boundary log-integrability + Poisson representation, marking the outer term as a likely-easy subgate.
+- **2025-12-18**: Re-boxed the Nevanlinna strip wall in terms of \(F=\det_2/\xi\) and updated the driver/paper strip reduction (Remark~`\ref{rem:logplus_split_J}` + Lemma~`\ref{lem:nevanlinna_strip_from_components}`) to respect cancellation.
+- **2025-12-18**: Re-boxed the Nevanlinna strip wall back to the PSC ratio \(J\) (not \(F\)), since the outer normalization is supposed to cancel \(F\)'s outer growth; updated the driver to treat \(J\)-Nevanlinna as the correct regularity target.
+- **2025-12-18**: Added paper Lemma~`\ref{lem:blaschke_inverse_strip_nevanlinna}` controlling the Nevanlinna contribution of a Blaschke inner denominator and updated the driver with the corresponding “pole contribution is controlled” note.
+- **2025-12-18**: Added paper Remark~`\ref{rem:zeta_gauge_J_gamma_ratio}` and updated the driver to record that A2c2-J\(_{\mathrm{strip}}\) is routine in the concrete ζ-gauge used in the repo (gamma-ratio cancellation + Stirling).
+- **2025-12-18**: Re-boxed the single “Current hard wall” to the RG CR/Green bottleneck `Port.HardyDirichletCRGreen cofactorEbox_poisson` (energy \(\Rightarrow\) cofactor phase bound); moved the Nevanlinna discussion to “notes” since it’s routine in the ζ-gauge.
+- **2025-12-18**: Updated `recognition-geometry-dec-18.tex` to split the RG bottleneck B1 into B1a (Carleson energy budget) and B1b (CR/Green energy \(\Rightarrow\) cofactor phase bound), explicitly pointing to the Lean interface `Port.HardyDirichletCRGreen cofactorEbox_poisson`.
+- **2025-12-18**: Added `RiemannRecognitionGeometry/Port/CRGreenAlgebra.lean`, porting the “pairing bound + remainder bound ⇒ boundary bound” algebra from `riemann-finish` and re-exported it via `RiemannRecognitionGeometry/Port.lean`.
+- **2025-12-18**: Added `Port.HardyDirichletCRGreenStrong` (energy-form CR/Green bound) and `hardyDirichletCRGreen_of_strong` in `RiemannRecognitionGeometry/Port/HardyDirichletCRGreen.lean`, so the boxed wall can be targeted in its cleanest “sqrt(Ebox)” form.
+- **2025-12-18**: Added `Port.CofactorCRGreenAssumptionsStrong` and the discharge lemma to `HardyDirichletCRGreenStrong cofactorEbox_poisson` (in `RiemannRecognitionGeometry/Port/CofactorCRGreenAssumptions.lean`), so the boxed wall has a single concrete cofactor-side target statement.
+- **2025-12-18**: Added `weierstrass_tail_bound_of_hardyDirichletStrong` to `RiemannRecognitionGeometry/Port/WeierstrassTailBound.lean`, so downstream RG tail bounds can consume the strong energy-form CR/Green wall directly.
+- **2025-12-18**: Added `RiemannRecognitionGeometry/Port/CofactorCRGreenSubgates.lean`, packaging the strong CR/Green wall into two clean analytic sub-inequalities (Green+Cauchy–Schwarz pairing + window-energy scaling) plus the `Real.Angle` representative link, and proved it implies `CofactorCRGreenAssumptionsStrong`.
 
 

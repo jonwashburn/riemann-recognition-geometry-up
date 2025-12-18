@@ -1,4 +1,4 @@
-/-!
+/-
 # Port step: discharge the Carleson budget for `cofactorEbox_poisson` from the FS axiom
 
 This file instantiates the *budget* interface

@@ -1,4 +1,4 @@
-/-!
+/-
 # Port alignment: wedge closure / boundary positivity interfaces
 
 The `reality` blueprint has a disabled “wedge closure” module:
@@ -51,5 +51,3 @@ end WedgeClosure
 
 end Port
 end RiemannRecognitionGeometry
-
-

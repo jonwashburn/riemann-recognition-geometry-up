@@ -1,4 +1,4 @@
-/-!
+/-
 # Port step: RG-facing “Blaschke dominates total” via the cofactor tail bound route
 
 The existing RG theorem `Axioms.blaschke_dominates_total` currently depends on:

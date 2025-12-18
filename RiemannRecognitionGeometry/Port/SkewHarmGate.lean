@@ -1,4 +1,4 @@
-/-!
+/-
 # Port scaffold: boundary-term gate ("skew/harm tail") pattern
 
 This file records a small, reusable analytic pattern that appears in the `reality` repo:
@@ -18,6 +18,7 @@ can depend on a stable interface, independent of the surrounding PDE context.
 -/
 
 import Mathlib.MeasureTheory.Integral.Bochner
+import Mathlib.MeasureTheory.Integral.IntegralEqImproper
 import Mathlib.Analysis.Calculus.Deriv.Basic
 
 noncomputable section

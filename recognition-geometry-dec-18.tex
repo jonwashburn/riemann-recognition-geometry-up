@@ -2165,6 +2165,277 @@ This section records the remaining \emph{paper-facing} analytic assumptions need
     \[
       \theta'(t) = -\pi\,\rho(t)\quad\text{a.e.}
     \]
+    In particular, in the absolutely-continuous regime one may \emph{define} the spectral measure by
+    \(d\mu_{\mathrm{spec}}(t) := \frac{1}{\pi}\bigl(-\theta'(t)\bigr)\,dt\),
+    and then the phase--velocity identity is tautological; the real content is the sign/regularity input
+    \(-\theta'(t)\ge0\) a.e.\ (and enough integrability to justify the pairings that appear in A1a).
+    \emph{Warning (reality check).} For the concrete zeta-model ratio
+    \(J(1/2+it)=-\,\Gamma_{\mathbb R}(1/2-it)/\Gamma_{\mathbb R}(1/2+it)\),
+    the associated phase is \(\theta(t)=-2\arg \Gamma_{\mathbb R}(1/2+it)-\pi\), whose derivative is not sign-definite for all \(t\)
+    (indeed \(\theta'(t)=-2\,\theta_{\mathrm{RS}}'(t)\), and \(\theta_{\mathrm{RS}}'(0)<0\)).
+    Thus the ``\(\theta'\le 0\) a.e.'' density gate is a \emph{convenient sufficient condition} (matching the current Lean encoding),
+    but may need to be replaced by a distributional/Herglotz--Clark measure statement allowing a singular part and avoiding pointwise sign claims.
+    Concretely, an honest replacement is to require a positive Borel measure \(\mu_{\mathrm{spec}}\) such that for all test functions \(\phi\in C_c^\infty(\mathbb{R})\),
+    \[
+      \int_{\mathbb{R}} \phi(t)\,d\mu_{\mathrm{spec}}(t)\;=\;-\frac{1}{\pi}\int_{\mathbb{R}} \phi(t)\,d\theta(t),
+    \]
+    where \(d\theta\) denotes the distributional derivative of a BV representative of \(\theta\). This is the natural endpoint of Herglotz/Clark theory for inner/Schur functions.
+    
+    \begin{lemma}[Bounded type via harmonic majorant]\label{lem:bounded_type_harmonic_majorant}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\) and let \(f:\Omega\to\mathbb{C}\) be holomorphic.
+    If there exists a harmonic function \(u\) on \(\Omega\) such that
+    \[
+      \log^{+}\!\bigl|f(s)\bigr|\ \le\ u(s)\qquad (s\in\Omega),
+    \]
+    then \(f\) is of bounded type on \(\Omega\) (equivalently, \(f=g/h\) with \(g,h\in H^\infty(\Omega)\)).
+    Conversely, if \(f\) is of bounded type on \(\Omega\), then \(\log^{+}|f|\) admits a harmonic majorant on \(\Omega\).
+    \end{lemma}
+    \begin{proof}
+    Standard characterization of the Nevanlinna class / bounded-type functions on a half-plane; see, e.g., \cite{DurenHp,GarnettBounded}. \end{proof}
+
+    \begin{lemma}[Bounded type via Nevanlinna integral bound]\label{lem:bounded_type_nevanlinna_integral}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\) and let \(f\) be meromorphic on \(\Omega\).
+    Then \(f\) is of bounded type (bounded characteristic) on \(\Omega\) if and only if
+    \[
+      \sup_{\sigma>1/2}\ \int_{\mathbb{R}} \log^{+}\!\bigl|f(\sigma+it)\bigr|\ \frac{dt}{1+t^2}\ <\ \infty.
+    \]
+    \end{lemma}
+    \begin{proof}
+    Standard equivalence between bounded type and finiteness of the Nevanlinna characteristic in a half-plane; see, e.g., \cite{DurenHp,GarnettBounded}. \end{proof}
+
+    \begin{remark}[How one usually checks the supremum in practice]\label{rem:nevanlinna_strip_reduction}
+    In applications, one rarely estimates \(\sup_{\sigma>1/2}\) in one shot. Instead one fixes \(\sigma_0>1/2\) and splits the supremum into a boundary strip \(1/2<\sigma\le \sigma_0\) (the genuine boundary-value/Hardy work) and the far-right region \(\sigma\ge \sigma_0\), where one typically has a uniform bound \(\sup_{\sigma\ge\sigma_0,t}|f(\sigma+it)|<\infty\) from normalization/absolute convergence (hence the integral is trivially bounded).
+    \end{remark}
+
+    \begin{lemma}[Far-right Nevanlinna bound from polynomial growth]\label{lem:nevanlinna_far_right_poly}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\) and let \(f\) be holomorphic on \(\{s:\Re(s)\ge 1\}\).
+    Suppose there exist constants \(C\ge 1\) and \(A\ge 0\) such that for all \(\sigma\ge 1\) and all \(t\in\mathbb{R}\),
+    \[
+      |f(\sigma+it)| \le C\,(1+|t|)^A.
+    \]
+    Then
+    \[
+      \sup_{\sigma\ge 1}\ \int_{\mathbb{R}} \log^{+}\!\bigl|f(\sigma+it)\bigr|\ \frac{dt}{1+t^2}\ <\ \infty.
+    \]
+    \end{lemma}
+    \begin{proof}
+    As in Lemma~\ref{lem:poly_growth_implies_nevanlinna}: \(\log^{+}|f(\sigma+it)|\le \log(C)+A\log(1+|t|)\), and \(\log(1+|t|)/(1+t^2)\) is integrable on \(\mathbb{R}\).
+    \end{proof}
+
+    \begin{lemma}[Blaschke summability from a genus-one zero set]\label{lem:blaschke_sum_from_genus_one}
+    Let \(Z\subset\mathbb{C}\) be a multiset such that \(\sum_{\rho\in Z} |\rho|^{-2}<\infty\).
+    Then the half-plane Blaschke sum over \(Z\cap\Omega\),
+    \[
+      \sum_{\rho\in Z,\ \Re\rho>1/2} \frac{\Re\rho-\tfrac12}{1+|\rho|^2},
+    \]
+    converges.
+    \end{lemma}
+    \begin{proof}
+    Split into \(|\rho|\le 1\) (finite contribution) and \(|\rho|>1\). For \(|\rho|>1\) we have
+    \[
+      0\le \frac{\Re\rho-\tfrac12}{1+|\rho|^2}\le \frac{|\rho|}{|\rho|^2}\le \frac{1}{|\rho|^2},
+    \]
+    so the sum is dominated by \(\sum |\rho|^{-2}<\infty\).
+    \end{proof}
+
+    \begin{remark}[Application: \(\xi\)-zeros satisfy the Blaschke condition]\label{rem:xi_blaschke_condition}
+    The completed Riemann \(\xi\)-function is an entire function of order \(1\) and genus \(1\), hence admits a canonical (Hadamard) product whose convergence implies \(\sum_{\rho} |\rho|^{-2}<\infty\) over its zeros \(\rho\) (counted with multiplicity); see, e.g., \cite{TitchmarshZeta}.
+    Therefore Lemma~\ref{lem:blaschke_sum_from_genus_one} applies to the zero set in \(\Omega\): the associated half-plane Blaschke sum converges.
+    This is relevant because poles of the meromorphic ratio \(J=\det_2/(O\,\xi)\) at \(\xi\)-zeros do not automatically obstruct bounded type; what matters is precisely Blaschke summability and the remaining outer/Nevanlinna data.
+    \end{remark}
+
+    \begin{lemma}[Blaschke poles contribute a controlled strip Nevanlinna term]\label{lem:blaschke_inverse_strip_nevanlinna}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\). Let \(\{\rho\}\subset\Omega\) be a multiset satisfying the half-plane Blaschke condition
+    \[
+      \sum_{\rho\in\Omega} \frac{\Re\rho-\tfrac12}{1+|\rho|^2}\ <\ \infty.
+    \]
+    Let \(B\) be the corresponding half-plane Blaschke product (inner function) with zeros \(\rho\).
+    Then
+    \[
+      \sup_{1/2<\sigma\le 1}\ \int_{\mathbb{R}} \log^{+}\!\Bigl|\frac{1}{B(\sigma+it)}\Bigr|\ \frac{dt}{1+t^2}\ <\ \infty.
+    \]
+    \end{lemma}
+    \begin{proof}
+    Standard estimate for Blaschke products in a half-plane: \(-\log|B|\) is the Green-potential of the zero set, and the Blaschke summability condition is exactly what ensures uniform integrability of \(-\log|B(\sigma+\!it)|\) against the Cauchy weight \((1+t^2)^{-1}dt\) on compact \(\sigma\)-ranges away from the boundary. See, e.g., \cite{DurenHp,GarnettBounded}. \end{proof}
+
+    \begin{lemma}[Uniform polynomial growth implies the Nevanlinna bound]\label{lem:poly_growth_implies_nevanlinna}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\) and let \(f:\Omega\to\mathbb{C}\) be holomorphic.
+    Suppose there exist constants \(C\ge 1\) and \(A\ge 0\) such that for all \(\sigma>1/2\) and all \(t\in\mathbb{R}\),
+    \[
+      |f(\sigma+it)| \le C\,(1+|t|)^A.
+    \]
+    Then
+    \[
+      \sup_{\sigma>1/2}\ \int_{\mathbb{R}} \log^{+}\!\bigl|f(\sigma+it)\bigr|\ \frac{dt}{1+t^2}\ <\ \infty,
+    \]
+    hence \(f\) is of bounded type on \(\Omega\) (by Lemma~\ref{lem:bounded_type_nevanlinna_integral}).
+    \end{lemma}
+    \begin{proof}
+    Since \(C\ge1\), \(\log^{+}|f(\sigma+it)|\le \log(C)+A\log(1+|t|)\). The function \(t\mapsto \log(1+|t|)/(1+t^2)\) is integrable on \(\mathbb{R}\), so the displayed supremum is bounded uniformly in \(\sigma\).
+    \end{proof}
+
+    \begin{lemma}[Subadditivity of \(\log^{+}\) under products]\label{lem:logplus_mul}
+    For \(a,b\ge 0\), one has
+    \[
+      \log^{+}(ab)\ \le\ \log^{+}(a)\ +\ \log^{+}(b).
+    \]
+    Consequently, for complex numbers \(u,v\) one has
+    \[
+      \log^{+}|uv|\ \le\ \log^{+}|u|\ +\ \log^{+}|v|.
+    \]
+    \end{lemma}
+    \begin{proof}
+    If \(ab\le 1\), then \(\log^{+}(ab)=0\) and the inequality is trivial. If \(ab>1\), then \(\log^{+}(ab)=\log(ab)=\log a+\log b\le \log^{+}a+\log^{+}b\). The complex statement follows by applying the real inequality to \(a=|u|\), \(b=|v|\).
+    \end{proof}
+
+    \begin{remark}[Splitting the Nevanlinna wall for the PSC ratio]\label{rem:logplus_split_J}
+    The PSC ratio is \(J=\det_2/(O\,\xi)\). It is crucial to respect cancellations between \(\det_2\) and \(\xi\): in the \(\zeta\)-gauge, for example, \(\det_2=\zeta\) cancels the \(\zeta\)-factor inside \(\xi\), and \(J\) reduces to a pure gamma ratio.
+    
+    Accordingly, set the \emph{cancellation ratio}
+    \[
+      F(s)\ :=\ \frac{\det_2(s)}{\xi(s)}\qquad\text{(meromorphic on \(\Omega\))},
+    \]
+    so that \(J=F/O\).
+    Lemma~\ref{lem:logplus_mul} then gives the pointwise bound
+    \[
+      \log^{+}|J|\ \le\ \log^{+}|F|\ +\ \log^{+}\Bigl|\frac{1}{O}\Bigr|.
+    \]
+    Thus A2c2-BT\(_{\mathrm{strip}}\) reduces to proving strip-integral bounds for \(\log^{+}|F|\) and \(\log^{+}|1/O|\).
+    \end{remark}
+
+    \begin{lemma}[Outer term: strip Nevanlinna bound for \(1/O\) from boundary log-integrability]\label{lem:outer_inverse_strip_bound}
+    Let \(O\) be a holomorphic, zero-free function on \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\), and write \(u(s)=\log|O(s)|\).
+    Assume that \(u\) admits nontangential boundary values \(u_0(t)=\lim_{\sigma\downarrow 1/2}u(\sigma+it)\) for a.e.\ \(t\), with
+    \[
+      \int_{\mathbb{R}} |u_0(t)|\,\frac{dt}{1+t^2}\ <\ \infty,
+    \]
+    and that \(u(\sigma+it)\) is the Poisson extension of \(u_0\) on \(\Omega\) (as is the case for an outer function in a Smirnov/Nevanlinna class).
+    Then
+    \[
+      \sup_{1/2<\sigma\le 1}\ \int_{\mathbb{R}} \log^{+}\!\Bigl|\frac{1}{O(\sigma+it)}\Bigr|\ \frac{dt}{1+t^2}\ <\ \infty.
+    \]
+    \end{lemma}
+    \begin{proof}
+    Since \(O\) is zero-free, \(\log^{+}|1/O| = (-u)^{+}\le |u|\). Thus it suffices to bound
+    \(\sup_{1/2<\sigma\le 1}\int_{\mathbb{R}} |u(\sigma+it)|\,(1+t^2)^{-1}dt\).
+    By the Poisson representation \(u(\sigma+\!it)=(P_{\sigma-1/2}*u_0)(t)\) and the triangle inequality,
+    \(|u(\sigma+it)|\le (P_{\sigma-1/2}*|u_0|)(t)\).
+    Integrating against \((1+t^2)^{-1}dt\) and using Fubini, this reduces to bounding the convolution of the Cauchy weight \((1+t^2)^{-1}\) with the Poisson kernel.
+    Since both are (up to constants) Cauchy densities and the Cauchy family is stable under convolution, the resulting weight is comparable (uniformly for \(\sigma\in(1/2,1]\)) to \((1+t^2)^{-1}\).
+    Therefore the weighted \(L^1\) norm of \(u(\sigma+\!i\cdot)\) is uniformly controlled by the weighted \(L^1\) norm of \(u_0\), giving the desired bound.
+    \end{proof}
+
+    \begin{lemma}[Strip Nevanlinna bound for \(J\) from the cancellation ratio]\label{lem:nevanlinna_strip_from_components}
+    Let \(\det_2,O,\xi\) be meromorphic on \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\), and define
+    \(F=\det_2/\xi\) and \(J=F/O\) (meromorphically).
+    Suppose that each of the following two strip bounds holds:
+    \[
+      \sup_{1/2<\sigma\le 1}\ \int_{\mathbb{R}} \log^{+}\!\bigl|F(\sigma+it)\bigr|\ \frac{dt}{1+t^2}\ <\ \infty,
+    \]
+    \[
+      \sup_{1/2<\sigma\le 1}\ \int_{\mathbb{R}} \log^{+}\!\Bigl|\frac{1}{O(\sigma+it)}\Bigr|\ \frac{dt}{1+t^2}\ <\ \infty.
+    \]
+    Then the strip Nevanlinna bound holds for \(J\):
+    \[
+      \sup_{1/2<\sigma\le 1}\ \int_{\mathbb{R}} \log^{+}\!\bigl|J(\sigma+it)\bigr|\ \frac{dt}{1+t^2}\ <\ \infty.
+    \]
+    \end{lemma}
+    \begin{proof}
+    For each fixed \(\sigma\), Lemma~\ref{lem:logplus_mul} applied to \(J=F\cdot (1/O)\) gives the pointwise inequality
+    \(\log^{+}|J|\le \log^{+}|F|+\log^{+}|1/O|\) away from the discrete pole set, hence almost everywhere on \(\mathbb{R}\).
+    Integrate against \((1+t^2)^{-1}dt\), take sup over \(1/2<\sigma\le 1\), and use the two assumed bounds.
+    \end{proof}
+
+    \begin{remark}[Sanity check: the zeta gamma-ratio model]\label{rem:zeta_gamma_ratio_bounded_type}
+    For the concrete zeta-model ratio \(J(s)=-\,\Gamma_{\mathbb R}(1-s)/\Gamma_{\mathbb R}(s)\), Stirling's formula on vertical lines implies a uniform polynomial bound of the form
+    \(|J(\sigma+it)|\ll (1+|t|)^{A(\sigma)}\) (and in fact \(A(\sigma)\) can be taken uniformly for \(\sigma\ge 1/2\)).
+    Thus the Nevanlinna integral bound in Lemma~\ref{lem:bounded_type_nevanlinna_integral} is a \emph{routine} consequence of classical gamma estimates in that model.
+    \end{remark}
+
+    \begin{remark}[Why the \(\zeta\)-gauge PSC ratio reduces to a gamma ratio]\label{rem:zeta_gauge_J_gamma_ratio}
+    In the Lean instantiation `ZetaInstantiation.lean`, one chooses
+    \(\det_2=\zeta\), \(\xi=\xi_{\mathrm{Lagarias}}=(1/2)\,s(s-1)\,\mathrm{completedRiemannZeta}(s)\),
+    and \(O(s)=2/(s(1-s)\Gamma_{\mathbb R}(1-s))\).
+    Unwinding the definitions (and the identity \(\mathrm{completedRiemannZeta}(s)=\Gamma_{\mathbb R}(s)\,\zeta(s)\) up to harmless point-value conventions at \(s=0,1\))
+    gives the exact cancellation
+    \[
+      J(s)\;=\;\frac{\det_2(s)}{O(s)\,\xi(s)}\;=\;-\frac{\Gamma_{\mathbb R}(1-s)}{\Gamma_{\mathbb R}(s)}.
+    \]
+    This identity explains why the Nevanlinna/bounded-characteristic regularity of \(J\) is routine in the \(\zeta\)-gauge: it reduces to classical Stirling bounds for \(\Gamma_{\mathbb R}\) on vertical lines.
+    \end{remark}
+
+    \begin{remark}[Determinant-growth route to bounded type (operator-theoretic angle)]\label{rem:det2_growth_bounded_type}
+    In the intended PSC interpretation, \(\det_2(s)\) is a \(2\)-modified Fredholm determinant \(\det_2(I-A(s))\) for a Hilbert--Schmidt operator \(A(s)\).
+    Classical trace-ideal estimates (see, e.g., Simon's trace ideals book) bound the determinant in terms of \(\|A(s)\|_{\mathrm{HS}}\), schematically
+    \[
+      \log|\det_2(I-A(s))|\ \lesssim\ \|A(s)\|_{\mathrm{HS}}^2.
+    \]
+    Thus, one plausible way to prove the Nevanlinna bound (A2c2-BT\(_{\mathrm{Nev}}\)) for the PSC ratio \(J=\det_2/(O\,\xi)\) is to obtain \emph{uniform} (in \(\sigma>1/2\)) growth control for \(\|A(\sigma+it)\|_{\mathrm{HS}}\) and the corresponding outer factor \(O\).
+    This highlights a potential convergence between the Route~3 bounded-type wall and the RG ``energy budget'' estimates (B1), which also control \(L^2\)-type energies of related analytic objects.
+    \end{remark}
+
+    \begin{lemma}[Bounded type is closed under products/quotients]\label{lem:bounded_type_closed}
+    Let \(f,g:\Omega\to\mathbb{C}\) be holomorphic and of bounded type on \(\Omega\). Then \(fg\) is of bounded type on \(\Omega\).
+    If additionally \(g\) is nonvanishing on \(\Omega\), then \(f/g\) is of bounded type on \(\Omega\).
+    \end{lemma}
+    \begin{proof}
+    Write \(f=a/b\) and \(g=c/d\) with \(a,b,c,d\in H^\infty(\Omega)\), then \(fg=(ac)/(bd)\) and \(f/g=(ad)/(bc)\); see \cite{DurenHp,GarnettBounded}. \end{proof}
+
+    \begin{lemma}[Unimodular boundary values + bounded characteristic \(\Rightarrow\) quotient of inner factors]\label{lem:quotient_inner_of_bounded_char_unimodular}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\). Suppose \(J\) is meromorphic on \(\Omega\) and of bounded characteristic (i.e.\ \(J=g/h\) with \(g,h\in H^\infty(\Omega)\)).
+    Assume \(|J(1/2+it)|=1\) for a.e.\ \(t\in\mathbb{R}\) (nontangential boundary values).
+    Then there exist inner functions \(I_1,I_2\) on \(\Omega\) and a unimodular constant \(c\in\mathbb{C}\) with \(|c|=1\) such that
+    \[
+      J(s)=c\,\frac{I_1(s)}{I_2(s)}
+    \]
+    for all \(s\in\Omega\) away from the poles of \(J\).
+    \end{lemma}
+    \begin{proof}
+    Write \(g=I_g\,O_g\) and \(h=I_h\,O_h\) as inner--outer factorizations in \(H^\infty(\Omega)\) \cite{DurenHp,GarnettBounded}.
+    Then \(J=(I_g/I_h)\cdot (O_g/O_h)\).
+    Taking boundary moduli gives \(|O_g/O_h|=|g/h|=|J|=1\) a.e.\ on \(\Re(s)=1/2\).
+    A (half-plane) outer function with unimodular boundary modulus is a unimodular constant, hence \(O_g/O_h=c\) with \(|c|=1\).
+    Therefore \(J=c\,(I_g/I_h)\).
+    \end{proof}
+
+    \begin{remark}[Component-wise view of the PSC ratio (bounded type is meromorphic)]\label{rem:psc_ratio_bounded_type_components}
+    The bounded-type/Nevanlinna condition is naturally a \emph{meromorphic} notion on \(\Omega\): \(J\) is of bounded type if \(J=g/h\) with \(g,h\in H^\infty(\Omega)\), allowing poles at zeros of \(h\).
+    Thus for the PSC ratio \(J=\det_2/(O\,\xi)\), one does \emph{not} assume \(\xi\) is nonvanishing on \(\Omega\); zeros of \(\xi\) simply correspond to poles of \(J\) (unless the numerator cancels them).
+    
+    Practically, the Nevanlinna integral bound A2c2-BT\(_{\mathrm{Nev}}\) is attacked by growth control of \(\log^{+}|J(\sigma+it)|\) on vertical lines, e.g. via:
+    \begin{itemize}
+        \item determinant/trace-ideal bounds for \(\det_2\) (Remark~\ref{rem:det2_growth_bounded_type}),
+        \item outer/gamma-factor control for \(O\), and
+        \item standard vertical-line bounds for the completed \(\xi\).
+    \end{itemize}
+    
+    Finally, note that if \(J\) is of bounded characteristic and has unimodular boundary values, then Lemma~\ref{lem:quotient_inner_of_bounded_char_unimodular} gives a quotient-of-inner factorization \(J=(I_1/I_2)\cdot c\).
+    The boundary phase derivative is then a \emph{signed} measure (zeros minus poles). The RH-adjacent positivity input A1b'' corresponds precisely to ruling out an ``inner denominator'' \(I_2\), i.e.\ proving that \(J\) is genuinely inner.
+    \end{remark}
+
+    \begin{lemma}[Unimodular boundary values + bounded type \(\Rightarrow\) inner]\label{lem:inner_of_bounded_type_unimodular}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\). Suppose \(J:\Omega\to\mathbb{C}\) is holomorphic and of bounded type on \(\Omega\) (i.e.\ \(J=g/h\) with \(g,h\in H^\infty(\Omega)\)), and that \(|J(1/2+it)|=1\) for a.e.\ \(t\in\mathbb{R}\) in the nontangential boundary sense.
+    Then \(J\) is inner on \(\Omega\).
+    \end{lemma}
+    \begin{proof}
+    Standard canonical factorization for bounded-type (Nevanlinna class) functions: \(J=B\,S\,O\) with \(B,S\) inner (Blaschke and singular factors) and \(O\) outer. Since \(|B|=|S|=1\) a.e.\ on the boundary, the hypothesis \(|J|=1\) a.e.\ forces \(|O|=1\) a.e., hence \(O\) is a unimodular constant. Therefore \(J\) is inner. See, e.g., \cite{DurenHp,GarnettBounded}. \end{proof}
+
+    \begin{lemma}[A1b'' from an inner hypothesis]\label{lem:a1b_from_coinner}
+    Let \(\Omega=\{s\in\mathbb{C}:\Re(s)>1/2\}\). Suppose \(J:\Omega\to\mathbb{C}\) is \emph{inner} on \(\Omega\) (bounded holomorphic with \(|J|\le 1\) on \(\Omega\) and \(|J(1/2+it)|=1\) a.e.).
+    Then there exists a BV representative \(\theta:\mathbb{R}\to\mathbb{R}\) with \(J(1/2+it)=e^{i\theta(t)}\) a.e.\ and a positive Borel measure \(\mu_{\mathrm{spec}}\ge0\) such that
+    \[
+      d\theta \;=\; -\pi\, d\mu_{\mathrm{spec}}
+    \]
+    as distributions on \(\mathbb{R}\). In particular, A1b'' holds.
+    \end{lemma}
+    \begin{proof}
+    Standard inner-function boundary theory and canonical factorization on a half-plane: the boundary argument of an inner function has a BV representative whose distributional derivative is a signed measure encoding the Blaschke (zero) and singular parts. In the \emph{right half-plane} convention (boundary parameter \(t\) on \(1/2+it\)), the orientation induces a minus sign, yielding \(d\theta=-\pi\,d\mu_{\mathrm{spec}}\) with \(\mu_{\mathrm{spec}}\ge0\). See, e.g., \cite{DurenHp,GarnettBounded}. \end{proof}
+
+    \noindent\emph{Net effect (separate regularity vs.\ positivity).}
+    Bounded type on \(\Omega\) is a \emph{regularity} hypothesis: it gives a canonical factorization for \(J\) and makes distributional boundary objects (boundary values, phases, and their BV derivatives) well-defined.
+    If \(J\) is additionally holomorphic on \(\Omega\) and \(|J(1/2+it)|=1\) a.e., then Lemma~\ref{lem:inner_of_bounded_type_unimodular} shows \(J\) is inner and Lemma~\ref{lem:a1b_from_coinner} yields A1b'' with a positive spectral measure.
+    In the present RH application, however, the PSC ratio \(J=\det_2/(O\,\xi)\) is expected to be \emph{meromorphic} on \(\Omega\) with poles at off-critical zeros of \(\xi\); bounded type + unimodular boundary values then yield a \emph{quotient of inner factors} \(J=(I_1/I_2)\cdot c\), so the boundary phase derivative is in general a \emph{signed} measure (zeros minus poles).
+    The RH-adjacent content of A1b'' is precisely the \emph{positivity} that rules out an ``inner denominator'' \(I_2\) (no pole contribution), i.e.\ upgrades \(J\) from meromorphic inner to genuinely inner.
     \item \textbf{A1c (Pair factorization).}
     For \(h=\mathrm{pair}(f,g)\), the boundary transform factors as \(F_h=\overline{F_f}\,F_g\).
     \item \textbf{A1d (Normalization tracking).}
@@ -2200,6 +2471,25 @@ Substitute the second identity into the first and simplify:
 \[
   W=\frac{1}{2\pi}\bigl(-(-\pi\int F\,d\mu)\bigr)=\frac12\int F\,d\mu.
 \]
+\end{proof}
+
+\begin{lemma}[Splice completion (distributional algebra step)]\label{lem:splice_completion_algebra_distributional}
+Let \(\mu\) be a (finite) Borel measure on \(\mathbb{R}\), let \(d\theta\) be a finite signed Borel measure on \(\mathbb{R}\), and let \(F:\mathbb{R}\to\mathbb{C}\) be integrable with respect to both \(d\theta\) and \(\mu\).
+Assume the two identities
+\[
+  W \;=\; \frac{1}{2\pi}\int_{\mathbb{R}} -\,F(t)\,d\theta(t)
+\]
+and
+\[
+  \int_{\mathbb{R}} F(t)\,d\theta(t) \;=\; -\pi\int_{\mathbb{R}} F(t)\,d\mu(t).
+\]
+Then
+\[
+  W \;=\; \frac12\int_{\mathbb{R}} F(t)\,d\mu(t).
+\]
+\end{lemma}
+\begin{proof}
+Substitute the second identity into the first and simplify, exactly as in Lemma~\ref{lem:splice_completion_algebra}.
 \end{proof}
 
 \noindent
@@ -2336,7 +2626,10 @@ Equating derivatives gives \(iF'(a+it)=i\theta'(t)F(a+it)\), hence \(F'(a+it)/F(
     \item \textbf{A2c (Contour-to-boundary limit / right-edge limits).}
     The boundary-limit theorems that identify contour expressions with boundary values (Fatou-type limits / distributional boundary values), including the right-edge limiting procedure.
     The standard “boundary limits exist a.e.” component is handled by Lemma~\ref{lem:fatou_halfplane}; the remaining work is to verify the Hardy/growth hypotheses for the specific Route~3 symbols and to match the resulting boundary values to the objects used in the spectral identity.
-    Concretely, for the PSC ratio \(J(s)=\det_2(s)/(O(s)\,\xi(s))\) on \(\Omega=\{\Re(s)>1/2\}\), one needs a bounded-type/Hardy hypothesis (e.g.\ \(J\in H^\infty(\Omega)\) or \(J\) inner on \(\Omega\)) giving a.e.\ boundary values on \(\Re(s)=1/2\), a measurable boundary phase \(\theta\) with \(J(1/2+it)=e^{i\theta(t)}\) a.e., and enough regularity on \(\theta\) (at least \(\theta\in W^{1,1}_{\mathrm{loc}}\)) to interpret \(\theta'\) and the boundary pairing. Under pointwise \(C^1\) trace regularity, the calculation \(J'/J=\theta'\) is the content of Lemma~\ref{lem:logderiv_of_phase_trace}.
+    Concretely, for the PSC ratio \(J(s)=\det_2(s)/(O(s)\,\xi(s))\) on \(\Omega=\{\Re(s)>1/2\}\), one needs a bounded-type/Hardy hypothesis giving a.e.\ boundary values on \(\Re(s)=1/2\) and a measurable boundary phase \(\theta\) with \(J(1/2+it)=e^{i\theta(t)}\) a.e.
+    The natural endpoint for the Route~3 splice is \emph{distributional}: a positive measure \(\mu_{\mathrm{spec}}\ge0\) such that \(d\theta=-\pi\,d\mu_{\mathrm{spec}}\) (A1b'').
+    In particular, if one can upgrade the Hardy hypothesis to show that \(J\) is \emph{inner} on \(\Omega\), then A1b'' is standard by inner-function boundary theory (Lemma~\ref{lem:a1b_from_coinner}).
+    Under stronger pointwise \(C^1\) trace regularity, one may additionally identify \(J'/J=\theta'\) pointwise (Lemma~\ref{lem:logderiv_of_phase_trace}).
     (Lean locus: \texttt{ContourToBoundary.lean}, \texttt{ZetaRightEdgePhaseLimit.lean}, \texttt{LagariasContour.lean}.)
 
     \item \textbf{A2d (Interchange: Fubini/Tonelli and prime-sum interchanges).}
@@ -2348,10 +2641,20 @@ Equating derivatives gives \(iF'(a+it)=i\theta'(t)F(a+it)\), hence \(F'(a+it)/F(
 
 \subsection*{B: Recognition Geometry (RG) track --- remaining unconditional gaps}
 \begin{itemize}
-    \item \textbf{B1 (RG bottleneck: Carleson energy budget).}
-    The RG main theorem (\texttt{RiemannRecognitionGeometry/Main.lean}) remains conditional on the bundled energy-budget statement
-    \texttt{RGAssumptions.j\_carleson\_energy\_axiom\_statement} (see \texttt{RiemannRecognitionGeometry/Assumptions.lean}).
-    This is the core “Hardy/Dirichlet/Carleson/CR--Green” estimate that controls the cofactor field’s tent energy on Whitney regions.
+    \item \textbf{B1 (RG bottleneck: energy $\Rightarrow$ phase control on Whitney regions).}
+    For the RG track (\texttt{RiemannRecognitionGeometry/Main.lean}), the analytic bottleneck naturally splits into two subgates:
+    \begin{itemize}
+        \item \textbf{B1a (Carleson energy budget).}
+        The main theorem remains conditional on the bundled energy-budget statement
+        \texttt{RGAssumptions.j\_carleson\_energy\_axiom\_statement} (see \texttt{RiemannRecognitionGeometry/Assumptions.lean}),
+        which controls the cofactor field’s tent/box energy on Whitney regions.
+        \item \textbf{B1b (CR/Green conversion: energy $\Rightarrow$ cofactor phase bound).}
+        One also needs the CR/Green pairing (Green identity + Cauchy--Schwarz + boundary-term gates) that converts a box-energy upper bound
+        into a uniform bound on the cofactor phase change across a Whitney interval.
+        In Lean, this is isolated as the target interface
+        \texttt{Port.HardyDirichletCRGreen cofactorEbox\_poisson}
+        (see \texttt{RiemannRecognitionGeometry/Port/HardyDirichletCRGreen.lean}) and is currently the most concrete “single-lemma” wall for the RG wedge closure.
+    \end{itemize}
 
     \item \textbf{B2 (Oscillation certificate for \(\log|\xi|\)).}
     The RG theorem also assumes an explicit oscillation/BMO certificate

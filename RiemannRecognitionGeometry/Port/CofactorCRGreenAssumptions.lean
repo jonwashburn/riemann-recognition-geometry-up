@@ -1,4 +1,4 @@
-/-!
+/-
 # Port step: make the cofactor CR/Green requirement explicitly energy-based
 
 The remaining “real work” item in the port plan is to prove a **faithful**
@@ -19,6 +19,7 @@ the existing project-level cofactor Green bound implies the energy-based stateme
 
 import RiemannRecognitionGeometry.Assumptions
 import RiemannRecognitionGeometry.Port.CofactorEnergy
+import RiemannRecognitionGeometry.Port.CofactorCarlesonBudget
 import RiemannRecognitionGeometry.Port.HardyDirichletCRGreen
 
 noncomputable section
@@ -41,6 +42,15 @@ structure CofactorCRGreenAssumptions : Prop where
       ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
         C_geom * Real.sqrt (E * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))
 
+/-- **Strong energy-form cofactor CR/Green target** for `Ebox := cofactorEbox_poisson`.
+
+This is the cleanest “faithful” statement: it bounds phase change directly by `sqrt(Ebox)`. -/
+structure CofactorCRGreenAssumptionsStrong : Prop where
+  cofactor_green_from_energy_strong :
+    ∀ (I : WhitneyInterval) (ρ : ℂ),
+      ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
+        C_geom * Real.sqrt (cofactorEbox_poisson ρ I) * (1 / Real.sqrt (2 * I.len))
+
 /-- The energy-based assumption discharges the generic Hardy/Dirichlet CRGreen interface
 for `Ebox := cofactorEbox_poisson`. -/
 theorem hardyDirichletCRGreen_of_cofactorCRGreenAssumptions
@@ -49,6 +59,19 @@ theorem hardyDirichletCRGreen_of_cofactorCRGreenAssumptions
   refine ⟨?_⟩
   intro I ρ E hE_pos hEbox
   exact h.cofactor_green_from_energy I ρ E hE_pos hEbox
+
+/-- The **strong** energy-form cofactor CR/Green assumption discharges the generic
+`HardyDirichletCRGreenStrong` interface for `Ebox := cofactorEbox_poisson`. -/
+theorem hardyDirichletCRGreenStrong_of_cofactorCRGreenAssumptionsStrong
+    (h : CofactorCRGreenAssumptionsStrong) :
+    HardyDirichletCRGreenStrong cofactorEbox_poisson := by
+  refine ⟨?_, ?_⟩
+  · intro ρ I
+    -- energy ≥ 0
+    simpa [cofactorEbox_poisson] using
+      poissonExtension_carleson_energy_nonneg (w := cofactorLogAbs ρ) (a := I.t0 - I.len) (b := I.t0 + I.len)
+  · intro I ρ
+    exact h.cofactor_green_from_energy_strong I ρ
 
 /-- Compatibility: the current project-level cofactor Green bound implies the energy-based
 cofactor CR/Green target (the implication is currently non-faithful, but keeps the build usable

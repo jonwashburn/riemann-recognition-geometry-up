@@ -35,17 +35,52 @@ As of now, the **Carleson-budget** side has landed for `Ebox := Port.cofactorEbo
 (see `RiemannRecognitionGeometry/Port/CofactorCarlesonBudget.lean`). The remaining key port target is the
 **CR/Green** side: `HardyDirichletCRGreen cofactorEbox_poisson`.
 
+Concretely, “CR/Green” here means: choose a scale-normalized window `φ_I`, prove a scale-invariant window-energy
+bound for its Poisson extension, establish the Green pairing (boundary phase velocity ↔ interior pairing),
+kill the boundary term at infinity (use `Port/SkewHarmGate.lean`), then apply Cauchy–Schwarz to obtain the
+energy→phase-change inequality.
+
+**Update (upper bound side)**: we also introduced an explicit *energy-based* xi-phase CR/Green target
+`Port.XiCRGreenAssumptions` and a derived theorem `Port.totalPhaseSignal_bound_of_xiCRGreenAssumptions`,
+so the Port contradiction chain can now be run without the monolithic `ClassicalAnalysisAssumptions` record.
+
+For symmetry, `Port/XiCarlesonBudget.lean` instantiates the same Hardy/Dirichlet Carleson-budget interface on the
+xi side (wrapping `xiEbox_poisson` as `xiEbox_poissonEbox`), so “upper bound” and “lower bound” routes share the
+same budget abstraction.
+
+We also added an explicit “blueprint-shaped” upper bound lemma in `Port/TotalPhaseSignalBound.lean` that derives
+`totalPhaseSignal ≤ U_tail` from the Hardy/Dirichlet Carleson-budget interface + the xi CR/Green target (in the
+“interval contains a zero” setting).
+
+For convenience, the two energy-based CR/Green targets are now bundled as
+`Port.EnergyCRGreenAssumptions`, and Port “main” theorems have wrappers that take that single bundle.
+
+To match the `reality` CR/Green blueprint style (real-valued phase differences / pairings), we also added
+`Port.RealPhaseTransfer`: a small algebraic layer that transfers bounds from ℝ-valued phase differences
+(`argXi` / “real cofactor phase”) to the `Real.Angle` norms used by the RG spine.
+
+We also added “blueprint-style” Port wrappers (in `Port/ZeroFreeWithInterval.lean` and `Port/MainNoRGAssumptions.lean`)
+that take these real-valued CR/Green targets directly, and then transfer internally.
+
+For convenience, these real-valued CR/Green targets are now bundled as
+`Port.EnergyCRGreenAssumptionsReal`.
+
 ### How `/Projects/reality` helps (porting plan)
 
 See `REALITY_PORT_PLAN.md` for a statement-by-statement alignment with:
 `/Users/jonathanwashburn/Projects/reality/IndisputableMonolith/RH/HardyDirichlet/*.lean.disabled`
 and `/Users/jonathanwashburn/Projects/reality/IndisputableMonolith/CPM/LawOfExistence.lean`.
 
+**Note**: the `reality` Hardy/Dirichlet files are blueprint scaffolds (they still contain `sorry`/axiom placeholders for
+the real analytic content), so the remaining work here is to *formalize* CR/Green + window-energy estimates in this repo,
+or keep them as explicit target interfaces (`Port.*CRGreenAssumptions*`).
+
 ### Port scaffold (implemented)
 
 Translation-stub modules (compiled in this repo) now exist under `RiemannRecognitionGeometry/Port/`:
 - `HardyDirichletCarleson.lean`: a faithful **Carleson energy budget** interface (parameterized by an abstract box-energy functional), taking an explicit BMO certificate `InBMOWithBound (cofactorLogAbs ρ) M` as input.
 - `HardyDirichletCRGreen.lean`: a faithful **CR/Green cofactor phase bound** interface (energy → phase bound).
+  (Note: this interface is currently **cofactor-specific**; the xi-side uses `Port.XiCRGreenAssumptions*`.)
 - `SkewHarmGate.lean`: a reusable **boundary-term at ∞ vanishes from integrability** wrapper, matching the pattern used in the `reality` repo.
 - `WeierstrassTailBound.lean`: a derived theorem `weierstrass_tail_bound_of_hardyDirichlet` showing the RG tail bound follows from the two Hardy/Dirichlet-style interfaces + the √|I| cancellation.
 - `CofactorEnergy.lean`: concrete candidates `Ebox` for the cofactor field:
@@ -64,12 +99,16 @@ Translation-stub modules (compiled in this repo) now exist under `RiemannRecogni
   `cofactorEbox_poisson` (compatible with the older project-level `cofactor_green_identity_axiom_statement`, but
   designed to be replaced by a faithful Green pairing proof).
 - `CofactorBMOInheritance.lean`: packages the missing “BMO inheritance” bridge (logAbsXi → cofactorLogAbs) as an
-  explicit target interface, so the Port contradiction can be driven from `OscillationTarget` rather than assuming
-  cofactor BMO separately.
+  explicit target interface. **Update**: with the corrected Port cofactor boundary-modulus model (`cofactorLogAbs ρ = logAbsXi`),
+  this inheritance is now definitionally trivial (`cofactorBMOInheritance_trivial`), and the Port contradiction has
+  convenience wrappers that take only `OscillationTarget`.
+- `MainNoRGAssumptions.lean`: Port analogues of the RG “main” theorems without `RGAssumptions`.
+  **Update**: now also has “trivial inheritance” convenience wrappers (no explicit `CofactorBMOInheritance` argument).
 - `LocalZeroFree.lean`: mirrors the RG band-interior “no zeros” step (`local_zero_free` / `no_interior_zeros`) but
   removes the `RGAssumptions` parameter by routing through the Port centered contradiction + `CofactorBMOInheritance`.
 - `WedgeClosure.lean` / `SchurPinch.lean` (Port): alignment wrappers that re-export the existing Route 3
   boundary-wedge and Schur pinch interfaces via stable `Port/*` paths (matching the `reality` module shapes).
+- `Port.lean`: aggregator module so the whole Port surface can be compiled as one target (`lake build RiemannRecognitionGeometry.Port`).
 
 ---
 

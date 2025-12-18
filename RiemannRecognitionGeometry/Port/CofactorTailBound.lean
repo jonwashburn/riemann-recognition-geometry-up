@@ -1,4 +1,4 @@
-/-!
+/-
 # Port step: a non-vacuous tail bound route using `cofactorEbox_poisson`
 
 At this point we have:

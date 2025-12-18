@@ -1,4 +1,4 @@
-/-!
+/-
 # Port scaffold: HardyDirichlet/CRGreen → Recognition Geometry cofactor Green bound
 
 This file mirrors the *shape* of the CR/Green pairing step from the disabled blueprint:
@@ -55,6 +55,52 @@ structure HardyDirichletCRGreen (Ebox : ℂ → WhitneyInterval → ℝ) : Prop 
       Ebox ρ I ≤ E * (2 * I.len) →
       ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
         C_geom * Real.sqrt (E * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))
+
+/-- A *strong* (more direct) CR/Green interface:
+it bounds phase change in terms of the **actual box energy** `Ebox ρ I`,
+rather than an auxiliary density parameter `E`.
+
+This is the natural target of a faithful Green identity + Cauchy–Schwarz proof.
+The weaker `HardyDirichletCRGreen` API is then recovered by monotonicity of `Real.sqrt`
+from `Ebox ρ I ≤ E · |I|`. -/
+structure HardyDirichletCRGreenStrong (Ebox : ℂ → WhitneyInterval → ℝ) : Prop where
+  /-- Sanity: box energy is nonnegative. -/
+  Ebox_nonneg : ∀ ρ I, 0 ≤ Ebox ρ I
+
+  /-- Strong CR/Green bound (energy form). -/
+  cofactor_phase_change_bound_strong :
+    ∀ (I : WhitneyInterval) (ρ : ℂ),
+      ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
+        C_geom * Real.sqrt (Ebox ρ I) * (1 / Real.sqrt (2 * I.len))
+
+/-- The strong energy-form CR/Green bound implies the weaker API that quantifies over
+an energy density parameter `E`. -/
+theorem hardyDirichletCRGreen_of_strong {Ebox : ℂ → WhitneyInterval → ℝ}
+    (h : HardyDirichletCRGreenStrong Ebox) :
+    HardyDirichletCRGreen Ebox := by
+  refine ⟨?_⟩
+  intro I ρ E hE_pos hEbox
+  have hlen_pos : 0 < (2 * I.len : ℝ) := by nlinarith [I.len_pos]
+  have hlen_nonneg : 0 ≤ (2 * I.len : ℝ) := le_of_lt hlen_pos
+  have hE_nonneg : 0 ≤ E := le_of_lt hE_pos
+  -- From `Ebox ≤ E·|I|`, we get `√Ebox ≤ √(E·|I|)`.
+  have hsqrt_le : Real.sqrt (Ebox ρ I) ≤ Real.sqrt (E * (2 * I.len)) := by
+    exact Real.sqrt_le_sqrt hEbox
+  -- Finish by monotonicity under multiplication by nonnegative factors.
+  have h0 :=
+    h.cofactor_phase_change_bound_strong I ρ
+  -- `C_geom` and `1/√(2*I.len)` are nonnegative.
+  have hC_nonneg : 0 ≤ C_geom := by
+    -- `C_geom = 1/2`.
+    simp [RiemannRecognitionGeometry.C_geom]
+  have hden_nonneg : 0 ≤ (1 / Real.sqrt (2 * I.len) : ℝ) :=
+    one_div_nonneg.mpr (Real.sqrt_nonneg _)
+  -- Replace `√Ebox` by the larger `√(E·|I|)` on the RHS.
+  have : C_geom * Real.sqrt (Ebox ρ I) * (1 / Real.sqrt (2 * I.len))
+            ≤ C_geom * Real.sqrt (E * (2 * I.len)) * (1 / Real.sqrt (2 * I.len)) := by
+    -- Multiply the inequality `hsqrt_le` by nonneg factors.
+    exact mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hsqrt_le hC_nonneg) hden_nonneg
+  exact le_trans h0 this
 
 end Port
 end RiemannRecognitionGeometry

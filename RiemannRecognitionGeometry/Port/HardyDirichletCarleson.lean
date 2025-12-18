@@ -1,4 +1,4 @@
-/-!
+/-
 # Port scaffold: HardyDirichlet/Carleson → Recognition Geometry energy budget
 
 This file is a **translation stub** between:
