@@ -1,0 +1,73 @@
+/-!
+# Port step: local zero-free (band interior) without `RGAssumptions`
+
+This file mirrors the RG theorem `Axioms.local_zero_free`, but replaces the call to
+`Axioms.zero_free_with_interval` (which depends on `RGAssumptions`) by the Port theorem
+`Port.zero_free_with_interval_of_inheritance`.
+
+So the remaining hypotheses are:
+- `ClassicalAnalysisAssumptions` (for the phase upper bound `totalPhaseSignal_bound`), and
+- a cofactor BMO inheritance interface `Port.CofactorBMOInheritance`.
+
+This is a clean “wiring point”: once we discharge the two Port analytic targets
+(`CofactorCRGreenAssumptions` + `CofactorBMOInheritance`), we can systematically remove the
+RG-specific `RGAssumptions` dependency from the RG spine.
+-/
+
+import RiemannRecognitionGeometry.Axioms
+import RiemannRecognitionGeometry.Port.ZeroFreeWithInterval
+
+noncomputable section
+
+namespace RiemannRecognitionGeometry
+namespace Port
+
+open Complex Set
+
+/-- Port analogue of `Axioms.local_zero_free` removing the `RGAssumptions` parameter,
+using `Port.zero_free_with_interval_of_inheritance`. -/
+theorem local_zero_free_of_inheritance (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_re_upper : ρ.re ≤ 1)  -- Critical strip constraint
+    (h_width_lower : 2 * I.len ≥ |ρ.im|)   -- Lower bound: interval width ≥ |γ|
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)  -- Upper bound
+    (hCA : ClassicalAnalysisAssumptions)
+    (hInh : CofactorBMOInheritance)
+    (M : ℝ) (h_osc : InBMOWithBound logAbsXi M)
+    (hM_le : M ≤ C_tail) :
+    False := by
+  simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior
+  obtain ⟨hσ_lower, hσ_upper, hγ_in⟩ := hρ_interior
+
+  have hρ_re : 1/2 < ρ.re := by
+    have h := B.σ_lower_gt_half
+    have hpos := B.thickness_pos
+    linarith
+
+  -- Invoke the centered contradiction (no `RGAssumptions`)
+  exact
+    zero_free_with_interval_of_inheritance
+      (ρ := ρ) (hCA := hCA) (hInh := hInh)
+      (hρ_re := hρ_re) (hρ_zero := hρ_zero)
+      (M := M) (h_osc := h_osc) (hM_le := hM_le)
+
+/-- Port analogue of `Axioms.no_interior_zeros` removing the `RGAssumptions` parameter. -/
+theorem no_interior_zeros_of_inheritance (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (hCA : ClassicalAnalysisAssumptions)
+    (hInh : CofactorBMOInheritance)
+    (M : ℝ) (h_osc : InBMOWithBound logAbsXi M)
+    (hM_le : M ≤ C_tail) :
+    ∀ ρ ∈ B.interior, ρ.re ≤ 1 → (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) →
+      completedRiemannZeta ρ ≠ 0 := by
+  intro ρ hρ_interior hρ_re_upper h_width_lower h_width_upper hρ_zero
+  exact
+    (local_zero_free_of_inheritance I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower
+        h_width_upper hCA hInh M h_osc hM_le).elim
+
+end Port
+end RiemannRecognitionGeometry
+
+

@@ -221,26 +221,25 @@ structure OuterConstructionHypotheses (det2 ξ : ℂ → ℂ) where
 
 /-! ## Section 9: Positivity from Construction -/
 
-/-- The boundary of F_pinch is nonnegative when |J| = 1 on the boundary.
+/--
+## (P+) Boundary/phase positivity for the pinch field
 
-This is the key observation: when |J| = 1, we have J lies on the unit circle,
-and for a function with unit modulus, Re(2J) ranges over [-2, 2].
-The Poisson representation then transports this to positivity in the interior. -/
-theorem boundary_positive_from_outer
+This is the **hard step**: it is *not* a consequence of `|J_pinch| = 1` on the boundary.
+In `riemann-finish` it is obtained by the "Whitney wedge / phase-velocity" argument
+(`BoundaryWedgeProof.PPlus_from_constants`), which itself rests on Carleson/Whitney energy
+estimates (and, currently, some packaged analytic hypotheses).
+
+We isolate it as a single named lemma so that downstream work can be cleanly expressed in
+terms of “(P+) holds” rather than a tangle of placeholder hypotheses.
+-/
+theorem boundary_positive_pinch
     {det2 O ξ : ℂ → ℂ}
-    (hBME : BoundaryModulusEq O (fun s => det2 s / ξ s))
-    (hξ_nz : ∀ᵐ t : ℝ, ξ (boundary t) ≠ 0)
-    (hO_nz : ∀ᵐ t : ℝ, O (boundary t) ≠ 0)
-    (hdet2_real_nonneg : ∀ᵐ t : ℝ, 0 ≤ (det2 (boundary t)).re)
-    (hξ_real_nonneg : ∀ᵐ t : ℝ, 0 ≤ (ξ (boundary t)).re) :
+    (_hOuter : IsOuter O)
+    (_hBME : BoundaryModulusEq O (fun s => det2 s / ξ s)) :
     BoundaryPositive (F_pinch det2 O ξ) := by
-  -- For the pinch field F = 2·J where |J| = 1 on the boundary,
-  -- Re(F) = 2·Re(J). When |J| = 1, J lies on the unit circle.
-  -- The sign of Re(J) depends on the phases of det2, O, and ξ.
-  --
-  -- This is where the deep arithmetic of the explicit formula enters:
-  -- det2 and ξ are related by the functional equation, and their
-  -- phases on the critical line are controlled by the Gamma factor.
+  -- TODO (Phase argument):
+  -- port/adapt the Route-B boundary wedge proof (or an equivalent phase-positivity argument)
+  -- to this `OuterConstruction` setting.
   sorry
 
 /-- Interior positivity: from the outer construction hypotheses,
@@ -311,6 +310,7 @@ theorem construct_outer_hypotheses
     (hdet2_meas : Measurable (fun t : ℝ => det2 (boundary t)))
     (hξ_meas : Measurable (fun t : ℝ => ξ (boundary t)))
     (hlog_int : Integrable (fun t : ℝ => Real.log (Complex.abs ((det2 / ξ) (boundary t)))))
+    (hdet2_nz_ae : ∀ᵐ t : ℝ, det2 (boundary t) ≠ 0)
     (hξ_nz_ae : ∀ᵐ t : ℝ, ξ (boundary t) ≠ 0) :
     ∃ H : OuterConstructionHypotheses det2 ξ, True := by
   -- Use outer_exists_with_modulus to get O
@@ -318,8 +318,8 @@ theorem construct_outer_hypotheses
   have hF_meas : Measurable (fun t : ℝ => (det2 / ξ) (boundary t)) := by
     exact hdet2_meas.div hξ_meas
   have hF_nz_ae : ∀ᵐ t : ℝ, (det2 / ξ) (boundary t) ≠ 0 := by
-    -- Needs det2 nonzero a.e. on boundary as well
-    sorry
+    filter_upwards [hdet2_nz_ae, hξ_nz_ae] with t hdet hξ
+    exact div_ne_zero hdet hξ
   have ⟨O, hOuter, hBME⟩ := outer_exists_with_modulus (det2 / ξ) hF_meas hlog_int hF_nz_ae
   -- Use pinch_has_poisson_rep to get the Poisson representation
   have hPoisson := pinch_has_poisson_rep det2 O ξ hOuter hBME hξ_analytic hdet2_analytic

@@ -121,7 +121,7 @@
     \texttt{jwashburn@recognitionphysics.org}
 }
 
-\date{December 2025}
+\date{December 18, 2025}
 
 % ----------------------------------------------------------------------
 % Document Body
@@ -1929,18 +1929,22 @@ If the Weil gate holds on a sufficiently rich class of Weil test functions, then
 This is the classical Weil positivity criterion (equivalently, Li's criterion in a Mellin-normalized test space); see \cite{WeilExplicit,LiCriterion} for standard formulations. \qedhere
 \end{proof}
 
-\begin{assumption}[Measure-first spectral identity with positive boundary measure]\label{ass:route3_spectral_identity}
-There exist a (Borel) measure \(\mu\) on \(\mathbb{R}\) with \(\mu\ge0\), and a linear map \(f\mapsto F_f\) from \(\mathcal{T}\) into \(L^2(\mu)\), such that for all \(f,g\in\mathcal{T}\),
+\begin{assumption}[Splice-completion spectral identity]\label{ass:route3_spectral_identity}
+There exist a positive Borel measure \(\mu_{\mathrm{spec}}\) on \(\mathbb{R}\) and a linear map
 \[
-  B(f,g)\ =\ \int_{\mathbb{R}} \overline{F_f(t)}\,F_g(t)\, d\mu(t).
+  \mathcal{T}\ni f \longmapsto F_f \in L^2(\mu_{\mathrm{spec}})
+\]
+such that for all \(f,g\in\mathcal{T}\),
+\[
+  B(f,g)\ =\ \frac12\int_{\mathbb{R}} \overline{F_f(t)}\,F_g(t)\, d\mu_{\mathrm{spec}}(t).
 \]
 \end{assumption}
 
-\begin{theorem}[Route 3 reduction to the spectral identity]\label{thm:route3_reduction_spectral_identity}
+\begin{theorem}[Route 3 reduction via splice completion]\label{thm:route3_reduction_spectral_identity}
 Assuming Assumption~\ref{ass:route3_spectral_identity}, the Riemann Hypothesis holds.
 \end{theorem}
 \begin{proof}
-Let \(H:=L^2(\mu)\) and define \(T:\mathcal{T}\to H\) by \(Tf:=F_f\).
+Let \(H:=L^2(\mu_{\mathrm{spec}})\) and define \(T:\mathcal{T}\to H\) by \(Tf:=\frac{1}{\sqrt2}\,F_f\).
 Then Assumption~\ref{ass:route3_spectral_identity} gives \(B(f,g)=\langle Tf,Tg\rangle_H\), hence by Lemma~\ref{lem:reflection_implies_weilgate} the Weil gate holds.
 Theorem~\ref{thm:weil_li_gate_implies_RH} then yields the Riemann Hypothesis.
 \end{proof}
@@ -2141,6 +2145,230 @@ The remaining mathematical work is to prove that the arithmetic \(J\) induces th
 
 That's Recognition Geometry in its barest form: ``indistinguishable under the form'' \(\to\) quotient \(\to\) completion \(\to\) physical state space.
 
+\section{Assumption Ledger (RH instantiation)}\label{sec:assumption_ledger_rh}
+
+This section records the remaining \emph{paper-facing} analytic assumptions needed to turn the Route~3 reduction into a fully unconditional proof. The intent is that each item below is either (i) proved and then removed, or (ii) weakened to a strictly smaller hypothesis.
+
+\subsection*{A1: Splice-completion spectral identity (Route~3)}
+\begin{itemize}
+    \item \textbf{A1 (Splice identity).} Assumption~\ref{ass:route3_spectral_identity}.
+    \item \textbf{A1a (Explicit-formula cancellation / contour \(\to\) boundary).}
+    Reduce the contour definition of \(W^{(1)}\) to a boundary pairing against the derivative of a boundary phase \(\theta\) for the PSC ratio
+    \(J(s)=\det_2(s)/(O(s)\,\xi(s))\) (Lagarias’ Guinand--Weil explicit formula \cite[Thm.~3.1]{Lagarias2007}, plus contour-to-boundary limit justification).
+    \item \textbf{A1b (Phase--velocity / spectral measure identity).}
+    Identify \(\theta'\) (distributionally) with a positive boundary spectral measure \(\mu_{\mathrm{spec}}\) (the phase--velocity identity). Concretely, the Lean interface is the test-function identity
+    \[
+      \forall \phi\in L^1(\mathbb{R}),\qquad
+      \int_{\mathbb{R}} \phi(t)\,\theta'(t)\,dt \;=\; -\pi\int_{\mathbb{R}} \phi(t)\,d\mu_{\mathrm{spec}}(t),
+    \]
+    (with the integrability hypotheses made explicit). If moreover \(\mu_{\mathrm{spec}}\ll dt\) with density \(\rho(t)\ge0\), then this is equivalent to the a.e. identity
+    \[
+      \theta'(t) = -\pi\,\rho(t)\quad\text{a.e.}
+    \]
+    \item \textbf{A1c (Pair factorization).}
+    For \(h=\mathrm{pair}(f,g)\), the boundary transform factors as \(F_h=\overline{F_f}\,F_g\).
+    \item \textbf{A1d (Normalization tracking).}
+    Account for the overall constant (the \(1/2\) factor).
+    \item \textbf{Lean map.}
+    In the Lean development, A1 is intended to be obtained from a \emph{contour-to-boundary splice} chain (see \texttt{ExplicitFormula/ContourToBoundary.lean}):
+    \begin{itemize}
+        \item \emph{Explicit-formula cancellation}: reduce the contour definition of \(W^{(1)}\) to a boundary pairing against the derivative of a boundary phase \(\theta\) for the PSC ratio
+        \(J(s)=\det_2(s)/(O(s)\,\xi(s))\) (the hypothesis \texttt{explicit\_formula\_cancellation}). This is the Guinand--Weil explicit formula in Lagarias' normalization; see \cite[Thm.~3.1]{Lagarias2007}.
+        \item \emph{Phase--velocity identity}: identify \(\theta'\) (distributionally) with a positive boundary spectral measure \(\mu_{\mathrm{spec}}\) (the field \texttt{PSCComponents.phase\_velocity\_identity}).
+        \item \emph{Pair factorization}: for \(h=\mathrm{pair}(f,g)\), the boundary transform factors as \(F_h=\overline{F_f}\,F_g\).
+        \item \emph{Normalization tracking}: account for the overall constant (the \(1/2\) factor appearing in \texttt{splice\_completion\_with\_normalization}).
+    \end{itemize}
+\end{itemize}
+
+\begin{lemma}[Splice completion (algebraic step)]\label{lem:splice_completion_algebra}
+Let \(\mu\) be a (finite) Borel measure on \(\mathbb{R}\), let \(\theta':\mathbb{R}\to\mathbb{R}\) be measurable, and let \(F:\mathbb{R}\to\mathbb{C}\) be integrable both with respect to Lebesgue measure \(dt\) and with respect to \(\mu\).
+Assume the two identities
+\[
+  W \;=\; \frac{1}{2\pi}\int_{\mathbb{R}} -\,F(t)\,\theta'(t)\,dt
+\]
+and
+\[
+  \int_{\mathbb{R}} F(t)\,\theta'(t)\,dt \;=\; -\pi\int_{\mathbb{R}} F(t)\,d\mu(t).
+\]
+Then
+\[
+  W \;=\; \frac12\int_{\mathbb{R}} F(t)\,d\mu(t).
+\]
+\end{lemma}
+\begin{proof}
+Substitute the second identity into the first and simplify:
+\[
+  W=\frac{1}{2\pi}\bigl(-(-\pi\int F\,d\mu)\bigr)=\frac12\int F\,d\mu.
+\]
+\end{proof}
+
+\noindent
+\textbf{How A1 is expected to be proved.}
+The planned route is to identify the Weil pairing \(B(f,g)=W^{(1)}(f\star_m \widetilde{\overline g})\) with a boundary pairing coming from the PSC ratio \(J=\det_2/(O\,\xi)\) via the splice-completion chain above, producing a positive spectral measure \(\mu_{\mathrm{spec}}\).
+Positivity is then automatic at the level of definitions (a \emph{measure} is nonnegative), and the remaining analytic work is proving the explicit cancellation and phase--velocity identities from the classical explicit formula / boundary value theory (cf.\ \cite{TitchmarshZeta,DurenHp} and the references in the Route~3 section).
+
+\subsection*{A2: Analytic interchange and boundary limits}
+\begin{lemma}[Fourier inversion for Schwartz functions]\label{lem:fourier_inversion_schwartz}
+Let \(\varphi \in \mathcal{S}(\mathbb{R})\) be a Schwartz function and define its Fourier transform by
+\[
+  \widehat{\varphi}(\xi)\ :=\ \int_{\mathbb{R}} \varphi(t)\,e^{-2\pi i t\xi}\,dt.
+\]
+Then for all \(t\in\mathbb{R}\),
+\[
+  \varphi(t)\ =\ \int_{\mathbb{R}} \widehat{\varphi}(\xi)\,e^{2\pi i t\xi}\,d\xi.
+\]
+\end{lemma}
+\begin{proof}
+Standard; see \cite{SteinShakarchiFourier}. \qedhere
+\end{proof}
+
+\begin{lemma}[Mellin inversion via Fourier inversion (log-Schwartz case)]\label{lem:mellin_inversion_log_schwartz}
+Let \(c\in\mathbb{R}\) and let \(f:(0,\infty)\to\mathbb{C}\) be such that the log-pullback
+\[
+  g(u)\ :=\ e^{cu}\,f(e^u)
+\]
+is a Schwartz function on \(\mathbb{R}\).
+Define the Mellin transform on the vertical line \(\Re s=c\) in the \(2\pi\)-normalization by
+\[
+  \mathcal{M}_c f(\xi)\ :=\ \int_0^\infty f(x)\,x^{c-1}\,x^{-2\pi i \xi}\,dx.
+\]
+Then for all \(u\in\mathbb{R}\),
+\[
+  f(e^u)\ =\ e^{-cu}\int_{\mathbb{R}} \mathcal{M}_c f(\xi)\,e^{2\pi i u\xi}\,d\xi.
+\]
+\end{lemma}
+\begin{proof}
+By the substitution \(x=e^u\) (so \(dx=e^u\,du\)), we have
+\[
+  \mathcal{M}_c f(\xi)
+  = \int_{\mathbb{R}} e^{cu}f(e^u)\,e^{-2\pi i u\xi}\,du
+  = \widehat{g}(\xi).
+\]
+Since \(g\in\mathcal{S}(\mathbb{R})\), Lemma~\ref{lem:fourier_inversion_schwartz} applies and yields
+\[
+  g(u)=\int_{\mathbb{R}} \widehat{g}(\xi)\,e^{2\pi i u\xi}\,d\xi
+  =\int_{\mathbb{R}} \mathcal{M}_c f(\xi)\,e^{2\pi i u\xi}\,d\xi.
+\]
+Multiplying by \(e^{-cu}\) gives the stated formula for \(f(e^u)\).
+\end{proof}
+
+\begin{lemma}[Fubini--Tonelli and series--integral interchange]\label{lem:fubini_tonelli_series}
+Let \(h:\mathbb{R}\times\mathbb{R}\to\mathbb{C}\) be measurable.
+If \(\int_{\mathbb{R}}\!\int_{\mathbb{R}} |h(x,y)|\,dx\,dy < \infty\), then the iterated integrals
+\(\int_{\mathbb{R}}(\int_{\mathbb{R}} h(x,y)\,dy)\,dx\) and \(\int_{\mathbb{R}}(\int_{\mathbb{R}} h(x,y)\,dx)\,dy\) exist and are equal.
+More generally, if \((f_n)_{n\ge1}\) are measurable functions on \(\mathbb{R}\) such that
+\(\sum_{n\ge1}\int_{\mathbb{R}} |f_n(t)|\,dt < \infty\), then
+\[
+  \int_{\mathbb{R}} \sum_{n\ge1} f_n(t)\,dt \;=\; \sum_{n\ge1}\int_{\mathbb{R}} f_n(t)\,dt.
+\]
+\end{lemma}
+\begin{proof}
+Standard (Tonelli/Fubini for absolute integrability); see \cite{FollandRA}. \qedhere
+\end{proof}
+
+\begin{lemma}[Dominated convergence]\label{lem:dominated_convergence}
+Let \((f_n)_{n\ge1}\) be measurable functions on \(\mathbb{R}\) such that \(f_n(t)\to f(t)\) for almost every \(t\), and suppose there exists an integrable \(g\ge0\) with \(|f_n(t)|\le g(t)\) for all \(n\) and almost every \(t\).
+Then \(\int_{\mathbb{R}} f_n(t)\,dt \to \int_{\mathbb{R}} f(t)\,dt\).
+\end{lemma}
+\begin{proof}
+Standard; see \cite{FollandRA}. \qedhere
+\end{proof}
+
+\begin{lemma}[Absolute convergence of the log-derivative Dirichlet series]\label{lem:logderiv_dirichlet_series}
+For \(\Re(s)>1\),
+\[
+  -\frac{\zeta'(s)}{\zeta(s)} \;=\; \sum_{n=1}^{\infty} \frac{\Lambda(n)}{n^{s}},
+\]
+and the series converges absolutely and locally uniformly on half-planes \(\Re(s)\ge 1+\varepsilon\) (\(\varepsilon>0\)).
+\end{lemma}
+\begin{proof}
+Standard; see \cite{ApostolANT,TitchmarshZeta}. \qedhere
+\end{proof}
+
+\begin{lemma}[Identity theorem]\label{lem:identity_theorem}
+Let \(U\subseteq\mathbb{C}\) be a connected open set and let \(f,g:U\to\mathbb{C}\) be holomorphic.
+If \(f=g\) on a subset of \(U\) having an accumulation point in \(U\), then \(f=g\) on all of \(U\).
+\end{lemma}
+\begin{proof}
+Standard; see \cite{AhlforsComplex}. \qedhere
+\end{proof}
+
+\begin{lemma}[Fatou boundary limits for Hardy \(H^p\) on a half-plane]\label{lem:fatou_halfplane}
+Let \(a\in\mathbb{R}\) and \(1\le p<\infty\). Let \(F\) be holomorphic on the half-plane
+\(\{s\in\mathbb{C}:\Re(s)>a\}\) and assume
+\[
+  \sup_{\sigma>a}\int_{\mathbb{R}} |F(\sigma+it)|^{p}\,dt \;<\;\infty.
+\]
+Then there exists \(f\in L^p(\mathbb{R})\) such that \(F(\sigma+it)\to f(t)\) as \(\sigma\to a^+\)
+along nontangential approach regions for almost every \(t\), and \(F\) is recovered from \(f\) by Poisson integral.
+\end{lemma}
+\begin{proof}
+Standard Hardy-space theory (Fatou theorem); see \cite{DurenHp,GarnettBounded}. \qedhere
+\end{proof}
+
+\begin{lemma}[Unimodular phase trace implies real log-derivative]\label{lem:logderiv_of_phase_trace}
+Fix \(a\in\mathbb{R}\). Let \(F\) be holomorphic on an open neighborhood of the line \(\Re(s)=a\), and assume \(F(a+it)\neq 0\) on an open interval \(I\subseteq\mathbb{R}\).
+Suppose there exists a real-valued \(C^1\) function \(\theta:I\to\mathbb{R}\) such that
+\[
+  F(a+it)=e^{i\theta(t)}\qquad (t\in I).
+\]
+Then for all \(t\in I\),
+\[
+  \frac{F'(a+it)}{F(a+it)}=\theta'(t)\in\mathbb{R}.
+\]
+\end{lemma}
+\begin{proof}
+Differentiate the identity \(F(a+it)=e^{i\theta(t)}\) with respect to \(t\).
+By the chain rule along the path \(z(t)=a+it\), \(\frac{d}{dt}F(z(t))=F'(z(t))\cdot z'(t)=i\,F'(a+it)\).
+On the other hand, \(\frac{d}{dt}e^{i\theta(t)}=i\,\theta'(t)\,e^{i\theta(t)}\).
+Equating derivatives gives \(iF'(a+it)=i\theta'(t)F(a+it)\), hence \(F'(a+it)/F(a+it)=\theta'(t)\), which is real.
+\end{proof}
+
+\begin{itemize}
+    \item \textbf{A2a (Fourier inversion on the chosen test space).}
+    For the specific boundary transforms \(t\mapsto F_f(t)\) arising in Route~3, verify the regularity needed to apply Lemma~\ref{lem:fourier_inversion_schwartz} (typically \(F_f\in\mathcal{S}(\mathbb{R})\), with the stated normalization).
+    (Lean locus: \texttt{ZetaFourierInversionWeil.lean}.)
+
+    \item \textbf{A2b (Mellin inversion / change-of-variables).}
+    The Mellin-side change-of-variables and inversion steps required to align Lagarias' normalization with the multiplicative convolution/involution used in \(B(f,g)\). In the log-Schwartz setting, Mellin inversion reduces to Lemma~\ref{lem:mellin_inversion_log_schwartz}; the remaining work is verifying the log-Schwartz regularity and matching the chosen Mellin normalization to the Route~3 definitions.
+    (Lean locus: \texttt{MathlibBridge.lean}, \texttt{MulConvolution.lean}, \texttt{Lagarias.lean}.)
+
+    \item \textbf{A2c (Contour-to-boundary limit / right-edge limits).}
+    The boundary-limit theorems that identify contour expressions with boundary values (Fatou-type limits / distributional boundary values), including the right-edge limiting procedure.
+    The standard “boundary limits exist a.e.” component is handled by Lemma~\ref{lem:fatou_halfplane}; the remaining work is to verify the Hardy/growth hypotheses for the specific Route~3 symbols and to match the resulting boundary values to the objects used in the spectral identity.
+    Concretely, for the PSC ratio \(J(s)=\det_2(s)/(O(s)\,\xi(s))\) on \(\Omega=\{\Re(s)>1/2\}\), one needs a bounded-type/Hardy hypothesis (e.g.\ \(J\in H^\infty(\Omega)\) or \(J\) inner on \(\Omega\)) giving a.e.\ boundary values on \(\Re(s)=1/2\), a measurable boundary phase \(\theta\) with \(J(1/2+it)=e^{i\theta(t)}\) a.e., and enough regularity on \(\theta\) (at least \(\theta\in W^{1,1}_{\mathrm{loc}}\)) to interpret \(\theta'\) and the boundary pairing. Under pointwise \(C^1\) trace regularity, the calculation \(J'/J=\theta'\) is the content of Lemma~\ref{lem:logderiv_of_phase_trace}.
+    (Lean locus: \texttt{ContourToBoundary.lean}, \texttt{ZetaRightEdgePhaseLimit.lean}, \texttt{LagariasContour.lean}.)
+
+    \item \textbf{A2d (Interchange: Fubini/Tonelli and prime-sum interchanges).}
+    The measure-theoretic interchange steps (Fubini/Tonelli and dominated convergence) are standard; see
+    Lemma~\ref{lem:fubini_tonelli_series} and Lemma~\ref{lem:dominated_convergence}.
+    For prime sums arising from Dirichlet-series expansions of \(-\zeta'/\zeta\), absolute convergence on \(\Re(s)>1\) (Lemma~\ref{lem:logderiv_dirichlet_series}) justifies termwise integration there; equalities are then extended to the required domain by analytic continuation (Lemma~\ref{lem:identity_theorem}), avoiding unjustified interchanges on the critical line.
+    (Lean locus: \texttt{Route3FubiniTonelliLemmas.lean} and related analytic files.)
+\end{itemize}
+
+\subsection*{B: Recognition Geometry (RG) track --- remaining unconditional gaps}
+\begin{itemize}
+    \item \textbf{B1 (RG bottleneck: Carleson energy budget).}
+    The RG main theorem (\texttt{RiemannRecognitionGeometry/Main.lean}) remains conditional on the bundled energy-budget statement
+    \texttt{RGAssumptions.j\_carleson\_energy\_axiom\_statement} (see \texttt{RiemannRecognitionGeometry/Assumptions.lean}).
+    This is the core “Hardy/Dirichlet/Carleson/CR--Green” estimate that controls the cofactor field’s tent energy on Whitney regions.
+
+    \item \textbf{B2 (Oscillation certificate for \(\log|\xi|\)).}
+    The RG theorem also assumes an explicit oscillation/BMO certificate
+    \(\exists M,\ \mathrm{InBMOWithBound}(\log|\xi|)\,M \wedge M\le C_{\mathrm{tail}}\)
+    (the \texttt{OscillationTarget} in \texttt{RiemannRecognitionGeometry/Assumptions.lean}).
+
+    \item \textbf{B3 (Classical-analysis axioms still present in compiled modules).}
+    Some infrastructure theorems are currently carried as explicit axioms in the Lean library, but for an unconditional \emph{written} proof these are standard results that can be cited:
+    \begin{itemize}
+        \item \emph{John--Nirenberg inequality} for BMO (exponential integrability of mean oscillation) \cite{JohnNirenberg,SteinHarmonic}.
+        \item \emph{Fefferman--Stein \(H^1\)–BMO duality} and related maximal-function estimates \cite{FeffermanStein,SteinHarmonic}.
+        \item \emph{BMO \(\to\) Carleson measure} characterization via Poisson extension (tent/box energy control) \cite{GarnettBounded,SteinHarmonic}.
+        \item The \(\eta\)–\(\zeta\) relation and analytic continuation/identity principle steps used to transfer nonvanishing statements between standard zeta-function avatars \cite{TitchmarshZeta,ApostolANT}.
+    \end{itemize}
+    In the present manuscript, these are treated as \emph{external} theorems; the remaining nontrivial work is concentrated in B1/B2 (RG track) and A1/A2 (Route~3 track).
+\end{itemize}
+
 \section{Notation Index}
 
 \begin{tabular}{ll}
@@ -2220,6 +2448,45 @@ Weil, A. \textit{Sur les ``formules explicites'' de la théorie des nombres prem
 
 \bibitem{LiCriterion}
 Li, X.-J. \textit{The positivity of a sequence of numbers and the Riemann hypothesis}. J. Number Theory 65 (1997), 325--333.
+
+\bibitem{Lagarias2007}
+Lagarias, J. C. \textit{The Riemann Hypothesis: Arithmetic and Geometry}. Survey article (May 4, 2007).
+
+\bibitem{DurenHp}
+Duren, P. L. \textit{Theory of \(H^p\) Spaces}. Academic Press, 1970. (Reprinted: Dover, 2000.)
+
+\bibitem{AronszajnRKHS}
+Aronszajn, N. \textit{Theory of reproducing kernels}. Trans. Amer. Math. Soc. 68 (1950), 337--404.
+
+\bibitem{OSReflection}
+Osterwalder, K., Schrader, R. \textit{Axioms for Euclidean Green's functions}. Comm. Math. Phys. 31 (1973), 83--112.
+
+\bibitem{SteinShakarchiFourier}
+Stein, E. M., Shakarchi, R. \textit{Fourier Analysis: An Introduction}. Princeton University Press, 2003.
+
+\bibitem{JohnNirenberg}
+John, F., Nirenberg, L. \textit{On functions of bounded mean oscillation}. Comm. Pure Appl. Math. 14 (1961), 415--426.
+
+\bibitem{FeffermanStein}
+Fefferman, C., Stein, E. M. \textit{\(H^p\) spaces of several variables}. Acta Math. 129 (1972), 137--193.
+
+\bibitem{SteinHarmonic}
+Stein, E. M. \textit{Harmonic Analysis: Real-Variable Methods, Orthogonality, and Oscillatory Integrals}. Princeton University Press, 1993.
+
+\bibitem{FollandRA}
+Folland, G. B. \textit{Real Analysis: Modern Techniques and Their Applications}. 2nd ed., Wiley, 1999.
+
+\bibitem{GarnettBounded}
+Garnett, J. B. \textit{Bounded Analytic Functions}. Springer, 1st ed., 1981. (Reprint: Springer, 2007.)
+
+\bibitem{TitchmarshZeta}
+Titchmarsh, E. C. \textit{The Theory of the Riemann Zeta-Function}. 2nd ed., revised by D. R. Heath-Brown. Oxford University Press, 1986.
+
+\bibitem{ApostolANT}
+Apostol, T. M. \textit{Introduction to Analytic Number Theory}. Springer, 1976.
+
+\bibitem{AhlforsComplex}
+Ahlfors, L. V. \textit{Complex Analysis}. 3rd ed., McGraw--Hill, 1979.
 
 \end{thebibliography}
 

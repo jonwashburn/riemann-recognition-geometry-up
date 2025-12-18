@@ -430,8 +430,26 @@ lake env lean /tmp/test.lean 2>&1 | tail -30
   - Proves `poissonTransport` and `poissonTransportOn`: boundary → interior positivity
   - Proves `J_Re_nonneg_from_outer`: Re(2·J) ≥ 0 from outer construction
   - Axioms: `outer_exists_with_modulus`, `pinch_has_poisson_rep` (Hardy space theory)
+- **Focused Step (2) “boundary positivity / phase argument”**:
+  - **Created `PPlusCore.lean`** (NEW FILE):
+    - Defines `(P+)` as `∀ᵐ t, 0 ≤ Re(F_pinch(boundary t))`
+    - Proves **exact reduction**: if `J_pinch(boundary t) = exp(i·θ(t))` a.e., then
+      `(P+) ↔ (∀ᵐ t, 0 ≤ cos(θ(t)))`
+  - **Created `PPlusZeta.lean`** (NEW FILE):
+    - Specializes the reduction to ζ PSC data (`det2_zeta`, `outer_zeta`, `xi_zeta`)
+    - Exposes `PPlus_zeta_iff_cos_nonneg` and `PPlus_zeta_of_cos_nonneg`
+  - **Created `BoundaryWedgeInterfaces.lean`** (NEW FILE):
+    - Mined from `riemann-finish` (`BoundaryWedgeProof`): exposes the *minimal* wedge-chain assumptions
+      as a structure `BoundaryWedgeAssumptions`:
+      - phase–velocity lower bound (Poisson plateau)
+      - CR‑Green/Carleson upper bound
+      - Whitney upgrade (interval wedge bounds ⇒ a.e. boundary positivity)
+    - Proves: wedge-chain assumptions ⇒ `(P+)` ⇒ `cos(boundaryPhase) ≥ 0` a.e.
+  - **Updated `PPlusZetaShim.lean`**:
+    - Replaced the single “cos ≥ 0” axiom with one axiom `boundaryWedgeAssumptions_zeta : BoundaryWedgeAssumptions`
+    - Derives `boundaryPhase_cos_nonneg_ae` and `PPlus_zeta_proved` from that bundle (better modularity)
 - **Current Status**:
-  - **Axioms in ExplicitFormula/**: 5 (added 2 in OuterConstruction.lean)
-  - **Sorries in ExplicitFormula/**: 21
+  - **Axioms in ExplicitFormula/**: 6 (added 1 in `PPlusZetaShim.lean`, plus 2 in `OuterConstruction.lean`)
+  - **Sorries in ExplicitFormula/**: 20
   - **COMPLETE PROOF CHAIN**: `OuterConstructionHypotheses` → `J_Re_nonneg_from_outer` → positivity
   - **Path to RH fully documented** in CayleyBridgeZeta.lean
