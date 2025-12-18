@@ -340,6 +340,29 @@ theorem weilTransform_reflection (f : WeilTestFunction) (s : ℂ) :
   -- The Schwartz-level proof gives us most of the work
   exact ExplicitFormula.weilTransform_reflection f.toSchwartz s
 
+/-- Conjugation intertwines the Weil transform by `s ↦ conj s`. -/
+theorem weilTransform_conjugation (f : WeilTestFunction) (s : ℂ) :
+    (conjugation f).weilTransform s = starRingEnd ℂ (f.weilTransform (starRingEnd ℂ s)) := by
+  unfold weilTransform conjugation
+  simp only [conjSchwartz_apply, starRingEnd_apply]
+  -- Use property that star commutes with integral for integrable functions
+  -- (We assume integrability here as part of the skeleton)
+  sorry
+
+instance : TestSpace WeilTestFunction where
+  Mellin := weilTransform
+  conv := convolution
+  tilde := reflection
+  star := conjugation
+  mellin_conv := by
+    intro f g s
+    -- This requires enough decay for s.re. 
+    -- For now, we reuse the critical-strip proof as a placeholder.
+    -- In a full proof, this would be proved for the convergence strip of f and g.
+    sorry
+  mellin_tilde := weilTransform_reflection
+  mellin_star := weilTransform_conjugation
+
 end WeilTestFunction
 
 end ExplicitFormula
