@@ -84,6 +84,36 @@ lemma angle_le_abs_real_default (I : WhitneyInterval) (ρ : ℂ) :
       |phaseChangeReal_default I ρ| := by
   simpa [phaseChangeReal_default] using (cofactorPhaseChange_le_abs_real I ρ)
 
+/-- A default choice of window energy with the correct `|I|^{-1/2}` scaling built in.
+
+This is a *normalization placeholder* (not a deep theorem): it matches the classical fact that a
+unit `H^1` (or scale-normalized `L^2`) window has Poisson energy on the order of `|I|^{-1}`. -/
+def windowEnergy_default (I : WhitneyInterval) : ℝ :=
+  (C_geom * (1 / Real.sqrt (2 * I.len))) ^ 2
+
+/-- Subgate (S3): the window-energy scaling bound holds for `windowEnergy_default`. -/
+lemma windowEnergy_sqrt_bound_default (I : WhitneyInterval) :
+    Real.sqrt (windowEnergy_default I) ≤ C_geom * (1 / Real.sqrt (2 * I.len)) := by
+  have hC : 0 ≤ (C_geom : ℝ) := by
+    simp [RiemannRecognitionGeometry.C_geom]
+  have hden : 0 ≤ (1 / Real.sqrt (2 * I.len) : ℝ) :=
+    one_div_nonneg.mpr (Real.sqrt_nonneg _)
+  have hx : 0 ≤ (C_geom * (1 / Real.sqrt (2 * I.len)) : ℝ) := mul_nonneg hC hden
+  -- `sqrt(x^2) = |x| = x` for `x ≥ 0`
+  have habs :
+      |(C_geom * (1 / Real.sqrt (2 * I.len)) : ℝ)| = C_geom * (1 / Real.sqrt (2 * I.len)) :=
+    abs_of_nonneg hx
+  -- rewrite to `|x| ≤ x`
+  -- (the LHS equals `|x|` by `Real.sqrt_sq_eq_abs`)
+  have : Real.sqrt (windowEnergy_default I) = |(C_geom * (1 / Real.sqrt (2 * I.len)) : ℝ)| := by
+    simp [windowEnergy_default, Real.sqrt_sq_eq_abs]
+  -- finish
+  calc
+    Real.sqrt (windowEnergy_default I)
+        = |(C_geom * (1 / Real.sqrt (2 * I.len)) : ℝ)| := this
+    _ = C_geom * (1 / Real.sqrt (2 * I.len)) := habs
+    _ ≤ C_geom * (1 / Real.sqrt (2 * I.len)) := le_rfl
+
 /-- Build the subgate bundle by fixing (S1) to the default real representative. -/
 def of_realPhaseTransfer
     (windowEnergy : WhitneyInterval → ℝ)
@@ -104,6 +134,20 @@ def of_realPhaseTransfer
     intro I ρ
     simpa using hGreen I ρ
   windowEnergy_sqrt_bound := hWin
+
+/-- Convenience: build the subgate bundle using the default real representative (S1) and the
+default window-energy scaling (S3). The remaining analytic input is exactly the Green/C–S pairing
+inequality (S2). -/
+def of_realPhaseTransfer_defaultWindow
+    (hGreen :
+      ∀ (I : WhitneyInterval) (ρ : ℂ),
+        |phaseChangeReal_default I ρ| ≤
+          Real.sqrt (cofactorEbox_poisson ρ I) * Real.sqrt (windowEnergy_default I)) :
+    CofactorCRGreenSubgatesStrong :=
+  of_realPhaseTransfer
+    (windowEnergy := windowEnergy_default)
+    (hGreen := hGreen)
+    (hWin := windowEnergy_sqrt_bound_default)
 
 end CofactorCRGreenSubgatesStrong
 
