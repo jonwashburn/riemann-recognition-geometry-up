@@ -68,6 +68,8 @@ Translation-stub modules (compiled in this repo) now exist under `RiemannRecogni
   cofactor BMO separately.
 - `LocalZeroFree.lean`: mirrors the RG band-interior “no zeros” step (`local_zero_free` / `no_interior_zeros`) but
   removes the `RGAssumptions` parameter by routing through the Port centered contradiction + `CofactorBMOInheritance`.
+- `WedgeClosure.lean` / `SchurPinch.lean` (Port): alignment wrappers that re-export the existing Route 3
+  boundary-wedge and Schur pinch interfaces via stable `Port/*` paths (matching the `reality` module shapes).
 
 ---
 
