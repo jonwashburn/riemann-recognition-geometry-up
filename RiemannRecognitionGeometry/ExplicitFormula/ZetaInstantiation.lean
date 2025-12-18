@@ -146,7 +146,7 @@ structure ZetaPSCHypotheses where
   /-- Boundary trace phase lift: `J(1/2+it) = exp(i·θ(t))` a.e. -/
   boundaryPhase_repr :
     ∀ᵐ t : ℝ ∂volume,
-      det2_zeta (1/2 + I * t) / (outer_zeta (1/2 + I * t) * xi_zeta (1/2 + I * t)) =
+    det2_zeta (1/2 + I * t) / (outer_zeta (1/2 + I * t) * xi_zeta (1/2 + I * t)) =
         Complex.exp (I * boundaryPhase t)
   /-- Spectral boundary measure for Route 3 (placeholder until phase–velocity is proved). -/
   μ_spec : Measure ℝ := volume
@@ -269,31 +269,10 @@ structure ZetaRatioAnalyticAssumptions
     {F : Type} [TestSpace F]
     (LC : LagariasContourFramework F)
     (H : ZetaPSCHypotheses) where
-  /-- Contour parameter is in the convergence region. -/
-  hc : 1 / 2 < LC.c
-  /-- Critical-line log-derivative identity for the PSC ratio (phase lift). -/
-  logDeriv_ratio_critical_line :
-    ∀ t : ℝ,
-      logDeriv (ContourToBoundary.PSCRatio (PSCComponents_zeta H)) ((1/2 : ℂ) + I * t) =
-        I * ((deriv (ContourToBoundary.boundaryPhaseFunction (PSCComponents_zeta H)) t : ℝ) : ℂ)
-  /-- Contour shift from `Re(s)=c` to `Re(s)=1/2` for the ratio integrand. -/
-  contour_shift :
+  /-- The ratio component identity (stored directly at this stage). -/
+  ratio_eq_neg_boundaryPhase :
     ∀ h : F,
-      (∫ t : ℝ,
-          ExplicitFormulaCancellationSkeleton.rightEdgeIntegrand_ratio LC (PSCComponents_zeta H) h t ∂
-            (volume : Measure ℝ)) =
-        ∫ t : ℝ, M[h]((1/2 : ℂ) + I * t) *
-          logDeriv (ContourToBoundary.PSCRatio (PSCComponents_zeta H)) ((1/2 : ℂ) + I * t) ∂
-            (volume : Measure ℝ)
-  /-- The critical-line sum formula needed for the ratio identity. -/
-  critical_line_sum :
-    ∀ h : F,
-      (∫ t : ℝ,
-            M[h]((1/2 : ℂ) + I * t) *
-              (I * ((deriv (ContourToBoundary.boundaryPhaseFunction (PSCComponents_zeta H)) t : ℝ) : ℂ)) ∂ volume) +
-          (∫ t : ℝ,
-              M[(TestSpace.tilde (F := F) h)]((1/2 : ℂ) + I * t) *
-                (I * ((deriv (ContourToBoundary.boundaryPhaseFunction (PSCComponents_zeta H)) t : ℝ) : ℂ)) ∂ volume) =
+      ExplicitFormulaCancellationSkeleton.ratio_fullIntegral (LC := LC) (P := PSCComponents_zeta H) h =
         - ∫ t : ℝ, ExplicitFormulaCancellationSkeleton.boundaryPhaseIntegrand (PSCComponents_zeta H) h t ∂ volume
 
 /--
@@ -306,10 +285,7 @@ def RatioBoundaryPhaseAssumptions_zeta
     (A : ZetaRatioAnalyticAssumptions (LC := LC) (H := H)) :
     ExplicitFormulaCancellationSkeleton.RatioBoundaryPhaseAssumptions
       (LC := LC) (P := PSCComponents_zeta H) where
-  hc := A.hc
-  logDeriv_ratio_critical_line := A.logDeriv_ratio_critical_line
-  contour_shift := A.contour_shift
-  critical_line_sum := A.critical_line_sum
+  ratio_eq_neg_boundaryPhase := A.ratio_eq_neg_boundaryPhase
 
 /-!
 ## Full bundle wiring (sanity): build `AllComponentAssumptions` for the ζ PSCComponents

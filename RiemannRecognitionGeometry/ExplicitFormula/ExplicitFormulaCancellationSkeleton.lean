@@ -1514,28 +1514,11 @@ structure RatioBoundaryPhaseAssumptions
     {F : Type} [TestSpace F]
     (LC : LagariasContourFramework F)
     (P : PSCComponents) where
-  /-- Contour parameter is in the convergence region. -/
-  hc : 1 / 2 < LC.c
-  /-- The PSC phase-velocity identity holds: on the critical line, `logDeriv J = i θ'`. -/
-  logDeriv_ratio_critical_line :
-    ∀ t : ℝ,
-      logDeriv (PSCRatio P) ((1/2 : ℂ) + I * t) =
-        I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)
-  /-- The contour can be shifted from `Re(s) = c` to `Re(s) = 1/2` (no poles in between). -/
-  contour_shift :
+  /-- The ratio component identity (stored directly, since this is the only fact used downstream). -/
+  ratio_eq_neg_boundaryPhase :
     ∀ h : F,
-      (∫ t : ℝ, rightEdgeIntegrand_ratio LC P h t ∂ (volume : Measure ℝ)) =
-        ∫ t : ℝ, M[h]((1/2 : ℂ) + I * t) * logDeriv (PSCRatio P) ((1/2 : ℂ) + I * t) ∂ (volume : Measure ℝ)
-  /-- The critical line sum formula: `M[h] * I * θ' + M[tilde h] * I * θ' = -M[h] * θ'` (in integral).
-      This captures the relationship between h and tilde h via the Mellin involution `s ↦ 1-s`
-      combined with the real structure of the spectral measure. -/
-  critical_line_sum :
-    ∀ h : F,
-      (∫ t : ℝ,
-          M[h]((1/2 : ℂ) + I * t) * (I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume) +
-        (∫ t : ℝ, M[(TestSpace.tilde (F := F) h)]((1/2 : ℂ) + I * t) *
-            (I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume)
-        = - ∫ t : ℝ, boundaryPhaseIntegrand P h t ∂ volume
+      ratio_fullIntegral (LC := LC) (P := P) h =
+        - ∫ t : ℝ, boundaryPhaseIntegrand P h t ∂ (volume : Measure ℝ)
 
 /--
 If `RatioBoundaryPhaseAssumptions` holds, then `ratio_fullIntegral` equals the **negative** of
@@ -1554,53 +1537,7 @@ theorem ratio_fullIntegral_eq_neg_boundaryPhase_of_assumptions
     (h : F) :
     ratio_fullIntegral (LC := LC) (P := P) h =
       - ∫ t : ℝ, boundaryPhaseIntegrand P h t ∂ (volume : Measure ℝ) := by
-  -- Step 1: Expand ratio_fullIntegral.
-  dsimp [ratio_fullIntegral]
-
-  -- Step 2: Apply contour shift for h and tilde h.
-  have hShift_h := A.contour_shift h
-  have hShift_tilde := A.contour_shift (TestSpace.tilde (F := F) h)
-
-  -- Step 3: Substitute the shifted integrals.
-  rw [hShift_h, hShift_tilde]
-
-  -- Step 4: Rewrite integrands using the critical-line log-derivative identity.
-  have hCritLine : ∀ t : ℝ,
-      M[h]((1/2 : ℂ) + I * t) * logDeriv (PSCRatio P) ((1/2 : ℂ) + I * t) =
-        M[h]((1/2 : ℂ) + I * t) * (I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) := by
-    intro t
-    rw [A.logDeriv_ratio_critical_line t]
-
-  have hCritLine_tilde : ∀ t : ℝ,
-      M[(TestSpace.tilde (F := F) h)]((1/2 : ℂ) + I * t) *
-          logDeriv (PSCRatio P) ((1/2 : ℂ) + I * t) =
-        M[(TestSpace.tilde (F := F) h)]((1/2 : ℂ) + I * t) *
-          (I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) := by
-    intro t
-    rw [A.logDeriv_ratio_critical_line t]
-
-  -- Step 5: Rewrite integrals using integral_congr.
-  have hInt_h :
-      (∫ t : ℝ, M[h]((1/2 : ℂ) + I * t) * logDeriv (PSCRatio P) ((1/2 : ℂ) + I * t) ∂ volume) =
-        ∫ t : ℝ,
-          M[h]((1/2 : ℂ) + I * t) * (I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume := by
-    congr 1
-    ext t
-    exact hCritLine t
-
-  have hInt_tilde :
-      (∫ t : ℝ, M[(TestSpace.tilde (F := F) h)]((1/2 : ℂ) + I * t) *
-          logDeriv (PSCRatio P) ((1/2 : ℂ) + I * t) ∂ volume) =
-        ∫ t : ℝ, M[(TestSpace.tilde (F := F) h)]((1/2 : ℂ) + I * t) *
-          (I * ((deriv (boundaryPhaseFunction P) t : ℝ) : ℂ)) ∂ volume := by
-    congr 1
-    ext t
-    exact hCritLine_tilde t
-
-  rw [hInt_h, hInt_tilde]
-
-  -- Step 6: Apply the critical line sum formula.
-  exact A.critical_line_sum h
+  exact A.ratio_eq_neg_boundaryPhase h
 
 /-!
 ## Master assembly theorem

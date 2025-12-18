@@ -8,8 +8,9 @@
 
 ## 🔴 EXECUTION RULES (READ FIRST)
 
-1. **Find the first `[ ]` checkbox below and do it.**
-2. After completing a task, mark it `[x]` and immediately start the next `[ ]`.
+1. **Pick a track (A/B/C) and find the first `[ ]` checkbox in that track’s queue below. Do it.**
+   - If no track is specified in the chat prompt, default to **Track A (Core integrator)**.
+2. After completing a task, mark it `[x]` and immediately start the next `[ ]` **in the same track**.
 3. If you finish all tasks, add new ones based on the remaining work.
 4. Run `lake build` after any Lean file change.
 5. If you add/strengthen **any** hypothesis/axiom (including hypothesis-bundle fields), **update the Assumption Ledger** below immediately.
@@ -18,6 +19,41 @@
 8. If stuck for >2 attempts on one task, skip it and note why.
 
 ---
+
+## 🧵 MULTI-TRACK WORKFLOW (A/B/C)
+
+We run Route 3 in parallel: **Track A** maintains the integration spine; **Tracks B/C** discharge the
+remaining classical/analytic inputs as theorems (ideally without adding new axioms).
+
+### Track A — Core integrator (default for this chat)
+- **Goal**: Keep the full chain compiling, minimize assumption surface area, and integrate Track B/C
+  deliverables into an end-to-end ζ run.
+- **Primary files**: `ROUTE3_DRIVER.md`, `ExplicitFormula/ZetaInstantiation.lean`,
+  `ExplicitFormula/ZetaRightEdgePhaseLimit.lean`, `ExplicitFormula/ZetaEndToEndSchwartz.lean`.
+- **Output contract**: Merge small, build-green commits; update the **Assumption Ledger** on every
+  assumption-surface change.
+
+### Track B — Mellin/Fourier + det₂ analytic obligations (good for a faster model)
+- **Goal**: Discharge `ZetaDet2AnalyticAssumptions.fourier_inversion` for the concrete Schwartz test
+  space and eliminate it from the Ledger.
+- **Primary files**: `ExplicitFormula/SchwartzTestSpace.lean`, `ExplicitFormula/ZetaDet2Schwartz.lean`
+  (optionally add `ExplicitFormula/ZetaFourierInversionSchwartz.lean`).
+- **Output contract**: Provide a theorem (no new global axioms) building
+  `FourierInversionDirichletTerm ...` for Schwartz; then simplify
+  `zetaDet2AnalyticAssumptions_schwartz` so it no longer takes `hFI` as an input.
+
+### Track C — Boundary phase + right-edge limit + sesquilinear identity (hard analysis)
+- **Goal**: Discharge ζ boundary-phase hypotheses, the right-edge contour limit hypotheses, and the
+  Route‑3 sesquilinear identity inputs (measure/L²/integrability).
+- **Primary files**: `ExplicitFormula/ZetaInstantiation.lean`, `ExplicitFormula/ZetaRightEdgePhaseLimit.lean`,
+  `ExplicitFormula/LagariasContour.lean`, `ExplicitFormula/Route3HypBundle.lean`, `ExplicitFormula/PSCSplice.lean`.
+- **Output contract**: Turn Ledger items into theorems/instances, or isolate unavoidable gaps as
+  narrowly-scoped *bundle fields* (never as global `axiom`s).
+
+### Working agreement (avoid conflicts)
+- **One track, one file-set**: don’t edit another track’s primary files unless integrating a finished result.
+- **Prefer new files** for big classical results; wire them in via small imports.
+- **Always update the Assumption Ledger** when adding/removing/weaken/renaming any hypothesis fields.
 
 ## 📊 CURRENT STATUS
 
@@ -40,23 +76,34 @@ This section is the **single source of truth** for what is still assumed (even i
 
 - **Literal Lean axioms (in `ExplicitFormula/*`)**: none ✅
 
-- **ζ instantiation hypotheses (bundled, but still assumptions)**: `ZetaPSCHypotheses` in `ZetaInstantiation.lean`
+- **ζ instantiation hypotheses (bundled, but still assumptions; Track C)**: `ZetaPSCHypotheses` in `ZetaInstantiation.lean`
   - `boundaryPhase_diff`: differentiability of the chosen boundary phase (classical analysis).
   - `boundaryPhase_repr`: critical-line phase representation (branch/arg bookkeeping; classical but delicate).
   - `phase_velocity`: phase–velocity identity relating `θ'(t)` to `μ_spec` (classical/spectral input).
   - (Removed) `det2_ne_zero_strip`: **eliminated** by weakening `PSCComponents.det2_ne_zero` to only require `Re(s) > 1`.
 
-- **det2 (prime-term) instantiation hypotheses (bundled, but still assumptions)**: `ZetaDet2AnalyticAssumptions` in `ZetaInstantiation.lean`
+- **det2 (prime-term) instantiation hypotheses (bundled, but still assumptions; Track B)**: `ZetaDet2AnalyticAssumptions` in `ZetaInstantiation.lean`
+  - `fourier_inversion`: Fourier inversion for Mellin–Dirichlet terms (analytic input).
   - `integrable_term`: integrability of each Dirichlet term integrand.
   - `summable_integral_norm`: summability of the integral norms (Fubini/Tonelli gate).
 
 - **outer (archimedean) instantiation hypotheses**: **none** (at the current skeleton stage).
   - `OuterArchimedeanAssumptions` was trimmed to only the field actually used downstream (`outer_fullIntegral = archimedeanTerm`), and the ζ instance takes `archimedeanTerm := outer_fullIntegral` (definitionally true).
 
-- **ratio (boundary phase) instantiation hypotheses (bundled, but still assumptions)**: `ZetaRatioAnalyticAssumptions` in `ZetaInstantiation.lean`
-  - `logDeriv_ratio_critical_line`: critical-line phase/log-derivative identity.
-  - `contour_shift`: ratio contour-shift identity to `Re(s)=1/2`.
-  - `critical_line_sum`: the critical-line sum identity used in the ratio component.
+- **ratio (boundary phase) instantiation hypotheses (bundled, but still assumptions; Track C)**: `ZetaRatioAnalyticAssumptions` in `ZetaInstantiation.lean`
+  - `ratio_eq_neg_boundaryPhase`: the ratio component identity stored directly:
+    `ratio_fullIntegral = - ∫ boundaryPhaseIntegrand`.
+
+- **right-edge phase-limit hypotheses (bundled, but still assumptions; Track C)**:
+  `RightEdgePhaseLimitAssumptions` in `ExplicitFormulaCancellationSkeleton.lean`
+  - `horizBottom_vanish`, `horizTop_vanish`
+  - `rightEdge_phase_limit`
+  - `xiLC` (choice of `LC.xi`) and `xiP` (choice of `P.xi`) — for ζ, `xiP` is definitional; `xiLC` is a framework choice.
+
+- **Route‑3 sesquilinear identity hypotheses (bundled, but still assumptions; Track C)**:
+  `ZetaInstantiation.EndToEnd.Assumptions` in `ZetaEndToEndSchwartz.lean`
+  - `transform`, `transform_eq_mellinOnCriticalLine`
+  - `memL2`, `integrable_pairTransform_volume`, `integrable_pairTransform_deriv_volume`, `integrable_pairTransform_μ`
 
 - **Definition consistency audit (must stay consistent with bundles)**:
   - ✅ Reconciled: `det2_zeta := riemannZeta` (so `logDeriv det2_zeta = - LSeries(Λ)` on `Re(s) > 1` matches `Det2PrimeTermAssumptions.logDeriv_det2_eq_neg_vonMangoldt`).
@@ -127,8 +174,39 @@ The proof chain is complete with 0 sorry. Remaining work: instantiate hypothesis
   - Implemented for the concrete `SchwartzTestSpace` (`F := SchwartzMap ℝ ℂ`) in `RiemannRecognitionGeometry/ExplicitFormula/ZetaDet2Schwartz.lean` via `ZetaInstantiation.Schwartz.zetaDet2AnalyticAssumptions_schwartz`.
   - Assumes `1 < LC.c` and takes `fourier_inversion` as an explicit input (already a field of the bundle).
 - [x] **Fill outer-side obligations**: eliminated unused outer analytic side-conditions by trimming `OuterArchimedeanAssumptions` to only the identity field used downstream; ζ outer instantiation is now definitional.
-- [ ] **Fill `ZetaRatioAnalyticAssumptions`**: prove `contour_shift` + `critical_line_sum` (phase bookkeeping).
-- [ ] **End-to-end ζ run**: construct concrete `LagariasContourFramework` + `RightEdgePhaseLimitAssumptions` for `xiLagarias` and fire the full chain to `RiemannHypothesis`.
+- [x] **Minimize `ZetaRatioAnalyticAssumptions` surface**: trimmed to a single identity field (`ratio_eq_neg_boundaryPhase`) since that’s the only downstream use.
+- [x] **Isolate the remaining ratio blocker**: the only remaining ratio-side analytic input is
+  `ZetaRatioAnalyticAssumptions.ratio_eq_neg_boundaryPhase` (no proof yet; requires contour shift + boundary log-derivative + tilde bookkeeping).
+
+### Phase 6: Remaining “unconditional” blockers (major analysis) — split into parallel tracks
+
+#### Track A (core integrator)
+- [ ] **Integration target**: as Track B/C discharge Ledger items, replace `EndToEnd.Assumptions` fields with concrete instances for a chosen test space and run the full chain with fewer assumptions.
+  - Primary target: `ExplicitFormula/ZetaEndToEndSchwartz.lean` (`ZetaInstantiation.EndToEnd.Assumptions` → `ZetaInstantiation.EndToEnd.RH`).
+  - Keep the build green and the Ledger accurate as assumptions are removed/weakened.
+
+#### Track B (Mellin/Fourier / det₂)
+- [ ] **Fourier inversion for Schwartz**: prove `ZetaDet2AnalyticAssumptions.fourier_inversion` for `F := SchwartzMap ℝ ℂ` and eliminate it from the Ledger.
+  - Suggested deliverable: a lemma producing
+    `ExplicitFormulaCancellationSkeleton.FourierInversionDirichletTerm (F := SchwartzMap ℝ ℂ) (c := LC.c) ...`
+    from Mathlib’s Mellin/Fourier inversion, wired to our `TestSpace.M` / `mellinOnCriticalLine`.
+  - Then update `ZetaInstantiation.Schwartz.zetaDet2AnalyticAssumptions_schwartz` to *not* take `hFI`.
+
+#### Track C (phase / right-edge limit / sesquilinear identity)
+- [ ] **Concrete ζ phase hypotheses**: build a concrete `ZetaPSCHypotheses` (define `boundaryPhase`, choose `μ_spec`) and prove:
+  - `boundaryPhase_diff`, `boundaryPhase_repr`, `phase_velocity`.
+- [ ] **Ratio identity**: prove `ZetaRatioAnalyticAssumptions.ratio_eq_neg_boundaryPhase` (or replace it by a smaller, more natural lemma + bundle refactor).
+- [ ] **Right-edge phase limit**: build `RightEdgePhaseLimitAssumptions` for `PSCComponents_zeta` and a concrete `LagariasContourFramework`.
+  - Helper constructors: `ExplicitFormula/ZetaRightEdgePhaseLimit.lean`
+    (`EndToEnd.mkLagariasContourFramework_xiLagarias`, `EndToEnd.rightEdgePhaseLimitAssumptions_zeta`,
+     `EndToEnd.rightEdgePhaseLimitAssumptions_zeta_of_rightEdgeIntegralIdentityAssumptions`).
+- [ ] **Route‑3 sesquilinear identity inputs**: discharge the `PSCSplice`/Route‑3 measure identity inputs for `μ_spec` (transform, `memL2`, and integrability).
+  - Convenience bundle: `ExplicitFormula/ZetaEndToEndSchwartz.lean` includes `EndToEnd.AssumptionsIntegralId` + `EndToEnd.RH_of_integralId`
+    (accepts right-edge input as `RightEdgeIntegralIdentityAssumptions` + horizontal vanishing, and derives `RightEdgePhaseLimitAssumptions` automatically).
+
+- [x] **End-to-end ζ run (wiring)**: `ExplicitFormula/ZetaEndToEndSchwartz.lean` (`RH_of_rightEdgePhaseLimitAssumptions`) fires the full chain from
+  `LagariasContourFramework` + `RightEdgePhaseLimitAssumptions` + transform/L²/integrability inputs → `RiemannHypothesis`. (`lake build` ✅)
+- [x] **Bundle end-to-end ζ assumptions**: `ExplicitFormula/ZetaEndToEndSchwartz.lean` exposes `ZetaInstantiation.EndToEnd.Assumptions` + `ZetaInstantiation.EndToEnd.RH`.
 
 ---
 
@@ -157,7 +235,10 @@ Classical contour integral calculus
 | `ArithmeticJ.lean` | `det2` / von Mangoldt connection |
 | `WeilFunctionals.lean` | `primeTerm`, `archimedeanTerm` definitions |
 | `MainRoute3.lean` | Final RH statement |
-| `ZetaInstantiation.lean` | Concrete ζ instantiation (WIP) |
+| `ZetaInstantiation.lean` | Concrete ζ PSC-components + ζ hypothesis bundles |
+| `ZetaDet2Schwartz.lean` | det₂ analytic obligations for Schwartz test space |
+| `ZetaRightEdgePhaseLimit.lean` | Convenience constructors for right-edge phase-limit bundles |
+| `ZetaEndToEndSchwartz.lean` | End-to-end “assumptions → RH” wiring target |
 
 ---
 
@@ -237,4 +318,5 @@ lake env lean /tmp/test.lean 2>&1 | tail -30
 - Removed unused `fourier_inversion_tilde` field from `Det2PrimeTermAssumptions` (and the ζ wrapper bundle) to reduce assumption surface area.
 - Phase 4 completed: ζ bundle constructors are in place; added Phase 5 checkboxes for discharging the remaining analytic obligations.
 - Phase 5 started: removed the last `ExplicitFormula/*` global `axiom` by bundling Fourier inversion as an explicit analytic hypothesis.
+- Updated `ROUTE3_DRIVER.md` to a multi-track plan (A/B/C): Track A integrates; Tracks B/C discharge remaining classical/analytic obligations.
 
