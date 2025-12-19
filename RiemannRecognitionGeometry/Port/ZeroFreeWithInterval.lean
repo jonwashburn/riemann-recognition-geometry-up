@@ -184,18 +184,6 @@ theorem zero_free_with_interval_of_OscillationTarget_of_xi_and_cofactor_CRGreen 
   -- Contradiction: lower bound vs upper bound.
   linarith
 
-/-- Strong version of the Port centered contradiction, taking the faithful **strong**
-energy-form CR/Green targets. -/
-theorem zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptionsStrong (ρ : ℂ)
-    (h : EnergyCRGreenAssumptionsStrong)
-    (hρ_re : 1/2 < ρ.re)
-    (hρ_zero : completedRiemannZeta ρ = 0)
-    (hOsc : OscillationTarget) :
-    False :=
-  zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptions
-    (ρ := ρ) (h := energyCRGreenAssumptions_of_strong h)
-    (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
-
 /-- Same as `zero_free_with_interval_of_OscillationTarget_of_xi_and_cofactor_CRGreen`, but taking the bundled
 `EnergyCRGreenAssumptions`. -/
 theorem zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptions (ρ : ℂ)
@@ -208,6 +196,18 @@ theorem zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptions
     zero_free_with_interval_of_OscillationTarget_of_xi_and_cofactor_CRGreen
       (ρ := ρ) (hXi := h.xi) (hCof := h.cofactor)
       (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
+
+/-- Strong version of the Port centered contradiction, taking the faithful **strong**
+energy-form CR/Green targets. -/
+theorem zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptionsStrong (ρ : ℂ)
+    (h : EnergyCRGreenAssumptionsStrong)
+    (hρ_re : 1/2 < ρ.re)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hOsc : OscillationTarget) :
+    False :=
+  zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptions
+    (ρ := ρ) (h := energyCRGreenAssumptions_of_strong h)
+    (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
 
 /-- Same centered contradiction, but taking **real-valued** CR/Green targets (blueprint-style).
 
