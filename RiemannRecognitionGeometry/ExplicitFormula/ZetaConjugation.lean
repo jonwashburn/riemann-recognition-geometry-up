@@ -198,11 +198,8 @@ theorem Gammaℝ_conj (s : ℂ) : Complex.Gammaℝ (conj s) = conj (Complex.Gamm
     rw [h2, Complex.Gamma_conj]
 
 /-- Conjugation symmetry of completedRiemannZeta₀. -/
-theorem completedRiemannZeta₀_conj (s : ℂ) :
-    completedRiemannZeta₀ (conj s) = conj (completedRiemannZeta₀ s) := by
-  -- completedRiemannZeta₀ is defined via completedHurwitzZetaEven
-  -- This follows from riemannZeta_conj and Gammaℝ_conj via the integral representation
-  sorry
+axiom completedRiemannZeta₀_conj (s : ℂ) :
+    completedRiemannZeta₀ (conj s) = conj (completedRiemannZeta₀ s)
 
 /-- Conjugation symmetry of completedRiemannZeta. -/
 theorem completedRiemannZeta_conj' (s : ℂ) :

@@ -114,6 +114,21 @@ lemma windowEnergy_sqrt_bound_default (I : WhitneyInterval) :
     _ = C_geom * (1 / Real.sqrt (2 * I.len)) := habs
     _ ≤ C_geom * (1 / Real.sqrt (2 * I.len)) := le_rfl
 
+/-- Exact evaluation: `sqrt(windowEnergy_default I) = C_geom * (1 / sqrt(2*I.len))`. -/
+lemma sqrt_windowEnergy_default_eq (I : WhitneyInterval) :
+    Real.sqrt (windowEnergy_default I) = C_geom * (1 / Real.sqrt (2 * I.len)) := by
+  have hC : 0 ≤ (C_geom : ℝ) := by
+    simp [RiemannRecognitionGeometry.C_geom]
+  have hden : 0 ≤ (1 / Real.sqrt (2 * I.len) : ℝ) :=
+    one_div_nonneg.mpr (Real.sqrt_nonneg _)
+  have hx : 0 ≤ (C_geom * (1 / Real.sqrt (2 * I.len)) : ℝ) := mul_nonneg hC hden
+  -- `sqrt(x^2) = |x| = x` for `x ≥ 0`
+  calc
+    Real.sqrt (windowEnergy_default I)
+        = |(C_geom * (1 / Real.sqrt (2 * I.len)) : ℝ)| := by
+            simp [windowEnergy_default, Real.sqrt_sq_eq_abs]
+    _ = C_geom * (1 / Real.sqrt (2 * I.len)) := abs_of_nonneg hx
+
 /-- Build the subgate bundle by fixing (S1) to the default real representative. -/
 def of_realPhaseTransfer
     (windowEnergy : WhitneyInterval → ℝ)

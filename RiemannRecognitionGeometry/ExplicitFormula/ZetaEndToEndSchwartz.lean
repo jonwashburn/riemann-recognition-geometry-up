@@ -1,6 +1,7 @@
 import RiemannRecognitionGeometry.ExplicitFormula.ZetaInstantiation
 import RiemannRecognitionGeometry.ExplicitFormula.PSCSplice
 import RiemannRecognitionGeometry.ExplicitFormula.ZetaRightEdgePhaseLimit
+import RiemannRecognitionGeometry.ExplicitFormula.BoundaryWedgeInterfaces
 
 /-!
 # Route 3: end-to-end ζ run (Route 3 test space)
@@ -41,28 +42,8 @@ structure Assumptions where
   Aphase :
     ExplicitFormulaCancellationSkeleton.RightEdgePhaseLimitAssumptions
       (LC := LC) (P := (PSCComponents_zeta H))
-  transform : Route3.F →ₗ[ℂ] (ℝ → ℂ)
-  transform_eq_mellinOnCriticalLine :
-    ∀ f : Route3.F,
-      transform f = fun t : ℝ => mellinOnCriticalLine (F := Route3.F) f t
-  memL2 : ∀ f : Route3.F, MeasureTheory.Memℒp (transform f) 2 (PSCComponents_zeta H).μ_spec
-  integrable_pairTransform_volume :
-    ∀ f g : Route3.F,
-      Integrable
-        (fun t : ℝ => (starRingEnd ℂ (transform f t)) * (transform g t))
-        volume
-  integrable_pairTransform_deriv_volume :
-    ∀ f g : Route3.F,
-      Integrable
-        (fun t : ℝ =>
-          ((starRingEnd ℂ (transform f t)) * (transform g t)) *
-            ((deriv (ContourToBoundary.boundaryPhaseFunction (PSCComponents_zeta H)) t : ℝ) : ℂ))
-        volume
-  integrable_pairTransform_μ :
-    ∀ f g : Route3.F,
-      Integrable
-        (fun t : ℝ => (starRingEnd ℂ (transform f t)) * (transform g t))
-        (PSCComponents_zeta H).μ_spec
+  /-- The shared “transform / L² / integrability” bundle (factored in `ZetaInstantiation`). -/
+  Azeta : Assumptions_zeta (LC := LC) (H := H)
 
 theorem RH (A : Assumptions) : RiemannHypothesis := by
   classical
@@ -93,13 +74,16 @@ theorem RH (A : Assumptions) : RiemannHypothesis := by
     Route3.PSCSplice.RH_ofContourToBoundary
       (P := PSCComponents_zeta A.H)
       (L := A.LC.L)
-      (transform := A.transform)
-      (transform_eq_mellinOnCriticalLine := A.transform_eq_mellinOnCriticalLine)
-      (memL2 := A.memL2)
+      (transform := A.Azeta.transform)
+      (transform_eq_mellinOnCriticalLine := A.Azeta.transform_eq_mellinOnCriticalLine)
+      (memL2 := by
+        intro f
+        -- `((PSCComponents_zeta A.H).μ_spec)` is definitionally `A.H.μ_spec`.
+        simpa using (A.Azeta.memL2 f))
       (h_explicit := hExplicit)
-      (h_integrable_F := A.integrable_pairTransform_volume)
-      (h_integrable_vol := A.integrable_pairTransform_deriv_volume)
-      (h_integrable_μ := A.integrable_pairTransform_μ)
+      (h_integrable_F := A.Azeta.integrable_pairTransform_volume)
+      (h_integrable_vol := A.Azeta.integrable_pairTransform_deriv_volume)
+      (h_integrable_μ := A.Azeta.integrable_pairTransform_μ)
 
 /--
 Variant assumptions where the right-edge input is provided in the more structural form:
@@ -131,29 +115,8 @@ structure AssumptionsIntegralId where
   rightEdgeIntegralId :
     ExplicitFormulaCancellationSkeleton.RightEdgeIntegralIdentityAssumptions
       (LC := LC) (P := PSCComponents_zeta H)
-
-  transform : Route3.F →ₗ[ℂ] (ℝ → ℂ)
-  transform_eq_mellinOnCriticalLine :
-    ∀ f : Route3.F,
-      transform f = fun t : ℝ => mellinOnCriticalLine (F := Route3.F) f t
-  memL2 : ∀ f : Route3.F, MeasureTheory.Memℒp (transform f) 2 (PSCComponents_zeta H).μ_spec
-  integrable_pairTransform_volume :
-    ∀ f g : Route3.F,
-      Integrable
-        (fun t : ℝ => (starRingEnd ℂ (transform f t)) * (transform g t))
-        volume
-  integrable_pairTransform_deriv_volume :
-    ∀ f g : Route3.F,
-      Integrable
-        (fun t : ℝ =>
-          ((starRingEnd ℂ (transform f t)) * (transform g t)) *
-            ((deriv (ContourToBoundary.boundaryPhaseFunction (PSCComponents_zeta H)) t : ℝ) : ℂ))
-        volume
-  integrable_pairTransform_μ :
-    ∀ f g : Route3.F,
-      Integrable
-        (fun t : ℝ => (starRingEnd ℂ (transform f t)) * (transform g t))
-        (PSCComponents_zeta H).μ_spec
+  /-- The shared “transform / L² / integrability” bundle (factored in `ZetaInstantiation`). -/
+  Azeta : Assumptions_zeta (LC := LC) (H := H)
 
 def AssumptionsIntegralId.toAssumptions (A : AssumptionsIntegralId) : Assumptions where
   LC := A.LC
@@ -165,15 +128,43 @@ def AssumptionsIntegralId.toAssumptions (A : AssumptionsIntegralId) : Assumption
       (hBot := A.horizBottom_vanish)
       (hTop := A.horizTop_vanish)
       (AId := A.rightEdgeIntegralId)
-  transform := A.transform
-  transform_eq_mellinOnCriticalLine := A.transform_eq_mellinOnCriticalLine
-  memL2 := A.memL2
-  integrable_pairTransform_volume := A.integrable_pairTransform_volume
-  integrable_pairTransform_deriv_volume := A.integrable_pairTransform_deriv_volume
-  integrable_pairTransform_μ := A.integrable_pairTransform_μ
+  Azeta := A.Azeta
 
 theorem RH_of_integralId (A : AssumptionsIntegralId) : RiemannHypothesis :=
   RH (A := A.toAssumptions)
+
+/-!
+## End-to-end: boundary wedge + splice identity → RH
+
+This is the “single bundle” entrypoint for the PSC/Route‑3 ζ run: we package the boundary‑wedge
+interface (hence (P+)) together with the Route‑3 measure‑first splice identity assumptions.
+
+No new analysis is proved here; we just expose the fully bundled hypothesis surface.
+-/
+
+variable [TestSpace Route3.F]
+
+/-- One-stop assumption bundle for an end-to-end ζ run using the Route‑3 splice identity. -/
+structure AssumptionsSplice where
+  /-- ζ boundary hypotheses (phase representation, phase–velocity, etc.). -/
+  H : ZetaPSCHypotheses
+  /-- Boundary wedge interface, implying (P+) / cosine nonnegativity for `H.boundaryPhase`. -/
+  wedge : BoundaryWedgeAssumptions H
+  /-- Route‑3 measure-first splice identity (against a positive measure). -/
+  splice : Route3.PSCSplice.Assumptions (F := Route3.F)
+
+/-- Convenience: the wedge assumptions imply `(P+)` for the ζ pinch field. -/
+theorem AssumptionsSplice.PPlus_zeta (A : AssumptionsSplice) : PPlus_zeta :=
+  PPlus_zeta_of_boundary_wedge A.H A.wedge
+
+/-- Convenience: the wedge assumptions imply the phase-positivity target `cos(θ) ≥ 0` a.e. -/
+theorem AssumptionsSplice.boundaryPhase_cos_nonneg_ae (A : AssumptionsSplice) :
+    (∀ᵐ t : ℝ, 0 ≤ Real.cos (A.H.boundaryPhase t)) :=
+  boundaryPhase_cos_nonneg_ae_of_boundary_wedge A.H A.wedge
+
+/-- If the Route‑3 splice identity holds (packaged together with the boundary wedge), then RH follows. -/
+theorem RH_of_splice (A : AssumptionsSplice) : RiemannHypothesis :=
+  Route3.PSCSplice.RHμ_spec (A := A.splice)
 
 end EndToEnd
 

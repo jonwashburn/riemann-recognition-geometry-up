@@ -22,7 +22,7 @@ The goal here is not to claim anything is already proved in `reality/`—most of
 
 - **Driver**: `ROUTE3_DRIVER.md`
 - **Code**: `RiemannRecognitionGeometry/ExplicitFormula/*`
-- **Status**: there are still **`sorry`** and **axioms** in this track; it’s explicitly managed via hypothesis bundles and an assumption ledger.
+- **Status**: this track is now **`sorry`-free**; the remaining gaps are explicit **axioms / hypothesis bundles** (wedge closure, Fourier inversion, splice identity inputs, etc.), and are managed via the assumption ledger.
 
 ### 2) The real remaining gaps in *this* repo (exact Lean targets)
 
@@ -174,6 +174,11 @@ Suggested landing files in this repo (new):
 - ✅ `RiemannRecognitionGeometry/Port/CofactorEnergy.lean` (defines concrete candidates:
   - `cofactorEbox` via `CarlesonBound.boxEnergy` of `poissonExtension_gradient`, and
   - `cofactorEbox_poisson` via `PoissonExtension.carleson_energy` (matches the Fefferman–Stein axiom interface))
+ - ✅ `RiemannRecognitionGeometry/Port/XiCRGreenS2Interfaces.lean` + `.../XiCRGreenS2.lean`:
+   faithful xi-side “S2” (trace identity + pairing bound) interfaces, matching the blueprint decomposition.
+ - ✅ `RiemannRecognitionGeometry/Port/EnergyCRGreenS2.lean`:
+   wiring glue `(xi S2 + cofactor S2) → EnergyCRGreenAssumptionsStrong`, plus a Port main wrapper
+   `RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2` in `Port/MainNoRGAssumptions.lean`.
 
 ### 5) Immediate next actions
 

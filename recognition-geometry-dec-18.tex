@@ -2639,6 +2639,41 @@ Equating derivatives gives \(iF'(a+it)=i\theta'(t)F(a+it)\), hence \(F'(a+it)/F(
     (Lean locus: \texttt{Route3FubiniTonelliLemmas.lean} and related analytic files.)
 \end{itemize}
 
+\begin{lemma}[Phase lift + FTC (trace gate)]\label{lem:phase_lift_ftc}
+Let $a\le b$ and let $\varphi:[a,b]\to \mathbb{R}/2\pi\mathbb{Z}$ be a phase valued modulo $2\pi$.
+Assume there exists a real-valued lift $\theta:[a,b]\to\mathbb{R}$ with $\theta(t)\bmod 2\pi=\varphi(t)$ for all $t\in[a,b]$.
+If $\theta$ is $C^1$ on $[a,b]$ and $\theta'\in L^1([a,b])$, then
+\[
+\theta(b)-\theta(a)=\int_a^b \theta'(t)\,dt,
+\qquad\text{and hence}\qquad
+\|\varphi(b)-\varphi(a)\|\le \left|\int_a^b \theta'(t)\,dt\right|.
+\]
+\end{lemma}
+
+\begin{proof}
+The identity $\theta(b)-\theta(a)=\int_a^b\theta'(t)\,dt$ is the fundamental theorem of calculus.
+For the angle bound, note that the quotient map $\mathbb{R}\to \mathbb{R}/2\pi\mathbb{Z}$ is a group homomorphism, so
+$\varphi(b)-\varphi(a)=(\theta(b)-\theta(a))\bmod 2\pi$.
+By definition, the norm $\|\cdot\|$ on $\mathbb{R}/2\pi\mathbb{Z}$ is the minimal absolute value among real representatives, hence
+$\|\varphi(b)-\varphi(a)\|\le |\theta(b)-\theta(a)| = \left|\int_a^b \theta'(t)\,dt\right|$.
+\end{proof}
+
+\begin{lemma}[CR boundary trace identity for a logarithm branch]\label{lem:cr_boundary_trace_log}
+Let $\Omega=\{x+iy : y>0\}$ be the upper half-plane and let $f:\Omega\to\mathbb{C}$ be holomorphic and nonvanishing.
+Assume there exists a holomorphic branch of the logarithm $F=\log f$ on $\Omega$, and write $F=u+iv$ with real-valued harmonic functions $u,v$.
+Assume further that the nontangential boundary traces $u(t):=\lim_{y\downarrow 0}u(t+iy)$ and $v(t):=\lim_{y\downarrow 0}v(t+iy)$ exist for a.e.\ $t$ on an interval $I$,
+and that $u,v$ admit enough boundary regularity on $I$ so that the Cauchy--Riemann equations may be passed to the boundary in the distributional sense.
+Then, on $I$ (as distributions),
+\[
+\frac{d}{dt}v(t) = -\partial_y u(t,0^+).
+\]
+\end{lemma}
+
+\begin{proof}
+Inside $\Omega$ the Cauchy--Riemann equations give $\partial_x v = -\partial_y u$.
+Under the stated boundary-regularity hypotheses one may pass to boundary traces, yielding the distributional identity on $I$.
+\end{proof}
+
 \subsection*{B: Recognition Geometry (RG) track --- remaining unconditional gaps}
 \begin{itemize}
     \item \textbf{B1 (RG bottleneck: energy $\Rightarrow$ phase control on Whitney regions).}
@@ -2651,9 +2686,25 @@ Equating derivatives gives \(iF'(a+it)=i\theta'(t)F(a+it)\), hence \(F'(a+it)/F(
         \item \textbf{B1b (CR/Green conversion: energy $\Rightarrow$ cofactor phase bound).}
         One also needs the CR/Green pairing (Green identity + Cauchy--Schwarz + boundary-term gates) that converts a box-energy upper bound
         into a uniform bound on the cofactor phase change across a Whitney interval.
-        In Lean, this is isolated as the target interface
-        \texttt{Port.HardyDirichletCRGreen cofactorEbox\_poisson}
-        (see \texttt{RiemannRecognitionGeometry/Port/HardyDirichletCRGreen.lean}) and is currently the most concrete “single-lemma” wall for the RG wedge closure.
+        A key bookkeeping subgate is the \emph{trace/FTC} step (Lemma~\ref{lem:phase_lift_ftc}): one must work with a genuine real-valued phase \emph{lift}
+        on each Whitney base interval (to avoid principal-branch argument discontinuities) and identify its real phase change with an integral of a phase-velocity density.
+        It is often helpful to separate this into two micro-gates:
+        (i) the existence of a suitable lift $\theta$ of the cofactor phase modulo $2\pi$, and
+        (ii) the existence/identification of an $L^1$ phase velocity $\theta'$ for that lift so that FTC applies.
+        A further \emph{boundary-term gate} is then needed to connect $\theta'$ to the boundary trace of a 2D harmonic/Dirichlet field (the step that makes energy estimates apply),
+        e.g.\ via a Cauchy--Riemann boundary identity for a logarithm branch (Lemma~\ref{lem:cr_boundary_trace_log}).
+        In Lean, this has been isolated into a faithful lift-based interface:
+        \texttt{Port.CofactorCRGreenS2Interfaces.CofactorPhaseLift} (lift) and
+        \texttt{Port.CofactorCRGreenS2Interfaces.PhaseVelocityFTC} (FTC-valid velocity), bundled as
+        \texttt{Port.CofactorCRGreenS2Interfaces.GreenTraceIdentity} (the trace/FTC gate), plus
+        \texttt{Port.CofactorCRGreenS2Interfaces.PairingBound} (the Cauchy--Schwarz pairing bound),
+        which together imply the strong energy-form CR/Green estimate
+        \texttt{Port.CofactorCRGreenAssumptionsStrong} via
+        \texttt{cofactorCRGreenAssumptionsStrong\_of\_greenTrace\_and\_pairing}.
+        The remaining hard work is to prove these gates from an actual Green identity on Whitney boxes (including boundary-term control).
+        A Lean-facing statement-only interface for the CR boundary identity is provided in
+        \texttt{RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean} (\texttt{CRBoundaryTraceLog});
+        this is the current “boxed wall” in the driver.
     \end{itemize}
 
     \item \textbf{B2 (Oscillation certificate for \(\log|\xi|\)).}

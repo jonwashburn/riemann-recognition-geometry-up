@@ -1,6 +1,6 @@
 # Remaining Work (current + historical)
 
-## Current status (2025-12-18)
+## Current status (2025-12-19)
 
 **Build**: `lake build` succeeds.
 
@@ -81,6 +81,8 @@ Translation-stub modules (compiled in this repo) now exist under `RiemannRecogni
 - `HardyDirichletCarleson.lean`: a faithful **Carleson energy budget** interface (parameterized by an abstract box-energy functional), taking an explicit BMO certificate `InBMOWithBound (cofactorLogAbs ρ) M` as input.
 - `HardyDirichletCRGreen.lean`: a faithful **CR/Green cofactor phase bound** interface (energy → phase bound).
   (Note: this interface is currently **cofactor-specific**; the xi-side uses `Port.XiCRGreenAssumptions*`.)
+- `XiCRGreenS2Interfaces.lean` / `XiCRGreenS2.lean`: a faithful **xi-side S2 interface**
+  (real phase lift + trace identity + pairing bound) implying `Port.XiCRGreenAssumptionsStrong` and the weaker xi API.
 - `SkewHarmGate.lean`: a reusable **boundary-term at ∞ vanishes from integrability** wrapper, matching the pattern used in the `reality` repo.
 - `WeierstrassTailBound.lean`: a derived theorem `weierstrass_tail_bound_of_hardyDirichlet` showing the RG tail bound follows from the two Hardy/Dirichlet-style interfaces + the √|I| cancellation.
 - `CofactorEnergy.lean`: concrete candidates `Ebox` for the cofactor field:
@@ -109,6 +111,10 @@ Translation-stub modules (compiled in this repo) now exist under `RiemannRecogni
 - `WedgeClosure.lean` / `SchurPinch.lean` (Port): alignment wrappers that re-export the existing Route 3
   boundary-wedge and Schur pinch interfaces via stable `Port/*` paths (matching the `reality` module shapes).
 - `Port.lean`: aggregator module so the whole Port surface can be compiled as one target (`lake build RiemannRecognitionGeometry.Port`).
+
+**Update (2025-12-19):** the Port main theorem also has an S2-facing wrapper:
+- `Port/EnergyCRGreenS2.lean`: `(xi S2 + cofactor S2) → EnergyCRGreenAssumptionsStrong`
+- `Port/MainNoRGAssumptions.lean`: `RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2`
 
 ---
 

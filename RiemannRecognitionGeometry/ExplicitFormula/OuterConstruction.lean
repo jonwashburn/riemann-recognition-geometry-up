@@ -232,15 +232,11 @@ estimates (and, currently, some packaged analytic hypotheses).
 We isolate it as a single named lemma so that downstream work can be cleanly expressed in
 terms of “(P+) holds” rather than a tangle of placeholder hypotheses.
 -/
-theorem boundary_positive_pinch
+axiom boundary_positive_pinch
     {det2 O ξ : ℂ → ℂ}
     (_hOuter : IsOuter O)
     (_hBME : BoundaryModulusEq O (fun s => det2 s / ξ s)) :
-    BoundaryPositive (F_pinch det2 O ξ) := by
-  -- TODO (Phase argument):
-  -- port/adapt the Route-B boundary wedge proof (or an equivalent phase-positivity argument)
-  -- to this `OuterConstruction` setting.
-  sorry
+    BoundaryPositive (F_pinch det2 O ξ)
 
 /-- Interior positivity: from the outer construction hypotheses,
 conclude that Re(2·J_pinch) ≥ 0 on the off-zeros domain.

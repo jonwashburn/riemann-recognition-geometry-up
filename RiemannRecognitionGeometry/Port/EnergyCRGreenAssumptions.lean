@@ -23,6 +23,18 @@ structure EnergyCRGreenAssumptions : Prop where
   xi : XiCRGreenAssumptions
   cofactor : CofactorCRGreenAssumptions
 
+/-- Bundled **strong** energy-form CR/Green targets (xi-side + cofactor-side). -/
+structure EnergyCRGreenAssumptionsStrong : Prop where
+  xi : XiCRGreenAssumptionsStrong
+  cofactor : CofactorCRGreenAssumptionsStrong
+
+/-- Strong CR/Green bundle ⇒ the weaker bundle (by strong→weak on each side). -/
+theorem energyCRGreenAssumptions_of_strong (h : EnergyCRGreenAssumptionsStrong) :
+    EnergyCRGreenAssumptions := by
+  refine ⟨?_, ?_⟩
+  · exact xiCRGreenAssumptions_of_xiCRGreenAssumptionsStrong h.xi
+  · exact cofactorCRGreenAssumptions_of_cofactorCRGreenAssumptionsStrong h.cofactor
+
 /-- Compatibility: the current project-level `ClassicalAnalysisAssumptions` implies the bundled
 energy-based CR/Green targets (non-faithfully, until a true Green pairing proof lands). -/
 theorem energyCRGreenAssumptions_of_ClassicalAnalysisAssumptions

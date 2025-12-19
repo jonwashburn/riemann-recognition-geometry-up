@@ -24,6 +24,7 @@ import RiemannRecognitionGeometry.Port.CofactorBMOInheritance
 import RiemannRecognitionGeometry.Port.CofactorCRGreenAssumptions
 import RiemannRecognitionGeometry.Port.XiCRGreenAssumptions
 import RiemannRecognitionGeometry.Port.EnergyCRGreenAssumptions
+import RiemannRecognitionGeometry.Port.EnergyCRGreenS2
 import RiemannRecognitionGeometry.Port.RealPhaseTransfer
 import RiemannRecognitionGeometry.Port.EnergyCRGreenAssumptionsReal
 
@@ -180,6 +181,26 @@ theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_energyCRG
   exact
     RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_xi_and_cofactor_CRGreen
       (hXi := h.xi) (hCof := h.cofactor) (hT := hT)
+
+/-- Same Port RH theorem, but taking the bundled **strong** energy-form CR/Green targets. -/
+theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_energyCRGreenAssumptionsStrong
+    (h : EnergyCRGreenAssumptionsStrong)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  exact
+    RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_energyCRGreenAssumptions
+      (h := energyCRGreenAssumptions_of_strong h) (hT := hT)
+
+/-- Same Port RH theorem, but taking the faithful S2 (“trace + pairing”) assumptions on both
+the xi side and the cofactor side. -/
+theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2
+    (hXi : XiCRGreenS2.Assumptions)
+    (hCof : CofactorCRGreenS2.Assumptions)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  exact
+    RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_energyCRGreenAssumptionsStrong
+      (h := energyCRGreenAssumptionsStrong_of_S2 hXi hCof) (hT := hT)
 
 /-- Same Port RH theorem, but taking **real-valued** CR/Green targets (blueprint-style).
 

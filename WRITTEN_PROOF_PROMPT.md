@@ -2,6 +2,11 @@
 
 This file is meant to be **copy-pasted into chat** (or referenced) as the standing instructions for continuing the written proof work.
 
+## Companion prompts (same repo)
+
+- **Lean second-tier cleanup driver** (remove/relocate `sorry`s, consolidate assumption bundles, keep `lake build` green):
+  `LEAN_CLEANUP_PROMPT.md`
+
 ## Canonical target file
 
 - **Primary paper (current working copy)**: `recognition-geometry-dec-18.tex`
@@ -46,14 +51,36 @@ If none of these happens, the session is a failure: immediately downgrade the bo
 
 \[
 \boxed{
-\textbf{B1′ (CR/Green phase bound from box energy):}\quad
-\forall I,\rho,\ E>0,\ \Bigl(E_{\mathrm{box}}(\rho,I)\le E\cdot(2|I|)\Bigr)\ \Rightarrow\
-\|\Delta\theta_{\mathrm{cofactor}}(\rho;I)\|\ \le\ C_{\mathrm{geom}}\sqrt{E}.
+\textbf{B1′′a / S2a1-BT (CR boundary trace identity for the cofactor lift):}\quad
+\exists\ \texttt{L : CofactorPhaseLift},\ \exists\ \texttt{F : PhaseVelocityFTC L},\ \exists\ \texttt{h : CRBoundaryTraceLog L F},
+\\
+\text{so that the phase velocity }\theta'_{I,\rho}\text{ is identified as a boundary trace (CR/Neumann) of a 2D log-branch field.}
 }
 \]
 
-This is the honest “energy → phase” analytic bottleneck that feeds the boundary-wedge closure.
-In Lean it is exactly the missing interface `Port.HardyDirichletCRGreen cofactorEbox_poisson` (see `RiemannRecognitionGeometry/Port/HardyDirichletCRGreen.lean`).
+This is the smallest *honest* remaining obstacle inside the S2-only CR/Green wall: it’s no longer the
+vacuous “there exists an integrand whose integral equals a number”, but the genuine regularity gate
+that the cofactor phase has an actual velocity density on the Whitney base (in an `HasDerivAt`+FTC sense).
+The Cauchy–Schwarz pairing inequality is packaged separately.
+
+In Lean, the S2 decomposition lives in `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean`:
+- `GreenTraceIdentity` (boxed target): a **lift-based** FTC/trace gate (a lift `θ` with `(θ(t) : Real.Angle) = rgCofactorPhaseAngle` on `I`, plus `HasDerivAt θ = dPhase` and `IntervalIntegrable dPhase`),
+- `PairingBound`: the Cauchy–Schwarz pairing inequality for `∫ dPhase`.
+Together they imply the strong cofactor CR/Green bound `CofactorCRGreenAssumptionsStrong` via
+`cofactorCRGreenAssumptionsStrong_of_greenTrace_and_pairing`, and thus feed the RG pipeline.
+
+**New “smallest lemma” split (Lean-side, optional but recommended):**
+`GreenTraceIdentity` has been refactored to expose two strictly smaller named subgates:
+- `CofactorPhaseLift` (S2a0): existence of a real-valued lift `θ` of the cofactor `Real.Angle` phase on Whitney bases.
+- `PhaseVelocityFTC` (S2a1): an FTC-valid (integrable) phase velocity density `dθ/dt` for that lift on Whitney bases.
+These rebuild the bundled gate via `GreenTraceIdentity.of_lift_and_ftc`.
+
+**Boundary-term gate (this is now the boxed target):**
+the CR/Green pipeline ultimately needs the phase velocity to be a genuine boundary trace of a 2D field.
+This is captured semantically by the “log-branch CR identity” interface in
+`RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean`:
+`CRBoundaryTraceInterfaces.CRBoundaryTraceLog`, which implies `PhaseVelocityBoundaryTrace` via
+`phaseVelocityBoundaryTrace_of_CRBoundaryTraceLog`.
 
 **Decomposition (now formalized as a reusable lemma):**
 the *algebraic* core “(pairing bound) + (remainder bound) ⇒ (boundary bound)” is now in
@@ -89,13 +116,14 @@ directly (no auxiliary `E`) and produces the usual RG tail bound with the √|I|
 It proves `cofactorCRGreenAssumptionsStrong_of_subgates : CofactorCRGreenSubgatesStrong → CofactorCRGreenAssumptionsStrong`.
 So the smallest remaining analytic work is now “prove these two inequalities + the boundary-term gate” in whatever analytic model we choose.
 
-**Further shrink (S1 already discharged):**
+**Further shrink (S1 and S3 already discharged):**
 `RiemannRecognitionGeometry/Port/CofactorCRGreenSubgates.lean` now fixes a default choice
 `phaseChangeReal_default(I,ρ) := rgCofactorPhaseReal ρ(t0+len) - rgCofactorPhaseReal ρ(t0-len)`
 and proves `angle_le_abs_real_default` using the existing lemma
 `Port.cofactorPhaseChange_le_abs_real` (`Port/RealPhaseTransfer.lean`).
-So subgate (S1) is *not* part of the analytic wall anymore; the remaining work is exactly:
-(S2) the Green+C–S pairing inequality and (S3) the window-energy scaling bound (plus the boundary-term gate).
+It also defines `windowEnergy_default(I) := (C_geom*(1/√|I|))^2` and proves `windowEnergy_sqrt_bound_default`,
+so subgates (S1) and (S3) are *not* part of the analytic wall anymore. The remaining work is now literally:
+**(S2)** the Green+C–S pairing inequality for the default representative and default window energy (plus the boundary-term gate).
 
 **Why A2c2-J\(_{\mathrm{strip}}\) is no longer boxed:** for the repo’s concrete ζ gauge,
 \[
@@ -464,5 +492,13 @@ These are “hard elements” that will take multiple iterations. Keep each item
 - **2025-12-18**: Added `weierstrass_tail_bound_of_hardyDirichletStrong` to `RiemannRecognitionGeometry/Port/WeierstrassTailBound.lean`, so downstream RG tail bounds can consume the strong energy-form CR/Green wall directly.
 - **2025-12-18**: Added `RiemannRecognitionGeometry/Port/CofactorCRGreenSubgates.lean`, packaging the strong CR/Green wall into two clean analytic sub-inequalities (Green+Cauchy–Schwarz pairing + window-energy scaling) plus the `Real.Angle` representative link, and proved it implies `CofactorCRGreenAssumptionsStrong`.
 - **2025-12-18**: Further discharged the “real representative ⇒ angle norm” subgate (S1) by defining `phaseChangeReal_default` and proving `angle_le_abs_real_default` using `Port.cofactorPhaseChange_le_abs_real` (RealPhaseTransfer). Remaining analytic work is now precisely the Green+C–S pairing inequality (S2) and the window-energy scaling bound (S3), plus the boundary-term gate.
+- **2025-12-18**: Discharged the window-energy scaling subgate (S3) by defining `windowEnergy_default(I) := (C_geom*(1/√|I|))^2` and proving `windowEnergy_sqrt_bound_default`. Remaining analytic work is now literally the Green+C–S pairing inequality (S2) (plus the boundary-term gate).
+- **2025-12-18**: Re-boxed the current hard wall down to S2 only, and added `RiemannRecognitionGeometry/Port/CofactorCRGreenS2.lean` (now: `Port.CofactorCRGreenS2.Assumptions := ∃ T, PairingBound T`) plus `cofactorCRGreenAssumptionsStrong_of_S2`, so proving the two S2 subgates yields the strong energy-form cofactor CR/Green bound.
+- **2025-12-18**: Added `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean`, decomposing the strong cofactor CR/Green bound into the two standard analytic subgates: (S2a) a faithful lift-based trace/FTC gate (`GreenTraceIdentity`) and (S2b) the Cauchy–Schwarz pairing inequality (`PairingBound`), with a lemma producing `Port.CofactorCRGreenAssumptionsStrong` directly.
+- **2025-12-18**: Re-boxed the single current hard wall from “S2 inequality” to the strictly smaller “S2a Green trace identity + boundary-term gate” target (`GreenTraceIdentity`), since the pairing bound is now a separate interface.
+- **2025-12-19**: Honesty fix: strengthened `Port.CofactorCRGreenS2Interfaces.GreenTraceIdentity` from a vacuous “∃ integrand” statement to a non-vacuous FTC/derivative gate (provides a true phase-velocity density `dPhase` for `rgCofactorPhaseReal` on the Whitney base interval, plus `IntervalIntegrable`), and proved the trace identity via `intervalIntegral.integral_eq_sub_of_hasDerivAt`.
+- **2025-12-19**: Faithfulness fix: rewrote the S2a gate to avoid differentiating the principal-branch `arg`. `GreenTraceIdentity` now includes a real-valued lift `theta` whose coercion to `Real.Angle` agrees with `rgCofactorPhaseAngle` on the Whitney base, and the FTC is applied to that lift.
+- **2025-12-19**: Further shrink: split the bundled S2a gate into two explicit subgates (`CofactorPhaseLift` and `PhaseVelocityFTC`), and added `GreenTraceIdentity.of_lift_and_ftc` to rebuild the bundled trace gate from the smaller pieces.
+- **2025-12-19**: Re-boxed the single “Current hard wall” to the boundary-term gate: the log-branch CR boundary trace identity interface `CRBoundaryTraceInterfaces.CRBoundaryTraceLog` (Lean file `Port/CRBoundaryTraceInterfaces.lean`), which implies the generic `PhaseVelocityBoundaryTrace` hook.
 
 

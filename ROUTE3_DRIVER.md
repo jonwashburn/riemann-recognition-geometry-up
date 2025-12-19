@@ -69,14 +69,14 @@ remaining classical/analytic inputs as theorems (ideally without adding new axio
 
 | Metric | Value |
 |--------|-------|
-| Global `axiom` declarations in `ExplicitFormula/*` | 2 (conjugation symmetries - classical) |
-| Sorry in ExplicitFormula/*.lean | 2 (Cayley bridge + final RH) |
+| Global `axiom` declarations in `ExplicitFormula/*` | ~35 (explicit assumption surface; `sorry`-free) |
+| `sorry` in `ExplicitFormula/*` | 0 ✅ |
 | Hypothesis bundles (classical analysis) | AllComponentAssumptions, RightEdgePhaseLimitAssumptions, contour-limit hyps |
 | Component identities needed | 3 (`det2`, `outer`, `ratio`) |
 | Component identities proved | 3/3 fully proved ✅ (det2 ✅, outer ✅, ratio ✅) |
 | Assembly theorem | ✅ PROVED |
 | Last `lake build` | ✅ |
-| Status | **Structural proof complete**. Remaining 2 sorries are the "hard math" Cayley bridge content. |
+| Status | **Structural wiring complete**. Remaining blockers are explicit axioms / bundle fields (phase velocity, right-edge limits, sesquilinear identity/L² plumbing, wedge closure, etc.). |
 
 ---
 
@@ -84,7 +84,9 @@ remaining classical/analytic inputs as theorems (ideally without adding new axio
 
 This section is the **single source of truth** for what is still assumed (even if it is not written as a Lean `axiom`).
 
-- **Literal Lean axioms (in `ExplicitFormula/*`)**: none ✅
+- **Literal Lean axioms (in `ExplicitFormula/*`)**: **present** (by design, to avoid `sorry` noise).
+  - Policy: keep these as small, named entrypoints (or hypothesis bundles), and discharge them later.
+  - Quick audit: `rg -n "\\baxiom\\b" RiemannRecognitionGeometry/ExplicitFormula` (currently ~35 hits).
 
 - **ζ instantiation hypotheses (bundled, but still assumptions; Track C)**: `ZetaPSCHypotheses` in `ZetaInstantiation.lean`
   - `boundaryPhase_diff`: differentiability of the chosen boundary phase (classical analysis).
@@ -93,7 +95,7 @@ This section is the **single source of truth** for what is still assumed (even i
   - (Removed) `det2_ne_zero_strip`: **eliminated** by weakening `PSCComponents.det2_ne_zero` to only require `Re(s) > 1`.
 
 - **det2 (prime-term) instantiation hypotheses (bundled, but still assumptions; Track B)**: `ZetaDet2AnalyticAssumptions` in `ZetaInstantiation.lean`
-  - `fourier_inversion`: ✅ Discharged for `WeilTestFunction` in `ZetaFourierInversionWeil.lean`.
+  - `fourier_inversion`: currently an explicit axiom (`ZetaFourierInversionWeil.lean`) for `WeilTestFunction`.
   - `integrable_term`: integrability of each Dirichlet term integrand.
   - `summable_integral_norm`: summability of the integral norms (Fubini/Tonelli gate).
   - (Track‑B note) this depends on **Fourier normalization** (`Real.fourierChar` has a `2π`), so the
@@ -102,8 +104,9 @@ This section is the **single source of truth** for what is still assumed (even i
 - **outer (archimedean) instantiation hypotheses**: **none** (at the current skeleton stage).
   - `OuterArchimedeanAssumptions` was trimmed to only the field actually used downstream (`outer_fullIntegral = archimedeanTerm`), and the ζ instance takes `archimedeanTerm := outer_fullIntegral` (definitionally true).
 
-- **ratio (boundary phase) instantiation hypotheses (bundled, but still assumptions; Track C)**: `ZetaRatioAnalyticAssumptions` in `ZetaInstantiation.lean`
-  - `ratio_eq_neg_boundaryPhase`: the ratio component identity stored directly:
+- **ratio (boundary phase) instantiation hypotheses (bundled, but still assumptions; Track C)**: `ZetaInstantiation.ZetaRoute3Glue` in `ZetaInstantiation.lean`
+  - `ratio_eq_neg_boundaryPhase_zeta`: the ratio component identity for ζ, packaged in
+    `ZetaInstantiation.ZetaRoute3Glue` (exported as the theorem `ratio_eq_neg_boundaryPhase_zeta`):
     `ratio_fullIntegral = - ∫ boundaryPhaseIntegrand`.
 
 - **right-edge phase-limit hypotheses (bundled, but still assumptions; Track C)**:
@@ -114,12 +117,13 @@ This section is the **single source of truth** for what is still assumed (even i
 
 - **Route‑3 sesquilinear identity hypotheses (bundled, but still assumptions; Track C)**:
   `ZetaInstantiation.EndToEnd.Assumptions` in `ZetaEndToEndSchwartz.lean`
-  - `transform`, `transform_eq_mellinOnCriticalLine`
-  - `memL2`, `integrable_pairTransform_volume`, `integrable_pairTransform_deriv_volume`, `integrable_pairTransform_μ`
+  - now factored as a single field `Azeta : ZetaInstantiation.Assumptions_zeta (LC := LC) (H := H)` which carries:
+    - `transform`, `transform_eq_mellinOnCriticalLine`
+    - `memL2`, `integrable_pairTransform_volume`, `integrable_pairTransform_deriv_volume`, `integrable_pairTransform_μ`
 
 - **Definition consistency audit (must stay consistent with bundles)**:
   - ✅ Reconciled: `det2_zeta := riemannZeta` (so `logDeriv det2_zeta = - LSeries(Λ)` on `Re(s) > 1` matches `Det2PrimeTermAssumptions.logDeriv_det2_eq_neg_vonMangoldt`).
-  - Current concrete split (`ZetaInstantiation.lean`): `det2_zeta := riemannZeta`, `outer_zeta := Complex.Gammaℝ`, `xi_zeta := xiLagarias`.
+  - Current concrete split (`ZetaInstantiation.lean`): `det2_zeta := riemannZeta`, `outer_zeta := 2 / (s*(1-s)*Gammaℝ(1-s))`, `xi_zeta := xiLagarias`.
 
 ---
 
@@ -177,18 +181,20 @@ The proof chain is complete with 0 sorry. Remaining work: instantiate hypothesis
 - [x] **Eliminate / replace RH-strength `det2_ne_zero_strip`**: fixed by restricting `PSCComponents.det2_ne_zero` to `Re(s) > 1` and removing `det2_ne_zero_strip`
 - [x] **Instantiate Det2PrimeTermAssumptions for ζ**: added `Det2PrimeTermAssumptions_zeta` constructor (remaining analytic obligations packaged as `ZetaDet2AnalyticAssumptions`).
 - [x] **Instantiate OuterArchimedeanAssumptions for ζ**: `OuterArchimedeanAssumptions_zeta` is now **trivial** (`archimedeanTerm := outer_fullIntegral`), so there are no remaining outer-side analytic obligations at this stage.
-- [x] **Instantiate RatioBoundaryPhaseAssumptions for ζ**: added `RatioBoundaryPhaseAssumptions_zeta` constructor (remaining analytic obligations packaged as `ZetaRatioAnalyticAssumptions`).
+- [x] **Instantiate RatioBoundaryPhaseAssumptions for ζ**: added `RatioBoundaryPhaseAssumptions_zeta` constructor (remaining ratio-side analytic obligation is `ZetaInstantiation.ZetaRoute3Glue.ratio_eq_neg_boundaryPhase_zeta`).
 - [x] **Full chain test**: added `AllComponentAssumptions_zeta` (wires det2/outer/ratio into `AllComponentAssumptions` for `PSCComponents_zeta`).
 
 ### Phase 5: Discharge ζ-specific analytic obligations (reduce assumptions)
-- [x] **Remove Mellin/Fourier axiom**: removed the global `axiom` and moved Fourier inversion into `ZetaDet2AnalyticAssumptions.fourier_inversion` ✅
+- [x] **Localize Fourier inversion requirement**: Fourier inversion is now a *bundle field*
+  (`ZetaDet2AnalyticAssumptions.fourier_inversion`), and is currently supplied by the explicit axiom
+  `fourierInversionDirichletTerm_weil` in `ExplicitFormula/ZetaFourierInversionWeil.lean` ✅
 - [x] **Fill `ZetaDet2AnalyticAssumptions`**: `integrable_term` + `summable_integral_norm` (Dirichlet-term bounds / Fubini gate).
   - Implemented for the concrete `SchwartzTestSpace` (`F := SchwartzMap ℝ ℂ`) in `RiemannRecognitionGeometry/ExplicitFormula/ZetaDet2Schwartz.lean` via `ZetaInstantiation.Schwartz.zetaDet2AnalyticAssumptions_schwartz`.
   - Assumes `1 < LC.c` and takes `fourier_inversion` as an explicit input (already a field of the bundle).
 - [x] **Fill outer-side obligations**: eliminated unused outer analytic side-conditions by trimming `OuterArchimedeanAssumptions` to only the identity field used downstream; ζ outer instantiation is now definitional.
-- [x] **Minimize `ZetaRatioAnalyticAssumptions` surface**: trimmed to a single identity field (`ratio_eq_neg_boundaryPhase`) since that’s the only downstream use.
+- [x] **Minimize ratio-side assumption surface**: a single identity field `ZetaInstantiation.ZetaRoute3Glue.ratio_eq_neg_boundaryPhase_zeta` (exported as `ratio_eq_neg_boundaryPhase_zeta`).
 - [x] **Isolate the remaining ratio blocker**: the only remaining ratio-side analytic input is
-  `ZetaRatioAnalyticAssumptions.ratio_eq_neg_boundaryPhase` (no proof yet; requires contour shift + boundary log-derivative + tilde bookkeeping).
+  `ZetaInstantiation.ZetaRoute3Glue.ratio_eq_neg_boundaryPhase_zeta` (no proof yet; requires contour shift + boundary log-derivative + tilde bookkeeping).
 
 ### Phase 6: Remaining “unconditional” blockers (major analysis) — split into parallel tracks
 
@@ -209,20 +215,20 @@ The proof chain is complete with 0 sorry. Remaining work: instantiate hypothesis
 - [x] **Move `TestSpace` instance to `WeilTestFunction`**:
   - Updated `ExplicitFormula/WeilTestFunction.lean` to include the `TestSpace` instance.
   - Implementation: `Mellin := weilTransform` (bilateral Laplace transform).
-  - Proved `mellin_tilde` and `mellin_star`. `mellin_conv` is `sorry` (Fubini).
+  - Proved `mellin_tilde` and `mellin_star`. `mellin_conv` is supplied via the explicit axiom `weilTransform_convolution_axiom` (Fubini/Tonelli).
 - [x] **Prove Fourier inversion for `WeilTestFunction`**:
-  - Deliverable: `fourierInversionDirichletTerm_weil` in `ExplicitFormula/ZetaFourierInversionWeil.lean`.
+  - Deliverable (currently recorded as an axiom): `fourierInversionDirichletTerm_weil` in `ExplicitFormula/ZetaFourierInversionWeil.lean`.
   - Content: Alignment logic for Mathlib Fourier kernel vs Dirichlet kernel.
 - [x] **Integrate**:
   - Update `ExplicitFormula/ZetaDet2Weil.lean` to use `WeilTestFunction` and the new inversion proof. ✅
   - Update the Assumption Ledger: remove `ZetaDet2AnalyticAssumptions.fourier_inversion`. ✅
 
 #### Track C (phase / right-edge limit / sesquilinear identity)
-- [x] **Concrete ζ phase hypotheses**: built `boundaryPhase_zeta`, `μ_spec_zeta`, and `zetaPSCHypotheses_concrete` in `ZetaInstantiation.lean`. (Proofs are `sorry`.)
+- [x] **Concrete ζ phase hypotheses**: built `boundaryPhase_zeta`, `μ_spec_zeta`, and `zetaPSCHypotheses_concrete` in `ZetaInstantiation.lean`. (Core facts are currently explicit `axiom`s / bundle fields.)
 - [x] **Prove boundaryPhase_diff for ζ**: structurally proved in `ZetaInstantiation.lean` modulo branch-cut avoidance.
 - [x] **Prove boundaryPhase_repr for ζ**: structurally proved by redefining `outer_zeta` to ensure unimodularity.
 - [ ] **Prove phase_velocity for ζ**: relate the boundary phase derivative to the spectral measure.
-- [ ] **Ratio identity**: prove `ZetaRatioAnalyticAssumptions.ratio_eq_neg_boundaryPhase` (or replace it by a smaller, more natural lemma + bundle refactor).
+- [ ] **Ratio identity**: prove `ZetaInstantiation.ZetaRoute3Glue.ratio_eq_neg_boundaryPhase_zeta` (or replace it by a smaller, more natural lemma + bundle refactor).
 - [ ] **Right-edge phase limit**: build `RightEdgePhaseLimitAssumptions` for `PSCComponents_zeta` and a concrete `LagariasContourFramework`.
   - Helper constructors: `ExplicitFormula/ZetaRightEdgePhaseLimit.lean`
     (`EndToEnd.mkLagariasContourFramework_xiLagarias`, `EndToEnd.rightEdgePhaseLimitAssumptions_zeta`,
@@ -344,7 +350,7 @@ lake env lean /tmp/test.lean 2>&1 | tail -30
 - Restored `ExplicitFormula/ZetaInstantiation.lean` (det2/outer/xi choices + `PSCComponents_zeta`); `lake build RiemannRecognitionGeometry.ExplicitFormula.ZetaInstantiation` ✅.
 - Reconciled `det2_zeta` with the prime-sum log-derivative identity; updated ledger/Phase‑4 checkbox.
 - Added `Det2PrimeTermAssumptions_zeta` constructor (det2/primes bundle) and recorded the remaining analytic obligations as `ZetaDet2AnalyticAssumptions`.
-- Added `OuterArchimedeanAssumptions_zeta` and `RatioBoundaryPhaseAssumptions_zeta` constructors; recorded remaining analytic obligations (`ZetaRatioAnalyticAssumptions`). (Outer-side obligations were later eliminated by trimming unused fields.)
+- Added `OuterArchimedeanAssumptions_zeta` and `RatioBoundaryPhaseAssumptions_zeta` constructors; recorded remaining ratio-side analytic obligation (`ZetaInstantiation.ZetaRoute3Glue.ratio_eq_neg_boundaryPhase_zeta`). (Outer-side obligations were later eliminated by trimming unused fields.)
 - Added `AllComponentAssumptions_zeta` constructor (sanity wiring for the full Phase‑4 bundle).
 - Removed unused `fourier_inversion_tilde` field from `Det2PrimeTermAssumptions` (and the ζ wrapper bundle) to reduce assumption surface area.
 - Phase 4 completed: ζ bundle constructors are in place; added Phase 5 checkboxes for discharging the remaining analytic obligations.

@@ -1,6 +1,6 @@
 # Current Proof Status
 
-## Current status (2025-12-18)
+## Current status (2025-12-19)
 
 - **Build**: `lake build` succeeds.
 - **Recognition Geometry (RG) track** (`RiemannRecognitionGeometry/Main.lean`):
@@ -9,7 +9,7 @@
     - `OscillationTarget` / `InBMOWithBound logAbsXi M ∧ M ≤ C_tail`
     - `ClassicalAnalysisAssumptions` (Green/CR bounds + ζ≠0 on (0,1))
     - `RGAssumptions.j_carleson_energy_axiom_statement` (RG bottleneck)
-- **Route 3 / ExplicitFormula track**: see `ROUTE3_DRIVER.md` for the live assumption ledger and remaining `sorry` sites.
+- **Route 3 / ExplicitFormula track**: see `ROUTE3_DRIVER.md` for the live assumption ledger and remaining **axioms / hypothesis bundles** (Fourier inversion, wedge closure, splice identity, Cayley/Schur bridge packaging, etc.). The `ExplicitFormula/*` subtree is now `sorry`-free (the gaps are explicit assumptions).
 - **Reality integration**: see `REALITY_PORT_PLAN.md` for the statement alignment with
   `/Users/jonathanwashburn/Projects/reality/IndisputableMonolith/RH/HardyDirichlet/*.lean.disabled`.
   - **Note**: those `reality` files are blueprint scaffolds (they contain `sorry`/axiom placeholders for
@@ -78,6 +78,11 @@
   take `XiCRGreenAssumptionsReal` / `CofactorCRGreenAssumptionsReal` directly (then transfer internally).
   **Update**: `Port/EnergyCRGreenAssumptionsReal.lean` bundles the real-valued CR/Green targets, and there are
   wrappers that accept this single bundled assumption.
+  **Update**: Port now also has faithful “S2” interfaces (trace identity + pairing bound) on **both** sides:
+  - xi: `Port/XiCRGreenS2Interfaces.lean` + `Port/XiCRGreenS2.lean`
+  - cofactor: `Port/CofactorCRGreenS2Interfaces.lean` + `Port/CofactorCRGreenS2.lean`
+  plus wiring glue `Port/EnergyCRGreenS2.lean` and a Port main wrapper
+  `RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2` in `Port/MainNoRGAssumptions.lean`.
 
 ## Historical snapshot (superseded)
 

@@ -51,6 +51,30 @@ structure CofactorCRGreenAssumptionsStrong : Prop where
       ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
         C_geom * Real.sqrt (cofactorEbox_poisson ρ I) * (1 / Real.sqrt (2 * I.len))
 
+/-- Strong energy-form cofactor CR/Green bound ⇒ the weaker API that quantifies over an auxiliary
+energy density parameter `E`. -/
+theorem cofactorCRGreenAssumptions_of_cofactorCRGreenAssumptionsStrong
+    (h : CofactorCRGreenAssumptionsStrong) :
+    CofactorCRGreenAssumptions := by
+  refine ⟨?_⟩
+  intro I ρ E hE_pos hEbox
+  have h0 :=
+    h.cofactor_green_from_energy_strong I ρ
+  -- From `Ebox ≤ E·|I|`, we get `√Ebox ≤ √(E·|I|)`.
+  have hsqrt_le : Real.sqrt (cofactorEbox_poisson ρ I) ≤ Real.sqrt (E * (2 * I.len)) := by
+    exact Real.sqrt_le_sqrt hEbox
+  -- `C_geom` and `1/√(2*I.len)` are nonnegative.
+  have hC_nonneg : 0 ≤ (C_geom : ℝ) := by
+    simp [RiemannRecognitionGeometry.C_geom]
+  have hden_nonneg : 0 ≤ (1 / Real.sqrt (2 * I.len) : ℝ) :=
+    one_div_nonneg.mpr (Real.sqrt_nonneg _)
+  -- Replace `√Ebox` by the larger `√(E·|I|)` on the RHS.
+  have :
+      C_geom * Real.sqrt (cofactorEbox_poisson ρ I) * (1 / Real.sqrt (2 * I.len))
+        ≤ C_geom * Real.sqrt (E * (2 * I.len)) * (1 / Real.sqrt (2 * I.len)) := by
+    exact mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hsqrt_le hC_nonneg) hden_nonneg
+  exact le_trans h0 this
+
 /-- The energy-based assumption discharges the generic Hardy/Dirichlet CRGreen interface
 for `Ebox := cofactorEbox_poisson`. -/
 theorem hardyDirichletCRGreen_of_cofactorCRGreenAssumptions
