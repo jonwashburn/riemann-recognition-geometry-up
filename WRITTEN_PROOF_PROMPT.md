@@ -90,8 +90,8 @@ trace field on the boundary).
 
 There is also a monotonicity lemma
 `CofactorCRGreenS2Interfaces.phaseVelocityBoundaryTracePoissonAE_of_pointwise` showing the pointwise
-boundary-limit gate implies the a.e. one; we box the a.e. version because this matches the natural output
-of Hardy/BMO boundary theory.
+boundary-limit gate implies the a.e. one. We keep the a.e. interface around because it matches the natural
+output of Hardy/BMO boundary theory (even though the boxed target is now the strictly weaker pairing-level gate).
 
 We now additionally expose the even smaller “pairing” gate
 `PhaseVelocityBoundaryTracePoissonPairing`, which only asserts convergence at the level of the
@@ -312,6 +312,7 @@ When we hit any of these milestones, create a new dated snapshot `recognition-ge
 - [x] Split A1 into A1a–A1d (paper + driver), and update A1’s status/plan to track which pieces are “cite Lagarias” vs genuinely new.
 - [x] Make A1b (phase–velocity) explicit in both driver and paper, matching the Lean interface and clarifying the density interpretation.
 - [x] Strengthen the boundary-term gate interface to be non-vacuous: introduce the Poisson-model boundary-limit gate `PhaseVelocityBoundaryTracePoisson` tying the phase velocity to the \(y\downarrow0\) limit of the conjugate Poisson gradient of `cofactorLogAbs` (the field defining `cofactorEbox_poisson`).
+- [x] Further shrink the Poisson boundary-term gate to the *minimal* CR/Green-consumer shape: introduce the pairing/distributional gate `PhaseVelocityBoundaryTracePoissonPairing` and re-box the hard wall to it.
 
 ## Assumption Ledger (paper-facing map)
 
@@ -417,11 +418,22 @@ Each assumption must have: **ID**, **statement (1–5 lines)**, **where used**, 
 
 ### Recognition Geometry (RG) track assumptions (Main.lean route)
 
-- **B1 (RG bottleneck: Carleson energy budget)**  
+- **B1a (RG bottleneck: Carleson energy budget)**  
   - **Statement**: discharge `RGAssumptions.j_carleson_energy_axiom_statement` (the “energy budget” per Whitney interval / tent region).  
   - **Where used**: RG main theorem (`RiemannRecognitionGeometry/Main.lean`) via the boundary-certificate / tail-budget chain.  
   - **Status**: open  
   - **Next-proof plan**: port the statement-shape from the HardyDirichlet blueprints (`REALITY_PORT_PLAN.md`) and prove it via a CR–Green + Carleson/Hardy pipeline (or VK-density packing bounds), explicitly tracking constants.
+
+- **B1b (RG bottleneck: CR/Green energy \(\Rightarrow\) cofactor phase bound)**  
+  - **Statement**: prove the strong cofactor CR/Green bound `Port.CofactorCRGreenAssumptionsStrong`, i.e. an energy-form inequality controlling the cofactor phase change on Whitney bases by \(\sqrt{\texttt{cofactorEbox\_poisson}}\). In the current port, this is decomposed into:
+    - `GreenTraceIdentity` / (`CofactorPhaseLift` + `PhaseVelocityFTC`) (FTC/trace gate), and
+    - `PairingBound` (Cauchy–Schwarz bound against the Poisson-model energy),
+    plus the **boundary-term gate** tying the phase velocity to the Poisson-model field.  
+  - **Where used**: RG main theorem route via `HardyDirichletCRGreenStrong cofactorEbox_poisson` and then the Weierstrass tail bound.  
+  - **Status**: open (current boxed subwall is the Poisson boundary-term gate at pairing/distributional strength: `PhaseVelocityBoundaryTracePoissonPairing`).  
+  - **Next-proof plan**: isolate the minimal regularity hypothesis on `cofactorLogAbs` (Hardy/BMO/outer-factor package) that yields the pairing limit
+    \(\int_I \partial_x(\widetilde P[\log|\,\mathrm{cofactor}\,|])(t,y)\,dt \to \int_I \theta'(t)\,dt\) as \(y\downarrow0\), and then feed that into the existing Green/C–S algebra.  
+  - **Lean locus**: `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean` (interfaces `CofactorPhaseLift`, `PhaseVelocityFTC`, `PhaseVelocityBoundaryTracePoissonPairing`, `GreenTraceIdentity`, `PairingBound`), plus the discharge theorems in `Port/CofactorCRGreenAssumptions.lean` / `Port/HardyDirichletCRGreen.lean`.
 
 - **B2 (Oscillation certificate for \(\log|\xi|\))**  
   - **Statement**: produce `OscillationTarget := ∃ M, InBMOWithBound logAbsXi M ∧ M ≤ C_tail`.  
@@ -453,7 +465,11 @@ These are “hard elements” that will take multiple iterations. Keep each item
 
 - **HW4: RG Carleson-energy bottleneck (G1)**  
   - **Deliverable**: a paper lemma (with explicit constants and hypotheses) that implies `RGAssumptions.j_carleson_energy_axiom_statement`, plus a proof plan aligned with the HardyDirichlet blueprints.  
-  - **Links**: Assumption B1.
+  - **Links**: Assumption B1a.
+
+- **HW4b: RG CR/Green boundary-term gate (B1b)**  
+  - **Deliverable**: a paper lemma (with explicit hypotheses) proving the boxed Poisson boundary pairing limit for the cofactor phase velocity, and a short map of which standard Hardy/BMO boundary theorems discharge which sub-assumptions (a.e. trace, domination/uniform integrability, distributional pairing).  
+  - **Links**: Assumption B1b.
 
 - **HW5: RG oscillation certificate (G2)**  
   - **Deliverable**: a paper theorem producing an explicit oscillation/BMO certificate for \(\log|\xi|\) adequate for the RG chain, with a clear map to what must be formalized.  
