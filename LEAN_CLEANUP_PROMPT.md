@@ -61,9 +61,9 @@ The user is OK with keeping classical axioms. Prefer to place them in **one of t
 
 Good candidates to remain axioms for now (if not already proved):
 
-- **Boundary wedge closure (P+)** packages:
+  - **Boundary wedge closure (P+)** packages:
   - `ExplicitFormula/BoundaryWedgeInterfaces.lean`
-  - `ExplicitFormula/PPlusZetaShim.lean` (currently the shim/axiom)
+  - `ExplicitFormula/ZetaInstantiation.lean` (now contains the boundary-wedge shim axiom)
 - **Outer existence / Poisson representation** packages:
   - `ExplicitFormula/OuterConstruction.lean` (already mostly “axioms + framework”)
 - **Route 3 splice identity** (measure-first / `L²(μ_spec)` identity):

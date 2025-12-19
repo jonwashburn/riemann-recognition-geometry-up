@@ -51,10 +51,10 @@ If none of these happens, the session is a failure: immediately downgrade the bo
 
 \[
 \boxed{
-\textbf{B1′′a / S2a1-BT-Poisson (boundary trace identity tied to the Poisson energy model):}\quad
-\exists\ \texttt{L : CofactorPhaseLift},\ \exists\ \texttt{F : PhaseVelocityFTC L},\ \exists\ \texttt{h : PhaseVelocityBoundaryTracePoisson L F},
+\textbf{B1′′a / S2a1-BT-Poisson-pairing (Poisson boundary trace gate, pairing/distributional strength):}\quad
+\exists\ \texttt{L : CofactorPhaseLift},\ \exists\ \texttt{F : PhaseVelocityFTC L},\ \exists\ \texttt{h : PhaseVelocityBoundaryTracePoissonPairing L F},
 \\
-\text{so that the phase velocity }\theta'_{I,\rho}\text{ is identified as the }y\downarrow0\text{ boundary limit of the Poisson-model field defining }\texttt{cofactorEbox\_poisson.}
+\text{so that the phase change integral }\int \theta'_{I,\rho}\text{ is identified as the }y\downarrow0\text{ limit of the corresponding Poisson-model boundary pairing (the minimal form used in CR/Green).}
 }
 \]
 
@@ -78,7 +78,7 @@ These rebuild the bundled gate via `GreenTraceIdentity.of_lift_and_ftc`.
 **Boundary-term gate (boxed target, non-vacuous):**
 the direct Port-level hook `PhaseVelocityBoundaryTrace` is too weak by itself (you can “fake” the boundary value).
 So we now box the stronger, energy-tied interface
-`PhaseVelocityBoundaryTracePoisson (L := L) (F := F)` in
+`PhaseVelocityBoundaryTracePoissonPairing (L := L) (F := F)` in
 `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean`, which asserts the phase velocity is the
 **boundary limit** \(y\downarrow0\) of the x-component of the conjugate Poisson gradient for `cofactorLogAbs ρ`
 (the same Poisson-model field whose Carleson energy defines `cofactorEbox_poisson`).
@@ -87,6 +87,15 @@ There is a small “shape” lemma
 `CofactorCRGreenS2Interfaces.phaseVelocityBoundaryTrace_of_poisson` showing this Poisson boundary-limit gate
 implies the weaker `PhaseVelocityBoundaryTrace` hook (useful when wiring older statements that talk about a
 trace field on the boundary).
+
+There is also a monotonicity lemma
+`CofactorCRGreenS2Interfaces.phaseVelocityBoundaryTracePoissonAE_of_pointwise` showing the pointwise
+boundary-limit gate implies the a.e. one; we box the a.e. version because this matches the natural output
+of Hardy/BMO boundary theory.
+
+We now additionally expose the even smaller “pairing” gate
+`PhaseVelocityBoundaryTracePoissonPairing`, which only asserts convergence at the level of the
+interval integral (distributional strength). This is the actual shape used when feeding Green/C–S.
 
 For semantic faithfulness, there is also a “log-branch CR identity” archetype in
 `RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean`:
@@ -278,6 +287,8 @@ When we hit any of these milestones, create a new dated snapshot `recognition-ge
 - **2025-12-19**: Chip the RG boundary-term gate: re-box the single hard wall to the *direct* Port hook `PhaseVelocityBoundaryTrace` (and treat `CRBoundaryTraceLog` as an archetype sufficient condition). Add a paper lemma clarifying the equivalent boundary-trace forms (x-derivative vs normal-derivative) so the written proof matches the Lean interface choice.
 - **2025-12-19**: Strengthen the boundary-term gate to a non-vacuous Poisson-model boundary-limit statement: add `PhaseVelocityBoundaryTracePoisson` (limit \(y\downarrow0\) of the conjugate Poisson gradient) and re-box the hard wall accordingly.
 - **2025-12-19**: Add a small interface-shape bridge lemma `phaseVelocityBoundaryTrace_of_poisson : PhaseVelocityBoundaryTracePoisson → PhaseVelocityBoundaryTrace` in `Port/CofactorCRGreenS2Interfaces.lean` (pure wiring; analytic content remains in the Poisson boundary-limit gate).
+- **2025-12-19**: Further honest shrink: add the a.e./distributional-strength gate `PhaseVelocityBoundaryTracePoissonAE` and re-box the hard wall to that (since boundary theory naturally yields a.e. trace identities). Added `phaseVelocityBoundaryTracePoissonAE_of_pointwise` as the trivial implication.
+- **2025-12-19**: Further shrink to the *minimal* CR/Green-consumer shape: add `PhaseVelocityBoundaryTracePoissonPairing` (convergence of the interval integral / distributional strength) and re-box the hard wall to it.
 
 ## Next edits (short queue)
 

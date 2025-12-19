@@ -274,7 +274,6 @@ Classical contour integral calculus
 | `ZetaEndToEndSchwartz.lean` | End-to-end "assumptions → RH" wiring target |
 | `ZetaConjugation.lean` | Zeta conjugation symmetry (ported from riemann-joint-new) |
 | `HalfPlanePoisson.lean` | Half-plane Poisson kernel/integral (ported from riemann-finish) |
-| `CayleyBridgeZeta.lean` | Cayley bridge path to RH with explicit gaps |
 | `OuterSchurBridge.lean` | Outer functions, Schur bridge, pinch field (ported) |
 
 ---
@@ -458,4 +457,4 @@ lake env lean /tmp/test.lean 2>&1 | tail -30
   - **Axioms in ExplicitFormula/**: 6 (added 1 in `PPlusZetaShim.lean`, plus 2 in `OuterConstruction.lean`)
   - **Sorries in ExplicitFormula/**: 20
   - **COMPLETE PROOF CHAIN**: `OuterConstructionHypotheses` → `J_Re_nonneg_from_outer` → positivity
-  - **Path to RH fully documented** in CayleyBridgeZeta.lean
+  - **Path to RH fully documented** in `ZetaInstantiation.lean` and `ZetaEndToEndSchwartz.lean`

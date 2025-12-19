@@ -2,7 +2,9 @@
 
 ## Current status (2025-12-18)
 
-**Build**: `lake build` succeeds with **zero warnings** (all unused variables and deprecations resolved).
+**Build**: `lake build` succeeds with **zero warnings** (all unused variables, deprecations, and linter suggestions resolved).
+**Correctness**: **0 `sorry`s** in the entire codebase.
+**Axioms**: **21 named axioms** (tracked via `PROOF_STATUS_CURRENT.md` and `ROUTE3_DRIVER.md`).
 
 ### What the repo proves today (honest summary)
 
@@ -96,7 +98,10 @@ Translation-stub modules (compiled in this repo) now exist under `RiemannRecogni
 - `BlaschkeDominatesTotal.lean`: an RG-facing theorem `Port.blaschke_dominates_total_of_cofactorBMO` that removes the `RGAssumptions` dependency from “Blaschke dominates total” and instead takes the explicit cofactor BMO certificate.
 - `BlaschkeDominatesTotal.lean` also has variants that depend only on the energy-based `Port.CofactorCRGreenAssumptions`
   target bundle (rather than the full `ClassicalAnalysisAssumptions` record).
-- `ZeroFreeWithInterval.lean`: a centered contradiction theorem `Port.zero_free_with_interval_of_cofactorBMO` that removes the `RGAssumptions` dependency from `Axioms.zero_free_with_interval` (at the cost of also assuming cofactor BMO).
+- `ZeroFreeWithInterval.lean` now has S2- and energy-facing wrappers
+  (`zero_free_with_interval_of_OscillationTarget_of_S2`,
+  `zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptionsStrong`,
+  and bundled `EnergyCRGreenAssumptions` variants).
 - `CofactorCRGreenAssumptions.lean`: packages the remaining “CR–Green” step as an **energy-based** target tied to
   `cofactorEbox_poisson` (compatible with the older project-level `cofactor_green_identity_axiom_statement`, but
   designed to be replaced by a faithful Green pairing proof).

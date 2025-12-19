@@ -96,6 +96,63 @@ structure PhaseVelocityBoundaryTracePoisson (L : CofactorPhaseLift) (F : PhaseVe
             (PoissonExtension.gradient_conjugate_poisson (cofactorLogAbs ρ) (t, y)).1)
           (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (F.dPhase I ρ t))
 
+/-- AE / distributional-strength version of the Poisson boundary-term gate:
+the boundary limit identity is only required for a.e. `t` on the Whitney base interval. -/
+structure PhaseVelocityBoundaryTracePoissonAE (L : CofactorPhaseLift) (F : PhaseVelocityFTC L) : Prop where
+  ae_tendsto_dx_conjPoisson :
+    ∀ (I : WhitneyInterval) (ρ : ℂ),
+      (∀ᵐ t ∂(volume.restrict (Set.uIcc (I.t0 - I.len) (I.t0 + I.len))),
+        Tendsto
+          (fun y : ℝ =>
+            (PoissonExtension.gradient_conjugate_poisson (cofactorLogAbs ρ) (t, y)).1)
+          (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (F.dPhase I ρ t)))
+
+/-- Pairing / distributional-strength version of the Poisson boundary-term gate:
+we only require that the **interval integral** of the Poisson-model trace converges to the
+interval integral of the phase velocity.
+
+This is the minimal shape needed to connect the phase change `∫ dPhase` to the Poisson-model field
+in the Green/Cauchy–Schwarz energy argument. -/
+structure PhaseVelocityBoundaryTracePoissonPairing (L : CofactorPhaseLift) (F : PhaseVelocityFTC L) : Prop where
+  /-- As `y → 0⁺`, the interval integral of the Poisson-model trace tends to the interval integral
+  of the phase velocity. -/
+  tendsto_intervalIntegral_dx_conjPoisson :
+    ∀ (I : WhitneyInterval) (ρ : ℂ),
+      Tendsto
+        (fun y : ℝ =>
+          ∫ t in (I.t0 - I.len)..(I.t0 + I.len),
+            (PoissonExtension.gradient_conjugate_poisson (cofactorLogAbs ρ) (t, y)).1)
+        (nhdsWithin (0 : ℝ) (Set.Ioi 0))
+        (nhds (∫ t in (I.t0 - I.len)..(I.t0 + I.len), F.dPhase I ρ t))
+
+lemma phaseVelocityBoundaryTracePoissonAE_of_pointwise
+    {L : CofactorPhaseLift} {F : PhaseVelocityFTC L} (h : PhaseVelocityBoundaryTracePoisson L F) :
+    PhaseVelocityBoundaryTracePoissonAE L F := by
+  refine ⟨?_⟩
+  intro I ρ
+  -- From a pointwise statement on the interval, we get the a.e. statement under the restricted measure.
+  have h_all : ∀ t : ℝ,
+      t ∈ Set.uIcc (I.t0 - I.len) (I.t0 + I.len) →
+        Tendsto
+          (fun y : ℝ =>
+            (PoissonExtension.gradient_conjugate_poisson (cofactorLogAbs ρ) (t, y)).1)
+          (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (F.dPhase I ρ t)) := by
+    intro t ht
+    exact h.tendsto_dx_conjPoisson I ρ t ht
+  -- Push `h_all` through `ae_restrict_iff`.
+  have h_ae : (∀ᵐ t ∂volume,
+      t ∈ Set.uIcc (I.t0 - I.len) (I.t0 + I.len) →
+        Tendsto
+          (fun y : ℝ =>
+            (PoissonExtension.gradient_conjugate_poisson (cofactorLogAbs ρ) (t, y)).1)
+          (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (F.dPhase I ρ t))) :=
+    Filter.Eventually.of_forall h_all
+  -- Convert the `∀ᵐ` implication under `volume` to the restricted-measure statement.
+  -- We use `ae_restrict_iff'` since it does not require measurability of the predicate.
+  simpa using
+    (MeasureTheory.ae_restrict_iff' (μ := volume)
+          (s := Set.uIcc (I.t0 - I.len) (I.t0 + I.len)) measurableSet_uIcc).2 h_ae
+
 /-- A Poisson-model boundary-limit witness yields a “plain” boundary-trace hook by defining
 an auxiliary field whose boundary value is filled in by the phase velocity.
 

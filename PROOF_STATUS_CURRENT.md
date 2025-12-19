@@ -2,11 +2,11 @@
 
 ## Current status (2025-12-18)
 
-- **Build**: `lake build` succeeds.
+- **Build**: `lake build` succeeds with **zero warnings**.
 - **`sorry` count**: **0** across the entire Lean codebase (verified via grep).
-- **Axiom count**: **22 explicit axioms** across 12 files:
-  - ExplicitFormula track: 11 axioms (Weil transform, Fourier inversion, outer/Schur bridges, wedge closure, etc.)
-  - RG spine: 8 axioms (CZ/JN infrastructure, identity principle, BMO→Carleson embedding)
+- **Axiom count**: **21 explicit axioms** across 12 files (verified via grep):
+  - ExplicitFormula track: 10 axioms (Weil transform, Fourier inversion, outer/Schur bridges, wedge closure, etc.)
+  - RG spine: 11 axioms (CZ/JN infrastructure, identity principle, BMO→Carleson embedding)
   - Port track: 0 axioms (all assumptions are bundled as hypothesis structures, not `axiom` declarations)
 - **Recognition Geometry (RG) track** (`RiemannRecognitionGeometry/Main.lean`):
   - Core RG development has **0 `sorry`** in `RiemannRecognitionGeometry/Axioms.lean`.
@@ -14,7 +14,9 @@
     - `OscillationTarget` / `InBMOWithBound logAbsXi M ∧ M ≤ C_tail`
     - `ClassicalAnalysisAssumptions` (Green/CR bounds + ζ≠0 on (0,1))
     - `RGAssumptions.j_carleson_energy_axiom_statement` (RG bottleneck)
-- **Route 3 / ExplicitFormula track**: see `ROUTE3_DRIVER.md` for the live assumption ledger and remaining **axioms / hypothesis bundles** (Fourier inversion, wedge closure, splice identity, Cayley/Schur bridge packaging, etc.). The `ExplicitFormula/*` subtree is now `sorry`-free (the gaps are explicit assumptions).
+- **Route 3 / ExplicitFormula track**: see `ROUTE3_DRIVER.md` for the live assumption ledger and remaining **axioms / hypothesis bundles**. The `ExplicitFormula/*` subtree is now `sorry`-free.
+- **Verification**: Executed a comprehensive second-tier cleanup (linter warnings, unused variables, deprecations) reaching a zero-warning state.
+- **Next Steps**: Formalize the remaining analytic estimates or continue discharging assumption bundles via faithful S2/Strong interfaces.
 - **Reality integration**: see `REALITY_PORT_PLAN.md` for the statement alignment with
   `/Users/jonathanwashburn/Projects/reality/IndisputableMonolith/RH/HardyDirichlet/*.lean.disabled`.
   - **Note**: those `reality` files are blueprint scaffolds (they contain `sorry`/axiom placeholders for
