@@ -96,6 +96,20 @@ structure PhaseVelocityBoundaryTracePoisson (L : CofactorPhaseLift) (F : PhaseVe
             (PoissonExtension.gradient_conjugate_poisson (cofactorLogAbs ρ) (t, y)).1)
           (nhdsWithin (0 : ℝ) (Set.Ioi 0)) (nhds (F.dPhase I ρ t))
 
+/-- A Poisson-model boundary-limit witness yields a “plain” boundary-trace hook by defining
+an auxiliary field whose boundary value is filled in by the phase velocity.
+
+This lemma is **not** meant to be a full analytic theorem; it just records a convenient implication
+between interface shapes. -/
+def phaseVelocityBoundaryTrace_of_poisson
+    {L : CofactorPhaseLift} {F : PhaseVelocityFTC L} (_h : PhaseVelocityBoundaryTracePoisson L F) :
+    PhaseVelocityBoundaryTrace L F where
+  gradField := fun I ρ p => (F.dPhase I ρ p.1, 0)
+  trace_eq := by
+    intro I ρ t ht
+    -- By construction, the boundary x-component is `dPhase`.
+    simp
+
 /-- Subgate A (S2a): an **FTC/trace gate** for the default real phase representative.
 
 The key honesty point: we do **not** differentiate `argXi` (principal branch), which is not a faithful

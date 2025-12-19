@@ -24,8 +24,8 @@ namespace RiemannRecognitionGeometry
 structure ClassicalAnalysisAssumptions : Prop where
   /-- Green–Cauchy–Schwarz (phase change bounded by Carleson energy). -/
   green_identity_axiom_statement :
-    ∀ (J : WhitneyInterval) (C : ℝ) (hC_pos : C > 0)
-      (E : ℝ) (hE_pos : E > 0) (hE_le : E ≤ C),
+    ∀ (J : WhitneyInterval) (C : ℝ) (_hC_pos : C > 0)
+      (E : ℝ) (_hE_pos : E > 0) (_hE_le : E ≤ C),
       xiPhaseChange J ≤
         C_geom * Real.sqrt (E * (2 * J.len)) * (1 / Real.sqrt (2 * J.len))
 
@@ -39,8 +39,8 @@ structure ClassicalAnalysisAssumptions : Prop where
   `rgCofactorPhaseAngle ρ t`, so we record the Green bound directly for its phase change.
   This is classical harmonic analysis / CR–Green bookkeeping (cf. `CPM.tex`). -/
   cofactor_green_identity_axiom_statement :
-    ∀ (I : WhitneyInterval) (ρ : ℂ) (C : ℝ) (hC_pos : C > 0)
-      (E : ℝ) (hE_pos : E > 0) (hE_le : E ≤ C),
+    ∀ (I : WhitneyInterval) (ρ : ℂ) (C : ℝ) (_hC_pos : C > 0)
+      (E : ℝ) (_hE_pos : E > 0) (_hE_le : E ≤ C),
       ‖rgCofactorPhaseAngle ρ (I.t0 + I.len) - rgCofactorPhaseAngle ρ (I.t0 - I.len)‖ ≤
         C_geom * Real.sqrt (E * (2 * I.len)) * (1 / Real.sqrt (2 * I.len))
 

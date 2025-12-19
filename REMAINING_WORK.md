@@ -1,8 +1,8 @@
 # Remaining Work (current + historical)
 
-## Current status (2025-12-19)
+## Current status (2025-12-18)
 
-**Build**: `lake build` succeeds.
+**Build**: `lake build` succeeds with **zero warnings** (all unused variables and deprecations resolved).
 
 ### What the repo proves today (honest summary)
 

@@ -1225,7 +1225,7 @@ lemma hasDerivAt_neg_inv_two_one_add_sq (u : ℝ) :
 
     **Proof**: By Fundamental Theorem of Calculus with antiderivative -1/(2(1+u²)).
     - F(a) - F(0) = -1/(2(1+a²)) - (-1/2) = 1/2 - 1/(2(1+a²)) -/
-lemma intervalIntegral_u_div_one_add_sq_sq (a : ℝ) (ha : 0 ≤ a) :
+lemma intervalIntegral_u_div_one_add_sq_sq (a : ℝ) (_ha : 0 ≤ a) :
     ∫ u in (0:ℝ)..a, u / (1 + u^2)^2 = 1/2 - 1 / (2 * (1 + a^2)) := by
   -- FTC: ∫_0^a f'(u) du = F(a) - F(0) where F(u) = -1/(2(1+u²))
   have hderiv : ∀ u ∈ Set.uIcc 0 a, HasDerivAt (fun u => -1 / (2 * (1 + u^2))) (u / (1 + u^2)^2) u := by
@@ -1739,7 +1739,7 @@ lemma poissonExtension_gradient_bound_from_oscillation (f : ℝ → ℝ) (x : �
     This reformulated lemma uses a floor parameter ε to avoid the divergence. -/
 lemma carlesonEnergy_bound_from_gradient_with_floor (f : ℝ → ℝ) (I : WhitneyInterval)
     (C M ε : ℝ) (hC : C > 0) (hM : M > 0) (hε : 0 < ε) (hε_le : ε ≤ 4 * I.len)
-    (hf_meas : Measurable f)
+    (_hf_meas : Measurable f)
     (hf_cont_grad : ContinuousOn (fun p : ℝ × ℝ => poissonGradientEnergy f p.1 p.2)
                                  {p | p.1 ∈ I.interval ∧ ε ≤ p.2 ∧ p.2 ≤ 4 * I.len})
     (h_grad : ∀ x y, x ∈ I.interval → ε ≤ y → y ≤ 4 * I.len →
@@ -2407,7 +2407,7 @@ theorem recognition_phase_satisfies_green_cs (f_phase : ℝ → ℝ) (I : Whitne
 /-- **LEMMA**: The RHS of Green's identity bound is always non-negative.
 
     C_geom · √E · |I|^{-1/2} ≥ 0 for any E ≥ 0. -/
-lemma greens_identity_rhs_nonneg (E : ℝ) (hE : E ≥ 0) (I : WhitneyInterval) :
+lemma greens_identity_rhs_nonneg (E : ℝ) (_hE : E ≥ 0) (I : WhitneyInterval) :
     C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len)) ≥ 0 := by
   have h_len_pos : 0 < 2 * I.len := whitney_len_pos I
   have h_sqrt_len_pos : 0 < Real.sqrt (2 * I.len) := Real.sqrt_pos_of_pos h_len_pos
@@ -2639,7 +2639,7 @@ lemma log_distance_deriv_bound (d : ℝ) (hd_pos : d > 0) :
   · simp [hu, hd_pos]
   · have h_denom_pos : d^2 + u^2 > 0 := by positivity
     rw [abs_div, abs_of_pos h_denom_pos]
-    rw [div_le_div_iff h_denom_pos (by positivity : 2 * d > 0)]
+    rw [div_le_div_iff₀ h_denom_pos (by positivity : 2 * d > 0)]
     have h_sq : (|u| - d)^2 ≥ 0 := sq_nonneg _
     have h_expand : |u|^2 - 2 * d * |u| + d^2 ≥ 0 := by nlinarith [h_sq, _root_.sq_abs u]
     have h3 : d^2 + u^2 ≥ 2 * d * |u| := by nlinarith [h_expand, _root_.sq_abs u]
@@ -2648,7 +2648,7 @@ lemma log_distance_deriv_bound (d : ℝ) (hd_pos : d > 0) :
       _ = 1 * (d^2 + u^2) := by ring
 
 /-- The connection between Complex.abs and the quadratic form. -/
-lemma log_distance_abs_sq (ρ : ℂ) (hρ_re : 1/2 < ρ.re) :
+lemma log_distance_abs_sq (ρ : ℂ) (_hρ_re : 1/2 < ρ.re) :
     let d := ρ.re - 1/2
     ∀ t : ℝ, Complex.abs ((1/2 : ℂ) + t * Complex.I - ρ) ^ 2 = d^2 + (t - ρ.im)^2 := by
   intro d t

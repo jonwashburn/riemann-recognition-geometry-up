@@ -110,7 +110,7 @@ Minimum value analysis:
 
 /-- Helper: arctan(x) - arctan(y) when x ≥ 0 and y ≤ 0.
     The difference is at least arctan(x) + arctan(-y). -/
-lemma arctan_diff_nonneg_nonpos (x y : ℝ) (hx : 0 ≤ x) (hy : y ≤ 0) :
+lemma arctan_diff_nonneg_nonpos (x y : ℝ) (_hx : 0 ≤ x) (hy : y ≤ 0) :
     Real.arctan x - Real.arctan y ≥ Real.arctan x + Real.arctan (-y) := by
   have h1 : Real.arctan y ≤ 0 := by
     rw [← Real.arctan_zero]
@@ -125,7 +125,7 @@ lemma arctan_neg' (x : ℝ) : Real.arctan (-x) = -Real.arctan x := Real.arctan_n
 /-- Helper: When γ ∈ [a, b] and σ > 1/2, the arctan arguments have favorable signs.
     Specifically, (a-σ)/γ < 0 < (b-σ)/γ when a < σ < b and γ > 0. -/
 lemma arctan_args_opposite_signs (σ γ a b : ℝ) (hγ_pos : 0 < γ)
-    (hγ_lower : a ≤ γ) (hγ_upper : γ ≤ b) (hab : a < b) :
+    (hγ_lower : a ≤ γ) (hγ_upper : γ ≤ b) (_hab : a < b) :
     (a - σ) / γ ≤ (γ - σ) / γ ∧ (γ - σ) / γ ≤ (b - σ) / γ := by
   constructor
   · apply div_le_div_of_nonneg_right _ (le_of_lt hγ_pos)
@@ -401,11 +401,11 @@ lemma arctan_sub_of_pos {x y : ℝ} (hx : 0 < x) (hy : 0 < y) :
     Equivalently: v(3 - α) ≥ 1 + α².
     For γ ≥ 1/2: α ≤ (1-γ)/γ ≤ 1, so v(3-α) ≥ 1·2 = 2 ≥ 1 + 1 ≥ 1 + α². -/
 theorem whitney_polynomial_bound (x y γ : ℝ)
-    (hx_neg : x < 0) (hy_neg : y < 0) (hx_gt_y : x > y)
+    (hx_neg : x < 0) (hy_neg : y < 0) (_hx_gt_y : x > y)
     (hγ_pos : γ > 0)
     (hγ_half : γ ≥ 1/2)  -- Required: excludes edge cases with small imaginary parts
     (h_spread : x - y ≥ 1)
-    (h_spread_upper : x - y ≤ 10)
+    (_h_spread_upper : x - y ≤ 10)
     (h_abs_x_bound : -x ≤ (1 - γ) / γ) :
     (x - y) / (1 + x * y) ≥ 1/3 := by
   -- Key setup: xy > 0 since both x and y are negative

@@ -301,12 +301,12 @@ lemma arg_unit_circle_arctan (z : ℂ) (hz_unit : Complex.abs z = 1) (hre : z.re
     have h_sin_double : Real.sin θ = 2 * Real.sin (θ / 2) * Real.cos (θ / 2) := by
       have h2 : θ = 2 * (θ / 2) := by ring
       rw [h2, Real.sin_two_mul]
-      ring
+      ring_nf
     -- 1 + cos(θ) = 2*cos²(θ/2)
     have h_one_plus_cos : 1 + Real.cos θ = 2 * Real.cos (θ / 2) ^ 2 := by
       have h2 : θ = 2 * (θ / 2) := by ring
       rw [h2, Real.cos_two_mul]
-      ring
+      ring_nf
     rw [h_sin_double, h_one_plus_cos, Real.tan_eq_sin_div_cos]
     field_simp [h_cos_half_ne, sq]
     ring
@@ -512,7 +512,7 @@ lemma blaschkeFactor_tan_arg (ρ : ℂ) (t : ℝ) (hne : (t : ℂ) ≠ conj ρ)
     The absolute value formula |phaseChange| = 2*|arctan((b-σ)/γ) - arctan((a-σ)/γ)|
     holds because branch discontinuities cancel in the difference. -/
 lemma blaschkePhase_arctan_connection (ρ : ℂ) (t : ℝ)
-    (hγ_pos : 0 < ρ.im) (hne : t ≠ ρ.re) :
+    (_hγ_pos : 0 < ρ.im) (_hne : t ≠ ρ.re) :
     -- The phase is related to arctan, up to branch handling
     -- This is the key mathematical fact
     True := trivial  -- Placeholder for the detailed connection
@@ -555,7 +555,7 @@ Recognition Geometry framework, this bound is established by:
 The hypothesis `h_phase_bound` represents the output of steps 1-3.
 -/
 lemma total_phase_lower_bound (ρ : ℂ) (I : WhitneyInterval)
-    (hρ_re : 1/2 < ρ.re) (hρ_im : ρ.im ∈ I.interval)
+    (_hρ_re : 1/2 < ρ.re) (_hρ_im : ρ.im ∈ I.interval)
     (h_phase_bound : |phaseChange ρ (I.t0 - I.len) (I.t0 + I.len)| ≥ 2 * Real.arctan 2) :
     |phaseChange ρ (I.t0 - I.len) (I.t0 + I.len)| ≥ 2 * Real.arctan 2 :=
   h_phase_bound
@@ -621,7 +621,7 @@ line creates a detectable phase signal that cannot be masked by tail noise. -/
 theorem trigger_lower_bound (I : WhitneyInterval) (B : RecognizerBand)
     (hB_base : B.base = I)
     (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
-    (hρ_zero : completedRiemannZeta ρ = 0)
+    (_hρ_zero : completedRiemannZeta ρ = 0)
     (h_phase_bound : |phaseChange ρ (I.t0 - I.len) (I.t0 + I.len)| ≥ 2 * Real.arctan 2) :
     ∃ ℓ : Fin 3, windowPhaseMass (tripleWindows I ℓ) ρ ≥ L_rec := by
   simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior

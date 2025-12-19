@@ -151,14 +151,14 @@ private lemma neg_one_pow_odd' (j : ℕ) : (-1 : ℝ)^(2 * j + 1) = -1 := by
   rw [pow_add, pow_mul, neg_one_sq, one_pow, one_mul, pow_one]
 
 /-- For even k, the signed difference is in [0, a_m - a_{m+k}]. -/
-private lemma signed_diff_even (a : ℕ → ℝ) (ha_pos : ∀ n, 0 ≤ a n)
+private lemma signed_diff_even (a : ℕ → ℝ) (_ha_pos : ∀ n, 0 ≤ a n)
     (ha_anti : Antitone a) (m j : ℕ) :
     0 ≤ (-1 : ℝ)^m * (altPartialSum a (m + 2*j) - altPartialSum a m) ∧
     (-1 : ℝ)^m * (altPartialSum a (m + 2*j) - altPartialSum a m) ≤ a m - a (m + 2*j) := by
   induction j with
   | zero =>
     simp only [Nat.mul_zero, add_zero, sub_self, mul_zero]
-    constructor <;> linarith [ha_pos m]
+    constructor <;> linarith [_ha_pos m]
   | succ j ih =>
     obtain ⟨ih_lo, ih_hi⟩ := ih
     have h_step : altPartialSum a (m + 2*(j+1)) - altPartialSum a m =
@@ -506,7 +506,7 @@ lemma tsum_nat_eq_even_add_odd {f : ℕ → ℝ} (hf : Summable f) :
       right_inv := fun ⟨n, hn⟩ => by
         ext
         simp only [Set.mem_compl_iff, Set.mem_setOf_eq] at hn
-        have h_odd : Odd n := Nat.odd_iff_not_even.mpr hn
+        have h_odd : Odd n := Nat.not_even_iff_odd.mp hn
         obtain ⟨k, hk⟩ := h_odd
         simp only [hk]; omega
     }
@@ -771,7 +771,8 @@ lemma hasDerivAt_one_minus_two_pow_at_one :
   have h1 : HasDerivAt (fun s : ℝ => 1 - s) (-1 : ℝ) (1 : ℝ) := by
     have hc : HasDerivAt (fun _ : ℝ => (1 : ℝ)) 0 1 := hasDerivAt_const 1 1
     have hid : HasDerivAt (fun s : ℝ => s) 1 1 := hasDerivAt_id 1
-    convert hc.sub hid using 1 <;> ring
+    convert hc.sub hid using 1
+    ring
   -- Step 2: Derivative of 2^x at x = 0 is 2^0 * log 2 = log 2
   have h2 : HasDerivAt (fun x : ℝ => (2 : ℝ)^x) (Real.log 2) 0 := by
     have := Real.hasStrictDerivAt_const_rpow (by norm_num : (0 : ℝ) < 2) 0

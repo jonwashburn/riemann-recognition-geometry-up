@@ -223,7 +223,7 @@ theorem poisson_extension_energy_identity
 theorem green_energy_bound_for_window
     (I : WhitneyInterval)
     (φ_L2_norm_sq : ℝ)
-    (h_support : True)  -- Support ⊂ I (structural assumption)
+    (_h_support : True)  -- Support ⊂ I (structural assumption)
     (h_L2 : φ_L2_norm_sq ≤ 1 / (2 * I.len))
     (E_poisson : ℝ)
     (h_global_energy : E_poisson ≤ (1/2) * φ_L2_norm_sq) :
@@ -250,11 +250,11 @@ theorem green_energy_bound_for_window
 theorem green_cauchy_schwarz_explicit
     (I : WhitneyInterval)
     (E_u : ℝ)  -- Carleson energy of u (Poisson extension of log|ξ|)
-    (M : ℝ) (h_E_u_bound : E_u ≤ K_tail M * (2 * I.len))
+    (M : ℝ) (_h_E_u_bound : E_u ≤ K_tail M * (2 * I.len))
     (E_v : ℝ)  -- Carleson energy of v (Poisson extension of window)
-    (h_E_v_bound : E_v ≤ 1 / (2 * (2 * I.len)))
+    (_h_E_v_bound : E_v ≤ 1 / (2 * (2 * I.len)))
     (boundary_integral : ℝ)  -- |∫_I φ(-∂_σ u)|
-    (h_cauchy_schwarz : boundary_integral ≤ Real.sqrt E_u * Real.sqrt E_v)
+    (_h_cauchy_schwarz : boundary_integral ≤ Real.sqrt E_u * Real.sqrt E_v)
     (h_bound : boundary_integral ≤ C_geom * Real.sqrt (K_tail M)) :
     boundary_integral ≤ C_geom * Real.sqrt (K_tail M) := h_bound
 
@@ -309,9 +309,9 @@ The hypothesis `h_bound` represents the output of steps 1-3.
 -/
 lemma green_cauchy_schwarz_general (I : WhitneyInterval)
     (gradField : ℝ × ℝ → ℝ × ℝ)
-    (E : ℝ) (hE_def : E = boxEnergy gradField I)
+    (E : ℝ) (_hE_def : E = boxEnergy gradField I)
     (integrand : ℝ → ℝ)
-    (h_trace : ∀ t ∈ I.interval, integrand t = (gradField (t, 0)).1)
+    (_h_trace : ∀ t ∈ I.interval, integrand t = (gradField (t, 0)).1)
     (h_bound : |∫ t in I.interval, integrand t| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len))) :
     |∫ t in I.interval, integrand t| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * I.len)) :=
   h_bound
@@ -324,8 +324,8 @@ represents the full gradient field's energy, not just a constant gradient.
 -/
 lemma green_cauchy_schwarz (W : WindowFunction) (gradTail : ℝ → ℝ)
     (gradField : ℝ × ℝ → ℝ × ℝ)
-    (E : ℝ) (hE : E = boxEnergy gradField W.support)
-    (h_trace : ∀ t ∈ W.support.interval, gradTail t = (gradField (t, 0)).1)
+    (E : ℝ) (_hE : E = boxEnergy gradField W.support)
+    (_h_trace : ∀ t ∈ W.support.interval, gradTail t = (gradField (t, 0)).1)
     (h_bound : |windowPairing W gradTail| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * W.support.len))) :
     |windowPairing W gradTail| ≤ C_geom * Real.sqrt E * (1 / Real.sqrt (2 * W.support.len)) :=
   h_bound
@@ -366,7 +366,7 @@ theorem tail_pairing_bound (I : WhitneyInterval)
     (gradField : ℝ × ℝ → ℝ × ℝ)
     (h_carleson : boxEnergy gradField I ≤ K_tail M * (2 * I.len))
     (gradTail : ℝ → ℝ)
-    (h_trace : ∀ t ∈ I.interval, gradTail t = (gradField (t, 0)).1)
+    (_h_trace : ∀ t ∈ I.interval, gradTail t = (gradField (t, 0)).1)
     (h_gcs : |∫ t in I.interval, gradTail t| ≤
         C_geom * Real.sqrt (boxEnergy gradField I) * (1 / Real.sqrt (2 * I.len))) :
     |∫ t in I.interval, gradTail t| ≤ U_tail M := by

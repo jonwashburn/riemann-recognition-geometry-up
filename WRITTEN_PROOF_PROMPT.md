@@ -83,6 +83,11 @@ So we now box the stronger, energy-tied interface
 **boundary limit** \(y\downarrow0\) of the x-component of the conjugate Poisson gradient for `cofactorLogAbs ρ`
 (the same Poisson-model field whose Carleson energy defines `cofactorEbox_poisson`).
 
+There is a small “shape” lemma
+`CofactorCRGreenS2Interfaces.phaseVelocityBoundaryTrace_of_poisson` showing this Poisson boundary-limit gate
+implies the weaker `PhaseVelocityBoundaryTrace` hook (useful when wiring older statements that talk about a
+trace field on the boundary).
+
 For semantic faithfulness, there is also a “log-branch CR identity” archetype in
 `RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean`:
 `CRBoundaryTraceInterfaces.CRBoundaryTraceLog` (sufficient to imply a boundary-trace hook once the model is wired).
@@ -271,6 +276,8 @@ When we hit any of these milestones, create a new dated snapshot `recognition-ge
 - **2025-12-18**: Re-box the single current hard wall away from Route-3 Nevanlinna regularity (routine in the ζ-gauge) and onto the actual RG analytic bottleneck: the CR/Green “energy → phase” bound `Port.HardyDirichletCRGreen cofactorEbox_poisson`.
 - **2025-12-18**: Mine `riemann-finish`’s `CRGreenOuter.lean` for the minimal subgates (pairing bound + remainder bound ⇒ boundary bound; then Carleson budget ⇒ uniform bound) and port the *algebraic* core into this repo as a reusable lemma.
 - **2025-12-19**: Chip the RG boundary-term gate: re-box the single hard wall to the *direct* Port hook `PhaseVelocityBoundaryTrace` (and treat `CRBoundaryTraceLog` as an archetype sufficient condition). Add a paper lemma clarifying the equivalent boundary-trace forms (x-derivative vs normal-derivative) so the written proof matches the Lean interface choice.
+- **2025-12-19**: Strengthen the boundary-term gate to a non-vacuous Poisson-model boundary-limit statement: add `PhaseVelocityBoundaryTracePoisson` (limit \(y\downarrow0\) of the conjugate Poisson gradient) and re-box the hard wall accordingly.
+- **2025-12-19**: Add a small interface-shape bridge lemma `phaseVelocityBoundaryTrace_of_poisson : PhaseVelocityBoundaryTracePoisson → PhaseVelocityBoundaryTrace` in `Port/CofactorCRGreenS2Interfaces.lean` (pure wiring; analytic content remains in the Poisson boundary-limit gate).
 
 ## Next edits (short queue)
 
@@ -293,7 +300,7 @@ When we hit any of these milestones, create a new dated snapshot `recognition-ge
 - [x] Refactor the Route~3 theorem chain assumptions to match splice completion (positive \(\mu_{\mathrm{spec}}\), factorization \(F_{\mathrm{pair}}=\overline{F_f}F_g\), normalization), and update the corresponding assumption labels/ledger text.
 - [x] Split A1 into A1a–A1d (paper + driver), and update A1’s status/plan to track which pieces are “cite Lagarias” vs genuinely new.
 - [x] Make A1b (phase–velocity) explicit in both driver and paper, matching the Lean interface and clarifying the density interpretation.
-- [ ] Strengthen the boundary-term gate interface to be non-vacuous: tie the `PhaseVelocityBoundaryTrace` “trace field” to the same 2D harmonic field whose Carleson-box energy defines `cofactorEbox_poisson` (Poisson/conjugate-Poisson model + boundary trace as a limit, not point-evaluation).
+- [x] Strengthen the boundary-term gate interface to be non-vacuous: introduce the Poisson-model boundary-limit gate `PhaseVelocityBoundaryTracePoisson` tying the phase velocity to the \(y\downarrow0\) limit of the conjugate Poisson gradient of `cofactorLogAbs` (the field defining `cofactorEbox_poisson`).
 
 ## Assumption Ledger (paper-facing map)
 

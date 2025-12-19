@@ -537,10 +537,10 @@ theorem czDecomposition_measure_bound (f : ℝ → ℝ) (a b : ℝ) (_hab : a < 
     a classical result requiring dyadic infrastructure.
 
     Reference: Stein, "Harmonic Analysis", Chapter I -/
-theorem czDecomposition_exists (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
-    (hf_int : IntegrableOn f (Icc a b))
-    (t : ℝ) (ht_pos : t > 0)
-    (ht_above_avg : t > (b - a)⁻¹ * ∫ x in Icc a b, |f x|)
+theorem czDecomposition_exists (f : ℝ → ℝ) (a b : ℝ) (_hab : a < b)
+    (_hf_int : IntegrableOn f (Icc a b))
+    (t : ℝ) (_ht_pos : t > 0)
+    (_ht_above_avg : t > (b - a)⁻¹ * ∫ x in Icc a b, |f x|)
     (h_exists : ∃ _cz : CZDecomposition f (Icc a b) t, True) :
     ∃ _cz : CZDecomposition f (Icc a b) t, True := h_exists
 
@@ -1011,10 +1011,10 @@ axiom czDecomposition_axiom (f : ℝ → ℝ) (a b : ℝ) (_hab : a < b)
     1. f = g + Σ_j b_j a.e.
     2. |g| ≤ 2t a.e. (from CZ selection + doubling)
     3. supp(b_j) ⊂ Q_j and ∫_{Q_j} b_j = 0 -/
-theorem czDecompFull_exists_theorem (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
-    (hf_int : IntegrableOn f (Icc a b))
-    (t : ℝ) (ht_pos : t > 0)
-    (ht_above_avg : t > (b - a)⁻¹ * ∫ x in Icc a b, |f x|)
+theorem czDecompFull_exists_theorem (f : ℝ → ℝ) (a b : ℝ) (_hab : a < b)
+    (_hf_int : IntegrableOn f (Icc a b))
+    (t : ℝ) (_ht_pos : t > 0)
+    (_ht_above_avg : t > (b - a)⁻¹ * ∫ x in Icc a b, |f x|)
     (h_exists : ∃ _cz : CZDecompFull f (Icc a b) t, True) :
     ∃ _cz : CZDecompFull f (Icc a b) t, True := h_exists
 
@@ -1417,10 +1417,10 @@ lemma level_set_subset_cz {f : ℝ → ℝ} {c_I c_Q t δ : ℝ}
 
     **IMPLEMENTATION**: Takes the inequality as an explicit hypothesis.
     The hypothesis encapsulates the CZ decomposition argument. -/
-theorem goodLambda_inequality_theorem (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
-    (M : ℝ) (hM_pos : M > 0)
-    (h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
-    (t : ℝ) (ht : t > M)
+theorem goodLambda_inequality_theorem (f : ℝ → ℝ) (a b : ℝ) (_hab : a < b)
+    (M : ℝ) (_hM_pos : M > 0)
+    (_h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
+    (t : ℝ) (_ht : t > M)
     (h_ineq : volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t} ≤
               ENNReal.ofReal (1/2) * volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t - M}) :
     volume {x ∈ Icc a b | |f x - intervalAverage f a b| > t} ≤
@@ -1511,9 +1511,9 @@ lemma goodLambda_inequality (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
     5. Sum: μ({|f - f_I| > M}) ≤ (1/2) · Σ_j |Q_j| ≤ |I|/2
 
     This is the base case for the John-Nirenberg exponential decay. -/
-theorem jn_first_step_theorem (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
-    (M : ℝ) (hM_pos : M > 0)
-    (h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
+theorem jn_first_step_theorem (f : ℝ → ℝ) (a b : ℝ) (_hab : a < b)
+    (M : ℝ) (_hM_pos : M > 0)
+    (_h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
     (h_bound : volume {x ∈ Icc a b | |f x - intervalAverage f a b| > M} ≤
                ENNReal.ofReal ((b - a) / 2)) :
     volume {x ∈ Icc a b | |f x - intervalAverage f a b| > M} ≤
@@ -1694,10 +1694,10 @@ theorem johnNirenberg_exp_decay (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
     (1/|I|) ∫_I |f - f_I|^p ≤ C_p · M^p
 
     where C_p = JN_C1 · (2e)^p · Γ(p+1) -/
-theorem bmo_Lp_bound_theorem (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
-    (M : ℝ) (hM_pos : M > 0)
-    (h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
-    (p : ℝ) (hp : 1 ≤ p)
+theorem bmo_Lp_bound_theorem (f : ℝ → ℝ) (a b : ℝ) (_hab : a < b)
+    (M : ℝ) (_hM_pos : M > 0)
+    (_h_bmo : ∀ a' b' : ℝ, a' < b' → meanOscillation f a' b' ≤ M)
+    (p : ℝ) (_hp : 1 ≤ p)
     (h_bound : (b - a)⁻¹ * ∫ x in Icc a b, |f x - intervalAverage f a b|^p ≤
                (JN_C1 * (2 * Real.exp 1)^p * Real.Gamma (p + 1)) * M^p) :
     (b - a)⁻¹ * ∫ x in Icc a b, |f x - intervalAverage f a b|^p ≤
@@ -1790,9 +1790,9 @@ theorem bmo_Lp_bound (f : ℝ → ℝ) (a b : ℝ) (hab : a < b)
 
     The constant 2·JN_C1 = 2e ≈ 5.44 is universal for all kernels. -/
 theorem bmo_kernel_bound_theorem (f : ℝ → ℝ) (K : ℝ → ℝ)
-    (M : ℝ) (hM_pos : M > 0)
-    (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
-    (hK_int : Integrable K)
+    (M : ℝ) (_hM_pos : M > 0)
+    (_h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
+    (_hK_int : Integrable K)
     (c : ℝ)
     (h_bound : |∫ t, K t * (f t - c)| ≤ (2 * JN_C1) * M * ∫ t, |K t|) :
     |∫ t, K t * (f t - c)| ≤ (2 * JN_C1) * M * ∫ t, |K t| := h_bound
@@ -2114,7 +2114,7 @@ lemma tendsto_div_sq_atTop {y : ℝ} (_hy : 0 < y) :
     have hε_ne : ε ≠ 0 := ne_of_gt hε
     calc s * ε > (1/ε) * ε := mul_lt_mul_of_pos_right hs2 hε
       _ = 1 := div_mul_cancel₀ 1 hε_ne
-  have h_ineq : 1/s < ε := by rw [div_lt_iff hs_pos]; linarith
+  have h_ineq : 1/s < ε := by rw [div_lt_iff₀ hs_pos]; linarith
   linarith [h_bound, h_ineq]
 
 /-- s/(s² + y²) → 0 as s → -∞. -/
@@ -2620,9 +2620,9 @@ lemma poisson_dy_bound_for_bmo (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y
     6. Gradient norm = max of partials ≤ (2 * (2 * JN_C1) * (2/π)) * M/y
 
     This theorem connects John-Nirenberg to the Fefferman-Stein gradient bound. -/
-theorem poisson_gradient_bound_combination_theorem (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (hy : 0 < y)
-    (M : ℝ) (hM_pos : M > 0)
-    (h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
+theorem poisson_gradient_bound_combination_theorem (f : ℝ → ℝ) (x : ℝ) {y : ℝ} (_hy : 0 < y)
+    (M : ℝ) (_hM_pos : M > 0)
+    (_h_bmo : ∀ a b : ℝ, a < b → meanOscillation f a b ≤ M)
     (h_bound : ‖poissonExtension_gradient f x y‖ ≤ (2 * (2 * JN_C1) * (2 / Real.pi)) * M / y) :
     ‖poissonExtension_gradient f x y‖ ≤ (2 * (2 * JN_C1) * (2 / Real.pi)) * M / y := h_bound
 
