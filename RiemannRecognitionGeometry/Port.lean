@@ -12,6 +12,7 @@ import RiemannRecognitionGeometry.Port.CRBoundaryTraceInterfaces
 import RiemannRecognitionGeometry.Port.XiEnergy
 import RiemannRecognitionGeometry.Port.XiCarlesonBudget
 import RiemannRecognitionGeometry.Port.XiCRGreenAssumptions
+import RiemannRecognitionGeometry.Port.XiCRGreenSubgates
 import RiemannRecognitionGeometry.Port.XiCRGreenS2Interfaces
 import RiemannRecognitionGeometry.Port.XiCRGreenS2
 import RiemannRecognitionGeometry.Port.EnergyCRGreenAssumptions

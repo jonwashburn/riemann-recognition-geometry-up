@@ -146,6 +146,60 @@ theorem no_off_critical_zeros_in_strip_of_oscillationTarget_of_xi_and_cofactor_C
         (ρ := ρ) (hXi := hXi) (hCof := hCof)
         (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hT)
 
+/-- Same as `no_off_critical_zeros_in_strip_of_oscillationTarget_of_xi_and_cofactor_CRGreen`, but taking the
+bundled `EnergyCRGreenAssumptions`. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptions
+    (h : EnergyCRGreenAssumptions)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  exact
+    no_off_critical_zeros_in_strip_of_oscillationTarget_of_xi_and_cofactor_CRGreen
+      (hXi := h.xi) (hCof := h.cofactor) (hT := hT)
+
+/-- Same as `no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptions`, but taking the
+bundled **strong** energy-form CR/Green targets. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptionsStrong
+    (h : EnergyCRGreenAssumptionsStrong)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  exact
+    no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptions
+      (h := energyCRGreenAssumptions_of_strong h) (hT := hT)
+
+/-- Same as `no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptions`, but taking the
+faithful S2 (“trace + pairing”) assumptions on both the xi side and the cofactor side. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTarget_of_S2
+    (hXi : XiCRGreenS2.Assumptions)
+    (hCof : CofactorCRGreenS2.Assumptions)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  exact
+    no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptions
+      (h := energyCRGreenAssumptions_of_S2 hXi hCof) (hT := hT)
+
+/-- Same as `no_off_critical_zeros_in_strip_of_oscillationTarget_of_xi_and_cofactor_CRGreen`, but taking
+**real-valued** CR/Green targets (blueprint-style). -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTarget_of_real_CRGreen
+    (hXi : XiCRGreenAssumptionsReal)
+    (hCof : CofactorCRGreenAssumptionsReal)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  have hXi' : XiCRGreenAssumptions := xiCRGreenAssumptions_of_real hXi
+  have hCof' : CofactorCRGreenAssumptions := cofactorCRGreenAssumptions_of_real hCof
+  exact
+    no_off_critical_zeros_in_strip_of_oscillationTarget_of_xi_and_cofactor_CRGreen
+      (hXi := hXi') (hCof := hCof') (hT := hT)
+
+/-- Same as `no_off_critical_zeros_in_strip_of_oscillationTarget_of_real_CRGreen`, but taking the bundled
+**real-valued** CR/Green targets. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTarget_of_energyCRGreenAssumptionsReal
+    (h : EnergyCRGreenAssumptionsReal)
+    (hT : OscillationTarget) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  exact
+    no_off_critical_zeros_in_strip_of_oscillationTarget_of_real_CRGreen
+      (hXi := h.xi) (hCof := h.cofactor) (hT := hT)
+
 /-- Port analogue of `Main.RiemannHypothesis_recognition_geometry_of_oscillationTarget` using the explicit
 energy-based CR/Green targets instead of `ClassicalAnalysisAssumptions` and `RGAssumptions`. -/
 theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_xi_and_cofactor_CRGreen

@@ -22,6 +22,7 @@ import RiemannRecognitionGeometry.Port.CofactorCRGreenAssumptions
 import RiemannRecognitionGeometry.Port.TotalPhaseSignalBound
 import RiemannRecognitionGeometry.Port.XiCRGreenAssumptions
 import RiemannRecognitionGeometry.Port.EnergyCRGreenAssumptions
+import RiemannRecognitionGeometry.Port.EnergyCRGreenS2
 import RiemannRecognitionGeometry.Port.RealPhaseTransfer
 import RiemannRecognitionGeometry.Port.EnergyCRGreenAssumptionsReal
 
@@ -224,6 +225,21 @@ theorem zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptions
     zero_free_with_interval_of_OscillationTarget_of_real_CRGreen
       (ρ := ρ) (hXi := h.xi) (hCof := h.cofactor)
       (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
+
+/-- Same centered contradiction, but taking the faithful S2 assumptions (trace identity + pairing bound)
+on both the xi side and the cofactor side. -/
+theorem zero_free_with_interval_of_OscillationTarget_of_S2 (ρ : ℂ)
+    (hXi : XiCRGreenS2.Assumptions)
+    (hCof : CofactorCRGreenS2.Assumptions)
+    (hρ_re : 1/2 < ρ.re)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hOsc : OscillationTarget) :
+    False := by
+  have h' : EnergyCRGreenAssumptions :=
+    energyCRGreenAssumptions_of_S2 hXi hCof
+  exact
+    zero_free_with_interval_of_OscillationTarget_of_energyCRGreenAssumptions
+      (ρ := ρ) (h := h') (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
 
 end Port
 end RiemannRecognitionGeometry

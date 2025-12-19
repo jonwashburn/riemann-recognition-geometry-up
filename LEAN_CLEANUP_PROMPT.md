@@ -153,10 +153,25 @@ small “blueprint-shaped” interfaces (trace identity + pairing bound), rather
   - `RiemannRecognitionGeometry/Port/EnergyCRGreenS2.lean`: `(xi S2 + cofactor S2) → EnergyCRGreenAssumptionsStrong`
   - `RiemannRecognitionGeometry/Port/MainNoRGAssumptions.lean` now has
     `RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2`.
+  - `RiemannRecognitionGeometry/Port/ZeroFreeWithInterval.lean` now has
+    `zero_free_with_interval_of_OscillationTarget_of_S2` (centered contradiction, S2-facing).
+  - `RiemannRecognitionGeometry/Port/TotalPhaseSignalBound.lean` now has
+    `totalPhaseSignal_bound_of_xiS2` (upper bound, xi S2-facing).
+  - `RiemannRecognitionGeometry/Port/LocalZeroFree.lean` now has S2- and energy-facing wrappers
+    (`local_zero_free_of_OscillationTarget_of_S2`, `no_interior_zeros_of_OscillationTarget_of_S2`, and
+    bundled `EnergyCRGreenAssumptions` variants).
+  - `RiemannRecognitionGeometry/Port/MainNoRGAssumptions.lean` now has full S2/energy/real wrappers for the
+    “no off-critical zeros in the strip” theorem
+    (`no_off_critical_zeros_in_strip_of_oscillationTarget_of_S2` and bundled variants).
 
 Remaining work for this backlog item is **not** Lean plumbing anymore; it is the analytic content:
 produce real instances of the S2 interfaces from a concrete window choice + Green pairing +
 `Port/SkewHarmGate.lean` boundary-term gates + Cauchy–Schwarz.
+
+**Update (2025-12-19):** the xi side now also has an explicit “subgates” decomposition mirroring the
+cofactor file:
+- `RiemannRecognitionGeometry/Port/XiCRGreenSubgates.lean` (S1 real rep already solved via `actualPhaseSignal`;
+  remaining work is the Green/C–S pairing and window-energy estimate).
 
 ## Always-run checklist (every session)
 

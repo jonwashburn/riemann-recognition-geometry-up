@@ -2674,6 +2674,21 @@ Inside $\Omega$ the Cauchy--Riemann equations give $\partial_x v = -\partial_y u
 Under the stated boundary-regularity hypotheses one may pass to boundary traces, yielding the distributional identity on $I$.
 \end{proof}
 
+\begin{lemma}[Equivalent boundary-trace forms of the CR identity]\label{lem:cr_boundary_trace_equiv}
+Under the hypotheses of Lemma~\ref{lem:cr_boundary_trace_log}, we may rewrite the same boundary identity in the equivalent forms
+\[
+\frac{d}{dt}v(t) \;=\; \partial_x v(t,0^+)\;=\;-\partial_y u(t,0^+)
+\qquad\text{on }I\text{ (as distributions).}
+\]
+In particular, if one packages the boundary-term gate using a 2D field whose boundary trace is $\nabla v(t,0^+)$, then
+\(\frac{d}{dt}v(t) = (\nabla v(t,0^+))_1\).
+\end{lemma}
+
+\begin{proof}
+Along the boundary $y=0$ the parameter $t$ is the horizontal coordinate $x$, so \(\frac{d}{dt}v(t)=\partial_x v(t,0^+)\) in the distributional boundary-trace sense.
+The Cauchy--Riemann identity \(\partial_x v=-\partial_y u\) in $\Omega$ then yields \(\partial_x v(t,0^+)=-\partial_y u(t,0^+)\) on $I$ under the same boundary-regularity hypotheses as in Lemma~\ref{lem:cr_boundary_trace_log}.
+\end{proof}
+
 \subsection*{B: Recognition Geometry (RG) track --- remaining unconditional gaps}
 \begin{itemize}
     \item \textbf{B1 (RG bottleneck: energy $\Rightarrow$ phase control on Whitney regions).}
@@ -2702,9 +2717,11 @@ Under the stated boundary-regularity hypotheses one may pass to boundary traces,
         \texttt{Port.CofactorCRGreenAssumptionsStrong} via
         \texttt{cofactorCRGreenAssumptionsStrong\_of\_greenTrace\_and\_pairing}.
         The remaining hard work is to prove these gates from an actual Green identity on Whitney boxes (including boundary-term control).
-        A Lean-facing statement-only interface for the CR boundary identity is provided in
-        \texttt{RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean} (\texttt{CRBoundaryTraceLog});
-        this is the current “boxed wall” in the driver.
+        For the boundary-term gate, Lean’s most direct Port-level hook is
+        \texttt{Port.CofactorCRGreenS2Interfaces.PhaseVelocityBoundaryTrace} (a 2D trace field whose boundary trace equals the phase velocity, cf.\ Lemma~\ref{lem:cr_boundary_trace_equiv}).
+        For semantic faithfulness one can alternatively package a log-branch Cauchy--Riemann identity as
+        \texttt{RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean} (\texttt{CRBoundaryTraceLog}), which implies the direct trace hook.
+        The current “boxed wall” in the driver is the direct trace hook \texttt{PhaseVelocityBoundaryTrace}.
     \end{itemize}
 
     \item \textbf{B2 (Oscillation certificate for \(\log|\xi|\)).}

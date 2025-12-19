@@ -179,6 +179,12 @@ Suggested landing files in this repo (new):
  - ✅ `RiemannRecognitionGeometry/Port/EnergyCRGreenS2.lean`:
    wiring glue `(xi S2 + cofactor S2) → EnergyCRGreenAssumptionsStrong`, plus a Port main wrapper
    `RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2` in `Port/MainNoRGAssumptions.lean`.
+   - Convenience: the S2 pipeline also has intermediate-step wrappers:
+     - `Port/TotalPhaseSignalBound.lean`: `totalPhaseSignal_bound_of_xiS2`
+     - `Port/ZeroFreeWithInterval.lean`: `zero_free_with_interval_of_OscillationTarget_of_S2`
+     - `Port/LocalZeroFree.lean`: `local_zero_free_of_OscillationTarget_of_S2` and
+       `no_interior_zeros_of_OscillationTarget_of_S2`
+     - `Port/MainNoRGAssumptions.lean`: `no_off_critical_zeros_in_strip_of_oscillationTarget_of_S2`
 
 ### 5) Immediate next actions
 

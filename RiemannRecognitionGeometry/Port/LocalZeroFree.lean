@@ -5,13 +5,14 @@ This file mirrors the RG theorem `Axioms.local_zero_free`, but replaces the call
 `Axioms.zero_free_with_interval` (which depends on `RGAssumptions`) by the Port theorem
 `Port.zero_free_with_interval_of_inheritance`.
 
-So the remaining hypotheses are:
-- `ClassicalAnalysisAssumptions` (for the phase upper bound `totalPhaseSignal_bound`), and
-- a cofactor BMO inheritance interface `Port.CofactorBMOInheritance`.
+This file now supports three “assumption surfaces” (all build-green):
 
-This is a clean “wiring point”: once we discharge the two Port analytic targets
-(`CofactorCRGreenAssumptions` + `CofactorBMOInheritance`), we can systematically remove the
-RG-specific `RGAssumptions` dependency from the RG spine.
+- **Compatibility route**: `ClassicalAnalysisAssumptions` (+ the inheritance shim, now trivial in the
+  current Port model).
+- **Energy-based route**: explicit CR/Green targets `XiCRGreenAssumptions` + `CofactorCRGreenAssumptions`
+  (or their bundles), avoiding the monolithic `ClassicalAnalysisAssumptions` record.
+- **Faithful S2 route**: trace identity + pairing bound on both sides (`XiCRGreenS2.Assumptions` +
+  `CofactorCRGreenS2.Assumptions`), matching the blueprint decomposition.
 -/
 
 import RiemannRecognitionGeometry.Axioms
@@ -83,6 +84,124 @@ theorem no_interior_zeros_of_inheritance (I : WhitneyInterval) (B : RecognizerBa
   exact
     (local_zero_free_of_inheritance I B hB_base ρ hρ_interior hρ_zero hρ_re_upper h_width_lower
         h_width_upper hCA hInh M h_osc hM_le).elim
+
+/-- Energy-based Port local-zero-free: drive the contradiction from the explicit CR/Green targets,
+avoiding `ClassicalAnalysisAssumptions`. -/
+theorem local_zero_free_of_OscillationTarget_of_xi_and_cofactor_CRGreen
+    (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_re_upper : ρ.re ≤ 1)
+    (h_width_lower : 2 * I.len ≥ |ρ.im|)
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)
+    (hXi : XiCRGreenAssumptions)
+    (hCof : CofactorCRGreenAssumptions)
+    (hOsc : OscillationTarget) :
+    False := by
+  simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior
+  obtain ⟨_hσ_lower, _hσ_upper, _hγ_in⟩ := hρ_interior
+  have hρ_re : 1/2 < ρ.re := by
+    have h := B.σ_lower_gt_half
+    have hpos := B.thickness_pos
+    linarith
+  exact
+    zero_free_with_interval_of_OscillationTarget_of_xi_and_cofactor_CRGreen
+      (ρ := ρ) (hXi := hXi) (hCof := hCof)
+      (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
+
+/-- Same as `local_zero_free_of_OscillationTarget_of_xi_and_cofactor_CRGreen`, but taking the bundled
+`EnergyCRGreenAssumptions`. -/
+theorem local_zero_free_of_OscillationTarget_of_energyCRGreenAssumptions
+    (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_re_upper : ρ.re ≤ 1)
+    (h_width_lower : 2 * I.len ≥ |ρ.im|)
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)
+    (h : EnergyCRGreenAssumptions)
+    (hOsc : OscillationTarget) :
+    False := by
+  exact
+    local_zero_free_of_OscillationTarget_of_xi_and_cofactor_CRGreen
+      (I := I) (B := B) (hB_base := hB_base)
+      (ρ := ρ) (hρ_interior := hρ_interior) (hρ_zero := hρ_zero)
+      (hρ_re_upper := hρ_re_upper) (h_width_lower := h_width_lower) (h_width_upper := h_width_upper)
+      (hXi := h.xi) (hCof := h.cofactor) (hOsc := hOsc)
+
+/-- Same local-zero-free step, but driven by the faithful S2 assumptions (trace identity + pairing bound)
+on both the xi side and the cofactor side. -/
+theorem local_zero_free_of_OscillationTarget_of_S2
+    (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (ρ : ℂ) (hρ_interior : ρ ∈ B.interior)
+    (hρ_zero : completedRiemannZeta ρ = 0)
+    (hρ_re_upper : ρ.re ≤ 1)
+    (h_width_lower : 2 * I.len ≥ |ρ.im|)
+    (h_width_upper : 2 * I.len ≤ 10 * |ρ.im|)
+    (hXi : XiCRGreenS2.Assumptions)
+    (hCof : CofactorCRGreenS2.Assumptions)
+    (hOsc : OscillationTarget) :
+    False := by
+  simp only [RecognizerBand.interior, Set.mem_setOf_eq] at hρ_interior
+  obtain ⟨_hσ_lower, _hσ_upper, _hγ_in⟩ := hρ_interior
+  have hρ_re : 1/2 < ρ.re := by
+    have h := B.σ_lower_gt_half
+    have hpos := B.thickness_pos
+    linarith
+  exact
+    zero_free_with_interval_of_OscillationTarget_of_S2
+      (ρ := ρ) (hXi := hXi) (hCof := hCof)
+      (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hOsc := hOsc)
+
+/-- Energy-based Port analogue of `no_interior_zeros`, avoiding `ClassicalAnalysisAssumptions`. -/
+theorem no_interior_zeros_of_OscillationTarget_of_xi_and_cofactor_CRGreen
+    (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (hXi : XiCRGreenAssumptions)
+    (hCof : CofactorCRGreenAssumptions)
+    (hOsc : OscillationTarget) :
+    ∀ ρ ∈ B.interior, ρ.re ≤ 1 → (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) →
+      completedRiemannZeta ρ ≠ 0 := by
+  intro ρ hρ_interior hρ_re_upper h_width_lower h_width_upper hρ_zero
+  exact
+    (local_zero_free_of_OscillationTarget_of_xi_and_cofactor_CRGreen
+      (I := I) (B := B) (hB_base := hB_base)
+      (ρ := ρ) (hρ_interior := hρ_interior) (hρ_zero := hρ_zero)
+      (hρ_re_upper := hρ_re_upper) (h_width_lower := h_width_lower) (h_width_upper := h_width_upper)
+      (hXi := hXi) (hCof := hCof) (hOsc := hOsc)).elim
+
+/-- Same as `no_interior_zeros_of_OscillationTarget_of_xi_and_cofactor_CRGreen`, but taking the bundled
+`EnergyCRGreenAssumptions`. -/
+theorem no_interior_zeros_of_OscillationTarget_of_energyCRGreenAssumptions
+    (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (h : EnergyCRGreenAssumptions)
+    (hOsc : OscillationTarget) :
+    ∀ ρ ∈ B.interior, ρ.re ≤ 1 → (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) →
+      completedRiemannZeta ρ ≠ 0 := by
+  exact
+    no_interior_zeros_of_OscillationTarget_of_xi_and_cofactor_CRGreen
+      (I := I) (B := B) (hB_base := hB_base)
+      (hXi := h.xi) (hCof := h.cofactor) (hOsc := hOsc)
+
+/-- Same interior-zero-free statement, but driven by the faithful S2 assumptions. -/
+theorem no_interior_zeros_of_OscillationTarget_of_S2
+    (I : WhitneyInterval) (B : RecognizerBand)
+    (hB_base : B.base = I)
+    (hXi : XiCRGreenS2.Assumptions)
+    (hCof : CofactorCRGreenS2.Assumptions)
+    (hOsc : OscillationTarget) :
+    ∀ ρ ∈ B.interior, ρ.re ≤ 1 → (2 * I.len ≥ |ρ.im|) → (2 * I.len ≤ 10 * |ρ.im|) →
+      completedRiemannZeta ρ ≠ 0 := by
+  intro ρ hρ_interior hρ_re_upper h_width_lower h_width_upper hρ_zero
+  exact
+    (local_zero_free_of_OscillationTarget_of_S2
+      (I := I) (B := B) (hB_base := hB_base)
+      (ρ := ρ) (hρ_interior := hρ_interior) (hρ_zero := hρ_zero)
+      (hρ_re_upper := hρ_re_upper) (h_width_lower := h_width_lower) (h_width_upper := h_width_upper)
+      (hXi := hXi) (hCof := hCof) (hOsc := hOsc)).elim
 
 end Port
 end RiemannRecognitionGeometry

@@ -51,21 +51,21 @@ If none of these happens, the session is a failure: immediately downgrade the bo
 
 \[
 \boxed{
-\textbf{B1′′a / S2a1-BT (CR boundary trace identity for the cofactor lift):}\quad
-\exists\ \texttt{L : CofactorPhaseLift},\ \exists\ \texttt{F : PhaseVelocityFTC L},\ \exists\ \texttt{h : CRBoundaryTraceLog L F},
+\textbf{B1′′a / S2a1-BT (boundary trace identity for the cofactor phase velocity):}\quad
+\exists\ \texttt{L : CofactorPhaseLift},\ \exists\ \texttt{F : PhaseVelocityFTC L},\ \exists\ \texttt{h : PhaseVelocityBoundaryTrace L F},
 \\
-\text{so that the phase velocity }\theta'_{I,\rho}\text{ is identified as a boundary trace (CR/Neumann) of a 2D log-branch field.}
+\text{so that the phase velocity }\theta'_{I,\rho}\text{ is identified as a boundary trace of a 2D field on Whitney boxes.}
 }
 \]
 
-This is the smallest *honest* remaining obstacle inside the S2-only CR/Green wall: it’s no longer the
-vacuous “there exists an integrand whose integral equals a number”, but the genuine regularity gate
-that the cofactor phase has an actual velocity density on the Whitney base (in an `HasDerivAt`+FTC sense).
-The Cauchy–Schwarz pairing inequality is packaged separately.
+This is the smallest *honest* remaining obstacle inside the S2-only CR/Green wall: the CR/Green pairing
+needs the phase velocity to be a **genuine boundary trace** of a 2D harmonic/Dirichlet field on Whitney
+regions (so energy estimates can apply). The FTC existence of a velocity density is packaged separately
+as `PhaseVelocityFTC`.
 
 In Lean, the S2 decomposition lives in `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean`:
-- `GreenTraceIdentity` (boxed target): a **lift-based** FTC/trace gate (a lift `θ` with `(θ(t) : Real.Angle) = rgCofactorPhaseAngle` on `I`, plus `HasDerivAt θ = dPhase` and `IntervalIntegrable dPhase`),
-- `PairingBound`: the Cauchy–Schwarz pairing inequality for `∫ dPhase`.
+- `GreenTraceIdentity` (S2a): a **lift-based** FTC/trace gate (a lift `θ` with `(θ(t) : Real.Angle) = rgCofactorPhaseAngle` on `I`, plus `HasDerivAt θ = dPhase` and `IntervalIntegrable dPhase`),
+- `PairingBound` (S2b): the Cauchy–Schwarz pairing inequality for `∫ dPhase`.
 Together they imply the strong cofactor CR/Green bound `CofactorCRGreenAssumptionsStrong` via
 `cofactorCRGreenAssumptionsStrong_of_greenTrace_and_pairing`, and thus feed the RG pipeline.
 
@@ -76,11 +76,18 @@ Together they imply the strong cofactor CR/Green bound `CofactorCRGreenAssumptio
 These rebuild the bundled gate via `GreenTraceIdentity.of_lift_and_ftc`.
 
 **Boundary-term gate (this is now the boxed target):**
-the CR/Green pipeline ultimately needs the phase velocity to be a genuine boundary trace of a 2D field.
-This is captured semantically by the “log-branch CR identity” interface in
+the minimal Port-level hook is `PhaseVelocityBoundaryTrace (L := L) (F := F)`, i.e. existence of a
+2D field whose boundary trace equals the phase velocity.
+
+For semantic faithfulness, there is also a “log-branch CR identity” archetype in
 `RiemannRecognitionGeometry/Port/CRBoundaryTraceInterfaces.lean`:
 `CRBoundaryTraceInterfaces.CRBoundaryTraceLog`, which implies `PhaseVelocityBoundaryTrace` via
 `phaseVelocityBoundaryTrace_of_CRBoundaryTraceLog`.
+
+**Non-vacuity note (important):**
+`PhaseVelocityBoundaryTrace` by itself does not yet force the trace field to be the *same* harmonic
+field whose Carleson-box energy is `cofactorEbox_poisson`. In an actual discharge, the trace field must
+be tied to that energy model (Poisson/conjugate-Poisson / Green identity on Whitney boxes).
 
 **Decomposition (now formalized as a reusable lemma):**
 the *algebraic* core “(pairing bound) + (remainder bound) ⇒ (boundary bound)” is now in
@@ -500,5 +507,6 @@ These are “hard elements” that will take multiple iterations. Keep each item
 - **2025-12-19**: Faithfulness fix: rewrote the S2a gate to avoid differentiating the principal-branch `arg`. `GreenTraceIdentity` now includes a real-valued lift `theta` whose coercion to `Real.Angle` agrees with `rgCofactorPhaseAngle` on the Whitney base, and the FTC is applied to that lift.
 - **2025-12-19**: Further shrink: split the bundled S2a gate into two explicit subgates (`CofactorPhaseLift` and `PhaseVelocityFTC`), and added `GreenTraceIdentity.of_lift_and_ftc` to rebuild the bundled trace gate from the smaller pieces.
 - **2025-12-19**: Re-boxed the single “Current hard wall” to the boundary-term gate: the log-branch CR boundary trace identity interface `CRBoundaryTraceInterfaces.CRBoundaryTraceLog` (Lean file `Port/CRBoundaryTraceInterfaces.lean`), which implies the generic `PhaseVelocityBoundaryTrace` hook.
+- **2025-12-19**: Refined the boxed wall to the *direct* Port-level boundary-term hook `PhaseVelocityBoundaryTrace` (in `Port/CofactorCRGreenS2Interfaces.lean`), and demoted `CRBoundaryTraceLog` to a semantic “archetype sufficient condition” implying it. Added a non-vacuity note: in any discharge, the trace field must be tied to the same energy model defining `cofactorEbox_poisson`.
 
 

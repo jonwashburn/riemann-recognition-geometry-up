@@ -115,6 +115,11 @@ Translation-stub modules (compiled in this repo) now exist under `RiemannRecogni
 **Update (2025-12-19):** the Port main theorem also has an S2-facing wrapper:
 - `Port/EnergyCRGreenS2.lean`: `(xi S2 + cofactor S2) → EnergyCRGreenAssumptionsStrong`
 - `Port/MainNoRGAssumptions.lean`: `RiemannHypothesis_recognition_geometry_of_oscillationTarget_of_S2`
+- `Port/ZeroFreeWithInterval.lean`: `zero_free_with_interval_of_OscillationTarget_of_S2`
+- `Port/TotalPhaseSignalBound.lean`: `totalPhaseSignal_bound_of_xiS2`
+- `Port/LocalZeroFree.lean`: `local_zero_free_of_OscillationTarget_of_S2` and
+  `no_interior_zeros_of_OscillationTarget_of_S2`
+- `Port/MainNoRGAssumptions.lean`: `no_off_critical_zeros_in_strip_of_oscillationTarget_of_S2`
 
 ---
 

@@ -17,6 +17,7 @@ import RiemannRecognitionGeometry.CarlesonBound
 import RiemannRecognitionGeometry.Port.CofactorCarlesonBudget
 import RiemannRecognitionGeometry.Port.XiCarlesonBudget
 import RiemannRecognitionGeometry.Port.XiCRGreenAssumptions
+import RiemannRecognitionGeometry.Port.XiCRGreenS2
 
 noncomputable section
 
@@ -74,6 +75,16 @@ theorem totalPhaseSignal_bound_of_xiCRGreenAssumptions (I : WhitneyInterval)
 
   -- Conclude.
   simpa [U_tail] using h_phase'
+
+/-- Convenience wrapper: the faithful xi-side S2 assumptions (trace identity + pairing bound)
+imply the energy-based upper bound `totalPhaseSignal I ≤ U_tail M`. -/
+theorem totalPhaseSignal_bound_of_xiS2 (I : WhitneyInterval)
+    (hXi : XiCRGreenS2.Assumptions)
+    (M : ℝ) (h_osc : InBMOWithBound logAbsXi M) :
+    totalPhaseSignal I ≤ U_tail M := by
+  have hXi' : XiCRGreenAssumptions :=
+    XiCRGreenS2.xiCRGreenAssumptions_of_S2 hXi
+  exact totalPhaseSignal_bound_of_xiCRGreenAssumptions (I := I) (hXi := hXi') (M := M) h_osc
 
 /-- Variant: derive the same upper bound from the **Hardy/Dirichlet Carleson-budget interface**
 for `xiEbox_poisson` (and the xi CR/Green target), in the “interval contains a zero” setting.
