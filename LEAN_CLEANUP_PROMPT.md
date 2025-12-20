@@ -70,8 +70,7 @@ Good candidates to remain axioms for now (if not already proved):
   - `ExplicitFormula/ContourToBoundary.lean`
   - `ExplicitFormula/PSCSplice.lean`
 - **Zeta-specific boundary representation / phase–velocity plumbing** (if needed):
-  - `ExplicitFormula/ZetaInstantiation.lean`
-  - `ExplicitFormula/CayleyBridgeZeta.lean`
+  - `ExplicitFormula/ZetaInstantiation.lean` (now the canonical location; `CayleyBridgeZeta.lean` was deleted)
 
 The key is: **no scattered `sorry`s**—make each hard input a single, named assumption with a clear role.
 
@@ -114,9 +113,8 @@ Prefer to do this by **using existing bundles** rather than inventing new abstra
 **Status update (2025-12-19):** largely complete:
 
 - `ExplicitFormula/ZetaInstantiation.lean` now concentrates ζ glue assumptions into named bundles:
-  - `ZetaPSCGlue` (phase regularity/representation/velocity + outer regularity)
-  - `ZetaRoute3Glue` (ratio identity + Cayley measure-bridge package)
-  - `ZetaGlue` (convenience wrapper bundling the two)
+  - `ZetaPSCGlue` (phase regularity/representation/velocity + outer regularity) — axiom: `zetaPSCGlue`
+  - `ZetaRoute3Glue` (ratio identity + Cayley measure-bridge package) — axiom: `zetaRoute3Glue`
 - `ExplicitFormula/ZetaEndToEndSchwartz.lean` provides:
   - `ZetaInstantiation.EndToEnd.Assumptions` with `Azeta : ZetaInstantiation.Assumptions_zeta ...` (deduped L²/integrability plumbing)
   - `ZetaInstantiation.EndToEnd.AssumptionsSplice` + `ZetaInstantiation.EndToEnd.RH_of_splice` (boundary wedge + splice identity → RH)
@@ -126,7 +124,7 @@ Prefer to do this by **using existing bundles** rather than inventing new abstra
 Goal: ensure “the same conceptual assumption” is not duplicated across:
 
 - `Port/*` and `ExplicitFormula/*`
-- `CayleyBridgeZeta.lean` and `ZetaInstantiation.lean`
+- `ZetaInstantiation.lean` (now canonical after `CayleyBridgeZeta.lean` was deleted)
 - `PPlusZetaShim.lean` and other wedge-entrypoints
 
 Action:

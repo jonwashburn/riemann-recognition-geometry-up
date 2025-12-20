@@ -4,10 +4,14 @@
 
 - **Build**: `lake build` succeeds with **zero warnings**.
 - **`sorry` count**: **0** across the entire Lean codebase (verified via grep).
-- **Axiom count**: **21 explicit axioms** across 12 files (verified via grep):
-  - ExplicitFormula track: 10 axioms (Weil transform, Fourier inversion, outer/Schur bridges, wedge closure, etc.)
-  - RG spine: 11 axioms (CZ/JN infrastructure, identity principle, BMO→Carleson embedding)
+- **Axiom count**: **22 explicit axioms** across 12 files (verified via grep):
+  - ExplicitFormula track: 14 axioms (Weil transform, Fourier inversion, outer/Schur bridges, wedge closure, PSC/Route3 glue, conjugation, etc.)
+  - RG spine: 8 axioms (CZ/JN infrastructure ×6, identity principle, BMO→Carleson embedding)
   - Port track: 0 axioms (all assumptions are bundled as hypothesis structures, not `axiom` declarations)
+- **Note on what “axiom count” means**:
+  - This counts literal Lean `axiom` declarations (`^\s*axiom\s+`).
+  - It does **not** count “axiom-shaped fields” like `*_axiom_statement` inside assumption bundles such as `ClassicalAnalysisAssumptions` / `RGAssumptions`.
+  - The **RG main theorems** are explicitly conditional on `ClassicalAnalysisAssumptions`, `RGAssumptions`, and `OscillationTarget`; the additional `ExplicitFormula/*` axioms are for the separate Route‑3 track.
 - **Recognition Geometry (RG) track** (`RiemannRecognitionGeometry/Main.lean`):
   - Core RG development has **0 `sorry`** in `RiemannRecognitionGeometry/Axioms.lean`.
   - The main theorem is explicitly **conditional** on:

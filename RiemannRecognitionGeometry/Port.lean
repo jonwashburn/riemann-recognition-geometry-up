@@ -8,6 +8,7 @@ import RiemannRecognitionGeometry.Port.CofactorCRGreenAssumptions
 import RiemannRecognitionGeometry.Port.CofactorCRGreenSubgates
 import RiemannRecognitionGeometry.Port.CofactorCRGreenS2
 import RiemannRecognitionGeometry.Port.CofactorCRGreenS2Interfaces
+import RiemannRecognitionGeometry.Port.CofactorOuterLogBranch
 import RiemannRecognitionGeometry.Port.CRBoundaryTraceInterfaces
 import RiemannRecognitionGeometry.Port.XiEnergy
 import RiemannRecognitionGeometry.Port.XiCarlesonBudget

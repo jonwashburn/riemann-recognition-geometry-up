@@ -4,7 +4,7 @@
 
 **Build**: `lake build` succeeds with **zero warnings** (all unused variables, deprecations, and linter suggestions resolved).
 **Correctness**: **0 `sorry`s** in the entire codebase.
-**Axioms**: **21 named axioms** (tracked via `PROOF_STATUS_CURRENT.md` and `ROUTE3_DRIVER.md`).
+**Axioms**: **22 named axioms** across 12 files (tracked via `PROOF_STATUS_CURRENT.md` and `ROUTE3_DRIVER.md`).
 
 ### What the repo proves today (honest summary)
 

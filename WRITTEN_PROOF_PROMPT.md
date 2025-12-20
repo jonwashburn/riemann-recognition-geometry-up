@@ -51,17 +51,24 @@ If none of these happens, the session is a failure: immediately downgrade the bo
 
 \[
 \boxed{
-\textbf{B1′′a / S2a1-BT-Poisson-pairing (Poisson boundary trace gate, pairing/distributional strength):}\quad
-\exists\ \texttt{L : CofactorPhaseLift},\ \exists\ \texttt{F : PhaseVelocityFTC L},\ \exists\ \texttt{h : PhaseVelocityBoundaryTracePoissonPairing L F},
+\textbf{B1′′a / Outer-log-branch cofactor package (holistic boundary-term gate):}\quad
+\exists\ \texttt{h : Port.CofactorOuterLogBranch.CofactorOuterLogBranch},
 \\
-\text{so that the phase change integral }\int \theta'_{I,\rho}\text{ is identified as the }y\downarrow0\text{ limit of the corresponding Poisson-model boundary pairing (the minimal form used in CR/Green).}
+\text{so that (lift + FTC + Poisson pairing) are all supplied as one canonical object tied to the same Poisson-model energy } \texttt{cofactorEbox\_poisson}.
 }
 \]
 
-This is the smallest *honest* remaining obstacle inside the S2-only CR/Green wall: the CR/Green pairing
-needs the phase velocity to be a **genuine boundary trace** of a 2D harmonic/Dirichlet field on Whitney
-regions (so energy estimates can apply). The FTC existence of a velocity density is packaged separately
-as `PhaseVelocityFTC`.
+This is the smallest *honest* remaining obstacle inside the S2-only CR/Green wall, but phrased the way the
+written proof should read: instead of treating the Poisson boundary pairing as an orphan interface, we
+package the whole “outer/log-branch” normalization as a single named gate. Concretely, the object
+`Port.CofactorOuterLogBranch.CofactorOuterLogBranch` supplies:
+
+- a real-valued cofactor phase lift (`CofactorPhaseLift`),
+- an FTC-valid phase velocity (`PhaseVelocityFTC`),
+- and the non-vacuous Poisson-model pairing identity at distributional strength
+  (`PhaseVelocityBoundaryTracePoissonPairing`),
+
+all tied to the same Poisson extension whose Carleson energy defines `cofactorEbox_poisson`.
 
 In Lean, the S2 decomposition lives in `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean`:
 - `GreenTraceIdentity` (S2a): a **lift-based** FTC/trace gate (a lift `θ` with `(θ(t) : Real.Angle) = rgCofactorPhaseAngle` on `I`, plus `HasDerivAt θ = dPhase` and `IntervalIntegrable dPhase`),
@@ -82,6 +89,12 @@ So we now box the stronger, energy-tied interface
 `RiemannRecognitionGeometry/Port/CofactorCRGreenS2Interfaces.lean`, which asserts the phase velocity is the
 **boundary limit** \(y\downarrow0\) of the x-component of the conjugate Poisson gradient for `cofactorLogAbs ρ`
 (the same Poisson-model field whose Carleson energy defines `cofactorEbox_poisson`).
+
+**Holistic packaging (new):** the single-object interface
+`RiemannRecognitionGeometry/Port/CofactorOuterLogBranch.lean` defines
+`Port.CofactorOuterLogBranch.CofactorOuterLogBranch`, which bundles the lift + FTC + Poisson pairing gates.
+This is now the boxed target because it matches the intended analytic meaning (“there is an outer/log branch
+whose real part is the boundary log-modulus and whose imaginary part is the cofactor phase lift”).
 
 There is a small “shape” lemma
 `CofactorCRGreenS2Interfaces.phaseVelocityBoundaryTrace_of_poisson` showing this Poisson boundary-limit gate

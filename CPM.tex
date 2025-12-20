@@ -335,6 +335,108 @@ There exists \(C_B\) such that if \(\sup_{(x,t),r}\,\mathcal W(x,t;r)\le \vareps
 If \(\|u(\cdot,t_*)\|_{\mathrm{BMO}^{-1}}\le \varepsilon_{\rm SD}\) (Koch--Tataru \cite{KochTataru2001}), then a unique global mild solution exists forward from \(t_*\) and becomes smooth for \(t>t_*\). In a contradiction scheme, backward uniqueness eliminates a nontrivial ancient critical element, precluding blow-up.
 \end{theorem}
 
+\paragraph{A strict terminal-time maximum principle (for the constant-direction subcase).}
+Some proposed rigidity routes for ancient/critical elements reduce, in a special ``constant vorticity direction'' subcase, to a scalar advection--diffusion equation.  A common pitfall is to appeal to a strong maximum principle that requires the maximum to occur at an interior spacetime point; the following version is genuinely valid at the terminal time.
+
+\begin{theorem}[Strict terminal-time maximum principle for advection--diffusion]\label{thm:strict-terminal-max}
+Let $\rho:\R^3\times(-\infty,0]\to[0,1]$ be a bounded classical solution of
+\[
+\partial_t\rho + u\cdot\nabla\rho - \Delta\rho = 0
+\qquad\text{on }\R^3\times(-\infty,0],
+\]
+where $u$ is smooth and divergence-free: $\nabla\cdot u=0$.
+If $\rho(x_\ast,t_\ast)=1$ for some $(x_\ast,t_\ast)\in\R^3\times(-\infty,0]$,
+then $\rho\equiv 1$ on $\R^3\times(-\infty,t_\ast]$.
+In particular, if $\rho(0,0)=1$, then $\rho\equiv 1$ on $\R^3\times(-\infty,0]$.
+\end{theorem}
+
+\begin{proof}
+Fix any time $s<t_\ast$.
+For the uniformly parabolic operator $L:=\partial_t + u\cdot\nabla - \Delta$ with smooth coefficients,
+classical parabolic theory provides a (forward) fundamental solution
+$\Gamma(x,t;y,s)$ (see e.g.\ \cite{Friedman1964}) satisfying, for each fixed $(x,t)$ with $t>s$:
+\[
+\Gamma(x,t;y,s)>0\ \ \text{for all }y\in\R^3,
+\qquad
+\int_{\R^3}\Gamma(x,t;y,s)\,dy = 1.
+\]
+Moreover, the representation formula holds:
+\[
+\rho(x,t) = \int_{\R^3}\Gamma(x,t;y,s)\,\rho(y,s)\,dy.
+\]
+Apply this at $(x,t)=(x_\ast,t_\ast)$. Since $0\le \rho(\cdot,s)\le 1$,
+\[
+1=\rho(x_\ast,t_\ast)=\int_{\R^3}\Gamma(x_\ast,t_\ast;y,s)\,\rho(y,s)\,dy
+\le \int_{\R^3}\Gamma(x_\ast,t_\ast;y,s)\cdot 1\,dy = 1.
+\]
+Thus equality holds in an average of a bounded function against a strictly positive weight.
+If there were a point $y_0$ with $\rho(y_0,s)<1$, continuity would give a ball
+$B=B_r(y_0)$ and a $\delta>0$ such that $\rho\le 1-\delta$ on $B$.
+Since $\Gamma(x_\ast,t_\ast;\cdot,s)>0$ everywhere, we would get
+\[
+\int_{\R^3}\Gamma(x_\ast,t_\ast;y,s)\,\rho(y,s)\,dy
+\le 1-\delta\int_B \Gamma(x_\ast,t_\ast;y,s)\,dy
+< 1,
+\]
+contradicting $\rho(x_\ast,t_\ast)=1$.
+Therefore $\rho(\cdot,s)\equiv 1$ on $\R^3$.
+Since $s<t_\ast$ was arbitrary, $\rho\equiv 1$ on $\R^3\times(-\infty,t_\ast]$.
+\end{proof}
+
+\begin{lemma}[Biot--Savart divergence for constant vorticity]\label{lem:bs-divergence-const}
+The Biot--Savart formula
+\[
+u(x)=\frac{1}{4\pi}\int_{\R^3}\frac{(x-y)\times e_3}{|x-y|^3}\,dy
+\]
+does not converge (even as an improper integral): the integral diverges at spatial infinity.
+\end{lemma}
+
+\begin{proof}
+For $z=x-y$, one has
+\[
+\frac{|z\times e_3|}{|z|^3}\sim \frac{1}{|z|^2}.
+\]
+Hence
+\[
+\int_{|y|>R}\left|\frac{(x-y)\times e_3}{|x-y|^3}\right|dy
+\gtrsim \int_{|z|>R} |z|^{-2}\,dz
+\sim \int_R^\infty r^{-2}\cdot r^2\,dr
+=\int_R^\infty 1\,dr
+=\infty.
+\]
+\end{proof}
+
+\begin{theorem}[Constant direction forces Biot--Savart contradiction]\label{thm:constant-dir-contradiction-fixed}
+Assume an ancient vorticity field has constant direction $\xi\equiv e_3$, so
+$\omega=\rho\,e_3$ with $\rho\ge 0$, and suppose $\rho$ is bounded by $1$ and satisfies
+$\rho(0,0)=1$.
+Assume moreover that the associated velocity is taken in the Biot--Savart gauge at each time
+(i.e.\ $u(\cdot,t)$ is given by the Biot--Savart integral of $\omega(\cdot,t)$).
+Then such an ancient Navier--Stokes profile cannot exist.
+\end{theorem}
+
+\begin{proof}
+In the Biot--Savart gauge, $\omega=\rho e_3$ implies $u_3\equiv 0$, hence the stretching factor
+$\sigma=e_3\cdot\nabla u\cdot e_3=\partial_3 u_3$ vanishes.
+Therefore $\rho$ solves the homogeneous advection--diffusion equation
+\[
+\partial_t\rho + u\cdot\nabla\rho - \Delta\rho = 0
+\qquad\text{on }\R^3\times(-\infty,0].
+\]
+With $0\le\rho\le 1$ and $\rho(0,0)=1$, Theorem~\ref{thm:strict-terminal-max} yields $\rho\equiv 1$.
+Thus $\omega\equiv e_3$.
+
+But then the Biot--Savart integral defining $u$ diverges by Lemma~\ref{lem:bs-divergence-const}.
+This contradicts the assumed Biot--Savart gauge (and hence the mild/decaying-velocity framework).
+\end{proof}
+
+\begin{remark}[Gauge-fixing remains an input]\label{rem:gauge-fixing-ns}
+Theorem~\ref{thm:constant-dir-contradiction-fixed} is conditional on placing the ancient profile in the
+Biot--Savart (decaying) gauge on $\R^3$.
+Without a global gauge-fixing input, the constant-vorticity profile $\omega\equiv e_3$ corresponds to a legitimate
+(unbounded) rigid-rotation velocity field, so ``Biot--Savart divergence'' alone does not rule it out.
+\end{remark}
+
 \paragraph{Outcome.} The aggregator is a small-data gate: once the defect is small on a final window, the solution enters the global well-posedness regime, excluding blow-up via backward uniqueness.
 
 \section{Reverse-Lift: Classical \texorpdfstring{$\leftrightarrow$}{<->} Recognition Science}
@@ -623,6 +725,11 @@ X.-J. Li.
 H. Koch and D. Tataru.
 \newblock Well-posedness for the Navier--Stokes equations.
 \newblock \emph{Adv. Math.}, 157(1):22--35, 2001.
+
+\bibitem[Fri64]{Friedman1964}
+A. Friedman.
+\newblock \emph{Partial Differential Equations of Parabolic Type}.
+\newblock Prentice--Hall, 1964.
 
 \bibitem[Wei52]{Weil1952}
 A. Weil.

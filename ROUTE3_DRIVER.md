@@ -118,8 +118,8 @@ This section is the **single source of truth** for what is still assumed (even i
 - **Route‑3 sesquilinear identity hypotheses (bundled, but still assumptions; Track C)**:
   `ZetaInstantiation.EndToEnd.Assumptions` in `ZetaEndToEndSchwartz.lean`
   - now factored as a single field `Azeta : ZetaInstantiation.Assumptions_zeta (LC := LC) (H := H)` which carries:
-    - `transform`, `transform_eq_mellinOnCriticalLine`
-    - `memL2`, `integrable_pairTransform_volume`, `integrable_pairTransform_deriv_volume`, `integrable_pairTransform_μ`
+  - `transform`, `transform_eq_mellinOnCriticalLine`
+  - `memL2`, `integrable_pairTransform_volume`, `integrable_pairTransform_deriv_volume`, `integrable_pairTransform_μ`
 
 - **Definition consistency audit (must stay consistent with bundles)**:
   - ✅ Reconciled: `det2_zeta := riemannZeta` (so `logDeriv det2_zeta = - LSeries(Λ)` on `Re(s) > 1` matches `Det2PrimeTermAssumptions.logDeriv_det2_eq_neg_vonMangoldt`).
