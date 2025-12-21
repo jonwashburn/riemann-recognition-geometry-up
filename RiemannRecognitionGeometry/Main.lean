@@ -33,6 +33,9 @@ The main theorem: all non-trivial zeros of ζ(s) lie on Re(s) = 1/2.
 
 import RiemannRecognitionGeometry.Axioms
 import RiemannRecognitionGeometry.WhitneyGeometry
+import RiemannRecognitionGeometry.OscillationTargetTail
+import RiemannRecognitionGeometry.AssumptionsTail
+import RiemannRecognitionGeometry.Port.ZeroFreeWithIntervalTail
 import Mathlib.NumberTheory.LSeries.RiemannZeta
 import Mathlib.NumberTheory.LSeries.Dirichlet
 
@@ -106,6 +109,33 @@ theorem no_off_critical_zeros_in_strip_of_oscillationTarget
   rcases hT with ⟨M, h_osc, hM_le⟩
   exact no_off_critical_zeros_in_strip hCA hRG M h_osc hM_le
 
+/-- Renormalized variant (B2′ scaffolding): the zero-free theorem driven by `OscillationTargetTail`.
+
+This theorem is structurally aligned with the corrected paper B2′ story. It uses the Port-level
+centered contradiction from `Port.zero_free_with_interval_of_OscillationTargetTail`.
+
+The deep analytic steps are currently axiomatized in `OscillationTargetTail.lean` (D1/D2). -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTargetTail
+    (hCA : ClassicalAnalysisAssumptions)
+    (hT : OscillationTargetTail) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  intro ρ hρ_zero hρ_crit
+  simp only [criticalStrip, Set.mem_setOf_eq] at hρ_crit
+  by_cases h_re_gt_one : 1 < ρ.re
+  · exact completedRiemannZeta_ne_zero_of_re_gt_one h_re_gt_one hρ_zero
+  · push_neg at h_re_gt_one
+    have hρ_re : 1/2 < ρ.re := hρ_crit
+    exact
+      RiemannRecognitionGeometry.Port.zero_free_with_interval_of_OscillationTargetTail
+        (ρ := ρ) (hCA := hCA) (hρ_re := hρ_re) (hρ_zero := hρ_zero) (hT := hT)
+
+/-- Same theorem, but taking the bundled structure `OscillationTailAssumptions`. -/
+theorem no_off_critical_zeros_in_strip_of_oscillationTailAssumptions
+    (hCA : ClassicalAnalysisAssumptions)
+    (hOsc : OscillationTailAssumptions) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ ∈ criticalStrip → False := by
+  exact no_off_critical_zeros_in_strip_of_oscillationTargetTail hCA hOsc.oscillationTargetTail
+
 /-- Same theorem, but taking the bundled structure `OscillationAssumptions`. -/
 theorem no_off_critical_zeros_in_strip_of_oscillationAssumptions
     (hCA : ClassicalAnalysisAssumptions)
@@ -160,6 +190,47 @@ theorem RiemannHypothesis_recognition_geometry_of_oscillationTarget
     ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
   rcases hT with ⟨M, h_osc, hM_le⟩
   exact RiemannHypothesis_recognition_geometry hCA hRG M h_osc hM_le
+
+/-- Renormalized variant (B2′ scaffolding): RH from `OscillationTargetTail`.
+
+This is the direct analog of `RiemannHypothesis_recognition_geometry_of_oscillationTarget`, but driven by the
+renormalized Port contradiction. -/
+theorem RiemannHypothesis_recognition_geometry_of_oscillationTargetTail
+    (hCA : ClassicalAnalysisAssumptions)
+    (hT : OscillationTargetTail) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  intro ρ hρ
+  by_contra h
+  push_neg at h
+  rcases lt_trichotomy ρ.re (1/2 : ℝ) with h_lt | h_eq | h_gt
+  · -- Re(ρ) < 1/2 → 1-ρ is a zero with Re > 1/2
+    have h1ρ_zero : completedRiemannZeta (1 - ρ) = 0 := by
+      have h_FE := completedRiemannZeta_one_sub ρ
+      rw [h_FE, hρ]
+    have h1ρ_crit : (1 - ρ) ∈ criticalStrip := by
+      simp only [criticalStrip, Set.mem_setOf_eq, Complex.sub_re, Complex.one_re]
+      linarith
+    exact no_off_critical_zeros_in_strip_of_oscillationTargetTail hCA hT (1 - ρ) h1ρ_zero h1ρ_crit
+  · exact h h_eq
+  · have hρ_crit : ρ ∈ criticalStrip := by
+      simp only [criticalStrip, Set.mem_setOf_eq]
+      exact h_gt
+    exact no_off_critical_zeros_in_strip_of_oscillationTargetTail hCA hT ρ hρ hρ_crit
+
+/-- Same theorem, but taking the bundled structure `OscillationTailAssumptions`. -/
+theorem RiemannHypothesis_recognition_geometry_of_oscillationTailAssumptions
+    (hCA : ClassicalAnalysisAssumptions)
+    (hOsc : OscillationTailAssumptions) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  exact RiemannHypothesis_recognition_geometry_of_oscillationTargetTail hCA hOsc.oscillationTargetTail
+
+/-- Route‑A variant (scaffold): RH from μ‑Carleson packing (via the stubbed reduction μ‑Carleson ⇒ B2′). -/
+theorem RiemannHypothesis_recognition_geometry_of_muCarlesonAssumptions
+    (hCA : ClassicalAnalysisAssumptions)
+    (hμ : MuCarlesonAssumptions) :
+    ∀ ρ : ℂ, completedRiemannZeta ρ = 0 → ρ.re = 1/2 := by
+  have hT : OscillationTargetTail := hμ.oscillationTargetTail
+  exact RiemannHypothesis_recognition_geometry_of_oscillationTargetTail hCA hT
 
 /-- Same theorem, but taking the bundled structure `OscillationAssumptions`. -/
 theorem RiemannHypothesis_recognition_geometry_of_oscillationAssumptions

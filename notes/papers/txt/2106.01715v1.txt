@@ -1,0 +1,3653 @@
+1
+
+1
+2
+0
+2
+
+n
+u
+J
+
+3
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+5
+1
+7
+1
+0
+.
+6
+0
+1
+2
+:
+v
+i
+X
+r
+a
+
+SPECTRAL TRIPLES and ζ-CYCLES
+
+ALAIN CONNES1 and CATERINA CONSANI2
+
+1Coll`ege de France, 3 rue d’Ulm, Paris F-75005, France 1IHES, 35 rte de Chartres,
+91440 Bures-sur-Yvette, France (alain@connes.org) 2Dept. of Mathematics Johns
+Hopkins University, Baltimore 21218 USA (cconsan1@jhu.edu)
+
+To Vaughan Jones, in Memoriam, for his insight and breakthrough discoveries
+
+Abstract We exhibit very small eigenvalues of the quadratic form associated to the Weil explicit formulas
+restricted to test functions whose support is within a ﬁxed interval with upper bound S. We show
+both numerically and conceptually that the associated eigenvectors are obtained by a simple arithmetic
+operation of ﬁnite sum using prolate spheroidal wave functions associated to the scale S. Then we use
+these functions to condition the canonical spectral triple of the circle of length L=2 Log(S) in such a
+way that they belong to the kernel of the perturbed Dirac operator. We give numerical evidence that,
+when one varies L, the low lying spectrum of the perturbed spectral triple resembles the low lying zeros
+of the Riemann zeta function. We justify conceptually this result and show that, for each eigenvalue, the
+coincidence is perfect for the special values of the length L of the circle for which the two natural ways of
+realizing the perturbation give the same eigenvalue. This fact is tested numerically by reproducing the
+ﬁrst thirty one zeros of the Riemann zeta function from our spectral side, and estimate the probability
+of having obtained this agreement at random, as a very small number whose ﬁrst ﬁfty decimal places are
+all zero. The theoretical concept which emerges is that of zeta cycle and our main result establishes its
+relation with the critical zeros of the Riemann zeta function and with the spectral realization of these
+zeros obtained by the ﬁrst author.
+
+Keywords: Spectral triple, Weil positivity, Riemann zeta function, Spectral realization, Prolate spheroidal
+functions
+
+2010 Mathematics subject classiﬁcation: 11M55 (primary), 11M06, 46L87, 58B34 (secondary)
+
+1. Introduction
+
+When contemplating the low lying zeros of the Riemann zeta function one is tempted
+to speculate that they may form the spectrum of an operator of the form 1
+2 + iD with
+D = D∗ self-adjoint, and to search for the geometry provided by a spectral triple1 for
+which D is the Dirac operator. In this paper we give the construction of a spectral triple
+Θ(λ, k) = (A(λ), H(λ), D(λ, k)) which admits, as shown for small values of λ > 1, a
+spectrum of 1
+2 + iD very similar to the low lying zeros of the Riemann zeta function
+(this fact is exempliﬁed in Figure 1, for λ2 = 10.5). More precisely, the spectral triple
+Θ(λ, k) depends on λ and also on the choice of an integer k < 2λ2, moreover for a ﬁxed
+
+The second author is partially supported by the Simons Foundation collaboration grant n. 691493.
+
+1A triple (A, H, D) where A is an algebra acting in the Hilbert space H and D is an unbounded
+
+self-adjoint operator in H, this is the basic paradigm of noncommutative geometry [2]
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+A. Connes and C. Consani
+
+Figure 1. The low lying spectrum of iD(λ, k) for λ2 = 10.5, k = 18, on the left (in
+blue). On the right (in red) the low lying zeros of the Riemann zeta function .
+
+value of k the positive non-zero eigenvalues λn(D(λ, k)) arranged in increasing order,
+vary continuously with λ. A striking fact (discovered numerically at ﬁrst) is that for
+special values of λ the dependence of λn(D(λ, k)) on the value of k (close enough to 2λ2)
+disappears (see Figure 2 for the case n = 1), while the common value of these λn(D(λ, k))
+coincides exactly with the imaginary part of the n-th zero of the Riemann zeta function!
+This means that the qualitative resemblance of spectra as in Figure 1 yields in fact a sharp
+coincidence in some range: by varying λ in the interval 5 ≤ λ2 ≤ 16.5, and determining
+the coinciding eigenvalues up to n = 31 one produces 31 numbers in amazing agreement
+with the full collection of values of the ﬁrst 31 zeros of the zeta function (see Figure
+3; incidentally notice that the probability of obtaining such agreement from a random
+choice is of the order of 10−50 ).
+
+14-1414-14Spectral triples and ζ-cycles
+
+3
+
+Figure 2. The curves represent as a function of µ = λ2 the ﬁrst positive eigenvalue
+λ1(D(λ, 2k)) of D(λ, 2k). The ordinate of the points where the graphs touch each other is
+constant and coincides with the imaginary part ζ1 ∼ 14.134 of the ﬁrst zero of zeta. The
+abscissas, i.e. the values of µ, are part of the geometric progression with ratio exp( 2π
+) .
+ζ1
+
+Figure 3. Computing the coinciding eigenvalues λj(D(λ, k)) one obtains a list (lower
+line) which one compares with the list (upper line) of imaginary parts ζj of zeros of zeta.
+
+The main goal of this paper is to provide a theoretical explanation for this numerical
+“coincidence” and relate it to the spectral realization of the zeros of zeta given in [3].
+The new theoretical concept that emerges is that of a ζ-cycle.
+
+4
+
+A. Connes and C. Consani
+
+In Section 6.1 we explain how to deﬁne scale invariant Riemann sums for functions
+deﬁned on [0, ∞) with vanishing integral. This technique is implemented in the deﬁnition
+of the linear map
+
+from the Schwartz space S ev
+square integrable functions on the circle C = R∗
+is then provided by the following
+
+0 of even functions, f, f (0) = 0, with vanishing integral, to
++/µZ of length L = log µ. The key notion
+
+ΣµE : S ev
+
+0 → L2(C)
+
+Deﬁnition 1.1. A ζ-cycle is a circle C of length L = log µ such that the subspace
+ΣµE(S ev
+
+0 ) is not dense in the Hilbert space L2(C).
+
+It turns out that likewise for closed geodesics, ζ-cycles are stable under ﬁnite covers,
+and if C is a ζ-cycle of length L, then the n-fold cover of C is a ζ-cycle of length nL, for
+any positive integer n > 0.
+By construction, the subspace ΣµE(S ev
+0 ) ⊂ L2(C) is invariant under the group of rota-
+tions of the circle which appears here from the scaling action of the multiplicative group
+R∗
+
++/µZ. The main result of this paper is the following
+
++ on C = R∗
+
++ on the
+0 ) in L2(C) is formed by imaginary parts of zeros of the Riemann
+
+Theorem 1.1. (i) The spectrum of the action of the multiplicative group R∗
+orthogonal of ΣµE(S ev
+zeta function on the critical line.
+(ii) Let s > 0 be such that ζ( 1
+2π/s is a ζ-cycle, and the spectrum of the action of R∗
+
+2 + is) = 0, then any circle of length an integral multiple of
+
+0 ))⊥ contains s.
+
++ on (ΣµE(S ev
+
+The ad-hoc Sobolev spaces used in [3] to provide the spectral realization of zeros of zeta
+are here replaced by the canonical Hilbert space L2(C) of square integrable functions.
+Moreover, Theorem 1.1 provides the theoretical explanation for the above coincidence of
+spectral values. Indeed, the special values of λ2 = µ = exp L at which the k dependence
+of the eigenvalue λn(D(λ, k)) disappear, signal that the related circle of length L is a ζ-
+cycle and that λn(D(λ, k)) is in its spectrum. This explains why the low lying part of the
+spectrum of the spectral triple Θ(λ, k) possesses a tantalizing resemblance with the low
+lying zeros of the Riemann zeta function. Indeed, the special values of the length (L) of
+the circle for which the coinciding λn(D(λ, k)) occur, form a part of the arithmetic pro-
+gression of multiples of 2π/ζn, where ζn is the imaginary part of the n-th zero of the zeta
+function. This forces the graphs of the functions λn(D(µ1/2, k)) to pass through points
+of the form (exp(2πm/ζn), ζn) (as in Figure 2) which entails that the low lying spectrum
+of D(λ, k) (for k ∼ 2λ2) mimics the low lying zeros of the zeta function.
+The spectral triple Θ(λ, k) is a ﬁnite rank perturbation of the Dirac operator on a cir-
+cle of length log µ = 2 log λ and involves, as a key ingredient, classical prolate spheroidal
+wave functions [13, 12, 11]. These functions are used to deﬁne a ﬁnite dimensional sub-
+space (of dimension k) of the Hilbert space of square integrable functions on the circle
+of length 2 log λ, and the operator D(λ, k) is then canonically obtained from the oper-
+ator of ordinary diﬀerentiation D0(λ) to insure that its kernel contains the above ﬁnite
+dimensional subspace.
+
+Spectral triples and ζ-cycles
+
+5
+
+A priori, there seems to be no relation between the construction of the spectral triple
+Θ(λ, k) and the Riemann zeta function: in Section 3 we explain how we stumbled on
+Θ(λ, k) while continuing our investigations of the Weil quadratic form restricted to test
+functions with support in a ﬁxed interval. The Riemann-Weil explicit formulas give a con-
+crete and ﬁnite expression of the semi-local Weil quadratic form (see Section 2) which
+is suitable for numerical exploration since it only involves primes less than, say, λ2. By
+semi-local Weil quadratic form we mean the restriction QWλ of the sesquilinear form
+
+QW (f, g) :=
+
+(cid:88)
+
+(cid:98)f (¯s)(cid:98)g(s)
+
+1/2+is∈Z
+
+(1.1)
+
+on test functions f, g whose support is contained in the interval [λ−1, λ] ⊂ R∗
++. In (1.1),
+Z is the set of non-trivial zeros of the Riemann zeta function and Fourier transform is
+deﬁned on C∞
+
+c (R∗
+
++) by
+
+(cid:98)f (s) = Fµ(f )(s) :=
+
+(cid:90)
+
+R∗
++
+
+f (u)u−isd∗u.
+
+(1.2)
+
+√
+
+One knows that the positivity of the Weil quadratic form QWλ for all λ implies the
+Riemann Hypothesis (RH), and in case RH holds, QWλ is known to be strictly positive. In
+[14], the positivity was shown to hold for λ =
+2 using numerical analysis. In Section 2 we
+test numerically this positivity for larger values of λ, showing (§2.2) that the contribution
+from the archimedean place alone ceases to be positive in the upper part of the interval
+log(λ2) ∈ [log 2 − 0.2, log 2 + 0.2] ∼ [0.493, 0.893], while the positivity is restored by
+adding the contribution of the prime 2. This latter contribution depends explicitly on
+p = 2 in a form Wp which in fact can be evaluated for any real number p ∼ 2 (i.e.
+close to but not equal to 2). We show (§2.3) that by requiring positivity one restricts the
+allowed values of p to an interval of size ∼ 10−3 around p = 2, and in §2.4 we display that
+when λ2 grows past a prime power and one ignores its contribution, the quadratic form
+QWλ fails to remain positive. This fact is displayed up to λ2 ∼ 7. One striking numerical
+result is described in §2.5, where we report numerical evidence that as λ increases the
+corresponding operator in H(λ) := L2([λ−1, λ], d∗u) admits a ﬁnite number of extremely
+small positive eigenvalues. For instance, we ﬁnd that when λ2 = 11 the smallest positive
+eigenvalue is 2.389 × 10−48. The corresponding eigenfunctions are graphically reported
+in Figures 22, 23, 24.
+Section 3 explains conceptually the presence of these extremely small positive eigenvalues
+and there we also give an excellent approximation of the related eigenfunctions. The
+theoretical reason for the presence of these extremely small eigenvalues springs from the
+fact that the radical of the Weil quadratic form contains the range of the map E of [3],
+that is deﬁned on the codimension two subspace S ev
+0 of even Schwartz functions fulﬁlling
+f (0) = (cid:98)f (0) = 0 by
+
+E(f )(x) := x1/2 (cid:88)
+
+f (nx) , ∀f ∈ S ev
+0 .
+
+n>0
+
+(1.3)
+
+6
+
+A. Connes and C. Consani
+
+Even though RH implies that QWλ is strictly positive, and thus that its radical is {0}, by
+making use of (1.3), one can nevertheless construct functions g with support in [λ−1, λ]
+which are in the “near radical” of the Weil quadratic form i.e. fulﬁll QWλ(g) (cid:28) (cid:107)g(cid:107)2.
+More precisely, if the support of the even function f ∈ S ev
+is contained in the interval
+0
+[−λ, λ] ⊂ R, the support of E(f ) is contained in (0, λ] ⊂ R∗
++. On the other hand, the
+Poisson formula
+
+E( (cid:98)f )(x) = E(f )(x−1) , ∀f ∈ S ev
+0
+
+(1.4)
+
+shows that the support of E(f ) is contained in [λ−1, ∞) provided the support of the even
+function (cid:98)f is contained in the interval [−λ, λ] ⊂ R. The obstruction to obtain an element
+E(f ) of the radical of QWλ is the equality Pλ ∩ (cid:98)Pλ = {0}, where Pλ and (cid:99)Pλ are the
+cutoﬀ projections in the Hilbert space L2(R)ev of square integrable even functions (the
+projection Pλ is given by the multiplication by the characteristic function of the interval
+[−λ, λ] ⊂ R, the projection (cid:99)Pλ is its conjugate by the Fourier transform FeR ). The seminal
+work of Slepian and Pollack [13, 12, 11] on band limited functions then shows that while
+Pλ ∩ (cid:98)Pλ = {0}, the angle operator between these two projections admits a ﬁnite number
+1 + ν(λ2) ∼ 2λ2 of extremely small non zero eigenvalues and that the corresponding
+eigenfunctions are the prolate spheroidal wave functions
+
+ψm,λ(x) := PS 2m,0
+
+(cid:16)
+
+2πλ2,
+
+(cid:17)
+
+x
+λ
+
+, m ≤ ν(λ2) ∼ 2λ2.
+
+By construction, each ψm,λ is a function on the interval [−λ, λ] that one extends by 0
+outside that interval. Its Fourier transform FeR (ψm,λ) restricted to the interval [−λ, λ],
+is equal to χmψm,λ where the scalar χm is very close to (−1)m provided that m is
+less than ν(λ2) ∼ 2λ2. After taking care of the two conditions f (0) = (cid:98)f (0) = 0, the
+restriction of E(f ) to the interval [λ−1, λ] gives rise to a function which we call a “prolate
+vector”, and on which QWλ takes non-zero, but extremely small values. This fact is
+veriﬁed concretely in Section 3 where we compare the eigenvectors of the Weil quadratic
+form QWλ associated to its smallest eigenvalues with the orthogonalisation of the prolate
+vectors obtained using the technique outlined above, from the prolate spheroidal wave
+functions.
+The construction of the spectral triple Θ(λ, k) is carried out in Section 4. Even though
+this construction is motivated by the results of Section 3 on the near radical of the Weil
+quadratic form QWλ, the technique involved only uses the prolate vectors without any
+reference to QWλ. Using the ﬁrst k + 2 prolate functions, one obtains a k-dimensional
++/λ2Z, d∗u), then one lets Π(λ, k) be the associated
+subspace of L2([λ−1, λ], d∗u) (cid:39) L2(R∗
+orthogonal projection. By deﬁnition, the spectral triple Θ(λ, k) = (A(λ), H(λ), D(λ, k))
+is given by the action by multiplication of the algebra of smooth functions A(λ) :=
++/λ2Z, d∗u), while the operator D(λ, k) is the ﬁnite rank
+C∞(R∗
+perturbation
+
++/λ2Z) on H(λ) := L2(R∗
+
+D(λ, k) := (1 − Π(λ, k)) ◦ D0 ◦ (1 − Π(λ, k)), D0 = −iu∂u
+
+(1.5)
+
+Spectral triples and ζ-cycles
+
+7
+
+of the standard Dirac operator D0 = −iu∂u (with periodic boundary conditions when
++/λ2Z)). We compute the low lying spectra of these
+viewed in L2([λ−1, λ], d∗u) (cid:39) L2(R∗
+spectral triples and ﬁnd a neat resemblance with the low lying zeros of the Riemann
+zeta function, provided that k is suﬃciently close to the largest allowed value ν(λ2). On
+the other hand, since the eigenvalues λn(D(λ, k)) vary with λ, one cannot expect that
+they reproduce exactly the n-th zero of the zeta function. The subtlety of the relation
+is explained in Section 5, where we produce several criterions to recover the zeros of the
+Riemann zeta function using the non-zero eigenvalues λn(D(λ, k)). First we show that
+for k = 2(cid:96), the eigenvalues fulﬁll the inequality λn(D(λ, k + 1)) ≤ λn(D(λ, k)), then we
+prove (§5.1) that for certain values of λ one has λn(D(λ, k + 1)) (cid:39) λn(D(λ, k)). When
+this happens and k is close enough to the upper bound ν(λ2), the common eigenvalue
+coincides with the imaginary part of the n-th zero of the zeta function. This result
+is strengthened in §5.2, where we plot the evolution of the eigenvalues λn(D(λ, k)), as
+functions of µ = λ2, for ﬁxed k, and ﬁnd that several graphs coincide at the above special
+values of λ as displayed in Figure 2. In §5.3 we ﬁnd that the obtained special points in
+the (µ, λn) plane fulﬁll the quantization condition
+
+µiλn = 1.
+
+This result suggests that for the above special values of λ one has an eigenvector which
+is already an eigenvector of the unperturbed Dirac operator D0. In §5.4 we apply this
+criterion to select the special values of λ, and compute the 31 ﬁrst zeros of the Riemann
+zeta function with the precision shown in Figure 3. The conceptual explanation of these
+experimental ﬁndings is Theorem 1.1 whose proof is developed in the ﬁnal Section 6.
+
+2. The semi-local Weil quadratic form
+
+In this section we test numerically the positivity of the Weil quadratic form QW (f, g),
+in the semi local case, namely for test functions f, g with support in the interval [λ−1, λ].
+This investigation breaks down in two independent cases so that QWλ = QW +
+λ ⊕ QW −
+λ ,
+according to the parity of f and g with respect to the symmetry operator u (cid:55)→ u−1.
+Lemma 2.5 shows that for real test functions, the even functions do not interfere with
+the odd ones. Moreover by construction the positivity of QWλ depends on the length
+L = 2 log λ of the support of the test functions. We deﬁne in (2.21) an orthonormal basis
+{ηn, n ∈ Z} of the Hilbert space L2([λ−1, λ]) formed by odd (for the symmetry u (cid:55)→ u−1)
+real functions for n < 0, and by even real functions for n ≥ 0. The matrix σ(n, m) =
+QW (ηn, ηm) is the direct sum σ = σ+ ⊕ σ− of two inﬁnite symmetric real matrices, each
+of which is expressed as a ﬁnite sum involving the archimedean contribution −WR, as
+well as the contribution −Wp from primes p less than µ = λ2. The numerical tests consist
+in evaluating the eigenvalues of the very large portion of these matrices corresponding
+to indices n and m whose absolute values are ≤ N . These computations give signiﬁcant
+evidence that the increasing of large N does not alter substantially the lower part of the
+spectrum of σ(n, m). In §2.2 we ﬁnd that the archimedean contribution −WR to the Weil
+quadratic form when taken separately, ends to be positive if computed in an interval
+
+8
+
+A. Connes and C. Consani
+
+extending slightly beyond the value L = log 2 (Figure 6). However, the positivity is
+restored after that value, and precisely in the interval log 2 ≤ L < log 3, by implementing
+also the contribution of the prime p = 2, in terms of the related functional −W2. In
+§2.3 we report our numerical ﬁndings supplying evidence to the fact that the sign of
+QWλ is also sensitive to the replacement of −W2 by a functional −Wp whose deﬁnition
+uses the same formula as −W2 but replaces 2 with p, taken as a real variable in a small
+neighborhood of p = 2. Indeed the computations show that the positivity of the quadratic
+form fails if one considers real values of p outside an interval of size < 10−3 around 2. In
+§2.4 we report graphical evidence indicating how important is the contribution of each
+functional −Wp to preserve the positivity of the quadratic form, if the support of the
+test function stretches beyond a prime power pn. Finally, in §2.5 we display numerical
+evidence of the key fact that by suitably increasing the support of the test functions,
+the “even” and “ odd” matrices σ± admit a ﬁnite number of extremely small positive
+eigenvalues. The theoretical discussion of this result is presented in section 3.
+
+2.1. The matrix σ = σ+ ⊕ σ−
+This subsection describes the choice of test functions used in this paper while performing
+the numerical computations. When viewed in Hilbert theoretic terms the restriction
+QWλ of the Weil quadratic form to functions with support in the interval [λ−1, λ] is a
+lower bounded, lower semi-continuous quadratic form deﬁned on the Hilbert space H :=
+L2([λ−1, λ], d∗u) with values in (−∞, +∞]. We choose an orthonormal basis {ηn}n∈Z of
+H which is a core for QWλ and compute the eigenvalues of very large portions of the
+associated matrix QW (ηn, ηm) = σ(n, m).
+
+2.1.1. Explicit formula. Following [1], one considers the class W of complex valued func-
+tions f on R∗
++ which are continuous and with continuous derivative except at ﬁnitely
+many points where both f (x) and f (cid:48)(x) have at most a discontinuity of the ﬁrst kind,
+and at which the value of f (x) and f (cid:48)(x) is deﬁned as the average of the right and left
+limits. Moreover one assumes that for some δ > 0 one has
+
+f (x) = O(xδ), for x → 0+, f (x) = O(x−1−δ), for x → +∞.
+
+The Mellin transform of f ∈ W is deﬁned as
+
+˜f (s) :=
+
+(cid:90) ∞
+
+0
+
+f (x)xs−1dx
+
+Let f (cid:93)(x) := x−1f (x−1), then Weil’s explicit formula takes the form
+
+(cid:88)
+
+˜f (ρ) =
+
+ρ
+
+(cid:90) ∞
+
+0
+
+f (x)dx +
+
+(cid:90) ∞
+
+0
+
+f (cid:93)(x)dx −
+
+(cid:88)
+
+v
+
+Wv(f ),
+
+(2.1)
+
+(2.2)
+
+where the sum on the left hand side is over all complex zeros ρ of the Riemann zeta
+function, and the sum on the right hand side runs over all rational places v of Q. The
+
+Spectral triples and ζ-cycles
+
+non-archimedean distributions Wp are deﬁned as
+
+Wp(f ) := (log p)
+
+∞
+(cid:88)
+
+m=1
+
+(cid:0)f (pm) + f (cid:93)(pm)(cid:1)
+
+while the archimedean distribution is given by
+
+WR(f ) := (log 4π + γ)f (1) +
+
+(cid:90) ∞
+
+1
+
+(cid:18)
+
+f (x) + f (cid:93)(x) −
+
+2
+x
+
+f (1)
+
+(cid:19) dx
+
+x − x−1 .
+
+9
+
+(2.3)
+
+(2.4)
+
+The translation to (equivalent) formulas using the Fourier transform (in place of the
+Mellin transform) is done by implementing the automorphism ∆
+
+f (cid:55)→ ∆1/2f = F, F (x) = x1/2f (x)
+
+(2.5)
+
+which respects the convolution product and satisﬁes the equalities
+
+(∆1/2f (cid:93))(x) = x1/2f (cid:93)(x) = x−1/2f (x−1) = (∆1/2f )(x−1).
+
+After taking complex conjugates, ∆ is compatible with the natural involutions. For a
+rational place v, we set Wv(F ) := Wv(∆−1/2F ), then the above distributions Wp take
+the following form
+
+Wp(F ) = (log p)
+
+∞
+(cid:88)
+
+m=1
+
+p−m/2 (cid:0)F (pm) + F (p−m)(cid:1) .
+
+(2.6)
+
+Using the multiplicative version d∗x = dx/x of the Haar measure, the archimedean
+distribution WR becomes
+
+WR(F ) := (log 4π + γ)F (1) +
+
+(cid:90) ∞
+
+1
+
+(cid:16)
+
+F (x) + F (x−1) − 2x−1/2F (1)
+
+(cid:17) x1/2
+x − x−1 d∗x.
+
+(2.7)
+
+2.1.2. The semi-local Weil quadratic form. The Weil quadratic form is now re-written as
+
+QW (f, g) = ψ(f ∗ ∗ g), ψ(F ) := (cid:98)F (i/2) + (cid:98)F (−i/2) − WR(F ) −
+
+(cid:88)
+
+p
+
+Wp(F )
+
+(2.8)
+
+where (cid:98)F (s) := (cid:82) F (u)u−isd∗u denotes the Fourier transform of the function F . Moreover
+the functional W∞ := −WR fulﬁlls the following formula
+
+W∞(F ) =
+
+(cid:90)
+
+(cid:98)F (t)
+
+2∂tθ(t)
+2π
+
+dt
+
+(2.9)
+
+10
+
+A. Connes and C. Consani
+
+in terms of the derivative of the angular Riemann-Siegel function θ(t)
+
+θ(t) = −
+
+t
+2
+
+log π + (cid:61) log Γ
+
+(cid:18) 1
+4
+
++ i
+
+(cid:19)
+
+,
+
+t
+2
+
+(2.10)
+
+with log Γ(s), for (cid:60)(s) > 0, the branch of the log which is real for s real.
+By a lower bounded, lower semi-continuous (lsc) quadratic form q on a Hilbert space H
+we mean a lower semi-continuous map2 q : H → (−∞, +∞] which fulﬁlls q(λξ) = |λ|2q(ξ)
+for all λ ∈ C, the parallelogram law
+
+q(ξ + η) + q(ξ − η) = 2q(ξ) + 2q(η)
+
+and also an inequality of the form q(ξ) ≥ −c(cid:107)ξ(cid:107)2 for all ξ ∈ H, reﬂecting the lower
+bound of q. The associated sesquilinear form (antilinear in the ﬁrst variable) is given on
+the domain of q, Dom(q) := {ξ ∈ H | q(ξ) < ∞} by
+
+q(ξ, η) :=
+
+1
+4
+
+(q(ξ + η) − q(ξ − η) + iq(iξ + η) − iq(iξ − η)) .
+
+By a result of Kato (see [10], Theorem 2) such lower bounded quadratic forms correspond
+to lower bounded densely deﬁned self-adjoint operators T ≥ −c on H by the formula
+
+q(ξ) + c(cid:107)ξ(cid:107)2 = (cid:104)(T + c)
+
+1
+2 ξ | (T + c)
+
+1
+2 ξ(cid:105) = (cid:107)(T + c)
+
+1
+
+2 ξ(cid:107)2 , ∀ξ ∈ H.
+
+At the informal level this means that q(ξ, η) = (cid:104)ξ | T η(cid:105).
+
+Proposition 2.1. Let λ > 1. The following formula deﬁnes a lower bounded lower
+semi-continuous quadratic form QWλ : L2([λ−1, λ], d∗u) → (−∞, +∞]
+
+QWλ(f, f ) :=
+
+(cid:90)
+
+| (cid:98)f (t)|2 2∂tθ(t)
+
+2π
+
+(cid:18)
+
+dt + 2(cid:60)
+
+(cid:98)f (
+
+i
+2
+
+¯
+(cid:98)f (−
+
+)
+
+i
+2
+
+(cid:19)
+)
+
+−
+
+(cid:88)
+
+1<n≤λ2
+
+Λ(n)(cid:104)f | V (n)f (cid:105) (2.11)
+
+where Λ(n) is the von Mangoldt function and V (n) is the bounded self-adjoint operator
+in L2([λ−1, λ], d∗u) such that
+
+(cid:104)f | V (n)g(cid:105) = n−1/2 (cid:0)(f ∗ ∗ g)(n) + (f ∗ ∗ g)(n−1)(cid:1) .
+
+(2.12)
+
+Proof. The function ∂tθ(t) is even, lower bounded and of the order of O(log |t|) for
+|t| → ∞. This shows that the ﬁrst term (Q∞(f ) = (cid:82) | (cid:98)f (t)|2 2∂tθ(t)
+2π dt) in (2.11) deﬁnes
+a lower bounded,
+lower semi-continuous quadratic form Q∞ on the Hilbert space
+L2(R∗
++, d∗u). We view L2([λ−1, λ], d∗u) as the closed subspace of functions which van-
+ish outside [λ−1, λ]. The restriction of the quadratic form Q∞ to L2([λ−1, λ], d∗u) is still
+lower semi-continuous and lower bounded, moreover the domain {ξ ∈ L2([λ−1, λ], d∗u) |
+
+2i.e. such that when ξn → ξ one has q(ξ) ≤ lim inf q(ξn)
+
+Spectral triples and ζ-cycles
+
+11
+
+Q∞(ξ, ξ) < ∞} is dense since it contains all smooth functions with support in (λ−1, λ).
+Thus it remains to show that each of the remaining terms can be written in the form
+(cid:104)f | T g(cid:105) with T bounded and self-adjoint in L2([λ−1, λ], d∗u). One has
+
+(cid:98)f (
+
+i
+2
+
+) =
+
+(cid:90) λ
+
+λ−1
+
+f (u)u1/2d∗u = (cid:104)h | f (cid:105),
+
+h(u) := u1/2 , ∀u ∈ [λ−1, λ].
+
+(cid:16)
+
+(cid:98)f ( i
+2 )
+
+¯
+(cid:98)f (− i
+2 )
+
+(cid:17)
+
+in (2.11) is of the form (cid:104)f | T f (cid:105), where T is the sum of
+Thus the term 2(cid:60)
+the rank one operators T = |h(cid:105)(cid:104)h∗| + |h∗(cid:105)(cid:104)h|. Let us show that (2.12) deﬁnes a bounded
+self-adjoint operator V (n) in L2([λ−1, λ], d∗u). One has
+
+(f ∗ ∗ g)(v) =
+
+(cid:90)
+
+f ∗(vu−1)g(u)d∗u =
+
+(cid:90)
+
+f (v−1u)g(u)d∗u
+
+so that by the Cauchy-Schwarz inequality one derives |(f ∗ ∗ g)(v)| ≤ (cid:107)f (cid:107)(cid:107)g(cid:107). This shows
+that the equality (f ∗∗g)(v) = |f (cid:105)(cid:104)Vvg| deﬁnes a bounded operator Vv in L2([λ−1, λ], d∗u).
+(cid:3)
+Moreover its adjoint is V ∗
+
+v = Vv−1 and thus V (n) is bounded and self-adjoint.
+
+Lemma 2.2. Let λ > 1, and U ∈ L2([λ−1, λ], d∗u) be the function U (u) := u
+the space of Laurent polynomials C[U, U −1] is a core for the quadratic form QWλ.
+
+iπ
+log λ . Then
+
+Proof. Since all terms in (2.11) are bounded except for Q∞, it is enough to show that
+C[U, U −1] is a core for the quadratic form Q∞ restricted to L2([λ−1, λ], d∗u). First note
+that the powers U n belong to the domain of Q∞ since the Fourier transform of U n is
+given by
+
+(cid:99)U n(s) =
+
+(cid:90) λ
+
+λ−1
+
+U n(u)u−isd∗u =
+
+(cid:104)
+u
+
+iπn
+log λ −is
+
+(cid:18) iπn
+log λ
+
+(cid:19)−1 (cid:105)λ
+
+− is
+
+=
+
+λ−1
+
+= 2 log λ(−1)n sin(s log λ) (πn − s log λ)−1 = O(1/|s|).
+
+(2.13)
+
+Thus the integral of | (cid:99)U n(s)|2∂tθ(t) is absolutely convergent and U n belongs to the domain
+of Q∞. Next, given ξ ∈ L2([λ−1, λ], d∗u) such that Q∞(ξ, ξ) < ∞, we want to show that
+for any (cid:15) > 0 there exists η ∈ C[U, U −1] such that (with −c the lower bound of Q∞)
+
+(1 + c)(cid:107)ξ − η(cid:107)2 + Q∞(ξ − η, ξ − η) < (cid:15).
+
+(2.14)
+
+We switch from R∗
++ to the additive group R (using the logarithm) and let L = 2 log λ and
+H = L2([−L/2, L/2]) ⊂ L2(R). Under this change of variable the function U becomes
+U (x) = exp( 2πix
+
+L ). Moreover using the Fourier transform on R (cid:39) (cid:98)R one can write
+
+Q∞(f, f ) :=
+
+(cid:90)
+
+| (cid:98)f (t)|2 2∂tθ(t)
+
+2π
+
+dt.
+
+(2.15)
+
+12
+
+A. Connes and C. Consani
+
+In view of the asymptotic expansion for |t| → ∞
+
+∂tθ(t) =
+
+1
+2
+
+(log(|t|) − log(2) − log(π)) −
+
+1
+
+48t2 + O (cid:0)t−4(cid:1)
+
+one can replace (2.14) by an equivalent condition of ﬁnding, given (cid:15) > 0, a Laurent
+polynomial η in U (x) = exp( 2πix
+
+L ) for x ∈ [−L/2, L/2], such that
+
+(cid:90)
+
+|(cid:98)ξ(s) − (cid:98)η(s)|2(1 + log(1 + s2))ds < (cid:15).
+
+(2.16)
+
+We ﬁrst replace ξ by ξ1 with ξ1(x) := ρ ξ(ρx) for ρ > 1, while
+
+(cid:90)
+
+|(cid:98)ξ(s) − (cid:98)ξ1(s)|2(1 + log(1 + s2))ds < (cid:15)/2
+
+(2.17)
+
+This latter inequality holds provided ρ is close enough to 1. Indeed one has
+
+(cid:90)
+
+|(cid:98)ξ(s)|2(1 + log(1 + s2))ds < ∞,
+
+(cid:98)ξ1(s) = (cid:98)ξ(ρ−1s),
+
+while the scaling action S of R∗
+
++ on the Hilbert space of functions on R with the norm
+
+(cid:90)
+
+(cid:107)f (cid:107)2
+
+1 :=
+
+|f (s)|2(1 + log(1 + s2))ds
+
+is pointwise norm continuous. Note ﬁrst that S(ρ) is bounded uniformly near ρ = 1 since
+
+(cid:90)
+
+|f (ρ−1s)|2(1 + log(1 + s2))ds = ρ
+
+(cid:90)
+
+|f (t)|2(1 + log(1 + ρ2t2))dt
+
+while (1 + log(1 + ρ2t2)) ≤ 2(1 + log(1 + t2)) for all t ∈ R for ρ ≤ 2. The pointwise
+norm continuity of S(ρ) follows since this action is pointwise norm continuous on the
+dense subspace of continuous functions with compact support. Now the support of ξ1,
+ξ1(x) := ρ ξ(ρx) is contained in the interval [−ρ−1L/2, ρ−1L/2]. Thus the convolution
+c (R) whose support is contained in a small
+ξ2 = φ ∗ ξ1 with a smooth function φ ∈ C∞
+enough neighborhood of 0 is a smooth function with support in the interior of the interval
+[−L/2, L/2]. Fix such a φ positive with integral equal to 1. Let φn(x) = nφ(nx), and
+let ηn = φn ∗ ξ1. One has (cid:98)ηn(s) = (cid:98)φ(s/n)(cid:98)ξ1(s). The functions (cid:98)φ(s/n) are bounded
+| (cid:98)φ(s/n)| ≤ 1 and converge pointwise to 1, thus the Lebesgue dominated convergence
+theorem shows that for n large enough, one has
+
+(cid:90)
+
+|(cid:98)ξ1(s) − (cid:98)ηn(s)|2(1 + log(1 + s2))ds < (cid:15)/4.
+
+(2.18)
+
+Spectral triples and ζ-cycles
+
+13
+
+Finally since ηn ∈ C∞
+c ((−L/2, L/2)) it can be viewed as a smooth function on the circle
+obtained by identifying the end points of the interval [−L/2, L/2] so that there exists a
+sequence (ak)k∈Z of rapid decay such that ηn = (cid:80) akU k. Equation (2.13) still holds after
+the change of variables and one gets the equality
+
+(cid:107) (cid:98)U k(cid:107)2
+
+1 = 4(log λ)2
+
+(cid:90)
+
+| sin(s log λ) (πk − s log λ)−1 |2(1 + log(1 + s2))ds.
+
+One has sin2(s)s−2 ≤ 2(1 + s2)−1, and for any a ∈ R, 1 + (s − a)2 ≤ 2(1 + a2)(1 + s2) so
+that log(1+(s−a)2) ≤ log 2+log(1+s2)+log(1+a2). This shows that (cid:107) (cid:98)U k(cid:107)2
+1 = O(log |k|)
+and hence, since ηn = (cid:80) akU k where the sequence (ak)k∈Z is of rapid decay, one can ﬁnd
+N such that η = (cid:80)N
+
+−N akU k fulﬁlls
+
+(cid:90)
+
+|(cid:98)η(s) − (cid:98)ηn(s)|2(1 + log(1 + s2))ds < (cid:15)/4.
+
+Combining (2.17), (2.18), (2.19) one obtains the required approximation.
+
+(2.19)
+
+(cid:3)
+
+Proposition 2.3. Let λ > 1. The quadratic form QWλ : L2([λ−1, λ], d∗u) → (−∞, +∞]
+of (2.11) fulﬁlls, for any f ∈ L2([λ−1, λ], d∗u),
+
+QWλ(f ) = lim inf
+gn→f
+
+QWλ(gn), gn ∈ C[U, U −1]
+
+(2.20)
+
+Proof. By applying the lower semicontinuity of QWλ one sees that in (2.20) the lhs is
+smaller than the rhs. The density of C[U, U −1] in the domain of QWλ for the graph-
+norm shown in Lemma 2.2, proves that if f is in the domain of QWλ there exists a
+sequence gn of elements of C[U, U −1] converging to f in norm, and such that QWλ(f ) =
+(cid:3)
+limgn→f QWλ(gn).
+
+Corollary 2.4. The lower bound of QWλ is the limit, when N → ∞, of the smallest
+eigenvalue of the restriction of QWλ to the linear span EN of the functions U k for
+|k| ≤ N .
+
+2.1.3. Basis of real functions in C[U, U −1]. In order to compute explicitly the smallest
+eigenvalue of the restriction of QWλ to the linear span EN of the functions U k, for
+|k| ≤ N , as in Corollary 2.4, we ﬁrst ﬁnd a convenient orthonormal basis formed of real
+valued functions. We ﬁrst consider the Hilbert space L2([−L/2, L/2]) ⊂ L2(R) with the
+inner product deﬁned by the formula
+
+(cid:104)ξ | η(cid:105) :=
+
+(cid:90) L/2
+
+−L/2
+
+ξ(x)η(x)dx
+
+14
+
+A. Connes and C. Consani
+
+An orthonormal real basis is given, by the constant function ξ0(x) = L−1/2 together with
+the functions ξn(x) n ∈ Z, n (cid:54)= 0, deﬁned as follows
+
+ξn(x) := (−1)n(cid:16) 2
+L
+ξn(x) := (−1)n(cid:16) 2
+L
+
+(cid:17)1/2
+
+(cid:17)1/2
+
+cos
+
+sin
+
+(cid:17)
+
+(cid:17)
+
+(cid:16) 2πnx
+L
+(cid:16) 2πnx
+L
+
+, ∀n > 0
+
+(2.21)
+
+, ∀n < 0.
+
+We note the following simple facts
+
+Lemma 2.5. Let L > 0, φj ∈ L2([−L/2, L/2]) and θ = φ1 ∗ φ∗
+(i) The support of θ is contained in the interval [−L, L], and for t ∈ [0, L] one has
+
+2. Then
+
+θ(t) =
+
+(cid:90) L/2
+
+t−L/2
+
+φ1(x)φ2(x − t)dx,
+
+θ(−t) =
+
+(cid:90) L/2
+
+t−L/2
+
+φ1(x − t)φ2(x)dx.
+
+(ii) If the functions φj are real, then: φ1 ∗ φ∗
+(iii) If the functions φj are real, with φ1 even and φ2 odd, then for all t ∈ R one has:
+
+2(−t) = φ2 ∗ φ∗
+
+1(t).
+
+φ1 ∗ φ∗
+
+2(t) + φ2 ∗ φ∗
+
+1(t) = 0.
+
+Proof. (i) The function θ is given, using φ∗
+
+2(x) = φ2(−x), by
+
+θ(t) =
+
+(cid:90)
+
+R
+
+φ1(x)φ2(x − t)dx
+
+t ∈ R.
+
+Since the integrand is not zero only if x ∈ [−L/2, L/2] and x − t ∈ [−L/2, L/2], one can
+restrict the integration in the interval [t − L/2, L/2]. The second equality follows using
+the equality θ∗ = φ2 ∗ φ∗
+1.
+(ii) Follows from θ∗ = φ2 ∗ φ∗
+1.
+(iii) Notice that φ∗
+even, thus one derives: φ1 ∗ φ∗
+
+1 = φ1 since φ1 is real and
+(cid:3)
+
+2 = −φ2 since φ2 is real and odd, and φ∗
+
+1 = −φ1 ∗ φ2 + φ2 ∗ φ1 = 0.
+
+2 + φ2 ∗ φ∗
+
+It is convenient to rewrite the Weil sesquilinear form QW (f, g) = ψ(f ∗ ∗ g) using the
+
+natural invariance of the functional ψ under the symmetry hσ(u) := h(u−1). Thus
+
+where
+
+with
+
+ψ(h) = ψ#(h + hσ), hσ(u) := h(u−1)
+
+ψ#(F ) := W #
+
+0,2(F ) − W #
+
+R (F ) −
+
+(cid:88)
+
+W #
+
+p (F )
+
+W #
+
+0,2(F ) =
+
+(cid:90) ∞
+
+1
+
+F (x)(x1/2 + x−1/2)d∗x
+
+(2.22)
+
+(2.23)
+
+(2.24)
+
+Spectral triples and ζ-cycles
+
+W #
+
+R (F ) =
+
+1
+2
+
+(log 4π + γ)F (1) +
+
+(cid:90) ∞
+
+1
+
+x1/2F (x) − F (1)
+x − x−1
+
+d∗x
+
+W #
+
+p (F ) = (log p)
+
+∞
+(cid:88)
+
+m=1
+
+p−m/2F (pm).
+
+15
+
+(2.25)
+
+(2.26)
+
+Lemma 2.6. With ηn(u) := ξn(log u), the ηj, |j| ≤ n form an orthonormal basis of En.
+(i) The matrix of the Weil sesquilinear form is given by the following formula
+
+QWλ(ηn, ηm) = σ(n, m) = ψ#(h),
+
+h(u) = (ξn ∗ ξ∗
+
+m + ξm ∗ ξ∗
+
+n) (log u),
+
+(2.27)
+
+where ψ#(h) is deﬁned in (2.23).
+n)(y) = 0 , ∀y ∈ R.
+(ii) For n ≥ 0, m < 0 one has (ξn ∗ ξ∗
+m = ξm ∗ ξ∗
+(iii) For nm > 0, or n = 0 and m ≥ 0, one has: ξn ∗ ξ∗
+n.
+Furthermore, the convolution ξn ∗ ξ∗
+m(y) is an even function of y whose explicit descrip-
+tion, for y ∈ [0, L], is given in the following table whose general term gives the function
+1/2(ξn ∗ ξ∗
+
+m + ξm ∗ ξ∗
+
+m + ξm ∗ ξ∗
+
+n)(y)
+
+n > 0
+
+n = 0
+
+n < 0
+
+m > 0, n (cid:54)= m
+
+m = n > 0
+
+m = 0
+
+m < 0, n (cid:54)= m
+
+m = n < 0
+
+n sin( 2πny
+
+L )−m sin( 2πmy
+L )
+π(m2−n2)
+L )
+(L−y) cos( 2πny
+L
+−
+
+sin( 2πny
+L )
+2πn
+
+−
+L )
+sin( 2πny
+√
+2πn
+0
+
+∅
+
+−
+
+√
+
+L )
+sin( 2πmy
+2πm
+∅
+L−y
+L
+
+0
+
+∅
+
+0
+
+∅
+
+0
+
+m sin( 2πny
+
+L )−n sin( 2πmy
+L )
+π(m2−n2)
+
+L )
+sin( 2πny
+2πn +
+
+(L−y) cos( 2πny
+L )
+L
+
+Proof. (ii) Follows from Lemma 2.5.
+(iii) The table reported in (iii) is obtained by direct computation.
+(i) The formulas reported in (iii) show that all functions involved are in the domain of
+applicability W of the explicit formulas (see §2.1.1). Moreover the terms of the explicit
+formulas correspond to the terms which enter in the deﬁnition (2.11) of the quadratic
+(cid:3)
+form QWλ in Proposition 2.1.
+
+Lemma 2.6 (ii) shows that σ is a symmetric matrix and that
+
+σ(n, m) = 0 , ∀n ≥ 0, m < 0.
+
+Thus σ splits in two blocks σ = σ+ ⊕σ− which we shall call informally as the “even ” and
+“odd ” matrices. They correspond to the partition Z = {n ≥ 0} ∪ {n < 0} and one has
+
+QWλ = QW +
+
+λ ⊕ QW −
+
+λ , σ = σ+ ⊕ σ−.
+
+(2.28)
+
+16
+
+A. Connes and C. Consani
+
+This decomposition shows that the positivity of the Weil quadratic form can be tested
+working separately the cases of even functions (using the matrix σ+) and odd functions
+(using σ−). In the chosen basis ηn, the even case corresponds to considering elements of
+the basis indexed by n ≥ 0, while the odd case involves the ηn’s indexed by n < 0.
+
+2.1.4. The matrix w0,2(n, m). Next, we shall describe the contribution of the ﬁrst two
+terms in (2.8) to the matrix σ(m, n). The following lemma shows that these terms
+contribute by a rank one matrix to both the odd and the even matrices σ±.
+
+Lemma 2.7. Let n, m > 0 be positive integers, θ = ξm ∗ ξ∗
+following equality holds
+
+n, F (x) = θ(log x). The
+
+(cid:98)F (i/2) + (cid:98)F (−i/2) =
+
+8e− L
+
+2 (cid:0)eL/2 − 1(cid:1)2
+(L2 + 16π2m2) (L2 + 16π2n2)
+
+L3
+
+.
+
+(2.29)
+
+If n, m < 0 are negative integers, then one has
+
+(cid:98)F (i/2) + (cid:98)F (−i/2) = −
+
+256π2Le− L
+mn
+(L2 + 16π2m2) (L2 + 16π2n2)
+
+2 (cid:0)eL/2 − 1(cid:1)2
+
+.
+
+(2.30)
+
+Proof. We give the proof of (2.30); one proves (2.29) in a similar manner. One has
+
+(cid:98)F (i/2) + (cid:98)F (−i/2) =
+
+(cid:90)
+
+R∗
++
+
+F (x)(x1/2 + x−1/2)d∗x =
+
+(cid:90)
+
+R
+
+θ(t)(et/2 + e−t/2)dt =
+
+=
+
+(cid:90) ∞
+
+0
+
+(θ(t) + θ(−t))(et/2 + e−t/2)dt =
+
+(cid:90) L
+
+0
+
+(θ(t) + θ(−t))(et/2 + e−t/2)dt.
+
+For m (cid:54)= n Lemma 2.6 (iii) with t ∈ [0, L], implies
+
+θ(t) + θ(−t) =
+
+2
+(m2 − n2)π
+
+(cid:18)
+
+m sin
+
+(cid:17)
+
+(cid:16) 2πnt
+L
+
+− n sin
+
+(cid:16) 2πmt
+L
+
+(cid:17)(cid:19)
+
+.
+
+Furthermore one also has
+
+(cid:90) L
+
+0
+
+sin
+
+(cid:17)
+
+(cid:16) 2πnt
+L
+
+(et/2 + e−t/2)dt = −
+
+8πe− L
+
+2 (cid:0)eL/2 − 1(cid:1)2
+L2 + 16π2n2
+
+Ln
+
+which gives
+
+(cid:98)F (i/2) + (cid:98)F (−i/2) =
+
+2
+(m2 − n2)π
+
+(cid:32)
+
+−
+
+128π3e− L
+
+2 (cid:0)eL/2 − 1(cid:1)2
+
+Lmn (cid:0)m2 − n2(cid:1)
+
+(cid:33)
+
+(L2 + 16π2m2) (L2 + 16π2n2)
+
+Spectral triples and ζ-cycles
+
+17
+
+and this proves (2.30). When m = n, Lemma 2.6 (iii) gives with t ∈ [0, L],
+
+θ(t) + θ(−t) =
+
+1
+nπ
+
+sin
+
+(cid:17)
+
+(cid:16) 2πnt
+L
+
+(cid:16)
+
+1 −
+
++ 2
+
+(cid:17)
+
+t
+L
+
+cos
+
+(cid:16) 2πnt
+L
+
+(cid:17)
+
+.
+
+Then, one has
+
+(cid:90) L
+
+0
+
+(cid:16)
+
+1 −
+
+(cid:17)
+
+t
+L
+
+cos
+
+(cid:17)
+
+(cid:16) 2πnt
+L
+
+(et/2 + e−t/2)dt =
+
+4e− L
+
+2 (cid:0)eL/2 − 1(cid:1)2
+
+L (cid:0)L2 − 16π2n2(cid:1)
+
+(L2 + 16π2n2)2
+
+which gives
+
+(cid:98)F (i/2) + (cid:98)F (−i/2) = −
+
+8e− L
+
+2 (cid:0)eL/2 − 1(cid:1)2
+L2 + 16π2n2
+
+L
+
++
+
+8e− L
+
+2 (cid:0)eL/2 − 1(cid:1)2
+
+L (cid:0)L2 − 16π2n2(cid:1)
+
+(L2 + 16π2n2)2
+
+.
+
+This argument shows (2.30) using the equality: −(L2 + 16π2n2) + (L2 − 16π2n2) =
+(cid:3)
+−32π2n2.
+
+2.1.5. The sum (cid:80) Wp. The contribution of the non archimedean primes is given by (2.6),
+now written as
+
+(cid:88)
+
+Wp =
+
+(cid:88)
+
+1<m≤exp(L)
+
+Λ(m)m−1/2 (ξn ∗ ξ∗
+
+m + ξm ∗ ξ∗
+
+n) (log m).
+
+(2.31)
+
+2.1.6. The functional WR. Let θsym(t) = (ξn ∗ ξ∗
+
+m + ξm ∗ ξ∗
+
+n) (t), then(2.7) reads as
+
+WR =
+
+(cid:90) L
+
+exp (cid:0) x
+
+2
+
+(cid:1) θsym(x) − θsym(0)
+
+0
+
+exp (x) − exp (−x)
+
+dx − θsym(0)
+
+(cid:90) ∞
+
+L
+
+dx
+exp (x) − exp (−x)
+
++
+
+1
+2
+
+(γ + log(4π))θsym(0).
+
+One has
+
+so that one obtains
+
+(cid:90) ∞
+
+L
+
+dx
+exp (x) − exp (−x)
+
+=
+
+1
+2
+
+log
+
+(cid:19)
+
+(cid:18) eL + 1
+eL − 1
+
+WR =
+
+θsym(0)
+2
+
+(cid:32)
+
+(cid:32)
+
+γ + log
+
+4π
+
+(cid:33)(cid:33)
+
++
+
+eL − 1
+eL + 1
+
+(cid:90) L
+
+exp (cid:0) x
+
+2
+
+(cid:1) θsym(x) − θsym(0)
+
+0
+
+exp (x) − exp (−x)
+
+dx.
+
+(2.32)
+
+18
+
+A. Connes and C. Consani
+
+Figure 4. Coeﬃcient of θsym(0)
+
+2
+
+. Its value at L = log 2 is 2.00963.
+
+Figure 4 shows that the coeﬃcient of θsym(0)
+
+is negative near the origin (L = 0), thus
+2
+its contribution to the quadratic form QW is a positive one for small values of L, due to
+the minus sign in front of W +
+R (in (2.23)). This very same contribution becomes negative
+for larger values of L.
+
+2.2. Sensitivity of Weil positivity, archimedean place
+
+The ﬁrst fact we report from the numerical computations is that the archimedean con-
+tribution fails to remain positive when extended a bit beyond the value L = log 2. In the
+following two graphs (Figure 5 and 6) we report the variation of the smallest eigenvalue
+for the even matrix σ+, as the value of L approaches and then stretches a bit beyond
+log 2. When one considers values of L in the interval log 2 ≤ L < log 3, the contribution
+of the primes to the Weil quadratic form is only by p = 2, and of the form
+
+Wp(F ) = p−1/2 log p (θ(log p) + θ(− log p)) .
+
+(2.33)
+
+Figure 7 shows that adding the contribution of the prime 2 to the archimedean contribu-
+tion restores the positivity of the even matrix σ+. The graph is in terms of µ := exp L,
+and this choice of the variable is dictated by the fact that its integer prime power values
+play a crucial role in this study.
+
+Figure 5. Positivity of the archimedean contribution to the even matrix for
+L ∈ [0, log 2]. The smallest eigenvalue when L = log 2 is ∼ 0.00133.
+
+0.10.20.30.40.50.60.7-15-10-50.10.20.30.40.50.60.70.51.01.5Spectral triples and ζ-cycles
+
+19
+
+Figure 6. Change of sign of the smallest eigenvalue of the archimedean contribution to
+the even matrix for L ∈ [log 2 − 0.2, log 2 + 0.2] ∼ [0.493, 0.893].
+
+Figure 7. Change of sign of the smallest eigenvalue for the archimedean contribution
+alone, as a function of µ := exp L, near µ = 2 (in yellow). After adding the
+contribution of the prime 2 the smallest eigenvalue of the even matrix is > 0 (in blue).
+
+2.3. Sensitivity of Weil positivity to the precise value p = 2
+
+Figure 7 shows that beyond µ = 2 the contribution (2.33) of the prime 2 ﬁrst lowers the
+smallest eigenvalue in the interval exp L ∈ (2, 2.27) but then saves it from being negative.
+The value of the smallest eigenvalue of σ+ for µ = 3 is < 6 × 10−8. This suggests to use
+p as a variable in (2.33) and to test the sensitivity of Weil positivity to the precise value
+p = 2. To this end one ﬁxes L = log 3 (i.e. µ = 3) and replaces 2 by a variable p in (2.33).
+
+0.60.70.80.90.010.020.032.052.102.152.202.252.30-0.0010-0.00050.00050.001020
+
+A. Connes and C. Consani
+
+Figure 8. Sensitivity to the precise value p = 2.
+
+As Figure 8 shows, one ﬁnds that the smallest eigenvalue λ(p) for L = log 3 is negative
+for p = 1.9999 and also for p = 2.0005, so that the positivity requirement restricts the
+choice of p to an interval of size < 10−3 around p = 2.
+
+2.4. Change of sign of smallest eigenvalue
+
+Beyond p = 3 the sign of the smallest eigenvalue of the sum of the contributions of ∞
+and 2 to the even matrix σ+ is reported in yellow in Figure 9. Once again we notice
+that its negative behavior beyond µ = 3 is “ﬁxed” and the output (in blue in the ﬁgure)
+switches to be positive by adding the contribution of the prime 3.
+
+Figure 9. Change of sign of the smallest eigenvalue (in yellow) of the contributions of
+∞ and 2 to the even matrix beyond µ = 3. In blue, after adding the contribution of the
+prime 3: the total is > 0.
+
+2.002.022.042.062.082.10-0.07-0.06-0.05-0.04-0.03-0.02-0.013.053.103.153.203.25-3.×10-7-2.5×10-7-2.×10-7-1.5×10-7-1.×10-7-5.×10-85.×10-8Spectral triples and ζ-cycles
+
+21
+
+When µ goes beyond the prime power 4 = 22, the behavior of the smallest eigenvalue
+
+is similar to the earlier reported cases and is shown in Figure 10.
+
+Figure 10. Change of sign of the smallest eigenvalue of the even matrix beyond 4: in
+yellow if one neglects the contribution of the prime power 4 = 22, in blue if one does
+not. The smallest eigenvalue of the total contribution is > 0.
+
+For µ ∼ 5, and µ ∼ 7 the behavior of the smallest eigenvalue for the even matrix σ+ is
+
+similar to those shown in the earlier cases and is reported in Figures 11 and 12.
+
+Figure 11. Going beyond µ = 5
+without (yellow) and with (blue) the
+contribution of the prime 5 .
+
+Figure 12. Going beyond µ = 7
+without (yellow) and with (blue) the
+contribution of the prime 7 .
+
+The following graphs report the change of sign of the smallest eigenvalues for the odd
+
+matrices σ−, and for the same choices of prime powers: namely near 2, 3, 4, 5 and 7.
+
+4.054.104.154.20-2.×10-12-1.5×10-12-1.×10-12-5.×10-135.×10-131.×10-125.025.045.065.085.10-5.×10-185.×10-181.×10-177.027.047.067.08-2.×10-27-1.×10-271.×10-2722
+
+A. Connes and C. Consani
+
+Figure 13. Odd case. Going beyond
+µ = 2 without (yellow) and with (blue)
+the contribution of the prime 2 .
+
+Figure 14. Odd case. Going beyond
+µ = 3 without (yellow) and with (blue)
+the contribution of the prime 3 .
+
+Figure 15. Odd case. Going beyond
+µ = 4 without (yellow) and with (blue)
+the contribution of the prime power 4 .
+
+Figure 16. Odd case. Going beyond
+µ = 5 without (yellow) and with (blue)
+the contribution of the prime 5 .
+
+Figure 17. Odd case. Going beyond µ = 7 without (yellow) and with (blue) the
+contribution of the prime 7.
+
+2.022.042.062.082.102.120.020.040.060.083.023.043.063.083.10-0.00002-0.000010.000014.024.044.064.084.10-6.×10-10-4.×10-10-2.×10-102.×10-104.×10-106.×10-105.015.025.035.045.055.06-1.5×10-14-1.×10-14-5.×10-155.×10-151.×10-147.017.027.037.04-5.×10-245.×10-241.×10-23Spectral triples and ζ-cycles
+
+23
+
+2.5. Semi-local Weil quadratic form, small eigenvalues
+
+Pushing the computations further and increasing the precision, one obtains an estimate
+of the size of the smallest eigenvalue s(L) of the even matrix, as a function of µ = exp L.
+One ﬁnds an exponential behavior, as reported in Figures 18 and 19, where log s(L) is
+plotted in terms of µ = exp L.
+
+Figure 18. Decay of the log of the
+smallest eigenvalue of the even matrix
+as a function of µ = exp L .
+
+Figure 19. Decay of the log of the
+smallest eigenvalue of the odd matrix
+as a function of exp L .
+
+When one selects the small eigenvalues of the even matrix σ+ and plots the graphs of
+the logarithm of their size, one ﬁnds (see Figure 20) that their number increases roughly
+like µ = exp L.
+
+Figure 20. Decay of the log of the smallest eigenvalues of the even matrix σ+ as a
+function of µ = exp L.
+
+For the odd matrix σ−, the behavior is similar but with one less small eigenvalue, as
+
+shown in Figure 21.
+
+2468-80-60-40-202468-80-60-40-20234567-60-50-40-30-20-1024
+
+A. Connes and C. Consani
+
+Figure 21. Decay of the log of the smallest eigenvalues of the odd matrix σ− as a
+function of µ = exp L.
+
+Figure 22. Eigenvector for the smallest eigenvalue of QW +
+
+λ as function on R∗
++.
+
+Figures 22, 23 and 24 report the graphs of the eigenvectors of the quadratic form QW +
+λ
+
+respectively for the smallest, the second smallest and the third smallest eigenvalues.
+
+Figure 23. Eigenvector for the second
+
+Figure 24. Eigenvector for the third
+
+smallest eigenvalue of QW +
+function on R∗
+
+λ as
+
++ .
+
+smallest eigenvalue of QW +
+function on R∗
++.
+
+λ as
+
+2345678-60-50-40-30-20-100.51.01.52.00.51.01.50.51.01.52.0-1.0-0.50.51.01.50.51.01.52.0-0.50.51.01.5Spectral triples and ζ-cycles
+
+25
+
+3. Eigenfunctions and the prolate projection Π(λ, k)
+
+In this section we explain the existence of the very small eigenvalues of the Weil quadratic
+form QWλ on test functions with support in an interval [λ−1, λ] ⊂ R∗
++. We start by
+recalling that if RH holds, then the Weil quadratic form restricted to functions with
+support in a ﬁnite interval has zero radical, since the number N (r) of zeros of modulus
+at most r of the Fourier transform of a function f with compact support is of the order
+N (r) = O(r) (see [8] §15.20 (2)), while if f belonged to the radical of QW it would
+(assuming RH), vanish on all zeros of the Riemann zeta function whose number grows
+faster than O(r). On the other hand, the radical of QW contains the range of the map E
+0 ⊂ S(R) of even Schwartz functions fulﬁlling
+deﬁned on the codimension two subspace S ev
+f (0) = (cid:98)f (0) = 0 by the formula ([3])
+
+E(f )(x) = x1/2 (cid:88)
+
+f (nx).
+
+n>0
+
+(3.1)
+
+It is thus natural to bring-in (3.1) for the construction of functions g with support in
+[λ−1, λ] ⊂ R∗
++ which belong to the “near radical” of QWλ i.e. fulﬁll QWλ(g) (cid:28) (cid:107)g(cid:107)2.
+The deﬁnition of E shows that if the support of the even function f ∈ S ev
+is contained
+0
+in the interval [−λ, λ] ⊂ R, then the support of E(f ) is contained in (0, λ] ⊂ R∗
++. On the
+other hand, by applying the Poisson formula (with (cid:98)f the Fourier transform of f ) one has
+
+E( (cid:98)f )(x) = E(f )(x−1) , ∀f ∈ S ev
+0 .
+
+(3.2)
+
+Thus we see that λ−1 would be a lower bound of the support of E(f ) if the support of
+0 were contained in the interval [−λ, λ] ⊂ R. However this latter
+the even function (cid:98)f ∈ S ev
+inclusion is impossible since the Fourier transform of a function with compact support is
+analytic. In spite of this apparent obstacle in the construction, the work of Slepian and
+Pollack on band limited functions [11] provides a very useful approximate solution. The
+conceptual way to formulate their result is in terms of the pair of projections Pλ and
+(cid:99)Pλ in the Hilbert space L2(R)ev of square integrable even functions. The operator Pλ
+is the multiplication by the characteristic function of the interval [−λ, λ] ⊂ R, and the
+projection (cid:99)Pλ is its conjugate by the (additive) Fourier transform FeR . These two pro-
+jections have zero intersection but their “angle”, – an operator with discrete spectrum–
+admits approximatively 2λ2 very small eigenvalues whose associated eigenfunctions pro-
+vide excellent candidates for the “approximate intersection” Pλ ∩(cid:48) (cid:99)Pλ. In their work
+on signals transmission, Slepian and Pollack discovered that these eigenfunctions are
+exactly the prolate spheroidal wave functions which were already known to be solutions
+(by separation of variables) of the Helmoltz equation for prolate spheroids.
+
+The basic result of Slepian and Pollack is the diagonalisation of the positive operator
+Pλ (cid:99)PλPλ in the Hilbert space L2([−λ, λ]). They show that this operator commutes with
+the diﬀerential operator
+
+(Wλψ)(q) = −∂((λ2 − q2)∂) ψ(q) + (2πλq)2 ψ(q)
+
+(3.3)
+
+26
+
+A. Connes and C. Consani
+
+(here ∂ is the ordinary diﬀerentiation in one variable q ∈ [−λ, λ] and the dense domain is
+that of smooth functions on [−λ, λ]). The operator Wλ (obtained by closing its domain
+in the graph norm) is selfadjoint and positive and its eigenfunctions are the prolate
+spheroidal wave functions. When considering the Weil quadratic form QWλ evaluated on
+test functions with support in [λ−1, λ] we shall compare the eigenvectors associated to the
+extremely small eigenvalues with the range of the map E applied to linear combinations of
+eigenfunctions ψ of Wλ which belong to the approximate intersection Pλ ∩(cid:48) (cid:99)Pλ and vanish
+at zero. For this process, we only take the eigenfunctions ψ which are even functions of
+the variable q, and distinguish two cases since the action of the Fourier transform fulﬁlls
+FeRψ (cid:39) ±ψ on eigenfunctions ψ of Wλ. The corresponding sign ± determines precisely
+the choice of an eigenvector for the even or odd matrix. In standard notation one sets
+
+ψm,λ(x) := PS 2m,0
+
+(cid:16)
+
+2πλ2,
+
+(cid:17)
+
+x
+λ
+
+where ψm,λ is a function on the interval [−λ, λ] that one extends by 0 outside that
+interval. Its Fourier transform FeR (ψm,λ) is equal to χmψm,λ on [−λ, λ], where the scalar
+χm is very close to (−1)m provided that m is less than 2λ2. More precisely, FeR (ψm,λ) is
+computed using the equality
+
+(cid:90) 1
+
+−1
+
+PS 2m,0(γ, η) exp(iγηω) dη = (−1)m2S(1)
+
+2m,0(γ, 1)PS 2m,0(γ, ω)
+
+for γ = 2πλ2, ω = y
+
+λ . After changing variables to ξ = λ η, the equality above becomes
+
+(cid:90) λ
+
+−λ
+
+ψm,λ(ξ) exp(i2πξy) dξ = (−1)m2λS(1)
+
+2m,0(2πλ2, 1)ψm,λ(y).
+
+Given µ = λ2, one only retains the values of m for which the characteristic value
+χ(µ, m) = 2λS(1)
+2m,0(2πµ, 1) is almost equal to 1. This determines a collection {0, . . . , ν(µ)}
+of length approximately equal to 2µ, such that χ(µ, m) ∼ 1 for m ≤ ν(µ). The formula
+ν(µ) = 2µ − 1 works well when µ is a small half integer.
+
+Figure 25. Graphs of the functions χ(µ, m) as functions of µ .
+
+Spectral triples and ζ-cycles
+
+27
+
+In order to deﬁne the prolate projection we consider linear combinations of prolate
+
+functions which vanish at 0 and are given, for n > 0, by
+
+φ2n(x) := ψ2n(x)ψ0(0) − ψ0(x)ψ2n(0), φ2n+1(x) := ψ2n+1(x)ψ1(0) − ψ1(x)ψ2n+1(0).
+
+For 1 < n ≤ ν(µ) one may approximate FeR (φn) by (−1)nφn and, using the Poisson
+formula, act as if E(φn) would fulﬁll the equality E(φn)(u−1) = (−1)nE(φn)(u). We
+can then compute the components of E(φn) in the orthogonal basis ηj(u) = ξj(log u)
+of H = L2([λ−1, λ], d∗x) (Lemma 2.6) which fulﬁll ηj(u−1) = −ηj(u) for j < 0 and
+ηj(u−1) = ηj(u) for j ≥ 0. For 1 < n ≤ ν(µ), the component of E(φn) on ηj is non-zero
+only if ηj has the same parity as n, i.e. fulﬁlls ηj(u−1) = (−1)nηj(u), and in this case is
+given by the formula,
+
+E(φn)j (cid:39) 2
+
+(cid:90) λ/r
+
+(cid:88)
+
+1≤r<λ
+
+1
+
+u1/2φn(ru)ηj(u)d∗u.
+
+(3.4)
+
+One computes all these components for |j| ≤ N with N large, and applies the Gram-
+Schmidt orthogonalization process (separately for the even and odd cases) to the
+obtained vectors in EN . This process determines orthonormal vectors (cid:15)n ∈ EN ⊂ H =
+L2([λ−1, λ], d∗x) for 1 < n ≤ ν(µ) which are, by construction, the natural candidate
+functions to be compared (up to sign) with the eigenfunctions of the semi-local Weil
+quadratic form QWλ on EN .
+
+Deﬁnition 3.1. Let k < ν(λ2). We deﬁne Π(λ, k) as the orthogonal projection on the
+linear span of the vectors (cid:15)n, for n ∈ {2, . . . , k + 1}.
+
+Let γ be the grading operator in H = L2([λ−1, λ], d∗x) which takes the values ±1 on
+functions satisfying the equality f (u−1) = ±f (u). By construction, the vectors (cid:15)n are
+eigenvectors of γ and the following commutativity holds
+
+γ Π(λ, k) = Π(λ, k) γ , ∀λ, k
+
+(3.5)
+
+The series of graphs reported here below display the coincidence of the (cid:15)n with the actual
+eigenfunctions of the semi-local Weil quadratic form QWλ for the smallest eigenvalues.
+When only one graph appears (in yellow the graph of the (cid:15)’s) this means that the graphs
+of the two functions match with a high precision, otherwise the graph in blue of the
+eigenfunction is no longer hidden behind the yellow graph. Notice that the coincidence of
+(cid:15)2m with the eigenfunction of the even matrix for its m-th eigenvalue is expected to hold
+only when this eigenvalue is small and hence only when µ > m. Similarly, one expects
+the coincidence of (cid:15)2m+1 with the eigenfunction of the odd matrix for its m-th eigenvalue
+only when µ > m + 1 (since the number of small eigenvalues of the odd matrix is one
+less than for the even one). We have nevertheless plotted the graphs for all half integer
+values of µ between 3.5 and 11 to show the mismatch of the graphs when µ is too small.
+
+28
+
+A. Connes and C. Consani
+
+Figure 26. agreement of eigenfunctions for the even matrix and the smallest eigenvalue,
+for the 16 values of µ between 3.5 and 11. For µ = 11 the eigenvalue is 2.389 × 10−48 .
+
+Figure 27. agreement of eigenfunctions for the odd matrix and the smallest eigenvalue
+for the 16 values of µ between 3.5 and 11.
+
+1.21.41.61.8-1.5-1.0-0.51.21.41.61.82.0-1.5-1.0-0.51.21.41.61.82.0-1.5-1.0-0.51.21.41.61.82.02.2-1.5-1.0-0.51.21.41.61.82.02.20.51.01.51.21.41.61.82.02.22.4-1.5-1.0-0.51.52.02.50.51.01.51.52.02.5-1.5-1.0-0.51.52.02.5-1.5-1.0-0.51.52.02.50.51.01.51.52.02.50.51.01.51.52.02.53.0-1.5-1.0-0.51.52.02.53.00.51.01.51.52.02.53.00.51.01.51.52.02.53.0-1.5-1.0-0.51.52.02.53.00.51.01.51.21.41.61.80.51.01.51.21.41.61.82.0-1.4-1.2-1.0-0.8-0.6-0.4-0.21.21.41.61.82.0-1.4-1.2-1.0-0.8-0.6-0.4-0.21.21.41.61.82.02.2-1.4-1.2-1.0-0.8-0.6-0.4-0.21.21.41.61.82.02.2-1.4-1.2-1.0-0.8-0.6-0.4-0.21.21.41.61.82.02.22.40.20.40.60.81.01.21.41.52.02.5-1.4-1.2-1.0-0.8-0.6-0.4-0.21.52.02.50.20.40.60.81.01.21.41.52.02.5-1.4-1.2-1.0-0.8-0.6-0.4-0.21.52.02.5-1.4-1.2-1.0-0.8-0.6-0.4-0.21.52.02.5-1.4-1.2-1.0-0.8-0.6-0.4-0.21.52.02.53.0-1.4-1.2-1.0-0.8-0.6-0.4-0.21.52.02.53.00.20.40.60.81.01.21.41.52.02.53.00.20.40.60.81.01.21.41.52.02.53.00.20.40.60.81.01.21.41.52.02.53.0-1.4-1.2-1.0-0.8-0.6-0.4-0.2Spectral triples and ζ-cycles
+
+29
+
+Figure 28. agreement of eigenfunctions for the even matrix and the second smallest
+eigenvalue for the 16 values of µ between 3.5 and 11.
+
+Figure 29. agreement of eigenfunctions for the odd matrix and the second smallest
+eigenvalue for the 16 values of µ between 3.5 and 11.
+
+1.21.41.61.8-1.5-1.0-0.50.51.21.41.61.82.0-1.5-1.0-0.50.51.01.21.41.61.82.0-1.0-0.50.51.01.51.21.41.61.82.02.2-1.5-1.0-0.50.51.01.21.41.61.82.02.2-1.0-0.50.51.01.51.21.41.61.82.02.22.4-1.0-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.21.41.61.8-1.5-1.0-0.50.51.21.41.61.82.0-0.50.51.01.51.21.41.61.82.0-1.5-1.0-0.50.51.21.41.61.82.02.2-0.50.51.01.51.21.41.61.82.02.2-1.5-1.0-0.50.51.21.41.61.82.02.22.4-1.5-1.0-0.50.51.52.02.5-1.5-1.0-0.50.51.52.02.5-1.5-1.0-0.50.51.52.02.5-1.5-1.0-0.50.51.52.02.5-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-0.50.51.01.530
+
+A. Connes and C. Consani
+
+Figure 30. agreement of eigenfunctions for the even matrix and the third smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 4.
+
+Figure 31. agreement of eigenfunctions for the odd matrix and the third smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 4.5.
+
+1.21.41.61.8-2.0-1.5-1.0-0.50.51.21.41.61.82.0-1.5-1.0-0.50.51.21.41.61.82.0-0.50.51.01.51.21.41.61.82.02.2-0.50.51.01.51.21.41.61.82.02.2-0.50.51.01.51.21.41.61.82.02.22.4-1.5-1.0-0.50.51.52.02.5-0.50.51.01.51.52.02.5-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.52.02.5-0.50.51.01.51.52.02.5-0.50.51.01.51.52.02.53.0-0.50.51.01.51.52.02.53.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-1.5-1.0-0.50.51.21.41.61.8-2-111.21.41.61.82.0-10-551015201.21.41.61.82.0-1.5-1.0-0.50.51.21.41.61.82.02.2-0.50.51.01.51.21.41.61.82.02.2-1.0-0.50.51.01.51.21.41.61.82.02.22.4-1.5-1.0-0.50.51.01.52.02.5-1.0-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.0-0.50.51.01.51.52.02.5-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.0Spectral triples and ζ-cycles
+
+31
+
+Figure 32. agreement of eigenfunctions for the even matrix and the 4-th smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 5.
+
+Figure 33. agreement of eigenfunctions for the odd matrix and the 4-th smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 5.5.
+
+1.21.41.61.8-5-4-3-2-1121.21.41.61.82.0-2.0-1.5-1.0-0.50.51.01.21.41.61.82.0-0.50.51.01.52.01.21.41.61.82.02.2-0.50.51.01.51.21.41.61.82.02.2-1.5-1.0-0.50.51.01.21.41.61.82.02.22.4-0.50.51.01.51.52.02.5-0.50.51.01.51.52.02.5-0.50.51.01.51.52.02.5-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.52.02.5-1.5-1.0-0.50.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.21.41.61.8-3-2-112341.21.41.61.82.0-4-22461.21.41.61.82.0-1121.21.41.61.82.02.2-2.0-1.5-1.0-0.50.51.21.41.61.82.02.2-0.50.51.01.52.01.21.41.61.82.02.22.4-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.52.02.5-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.52.02.5-0.50.51.01.51.52.02.5-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-1.5-1.0-0.50.51.52.02.53.0-0.50.51.01.532
+
+A. Connes and C. Consani
+
+Figure 34. agreement of eigenfunctions for the even matrix and the 5-th smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 6.
+
+Figure 35. agreement of eigenfunctions for the odd matrix and the 5-th smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 6.5.
+
+1.21.41.61.8-4-3-2-1121.21.41.61.82.0-4-2241.21.41.61.82.0-15-10-55101.21.41.61.82.02.2-4-3-2-1121.21.41.61.82.02.2-0.50.51.01.52.02.51.21.41.61.82.02.22.4-2.0-1.5-1.0-0.50.51.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-1.0-0.50.51.01.52.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.21.41.61.8-10-55101.21.41.61.82.0-10-551.21.41.61.82.0-4-3-2-1121.21.41.61.82.02.2-2-112341.21.41.61.82.02.2-4-3-2-1121.21.41.61.82.02.22.4-3-2-1121.52.02.5-1.0-0.50.51.01.52.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.53.0-2.0-1.5-1.0-0.50.51.01.52.02.53.0-2.0-1.5-1.0-0.50.51.01.52.02.53.0-2.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.52.01.52.02.53.0-1.0-0.50.51.01.52.0Spectral triples and ζ-cycles
+
+33
+
+Figure 36. agreement of eigenfunctions for the even matrix and the 6-th smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 7.
+
+Figure 37. agreement of eigenfunctions for the odd matrix and the 6-th smallest
+eigenvalue for the 16 values of µ between 3.5 and 11. They begin to agree around µ = 7.5.
+
+1.21.41.61.8-4-3-2-111.21.41.61.82.0-4-2241.21.41.61.82.0-2-112341.21.41.61.82.02.2-2-112341.21.41.61.82.02.2-6-4-2241.21.41.61.82.02.22.4-2-112341.52.02.5-0.50.51.01.52.01.52.02.5-1.5-1.0-0.50.51.52.02.5-1.0-0.50.51.01.51.52.02.5-1.5-1.0-0.50.51.01.52.02.5-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.51.21.41.61.8-4-2241.21.41.61.82.0-4-2241.21.41.61.82.0-4-3-2-11231.21.41.61.82.02.2-4-221.21.41.61.82.02.2-112341.21.41.61.82.02.22.4-10-8-6-4-221.52.02.55101.52.02.5-1.0-0.50.51.01.52.02.51.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-2.0-1.5-1.0-0.50.51.01.52.02.5-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.5-1.0-0.50.51.01.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.51.52.02.53.0-1.0-0.50.51.01.534
+
+A. Connes and C. Consani
+
+4. The spectral triple Θ(λ, k) = (A(λ), H(λ), D(λ, k))
+
+The spectral triple Θ(λ, k) = (A(λ), H(λ), D(λ, k)) described in this section, whose
+spectrum has a remarkable similarity with the low lying zeros of the Riemann zeta func-
+tion is deﬁned through the action by multiplication of the algebra of smooth functions
++/λ2Z, d∗u). The operator
+A(λ) := C∞(R∗
+D(λ, k) is deﬁned by the following formula
+
++/λ2Z) on the Hilbert space H(λ) := L2(R∗
+
+D(λ, k) := (1 − Π(λ, k)) ◦ D0(λ) ◦ (1 − Π(λ, k)), D0(λ) := (−iu∂u).
+
+(4.1)
+
+This is a ﬁnite rank perturbation of the standard Dirac operator D0(λ), since by con-
+struction the range of the prolate projection Π(λ, k) is contained in the domain of D0(λ),
+so that one derives
+
+D(λ, k) = D0(λ) − Π(λ, k)D0(λ) − D0(λ)Π(λ, k) + Π(λ, k)D0(λ)Π(λ, k).
+
+Proposition 4.1. The operator D(λ, k), combined with the action of periodic functions
+by multiplication in L2([−L/2, L/2]) deﬁnes a spectral triple.
+
+Proof. The operator D(λ, k) is a ﬁnite rank perturbation of D0(λ), thus by the Kato-
+Rellich theorem (see [9] Proposition 8.6) it is essentially self-adjoint on any core of D0(λ).
+The domain of D(λ, k) is the same as the domain of D0(λ) and the boundedness of the
+(cid:3)
+commutator [D(λ, k), f ] follows from the boundedness of the perturbation.
+
+To compare the spectrum of D(λ, k), for k just below the upper bound ν(λ2) ∼ 2λ2
+(discussed in section 3), with the zeros of the Riemann zeta function, one needs to
+select an appropriate range of eigenvalues for which the comparison is meaningful. By
+construction the number of eigenvalues of D(λ, k) in the interval [0, E] has the same
+asymptotic behavior as for D0(λ), and thus diﬀers from the asymptotic behavior of the
+number N (E) of zeros of the Riemann zeta function with imaginary part in the interval
+[0, E], namely
+
+N (E) = #{ρ | ζ(ρ) = 0, and 0 < (cid:61)(ρ) ≤ E}.
+
+(4.2)
+
+This number is the sum of two contributions: N (E) = (cid:104)N (E)(cid:105) + Nosc(E). The oscillatory
+term Nosc(E) is of order log E and, more importantly in this context, one knows that
+
+(cid:104)N (E)(cid:105) =
+
+E
+2π
+
+log
+
+E
+2π
+
+−
+
+E
+2π
+
+.
+
+(4.3)
+
+When considering the operator D(λ, k), with k smaller and close to the upper bound
+ν(λ2), we let µ = λ2 and we obtain the following
+
+Proposition 4.2. For E = 2πµ, the number N (cid:48)(E) of non-zero eigenvalues of the
+operator D(λ, k) in the interval (0, E] fulﬁlls N (cid:48)(E) ∼ (cid:104)N (E)(cid:105).
+
+Spectral triples and ζ-cycles
+
+35
+
+Proof. It follows from (3.5) that D(λ, k)γ = −γD(λ, k) so that the number of eigenval-
+ues of D(λ, k) of absolute value less than E is 2N (cid:48)(E) plus the dimension of the kernel
+of D(λ, k). The spectrum of D(λ, k) is a perturbation of the spectrum of D0(λ) i.e. of
+L | k ∈ Z}. The perturbation increases the dimension of the kernel of D(λ, k) by the
+{ 2πk
+dimension of the projection Π(λ, k) i.e. by k ∼ 2µ, up to a log µ term. Thus, the number
+of non-zero eigenvalues of D(λ, k) with absolute value less than E has an approximated
+size equal to
+
+2N (cid:48)(E) ∼ #
+
+(cid:18)(cid:110) 2πj
+L
+
+(cid:111)
+
+| j ∈ Z
+
+(cid:19)
+
+∩ [−E, E]
+
+− 2µ ∼ 2
+
+EL
+2π
+
+− 2µ = 2
+
+(cid:18) E
+2π
+
+log
+
+E
+2π
+
+−
+
+(cid:19)
+
+.
+
+E
+2π
+
+using L = log µ and µ = E
+
+2π , which gives the expected estimate.
+
+(cid:3)
+
+4.1. Examples µ = 5.5, 6.5, 7.5, 8.5, 9.5
+
+In this part we report some numerical evidence showing the close resemblance of the
+spectrum of D(λ, k) with the low lying zeros of the Riemann zeta function, for a sample
+of small values of µ.
+
+4.1.1. µ = 5.5. For µ = 5.5, the cosine eigenvalues χ(5.5, n) are extremely close to 1
+when n = 0, 1, 2, 3, 4 and given for the next values of n in the following table
+
+n
+5
+6
+7
+8
+9
+10
+11
+12
+
+χ(5.5, n)
+0.99999999999647719857
+0.99999999894391115741
+0.99999980631702676769
+0.99997809227622865324
+0.99852183576050441685
+0.95065832620623051607
+0.57197061534624863399
+0.139174533954574303539
+
+Thus one derives that ν(5.5) = 10, since the next eigenvalue 0.5719706153 is far from 1.
+One has 2π5.5 ∼ 34.5575. The following table compares the positive eigenvalues λj =
+λj(D(λ, k)) of D(λ, k) (reported on the left column) with the imaginary part ζj of the
+ﬁrst zeros of the Riemann zeta function (right column)
+
+λj
+14.781
+21.701
+25.547
+29.345
+33.168
+
+ζj
+14.1347
+21.022
+25.0109
+30.4249
+32.9351
+
+The spectral visualization is shown in Figure 38, with the zeta zeros at the bottom
+
+36
+
+A. Connes and C. Consani
+
+Figure 38. First 5 non-zero eigenvalues for the Dirac in upper line and imaginary
+parts of zeros of zeta in lower line.
+
+4.1.2. µ = 6.5. For µ = 6.5 the cosine eigenvalues χ(6.5, n) are extremely close to 1 when
+n = 0, 1, 2, 3, 4, 5, 6; for 7 ≤ n ≤ 14 the values are reported in the following table
+
+n
+7
+8
+9
+10
+11
+12
+13
+14
+
+χ(6.5, n)
+0.99999999998668315975
+0.99999999731589077585
+0.99999963978717981581
+0.99996808936687677767
+0.99821407841789989100
+0.94788066237037484836
+0.57534099083086049406
+0.14710511279564130503
+
+Thus one has ν(6.5) = 12, since the next eigenvalue 0.5753409908 is far from 1. One has
+2π6.5 ∼ 40.8407. Once again, the following table reports the eigenvalues λj = λj(D(λ, k))
+compared with the imaginary part ζj of the ﬁrst zeros of the zeta function.
+
+λj
+13.936
+20.580
+24.690
+30.194
+33.454
+36.826
+40.259
+
+ζj
+14.1347
+21.022
+25.0109
+30.4249
+32.9351
+37.5862
+40.9187
+
+The spectral visualization is shown in Figure 39 with the zero of the zeta function in the
+second line
+
+Spectral triples and ζ-cycles
+
+37
+
+Figure 39. First 7 non-zero eigenvalues for the Dirac in upper line and imaginary
+parts of zeros of zeta in lower line..
+
+4.1.3. µ = 7.5. The cosine eigenvalues χ(7.5, n) are extremely close to 1 for n =
+0, 1, 2, 3, 4, 5, 6, 7, 8, and then given by
+
+n
+9
+10
+11
+12
+13
+14
+15
+16
+
+χ(7.5, n)
+0.99999999996397226733
+0.99999999453062631606
+0.99999941709770526957
+0.99995709581648305854
+0.99792322303841470726
+0.94552083061302325507
+0.57809629788957190907
+0.15383636015962926720
+
+Thus one has ν(7.5) = 14 since the next eigenvalue 0.5780962979 is far from 1. One
+has 2π7.5 ∼ 47.1239. Next table compares the eigenvalues λj = λj(D(λ, k)) with the
+imaginary part ζj of the ﬁrst zeros of the zeta function.
+
+λj
+15.060
+21.683
+24.948
+30.979
+33.243
+37.406
+40.514
+43.643
+46.658
+
+ζj
+14.1347
+21.022
+25.0109
+30.4249
+32.9351
+37.5862
+40.9187
+43.3271
+48.0052
+
+The spectral visualization is shown in Figure 40, with zeta zeros in the second line
+
+38
+
+A. Connes and C. Consani
+
+Figure 40. First 9 non-zero eigenvalues for the Dirac in upper line and imaginary
+parts of zeros of zeta in lower line.
+
+4.1.4. µ = 8.5.The χ(8.5, n) are extremely close to 1 for n ≤ 10, and the next ones are
+given by
+
+n
+11
+12
+13
+14
+15
+16
+17
+18
+
+χ(8.5, n)
+0.99999999992101000288
+0.99999999034148375362
+0.99999913999089362040
+0.99994536408530411219
+0.99764801726717553636
+0.94347292951033144975
+0.58041289343441020661
+0.15967051202562674536
+
+Thus one has ν(8.5) = 16, (the next eigenvalue 0.5804128934 is far from 1) and 2π8.5 ∼
+53.4071. The following table reports the eigenvalues λj = λj(D(λ, k)) compared to the
+imaginary part ζj of the ﬁrst zeros of the zeta function.
+
+λj
+14.887
+20.778
+25.535
+29.928
+32.473
+37.965
+41.088
+43.741
+46.685
+49.910
+52.845
+
+ζj
+14.1347
+21.022
+25.0109
+30.4249
+32.9351
+37.5862
+40.9187
+43.3271
+48.0052
+49.7738
+52.9703
+
+The spectral visualization is reported in Figure 41, with the zeta zeros in the second line.
+
+Spectral triples and ζ-cycles
+
+39
+
+Figure 41. First 11 non-zero eigenvalues for the Dirac in upper line and imaginary
+parts of zeros of zeta in lower line.
+
+4.1.5. µ = 9.5. For µ = 9.5 the cosine eigenvalues χ(9.5, n) are extremely close to 1 when
+0 ≤ n ≤ 12, and for 13 ≤ n ≤ 20 they are reported in the table
+
+n
+13
+14
+15
+16
+17
+18
+19
+20
+
+χ(9.5, n)
+0.99999999984990646525
+0.99999998455736228573
+0.99999881131048713492
+0.99993308190344158164
+0.99738707752987412262
+0.94166650390462098514
+0.58240244869697875785
+0.16480962032526478957
+
+Thus one has ν(9.5) = 18, since the next eigenvalue 0.5824024487 is far from 1. One
+has 2π9.5 ∼ 59.6903 and the following table reports the eigenvalues λj = λj(D(λ, k))
+compared to the imaginary part ζj of the ﬁrst zeros of the zeta function
+
+λj
+13.998
+21.501
+25.121
+30.689
+33.583
+37.813
+41.272
+43.050
+47.319
+50.190
+53.026
+55.731
+58.581
+
+ζj
+14.1347
+21.022
+25.0109
+30.4249
+32.9351
+37.5862
+40.9187
+43.3271
+48.0052
+49.7738
+52.9703
+56.4462
+59.347
+
+The spectral visualization is shown in Figure 42, with the zeta zeros in the second line
+
+40
+
+A. Connes and C. Consani
+
+Figure 42. First 13 non-zero eigenvalues for the Dirac in upper line and imaginary
+parts of zeros of zeta in lower line.
+
+4.1.6. µ = 10.5. For µ = 10.5 the cosine eigenvalues χ(10.5, n) are extremely close to 1
+when 0 ≤ n ≤ 14, and for 15 ≤ n ≤ 22 they are reported in the table
+
+n
+15
+16
+17
+18
+19
+20
+21
+22
+
+χ(10.5, n)
+0.99999999974270022369
+0.99999997703659571104
+0.99999843436641476606
+0.99992039045021729410
+0.99713907784499135361
+0.94005235637340584775
+0.58413979804862029634
+0.16939519615152177689
+
+Thus one has ν(10.5) = 20, since the next eigenvalue 0.5841397980 is far from 1. One
+also has 2π10.5 ∼ 65.9734. The table of eigenvalues (left column) compared to the ﬁrst
+zeta zeros (right column) is
+
+λj
+14.450
+21.455
+25.356
+30.345
+32.600
+37.410
+40.387
+42.895
+48.095
+50.346
+53.272
+56.050
+58.737
+61.386
+63.949
+
+ζj
+14.1347
+21.022
+25.0109
+30.4249
+32.9351
+37.5862
+40.9187
+43.3271
+48.0052
+49.7738
+52.9703
+56.4462
+59.347
+60.8318
+65.1125
+
+Spectral triples and ζ-cycles
+
+41
+
+The spectral visualization is shown in Figure 43, with zeta zeros in the second line
+
+Figure 43. First 15 non-zero eigenvalues for the Dirac in upper line and imaginary
+parts of zeros of zeta in lower line. .
+
+4.2. Average discrepancy
+For an objective comparison of the N (cid:48)(2πµ) eigenvalues λj of size up to 2πµ, with the
+imaginary parts ζj of the zeros of the Riemann zeta function, one has at disposal the
+following three possible measures of the discrepancy
+
+1. Mean absolute error:
+
+A(µ) :=
+
+1
+N (cid:48)(2πµ)
+
+(cid:88)
+
+|λj − ζj|
+
+When this error is computed for the values of µ used in the previous pages it gives
+the following list of values
+
+A(5.5) = 0.635176, A(6.5) = 0.44693, A(7.5) = 0.528827,
+
+2. Root-mean-square deviation. It is deﬁned as the square root of the average value of
+
+A(8.5) = 0.456739, A(9.5) = 0.395068
+
+the square deviation
+
+(cid:115)
+
+R(µ) :=
+
+1
+N (cid:48)(2πµ)
+
+(cid:88)
+
+(λj − ζj)2
+
+This gives the following list of values
+
+R(5.5) = 0.691088, R(6.5) = 0.48858, R(7.5) = 0.650648,
+
+R(8.5) = 0.562489, R(9.5) = 0.459776
+
+3. Normalized root-mean-square deviation. This deviation is obtained by dividing the
+root-mean-square deviation by the diameter of the range of the variables. It is
+invariant under aﬃne transformations and is thus a good measure of the
+discrepancy, usually expressed as a percentage. The diameter of the range of the
+variables is here equal to 2πµ − 14, and this gives the list,
+
+N R(5.5) = 0.0375848, N R(6.5) = 0.0185609, N R(7.5) = 0.0205914,
+
+42
+
+A. Connes and C. Consani
+
+N R(8.5) = 0.0148189, N R(9.5) = 0.0103126, N R(10.5) = 0.00995148
+
+These numbers show that the normalized root-mean-square deviation is steadily improv-
+ing and reaches 1% (one percent) for µ = 9.5 and then drops to less than one percent for
+µ = 10.5.
+
+5. Zeta zeros from eigenvalues of spectral triples
+
+In the previous section we explored the low lying eigenvalues of the spectral triples
+Θ(λ, k) = (A(λ), H(λ), D(λ, k)) for k = 2(cid:96) an even number as close as possible to the
+boundary ν(λ2) ∼ 2λ2 of the allowed interval. These numerical results give evidence of
+a deep relation between the low lying spectrum λn(D(λ, k)) of these spectral triples and
+the low lying zeros of the Riemann zeta function. The dependence on the parameters
+(λ, k), and the diﬀerence between the growth of the eigenvalues and that of the zeros of
+zeta, show that the relation is certainly more subtle than a simple equality between the
+eigenvalues λn(D(λ, k)) and the imaginary part ζn of the zeros.
+
+The main observation of this section is that, for any n ∈ N there are special values
+of the parameter λ at which the dependence of λn(D(λ, k)) on k disappears. For these
+special values of λ the common value of the λn(D(λ, k)) coincides with the imaginary
+part ζn of the n-th zero of the Riemann zeta function. Moreover, these special values of
+λ form a geometric progression whose scale factor is the exponential of π/ζn.
+
+This observation was ﬁrst experimentally tested and it will be fully and conceptually
+
+justiﬁed in section 6.
+
+We shall pursue 4 diﬀerent criterions to detect these special values of λ. They are
+
+• Comparison of λn(D(λ, 2(cid:96))) with λn(D(λ, 2(cid:96) + 1)) (§5.1)
+• Evolution of λn(D(λ, k)) as a function of λ (§5.2)
+• Quantization criterion x2iy = 1 applied to the point (λ, λn(D(λ, k))) (§5.3)
+• How far is the eigenvector ξn(D(λ, k)) for D(λ, k) from being an eigenvector of D0(λ)
+
+The numerical tests of these criterions show their agreement, but the precision becomes
+very sharp when one applies the last criterion. Applying the last method for the small
+range of λ in the interval (2, 4) one obtains the agreement with the ﬁrst 31 zeros ζn (n ≤
+31) of zeta with suﬃcient accuracy to assess the probability of a fortuitous coincidence
+at 10−50.
+
+5.1. The criterion λn(D(λ, 2(cid:96))) ∼ λn(D(λ, 2(cid:96) + 1))
+The ﬁrst step in order to detect the special values of λ is to see what happens if one
+replaces k = 2(cid:96) by the odd number k + 1 = 2(cid:96) + 1. One sees that the positive eigenvalues
+λn(D(λ, ∗)) decrease and actually agree for special values of λ. We ﬁrst brieﬂy explain
+why λn(D(λ, 2(cid:96))) ≥ λn(D(λ, 2(cid:96) + 1)) and then display some numerical results showing
+the coincidence for special values of λ. By construction, the kernel of D(λ, k) contains
+the range of Π(λ, k) and is thus at least of dimension k. Moreover by (3.5) one has, for
+the grading γ of H(λ),
+
+γ D(λ, k) = −D(λ, k) γ
+
+(5.1)
+
+Spectral triples and ζ-cycles
+
+43
+
+The kernel of the operator D0(λ) is one dimensional and given by the constant function
+1λ which is even (i.e. γ(1λ) = 1λ). This implies that the graded index of the operator
+D0(λ) is equal to 1. Then by stability of the index it follows that the graded index of the
+operator D(λ, k) is also equal to 1. This means that the signature of the restriction of γ to
+the kernel of D(λ, k) is 1 and hence that the dimension of ker(D(λ, k)) is an odd number.
+Thus for k = 2(cid:96) even it is natural to expect this kernel to be of dimension k + 1. This
+entices one to compare the two non-zero eigenvalues λn(D(λ, k)) and λn(D(λ, k + 1)).
+By construction one has Π(λ, k) < Π(λ, k + 1), and we now explain why the positive
+eigenvalues of these operators, arranged in increasing order, fulﬁll the inequality
+
+λn(D(λ, k + 1)) ≤ λn(D(λ, k)) , ∀n, λ
+
+(5.2)
+
+Lemma 5.1. Let A be a self-adjoint matrix of dimension N , and E ⊂ KerA a subspace
+of its kernel. Then the positive eigenvalues µn(A) arranged in decreasing order fulﬁll
+
+µn(A) = max
+
+F |dim F =n
+F ⊥E
+
+(cid:104)ξ | Aξ(cid:105)
+
+min
+ξ∈F
+(cid:107)ξ(cid:107)=1
+
+(5.3)
+
+Proof. By the mini-max theorem of Courant-Fisher one has
+
+µn(A) = max
+
+F |dim F =n
+
+(cid:104)ξ | Aξ(cid:105)
+
+min
+ξ∈F
+(cid:107)ξ(cid:107)=1
+
+and we need to show that the added condition that F is perpendicular to E does not
+change the maximum. It can only lower it and it is enough to check that the choice of
+F which reaches the maximum in the Courant-Fisher formula does fulﬁll F ⊥ E. Indeed
+this F is the linear span of the eigenvectors for eigenvalues µk(A) for k ≤ n, and all these
+(cid:3)
+eigenvectors are orthogonal to the kernel of A since µk(A) ≥ µn(A) > 0 for k ≤ n.
+
+Proposition 5.2. Let D ∈ MN (C) be a self-adjoint matrix.
+(i) Let P ∈ MN (C) be a projection (self-adjoint idempotent) and Q = 1−P , DP := QDQ.
+Then the positive eigenvalues of DP arranged in decreasing order fulﬁll the equality
+
+µn(DP ) = max
+
+F |dim F =n
+F ⊥P
+
+(cid:104)ξ | Dξ(cid:105)
+
+min
+ξ∈F
+(cid:107)ξ(cid:107)=1
+
+(5.4)
+
+(ii) Let Pj ∈ MN (C) be projections such that P1 ≤ P2. Then, with the notations of (i)
+the positive eigenvalues of DPj fulﬁll the inequality
+
+µn(DP2) ≤ µn(DP1)
+
+(5.5)
+
+Proof. (i) By (5.3) applied for A = DP and E = P (CN ) one has
+
+µn(DP ) =
+
+max
+F |dim F =n,F ⊥E
+
+min
+ξ∈F |(cid:107)ξ(cid:107)=1
+
+(cid:104)ξ | DP ξ(cid:105)
+
+44
+
+A. Connes and C. Consani
+
+and for ξ ⊥ E one has Qξ = ξ so that
+
+(cid:104)ξ | DP ξ(cid:105) = (cid:104)ξ | QDQξ(cid:105) = (cid:104)Qξ | DQξ(cid:105) = (cid:104)ξ | Dξ(cid:105)
+
+which gives (5.4).
+(ii) We apply (5.4) to µn(DPj ). The condition F ⊥ P2 is more restrictive than F ⊥ P1
+(cid:3)
+so one obtains (5.5).
+
+Figure 44. First eigenvalue, the lower graph is that of λ1(D(λ, k + 1)) and the upper
+graph is that of λ1(D(λ, k)). The horizontal line is the imaginary part of the ﬁrst zero
+of zeta.
+
+Figure 45. Second eigenvalue, the lower graph is that of λ2(D(λ, k + 1)) and the upper
+graph is that of λ2(D(λ, k)). The horizontal line is the imaginary part of the second
+zero of zeta.
+
+Applying the criterion λn(D(λ, k)) ∼ λn(D(λ, k + 1)) to determine the relevant values
+of µ ∈ I = [5, 16.5], i.e. by minimizing the diﬀerence λn(D(λ, k)) − λn(D(λ, k + 1)) on
+Z ∩ I, one obtains the approximate list of ﬁrst 31 zeros of zeta
+the ﬁnite set of µ ∈ 1
+10
+shown in Figure 46.
+
+681012141613.013.514.014.515.015.516.06810121416202122Spectral triples and ζ-cycles
+
+45
+
+Figure 46. Using the criterion λn(D(λ, k)) ∼ λn(D(λ, k + 1)).
+
+5.2. Continuous evolution of non-zero eigenvalues for a ﬁxed number of
+
+prolate conditions
+
+Figure 47. Evolution of the ﬁrst non-zero eigenvalue of D(λ, 2(cid:96)). The dashed
+horizontal line is the value of the imaginary part ζ1 of the ﬁrst zero of zeta. .
+
+When dealing with the operators D(λ, k), with k close to the largest allowed value ν(λ2) ∼
+2λ2 one introduces necessarily a discontinuity due to the discrete nature of the variable
+k. To avoid it one can, for ﬁxed k, consider the dependence of the eigenvalues λn(D(λ, k))
+as long as λ is suﬃciently large so that k < ν(λ2). One ﬁnds that for the values (cid:96) = 2, 3,
+the λn(D(λ, 2(cid:96))) agree around µ ∼ 3.8 and that their common value is close to ζ1. This
+
+λ1(D(λ,4)λ1(D(λ,6)λ1(D(λ,8)λ1(D(λ,10)λ1(D(λ,12)λ1(D(λ,14)λ1(D(λ,16)y=14.13446810121416μ=λ251015λ146
+
+A. Connes and C. Consani
+
+fact is all the more remarkable that when µ < 4 i.e. λ < 2 there is no summation involved
+in the (3.4). For (cid:96) = 3, 4, 5, the λn(D(λ, 2(cid:96))) agree around µ ∼ 5.95 and again we ﬁnd
+that their common value is close to ζ1. For (cid:96) = 5, 6, 7, 8, the λn(D(λ, 2(cid:96))) agree around
+µ ∼ 9.2 and again their value is close to ζ1. For (cid:96) = 8, 9, 10, 11, 12, 13 the λn(D(λ, 2(cid:96)))
+agree around µ ∼ 14.4 and their value is close to ζ1. The special values of µ at which
+the graphs meet appear to form a geometric progression. One ﬁnds that the ratio of
+consecutive terms is ∼ exp(2π/ζ1) and, more generally that for the n-th eigenvalue the
+special values of µ form a geometric progression with scale ratio ∼ exp(2π/ζn) where
+ζn is the imaginary part of the n-th zero of zeta. These “experimental” facts will be
+theoretically explained by Theorem 6.4.
+
+5.3. Quantization of length log µ
+
+The fact that many graphs of the eigenvalues λn(D(λ, k)) meet at some speciﬁc points of
+the plane suggests that one could push the comparison even further and compare these
+points with the spectrum of the unperturbed operator D0(λ). In terms of the coordinates
+(x, y) where x = µ = λ2 and y = λn(D(λ, k)), the spectrum of D0(λ) is characterized by
+the quantization condition xiy = 1. The subset of the plane deﬁned by this condition is
+the union of the graphs of the functions 2πn/ log x.
+
+Figure 48. Coincidence with solutions of xiy = 1.
+
+λ1(D(λ,4)λ1(D(λ,6)λ1(D(λ,8)λ1(D(λ,10)λ1(D(λ,12)λ1(D(λ,14)λ1(D(λ,16)y=6π/Logxy=8π/Logxy=10π/Logxy=12π/Logx46810121416μ=λ251015λ1Spectral triples and ζ-cycles
+
+47
+
+Figure 48 shows a perfect agreement between these graphs and the meeting points of
+the eigenvalue graphs. Independently of this result, one can measure how far the point
+(µ, λn(D(λ, k)) is from fulﬁlling the quantization condition by writing it in the form
+
+µiλn(D(λ,k)) = 1 ⇐⇒ |µiλn(D(λ,k)) − 1| = 0
+
+and by plotting the graphs of these functions for each integer n. They are shown in
+Figure 49 for n = 1 and in Figure 54 for n = 2. The key fact here is that the values of
+µ at which these functions vanish coincide with the previously determined values where
+λ1(D(λ, k + 1)) ∼ λ1(D(λ, k)) of Figures 44 and 45.
+
+Figure 49. Graph of |µiλ1(µ) − 1|.
+
+Figure 50. Graph of |µiλ2(µ) − 1|.
+
+5.4. The criterion of common eigenvector for D(λ, k) and D0(λ)
+The agreement of the quantization with the meeting points of the graphs of the eigenval-
+ues suggests that all the eigenvectors of the D(λ, k) involved agree with each other and
+are in fact eigenvectors of the unperturbed operator D0(λ). This gives a very strong cri-
+terion obtained by measuring the Hilbert space distance of an eigenvector ξn(D(λ, k)) for
+D(λ, k) with the eigenvector of D0(λ) which has the same rotation number. In Figures
+
+68101214160.51.01.52.068101214160.51.01.52.048
+
+A. Connes and C. Consani
+
+51 and 52 the norm of the diﬀerence is plotted and one gets the agreement of the zeros
+with the values determined by the three previous criteria. Finally Figure 53 compares
+the ﬁrst 31 eigenvalues selected using the last criterion with the imaginary parts of the
+ﬁrst 31 zeros of the Riemann zeta function.
+
+Figure 51. Distance of eigenvector of D(λ, k) for λ1 to eigenvectors of D0(λ).
+
+Figure 52. Distance of eigenvector ξ2(D(λ, k)) to eigenvectors of D0(λ).
+
+Figure 53. Using the criterion ξn(D(λ, k)) eigenvector of D0(λ), one obtains the 31
+eigenvalues compared above with the imaginary parts of the ﬁrst 31 zeros of the
+Riemann zeta function. .
+
+68101214160.20.40.60.81.068101214160.20.40.60.8Spectral triples and ζ-cycles
+
+49
+
+6. ζ-cycles
+
+The aim of this section is to provide a theoretical explanation for the numerical compu-
+tations reported in the previous part of this paper, and in particular to give a theoretical
+justiﬁcation for the close similarity of the spectrum of the operator D(λ, k) in the spec-
+tral triple θ(λ, k) (see Section 4) and the low lying zeros of the Riemann zeta function.
+The goal we shall pursue here is to relate these intriguing numerical results with the
+spectral realization of the zeros of the Riemann zeta function, as developed in [3]. The
+new theoretical concept emerging is that of a ζ-cycle C. In the following part we ﬁrst
+explain how to deﬁne scale invariant Riemann sums for functions deﬁned on [0, ∞) with
+vanishing integral. This technique is then implemented in the deﬁnition of a linear map
+ΣµE : S ev
+0 → L2(C) which plays a central role in this development and enters in the deﬁ-
+nition of the ζ-cycle (Deﬁnition 6.1). In §6.2 we prove that ζ-cycles are stable under ﬁnite
+covers, and ﬁnally we state and prove the main result of this paper, namely Theorem
+6.4. This result naturally selects a family of Hilbert spaces H(L) := ΣµE(S ev
+0 )⊥ naturally
+associated to the critical zeros of the Riemann zeta function.
+
+6.1. Scale invariant Riemann sums and the map ΣµE
+Let µ > 1 and Σµ be the linear map deﬁned on functions g : R∗
+formula
+
++ → C by the following
+
+(Σµg)(u) :=
+
+g(µku).
+
+(cid:88)
+
+k∈Z
+
+(6.1)
+
+This deﬁnition makes sense pointwise provided g decays fast enough at 0 and ∞ in R∗
++.
+The map E is deﬁned as follows
+
+(Ef )(u) := u1/2 (cid:88)
+
+f (nu).
+
+n>0
+
+(6.2)
+
+It is, by construction, proportional to a Riemann sum for the integral of f .
+0 be the linear space of real valued even Schwartz functions f ∈ S(R) such that
+We let S ev
+f (0) = 0 = (cid:82) f (x)dx. The following lemma describes the “well-behavior” of the map E.
+
+Lemma 6.1. Let f be a function of bounded variation on (0, ∞), of rapid decay for
+u → ∞, O(u2) when u → 0, and such that (cid:82) ∞
+0 f (t)dt = 0. Then the following properties
+hold
+(i) E(f )(u) is well-deﬁned pointwise, is O(u1/2) when u → 0 and of rapid decay for
+u → ∞.
+(ii) The series (6.1) deﬁning ΣµE(f ) is geometrically convergent, and deﬁnes a bounded
+measurable function on R∗
+
++/µZ.
+
+50
+
+A. Connes and C. Consani
+
+Proof. (i) The sum S(u) := u
+
+∞
+(cid:88)
+
+f (nu) is a Riemann sum for the integral (cid:82) ∞
+
+0 f (x)dx =
+
+0. One has f (0) = 0, and the following equality holds
+
+n=0
+
+u
+
+∞
+(cid:88)
+
+n=0
+
+f (nu) = −
+
+∞
+(cid:88)
+
+(cid:90) (n+1)u
+
+n=0
+
+nu
+
+((n + 1)u − t)df (t)
+
+since integration by parts in the Stieltjes integral shows that
+
+(cid:90) (n+1)u
+
+nu
+
+((n + 1)u − t)df (t) =
+
+(cid:90) (n+1)u
+
+nu
+
+f (t)dt − uf (nu)
+
+while (cid:82) ∞
+obtains the upper-bound
+
+0 f (t)dt = 0 by hypothesis. Since |((n + 1)u − t)| ≤ u for t ∈ [nu, (n + 1)u], one
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+∞
+(cid:88)
+
+0
+
+f (nu)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+
+∞
+(cid:88)
+
+(cid:90) (n+1)u
+
+n=0
+
+nu
+
+|df (t)|.
+
+The integral of the measure |df (t)| is ﬁnite since f is of bounded variation. We thus derive
+
+∞
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+n=0
+
+(cid:12)
+(cid:12)
+f (nu)
+(cid:12)
+(cid:12)
+
+≤
+
+(cid:90) ∞
+
+0
+
+|df (t)|
+
+and from this it follows that |E(f )(u)| = O(u1/2) for u → 0.
+(ii) Since f (u) is of rapid decay for u → ∞, one has |f (u)| ≤ Cu−N , N > 1 and this
+implies
+
+(cid:88)
+
+|f (nu)| ≤ Cu−N (cid:88)
+
+n−N = C (cid:48)u−N .
+
+n≥1
+
+n≥1
+
+Thus E(f )(u) is of rapid decay for u → ∞. Let u ∈ [λ−1, λ]. The terms of the series
+(cid:88)
+E(f )(µku) converge geometrically for k > 0; for k ≤ 0 (i) gives |E(f )(µku)| ≤ Cµk/2
+
+Z
+and hence the required uniform geometric convergence follows.
+
+(cid:3)
+
+The scaling action of R∗
+
++ on functions is deﬁned by (ϑ(λ)f )(x) := f (λ−1x). Next lemma
+
+describes the behavior of the scaling action in relation to the map E
+
+Lemma 6.2. (i) The Schwartz space S ev
+0
+ϑ and with µ > 1, the following equalities hold
+
+is globally invariant under the scaling action
+
+E ◦ λ−1/2ϑ(λ) = ϑ(λ) ◦ E, ϑ(λ)Σµ = Σµϑ(λ)
+
+(6.3)
+
+(ii) The scaling action ϑ induces an action of the multiplicative group Cµ = R∗
+ΣµE(S ev
+
+0 ).
+
++/µZ on
+
+Spectral triples and ζ-cycles
+
+51
+
+(iii) Let f be a function as in Lemma 6.1 that coincides near zero with a smooth even
+function, then ΣµE(f ) belongs to the closure of ΣµE(S ev
+
+0 ) in L2(Cµ).
+
+Proof. The conditions deﬁning the subspace S ev
+action. One has
+
+0 ⊂ S(R) are invariant under the scaling
+
+E(ϑ(λ)f )(u) = u1/2 (cid:88)
+
+f (nλ−1u) = λ1/2ϑ(λ)(E(f ))(u).
+
+n>0
+
+Moreover one has: ϑ(λ)Σµ = Σµϑ(λ). Thus, since S ev
+is invariant under the scaling
+0
+action, the same invariance holds for its image ΣµE(S ev
+0 ) on which the scaling action is
+now periodic of period µ. From this fact one derives an induced action of the multiplicative
+c (R∗
+group Cµ = R∗
++) have support
+in a small neighbourhood of 1 and be such that, for the norm in L2(Cµ),
+
++/µZ. Let f be as in Lemma 6.1. Let (cid:15) > 0 and ρ ∈ C∞
+
+(cid:107)ϑ(ρ)ΣµE(f ) − ΣµE(f )(cid:107) < (cid:15).
+
+By applying (6.3) one has, for a ˜ρ ∈ C∞
++) with the same support as ρ: ϑ(ρ)ΣµE(f ) =
+ΣµE(ϑ(˜ρ)(f )). Finally, the hypothesis on f show that the function ϑ(˜ρ)(f ) belongs to
+(cid:3)
+S ev
+0 .
+
+c (R∗
+
+6.2. Zeros of zeta and ζ-cycles
+We identify a circle of length L = log µ > 0 with the quotient space Cµ := R∗
+as a homogeneous space over the multiplicative group R∗
+the measure d∗u associated to the Haar measure of the multiplicative group R∗
+thus obtains a canonical bundle of R∗
++-homogeneous spaces over the base (0, ∞).
+
++/µZ viewed
++. This space is endowed with
++. One
+
+We keep the notations introduced in the previous part.
+
+Deﬁnition 6.1. A ζ-cycle is a circle C of length L = log µ such that the subspace
+ΣµE(S ev
+
+0 ) is not dense in the Hilbert space L2(C).
+
+As for closed geodesics, the ζ-cycles are stable under ﬁnite covers.
+
+Proposition 6.3. Let C be a ζ-cycle of length L = log µ, then for any positive integer
+n > 0 the n-fold cover of C is a ζ-cycle.
+
+Proof. Let π : Cn → C be the n-fold cover of C. From the adjunction of the operation
+π∗ : L2(C) → L2(Cn) with the operation of sum on the preimage of a point, it follows
+0 )⊂ L2(C) with µ = exp L,
+that if a vector ξ ∈ L2(C) belongs to the orthogonal to ΣµE(S ev
+(cid:3)
+then π∗ξ is orthogonal to Σµn E(S ev
+
+0 ).
+
+We are now ready to state and prove our main result. The spectral realization of the
+
+zeros of the Riemann zeta function of [3] admits the following geometric variant
+
+52
+
+A. Connes and C. Consani
+
+Figure 54. Example of ζ-cycles. They are shown here for the ﬁrst non-zero eigenvalue
+
+λ1(D(λ, k)). The graphs touch each other at the points P (k) = (exp( 2πk
+ζ1
+
+), ζ1). .
+
++ on the orthogonal complement of ΣµE(S ev
+
+Theorem 6.4. (i) Let C be a ζ-cycle. Then the spectrum of the action of the multi-
+plicative group R∗
+0 ) in L2(C) is formed by
+imaginary parts of zeros of zeta on the critical line.
+Conversely:
+(ii) Let s > 0 be such that ζ( 1
+tiple of 2π/s is a zeta cycle and its spectrum, for the action of R∗
+contains is.
+
+2 + is) = 0, then any real circle C of length an integral mul-
+0 ) ⊂ L2(C),
+
++ on ΣµE(S ev
+
+Proof. (i) The action of the multiplicative group R∗
++ on the orthogonal of ΣµE(S ev
+0 ) in
++/µZ.
+L2(C) is periodic and factors through the action of the multiplicative group G = R∗
+Since G is a compact abelian group the representation of G is a direct sum of unitary
+characters. Let χ be any such unitary character, then there then exists s ∈ R with
++/µZ. The orthogonality property of an
+µis = 1, such that χ(u) = uis for all u ∈ G = R∗
+0 ) ⊂ L2(C) implies
+eigenvector with eigenvalue χ with respect to the subspace ΣµE(S ev
+the following vanishing
+
+(cid:90)
+
+G
+
+χ(u)ΣµE(f )(u)d∗u = 0 , ∀f ∈ S ev
+0 .
+
+λ1(D(λ,4)λ1(D(λ,6)λ1(D(λ,8)λ1(D(λ,10)λ1(D(λ,12)λ1(D(λ,14)λ1(D(λ,16)y=14.134ζ-cycleλ=ⅇ6πζ1ζ-cycleλ=ⅇ5πζ1ζ-cycleλ=ⅇ4πζ1ζ-cycleλ=ⅇ3πζ146810121416μ=λ251015λ1Spectral triples and ζ-cycles
+
+53
+
+In turn, this implies the vanishing of the following integral
+
+(cid:90)
+
+R∗
++
+
+uisE(f )(u)d∗u = 0 , ∀f ∈ S ev
+0 .
+
+Let in particular f (x) := e−πx2
+and that f ∈ S ev
+
+0 . Furthermore one has
+
+πx2 (cid:0)−2πx2 + 3(cid:1). One easily checks that (cid:82) ∞
+
+0 f (x)dx = 0
+
+(cid:90)
+
+R∗
++
+
+uisf (u)d∗u =
+
+(cid:19)
+
++ s2
+
+(cid:18) 1
+4
+
+π− 1
+
+4 − is
+
+2 Γ
+
+(cid:18) 1
+4
+
++
+
+(cid:19)
+
+is
+2
+
+and, as we shall prove in general in the following part for functions f ∈ S ev
+
+0 , one also has
+
+(cid:90)
+
+R∗
++
+
+uisE(f )(u)d∗u = ζ(
+
+1
+2
+
+(cid:90)
+
++ is)
+
+R∗
++
+
+uisf (u)d∗u.
+
+This fact entails that for the speciﬁc choice of f made above one obtains the equality
+
+(cid:90)
+
+R∗
++
+
+uisE(f )(u)d∗u = (
+
+1
+4
+
++ s2)ζQ
+
+(cid:19)
+
++ is
+
+(cid:18) 1
+2
+
+where ζQ denotes the complete zeta function. Thus one derives that 1
+zeta.
+(ii) Let s > 0 be such that ζ( 1
+integer. To show that the circle C of length L is a zeta cycle, we ﬁrst prove that
+
+2 + is) = 0 and let L = 2πn/s, with n > 0 a positive
+
+2 + is is a zero of
+
+(cid:90)
+
+R∗
++
+
+uisE(f )(u)d∗u = 0 , ∀f ∈ S ev
+0 .
+
+Indeed, let f ∈ S ev
+multiplicative Fourier transform Fµ(w(f )) = ψ: ψ(z) = (cid:82)
+in the half plane (cid:61)(z) > −5/2 since f (u) = O(u2) for u → 0. For n > 0, one obtains
+
+0 , then with w being the unitary identiﬁcation w(f )(x) = x1/2f (x), the
+2 −izd∗u is holomorphic
+
+f (u)u 1
+
+R∗
++
+
+(cid:90)
+
+R∗
++
+
+u1/2f (nu)u−izd∗u = n−1/2+iz
+
+(cid:90)
+
+R∗
++
+
+v1/2f (v)v−izd∗v
+
+and for (cid:61)(z) > 1/2, one derives by applying Fubini theorem
+
+(cid:90)
+
+(cid:88)
+
+u1/2f (nu)u−izd∗u =
+
+R∗
++
+
+n
+
+(cid:32)
+
+(cid:88)
+
+n
+
+n−1/2+iz
+
+(cid:33) (cid:90)
+
+R∗
++
+
+v1/2f (v)v−izd∗v
+
+54
+
+A. Connes and C. Consani
+
+so that for z ∈ C with (cid:61)(z) > 1/2 one obtains
+
+(cid:90)
+
+R∗
++
+
+E(f )(u)u−izd∗u = ζ(
+
+1
+2
+
+− iz)ψ(z).
+
+(6.4)
+
+To justify the use of Fubini theorem in proving (6.4), note that for N > 1 one derives
+from Lemma 6.1 the following estimate
+
+(cid:88)
+
+|f (nu)| ≤ Cu−N (cid:88)
+
+n−N = C (cid:48)u−N , ∀u > 1
+
+n≥1
+
+n≥1
+
+which shows that the series (cid:80)
+instead the rough estimate, due to the absolute integrability of f , of the form
+
+n≥1 |f (nu)| is of rapid decay for u → ∞. For u → 0 we use
+
+(cid:88)
+
+|f (nu)| = O(u−1).
+
+This ensures the validity of Fubini for (cid:61)(z) > 1/2. Now, we know that ζ( 1
+2 − iz) has a
+pole at z = i/2, but since ψ(i/2) = 0 this singularity does not aﬀect the above product
+ζ( 1
+2 − iz)ψ(z) which is thus holomorphic in the half plane (cid:61)(z) > −5/2. By applying
+Lemma 6.1, we see that the function E(f )(u) is O(u1/2) when u → 0 and of rapid decay
+for u → ∞. Thus (cid:82)
+E(f )(u)u−izd∗u is holomorphic in the half-plane (cid:61)(z) > −1/2.
+Therefore one may conclude that (6.4) holds when z ∈ R and, if ζ( 1
+2 + is) = 0, one
+obtains
+
+R∗
++
+
+(cid:90)
+
+R∗
++
+
+E(f )(u)uisd∗u = 0 , ∀f ∈ S ev
+0 .
+
+At the beginning of this proof one has deﬁned L = 2πn/s: let now µ = exp L then one has
++/µZ
+µis = exp(2πin) = 1. In this way the function χ(u) := uis is well-deﬁned on C = R∗
+and the following vanishing holds in L2(C)
+
+(cid:104)ΣµE(f ) | χ(cid:105) =
+
+(cid:90)
+
+G
+
+χ(u)ΣµE(f )(u)d∗u =
+
+(cid:90)
+
+R∗
++
+
+E(f )(u)uisd∗u = 0 , ∀f ∈ S ev
+0 .
+
+This shows that C is a zeta-cycle and that its spectrum contains is.
+
+(cid:3)
+
+0 )⊥ ⊂ L2(C) and, for each integer n > 0, maps π∗
+
+The above development provides us with a family of Hilbert spaces H(L)
+
+ΣµE(S ev
+the action of N× on (0, ∞). Moreover we also have an action ϑ(λ) of R∗
+we have shown that the linear maps π∗
+parts of critical zeros of the Riemann zeta function, one ﬁnally deduces the following
+
+:=
+n : H(L) → H(nL) which lift
++ on H(L) and
+n are equivariant. Let Z be the set of imaginary
+
+Corollary 6.5.
+
+H(L) (cid:54)= {0} ⇐⇒ ∃s ∈ Z, n ∈ Z s.t. sL = 2πn.
+
+(6.5)
+
+Spectral triples and ζ-cycles
+
+55
+
+Proof. Assume ﬁrst that sL = n with s and n positive. Then it follows from Theorem
+6.4 (ii), that H(L) (cid:54)= {0}, since the circle of length L is a zeta-cycle. Conversely, if
+H(L) (cid:54)= {0} then the circle C of length L is a zeta-cycle and there exists by Theorem
+6.4 (i), a positive s ∈ Z and a non zero vector ξ ∈ H(L) such that ϑ(λ)(ξ) = λisξ for
+all λ ∈ R∗
++. Since the action of R∗
++ on L2(C) is periodic of period µ = exp(L) we have
+(cid:3)
+µis = 1 and this entails sL ∈ 2πZ.
+
+7. Outlook
+
+In this paper we have unveiled a new compelling relation between noncommutative geom-
+etry and the Riemann zeta function using the concept of spectral triple. The previous
+relations are
+• The BC system is a system of quantum statistical mechanics with spontaneous
+
+symmetry breaking which admits the Riemann zeta function as its partition function.
+
+• The adele class space of Q is a noncommutative space, dual to the BC-system and
+
+directly related to the zeros of the L-functions with Grossencharacter [3].
+
+• The quantized calculus is a key ingredient of the semi-local trace formula and it
+
+provides a source of positivity for the Weil quadratic form [6].
+
+It turns out that the adele class space of Q in its topos theoretic incarnation as the
+Scaling Site (the topos S = [0, ∞) (cid:111) N×) is the natural parameter space for the circles
+of length L which play a critical role in the present paper. Proposition 6.3 gives the
+compatibility of ζ-cycles with the action of N× by multiplication on the parameter L.
+The action of N× coming from coverings turns L2(C) into a sheaf over the Scaling Site S .
+The family of subspaces ΣµE(S0) ⊂ L2(C) generate a subsheaf of modules over the sheaf
+of smooth functions and one is then entitled to consider the cohomology of the quotient
+sheaf over S . Endowed with the R∗
++-equivariance this cohomology provides the spectral
+realization of the critical zeros of zeta, taking care, in particular, of eventual multiplicity.
+We shall discuss this fact in details in a forthcoming paper which, in particular, gives an
+application of the algebraic geometry over S developed in [4]
+
+Finally, the stability of ζ-cycles under coverings is reminiscent of the behavior of closed
+geodesics in a Riemannian manifold, suggesting to look for a mysterious “cusp” whose
+closed geodesics would correspond to ζ-cycles.
+
+References
+
+[1] E. Bombieri, The Riemann hypothesis. The millennium prize problems, 107–124, Clay
+
+Math. Inst., Cambridge, MA, 2006.
+
+[2] A. Connes, Noncommutative geometry, Academic Press (1994).
+[3] A. Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta
+
+function. Selecta Math. (N.S.) 5 (1999), no. 1, 29–106.
+
+[4] A. Connes, C. Consani, On Absolute Algebraic Geometry, the aﬃne case, Preprint (2019).
+
+arxiv.org/abs/1909.09796
+
+[5] A. Connes, C. Consani, The Scaling Hamiltonian, J. Operator Theory, 85 (1), pp. 257–276,
+
+2019.
+
+56
+
+A. Connes and C. Consani
+
+[6] A. Connes, C. Consani, Weil positivity and Trace formula, the archimedean place, (2020)
+
+arXiv:2006.13771
+
+[7] A. Connes, C. Consani, Quasi-inner functions and local factors, Journal of Number
+
+Theory, 226 , pp. 139–167, 2021.
+
+[8] W. Rudin, Real and Complex analysis, Third edition. McGraw-Hill Book Co., New York,
+
+1987.
+
+[9] K. Schmudgen, Unbounded self-adjoint operators on Hilbert space. Graduate Texts in
+
+Mathematics, 265. Springer, Dordrecht, 2012.
+
+[10] B. Simon, Lower semi-continuity of positive quadratic forms, Proceedings of the Royal
+
+Society of Edinburgh, 79, (1977), 267–273.
+
+[11] D. Slepian, H. Pollack, Prolate Spheroidal Wave Functions, Fourier Analysis and Uncer-
+
+tainty, The Bell System technical Journal (1961), 43–63.
+
+[12] D. Slepian, Some asymptotic expansions for prolate spheroidal wave functions, J. Math.
+
+Phys. Vol. 44 (1965), 99–140.
+
+[13] D. Slepian, Some comments on Fourier analysis, uncertainty and modeling, Siam Review.
+
+Vol. 23 (1983), 379–393.
+
+[14] H. Yoshida, On Hermitian forms attached to zeta functions. Zeta functions in geometry
+
+(Tokyo, 1990), 281–325, Adv. Stud. Pure Math., 21, Kinokuniya, Tokyo, 1992.
+
+

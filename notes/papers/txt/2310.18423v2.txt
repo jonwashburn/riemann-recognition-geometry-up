@@ -1,0 +1,7569 @@
+4
+2
+0
+2
+
+y
+a
+M
+4
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+2
+v
+3
+2
+4
+8
+1
+.
+0
+1
+3
+2
+:
+v
+i
+X
+r
+a
+
+ZETA ZEROS AND PROLATE WAVE OPERATORS
+
+SEMILOCAL ADELIC OPERATORS
+
+Alain Connes, Caterina Consani and Henri Moscovici
+
+Abstract. — We integrate in the framework of the semilocal trace formula two recent discoveries on
+the spectral realization of the zeros of the Riemann zeta function by introducing a semilocal analogue
+of the prolate wave operator. The latter plays a key role both in the spectral realization of the low lying
+zeros of zeta–using the positive part of its spectrum–and of their ultraviolet behavior–using the Sonin
+space which corresponds to the negative part of the spectrum. In the archimedean case the prolate
+operator is the sum of the square of the scaling operator with the grading of orthogonal polynomials,
+and we show that this formulation extends to the semilocal case. We prove the stability of the semilocal
+Sonin space under the increase of the ﬁnite set of places which govern the semilocal framework and
+describe their relation with Hilbert spaces of entire functions. Finally, we relate the prolate operator
+to the metaplectic representation of the double cover of SL(2, R) with the goal of obtaining (in a
+forthcoming paper) a second candidate for the semilocal prolate operator.
+
+Contents
+
+2
+1. Introduction. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+6
+2. Cyclic pairs and associated prolate operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3. Hardy-Titchmarsh transform: archimedean place. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+4. Semilocal case. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+5. Metaplectic representation in the Jacobi picture. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+References. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+
+2020 Mathematics Subject Classiﬁcation. — 11M06, 11M55, 22E46, 33D45, 34B20.
+Key words and phrases. — Riemann zeta, semilocal trace formula, Sonin space, prolate operator, orthogonal
+
+polynomials, metaplectic representation, Jacobi matrix, infrared, ultraviolet.
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+The diﬃculty of solving the Riemann Hypothesis (RH) is often primarily attributed to the inﬁnite
+number of terms within the Euler product.
+
+1. Introduction
+
+ζ(s) =
+
+(1
+
+p
+Y
+
+p−
+
+1
+
+s)−
+
+−
+
+(1)
+
+However, contrary to this widespread belief, there exists a property P (n), involving only the Euler
+factors for primes smaller than n, and whose validity for all n is equivalent to RH. This is derived
+from Weil’s positivity criterion which involves the quadratic form Qn deﬁned using the Riemann-
+Weil explicit formulas applied to test functions with support in the compact symmetric interval [ 1
+n , n].
+Furthermore, the semilocal trace formula of [7] gives, for each n, a Hilbert space theoretic framework
+in which the Weil quadratic form Qn becomes the trace of a simple operator theoretic expression,
+thus oﬀering a natural ground of exploration in order to attack RH. The present paper furthers
+the development of the operator-theoretic approach to RH by providing a uniﬁed framework that
+incorporates two recent discoveries related to the spectral realization of the zeros of the Riemann
+zeta function.
+On the one hand, the results of [9,10] show that the semilocal trace formula of [7] gives a conceptual
+explanation of Weil’s positivity for the archimedean place, the source of it being the Hilbert space
+representation of the scaling group. Moreover, in the same vein [11] shows that one can access to
+the infrared (low lying) part of the zeros of the Riemann zeta function using the scaling operator
+with periodic boundary conditions, restricted to the orthogonal of the radical of the Weil quadratic
+form. On the other hand the unusual ultraviolet behavior of the zeros of the Riemann zeta function
+found an unexpected spectral incarnation in [12] in terms of the negative eigenvalues of the classical
+prolate wave operator extended to the whole real line.
+In this paper we blend together these developments and go beyond the single archimedean place,
+using the semilocal framework of [7] which provides a canonical Hilbert space-operator theoretic
+stage in which the main players continue to make sense, and both the explicit formula and the
+radical of the Weil quadratic form have a conceptual meaning.
+The role of the prolate operator is crucial in both (infrared and ultraviolet) observed agreements with
+zeros of zeta. Its signiﬁcance in [11] arises because the radical of the Weil quadratic form is given by
+the range of the map E deﬁned on the Schwartz space S(R)ev
+f (nu).
+When applied to eigenfunctions ϕn of the prolate operator for positive eigenvalues, one generates
+extremely small eigenvalues of the Weil quadratic form restricted to functions with ﬁxed compact
+support. The corresponding eigenfunctions ψn of the Weil quadratic form are reconstructed in [11]
+by Gram-Schmidt orthogonalization of E(ϕn). The semilocal form of the map E agrees with the
+canonical identiﬁcation of the semilocal functions with functions on idele classes. The conceptual
+meaning of the map E will become clear in the semilocal formalism. The eigenfunctions ψn were
+used in [11] to condition the scaling operator with periodic boundary conditions. With this process
+we generated the low-lying zeros of the zeta function, while the ultraviolet behavior of the zeros
+remained out of reach. Thus the fact that the expected UV behavior is realized by the negative
+spectrum of the prolate operator suggests the tantalizing program of ﬁnding the semilocal analogue
+of the prolate operator. We expect that the use of such operator-theoretic tools in the semilocal case
+opens a way to handle Weil’s positivity as in [10]. In fact, the operator theoretic aspect of the present
+paper provides a more precise strategy for addressing the semilocal Weil positivity by comparing
+
+0 by the formula E(f )(u) := u1/2
+
+P
+
+ZETA AND WAVE OPERATORS
+
+3
+
+the trace functional associated to the operator- which is automatically positive for a selfadjoint
+operator- with the Weil functional. The conditioning, by the radical of the Weil quadratic form,
+that worked for the scaling operator in the infrared case will be implemented automatically by the
+orthogonality of the positive and the negative part of the spectrum of the semilocal prolate operator,
+whose corresponding negative eigenspace (1) was identiﬁed in [12] to the Sonin space.
+Our approach involves reinterpreting the prolate operator to propose a candidate for its semilocal
+counterpart. This is done by placing at the forefront the scaling operator, whose semilocal version
+is well established in [7], as well as the Sonin space.
+The scaling operator S is the selfadjoint generator of the group of dilations in the Hilbert space
+L2(R)ev of square integrable even functions on the real line. The prolate operator admits a simple
+expression in terms of the operator S and the vector given by the function ξ(x) := e−
+. This
+vector belongs to the domain of Sn for any n, and the span of the Snξ is L2(R)ev. We let N be
+the grading associated to the ﬁltration coming from the linear span of polynomials p(S)ξ, with
+deg P
+n. Ignoring the delicate domain deﬁnition needed to obtain a selfadjoint operator, the
+prolate operator Wλ is given by the formal expression
+
+πx2
+
+≤
+
+Wλ =
+
+−
+
+S2 + 2πλ2(4N + 1)
+
+1
+4
+
+.
+
+−
+
+(2)
+
+R
+
+∈
+
+ξ
+|
+
+∈ ∩n
+
+f (D)ξ
+h
+
+f (s)dµ(s) :=
+
+Formula (2) is meaningful for any cyclic pair (D, ξ) given by a selfadjoint operator D acting in
+a Hilbert space H and a unit vector ξ
+NDomDn which is cyclic (i.e. such that the vectors
+∈
+p(D)ξ with p a polynomial, are dense in H). For any cyclic pair (D, ξ), the spectral theorem
+provides a canonical form (or diagonalization) in which D is represented as the multiplication by
+R in the Hilbert space H = L2(R, dµ) where dµ is the spectral measure deﬁned
+the variable s
+, and the cyclic vector ξ is the constant function 1. The theory of
+by
+i
+orthogonal polynomials for the measure dµ then provides the representation of D as a Jacobi
+matrix and of the grading operator N as a diagonal matrix. We recall these basic facts in section 2.
+It turns out that one can naturally associate to a cyclic pair a spectral triple (A, H, D) where H
+and D are unchanged while the algebra A := c0(N) acts via the grading operator N associated to
+the orthogonal polynomials of the spectral measure. The role of the spectral triple (A, H, D) is to
+D2 by the addition
+understand algebraically the prolate operator as a perturbation of the operator
+of an element of the algebra A. The spectral triple (A, H, D) of a cyclic pair is even (in the sense
+that it admits a Z/2Z-grading commuting with the algebra and anticommuting with D) if and only
+s. Moreover such a Z/2Z-grading γ
+if the spectral measure dµ is even, i.e. invariant under s
+is unique if it exists. In the even case one obtains a Jacobi matrix representation for the prolate
+operator (proposition 2.4).
+In section 3 we describe in Theorem 3.1 the canonical form of the even cyclic pair associated to
+the scaling operator D = S and the cyclic vector ξ
+. The grading is given by the
+Fourier transform FeR acting in L2(R)ev. The isomorphism with the canonical form is given by the
+unitary
+
+(x) = 21/4e−
+
+7→ −
+
+πx2
+
+−
+
+∞
+
+V = M
+
+◦
+
+U : L2(R)ev
+
+→
+
+L2(R, dm)
+
+(3)
+
+1. up to a ﬁnite dimensional possible discrepancy
+
+4
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+which is the composition of the unitary transformation U : L2(R)ev
+
+L2(R)
+
+→
+
+U(f ) = π−
+
+1
+2
+
+∞
+
+f (v)v
+
+1
+2 −
+
+isd∗v .
+
+0
+Z
+
+→
+
+)−
+
+L2(R, dm) for the probability measure dm(s) := (2π)−
+
+with the multiplication operator M(f )(s) := U(ξ
+1(s)f (s) which is a unitary isomorphism
+M : L2(R)
+4 + is
+2ds on R. The
+2 )
+|
+unitary isomorphism V of (3) is the Hardy-Titchmarsh transform which, modulo normalizations,
+appears already in the paper [14, Theorem 1, p. 201]. Their original motivation was to construct
+s. This
+self-reciprocal functions by conjugating the Fourier transform with the symmetry s
+puts in evidence the role of the evenness, i.e. the Z/2Z-grading, of the cyclic pair. The unitary
+isomorphism V transforms the Hermite functions into the orthogonal polynomials Pn for the measure
+dm and the scaling operator S into the multiplication by s. Moreover the prolate wave operator
+
+Γ( 1
+|
+
+7→ −
+
+∞
+
+3
+2
+
+(Wλψ)(q) =
+
+∂((λ2
+
+−
+
+−
+
+q2)∂) ψ(q) + (2πλq)2 ψ(q)
+
+(4)
+
+becomes a special case of (2) and, in fact, of a general construction for orthogonal polynomials.
+More precisely, with N the grading operator N (Pn) := n Pn in L2(R, dm), one obtains
+
+V
+
+Wλ ◦
+
+◦
+
+V∗ =
+
+−
+
+s2 + 2πλ2(4N + 1)
+
+1
+4
+
+−
+
+(5)
+
+p
+
+(n + 1/2)(n + 1). In section 3.5 we describe the two hermitian Jacobi matrices J
+
+where s2 is the operator of multiplication by the square of the variable in L2(R, dm). The right
+hand side of (5) is meaningful in the general context of orthogonal polynomials. We compute
+in section 3.4 the hermitian Jacobi matrix of the scaling operator S in the basis of orthogonal
+polynomials. Its diagonal elements are 0, while the non-zero matrix elements above the diagonal
+are Sn,n+1 = i
+associated to the operators S2 restricted to the eigenspaces of FeR for the eigenvalues
+we obtain the Jacobi matrices of the prolate operator Wλ.
+In section 3.6 we show that the zeros of the zeta function appear from the action of the scaling
+operator on the quotient by the range of the map E applied to the positive eigenspace of Wλ when
+λ
+Section 4 is devoted to the extension of the Hardy-Titchmarsh transform in the semilocal situation
+involving a ﬁnite set S of places of Q containing the archimedean one, and the analysis of the
+semilocal Sonin space. The semilocal version of Theorem 3.1 involves a new measure which, up to
+normalization, is given by the square of the absolute value of the restriction to the critical line of
+the product of local factors for the places in S.
+To state this result we need the following notation (see section 4.1). The ring of semilocal adeles is
+the product AS =
+
+S Qv, the semilocal adele class space is the quotient XS := AS/Γ, where
+
+±
+1. Similarly
+
+→ ∞
+
+±
+
+.
+
+Γ =
+
+Q
+{±
+
+pn1
+1 · · ·
+
+pnk
+k
+
+: pj ∈
+
+S
+
+\ {∞}
+
+, nj ∈
+
+Z
+
+} ⊂
+
+GL1(AS) =
+
+GL1(Qp).
+
+S
+Yp
+∈
+
+The semilocal idele class group CS := GL1(AS)/Γ acts on XS by multiplication and this action
+restricts to its maximal compact subgroup KS. One has a canonical isomorphism wS of the Hilbert
+L2(R) being the Fourier
+space L2(XS )KS with L2(R∗+, d∗u), see (42). With Fµ : L2(R∗+, d∗u)
+transform for the multiplicative group R∗+ see (17), we obtain the unitary US := Fµ ◦
+wS. Finally
+
+→
+
+ZETA AND WAVE OPERATORS
+
+L2(R, dmS) be the unitary given by
+
+we let MS : L2(R)
+
+→
+
+MS(f )(s) :=
+
+S
+Yv
+∈
+
+1
+
+−
+
+Lv(
+
+1
+2 −
+
+is)
+
+!
+
+f (s), dmS(s) :=
+
+Lv(
+
+1
+2 −
+
+where the Lv are the local Euler factors. We then derive the following result
+
+S
+Yv
+∈
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+5
+
+(6)
+
+2
+
+ds.
+
+is)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Theorem 1. — (Proposition 4.1 and Proposition 4.2) Let S be a ﬁnite set of places with
+let RS be the maximal compact subring of
+f in L2(XS )KS .
+class of the function 1RS ⊗
+
+S,
+L2(R)ev. Then let ηS(f ) be the
+
+Qp, and f
+
+∞ ∈
+
+\{∞}
+
+Q
+
+∈
+
+∈
+
+S
+
+p
+
+(i) One has
+
+FµwS(ηS(f ))(s) =
+
+Lp(
+
+1
+2 −
+
+is)
+
+(cid:17)
+
+(Fµw
+
+∞
+
+f )(s).
+
+(7)
+
+S
+(cid:16) Yp
+∈
+
+\{∞}
+
+(ii) Let the Fourier transform for Qp be normalized so that the function 1Zp is its own Fourier
+transform and let FS, acting in L2(XS), be induced by the tensor product of the local Fourier
+transforms. One has
+
+FS ◦
+
+ηS = ηS ◦
+
+FeR.
+US : L2(XS )KS
+
+(iii) The unitary transformation VS := MS ◦
+(iv) The cyclic pair (S, ξS) is even and the Z/2Z grading is given by the Fourier transform FS
+
+form of the cyclic pair (D, ξ) where D := S and ξ = ξS := ηS(ξ
+
+L2(R, dmS) gives the canonical
+
+→
+
+).
+
+∞
+
+which becomes the symmetry s
+
+7→ −
+
+s under the unitary transformation VS.
+
+The computation of the coeﬃcients of the hermitian Jacobi matrix of the cyclic pair for a general S as
+above is deferred to a forthcoming paper. In order to analyse the semilocal Sonin spaces we introduce
+the dual Hardy-Titchmarsh transform in section 4.4. In the case of the single archimedan place this
+transform was introduced by J-F. Burnol in connection with the work of L. de Branges. The main
+result of this section is the construction of a hilbertian (2) isomorphism θS : L2(R)ev
+L2(XS)KS
+which connects together the semilocal Sonin spaces:
+
+→
+
+Theorem 2. — Let S be a ﬁnite set of places with
+∞ ∈
+hilbertian isomorphism of the Sonin spaces θS : Sλ(R, e
+∞
+character.
+
+S and λ > 0. Then the map θS induces a
+Sλ(XS , α) where α is the normalized
+)
+
+→
+
+This result suggests that the obtained invariantly deﬁned Sonin space should, when suitably equiped
+with a prolate type operator, play the role of the sought for Weil cohomology. In fact we observed
+in [12] that, in the case of the single archimedean place, the Sonin space corresponds (up to a
+ﬁnite dimensional possible discrepancy) to the negative part of the spectrum of the prolate operator
+and this gives another constraint in the search of the semilocal analogue of the prolate operator.
+Moreover the results of [13] suggest a strong relation between orthogonal polynomials-which play a
+key role in the semilocal case- and reproducing kernels commuting with diﬀerential operators.
+Another conceptual point of view on the prolate operator is obtained in section 5. We show that
+the prolate operator admits (still at the formal algebraic level) a description as an element of the
+enveloping algebra of the Lie algebra of SL2(R) through the metaplectic representation of the
+
+2. We use the term “hilbertian" to denote the underlying topological vector space structure of a Hilbert space
+
+ 
+6
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+double cover of SL2(R). We compare this description of the prolate operator with Theorem 3.1
+in section 5.2. We show that the generators of the metaplectic representation make sense in the
+context of cyclic pairs i.e. equivalently of orthogonal polynomials. We prove (Theorem 5.2) that
+the discrepency coeﬃcients dn vanish precisely in the situation of Theorem 3.1 and their vanishing
+determines uniquely the cyclic pair (S, ξ
+In a forthcoming paper we shall develop the role of the Weil representation [20] of the metaplectic
+cover of the algebraic group SL2(AS) in the semilocal context, thereby introducing a second potential
+candidate for the semilocal prolate operator.
+
+), the associated moments and the representation.
+
+∞
+
+2. Cyclic pairs and associated prolate operators
+
+In this section we give a general construction starting from a pair (D, ξ) of a selfadjoint operator
+N Dom Dn. We assume that H is inﬁnite
+D acting in a Hilbert space H and a unit vector ξ
+∈
+dimensional and that ξ is a cyclic vector, i.e. that the linear span of the vectors Djξ for j
+N is
+dense in H. Given such a pair we let En ⊂
+n.
+They are ﬁnite dimensional subspaces of H and dim En = n + 1, since the vectors Djξ are linearly
+En+1 and the general situation is described as
+independent. One has by construction D(En)
+follows by the spectral theorem.
+
+∈
+H be the linear span of the vectors Djξ for j
+
+∈ ∩n
+
+⊂
+
+≤
+
+Theorem 2.1. — Let (D, ξ) be a cyclic pair as above.
+
+(i) There exists a probability measure µ on R and a unitary isomorphism U : H
+
+which transforms D in the operator of multiplication by the variable s
+in the constant function equal to 1.
+
+∈
+
+L2(R, dµ)
+R and the vector ξ
+
+→
+
+(ii) Under the isomorphism U the subspace En becomes the space of polynomials of degree
+f (D)ξ
+(iii) The spectral measure
+h
+
+≤
+is a complete invariant of the cyclic pair.
+
+f (s)dµ(s) :=
+
+ξ
+|
+
+i
+
+n.
+
+Theorem 2.1 gives the canonical form of a cyclic pair (D, ξ). One can then apply the general theory
+of orthogonal polynomials and obtain an orthonormal basis (ξj) where ξ0 = ξ and En is the span of
+the ξj for j
+n. One then considers the number operator N which is diagonal in the orthonormal
+basis (ξj) and such that N ξj := jξj.
+
+≤
+
+R
+
+Deﬁnition 2.2. — Let (D, ξ) be a cyclic pair. The formal prolate operator ω(D, ξ, λ) is the
+operator
+
+ω(D, ξ, λ) :=
+
+D2 + λ2N.
+
+−
+
+This deﬁnition is formal inasmuch as it does not give precisely the domain of the operator. We shall
+see in section 3 that the standard prolate diﬀerential operator Wλ is a special case of deﬁnition 2.2.
+It is clear in that case that the obtained formal operator is symmetric and ﬁnding the relevant
+selfadjoint extension is delicate.
+
+Deﬁnition 2.3. — Let (D, ξ) be a cyclic pair. A Z/2-grading γ is a unitary of square 1, γ2 = 1,
+γ = γ∗ such that γD =
+
+Dγ and γξ = ξ. A cyclic pair is even if it admits a Z/2-grading.
+
+−
+
+Proposition 2.1. — A cyclic pair is even iﬀ the spectral measure µ of Theorem 2.1 is invariant
+s. The Z/2-grading is unique (if it exists) and is equal to γ = exp(iπN ).
+under s
+
+7→ −
+
+ZETA AND WAVE OPERATORS
+
+7
+
+−
+
+s) for all f
+
+s. Let γ(f )(s) :=
+Proof. — Assume that the measure µ of Theorem 2.1 is invariant under s
+L2(R, dµ). One has γ2 = 1 and γ is unitary by invariance of the measure. By
+f (
+s.
+construction γ anticommutes with the multiplication by s and one has γξ = ξ where ξ(s) = 1,
+∀
+Using the unitary isomorphism U : H
+L2(R, dµ) of Theorem 2.1 one obtains a Z/2-grading for
+(D, ξ). Conversely let γ be a Z/2-grading for (D, ξ). Then the spectral measure is invariant under
+s
+
+s, since one has
+
+7→ −
+
+→
+
+∈
+
+7→ −
+
+D)ξ
+
+ξ
+
+=
+
+h(
+
+s)dµ(s)
+
+h(s)dµ(s) :=
+
+h(D)ξ
+h
+
+ξ
+
+=
+
+h(D)γξ
+h
+
+γξ
+
+=
+
+h(
+h
+
+|
+
+|
+
+i
+
+i
+
+Z
+
+−
+
+|
+Let us show the uniqueness of the Z/2-grading. Let γ′ be another Z/2-grading. Then the product
+u = γγ′ commutes with D and fulﬁlls uξ = ξ. Thus one has uDjξ = Djξ for all j
+N and
+since ξ is cyclic one obtains u = 1 and hence γ′ = γ. Let us show that γ = exp(iπN ). One has
+γDjξ = (
+n) are globally
+invariant under γ and that they decompose as the eigenspaces E±n generated respectively by the
+Djξ for j
+n, j even and j odd. The Gram–Schmidt orthonormalization process thus takes place
+E±n according to the parity of j.
+independently in E±n yielding the orthonormal basis ξj where ξj ∈
+It follows that γ = exp(iπN ).
+
+1)j Djξ. This shows that the subspaces En (span of the Djξ for j
+
+−
+
+≤
+
+−
+
+≤
+
+∈
+
+Z
+
+i
+
+2.1. Spectral triple of a cyclic pair. — Let (D, ξ) be an even cyclic pair and γ the Z/2-
+grading. proposition 2.1 suggests to consider the even spectral triple (A, H, D) where the C ∗-algebra
+A := c0(N) of sequences vanishing at
+c0(N)
+
+acts as follows in the Hilbert space H of the cyclic pair:
+H
+
+(f, η)
+(8)
+Proposition 2.2. — Let (D, ξ) be a cyclic pair, and A := c0(N) act in H by (8). Then (A, H, D) is
+c0(N).
+a spectral triple and the commutators [D, f ] make sense and are bounded for any f
+
+f (N )η
+
+cc(N)
+
+∞
+
+7→
+
+H
+
+×
+
+∋
+
+∈
+
+∈
+
+⊂
+
+cc(N), it is by construction a ﬁnite linear combination of the delta functions
+= j and δj(j) = 1. The action (8) of δj in H is the rank one operator
+DomD and it is equal to the bounded
+. Thus the commutators [D, f ] are ﬁnite rank operators for any
+
+, and its commutator with D makes sense since ξj ∈
+
+ξj| − |
+
+ξjih
+
+Dξj|
+
+Ej+1 for all j and
+
+= 0 for k < n
+
+1 using D = D∗. Thus one has
+
+Dξn|
+h
+Dξn = an
+
+ξki
+
+−
+
+1ξn
+
+1 + anξn+1, an 6
+
+−
+
+−
+
+= 0,
+
+(9)
+
+where one can ﬁx by induction the phase of the orthonormal vectors ξn in such a way that the
+non-zero scalars an :=
+
+cc(N), one has f =
+
+are positive. Let f
+
+[D, f ] =
+
+f (j)[D, δj ] =
+
+X
+=
+
+(f (j)
+
+where αj := (f (j)
+
+X
+
+−
+αjT (j)
+
+Dξn|
+h
+
+ξn+1i
+f (j)aj (
+
+ξj+1ih
+|
+X
+ξj+1ih
+f (j + 1))aj (
+|
+
+∈
+ξj| − |
+ξjih
+ξj+1|
+ξjih
+ξj| − |
+ξj+1|
+) =
+−
+ξjih
+ξj| − |
+ξj+1ih
+f (j + 1))aj. Let T (j) := (
+X
+|
+α2j+1T (2j + 1)
+k
+
+α2jT (2j)
+k
+
+) +
+
++
+
+k
+
+X
+
+−
+
+f (j)aj
+
+ξj
+1 (
+P
+|
+αj (
+ξj| − |
+ξj+1ih
+|
+). One has
+ξj+1|
+= max
+
+k
+
+α2j+1|
+|
+X
+since the matrices of the terms appearing in the rhs are block diagonal. Moreover one has
+ξj|
+
+X
+T (j)ξki
+
+ξki − h
+
+ξj+1ih
+
+ξk+1|
+h
+
+ξk+1|
+h
+
+ξk+1|
+
+ξj+1|
+
+α2j|
+|
+
++ max
+
+ξjih
+
+k ≤ k
+
+= δ(j
+
+ξki
+
+X
+
+k)
+
+−
+
+=
+
+f (j)δj and
+ξj| − |
+ξj
+ξjih
+)
+ξj+1|
+
+1ih
+ξjih
+
+−
+
+)
+1|
+
+−
+
+Proof. — Let f
+∈
+δj(k) := 0 for k
+ξj|
+ξjih
+|
+operator
+cc(N)
+f
+One has Dξj ∈
+
+Dξjih
+|
+⊂
+
+c0(N).
+
+∈
+
+6
+8
+
+so that
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+and one obtains the inequalities
+
+ξk+1|
+h
+
+αjT (j)
+
+(cid:16)X
+
+(cid:17)
+
+= αk
+
+ξki
+
+max
+
+αj| ≤ k
+|
+
+αjT (j)
+
+k ≤
+
+max
+
+α2j|
+|
+
++ max
+
+α2j+1|
+|
+
+X
+
+f (j + 1))aj| ≤ k
+
+[D, f ]
+
+max
+j even |
+
+(f (j)
+
+f (j + 1))aj |
+
+−
+
++ max
+j odd |
+
+(f (j)
+
+f (j + 1))aj |
+
+−
+
+k ≤
+
+which gives
+
+max
+
+(f (j)
+|
+
+−
+
+and
+
+[D, f ]
+We now compute the spectral distance function on N associated to the spectral triple (A, H, D).
+
+f (j + 1))aj| ≤ k
+
+f (j + 1))aj|
+
+(f (j)
+|
+
+(f (j)
+|
+
+2 max
+
+max
+
+k ≤
+
+−
+
+−
+
+(10)
+
+Proposition 2.3. — Let φ(n) :=
+0
+≤
+triple (A, H, D) of proposition 2.2 is equivalent to the distance d(n, m) :=
+precisely
+
+R+. The spectral distance function of the spectral
+, more
+φ(m)
+|
+
+φ(n)
+|
+
+n a−
+
+P
+
+−
+
+≤
+
+j
+
+1
+j ∈
+
+1
+2
+
+d(n, m)
+
+≤
+
+sup
+
+f (n)
+
+{|
+
+−
+
+f (m)
+
+[D, f ]
+
+| | k
+
+1
+} ≤
+
+d(n, m)
+
+(11)
+
+k ≤
+
+Proof. — By construction one has aj > 0 so that the map φ is strictly increasing and d(n, m) :=
+φ(n)
+|
+
+deﬁnes a distance function on N. The distance d(n, m) is given by
+
+φ(m)
+|
+
+−
+
+d(n, m) = sup
+
+f (n)
+
+f (m)
+
+max
+
+{|
+
+−
+
+| |
+
+(f (j)
+|
+
+f (j + 1))aj| ≤
+
+1
+}
+
+−
+
+and thus (11) follows from (10).
+
+2.2. Jacobi matrix of the prolate operator of a cyclic pair. — At the formal level, i.e.
+ignoring the issue of selfadjointness of D, an even cyclic pair is determined by the sequence (an)
+which gives the Jacobi matrix of the operator D in the basis (ξn) by (9) while no longer assuming
+that the an are real.
+
+
+
+D =
+
+0
+a1
+0
+a2
+0
+. . .
+One can then determine a Jacobi matrix representation for the formal prolate operator of Deﬁni-
+tion 2.2. This operator commutes with the grading γ and thus is the direct sum of its restriction to
+the eigenspaces H± :=
+. These subspaces are generated by the vectors ξn where
+}
+the parity of n is ﬁxed. Indeed the square of the matrix of D is of the form (for n = 5)
+
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+
+0
+a0
+0
+0
+0
+. . .
+
+0
+0
+a2
+0
+a3
+. . .
+
+a0
+0
+a1
+0
+0
+. . .
+
+0
+0
+0
+a3
+0
+. . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+γξ =
+
+ξ
+{
+
+H
+
+
+
+±
+
+∈
+
+ξ
+
+|
+
+a0a0
+0
+a0a1
+0
+0
+0
+
+0
+a0a0 + a1a1
+0
+a1a2
+0
+0
+
+a0a1
+0
+a1a1 + a2a2
+0
+a2a3
+0
+
+0
+a1a2
+0
+a2a2 + a3a3
+0
+a3a4
+
+0
+0
+a2a3
+0
+a3a3 + a4a4
+0
+
+0
+0
+0
+a3a4
+0
+. . .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9
+
+
+
+
+
+
+
+ZETA AND WAVE OPERATORS
+
+and its restrictions to H± are Jacobi matrices of the general form
+
+
+
+
+
+
+
+a0a0
+a0a1 a1a1 + a2a2
+
+a0a1
+
+0
+0
+
+a2a3
+0
+
+0
+a2a3
+a3a3 + a4a4
+a4a5
+
+0
+0
+. . .
+. . .
+
+a0a0 + a1a1
+a1a2
+0
+0
+
+a1a2
+a2a2 + a3a3
+a3a4
+0
+
+0
+a3a4
+a4a4 + a5a5
+a5a6
+
+0
+0
+. . .
+. . .
+
+
+
+, 
+
+
+
+
+
+
+
+
+
+We now give the matrix description of the formal prolate operator of Deﬁnition 2.2.
+Proposition 2.4. — The formal prolate operator of Deﬁnition 2.2 restricted to H± is represented
+by the Jacobi matrices J ± whose matrix coeﬃcients are 0 except those given by
+
+n,n+1 = J +
+J +
+
+n+1,n =
+
+a2na2n+1, J +
+
+n,n =
+
+−
+
+J −n,n+1 = J −n+1,n =
+
+−
+
+a2n+1a2n+2, J −n,n =
+
+−
+
+a2na2n −
+−
+a2na2n −
+
+a2n
+
+1a2n
+
+1 + 2nλ2
+
+−
+
+−
+a2n+1a2n+1 + (2n + 1)λ2
+
+(12)
+
+(13)
+
+Proof. — This follows from Deﬁnition 2.2 and the computation of the matrix for the restriction of
+D2 to H±.
+
+3. Hardy-Titchmarsh transform: archimedean place
+
+This section contains a detailed proof of the following theorem.
+
+Theorem 3.1. — Let hn be the normalized Hermite functions.
+
+(i) One has U(h0) = 2−
+archimedean place.
+
+3
+4 π−
+
+1
+2 L
+
+( 1
+2 −
+
+∞
+
+is) where L
+
+∞
+
+(z) := π−
+
+z/2Γ(z/2) is the Euler factor at the
+
+(ii) The functions U(h2n) are of the form U(h2n)(s) = (
+
+1)nPn(s)U(h0)(s) where the Pn(s)
+are polynomials of the same parity as n and which are orthogonal (and normalized) for the
+4 + is
+2ds on R.
+probability measure dm(s) := (2π)−
+2 )
+|
+
+−
+
+3
+2
+
+Γ( 1
+|
+L2(R, dm), M(f )(s) := U(h0)−
+
+1(s)f (s) is a unitary isomorphism.
+
+(iii) The map M : L2(R)
+(iv) The unitary isomorphism M
+
+→
+
+U : L2(R)ev
+
+L2(R, dm) transforms the Hermite functions
+1)nPn and the operator S into the multiplication by s.
+
+→
+
+◦
+
+h2n into the orthogonal polynomials (
+
+−
+
+(v) Let N be the grading operator N (Pn) := n Pn in L2(R, dm). One has
+1
+4
+
+s2 + 2πλ2(4N + 1)
+
+Wλ ◦
+
+U)∗ =
+
+(M
+
+(M
+
+U)
+
+−
+
+−
+
+◦
+
+◦
+
+◦
+
+(14)
+
+where s2 is the operator of multiplication by the square of the variable in L2(R, dm).
+
+By construction the Hermite functions hn are themselves of the form hn(x) = Hn(x)h0(x) where the
+Hn are orthogonal (and normalized) polynomials. Since the Fourier transform Fµ does not preserve
+the product of functions nor their polynomial nature, Theorem 3.1 is by no means a consequence of
+the construction of the Hermite functions. The operator U
+U∗ is the multiplication by s while
+the Hermite operator gives the grading. The main result is that, due to the functional equation
+Γ(x + 1) = xΓ(x) of the Γ-function one has natural orthogonal polynomials governing the functions
+U(h2n) where the hn are the normalized Hermite functions.
+
+S
+
+◦
+
+◦
+
+10
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+3.1. Notation. —
+3.1.1. FeR : L2(R)ev
+
+→
+
+L2(R)ev. — The Fourier transform FeR : L2(R)
+
+L2(R)
+
+→
+
+FeR(f )(y) :=
+
+f (x) exp(
+
+−
+
+2πixy)dx
+
+(15)
+
+Z
+
+restricts to the subspace L2(R)ev
+: L2(R)ev
+
+3.1.2. w
+→
+positive real numbers is d∗u := du/u. The map w
+
+⊂
+
+∞
+
+L2(R) of even functions.
+
+is deﬁned by
+
+∞
+
+L2(R∗+, d∗u). — The Haar measure of the multiplicative group R∗+ of
+
+w
+
+(f )(u) := u1/2 f (u) ,
+
+u
+
+R∗+.
+
+∞
+
+∈
+L2(R). — The Fourier transform for the multiplicative group R∗+ is
+
+∀
+
+(16)
+
+3.1.3. Fµ : L2(R∗+, d∗u)
+
+→
+
+3.1.4. U : L2(R)ev
+
+→
+U : L2(R)ev
+
+Fµ(f )(s) :=
+
+∞
+
+f (u) u−
+
+isd∗u.
+
+Z
+L2(R). — The unitary transformation U := π−
+
+1
+
+0
+
+L2(R), U(f )(s) = π−
+
+1
+2
+
+∞
+
+f (v)v
+
+0
+
+Z
+
+→
+
+is given by
+
+(17)
+
+(18)
+
+w
+
+2 Fµ ◦
+isd∗v .
+
+1
+2 −
+
+∞
+
+3.2. Canonical form of the scaling operator. — We let H := x∂x and S :=
+2 ) acting
+in the Hilbert space L2(R)ev as unbounded operators. By construction S is the selfadjoint generator
+of the scaling unitary transformations
+
+−
+
+i(H + 1
+
+(exp(itS)f ) (x) = λ1/2 f (λ x), λ = et/2 ,
+
+L2(R)ev be the vector of norm 1 given by
+
+R.
+
+t
+
+∀
+
+∈
+
+h0(x) := 2
+
+1
+4 exp(
+
+−
+
+πx2) ,
+
+x
+
+∀
+
+∈
+
+R.
+
+We let ξ
+
+= h0 ∈
+
+∞
+
+One has
+
+1
+4 π
+
+2−
+
+1
+
+2 U(h0)(s) =
+
+∞
+
+v1/2
+−
+
+ise−
+
+πv2
+
+d∗v =
+
+Z
+We deﬁne the unitary transformation
+
+0
+
+1
+2
+
+π−
+
+1
+
+4 +i s
+
+2 Γ
+
+1
+4 −
+
+i
+
+s
+2
+
+(cid:19)
+
+(cid:18)
+
+M : L2(R)
+→
+U(h0)
+2ds
+where the measure dm is
+|
+|
+Proposition 3.1. — (i) The unitary transformation V := M
+
+L2(R, dm), M(f )(s) := U(h0)−
+
+the canonical form of the cyclic pair (S, ξ
+
+)) where S :=
+
+−
+) is even and the (unique) grading γ is equal to the Fourier transform
+
+∞
+
+U : L2(R)ev
+
+◦
+i(H + 1
+
+2 ) and ξ
+
+→
+∞
+
+L2(R, dm) gives
+= h0.
+
+1(s)f (s)
+
+(19)
+
+(ii) The cyclic pair (S, ξ
+FeR : L2(R)ev
+
+∞
+L2(R)ev.
+
+Proof. — (i) The conjugate of S by U is the multiplication by the variable s since
+
+∞
+
+((H +
+
+)f )(v)v
+
+1
+2 −
+
+isd∗v =
+
+∞
+
+∂v(v
+
+1
+2 f (v))v−
+
+isdv = is
+
+∞
+
+f (v)v
+
+1
+2 −
+
+isd∗v
+
+0
+Z
+
+0
+Z
+This remains true when conjugating by V, while by construction V(ξ
+V(ξ
+
+)(s) = 1.
+
+Z
+
+0
+
+∞
+
+∞
+
+) is the constant function
+
+→
+
+1
+2
+
+ZETA AND WAVE OPERATORS
+
+11
+
+(ii) The vector ξ
+anticommutes with S, thus the result follows from proposition 2.1.
+
+= h0 is invariant under FeR and this transformation is unitary of square 1 and
+
+∞
+
+3.3. Number operator N . — We relate the number operator N of the cyclic pair (S, ξ
+the Hermite diﬀerential operator H =
+∂2 + (2πq)2.
+
+−
+
+Proposition 3.2. — (i) The number operator N of the cyclic pair (S, ξ
+H
+
+) is given by
+
+∞
+
+N =
+
+8π −
+
+1
+4
+
+, H =
+
+∂2 + (2πq)2
+
+−
+
+(ii) The eigenfunctions of N are the even Hermite functions h2n ∈
+
+L2(R)ev where
+
+h2n(x) =
+
+1)n
+
+k2−
+
+−
+
+n+3k+ 1
+4
+
+πkx2ke−
+
+πx2
+
+((2n)!)
+
+1
+2
+
+(2k)!(n
+
+k)!
+
+−
+
+n
+
+0
+X
+
+(
+−
+
+) with
+
+∞
+
+(20)
+
+(21)
+
+Proof. — The Hermite functions (21) are eigenfunctions for the operator H and give the orthonor-
+mal basis of eigenfunctions for the restriction of H to L2(R)ev and the eigenvalues are 2π(4n + 1).
+n is formed of the even functions
+The subspace En ⊂
+for j
+2n. It coincides with the linear span of
+e−
+the functions h2j , 0
+
+L2(R)ev linear span of the vectors Sjξ
+P (x) where P (x) is an even polynomial of degree
+
+n. Thus one obtains (i) and (ii).
+
+∞
+≤
+
+πx2
+
+≤
+
+j
+
+≤
+As a corollary we get equation (14) of Theorem 3.1.
+
+≤
+
+Corollary 3.2. —
+
+(M
+
+U)
+
+Wλ ◦
+
+◦
+
+◦
+
+(M
+
+◦
+
+U)∗ =
+
+−
+
+s2 + 2πλ2(4N + 1)
+
+1
+4
+
+−
+
+(22)
+
+Proof. — One has by (4)
+
+(Wλψ)(q) = ∂(q2∂ ψ(q)) + λ2 H ψ(q) =
+
+S2 + λ2 H
+
+−
+
+1
+4
+
+−
+
+(cid:18)
+
+ψ(q)
+
+(cid:19)
+
+which gives (22) using (20) since V
+
+S
+
+◦
+
+◦
+
+V∗ is given by multiplication by s by proposition 3.1.
+
+3.4. Jacobi matrix for S. — This section should be compared, for the formulas of the tridiagonal
+matrix, with [16, Section 8] (formulas based on Hermite series).
+We let
+
+Pm(x) :=
+
+(2m)!
+
+p
+
+m
+
+0
+X
+
+1)k23k
+
+−
+
+m
+
+(
+−
+
+Q
+
+j
+
+k
+1
+−
+j=0
+−
+(2k)!(m
+(cid:0)
+
+ix
+
+2 + 1
+k)!
+
+4
+
+−
+
+(cid:1)
+
+(23)
+
+Proposition 3.3. — (i) The polynomials Pm are orthonormal polynomials with respect to the
+
+probability measure (2π)−
+
+3/2
+
+Γ
+|
+
+1
+4 −
+
+i x
+2
+
+2dx on the line.
+|
+
+(ii) The matrix acting on column vectors (3) of the operator of multiplication by x in the basis of
+(2n + 1)(2n + 2)
+
+the Pm is the hermitian Jacobi matrix with 0 on the diagonal and αn = i
+2
+in the upper diagonal.
+
+(cid:0)
+
+(cid:1)
+
+p
+
+3. The matrix with entries hxPn, Pmi is the transposed matrix
+
+12
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+Proof. — (i) The transform V(h2m) by the unitary V := M
+the polynomial (
+
+1)mPm as one gets using the equality
+
+−
+
+U : L2(R)ev
+
+◦
+
+→
+
+L2(R, dm) is given by
+
+∞
+
+x1/2
+−
+
+isπkx2ke−
+
+πx2
+
+d∗x =
+
+0
+
+1
+2
+
+π−
+
+1
+
+4 +i s
+
+2 Γ
+
+1
+4 −
+
+i
+
+s
+2
+
++ k
+
+(cid:18)
+
+(cid:19)
+
+Z
+
+(24)
+
+and the functional equation for Γ(z). The polynomial P0 = 1 gives the normalization. The
+orthonormality then follows from unitarity of V.
+w the operator H + 1
+(ii) Using Fµ ◦
+determine the coeﬃcient of x2n+2e−
+
+2 corresponds to the multiplication by ix, thus it is enough to
+πx2
+
+2 )h2n. The term of highest degree in h2n is
+
+in (H + 1
+
+When applying the operator H = x∂x to e−
+
+πx2
+
+xk one gets
+
+22n+ 1
+
+4 (2n)!−
+
+1
+
+2 πnx2ne−
+
+πx2
+
+πx2
+
+H(e−
+
+xk) = e−
+
+πx2
+
+xk
+
+2πx2 + k
+
+−
+(cid:0)
+2 )h2n is (
+
+Thus the coeﬃcient of x2n+2e−
+22n+2+ 1
+
+4 (2n + 2)!−
+
+1
+
+πx2
+
+in (H + 1
+
+2π) 22n+ 1
+(cid:1)
+4 (2n)!−
+2 πn+1. Thus for this highest term one has (H + 1
+2 )h2n ∼
+1
+2
+
+4 (2n + 2)!−
+
+22n+2+ 1
+
+4 (2n)!−
+
+2 πn+1
+
+2 πn/
+
+=
+
+−
+
+−
+
+1
+
+1
+
+1
+
+2π) 22n+ 1
+
+cn = (
+
+−
+
+which gives, using the orthonormal property of the hn, the equality
+1
+2
+
+(H +
+h
+p
+To check the signs one takes the simplest case, one has
+
+)h2n, h2n+2i
+
+1
+2
+
+−
+
+=
+
+(2n + 1)(2n + 2)
+
+(cid:16)
+
+(cid:17)
+
+p
+
+2 πn while in h2n+2 it is
+
+cnh2n+2 for
+
+(2n + 1)(2n + 2)
+
+(25)
+
+((H +
+
+1
+2
+
+)h0)(x) = (2
+
+1
+4 −
+
+1
+
+−
+
+1
+
+4 +1πx2)e−
+
+2
+
+πx2
+
+, h2(x) =
+
+1
+
+4πx2
+−
+4√2
+
+P1. From (25)
+so that (H + 1
+we thus obtain that the matrix of the multiplication by x, acting on column vectors is of the form
+
+h2. For m = 1 one has P1(x) = i√2 x. Thus xP0 =
+
+2 )h0 =
+
+i
+√2
+
+1
+√2
+
+−
+
+−
+
+0
+
+i
+√2
+−
+0
+
+i
+√2
+0
+
+i√3
+
+−
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+
+0
+i√3
+
+0
+
+−
+
+i
+
+15
+2
+
+q
+0
+
+0
+
+0
+0
+
+i
+
+15
+2
+
+q
+0
+
+i√14
+
+−
+
+0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+i.e. that one has for all n
+
+0
+0
+
+0
+
+i√14
+
+0
+0
+
+0
+
+0
+
+3i
+
+5
+2
+
+q
+0
+
+0
+
+3i
+
+5
+2
+
+q
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+−
+so that the component of xPn on Pn+1 is
+
+xPn = αn Pn+1 + αn
+
+1Pn
+
+−
+
+1, αn =
+
+−
+
+(2n + 1)(2n + 2).
+
+p
+
+i
+2
+
+p
+
+−
+
+i
+2
+
+(2n + 1)(2n + 2)
+
+(26)
+
+ZETA AND WAVE OPERATORS
+
+13
+
+We show in proposition 3.4 below that for the cyclic pair corresponding to the archimedean place,
+the spectral distance is equivalent to the metric induced on N∗ ⊂
+R∗+ by the invariant metric of the
+Lie group R∗+.
+
+Proposition 3.4. — The spectral metric for the cyclic pair (S, ξ
+to the metric induced on N∗ ⊂
+Proof. — The sequence (an) of (9), obtained after a change of phase in the orthonormal basis, is
+given by an =
+
+R∗+ by the invariant metric of the Lie group R∗+.
+
+) of proposition 3.1 is equivalent
+
+2 )(n + 1). For n > 0 one has
+
+(n + 1
+
+∞
+
+q
+
+an log(1 +
+
+1
+
+≤
+
+1
+n
+
+)
+
+≤
+
+√3 log 2
+
+which shows that the metric induced on N∗ ⊂
+equivalent to the metric d(n, m) :=
+equivalent to the spectral metric by proposition 2.3.
+
+φ(m)
+|
+
+φ(n)
+|
+
+−
+
+R∗+ by the invariant metric of the Lie group R∗+ is
+of proposition 2.3. In turns this latter metric is
+
+3.5. Jacobi matrix of the prolate operator. — We now determine the two Jacobi matrices
+given by the restrictions W±λ of the prolate operator (2) to the even and odd subspaces H± as in
+proposition 2.4. In fact one could compute directly these Jacobi matrices in the basis of Hermite
+functions and compare with [16, Section 8] (formulas based on Hermite series).
+The Jacobi matrix W+
+
+λ is of the following form
+
+2πλ2
+
+3
+4
+
+−
+3
+2
+
+
+
+q
+0
+
+0
+
+0
+
+
+
+
+
+
+
+
+
+
+
+3
+2
+
+43
+4
+
+q
+18πλ2
+
+−
+√105
+
+0
+
+0
+
+0
+
+√105
+
+34πλ2
+
+3
+
+147
+4
+
+−
+165
+2
+
+0
+q
+
+0
+
+0
+
+3
+
+165
+2
+
+q
+50πλ2
+
+−
+√2730
+
+315
+4
+
+0
+
+0
+
+0
+
+√2730
+
+
+
+
+
+
+
+
+
+
+
+
+
+66πλ2
+
+547
+4
+
+−
+0 for the coeﬃcients Jn,n+1 = Jn+1,n, and bn,
+
+For a Jacobi matrix J, we use the notation an, n
+n
+
+0 for the diagonal, i.e. bn = Jn,n.
+
+≥
+
+≥
+
+Proposition 3.5. — The coeﬃcients of the Jacobi matrix of the prolate operator W+
+
+λ are given by
+
+an =
+
+1
+4
+
+((4n + 1)(4n + 2)(4n + 3)(4n + 4))1/2 ,
+
+bn =
+
+8n2
+
+−
+
+2n
+
+−
+
+−
+
+3
+4
+
++ 2πλ2(8n + 1)
+
+(27)
+
+In the odd case, i.e. for W−λ , they are
+
+an =
+
+1
+4
+
+((4n + 3)(4n + 4)(4n + 5)(4n + 6))1/2 ,
+
+bn =
+
+8n2
+
+−
+
+−
+
+10n
+
+−
+
+15
+4
+
++ 2πλ2(8n + 5)
+
+(28)
+
+Proof. — This follows from (22) combined with proposition 2.4 applied to the coeﬃcients αn =
+i
+2
+
+(2n + 1)(2n + 2) determined in proposition 3.3.
+
+p
+
+14
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+3.6. Link with the map E and zeta. — In [11] we exhibited minuscule eigenvalues of the
+quadratic form associated to the Weil explicit formulas restricted to test functions supported in a
+ﬁxed compact interval. The corresponding eigenfunctions were constructed using the image through
+the map E of the positive spectrum of the prolate operator Wλ. We used these functions to condition
+the canonical spectral triple of the circle in such a way that they belong to the kernel of the perturbed
+the
+Dirac operator and obtained the low lying zeros of the Riemann zeta function. For λ
+eigenfunctions for positive eigenvalues of Wλ are approximated by the eigenfunctions of the operator
+H =
+−
+Following [8, Proposition 2.24] we now explain in which sense the conditioning of the scaling operator
+by E(
+), performed by taking a quotient (in place of an orthogonal complement as above) relates
+h2n}
+{
+to the zeros of zeta.
+Let S(R)ev
+two conditions f (0) =
+belong to S(R)ev
+
+0 be the subspace of the even part of the Schwartz space S(R) obtained by imposing the
+f (0) = 0. We describe simple linear combinations of the functions h2m which
+
+∂2 + (2πq)2. The latter eigenfunctions are the Hermite functions
+
+.
+h2n}
+{
+
+E, where
+
+→ ∞
+
+0 and then compute their image under the map Fµ ◦
+f (nx).
+
+Σ, Σ(f )(x) :=
+
+E := w
+
+b
+
+∞ ◦
+
+N
+X
+
+The Fourier transform FeR(h2m) is (
+−
+fulﬁlled by the two families of functions
+
+1)mh2m and thus the two conditions f (0) =
+
+h4ℓ(0)
+h0(0)
+
+h0, ψ−ℓ
+
+:=
+
+h4ℓ+2 +
+
+−
+
+h4ℓ+2(0)
+h2(0)
+
+h2
+
+ψ+
+ℓ
+
+1
+4
+
+1)n 2
+
+One has h2n(0) = (
+
+−
+
+:= h4ℓ −
+−n√(2n)!
+n!
+
+. Thus one gets
+
+1)k2−
+
+2ℓ+3k+ 1
+4
+
+ψ+
+
+ℓ (x) =
+
+2ℓ
+
+(
+−
+
+1
+X
+
+In the odd case one has h2(x)/h2(0) = e−
+h4ℓ+2 −
+
+h4ℓ+2(0)
+h2(0) h2 is
+
+πx2
+
+4πx2
+
+−
+
+(cid:0)
+
+(cid:1)
+
+((4ℓ)!)
+
+1
+2
+
+(2ℓ
+
+k)!(2k)!
+
+πkx2ke−
+
+πx2
+
+−
+. The coeﬃcient of πx2e−
+
+1
+
+πx2
+
+((4ℓ + 2)!)
+
+1
+2 in
+
+2ℓ
+
+23
+−
+
+−
+
+1+ 1
+4
+
+1
+
+(2ℓ)!2! −
+
+2ℓ
+
+2−
+
+−
+
+1+ 1
+4
+
+4
+
+×
+
+1
+(2ℓ + 1)!
+
+2ℓ+ 1
+4
+
+= 2−
+
+4ℓ
+(2ℓ + 1)!
+
+thus one has
+
+−
+ℓ (x) =
+
+ψ
+
+ℓ 2−2ℓ+ 9
+
+4 ((4ℓ + 2)!)
+
+1
+2
+
+ −
+
+(2ℓ + 1)!
+
+πx2 +
+
+2ℓ+1
+(
+−
+
+We now relate the Fourier transform Fµ(w
+
+k
+1)
+
+23k−2ℓ−1+ 1
+
+4
+
+((4ℓ + 2)!)
+
+1
+2
+
+(2ℓ + 1
+
+k)!(2k)!
+
+k
+
+x2k
+
+π
+
+!
+
+−πx2
+
+e
+
+(31)
+
+2
+X
+(ψ±ℓ )) to the polynomials (23).
+
+−
+
+∞
+
+Lemma 3.3. — (i) The Fourier transform Fµ(w
+
+(ψ±ℓ )) is equal
+
+to the product of
+
+the
+
+archimedean local factor π−
+
+is, by the following polynomials
+
+z
+2 Γ
+
+z
+2
+
+at z = 1
+
+2 −
+
+∞
+
+P +
+
+ℓ (s) :=
+
+(cid:1)
+(cid:0)
+2ℓ+3k
+1)k2−
+
+3
+4
+
+−
+
+2ℓ
+
+(
+−
+
+1
+X
+
+((4ℓ)!)
+
+1
+2
+
+k
+
+1
+
+−
+
+(2ℓ
+
+−
+
+k)!(2k)!
+
+0 (cid:18)
+Y
+
+i s
+2
+
+j
+
+−
+
++
+
+1
+4
+
+(cid:19)
+
+(32)
+
+f (0) = 0 are
+
+b
+
+(29)
+
+(30)
+
+ZETA AND WAVE OPERATORS
+
+15
+
+which is even, divisible by 1
+
+4 + s2, and with real coeﬃcients and
+
+P −ℓ (s) :=
+
+ℓ 2−
+
+2ℓ+ 5
+
+4 ((4ℓ + 2)!)
+
+1
+2
+
+−
+
+(2ℓ + 1)!
+
+1)k23k
+
+−
+
+2ℓ
+
+−
+
+7
+4
+
+((4ℓ + 2)!)
+
+1
+2
+
++
+
+2ℓ+1
+(
+−
+
+2
+X
+
+is
+2
+
++
+
+1
+4
+
++
+
+(cid:19)
+
+−
+
+(cid:18)
+k
+
+1
+
+−
+
+j
+0 (cid:18)
+Y
+
+is
+2
+
++
+
+1
+4
+
+−
+
+which is odd, divisible by 1
+
+(2ℓ + 1
+
+k)!(2k)!
+
+(cid:19)
+4 + s2, and with purely imaginary coeﬃcients.
+
+−
+
+(ii) One has
+
+P +
+
+ℓ (s) = 2−
+
+3
+4
+
+P2ℓ(s)
+
+P2ℓ(
+
+−
+
+(cid:18)
+
+i
+2
+
+)
+(cid:19)
+
+, P −ℓ (s) = 2−
+
+3
+4
+
+(cid:18)
+
+P2ℓ+1(s) + 2i s P2ℓ+1(
+
+i
+2
+
+)
+(cid:19)
+
+(33)
+
+(34)
+
+Proof. — (i) The formulas (32) and (33) follow directly from (30) and (31) together with (24). The
+divisibility by 1
+
+4 + s2 follows from the equality
+
+Fµ(w(ψ±ℓ ))(
+
+i
+2
+
+) =
+
+∞
+
+0
+
+Z
+
+x ψ±ℓ (x)d∗x =
+
+1
+2
+
+∞
+
+Z
+
+−∞
+
+ψ±ℓ (x)dx = 0
+
+It follows from (30) and (31) that P ±ℓ (i/2) = 0 and the parity of the polynomial P ±ℓ
+that it is divisible by 1
+(ii) This follows since (34) uniquely speciﬁes the required correction of the rescaled polynomials Pm
+to make them divisible by 1
+
+4 + s2 without altering their parity.
+
+then shows
+
+4 + s2.
+
+The Riemann-Landau Ξ function
+
+−
+2
+is entire, of Hadamard order one, even and real-valued for real s, and one has
+
+Γ(z/2)π−
+
+Ξ(s) =
+
++ is
+
+z =
+
+z/2ζ(z) ,
+
+z(z
+
+1)
+
+1
+2
+
+(35)
+
+Ξ(s) = Ξ(0)
+
+Y (cid:18)
+
+s2
+α2
+
+1
+
+−
+
+(cid:19)
+
+, Ξ(0) =
+
+ζ
+
+1
+4
+
+1
+Γ
+2
+8 4√π
+(cid:1)
+(cid:0)
+
+(cid:0)
+
+−
+
+∼
+
+(cid:1)
+
+0.497121
+
+2 + iα runs through the zeros of zeta with positive imaginary part.
+
+where 1
+4 + s2)R±ℓ (s) deﬁne the polynomials R±ℓ (s). The next proposition shows that
+Let then P ±ℓ (s) =
+these polynomials give the factorization of Fµ(E(ψ±ℓ )) as a multiple of the Ξ function, and that all
+polynomial multiples of Ξ are obtained in this way. We let H
+1 be the Hadamard topological ring
+≤
+1.
+of entire functions of order
+
+2( 1
+
+−
+
+1
+
+≤
+
+Proposition 3.6. — (i) One has the equality
+
+Fµ(E(ψ±ℓ ))(s) = R±ℓ (s) Ξ(s)
+
+(ii) The spectrum of the operator of multiplication by s in the quotient of H
+≤
+C such that 1
+
+the subspace spanned by the Fµ(E(ψ±ℓ )) is the set of s
+zero of zeta.
+
+∈
+
+1 by the closure of
+2 + is is a non-trivial
+
+Proof. — This follows from Lemma 3.3, as in [8, Proposition 2.24].
+
+16
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+4.1. Notations. — Let S be a ﬁnite set of places,
+
+AS =
+
+S, and AS the locally compact ring
+
+∞ ∈
+Qv.
+
+(36)
+
+4. Semilocal case
+
+S
+Yv
+∈
+This ring contains Q as a subring using the diagonal embedding. Let QS denote the subring of Q
+given by rational numbers whose denominator only involves primes p
+
+S. In other words,
+
+∈
+
+QS =
+The group Γ := Q∗S of invertible elements of the ring QS is of the form
+
+v /
+∈
+
+|v ≤
+
+q
+| |
+
+q
+{
+
+1 ,
+
+Q
+
+∈
+
+S
+
+∀
+
+}
+
+.
+
+The semilocal adèle class space XS is by deﬁnition the quotient
+
+Γ = GL1(QS) =
+
+pn1
+1 · · ·
+
+pnk
+k
+
+{±
+
+: pj ∈
+
+S
+
+\ {∞}
+
+, nj ∈
+
+Z
+
+.
+}
+
+XS := AS/Γ,
+
+and we let πS : AS →
+| • |S from the ring AS =
+
+v
+
+S Qv to R+
+∈
+
+Q
+
+(uv)v
+|
+
+S |S =
+
+∈
+
+u
+|v ∈
+|
+
+R+
+
+and by construction this map passes to the quotient XS = AS/Γ. The groups
+
+Y
+
+GL1(AS) =
+
+GL1(Qp), CS = GL1(AS)/Γ
+
+XS be the canonical projection. The module extends to a multiplicative map
+
+(37)
+
+(38)
+
+(39)
+
+(40)
+
+(41)
+
+S
+Yp
+∈
+
+AS gives an embedding
+act naturally by multiplication on the quotient XS and the orbit of 1
+XS. The complement of CS in XS is of measure zero for the product of the Haar measures
+CS →
+of the additive groups of the local ﬁelds (which is preserved by the action of the countable group
+Γ). Using the Radon-Nikodym derivative of the Haar measures of the multiplicative groups with
+respect to the Haar measure of the additive groups, one obtains a unitary identiﬁcation
+wS : L2(XS )
+
+L2(CS)
+
+(42)
+
+∈
+
+→
+
+(see [8] Proposition 2.30). We also recall (see [8, Eqs. (2.223) and (2.239)] that CS is a modulated
+locally compact group with module
+
+ModS(λ) =
+
+λ
+|
+
+|S :=
+
+,
+λp|
+|
+
+∀
+
+∈
+
+λ = (λp)
+
+CS
+
+(43)
+
+S
+Yp
+∈
+KS , where KS is the kernel of ModS.
+
+which is (non-canonically) isomorphic to R∗+ ×
+4.2. Semilocal Hardy-Titchmarsh transform. — We extend the formulas (18) and (19) to
+the semilocal case. We use the notation of section 4.1.
+Let S be a ﬁnite set of places,
+f
+ignoring the summation over
+
+Qp. For
+f in L2(XS). More precisely one has,
+
+∞ ∈
+L2(R)ev let ηS(f ) be the class of the function 1RS ⊗
+±
+ηS(f )(x) :=
+
+S, let RS be the maximal compact subring of
+
+1 since f is even, and letting Γ+ := Γ
+
+πS(˜x) = x.
+
+f (γ ˜x) ,
+
+Q+,
+
+(44)
+
+Q
+
+∈
+
+∩
+
+˜x
+
+∞
+
+=
+
+p
+
+XΓ+
+
+∀
+
+|
+
+6
+(45)
+
+(46)
+
+(47)
+
+ZETA AND WAVE OPERATORS
+
+17
+
+The restriction of ηS(f ) to the fundamental domain F = R∗S ×
+
+S GL1(Qp) is R∗S-invariant and, since 1RS ⊗
+
+f vanishes on γ(1
+
+p
+
+∈
+
+R∗+ of the action of Γ on GL1(AS) =
+
+u) unless γ
+
+×
+
+∈
+
+Z. One has
+
+Q
+
+It follows that
+
+where
+
+ηS(f )(1
+
+u) =
+
+×
+
+f (γ u).
+
+Z
+XΓ+
+∩
+
+wS(ηS (f ))(u) = ES(f )(u)
+
+ES(f )(u) := u1/2
+
+f (γ u)
+
+Z
+XΓ+
+∩
+
+Proposition 4.1. — Let f
+
+(i) One has
+
+L2(R)ev. Then with Lp(z) = (1
+
+p−
+
+z)−
+
+1 for z
+
+C,
+
+∈
+
+−
+
+∈
+
+Fµ(ES(f ))(s) =
+
+Lp(
+
+1
+2 −
+
+is)
+
+(cid:17)
+
+(Fµw
+
+∞
+
+f )(s).
+
+\{∞}
+
+S
+(cid:16) Yp
+∈
+λ where P S
+P S
+
+λ is the subspace of L2(XS )KS of functions with
+
+(ii) Let λ > 0. One has ηS(Pλ)
+x
+{
+
+support in
+
+.
+}
+
+| ≤
+
+| |
+
+λ
+
+x
+
+⊂
+
+(iii) Let the Fourier transform for Qp be normalized so that the function 1Zp is its own Fourier
+transform and let FS, acting in L2(XS), be induced by the tensor product of the local Fourier
+transforms. One has
+
+(iv) One has ηS(
+
+Pλ)
+
+P S
+
+λ where
+
+⊂
+
+FS ◦
+Pλ and
+
+FeR.
+
+ηS = ηS ◦
+λ are the images of Pλ, P S
+P S
+
+λ by the Fourier transform.
+
+Proof. — (i) For simplicity we consider the case of S =
+c
+
+c
+
+c
+
+c
+
+. Then one has
+
+Indeed, one has
+
+FµEp(f )(s) = Lp(
+
+1
+2 −
+
+p,
+{
+is)(Fµw
+
+∞}
+
+f )(s).
+
+∞
+
+FµEp(f )(s) =
+
+∞
+
+u1/2
+
+f (pku)u−
+
+isd∗u =
+
+∞
+
+∞
+
+f (pku)u
+
+1
+2 −
+
+isd∗u =
+
+∞
+
+f (v)p−
+
+k
+
+2 piksv
+
+1
+2 −
+
+isd∗v
+
+0
+Z
+k
+2 piks
+
+p−
+
+X
+∞
+
+f (v)v
+
+1
+2 −
+
+isd∗v =
+
+0
+Xk=0 Z
+∞
+f (v)v
+
+1
+2 −
+
+isd∗v (1
+
+0
+Xk Z
+1 = Lp(
+
+is)−
+
+1
+2 −
+
+p−
+
+0
+Z
+is equal to 1 on principal ideles and hence on elements γ
+
+Z
+
+0
+
+−
+
+=
+
+Xk
+
+x
+|
+
+(ii) The module
+Z
+. Thus
+x
+}
+|
+|
+of the function 1RS ⊗
+
+|
+
+makes sense on XS = (
+
+Qv) /Γ and so does P S
+
+λ . Let f
+
+f in L2(XS ). Let x = (y, u)
+
+λ <
+
+=
+
+x
+|
+
+|
+
+u
+
+u
+
+||
+
+| ≤ |
+
+| ⇒ |
+
+Q
+y
+|
+
+∈
+
+RS ×
+> λ
+u
+|
+
+R with
+
+x
+|
+f (u) = 0.
+
+|
+
+⇒
+
+1
+2 −
+
+is)(Fµw
+
+∞
+
+f )(s).
+
+Γ =
+
+nv ∈
+{±
+Pλ and ηS(f ) be the class
+
+∈
+
+|
+
+pnv
+v
+
+∈
+> λ. One has
+
+Q
+
+(iii) This follows since 1RS is its own Fourier transform.
+(iv) Follows from (ii) and (iii).
+
+18
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+R∗+ and denote by S the generator of the scaling
+
+Lv(
+
+1
+2 −
+
+2 ds
+is)
+|
+
+(48)
+
+We let US := Fµ ◦
+
+wS and MS : L2(R)
+
+→
+
+L2(R, dmS) the unitary given by
+
+MS(f )(s) :=
+
+S
+Yv
+∈
+
+Lv(
+
+1
+2 −
+
+is)
+
+!
+
+1
+
+−
+
+f (s), dmS(s) :=
+
+|
+
+S
+Yv
+∈
+
+We let KS be the kernel of the module CS →
+action of GL1(R)+ ⊂
+Proposition 4.2. — (i) The unitary transformation VS := MS ◦
+Q
+
+S GL1(Qp) on L2(XS )KS .
+∈
+
+GL1(AS) =
+
+p
+
+gives the canonical form of the cyclic pair (D, ξ) where D := S and ξ = ξS := ηS(ξ
+
+).
+
+(ii) The cyclic pair (S, ξS) is even and the grading is given by the Fourier transform FS which
+
+becomes the symmetry s
+
+s under the unitary transformation VS.
+
+US : L2(XS )KS
+
+L2(R, dmS)
+
+→
+
+∞
+
+7→ −
+
+Proof. — (i) The unitary US : L2(XS)KS
+S into the multiplication by the variable s as in the proof of proposition 3.1. By (47) applied to ξ
+one has
+
+L2(R) is an isomorphism and transforms the operator
+
+→
+
+∞
+
+1
+2 −
+
+US(ξS)(s) = US(ηS(ξ
+
+))(s) =
+
+Lp(
+
+is)
+
+(Fµw
+
+(ξ
+
+))(s) =
+
+Lv(
+
+∞
+
+∞
+
+∞
+
+\{∞}
+
+(cid:17)
+US(hS)(s) = 1.
+
+L2(R, dmS) is an isomorphism which transforms the operator S into the
+
+(cid:16) Yp
+S
+∈
+VS(ξS)(s) = MS ◦
+Thus VS : L2(XS )KS
+multiplication by the variable s and the vector ξS into the constant function 1.
+(ii) One checks directly that the Fourier transform FS anticommutes with S. It ﬁxes the vector ξ by
+proposition 4.1. The uniqueness of the grading shows that the Fourier transform FS becomes the
+symmetry s
+We let ιS : L2(R, dm)
+
+L2(R, dmS ) be the identity map ιS(f )(s) := f (s),
+
+s under the unitary transformation VS.
+
+7→ −
+
+R.
+
+→
+
+s
+
+S
+Yv
+∈
+
+1
+2 −
+
+is)
+
+→
+
+∀
+
+∈
+
+Proposition 4.3. — (i) The map ιS is bounded with bounded inverse.
+
+(ii) One has the following commutative diagram:
+
+L2(R)ev
+
+ηS
+
+/ L2(XS)KS
+
+V
+
+VS
+
+L2(R, dm)
+
+ιS /
+
+/ L2(R, dmS)
+
+(49)
+
+Proof. — (i) This follows since the function
+so that the Radon-Nikodym derivatives dm/dmS and dmS/dm are both bounded.
+(ii) This follows from (47).
+
+2 −
+
+\{∞}
+
+Q
+
+∈
+
+S
+
+p
+
+Lp( 1
+
+is) is bounded with bounded inverse,
+
+4.3. Semilocal Hermite operator. — Let S be a ﬁnite collection of places (including the
+archimedean one) and (S, ξS) the cyclic pair of proposition 4.2. As in section 2, the associated
+Hermite operator NS is deﬁned as the grading operator associated with the ﬁltration (En) of the
+Hilbert space L2(XS )KS by the subspaces generated by the iterates Sjξ, 0
+
+n
+
+j
+
+≤
+
+≤
+
+Theorem 4.1. — 1. For S =
+
+harmonic oscillator to L2(R)ev.
+
+{∞}
+
+the semilocal Hermite operator NS is the restriction of the
+
+ 
+(cid:15)
+(cid:15)
+/
+(cid:15)
+(cid:15)
+ZETA AND WAVE OPERATORS
+
+19
+
+2. The eigenfunctions of the semilocal Hermite operator NS are elements of L2(XS)KS of the
+n are polynomials obtained by orthonormalization and induc-
+
+), where P S
+
+n (x)e−
+
+πx2
+
+form ηS(P S
+tion.
+
+3. The matrix of S in the above orthonormal basis of L2(XS)KS , is a Jacobi hermitian matrix.
+
+πx2
+
+Proof. — 1. See proposition 3.2.
+2. One has ξS = 21/4 ηS(e−
+variable. The subspaces ES
+n ⊂
+function ηS(e−
+πx2
+space of products P (x)e−
+the orthogonalisation process delivers polynomials P S
+3. Follows from (9), i.e. the general theory of orthogonal polynomials.
+
+) and the operator S =
+2 ) acts as scaling on the archimedean
+L2(XS)KS are obtained by iteration of the operator S applied to the
+n is the image by ηS of the
+2n. Since ηS is not unitary
+
+) and the scaling operator commutes with ηS. Thus ES
+
+where P is an even polynomial of degree
+
+n which depend upon S.
+
+i(H + 1
+
+πx2
+
+≤
+
+−
+
+Thus we have reached a candidate for the analogue of the Hermite operator in the semilocal case
+and also for the prolate operator as in Deﬁnition 2.2:
+
+Wλ,S = (H +
+
+1
+2
+
+)2 + λ2NS.
+
+Remark 4.2. — (i) Due to the non-unitary nature of ηS one has NS ◦
+
+but the ﬁltrations associated to the subspaces N
+
+unless
+= ηS ◦
+n correspond to each other by
+
+ηS 6
+
+N
+
+∞
+
+S =
+the map ηS as shown in Theorem 4.1 (ii).
+
+{∞}
+
+≤
+
+(ii) Let
+
+| • |S : XS = AS/Γ
+analogue of the Hermite operator is to express the latter when S =
+of the multiplication by
+
+R+ be the module as in (40). Another guess for the semilocal
+in terms of a sum
+
+{∞}
+
+→
+
+x
+|
+
+2
+S and its conjugate under the Fourier transform.
+|
+one has
+
+(iii) Note that unless S =
+
+{∞}
+
+Indeed, taking S =
+
+2
+S ηS(f )
+| • |
+
+= ηS(
+
+| • |
+for simplicity, one has for f an even function
+
+2f ).
+
+∞}
+
+p,
+{
+wSηS(f ) = Ep(f ), Ep(f )(u) = u1/2
+
+f (pnu)
+
+(50)
+
+the image of the l.h.s. of (50) under the map wS is the function u2Ep(f )(u), while the image
+of the r.h.s. of (50) under the map wS is Ep(
+2f ) which evaluated at u gives the diﬀerent
+expression
+
+| • |
+
+N
+X
+
+u1/2
+
+u2p2nf (pnu)
+
+N
+X
+
+4.4. The dual Hardy-Titchmarsh transform. — We let as above S be a ﬁnite set of places
+containing
+
+wS. We let
+
+, and US := Fµ ◦
+
+∞
+
+ES(s) :=
+
+Lp(
+
+S
+Yp
+∈
+
+1
+2
+
++ is)
+
+(51)
+
+6
+20
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+and consider the Hilbert space L2
+given by
+
+R,
+
+(cid:16)
+
+ds
+ES(s)
+|
+
+|
+
+2
+
+. We let βS : L2(R)
+(cid:17)
+
+→
+
+L2
+
+R,
+
+(cid:16)
+
+ds
+ES((s)
+|
+
+|
+
+2
+
+(cid:17)
+
+be the unitary
+
+βS (f )(s) :=
+
+Lv(
+
+1
+2
+
++ is)
+
+!
+
+f (s)
+
+S
+Yv
+∈
+
+Deﬁnition 4.3. — The dual Hardy-Titchmarsh transform is the unitary
+
+υS : L2(XS)KS
+
+→
+
+L2
+
+R,
+
+(cid:16)
+
+ds
+2
+ES(s)
+|
+|
+
+, υS = βS ◦
+(cid:17)
+
+US
+
+Proposition 4.4. — (i) The following equality deﬁnes a sesquilinear pairing
+
+L2
+h
+
+ξ
+h
+
+η
+|
+
+R :=
+i
+
+Z
+
+ξ(x)η(x)dx ,
+
+ξ
+
+∀
+
+∈
+
+(ii) For any ξ, η
+
+∈
+
+L2(XS)KS one has
+
+υSξ
+h
+
+VS η
+|
+
+L2
+
+R,
+
+L2(R, dmS)
+
+ds
+2
+ES(s)
+|
+|
+
+(cid:17)
+
+, η
+
+∈
+
+ξ
+h
+
+η
+|
+
+.
+i
+
+(cid:16)
+R =
+i
+
+(52)
+
+(53)
+
+R,
+
+ds
+ES(s)
+|
+
+|
+
+2
+
+(cid:16)
+
+L2(R, dmS)
+i
+|
+
+(cid:17)
+(54)
+
+Proof. — The proof of (i) and (ii) follows from the equality valid for any place v and s
+
+R,
+
+∈
+
+and combining (48) with (52).
+
+Lv(
+
+1
+2
+
++ is) = Lv(
+
+1
+2 −
+
+is).
+
+4.5. The Sonin space in the local case. — The local deﬁnition of Sonin’s space is
+
+Deﬁnition 4.4. — Let K be a local ﬁeld and α an additive character of K. Let λ > 0. The Sonin
+space Sλ(K, α) is the subspace of the L2-space of square integrable functions on K deﬁned as follows
+
+Sλ(K, α) :=
+
+f
+{
+
+∈
+
+L2(K)
+
+|
+
+f (x) = 0 & Fαf (x) = 0
+
+x,
+
+x
+|
+
+|
+
+∀
+
+< λ
+
+}
+
+where Fα denotes the Fourier transform with respect to α.
+
+C
+
+z
+→ {
+
+We use the imaginary exponential e : Q/Z
+with the additive character (obtained using the embedding Qp/Zp ⊂
+= 1
+
+ep : Qp →
+C
+∈
+which is equal to 1 on the maximal compact subring Zp ⊂
+L2(K) and a
+Given a function f
+transform fulﬁlls the equality
+
+Qp/Zp ⊂
+
+z
+| |
+Qp.
+
+Q/Z e
+
+z
+→ {
+
+z
+| |
+
+∈
+
+∈
+
+∈
+
+|
+
+|
+
+, e(x) := exp(2πix). We endow Qp
+= 1
+}
+
+Q/Z)
+
+C
+
+(55)
+
+} ⊂
+
+K∗, we let fa be the function fa(x) := f (ax). The Fourier
+
+1
+a
+|
+|
+Proposition 4.5. — Let p be a ﬁnite prime and K = Qp, α = ep. The Z∗p-invariant part of
+S1(Qp, ep) is one dimensional, with generator σp := ǫ0 −
+1
+p ǫ1 where ǫn is the characteristic function
+of
+
+F(f )a−1
+
+F(fa) =
+
+= pn
+
+x
+{
+
+∈
+
+Qp | |
+x
+
+|
+
+. Moreover one has Fepσp = σp.
+}
+
+ 
+ZETA AND WAVE OPERATORS
+
+21
+
+Proof. — The function ǫn is equal to (1Zp)pn
+
+(1Zp)pn−1 since one has
+
+−
+
+ǫn(x) = 1Zp(pnx)
+ℓ and (ǫℓ)pk = ǫℓ+k. The Fourier transform of the function ǫn is
+
+1Zp(pn
+
+1x).
+
+−
+
+−
+
+Moreover one has 1Zp =
+then given by
+
+∞0 ǫ
+
+−
+
+P
+
+(56)
+
+ǫ1
+
+Fep(ǫn) = pn(1Zp)p−n
+
+−
+
+pn
+
+−
+
+1(1Zp)p−n+1 = pn(1
+
+1
+p
+
+)
+
+−
+
+∞
+
+0
+X
+
+ǫ
+
+n
+
+k −
+
+−
+
+−
+
+pn 1
+p
+
+n+1.
+
+ǫ
+
+−
+
+By (56) one has
+
+Fepσp = Fepǫ0 −
+
+1
+p
+
+Fepǫ1 =
+
+(1
+
+1
+p
+
+−
+
+∞
+
+)
+
+ǫ
+
+k −
+
+−
+
+1
+p
+
+ǫ1
+
+(1
+
+−
+
+1
+p
+
+∞
+
+)
+
+ǫ
+
+1
+
+−
+
+−
+
+k −
+
+1
+p
+
+ǫ0
+
+= ǫ0 −
+
+1
+p
+
+! −  
+
+0
+X
+
+0
+X
+< 1 thus σp ∈
+S1(Qp, ep) which is Z∗p-invariant is proportional to σp. Since ψ is
+Z anǫn and the L2 condition means
+∈
+< 1 all the coeﬃcients an for n < 0 vanish and one
+
+C such that ψ =
+
+!
+S1(Qp, ep).
+
+x
+|
+
+x,
+
+∀
+
+n
+
+|
+
+thus Fepσp = σp. By construction one has σp(x) = 0
+Let us now show that any ψ
+Z∗p-invariant, there exists coeﬃcients an ∈
+. Since ψ(x) = 0 when
+that
+∞
+has ψ =
+P
+
+an|
+|
+
+x
+|
+
+pn
+
+∈
+
+≥
+
+n
+
+|
+
+2 <
+0 anǫn. We now compute the Fourier transform Fepψ, which by (56) is
+
+P
+
+P
+
+Fepψ =
+
+an
+
+pn(1
+
+1
+p
+
+)
+
+−
+
+∞
+
+Xk=0
+
+ǫ
+
+n
+
+k −
+
+−
+
+−
+
+pn 1
+p
+
+ǫ
+
+−
+
+n+1
+
+.
+
+!
+
+0
+Xn
+≥
+
+∞0 ǫ
+
+The sum on the right only involves ǫj for j < 0 except for the terms where n = 0 and k = 0 in the
+n+1. Thus the terms not involving
+sum
+S1(Qp, ep) the sum
+1
+ǫj for j < 0 are given by the expression a0(1
+p ǫ1. Since ψ
+of the terms involving the ǫj for j < 0 is equal to 0 and thus one gets the equality
+
+k and the term with n = 0 and n = 1 in
+p )ǫ0 −
+
+pn 1
+p ǫ
+−
+−
+a0
+a1ǫ0 −
+
+P
+
+−
+
+∈
+
+−
+
+−
+
+n
+
+1
+
+Fepψ = a0(1
+
+−
+Finally in order that Fep(aǫ0 + bǫ1) vanishes for
+
+1
+p
+
+)ǫ0 −
+
+a1ǫ0 −
+
+1
+p
+
+a0
+
+ǫ1 =
+
+a0(1
+
+1
+p
+
+)
+
+a1
+
+−
+
+−
+
+ǫ0 −
+
+a0
+
+1
+p
+
+(cid:19)
+
+ǫ1 = aǫ0 + bǫ1.
+
+< 1 requires that it vanishes for x = 0 i.e. that
+
+(cid:18)
+x
+|
+
+|
+
+(aǫ0(x) + bǫ1(x))dx = 0 which means that a + pb = 0. This gives
+
+a0(1
+
+1
+p )
+
+−
+
+a1
+
+−
+
+(cid:16)
+
+−
+
+(cid:17)
+
+a0 = 0, i.e.
+
+a0 =
+R
+
+−
+
+pa1, so that ψ is a scalar multiple of σp.
+
+4.6. The Sonin space in the semilocal case. — Let S be as above, and
+be the module as in (40). We let α be the character of the additive group AS =
+the product of the ep (see (55)) with e
+Deﬁnition 4.5. — Let λ > 0. The semilocal Sonin space Sλ(XS, α) is the subspace of the Hilbert
+space L2(XS)KS deﬁned as follows
+
+R+
+S Qv obtained as
+
+(x) := exp(2πix). We let σS :=
+
+|•|S : XS = AS/Γ
+
+σp.
+Q
+
+⊗S
+
+\{∞}
+
+→
+
+∞
+
+f
+{
+where FS denotes the Fourier transform with respect to α.
+
+Sλ(XS , α) :=
+
+L2(XS )KS
+
+∈
+
+|
+
+f (x) = 0 & FSf (x) = 0
+
+x,
+
+x
+|
+
+|
+
+∀
+
+< λ
+
+}
+
+Proposition 4.6. — (i) Let f
+
+Then θS(f ) belongs to Sλ(XS, α).
+
+∈
+
+Sλ(R, e
+
+), θS(f ) be the class of the function σS ⊗
+
+f in L2(XS ).
+
+∞
+
+ 
+ 
+22
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+(ii) One has
+
+Fµ(wS(θS(f )))(s) = Fµ(w
+
+(f ))(s)
+
+∞
+
+×
+
+1
+
+−
+
+(cid:17)
+R = AS be such that
+y
+\{∞}|
+< λ. In both cases one gets σS(x)f (y) = 0 as well as
+
+YS
+\{∞} (cid:16)
+=
+z
+|
+
+x
+|
+
+|S
+
+∈
+
+|
+
+1
+2 −
+
+is
+
+p−
+
+(57)
+
+|∞
+σS(x)
+
+< λ. Then either
+f (y) = 0. The
+f in L2(XS ) belongs to
+
+c
+
+b
+
+Γ+ so that the class of σS ⊗
+. One has, as in (44),
+
+∞}
+f )(pn, pnλ) = λ1/2
+
+p,
+{
+(σp ⊗
+
+f (λ)
+
+1
+p
+
+−
+
+(cid:18)
+
+f (λ/p)
+
+(cid:19)
+
+|S
+
+< 1 or
+
+Proof. — (i) Let z = (x, y)
+x
+|
+\{∞}
+same holds for the elements γz
+Sλ(XS , α).
+(ii) For simplicity of notation we assume S =
+
+RS ×
+
+AS, γ
+
+y
+|
+
+|∞
+
+∈
+
+∈
+
+wS(σS ⊗
+
+f )(1
+
+×
+
+λ) := λ1/2
+
+since σp = ǫ0 −
+
+1
+p ǫ1. Let g = w
+
+∞
+
+Z
+Xn
+∈
+(f ) then one has
+
+so that one gets
+
+Next one has
+
+λ1/2f (λ/p) = p1/2(λ/p)1/2f (λ/p) = p1/2g(λ/p)
+
+wS(σS ⊗
+
+f )(1
+
+×
+
+λ) = g(λ)
+
+−
+
+p−
+
+1/2g(λ/p).
+
+Fµ(g)(s) =
+
+g(λ)λ−
+
+isd∗λ
+
+so that with g1(λ) = g(λ/p) one gets with λ = pu,
+
+Z
+
+Fµ(g1)(s) =
+
+g1(λ)λ−
+
+isd∗λ =
+
+g(λ/p)λ−
+
+isd∗λ =
+
+g(u)(pu)−
+
+isd∗u = p−
+
+isFµ(g)(s)
+
+Z
+Z
+which gives the required equality (57).
+
+Z
+
+4.7. The stability of Sonin spaces. — We keep the above notation. Since
+Lp( 1
+
+2 + is), we rewrite (57) as
+
+1
+
+(cid:16)
+
+−
+
+FµwS(θS(f ))(s) =
+
+Lp(
+
+1
+2
+
+1
+
+−
+
++ is)
+
+(cid:17)
+
+(Fµw
+
+∞
+
+f )(s).
+
+S
+(cid:16) Yp
+∈
+
+\{∞}
+
+Proposition 4.7. — Let λ > 0.
+
+1
+2 −
+
+is
+
+p−
+
+1
+
+−
+
+=
+
+(cid:17)
+
+(58)
+
+(i) Let FS be the Fourier transform in L2(XS ). One has FS ◦
+f , L2
+(ii) Let ι′S be the map f
+
+L2
+
+R,
+
+R,
+
+2
+
+ds
+E∞(s)
+|
+
+|
+
+→
+
+7→
+
+diagram
+
+θS = θS ◦
+
+FeR.
+
+ds
+ES(s)
+|
+
+|
+
+. One has the commutative
+
+2
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+L2(R)ev
+
+υ∞
+
+(cid:17)
+θS
+
+ι′
+S
+
+/ L2(XS)KS
+
+υS
+
+ds
+ES(s)
+|
+
+|
+
+2
+
+(cid:17)
+
+(59)
+
+(iii) Let f, g
+
+∈
+
+(cid:16)
+L2(R)ev. One has
+
+L2
+
+R,
+
+2
+
+ds
+E∞(s)
+|
+|
+(cid:17)
+ηS(g)
+θS(f )
+i
+|
+h
+
+/ L2
+
+R,
+
+=
+
+(cid:16)
+.
+g
+i
+|
+
+f
+h
+
+(cid:15)
+(cid:15)
+/
+(cid:15)
+(cid:15)
+/
+ZETA AND WAVE OPERATORS
+
+23
+
+Proof. — By proposition 4.6, one has θS(Sλ(R, e
+Sonin space.
+(i) This follows from the equality Fepσp = σp.
+(ii) Let f
+
+L2(R)ev. We compute υS ◦
+
+∈
+
+θS(f )(s) = (βSFµwS(θS(f ))) (s) =
+
+υS ◦
+
+Sλ(XS , α) where Sλ(XS, α) is the semilocal
+
+))
+
+⊂
+
+∞
+
+US = βS ◦
+θS(f ). By (53) one has υS = βS ◦
+1
+2
+
++ is)
+
++ is)
+
+Lv(
+
+Lp(
+
+1
+2
+
+−
+
+1
+
+!
+
+S
+(cid:16) Yp
+∈
+
+\{∞}
+
+(cid:17)
+
+S
+Yv
+∈
+
+FµwS. By (58)
+
+(Fµw
+
+f )(s) =
+
+∞
+
+1
+2
+(iii) The map US = FµwS : L2(XS)KS
+
+= L
+
+∞
+
+(
+
++ is)(Fµw
+
+∞
+
+f )(s) = υ
+
+∞
+
+(f )(s).
+
+L2(R) is unitary so that one has
+
+→
+ηS(g)
+θS(f )
+i
+|
+h
+
+=
+
+USηS(g)
+USθS(f )
+i
+|
+h
+
+and using (58) for the left term and (47) for the right term, one gets
+
+ηS(g)
+θS(f )
+i
+|
+h
+
+=
+
+h
+S
+(cid:16) Yp
+∈
+
+\{∞}
+
+Lp(
+
+1
+2
+
+1
+
+−
+
++ is)
+
+(cid:17)
+
+(Fµw
+
+∞
+
+f )
+|
+S
+(cid:16) Yp
+∈
+
+\{∞}
+
+Lp(
+
+1
+2 −
+
+which gives the required equality.
+
+We are now ready to prove the following fact
+
+is)
+
+(Fµw
+
+g)
+i
+
+=
+
+f
+h
+
+g
+|
+
+i
+
+∞
+
+(cid:17)
+
+)
+
+∋ ∞
+
+Theorem 4.6. — Let S
+isomorphism of the Sonin spaces θS : Sλ(R, e
+
+be a ﬁnite set of places and λ > 0. Then the map θS is a hilbertian
+Sλ(XS, α) where α is the normalized character.
+
+∞
+Proof. — We already know that θS(Sλ(R, e
+that one has equality, let h
+θS : L2(R)ev
+such that θS(f ) = h. To show that f
+elements of Pλ and
+Thus one obtains using proposition 4.7 (iii) that for any element g
+
+Sλ(XS, α) by proposition 4.6 (i). To show
+Sλ(XS, α). The commutative diagram (59) shows that the map
+L2(R)ev
+) it is enough to show that f is orthogonal to all
+P S
+λ .
+
+⊂
+L2(XS )KS is bounded with bounded inverse, hence there exists a unique f
+
+Pλ. By proposition 4.1 (ii) and (iv), one has ηS(Pλ)
+
+λ and ηS(
+P S
+
+Sλ(R, e
+
+P S
+
+→
+
+→
+
+⊂
+
+⊂
+
+))
+
+∈
+
+∈
+
+∈
+
+∞
+
+∞
+
+Pλ, or g
+
+∈
+
+∈
+
+c
+
+Pλ)
+λ one has
+c
+
+c
+
+f
+h
+
+g
+|
+
+i
+
+=
+
+ηS(g)
+θS(f )
+i
+|
+h
+
+= 0
+
+c
+
+since by construction the subspace Sλ(XS , α) is orthogonal to P S
+that f
+
+Sλ(R, e
+
+).
+
+λ and to
+
+∈
+
+∞
+
+P S
+
+λ . Thus we conclude
+
+c
+
+4.8. Hilbertian spaces of entire functions. — The stability exhibited by Theorem 4.6 shows
+that the hilbertian structure of the Sonin spaces Sλ(XS , α) is independent of S and the theory of
+Hilbert spaces of entire functions [3] in fact provides a canonical realization of these spaces which
+we now describe. It is important to point out that the choice of the ﬁnite set S plays a key role in
+ﬁxing the inner product in the Hilbertian space.
+
+ 
+24
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+4.8.1. Link with Hilbert spaces of entire functions. — The link between Sonin spaces (called in [3]
+“Sonine spaces") and Hilbert spaces of entire functions, due to de Branges [2, 3], is that the map (cf.
+also [4, 6])
+
+Sλ(R, e
+
+)
+
+∞
+
+∋
+
+f
+
+7→
+
+ˇM(f )(z) := π−
+
+z
+2 Γ
+
+f (t)t1
+−
+
+zd∗t
+
+(60)
+
+(cid:16)
+) onto a Hilbert space of entire functions, denoted here Bλ, which belongs to the
+
+sends Sλ(R, e
+∞
+class of de Branges spaces.
+4.8.2. Stability under semilocal ampliﬁcation. — The restriction of ˇM(f )(z) to the critical line, i.e.
+z = 1
+
+2 + is, coincides with the dual Hardy-Titchmarsh transform in the case S =
+1
+2
+
+,
+{∞}
+
+ˇM(f )
+
+(f )(s)
+
++ is
+
+(61)
+
+= υ
+
+∞
+
+z
+2
+
+(cid:17) ZR
+
+as follows from Deﬁnition 4.3, (52), (53).
+
+(cid:18)
+
+(cid:19)
+
+Proposition 4.8. — Let S
+of hilbertian spaces Sλ(XS , α) with Bλ and one has the commutative diagram
+
+be a ﬁnite set of places and λ > 0. The map υS is an isomorphism
+
+∋ ∞
+
+Sλ(R, e
+
+)
+
+∞
+
+$❏❏❏❏❏❏❏❏❏❏
+
+υ∞
+
+Sλ(XS, α)
+
+ztttttttttt
+
+υS
+
+θS
+
+Bλ
+
+Proof. — This follows from the diagram (59) together with (61).
+
+Note that Bλ inherits diﬀerent inner products from its embedding in L2
+
+R,
+
+(62)
+
+.
+
+ds
+ES(s)
+|
+
+|
+
+2
+
+(cid:17)
+
+(cid:16)
+
+4.8.3. De Branges space BS
+line L = 1
+axioms:
+
+λ . — Let z♯ designate the symmetric of z with respect to the critical
+2 + iR. A de Branges space is a Hilbert space K of entire functions satisfying the following
+
+(1) the evaluation at any w
+
+C is continuous;
+
+∈
+
+(2) the map F
+
+7→
+
+F #, F #(w) = F (w#) is a unitary anti-isometry of K;
+γ)F (w) belongs to K and
+
+/(w
+
+γ#
+
+w
+
+(3) if F (γ) = 0 then G(w) =
+
+−
+It follows from these axioms that for any ﬁnite S
+Bλ with the norm induced by its embedding in L2
+
+−
+
+(cid:0)
+
+(cid:1)
+
+∋ ∞
+R,
+
+the space BS
+
+F
+k
+λ obtained by endowing the space
+
+G
+k
+k
+
+.
+k
+
+=
+
+is a de Branges space.
+
+ds
+ES(s)
+|
+
+|
+
+2
+
+(cid:17)
+
+(cid:16)
+
+5. Metaplectic representation in the Jacobi picture
+
+5.1. Inﬁnitesimal representation and prolate operator. — We recall that the metaplectic
+representation ̟ of sl(2, R) on L2(R) is realized at the inﬁnitesimal level by letting the standard
+] = h, act on S(R), via the diﬀerential
+basis
+2e
+operators
+
+, with [h, e+] = 2e+, [h, e
+
+h, e+, e
+{
+
+, [e+, e
+
+] =
+
+−}
+
+−
+
+−
+
+−
+
+−
+
+̟(h) := x∂x +
+
+1
+2
+
+, ̟(e+) := iπx2, ̟(e
+−
+
+) :=
+
+i
+4π
+
+∂2
+x.
+
+(63)
+
+/
+/
+$
+z
+ZETA AND WAVE OPERATORS
+
+25
+
+Thus ̟(h) is up to a factor of i the scaling S while the Hermite operator, is obtained as ̟(k) using
+SO(2). With these notations
+the generator k = i(e
+one has
+
+e+) of the maximal compact subgroup K =
+
+− −
+
+̟(k) = πx2
+
+1
+4π
+
+∂2
+x
+
+−
+
+g
+
+(64)
+
+is the Hermite operator with spectrum
+
+n + 1
+{
+
+2 ; n
+
+∈
+
+Z+
+
+}
+
+and the Hermite functions
+
+1
+
+2 n! πn
+
+−
+
+1/2
+
+−
+
+Pn(x)e−
+
+πx2/2,
+
+hn =
+
+22n
+(cid:16)
+
+(cid:17)
+
+where
+
+Pn = (
+
+−
+
+1)ne2πx2
+
+∂n
+x
+
+2πx2
+
+e−
+
+,
+
+provide the associated eigenfunctions forming an orthonormal basis.
+Thus, switching to the other standard C-basis
+representation ̟ is determined by (64) together with
+
+k, n+, n
+{
+
+, where n
+
+−}
+
+(cid:16)
+
+∓
+
+= 1
+2
+
+h
+
+±
+
+(cid:0)
+
+(cid:17)
+
+i(e+ + e
+
+−
+
+)
+
+, the
+
+(cid:1)
+
+̟(n+) =
+
+∂2
+8π
+
++
+
+x ∂
+2
+
++
+
+1
+2
+
+πx2 +
+
+1
+4
+
+̟(n
+
+) =
+
+−
+
+−
+
+∂2
+8π
+
++
+
+x ∂
+2 −
+
+1
+2
+
+πx2 +
+
+=
+
+(cid:18)
+
+=
+
+1
+4
+
+= a2
+
+∂
+2√2π
+
++ x
+
+2
+
+π
+2
+
+(cid:19)
+
+r
+
+∂
+2√2π
+
++ x
+
+r
+
+−
+
+−
+
+(cid:18)
+
+2
+
+π
+2
+
+(cid:19)
+
+(a∗)2
+
+=
+
+−
+
+(65)
+
+(66)
+
+where a = ∂
+π
+2 are the annihilation and creation operators, in
+terms of which ̟(k) = aa∗ + a∗a. They function as lowering and raising operators with respect to
+the basis
+
+π
+2 and a∗ =
+
+∂
+2√2π
+
+since
+
++ x
+
++ x
+
+2√2π
+
+p
+
+−
+
+hn; n
+{
+
+∈
+
+p
+Z+
+}
+
+a(h0) = 0,
+
+a(hn) =
+
+n
+2
+
+hn
+
+1,
+
+−
+
+r
+
+and a∗(hn) =
+
+n + 1
+2
+
+r
+
+hn+1 ∀
+
+n
+
+∈
+
+Z+.
+
+(67)
+
+The Casimir operator C := h2 + 2(e+e
+−
+L2(R) = L2(R)ev
+tions of lowest weight 1
+
+⊕
+
+2 and 3
+
+2 respectively.
+
+3
+4 . In particular this shows that
+L2(R)odd represents the decomposition of ̟ into two irreducible subrepresenta-
+
+e+) fulﬁlls ̟(C) =
+
++ e
+
+−
+
+−
+
+Proposition 5.1. — At the formal level the operator Wλ is of the form ̟(Wλ) where Wλ is the
+following element of the enveloping algebra U(sl(2, R))
+
+Wλ = h2 + 4πλ2 k
+
+1
+4
+
+.
+
+−
+
+Proof. — This follows using (4), (63) and (64).
+
+5.2. Metaplectic representation and orthogonal polynomials. — We shall now present the
+metaplectic representation as a special case of a general construction for othogonal polynomials.
+We ﬁrst consider, as in section 2.2, the general set-up of orthogonal polynomials with respect to a
+measure dµ on R such that dµ(
+s) = dµ(s). Modulo a change of phase in the orthonormal basis we
+may assume that the coeﬃcients an of the Jacobi matrix A for the multiplication by the variable
+
+−
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+26
+
+s
+
+∈
+
+R are positive,
+
+The coeﬃcients an are determined by the moments cn :=
+
+tndµ(t) by (see [19, 2.2.7, 2.2.15])
+
+where the Dn are the determinants of Hankel matrices of the form, since the odd moments vanish,
+
+(68)
+
+(69)
+
+0
+a0
+0
+0
+0
+. . .
+
+a0
+0
+a1
+0
+0
+. . .
+
+0
+a1
+0
+a2
+0
+. . .
+
+0
+0
+a2
+0
+a3
+. . .
+
+0
+0
+0
+a3
+0
+. . .
+
+. . .
+. . .
+. . .
+. . .
+. . .
+. . .
+
+A =
+
+
+
+
+
+
+
+
+
+
+
+an =
+
+kn
+kn+1
+
+,
+
+kn = (Dn
+
+−
+
+R
+1/Dn)1/2
+
+c0
+0
+c2
+0
+c4
+0
+
+0
+c2
+0
+c4
+0
+c6
+
+c2
+0
+c4
+0
+c6
+0
+
+0
+c4
+0
+c6
+0
+c8
+
+c4
+0
+c6
+0
+c8
+0
+
+0
+c6
+0
+c8
+0
+c10
+
+D5 =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+To investigate the Lie algebra generated by A and the grading operator N , N Pn = nPn. We let
+
+F+ := N +
+
+1
+2i
+
+[A, N ], F
+
+−
+
+:= N
+
+1
+2i
+
+−
+
+[A, N ]
+
+Lemma 5.1. — (i) The double commutator [[A, N ], N ] = A.
+
+(ii) The commutator [F+, F
+
+−
+
+] is equal to
+
+iA.
+
+−
+
+(iii) The double commutator [A, [A, N ]] is equal to f (N ) for the function
+
+f (n) = 2(a2
+n
+
+a2
+n)
+
+1 −
+
+−
+
+(iv) One has [A, F+] = 2iF+ + Υ where the diagonal matrix Υ has the entries dn with
+
+1
+i
+
+dn =
+
+−
+
+2n + a2
+
+n −
+
+a2
+n
+
+1
+
+−
+
+(70)
+
+(71)
+
+(72)
+
+(v) The matrix F+ −
+
+1
+2 iA is upper triangular and is the sum N
+
+−
+
+iS where S is the weighted shift
+
+0 a0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+
+0
+a1
+0
+0
+0
+0
+
+0
+0
+a2
+0
+0
+0
+
+0
+0
+0
+a3
+0
+0
+
+0
+0
+0
+0
+a4
+0
+
+
+
+
+
+
+
+
+
+
+
+S =
+
+
+
+
+
+
+
+
+
+
+
+27
+
+(73)
+
+e+),
+
+(74)
+
+(75)
+
+(76)
+
+ZETA AND WAVE OPERATORS
+
+Proof. — (i) The commutator [A, N ] is of the form
+
+0
+a0
+−
+0
+0
+0
+0
+
+a0
+0
+a1
+−
+0
+0
+0
+
+0
+a1
+0
+a2
+−
+0
+0
+
+0
+0
+a2
+0
+a3
+−
+0
+
+
+
+
+
+
+
+
+
+
+
+and the double commutator [[A, N ], N ] = A.
+(ii) One has
+
+0
+0
+0
+a3
+0
+a4
+
+−
+
+0
+0
+0
+0
+a4
+0
+
+
+
+
+
+
+
+
+
+
+
+[F+, F
+
+−
+
+] = [N +
+
+1
+2i
+
+[A, N ], N
+
+1
+2i
+
+−
+
+[A, N ]] =
+
+1
+i
+
+[[A, N ], N ] =
+
+iA.
+
+−
+
+(iii) This important fact comes from computing [A, [A, N ]] which gives this matrix
+
+2a2
+1
+
+−
+
+2a2
+0
+0
+0
+0
+0
+0
+
+0
+
+2a2
+
+0 −
+0
+0
+0
+0
+
+2a2
+2
+
+0
+0
+
+2a2
+
+1 −
+0
+0
+0
+
+0
+0
+0
+
+2a2
+3
+
+2a2
+
+2 −
+0
+0
+
+0
+0
+0
+0
+
+2a2
+4
+
+2a2
+
+3 −
+0
+
+
+
+
+
+
+
+
+
+
+
+0
+0
+0
+0
+0
+. . .
+
+
+
+
+
+
+
+
+
+
+
+[A, F+] = [A, N ] +
+
+1
+2i
+
+[A, [A, N ]] = 2iF+ + Υ, dn =
+
+2in +
+
+−
+
+1
+2i
+
+f (n).
+
+(iv) One has
+
+1
+(v) By (73), the matrix F+ −
+2 iA is upper triangular.
+We look for a representation σ of sl(2, R) such that, with A as in (68) and k = i(e
+
+for some constant c. The identity
+
+[h, [h, k]] =
+
+translates into the relation
+
+σ(h) =
+
+−
+
+iA,
+
+σ(k) = N + c
+
+2i([h, e+] + [h, e
+
+−
+
+]) =
+
+4i(e+ −
+
+e
+−
+
+−
+
+) = 4k
+
+−
+
+[A, [A, σ(k))]] =
+
+4σ(k).
+
+−
+
+By lemma 5.1 (iii), [A, [A, N ]] is the diagonal matrix with diagonal entries 2
+identity (76) is thus equivalent to
+
+− −
+
+One has [h, k] =
+
+2i(e+ + e
+
+−
+
+−
+
+Thus with the notation (70) one gets, using (74)
+
+2(a2
+n
+
+−
+) so that
+
+a2
+n) =
+
+−
+
+4(n + c),
+
+n
+
+∀
+
+≥
+
+0.
+
+1 −
+
+e+ =
+
+i
+2
+
+k +
+
+1
+2
+
+(cid:18)
+
+[h, k]
+
+, e
+
+−
+
+=
+
+(cid:19)
+
+i
+2
+
+−
+
+(cid:18)
+
+k +
+
+1
+2
+
+[h, k]
+
+(cid:19)
+
+σ(e+) =
+
+i
+2
+
+(F+ + c), σ(e
+
+−
+
+) =
+
+i
+2
+
+(
+−
+
+F
+
+− −
+
+c)
+
+(cid:0)
+
+a2
+n
+
+1 −
+
+−
+
+a2
+n
+
+. The
+
+(cid:1)
+
+(77)
+
+(78)
+
+28
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+Thus by Lemma 5.1 (iv) one obtains
+
+[σ(h), σ(e+)] =
+
+1
+2
+
+[A, F+] = iF+ +
+
+1
+2
+
+Υ.
+
+The Lie algebra equality [h, e+] = 2e+ together with (72) and (77) then determine uniquely c = 1
+4 .
+This uniquely determines the an, the representation σ, and E
+
+) are given by
+
+iσ(e
+
+:=
+
+E+ =
+
+N +
+
+1
+2
+
+(cid:18)
+
++
+
+1
+4
+
+1
+4
+
+(cid:19)
+
+[A, N ],
+
+=
+
+E
+
+−
+
+−
+
+1
+2
+
+(cid:18)
+
+±
+
+−
+1
+4
+
+(cid:19)
+
+±
+1
+4
+
++
+
+N +
+
+[A, N ],
+
+(79)
+
+Theorem 5.2. — (i) The positive coeﬃcients an are speciﬁed uniquely in order for (74) to
+
+deﬁne a representation of the Lie algebra sl(2, R), one has
+
+(ii) The Hamburger moment problem for the moments associated to the sequence an by (69) is
+
+p
+
+an =
+
+1
+2
+
+(2n + 1)(2n + 2).
+
+(80)
+
+determinate.
+
+(iii) The unique measure dµ of the moment problem of (ii) is the probability measure proportional
+
+to
+
+Γ( 1
+|
+
+4 + 1
+
+2ds.
+2 is)
+|
+
+(iv) The representation σ is the even component of the metaplectic representation ̟ of
+
+SL(2, R).
+
+Proof. — (i) Using (77) together with c = 1
+
+4 one gets
+a2
+n) =
+
+2(a2
+n
+
+−
+
+1 −
+
+4n
+
+1
+
+−
+
+f
+
+−
+
+so that one obtains (80).
+(ii) By [18, Thm. 2, p. 86] the Hamburger moment problem corresponding is determinate, as follows
+from [17, Corollary 6.19] since
+
+1
+an ≡
+
+∞
+
+Xn=0
+
+Xn=0
+
+∞
+
+2
+
+(2n + 1)(2n + 2)
+
+=
+
+.
+
+∞
+
+(iii) The coeﬃcients an agree with those given by proposition 3.3, after rescaling by powers of i.
+(iv) The eigenvalues of σ(k), which serve as weights for the representation σ relative to the Cartan
+SL(2, R), exactly reproduce the spectrum of the Hermite operator transported
+subgroup
+from L2(R)ev. This identiﬁes the irreducible representation σ as being the even component of the
+metaplectic representation ̟ of
+
+SL(2, R).
+
+S0(2)
+
+f
+
+f
+
+⊂
+
+p
+
+We now determine explicitly the moments cn :=
+2. We use the equalities (69),
+proportional to
+2 is)
+|
+
+Γ( 1
+|
+
+4 + 1
+
+f
+
+R
+
+tndµ(t) where dµ is the probability measure
+
+kn = (Dn
+
+−
+
+1/Dn)1/2, an =
+
+kn
+kn+1
+
+, a2
+
+n =
+
+1
+4
+
+(2n + 1)(2n + 2),
+
+which imply
+
+Dn
+
+−
+
+1/Dn = k2
+
+n, k2
+
+n = k2
+0
+
+a(j)−
+
+2 =
+
+4n
+Γ(2n + 1)
+
+n
+
+1
+
+−
+
+0
+Y
+
+ZETA AND WAVE OPERATORS
+
+29
+
+This then determines the moments and shows that they are rational numbers, the ﬁrst are
+
+c0 = 1, c2 =
+
+1
+2
+
+, c4 =
+
+7
+4
+
+, c6 =
+
+139
+8
+
+, c8 =
+
+5473
+16
+
+, c10 =
+
+357721
+32
+
+What one ﬁnds in general is that the denominators of the moments are 2n for c2n so that they are
+determined by a sequence of integers. The ﬁrst ones are
+
+1, 7, 139, 5473, 357721, 34988647, 4784061619, 871335013633, 203906055033841,
+
+59618325600871687, 21297483077038703899, 9127322584507530151393, . . .
+
+This is a classical integer sequence, known as A126156 [15]. In fact one has
+
+Proposition 5.2. — The normalized moments cn of the measure (2π)−
+that cn = 0 for n odd and
+
+3/2
+
+Γ( 1
+|
+
+4 + 1
+
+2ds are such
+2 is)
+|
+
+Proof. — The normalization means c0 = 1 and that the measure dµ proportional to
+is a probability measure. The left hand side of (81) is then equal to
+
+Γ( 1
+|
+
+4 + 1
+
+2ds
+2 is)
+|
+
+X
+
+cn
+
+(ix)n
+n!
+
+=
+
+2
+ex + e−
+
+x .
+
+r
+
+(81)
+
+where ξ
+
+∈
+
+X
+
+L2(R)ev, ξ(x) = e−
+
+Z
+πx2
+
+cn
+
+(ix)n
+n!
+
+∞
+
+=
+
+exp(isx)dµ(s) =
+
+Fµ(w(ξ))
+exp(ixh)Fµ(w(ξ))
+i
+|
+h
+
+−∞
+, and h is the self-adjoint operator of multiplication by s.
+
+Fµ(w(ξ))(s) =
+
+∞
+
+x1/2
+−
+
+ise−
+
+πx2
+
+d∗x =
+
+0
+
+Z
+
+1
+2
+
+π−
+
+1
+
+4 +i s
+
+2 Γ
+
+1
+4 −
+
+i
+
+s
+2
+
+(cid:18)
+
+(cid:19)
+
+One has (Fµfλ)(s) = λis(Fµf )(s) where fλ(u) := f (λu), and taking λ = ex one obtains
+
+cn
+
+(ix)n
+n!
+
+=
+
+λ1/2ξλ|
+ξ
+h
+
+i
+
+X
+which gives the required equality.
+
+= λ1/2
+
+∞
+
+πλ2t2
+
+πt2
+
+e−
+
+e−
+
+dt = λ1/2(1 + λ2)−
+
+1/2
+
+Z
+
+−∞
+
+References
+
+[1] M. Berry and J. Keating, H = qp and the Riemann zeros, “Supersymmetry and Trace Formulae: Chaos and
+
+Disorder”, edited by J.P. Keating, D.E. Khmelnitskii and I.V. Lerner, Plenum Press.
+
+[2] L. de Branges, Self-reciprocal functions, J. Math. Anal. Appl. 9 (1964), 433–457.
+[3] L. de Branges, Hilbert Spaces of Entire Functions, Prentice-Hall, Inc., Englewood Cliﬀs, NJ, 1968.
+
+[4] J.-F. Burnol, Sur certain espaces de Hilbert de fonctions entières, liés à la transformation de Fourier et aux
+
+fonctions L de Dirichlet et de Riemann, C. R. Acad. Sci. Paris Ser. I 333 (2001), 201–206.
+
+[5] J.-F. Burnol, Sur les espaces de Sonine associés par de Branges à la transformation de Fourier, C. R. Acad. Sci.
+
+Paris Ser. I 335 (2002), 689–692.
+
+[6] J.-F. Burnol, Two complete and minimal systems associated with the zeros of the Riemann zeta function. J.
+
+Théor. Nombres Bordeaux 16 (2004), no. 1, 65-94.
+
+[7] A. Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta function. Selecta Math.
+
+(N.S.) 5 (1999), no. 1, 29–106.
+
+30
+
+ALAIN CONNES, CATERINA CONSANI and HENRI MOSCOVICI
+
+[8] A. Connes, M. Marcolli, Noncommutative Geometry, Quantum Fields, and Motives, Colloquium Publications,
+
+Vol.55, American Mathematical Society, 2008.
+
+[9] A. Connes, C. Consani, The Scaling Hamiltonian, J. Operator Theory 851 (2021), pp. 257-276.
+[10] A. Connes, C. Consani, Weil positivity and trace formula, the archimedean place. Selecta Math. (N.S.) 27 (2021),
+
+no. 4, Paper No. 77, 70 pp.
+
+[11] A. Connes, C. Consani, Spectral triples and ζ–cycles. Enseign. Math. 69 (2023), no. 1–2, 93-148.
+[12] A. Connes, H. Moscovici, The UV prolate spectrum matches the zeros of zeta. Proc. Natl. Acad. Sci. USA 119
+
+(2022), no. 22.
+
+[13] A. Grünbaum, A New Property of Reproducing Kernels for Classical Orthogonal Polynomials, Journal of Math-
+
+ematical Analysis and Applications, 95. 491-500 (1983).
+
+[14] G. H. Hardy and E. C. Titchmarsh, Self-reciprocal functions, Quart. J. Math. (Oxford), 1 (1930), 196-231.
+[15] The On-Line Encyclopedia of Integer Sequences, https://oeis.org
+[16] Osipov, Andrei; Rokhlin, Vladimir; Xiao, Hong Prolate spheroidal wave functions of order zero. Mathematical
+
+tools for bandlimited approximation. Applied Mathematical Sciences, 187. Springer, New York, 2013.
+
+[17] K. Schmüdgen, The Moment problem, Graduate Texts in Mathematics 277 Springer.
+[18] B. Simon, The classical moment problem as a self-adjoint ﬁnite diﬀerence operator, Adv. Math., 137 (1998),
+
+82-203.
+
+[19] G. Szego, Orthogonal polynomials, American Math. Soc. 4th edition (1975).
+[20] A. Weil, Sur certains groupes d’opérateurs unitaires, Acta Math. 111 (1964), 143-211.
+
+Alain Connes, Collège de France, 3 Rue d’Ulm, 75005 Paris, France
+
+•
+
+I.H.E.S., France
+
+E-mail : alain@connes.org
+
+Caterina Consani, Department of Mathematics, Johns Hopkins University, Baltimore, MD 21218, USA
+
+E-mail : cconsan1@jhu.edu
+
+Henri Moscovici, Department of Mathematics, Ohio State University, Columbus, OH 43210, USA
+
+E-mail : moscovici.1@osu.edu
+
+

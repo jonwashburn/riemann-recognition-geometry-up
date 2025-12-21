@@ -1,0 +1,11563 @@
+3
+2
+0
+2
+
+y
+a
+M
+0
+3
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+4
+v
+2
+8
+6
+3
+0
+.
+6
+0
+2
+2
+:
+v
+i
+X
+r
+a
+
+ASPECTS OF THE SCREW FUNCTION CORRESPONDING TO
+THE RIEMANN ZETA-FUNCTION
+
+MASATOSHI SUZUKI
+
+Abstract. We introduce a screw function corresponding to the Riemann zeta-function
+and study its properties from various aspects. Typical results are several equivalent
+conditions for the Riemann hypothesis in terms of the screw function. One of them
+can be considered an analog of so-called Weil’s positivity or Li’s criterion. In addition,
+we prove a few partial but unconditional results for such equivalents.
+
+Let ζ(s) be the Riemann zeta-function and let ξ(s) be the Riemann xi-function. The
+
+latter is an entire function deﬁned by
+
+1. Introduction
+
+ξ(s) =
+
+1
+2
+
+s(s
+
+−
+
+1)π−
+
+s/2Γ
+
+s
+2
+
+ζ(s)
+
+and satisﬁes two functional equations ξ(s) = ξ(1
+gamma-function and the bar denotes the complex conjugate.
+
+−
+
+(cid:17)
+
+(cid:16)
+s) and ξ(s) = ξ(¯s), where Γ(s) is the
+
+Typical results of the present paper are several equivalent conditions for the Riemann
+hypothesis (RH, for short) which claims that all zeros of ξ(s) lie on the critical line
+(s) = 1/2. The core of the interrelation among all such equivalents is the function
+
+ℜ
+Ψ(t) on [0,
+
+) deﬁned by
+
+∞
+
+Ψ(t) := 4(et/2 + e−
+
+t/2
+
+2)
+
+−
+
+−
+
+Λ(n)
+√n
+
+(t
+
+−
+
+log n)
+
++
+
+t
+2
+
+Γ′
+Γ
+
+1
+4
+
+(cid:20)
+
+(cid:18)
+
+(cid:19)
+
+log π
+
+−
+
+et
+Xn
+≤
+1
++
+4
+
+(cid:21)
+
+(cid:16)
+
+C
+
+e−
+
+t/2Φ(e−
+
+−
+
+2t, 2, 1/4)
+(cid:17)
+
+(1.1)
+
+,
+
+∈
+∞n=0(
+
+where Λ(n) is the von Mangoldt function deﬁned by Λ(n) = log p if n = pk with
+Z>0 and Λ(n) = 0 otherwise, C = π2 + 8G with the Catalan constant G =
+k
+szn is the Hurwitz–Lerch zeta
+) and
+function. Formula (1.1) shows that Ψ(t) is real-valued and continuous on [0,
+P
+P
+that Ψ(0) = 0 by Φ(1, 2, 1/4) = ζ(2, 1/4) = C. First, we state a few fundamental
+properties of Ψ(t) that are unconditionally proven in Section 2 below.
+
+2, and Φ(z, s, a) =
+
+1)n(2n + 1)−
+
+∞n=0(n + a)−
+
+∞
+
+−
+
+Theorem 1.1. The following holds for Ψ(t) deﬁned in (1.1).
+
+(1) The one-sided Fourier transform formula
+
+∞
+
+Ψ(t) eizt dt =
+
+1
+z2
+
+ξ′
+ξ
+
+−
+
+1
+2 −
+
+iz
+
+(cid:19)
+
+(cid:18)
+
+0
+Z
+
+holds if
+
+(z) > 1/2 , where i = √
+
+(2) The series representation
+
+ℑ
+
+1.
+
+−
+
+Ψ(t) =
+
+γ
+X
+
+1
+
+−
+
+cos(γt)
+γ2
+
+=
+
+1
+
+eiγt
+
+−
+γ2
+
+γ
+X
+
+Date: Version of May 31, 2023.
+2020 Mathematics Subject Classiﬁcation. 11M26 42A82 44A60 .
+Key words and phrases. Riemann zeta-function, screw functions, Stieltjes moment problem.
+
+1
+
+(1.2)
+
+(1.3)
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+M. SUZUKI
+
+holds for every t
+over all zeros γ of ξ(1/2
+
+≥
+
+(3) The estimate Ψ(t)
+
+≪
+
+c√t) holds for some constant c > 0.
+
+−
+
+−
+exp(t/2
+
+iz) counting with multiplicity.
+
+0, where the sums in the middle and the right-hand side range
+
+In Theorem 1.1 and in what follows, we use the Vinogradov symbol f (x)
+
+g(x)
+and the Landau symbol f (x) = O(g(x)) as symbols to mean that there exists a positive
+constant M such that
+
+M g(x) holds for prescribed range of x.
+
+≪
+
+f (x)
+|
+
+| ≤
+
+By the ﬁrst equality in (1.3), the function Ψ(t) is naturally extended to an even
+function on the real line. Therefore, we henceforth identify Ψ(t) with that extended
+even function, that is, we understand by replacing t with
+t in the right-hand side
+of (1.1) when t is negative. Also, by Theorem 1.1, any of (1.1), (1.3), or the Fourier
+inversion of (1.2) can be chosen as the deﬁnition of Ψ(t), but in this paper, we chose
+deﬁnition (1.1) including prime numbers.
+
+−
+
+Formulas (1.2) and (1.3) suggest that the function Ψ(t) is related to the class of screw
+Ga con-
+t) = g(t) (hermitian)
+
+functions introduced by M. G. Kre˘ın. For 0 < a
+sisting of all continuous functions g(t) on (
+and the kernel
+
+, he introduced the class
+
+2a, 2a) such that g(
+
+≤ ∞
+
+−
+
+−
+
+(1.4)
+
+(1.5)
+
+Gg(t, u) := g(t
+
+u)
+
+g(t)
+
+g(
+
+−
+
+−
+
+u) + g(0).
+
+−
+
+−
+
+is non-negative deﬁnite on (
+
+−
+
+a, a), that is,
+
+n
+
+Gg(ti, tj) ξiξj ≥
+
+0
+
+∈
+
+C, and
+
+N, ξi ∈
+
+Xi,j=1
+for all n
+< a, (i = 1, 2, ..., n). (In literature, a kernel satisfying
+ti|
+|
+(1.5) is often referred to as a positive deﬁnite kernel or semi-positive deﬁnite kernel, but
+Ga are called screw functions
+in this paper, we use the term above.) The members of
+because of their relationship with screw arcs in Hilbert spaces ([16, §12]).
+be the Nevanlinna class that consists of analytic functions in the upper half-
+plane C+ =
+is also called the class
+of Pick functions, or R functions, or Herglotz functions depending on the literature.)
+Kre˘ın–Langer [14, Satz 5.9] ([15, Prop. 5.1]) showed that the equality
+
+mapping C+ into C+ ∪
+
+R. (Note that
+
+(z) > 0
+}
+
+z
+{
+
+Let
+
+| ℑ
+
+N
+
+N
+
+∞
+
+g(t) eizt dt =
+
+i
+z2 Q(z),
+
+−
+
+(z) > h
+
+ℑ
+
+0
+Z
+
+for some h
+g(0) = 0 and all functions Q
+
+≥
+
+0 establishes a bijective correspondence between all functions g
+
+∈ N
+
+with the property
+
+Q(iy)
+y
+
+lim
++
+→
+
+∞
+
+y
+
+= 0.
+
+with
+
+∈ G∞
+
+(1.6)
+
+On the other hand, J. C. Lagarias [18, (1.5)] proved that the RH is true if and only if
+
+ξ′
+ξ
+
+ℑ
+
+i
+(cid:20)
+
+(cid:18)
+
+1
+2 −
+
+iz
+
+> 0 when
+
+(cid:19)(cid:21)
+
+(z) > 0.
+
+ℑ
+
+The latter means that the function
+
+Qξ(z) := i
+
+ξ′
+ξ
+
+(cid:18)
+
+1
+2 −
+
+iz
+
+(cid:19)
+
+(1.7)
+
+N
+
+belongs to
+series expansion of (ζ ′/ζ)(s) and an asymptotic expansion of (Γ′/Γ)(s) as
+(4.10)). Therefore, if we assume that the RH is true, Qξ(z) belongs to
+(1.6), thus there exists a corresponding screw function g
+to the function deﬁned by
+
+. It is easy to conﬁrm that Qξ(z) satisﬁes (1.6) unconditionally by Dirichlet
+(see
+s
+|
+| → ∞
+and satisﬁes
+. Such g must be equal
+
+∈ G∞
+
+N
+
+g(t) :=
+
+Ψ(t)
+
+−
+
+(1.8)
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+3
+
+from the Fourier integral formula (1.2) and the uniqueness of the Fourier transform.
+Conversely, assuming that this g(t) is a screw function, the RH holds from (1.2) and the
+above result of Kre˘ın–Langer.
+
+Hence we obtain the following equivalent condition for the RH which is the starting
+
+point of other equivalent conditions for the RH in the present paper.
+
+Theorem 1.2. The RH is true if and only if g(t) deﬁned by (1.8) is a screw function
+on R = (
+
+).
+
+,
+
+−∞
+
+∞
+
+Henceforth throughout this paper, g(t) is the function deﬁned by (1.1) and (1.8), and
+Gg(t, u) is the kernel deﬁned by (1.4) for this g(t), unless stated otherwise. We call g(t)
+the screw function of the Riemann zeta-function after Theorem 1.2, although it is an
+abuse of words in a strict sense. The series representation of g(t) obtained from (1.3) is
+nothing but an integral representation of a screw function ([16, Theorem 5.1 and (7.11)])
+and implies
+
+Gg(t, u) =
+
+γ
+X
+
+(eiγt
+
+−
+
+1)(e−
+γ2
+
+iγu
+
+1)
+
+−
+
+(1.9)
+
+u
+|
+|
+
+< a and
+
+< a for small a > 0 (see Section 4).
+
+(cf. the second line of the proof of [16, Theorem 5.1]). The kernel Gg(t, u) is non-negative
+on R2 under the RH, but it can be shown unconditionally that Gg(t, u) is non-negative
+if
+
+t
+|
+|
+As a main application of Theorem 1.2, we obtain a variant of Weil’s famous criterion
+for the RH by the positivity of the Weil distribution (see Section 3.2) in terms of screw
+functions as follows. For each 0 < a
+·iGg ,a for
+functions supported in [
+
+, we deﬁne the hermitian form
+
+a, a] by
+
+≤ ∞
+
+,
+h·
+
+−
+
+φ1, φ2iGg,a :=
+h
+
+Z
+
+a Z
+
+a
+
+a
+
+a
+
+Gg(t, u)φ1(u)φ2(t) dudt
+
+(1.10)
+
+−
+when the right-hand side is absolutely convergent. We also deﬁne the space
+
+−
+
+a
+
+φ(t) dt = 0
+
+,
+
+(1.11)
+
+C0(a) =
+
+φ
+
+C ∞c (R)
+
+∈
+
+supp φ
+
+a, a],
+
+[
+−
+
+⊂
+
+(cid:26)
+
+a
+
+Z
+
+−
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:27)
+
+−
+
+where C ∞c (R) is the space of all smooth functions on the real line having compact
+support. Note that C0(a) is not the class of continuous functions on (
+
+a, a).
+
+0 for all φ
+
+Theorem 1.3. The RH is true if and only if the hermitian form
+deﬁnite on C0(a), that is,
+φ, φ
+iGg ,a ≥
+h
+Moreover, assuming that the RH is true,
+L2(
+iGg ,a > 0 for all non-zero φ
+is,
+
+·iGg ,a is positive deﬁnite on L2(
+,
+h·
+−
+a, a) for every 0 < a <
+−
+
+φ, φ
+h
+See Section 3 for details and more on the Weil distribution and Weil’s positivity
+criterion. In addition to Theorem 1.3, we obtain the following analog of the equivalent
+of the RH by H. Yoshida [33] (see also Section 4.2) described by the nondegeneracy of
+hermitian forms.
+
+·iGg ,a is non-negative
+.
+∞
+a, a), that
+
+C0(a) for every 0 < a <
+
+,
+h·
+
+∞
+
+∈
+
+∈
+
+.
+
+Theorem 1.4. The RH is true if and only if the hermitian form
+degenerate on L2(
+the integral operator Gg[a] : L2(
+
+·iGg ,a is non-
+. The latter condition is equivalent that
+a, a) deﬁned by
+
+a, a) for every 0 < a <
+L2(
+
+a, a)
+
+,
+h·
+
+−
+
+−
+Gg[a] : φ(t)
+
+7→
+
+∞
+−
+a,a](t)
+
+→
+1[
+
+−
+
+a
+
+Z
+
+−
+
+Gg(t, u)φ(u) du,
+
+a
+
+(1.12)
+
+does not have zero as an eigenvalue for every 0 < a <
+istic function of a subset A
+
+R.
+
+, where 1A(t) is the character-
+
+∞
+
+⊂
+
+The advantage of Theorems 1.3 and 1.4 is that hermitian forms
+
+·iGg ,a are rep-
+resented by an integral operator with a continuous kernel acting on usual L2-spaces.
+
+,
+h·
+
+4
+
+M. SUZUKI
+
+This makes the strategy of Yoshida [33] and E. Bombieri [1] for the RH via the Weil
+distribution analytically more straightforward and simple.
+
+It is well known that the continuity of the kernel is not suﬃcient to conclude that
+the corresponding integral operator is of trace class. If we assume that the RH is true,
+Gg[a] is a positive deﬁnite Hilbert–Schmidt operator for every 0 < a <
+. Therefore,
+it is a trace class operator by Mercer’s theorem. Furthermore, the traceability of Gg[a]
+does not depend on the deﬁniteness of Gg[a] as follows.
+
+∞
+
+Theorem 1.5. For each 0 < a <
+
+, Gg[a] is a trace class operator unconditionally.
+
+Since Gg[a] is a trace class operator,
+
+∞
+
+Tr Gg[a] =
+
+∞
+
+a
+
+λa,n =
+
+Gg(t, t) dt
+
+holds by [9, Chapter IV, Theorem 8.1], where λa,1, λa,2, . . . are non-zero eigenvalues of
+Gg[a] counting with multiplicity.
+
+Xn=1
+
+a
+
+Z
+
+−
+
+We state further applications of Theorem 1.2 which are somewhat secondary to The-
+orems 1.3 and 1.4, but they are interesting in their own right, or the relations between
+diﬀerent subjects suggested by those results are interesting.
+
+The function Ψ(t) is bounded on [0,
+
+∞
+
+) by (1.3) under the RH, and vice versa.
+
+Theorem 1.6. The RH is true if and only if Ψ(t) = O(1) on [0,
+
+).
+
+∞
+
+) or L2(0,
+
+If Ψ(t) belongs to L1(0,
+
+(z) > 0 and deﬁnes
+an analytic function in C+ whose extension to the real line
+(z) = 0 is bounded or a
+function of L2(R), respectively. Therefore, in both cases, it contradicts z = 0 being a
+simple pole of the right-hand side. Hence, Ψ(t) belongs to neither L1(0,
+),
+regardless of whether the RH is true or false.
+
+), formula (1.2) holds for
+
+) nor L2(0,
+
+∞
+
+∞
+
+∞
+
+∞
+
+ℑ
+
+ℑ
+
+If the RH is true, Gg(t, t) = 2(g(0)
+
+and ξ = 1, and vice versa.
+
+−
+
+g(t)) = 2Ψ(t) is non-negative by (1.5) for n = 1
+
+Theorem 1.7. The RH is true if and only if Ψ(t) is pointwise non-negative, that is,
+R. Further, if RH is true, Ψ(t) > 0 when t
+Ψ(t)
+
+0 for every t
+
+= 0.
+
+≥
+
+∈
+
+We then discretize the pointwise positivity condition in Theorem 1.7 using the nth
+
+moment
+
+µn :=
+
+∞
+
+4−
+
+1e−
+
+t/2 Ψ(t)
+
+tn dt
+
+·
+
+0
+
+Z
+
+0, where the integral is absolutely convergent by Theorem 1.1 (3).
+
+for n
+
+Z
+
+∈
+
+≥
+Theorem 1.8. Let
+
+µ0
+µ1
+µ1
+µ2
+...
+...
+µn µn+1
+
+· · ·
+· · ·
+. . .
+
+· · ·
+
+µn
+µn+1
+...
+µ2n
+
+
+
+
+
+
+
+
+∆n := 
+
+
+
+
+
+µ1
+µ2
+...
+
+µ2
+µ3
+...
+µn+1 µn+2
+
+· · ·
+· · ·
+. . .
+
+· · ·
+
+µn+1
+µn+2
+...
+µ2n+1
+
+
+
+
+
+
+and ∆(1)
+
+n := 
+
+
+
+
+Z>0.
+
+be Hankel matrices consisting of moments µk deﬁned by (1.13). Then the RH is true if
+0 for all n
+and only if det ∆n ≥
+
+0 and det ∆(1)
+n
+
+≥
+
+∈
+
+In [19], X.-J. Li proved the so-called Li’s criterion that claims that the RH is true if
+
+and only if all Li coeﬃcients deﬁned by
+
+λn+1 =
+
+1
+n!
+
+dn
+dwn
+
+1
+
+(1
+
+(cid:20)
+
+−
+
+w)2
+
+ξ′
+ξ
+
+1
+
+1
+
+(cid:18)
+
+−
+
+w
+
+(cid:19)(cid:21)w=0
+
+,
+
+(1.14)
+
+(1.13)
+
+
+
+6
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+5
+
+n−
+{
+
+1λn}∞n=1 was considered by J. B. Keiper [11] before
+are positive. Since the sequence
+Li, the Li coeﬃcients are also referred to as the Keiper–Li coeﬃcients in some literature.
+Bombieri–Lagarias [2] found that the positivity of all Li coeﬃcients is a discretization
+of the positivity of the Weil distribution. The relation of Theorems 1.3 and 1.8 can be
+considered as an analog of the relation of the Weil distribution and Li coeﬃcients (see
+also Section 3.4). We are then interested in a direct relation between moments µn and Li
+coeﬃcients λn. Changing of variables as z = (i/2)(1
+2X) in (1.2) and then expanding
+exp(izt) to the power series of X, we obtain
+
+−
+
+µn =
+
+dn
+dX n
+
+1
+2X)2
+
+ξ′
+ξ
+
+(1
+
+−
+
+X)
+
+.
+
+(cid:21)X=0
+
+(1
+
+(cid:20)
+
+−
+
+(1.15)
+
+The similarity between (1.14) and (1.15) is obvious, and it is shown in Section 8 that
+there is an explicit relation between them.
+
+Recall (1.7) and deﬁne qξ(z) := Qξ(√z)/√z. Then, qξ(z) belongs to the subclass of
+corresponding to Kre˘ın’s strings under the RH (see Section 9). The corresponding
+
+N
+string is the one named Zeta string by S. Kotani [12].
+
+On the other hand, the series representation (1.3) suggests that g(t) =
+
+Ψ(t) is a
+mean-periodic function by appropriate choice of function space. In fact, it is uncondi-
+tionally shown that g(t) is mean-periodic using the function spaces used in Fesenko–
+Ricotta–Suzuki [8] (see Section 10).
+
+−
+
+The functions in class
+
+Ga have various fruitful connections with many diﬀerent mathe-
+matical objects, for example, due to a relation with positive-deﬁnite functions described
+in [16]. Therefore, more interesting discoveries and connections are expected for the
+screw function of the Riemann zeta-function from the origin mentioned above. Further-
+more, although this paper focused only on the Riemann zeta-function for simplicity, it
+would be natural to extend the results of this paper to other general L-functions like
+automorphic L-functions or L-functions in the Selberg class. However, we leave such
+studies for other papers [22, 25, 26, 27, 28] and future research.
+
+This paper is organized as follows. In Section 2, we prove Theorem 1.1 and a lemma
+needed in later sections. In Section 3, we prove Theorem 1.3 after reviewing the Weil
+distribution and preparing for the notation. In Section 4, we establish the pointwise non-
+negativity of Ψ(t), and the non-negativity of Gg(t, u) for small t, u, as a preliminary step
+towards proving Theorem 1.4. Moreover, we state and prove a lower bound for
+iGg ,a
+under restrictions to φ. In Section 5, we prove Theorem 1.4 using results in Section 4
+and make a comparison with Yoshida’s results. In Section 6, we prove Theorem 1.5 and
+study eigenvalues of the kernel Gg(t, u). In Section 7, we prove Theorems 1.6 and 1.7,
+and 1.8. In Section 8, we describe explicit relations between the moments µn and the
+Li coeﬃcients. In Section 9, we describe a Kre˘ın string corresponding to Qξ(z) in (1.7)
+under the RH. In Section 10, we discuss the mean-periodicity of the screw function g(t).
+In Section 11, we introduce variants Ψω(t) of Ψ(t) and state an analog of Theorem 1.7.
+Further, we study relations among diﬀerent Ψω(t)’s.
+
+φ, φ
+h
+
+Acknowledgments The author appreciates the valuable suggestions and comments of
+the referees that resulted in improvements in the presentation and organization of the
+paper. This work was supported by JSPS KAKENHI Grant Number JP17K05163 and
+JP23K03050. This work was also supported by the Research Institute for Mathematical
+Sciences, an International Joint Usage/Research Center located in Kyoto University.
+
+6
+
+M. SUZUKI
+
+2. Proof of Theorem 1.1 and a Lemma
+
+2.1. Proof of Theorems 1.1 (1). We use the change of variables s = 1/2
+convenience of writing. We ﬁrst note that the equality
+
+−
+
+iz for
+
+(z) > 1/2,
+
+(2.1)
+
+ξ′
+ξ
+
+(s) =
+
+1
+
+−
+
+s
+
+1
+s −
+
+1
+2
+
++
+
+1
+
+log π +
+
+1
+2
+
+Γ′
+Γ
+
+s
+2
+
+(cid:16)
+
+−
+
+(cid:17)
+
+log p
+
+∞
+
+ns
+
+p−
+
+p
+X
+
+n=1
+X
+
+holds for
+
+ℜ
+
+(s) > 1, which is equivalent to
+
+ℑ
+
+(z) > 1/2 in terms of z. We have
+
+∞
+
+4(et/2 + e−
+
+t/2
+
+2) eizt dt =
+
+−
+
+−
+
+0
+Z
+
+∞
+
+t eizt dt =
+
+1
+z2
+
+−
+
+1
+z2
+
+1
+
+s
+
+(cid:18)
+
+−
+
+1
+
++
+
+1
+s
+
+(cid:19)
+
+if
+
+ℑ
+
+(z) > 0,
+
+and
+
+if
+
+ℑ
+
+(t
+
+∞
+
+0
+
+Z
+log n)
+√n
+
+−
+
+0
+Z
+
+1[log n,
+
+∞
+
+)(t) eizt dt =
+
+1
+z2 n−
+
+s
+
+−
+
+(z) > 0
+
+if
+
+ℑ
+
+by direct and simple calculation. The third equality leads to
+
+∞
+0 
+Z
+
+−
+
+Λ(n)
+√n
+
+(t
+
+−
+
+log n)
+
+
+
+eizt dt
+
+et
+Xn
+≤
+∞
+
+
+=
+
+−
+
+=
+
+−
+
+0
+Z
+1
+z2
+
+Λ(n)
+√n
+
+(t
+
+−
+
+
+log n)1[log n,
+
+)(t) eizt dt
+
+∞
+
+∞
+
+n=2
+X
+
+∞
+
+Λ(n) n−
+
+s
+
+ −
+
+n=2
+X
+
+(z) > 1/2.
+
+if
+
+ℑ
+
+!
+
+Hence, the proof is completed if it is proved that
+
+1
+4
+
+0
+Z
+holds for
+
+∞
+
+ℑ
+
+e−
+
+t/2Φ(e−
+
+C
+
+−
+
+2t, 2, 1/4)
+(cid:17)
+
+(cid:16)
+
+(cid:19)(cid:19)
+(z) > 0. To prove this, we recall the well-known series expansion
+
+(cid:18)
+
+(cid:18)
+
+(cid:16)
+
+(cid:17)
+
+eizt dt =
+
+1
+2z2
+
+−
+
+Γ′
+Γ
+
+s
+2
+
+Γ′
+Γ
+
+−
+
+1
+4
+
+Γ′
+Γ
+
+(w) =
+
+γ0 −
+
+−
+
+∞
+
+1
+
+w + n −
+
+n=0 (cid:18)
+X
+
+1
+n + 1
+
+,
+
+(cid:19)
+
+where γ0 is the Euler–Mascheroni constant. On the other hand, we have
+
+(2.2)
+
+(2.3)
+
+(2.4)
+
+(2.5)
+
+1
+
+∞
+
+0
+
+Z
+
+2(n+ 1
+
+4 )t
+
+e−
+−
+2(n + 1
+
+4 )2
+
+eizt dt =
+
+1
+z2
+
+(cid:18)
+
+1
+
+s/2 + n −
+
+1
+n + 1/4
+
+(cid:19)
+
+(z) > 0 by direct and simple calculation. In addition,
+for non-negative integers n and
+noting that C = π2 + 8G is a special value of the Hurwitz zeta function, precisely
+C = ζ(2, 1/4) = Φ(1, 2, 1/4) =
+
+2, we get
+
+ℑ
+
+∞n=0(n + 1/4)−
+
+1
+4
+
+∞
+
+0
+Z
+
+C
+
+e−
+
+−
+
+t/2Φ(e−
+
+eizt dt
+
+P
+2t, 2, 1/4)
+i
+2(n+ 1
+4 )t
+1
+−
+2(n + 1/4)2
+
+e−
+
+∞
+
+∞
+
+0  
+
+n=0
+X
+
+∞
+
+1
+
+eizt dt =
+
+!
+
+1
+2z2
+
+∞
+
+1
+
+s/2 + n −
+
+1
+n + 1/4
+
+(cid:19)
+
+n=0 (cid:18)
+X
+1
+
+n + 1 −
+
+1
+n + 1/4
+
+(cid:19)
+
+s/2 + n −
+
+1
+n + 1
+
++
+
+1
+2z2
+
+∞
+
+n=0 (cid:18)
+X
+1
+Γ′
+2z2
+Γ
+
+−
+
+s
+2
+
++ γ0
+
++
+
+(cid:19)
+1
+2z2
+
+n=0 (cid:18)
+X
+1
+4
+
+Γ′
+Γ
+
++ γ0
+
+.
+
+1
+2
+
+Z
+1
+2z2
+
+h
+=
+
+=
+
+=
+
+(cid:19)
+We used (2.5) in the last equation. Hence, we obtain equality (2.4).
+
+(cid:19)
+
+(cid:18)
+
+(cid:18)
+
+(cid:19)
+
+(cid:18)
+
+(cid:16)
+
+(cid:17)
+
+(cid:3)
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+7
+
+2.2. Proof of Theorems 1.1 (2). Since ξ(s) is an order one entire function, Hadamard’s
+factorization theorem gives
+
+ξ
+
+1
+2 −
+
+iz
+
+= ea+bz
+
+γ (cid:20)(cid:18)
+Y
+Taking the logarithmic derivative of both sides,
+
+(cid:18)
+
+(cid:19)
+
+ξ′
+ξ
+
+1
+2 −
+
+(cid:18)
+
+iz
+
+= ib + i
+
+(cid:19)
+
+γ (cid:18)
+
+X
+
+z
+γ
+
+1
+
+−
+
+z
+γ
+
+e
+
+.
+
+(cid:19)
+
+(cid:21)
+
+1
+
+−
+
+z
+
++
+
+γ
+
+1
+γ
+
+,
+
+(cid:19)
+
+(2.6)
+
+where the sum on the right-hand side converges absolutely and uniformly on every
+compact subset of C outside the zeros γ. Substituting z = 0 into (2.6), we have ib =
+s),
+(ξ′/ξ)(1/2). On the other hand, taking the logarithmic derivative of ξ(s) = ξ(1
+(ξ′/ξ)(s) =
+s). Substituting s = 1/2 in this equality, we get (ξ′/ξ)(1/2) = 0,
+thus ib = (ξ′/ξ)(1/2) = 0. For each term on the right-hand side of (2.6), we have
+
+(ξ′/ξ)(1
+
+−
+
+−
+
+−
+
+i
+z2
+
+−
+
+z
+
+(cid:18)
+
+1
+
++
+
+γ
+
+1
+γ
+
+1
+
+∞
+
+=
+
+−
+
+e−
+γ2
+
+itγ
+
+eizt dt,
+
+−
+by direct calculation of the right-hand side, where
+
+(cid:19)
+
+0
+Z
+
+(z) >
+
+(γ)
+
+ℑ
+
+ℑ
+
+1/2 ([29, Theorem 2.12]).
+
+ℑ
+
+Therefore, if ˜Ψ(t) is the function deﬁned by the right-hand side of (1.3), then (1.2)
+(z) > 1/2 by interchanging summation and integration, which is justiﬁed
+holds when
+by the absolute convergence of the sum on the right-hand side of (1.3), and noting the
+symmetry γ
+s). The two
+γ coming from the functional equation ξ(s) = ξ(1
+functions Ψ(t) and ˜Ψ(t) have the same Fourier transform, so they are identical. The
+(cid:3)
+second equality in (1.3) also follows from the symmetry γ
+
+→ −
+
+γ.
+
+−
+
+(γ)
+
+|ℑ
+
+| ≤
+
+→ −
+
+2.3. Proof of Theorems 1.1 (3). The assertion aimed at follows from the following
+proposition and (1.1). The result is weaker than the one that follows from the best
+known zero-free region of ζ(s), but it is suﬃcient to guarantee the convergence of the
+integral in (1.13).
+
+Proposition 2.1. There exists c > 0 such that
+
+Λ(n)
+√n
+
+(t
+
+−
+
+et
+Xn
+≤
+
+log n) = 4et/2 + O
+
+c√t
+
+et/2e−
+(cid:16)
+
+(cid:17)
+
+(2.7)
+
+holds for t > 0.
+
+Proof. We write the left-hand side of (2.7) as ϕ(t). For X > 0 and c > 0, we have
+
+1
+2π
+
+−
+
+X+ic
+
+X+ic
+
+Z
+
+−
+
+izt
+
+e−
+z2 dz =
+
+1
+X 2 ,
+|
+
+t
+|
+
+1
+√X 2 + c2
+
+(cid:27)(cid:19)
+
+(cid:26)
+
+(cid:19)
+
+1
+X 2 ,
+|
+
+t
+|
+
+(cid:26)
+
+1
+√X 2 + c2
+
+(cid:27)(cid:19)
+
+(t > 0),
+
+(t = 0),
+
+(t < 0)
+
+
+
+
+
+
+t + O
+
+ect min
+
+0 + O
+
+2X
+X 2 + c2
+
+0 + O
+
+ect min
+
+(cid:18)
+
+(cid:18)
+
+(cid:18)
+
+−
+
+by a standard way of analytic number theory as in [29, §3.12]. Applying this to each
+term of the Dirichlet series expansion
+
+s, we have
+
+(ζ ′/ζ)(s) =
+
+1
+2π
+
+−
+
+X+ic
+
+X+ic
+
+Z
+
+−
+
+1
+z2
+
+ζ ′
+ζ
+
+−
+
+(cid:20)
+
+(cid:18)
+
+1
+2 −
+
+iz
+
+e−
+
+(cid:19)(cid:21)
+
+izt dz = ϕ(t) + O
+
+P
+
+∞n=1 Λ(n)n−
+Λ(et)
+et/2
+
+(cid:18)
+
+2X
+X 2 + c2
+
+(cid:19)
+
+(2.8)
+
+Λ(n)
+√n
+
+ec(t
+−
+
+log n) min
+
+1
+log n
+
+X 2 ,
+|
+
+1
+√X 2 + c2
+
+t
+|
+
+(cid:26)
+
+−
+
+=et
+Xn
+
++ O
+
+
+
+
+
+for c > 1/2. In the remaining part of the proof, we take c as 1/2 + 1/t.
+
+
+
+(cid:27)
+
+
+
+6
+8
+
+M. SUZUKI
+
+In the sum on the right-hand side of (2.8), the contribution from n in the range
+
+n
+
+≤
+
+et/2 or n
+
+3et/2 is
+
+≥
+
+1
+X 2
+
+≪
+
+Λ(n)
+√n
+
+ec(t
+−
+
+log n) =
+
+ect
+X 2
+
+ζ ′
+ζ
+
+1
+2
+
+(cid:18)
+
+−
+
+(cid:20)
+
++ c
+
+(cid:19)(cid:21)
+
+t
+
+et/2
+·
+X 2
+
+,
+
+≪
+
+n
+X
+1, ect = e
+since
+near s = 1). For n in the range et/2 < n < et
+
+log n
+
+| ≫
+
+t
+|
+
+−
+
+·
+
+et/2, and (ζ ′/ζ)(1/2 + c) = O(t) (by ζ(s) = (s
+n = r,
+
+2, if we put [et]
+
+−
+
+−
+
+(2.9)
+
+1)−
+
+1 + O(1)
+
+−
+
+log n = log
+
+t
+
+−
+
+et
+n
+
+= log
+
+et
+[et]
+
+−
+
+r ≥ −
+
+log
+
+1
+
+(cid:18)
+
+r
+[et]
+
+−
+
+≥
+
+(cid:19)
+
+r
+[et]
+
+.
+
+Therefore, the contribution from n in this range is
+
+et
+X 2
+
+≪
+
+≪
+
+r<et/2
+X2
+≤
+et/2
+t
+·
+X 2
+
+Λ([et]
+[et]
+
+p
+
+r)
+r ·
+
+−
+−
+1
+r ≪
+
+1
+r ≪
+
+et
+t
+·
+X 2
+
+t2
+
+et/2
+
+·
+X 2
+
+.
+
+1
+[et]
+
+1
+r
+
+r ·
+
+−
+
+r<et/2
+
+X2
+≤
+
+p
+
+(2.10)
+
+r<et/2
+
+X2
+≤
+
+The same applies to contributions from n in the range et + 2 < n < 3et/2. Finally, the
+contribution from n in the range et
+
+2 < n < et + 2 is
+
+−
+
+Λ(et)
+√et
+
+≪
+
+c log
+e
+
+1
+1+O(e−t)
+
+1
+X ≪
+
+t
+
+·
+
+e−
+X
+
+t/2
+
+,
+
+(2.11)
+
+because
+
+min
+
+1
+log n
+
+X 2 ,
+|
+
+1
+√X 2 + c2
+
+(cid:27)
+
+t
+|
+
+(cid:26)
+
+−
+
+1
+
+≤
+
+√X 2 + c2 ≤
+
+1
+X
+
+.
+
+From the estimates (2.9), (2.10), and (2.11) for the sum in (2.8), we obtain
+
+ϕ(t) =
+
+1
+2π
+
+−
+
+X+ic
+
+X+ic
+
+Z
+
+−
+
+1
+z2
+
+ζ ′
+ζ
+
+−
+
+(cid:20)
+
+(cid:18)
+
+1
+2 −
+
+iz
+
+(cid:19)(cid:21)
+
+e−
+
+izt dz + O
+
+t2
+
+et/2
+
+·
+X 2
+
+!
+
++ O
+
+t
+
+·
+
+t/2
+
+e−
+X !
+
+for c = 1/2 + 1/t. Referring the zero-free region σ > 1
++ 3)−
+ζ(σ + it) [29, Theorem 3.8], we put ψ(x) = c′(log
+the curve from
+ψ(X)) along y = 1/2
+X)) to X + i(1/2
+ψ(
+z = x + iy, Then, moving the path of integration downward,
+
+1 (c > 0) of
++ 3)−
+−
+1 (0 < c′ < c) and let CX be
+ψ(x), where
+
+X + i(1/2
+
+t
+|
+|
+−
+
+c(log
+
+t
+|
+
+−
+
+−
+
+−
+
+−
+
+|
+
+ϕ(t) = 4et/2 + O
+
+t2
+
+et/2
+
+·
+X 2
+
+!
+
++ O
+
+t
+
+·
+
+t/2
+
+e−
+X !
+X+ic
+
+1
+2π  Z
+
+−
+
+X+i( 1
+
+2 −
+
+−
+
+X))
+
+ψ(
+
+−
+
+X+ic
+
+−
+
++
+
++
+
+ZCX
+
+Z
+
+X+i( 1
+
+2 −
+
+1
+z2
+
+ζ ′
+ζ
+
+−
+
+(cid:20)
+
+(cid:18)
+
+1
+2 −
+
+iz
+
+(cid:19)(cid:21)
+
+e−
+
+izt dz.
+
+ψ(
+
+−
+
+X))!
+
+The ﬁrst and third integrals on the right-hand side are estimated as
+X −
+on CX is estimated as
+
+2et/2 log X by the estimate (ζ ′/ζ)(σ + it)
+
+t
+log(
+|
+
+≪
+
+|
+
+≪
+≪
++ 3) ([29, (3.11.7)]). The integral
+
+X −
+
+2ect log X
+
+X
+
+X
+
+x
+log(
++ 3)
++ 3)2 et(1/2
+|
+|
+x
+(
+Z
+|
+|
+−
+c′t
+et/2 exp
+log(X + 3)
+
+−
+
+≪
+
+≪
+
+(cid:18)
+
+log(X + 3).
+
+(cid:19)
+
+−
+
+ψ(x)) dx
+
+≪
+
+et/2 exp
+
+c′t
+log(X + 3)
+
+X
+
+X
+
+(cid:19) Z
+
+−
+
+x
+log(
++ 3)
++ 3)2 dx
+|
+|
+x
+(
+|
+|
+
+−
+
+(cid:18)
+
+ 
+ 
+ 
+ 
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+9
+
+Therefore, we obtain
+
+ϕ(t) = 4et/2 + O
+
+et/2 log X
+X 2
+
+!
+
++ O
+
+t2
+
+et/2
+
+·
+X 2
+
+!
+
++ O
+
++ O
+
+et/2 exp
+
+t/2
+
+(cid:18)
+e−
+X !
+
+.
+
+t
+
+·
+
+c′t
+log(X + 3)
+
+(cid:19)
+
+−
+
+(cid:18)
+
+log(X + 3)
+
+(cid:19)
+
+Finally, choosing X as log X = t1/2, we obtain (2.7) for a properly taken c > 0.
+
+(cid:3)
+
+2.4. Lemma. The following lemma is often used in subsequent sections.
+
+Lemma 2.1. Let F (z) be an entire function of the exponential type and let A be a
+complex number. Suppose that F (γ) = A for all zeros γ of ξ(1/2
+iz). Then F (z) = A
+as a function.
+
+−
+
+Proof. It suﬃces to deal only with case of A = 0. The number of zeros of F (z) in the
+r counted with multiplicity is O(r) by the assumption. On the other hand,
+disc
+r is not O(r) by [29, Section
+the number of distinct zeros of ξ(1/2
+(cid:3)
+9.12], which was ﬁrst proved by Littlewood. This is a contradiction if F
+
+z) in the disc
+
+= 0.
+
+| ≤
+
+| ≤
+
+z
+|
+
+z
+|
+
+−
+
+The known result that the number of simple zeros of ζ(s) on the critical line up to
+height T is bounded below by T log T is more convenient for the proof of Lemma 2.1
+(see Conrey [6] and his comments on the result of Levinson (1974) in the introduction).
+
+We denote the Fourier transform of φ(t) as
+
+3. Proof of Theorem 1.3
+
+b
+in this and the latter sections even when z is not a real number.
+
+φ(z) =
+
+∞
+
+φ(t) eizt dt.
+
+Z
+
+−∞
+
+3.1. Proof of necessity. Assuming that the RH is true, Gg(t, u) is non-negative deﬁ-
+0 for every
+nite on the real line by Theorem 1.2. Therefore,
+φ, φ
+h
+a, a), since all eigenvalues of Gg[a] are non-negative ([23, §8]). Moreover, the
+φ
+positive deﬁniteness is directly proved as follows.
+
+Gg[a]φ, φ
+h
+
+iGg ,a =
+
+L2(
+
+iL2
+
+≥
+
+−
+
+∈
+For integrable functions φ1(t) and φ2(t) with supp φi ⊂
+φ2(γ)
+
+φ1(0)
+
+φ1(
+
+[
+−
+
+a, a] (i = 1, 2),
+
+−
+
+γ)
+−
+γ
+
+γ
+X
+
+c
+
+·
+
+c
+
+c
+
+−
+γ
+
+φ2(0)
+
+c
+
+(3.1)
+
+φ1, φ2iGg ,a =
+h
+
+by (1.9). If we take φ = φ1 = φ2 and suppose that the RH is true. Then all γ are real,
+and thus
+
+γ). Therefore the right-hand side of (3.1) is equal to
+
+φ(γ) =
+
+φ(
+
+−
+
+b
+
+b
+
+φ(γ)
+
+2
+
+φ(0)
+
+−
+γ
+
+0.
+
+≥
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+The sum is positive for every non-zero φ(t) in L2(
+a, a) by Lemma 2.1, since
+(cid:12)
+non-constant entire function of the exponential type. Hence the hermitian form
+is positive deﬁnite for every 0 < a <
+
+under the RH.
+
+γ
+X
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+−
+
+b
+
+b
+
+∞
+
+(3.2)
+
+φ(z) is a
+·iGg ,a
+(cid:3)
+
+,
+h·
+b
+
+To prove the suﬃciency of the non-negative deﬁniteness of the hermitian forms
+
+we use Weil’s positivity criterion.
+
+,
+h·
+
+·iGg ,a,
+
+ 
+ 
+ 
+6
+10
+
+M. SUZUKI
+
+3.2. Weil’s positivity. The linear functional W : C ∞c (R)
+
+C deﬁned by
+
+→
+
+W (φ) :=
+
+ψ(γ)
+
+(3.3)
+
+ψ
+
+7→
+
+∗
+
+≥
+
+e
+∞
+
+Z
+
+−∞
+
+γ
+X
+
+b
+
+∈
+
+is called the Weil distribution. A. Weil [30] (see also [33]) showed that the RH is true if
+and only if the distribution W is non-negative deﬁnite, that is,
+C ∞c (R),
+
+for every ψ
+
+W (ψ
+
+(3.4)
+
+ψ)
+
+0
+
+where
+
+(ψ1 ∗
+
+ψ2)(x) :=
+
+ψ1(y)ψ2(x
+
+y) dy,
+
+−
+
+ψ(x) := ψ(
+
+−
+
+x).
+
+(3.5)
+
+Note that Weil does not mention that it is suﬃcient to taking compactly supported
+functions as test functions at least in [30, 31] and his collected papers, but in Yoshida
+[33], the criterion has been formulated in the form above, although it is not sure whether
+it is the ﬁrst literature.
+
+e
+
+3.3. Reduction of suﬃciency to Weil’s positivity. For 0 < a <
+
+Let we set D = d/dt and
+
+C(a) =
+
+φ
+{
+
+∈
+
+C ∞c (R)
+
+|
+
+supp ψ
+
+a, a]
+
+[
+−
+
+⊂
+
+.
+
+}
+
+, we deﬁne
+
+∞
+
+(3.6)
+
+(I (a)
+
+b φ)(t) :=
+
+t
+
+a
+
+Z
+
+−
+
+φ(u) du + b
+
+(b
+
+C).
+
+∈
+
+Then the maps
+
+D
+−→
+
+C0(a),
+
+C0(a)
+
+C(a)
+
+(3.7)
+are bijective and are inverse to each other, where C0(a) is the space deﬁned in (1.11).
+Therefore, from the following proposition, we ﬁnd that the nonnegativity of
+·iGg ,a on
+C0(a) for every 0 < a <
+Proposition 3.1. Let 0 < a <
+
+and let C(a) be the space deﬁned in (3.6). Then,
+
+implies that the RH is true.
+
+C(a)
+
+,
+h·
+
+∞
+
+I (a)
+0
+−→
+
+∞
+
+Dψ1, Dψ2iGg ,a = W (ψ1 ∗
+h
+
+ψ2)
+
+(3.8)
+
+for every ψ1, ψ2 ∈
+Proof. If φ = Dψ and
+
+C(a).
+
+φ(0) = 0, we have z−
+ψ1(
+
+1(
+
+φ(z)
+
+−
+
+f
+φ(0)) =
+
+−
+
+ψ(z) by integration by
+i
+
+Dψ1, Dψ2iGg,a =
+h
+ψ2) by (3.3) and (3.5).
+P
+
+parts. Therefore,
+equal to W (ψ1 ∗
+3.4. Relation between W and Ψ. The pointwise positivity of Theorem 1.7 turns out
+to be a special case of the Weil positivity. For t > 0, we consider the triangular function
+
+ψ2(γ) by (3.1). The right-hand side is
+(cid:3)
+
+γ)
+b
+
+c
+
+c
+
+f
+
+−
+
+b
+
+b
+
+b
+
+γ
+
+∆t(x) =
+
+Then W (∆t) = Ψ(t), because
+
+(t
+
+1
+2
+0,
+
+
+
+
+
+
+x
+
+− |
+
+),
+|
+
+x
+|
+x
+|
+
+t;
+
+| ≤
+
+> t.
+
+|
+
+∞
+
+∆t(x) eizxdx =
+
+1
+
+−
+
+cos(zt)
+z2
+
+Z
+
+−∞
+
+for any z
+function
+
+∈
+
+C. The triangular function ∆t is expressed as ∆t = Rt ∗
+
+Rt(x) =
+
+,
+
+1
+√2
+1
+2√2
+0,
+
+,
+
+
+
+
+
+
+< t/2;
+
+= t/2;
+
+> t/2.
+
+x
+|
+
+|
+
+x
+|
+x
+|
+
+|
+
+|
+
+(3.9)
+
+(3.10)
+
+Rt by the rectangular
+
+f
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+11
+
+0.07
+
+0.06
+
+0.05
+
+0.04
+
+0.03
+
+0.02
+
+0.01
+
+Therefore,
+
+0.5
+
+1.0
+
+1.5
+
+2.0
+
+Figure 1. Plot of Ψ(t) in the range 0
+t
+vertical dashed line is located at t = log 2.
+
+≤
+
+≤
+
+log 10. The
+
+Ψ(t) = W (∆t) = W (Rt ∗
+This one is similar to the formula of Li coeﬃcients by the Weil distribution W in [2].
+
+Rt).
+
+(3.11)
+
+f
+
+3.5. Relation between W and g. For a test function φ
+
+C ∞c (R),
+
+∈
+
+∞
+
+(
+−
+
+g(t))φ′′(t) dt =
+
+φ′′(γ)
+
+φ′′(0)) =
+
+φ(γ) = W (φ),
+
+1
+γ2 (
+
+−
+
+γ
+X
+where the prime means diﬀerentiation. Therefore we ﬁnd that
+
+γ
+X
+
+−∞
+
+c
+
+c
+
+Z
+
+b
+
+−
+
+g′′(t) = Ψ′′(t) =
+
+eiγt = W (t)
+
+γ
+X
+
+as a distribution, where we understand the distribution as W (φ) =
+W (t)φ(t) dt. From
+this relation, the Weil distribution W (t) can be regarded as an “accelerant” of the screw
+function g(t) of ξ(s) in the sense of [15, Introduction].
+
+R
+
+4. Preparations for the proof of Theorem 1.4
+
+4.1. Positivity of Ψ(t). It is observed that Ψ(t) is positive in a small range [0, t0) of t
+by numerical calculation by a computer (Figure 1). This observation is unconditionally
+proven and used to prove Theorem 1.4.
+
+Theorem 4.1. There exists t0 > log 2 such that Ψ(t) > 0 for 0 < t < t0.
+
+(π/2)
+
+3 log 2, we have Ψ′(t) = 2(et/2
+
+Proof. This follows from Theorem 4.2 below for the weaker result t0 > 0, which is
+suﬃcient for Theorem 1.4, but here we prove it in another direct way with the help
+of numerical calculation by computer. Diﬀerentiating (1.1) and noting (Γ′/Γ)(1/4) =
+t/2)
+t/2) + c
+γ0 −
+−
+−
+with c = (π/4)
+(γ0 + 3 log 2)/2, since there is no contribution from the primes for Ψ(t)
+on [0, log 2). Then we ﬁnd that all zeros of Ψ′(t) on [0, log 2) are t1 = 0.152631 . . . and
+t2 = 0.464002 . . . by numerical calculation. Since arctanh(e−
+0+, the
+value of Ψ′(t) is positive on [0, t1) and (t2, log 2) and is negative on (t1, t2). Further,
+> 0. Therefore, Ψ(t) is positive on
+Ψ(0) = 0 by deﬁnition and Ψ(t2) = 0.0396618
+(cid:3)
+[0, log 2] by the continuity.
+
+arctan(et/2) + arctanh(e−
+
+t/2)
+
+as t
+
+· · ·
+
+e−
+
+→
+
+→
+
+∞
+
++
+
+−
+
+−
+
+−
+
+4.2. Yoshida’s results. Yohida [33] studied a hermitian form on C ∞c (R) deﬁned by
+iW := W (φ
+
+φ, ψ
+h
+
+ψ).
+
+∗
+
+e
+
+12
+
+M. SUZUKI
+
+The space C(a) in (3.6) was ﬁrst introduced by him to localize the positivity (3.4). For
+0 < a <
+
+0, he also introduced the spaces
+
+and N
+
+Z
+
+∞
+
+∈
+
+≥
+
+K(a) =
+
+ψ(t) =
+
+(
+
+h(t),
+0,
+
+(
+
+t
+(
+|
+t
+(
+|
+
+and
+
+a
+
+a) for some h
+
+| ≤
+|
+
+> a)
+
+C ∞(R) with the period 2a,
+
+∈
+
+)
+
+πinx
+a
+
+KN (a) =
+
+ψ
+
+K(a)
+
+ψ(x) exp
+
+dx = 0 for all n
+
+N
+
+.
+
+(4.1)
+
+a
+
+−
+
+Z
+
+∈
+
+(cid:26)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Yoshida proved without any assumption that the hermitian form
+
+| ≤
+(cid:27)
+·iW is positive
+deﬁnite on K(a) if a > 0 is suﬃciently small ([33, Lemma 2]). Connes–Consani [4]
+provides an operator theoretic conceptual reason for this result. Yoshida also proved
+kL2 for
+that, for given a0 > 0 and µ > 0, there exists N
+φ
+k
+a0 ([33, Lemma 3])
+every φ
+
+KN (a) and 0 < a
+
+0 such that
+
+φ, φ
+h
+
+iW ≥
+
+,
+h·
+
+≥
+
+(cid:18)
+
+(cid:19)
+
+∈
+
+µ
+
+Z,
+
+n
+|
+
+∈
+
+≤
+
+4.3. Positivity of Gg(t, u). If the RH is true, g(t) of (1.1) and (1.8) belongs to the
+by Theorem 1.2. Therefore, the kernel Gg(t, u) is non-negative deﬁnite on R,
+class
+but we can directly conﬁrm that it is non-negative deﬁnite on R as
+
+G∞
+
+Gg(ti, tj)ξiξj =
+
+2
+
+eiγti )ξi
+
+(1
+
+−
+
+0
+
+≥
+
+1
+γ2 (cid:12)
+Xi
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+γ
+Xi,j
+X
+by using (1.9), since all zeros γ of ξ(1/2
+Ga for every a > 0.
+belongs to the class
+Ga when a > 0 is suﬃciently small. If g
+
+As an analog of Yoshida’s result above, we unconditionally prove that the restriction
+Ga, the
+2a,2a] belongs to
+a, a). It implies the nonnegativity of Ψ(t)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+iz) are real. Hence the restriction g
+(cid:12)
+
+g
+|[
+kernel Gg(t, u) is non-negative deﬁnite on (
+on (
+
+2a,2a] belongs to
+
+a, a), because
+
+2a,2a]
+
+|[
+
+−
+
+−
+
+−
+
+|[
+
+−
+
+−
+
+−
+
+for t
+
+(
+−
+
+∈
+
+0
+
+Gg(t, t) = g(0)
+
+g(t)
+
+g(
+
+t) = 0
+
+2g(t) = 2Ψ(t)
+
+−
+a, a). In particular, Theorem 4.1 in a weak form t0 = a > 0 follows from this.
+
+−
+
+−
+
+−
+
+≤
+
+Theorem 4.2. There exists a0 > 0 such that Gg(t, u) is positive deﬁnite on L2(
+if 0 < a < a0. In particular, the restriction g
+0 < a < a0.
+
+2a,2a] belongs to the class
+
+a, a)
+−
+Ga for every
+
+|[
+
+−
+
+L2(
+
+−
+
+∈
+
+a, a), we deﬁne the
+
+1
+
+dt.
+
+(4.2)
+
+Proof. We ﬁrst introduce a few auxiliary functions. For φ
+transformation
+
+Φ1(φ, z) :=
+
+φ(z)
+
+φ(0)
+
+−
+z
+
+=
+
+φ(t)
+
+a
+
+a
+
+Z
+
+−
+
+eizt
+−
+z
+
+b
+
+b
+
+For reals t, u, and a non-zero real y, we deﬁne
+eizt
+−
+z
+eizt
+−
+z
+
+K(t, u; y) : =
+
+K(t, u) : =
+
+1
+2π
+
+1
+2π
+
+−∞
+∞
+
++iy
+
+∞
+
+Z
+
+1
+
+e−
+
+izu
+
+−
+
+z
+
+1
+
+dz,
+
+izu
+
+1
+
+e−
+
+z
+
+1
+
+−
+
+dz.
+
++iy
+
+Z
+
+−∞
+
+Then, we ﬁnd that
+
+K(t, u) =
+
+1
+2
+
+t
+(
+|
+
+|
+
++
+
+u
+|
+
+t
+| − |
+
+) =
+u
+|
+
+−
+
+if t > 0, u > 0, t
+if t > 0, u > 0, t
+if t < 0, u > 0, t
+if t < 0, u < 0, t
+if t < 0, u < 0, t
+if t > 0, u < 0, t
+
+u > 0,
+u < 0,
+u < 0,
+u < 0,
+u > 0,
+u > 0,
+
+−
+−
+−
+−
+−
+−
+
+u,
+t,
+0,
+
+u,
+t,
+
+−
+−
+0,
+
+
+
+
+
+
+(4.3)
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+13
+
+and
+
+K(t, u; y) =
+
+1
+2y
+
+e−
+
+y(t+
+
+)
+
+t
+|
+
+|
+
+−
+
+−
+
+e−
+
+y(u+
+
+u
+
+) + e−
+
+|
+
+|
+
+y(t+u+
+
+u
+
+t
+−
+
+|
+
+|
+
+) + 1
+(cid:17)
+
+=
+
+(cid:16)
+
+1
+
+1
+
+0,
+e−
+
+e−
+
+0,
+
+
+
+
+
+
+2uy
+
+2ty
+
+,
+
+if t > 0, u > 0, t
+
+,
+
+if t > 0, u > 0, t
+
+−
+
+−
+
+e−
+2y
+e−
+2y
+
+if t < 0, u > 0, t
+
+if t < 0, u < 0, t
+
+1
+
+,
+
+−
+
+1
+
+,
+
+if t < 0, u < 0, t
+
+if t > 0, u < 0, t
+
+2uy
+
+2y
+2ty
+
+−
+
+2y
+
+(4.4)
+
+u > 0,
+
+u < 0,
+
+u < 0,
+
+u < 0,
+
+u > 0,
+
+u > 0,
+
+−
+
+−
+
+−
+
+−
+
+−
+
+−
+
+by an elementary calculus.
+
+We then prove the equality
+
+φ, φ
+h
+
+iGg ,a = I0 + I1 + I
+
+∞
+
+with
+
+I0 =
+
+1
+2π
+
+Z
+
++ic
+
+∞
+
+1
+
++
+
+1
+s
+
+1
+
+s
+
+∞
+
+−
++ic
+
++ic (cid:18)
+−∞
+1
+2π
+
+I1 =
+
+ζ ′
+ζ
+Γ′
+Γ
+
++ic
+1
+2
+
+−∞
+
+Z
+∞
+
+ℜ
+
+=
+
+I
+
+∞
+
+1
+2π
+
+(cid:16)
+
+s
+2
+
+1
+2
+
+−
+
+where s = 1/2
+
+(cid:20)
+
+Z
+(cid:16)
+−∞
+iz as elsewhere. We put
+−
+
+(cid:17)
+
+Φ1(φ; z)Φ1(φ; ¯z) + Φ1(φ;
+
+(cid:19) (cid:16)
+
+z)Φ1(φ;
+
+−
+
+−
+
+¯z)
+
+dz,
+
+(4.5)
+
+(cid:17)
+
+(s)
+
+Φ1(φ; z)Φ1(φ; ¯z) + Φ1(φ;
+
+z)Φ1(φ;
+
+−
+
+−
+
+¯z)
+
+dz,
+
+(4.6)
+
+log π
+
+2 +
+Φ1(φ; z)
+|
+|
+
+Φ1(φ;
+|
+
+2
+z)
+|
+
+−
+
+(cid:21) (cid:16)
+
+(cid:17)
+dz,
+
+(cid:17)
+
+g0(t) :=
+
+−
+
+4(et/2 + e−
+
+t/2
+
+2),
+
+g1(t) :=
+
+−
+
+(4.7)
+
+(4.8)
+
+(t) :=
+
+g
+∞
+
+Γ′
+Γ
+
+t
+|
+|
+2
+−
+(cid:20)
+iGg∗ ,a for
+
+1
+4
+
+−
+
+(cid:18)
+
+(cid:19)
+0, 1,
+
+log π
+
+−
+
+(cid:21)
+
+1
+4
+
+C
+
+−
+
+so that I
+=
+I0 + I1 + I
+
+φ, φ
+h
+. We will prove (4.5), (4.6), and (4.7) for I0, I1, and I
+∞
+For t > 0 and c > 1/2, taking the inversion of (2.1) and noting g0(0) = 0,
+
+(cid:17)
+φ, φ
+with the same notation as (1.10) and
+h
+
+, respectively.
+
+∗ ∈ {
+
+∞}
+
+(cid:16)
+
+∞
+
+∗
+
+iGg ,a =
+
+g0(t) =
+
+1
+2π
+
++ic
+
+∞
+
+1
+
+s
+
+1
+
++ic (cid:18)
+
++
+
+1
+s
+
+izt
+
+e−
+
+−
+
+z2
+
+1
+
+dz.
+
+−
+Because we ﬁnd that the integral on the right-hand side is zero for t < 0 by moving
+c
+
+, we can write
+
+−∞
+
++
+
+Z
+
+(cid:19)
+
+Λ(n)
+√n
+
+t
+(
+|
+
+| −
+
+log n),
+
+e|t|
+Xn
+≤
+
+e−|
+
+t
+|
+
+/2Φ(e−
+
+2
+|
+
+t
+|, 2, 1/4)
+
+→
+
+∞
+
+g0(t) =
+
+Z
+R. Therefore,
+
+for any t
+
+∈
+Gg0(t, u) = g0(t
+
+1
+2π
+
++ic
+
+∞
+
++ic (cid:18)
+
+−∞
+
+1
+s
+
++
+
+1
+
+1
+
+−
+
+s
+
+(cid:19) (cid:18)
+
+eizt
+
+1
+z2 +
+−
+
+izt
+
+e−
+
+−
+
+z2
+
+dz
+
+1
+
+(cid:19)
+
+−
+
+u)
+−
++ic
+
+∞
+
+g0(t)
+
+1
+
+Z
+
+−∞
+
+s
+
++ic (cid:18)
+
+−
+
+g0(
+
+−
+
+1
+
++
+
+u) + g0(0)
+eizu
+−
+z
+
+1
+
+−
+1
+s
+
+(cid:19) (cid:18)
+
+izt
+
+e−
+
+z
+
+1
+
+−
+
++
+
+izu
+
+e−
+
+z
+
+1
+
+−
+
+1
+
+eizt
+−
+z
+
+dz.
+
+(cid:19)
+
+=
+
+1
+2π
+
+From this formula and deﬁnitions (1.10) and (4.2), we obtain (4.5). In the same way,
+(4.6) and (4.7) are obtained by using (2.2), (2.3), and (2.4), but for (4.7), we move the
+
+14
+
+M. SUZUKI
+
+horizontal line of the integration to the real line in the ﬁnal step by noting the absence
+of poles (Γ′/Γ)(s/2) in
+
+(s) > 0.
+Now we prove the positivity of
+
+ℜ
+
+φ, φ
+h
+
+iGg ,a for small a > 0. We ﬁrst note the equality
+
+1
+2π
+
+∞
+
+Z
+
+−∞
+
+2 dz
+Φ1(φ; z)
+|
+|
+
+1
+2π
+a
+
+=
+
+=
+
+∞
+
+a
+
+φ(u)
+
+Z
+
+−∞ (cid:18)Z
+a
+
+−
+
+a
+
+1
+
+eiuz
+−
+z
+
+du
+
+φ(u)φ(t) K(t, u) dudt.
+
+a
+
+φ(t)
+
+(cid:19) (cid:18)Z
+
+−
+
+a
+
+itz
+
+e−
+
+z
+
+1
+
+−
+
+dt
+
+dz
+
+(cid:19)
+
+(4.9)
+
+a Z
+−
+We ﬁx c > 1 in (4.5) and (4.6) and set
+
+Z
+
+−
+
+a
+
+1
+
+(s)=1+c
+
+C1 = max
+ℜ
+1 + s−
+
+1)−
+
+s
+
+1
+
+−
+
+(cid:26)(cid:12)
+(cid:12)
+(cid:12)
+1) or (ζ ′/ζ)(s),
+(cid:12)
+
++
+
+1
+s
+
+,
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ζ ′
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+(s)
+(cid:12)
+(cid:27)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Then, for F (s) = ((s
+
+−
+
+1
+2π
+
++ic
+
+∞
+
++ic
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+−∞
+
+Z
+C1 ·
+
+≤
+
+F (s) Φ1(φ;
+
+z)Φ1(φ;
+
+±
+
+±
+
+¯z) dz
+
+1
+2π
+
+(cid:20)
+
++ic
+
+∞
+
++ic |
+
+Z
+
+−∞
+
+Φ1(φ;
+
+2 dz
+z)
+|
+
+±
+
+(cid:12)
+(cid:12)
+1/2
+(cid:12)
+(cid:12)
+
+(cid:21)
+
+(cid:20)
+
+1
+2π
+
++ic
+
+∞
+
++ic |
+
+Z
+
+−∞
+
+Φ1(φ;
+
+1/2
+
+2 dz
+¯z)
+|
+
+±
+
+(cid:21)
+
+by the Schwartz inequality. For the quantities on the right-hand side, we have
+
+1
+2π
+
++ic
+
+∞
+
+Φ1(φ;
+
+2 dz =
+z)
+|
+
+±
+
++ic |
+
+a
+
+a
+
+φ(u)φ(t) K(t, u;
+
+c) dudt
+
+±
+
+Z
+as in (4.9). If we ﬁx a real number a1 > 0, there exists C2 = C2(a1) > 0 such that
+
+−∞
+
+Z
+
+−
+
+−
+
+a Z
+
+a
+
+K(t, u;
+
+c)
+
+±
+
+≤
+
+C2K(t, u)
+
+a if 0 < a
+
+≤
+
+a1 by (4.3) and (4.4). Therefore,
+
+| ≤
++ic
+
+∞
+
+Z
+
+−∞
+
+Φ1(φ;
+
++ic |
+
+2 dz
+z)
+|
+
+±
+
+≤
+
+for any
+
+t
+|
+
+| ≤
+
+a and
+
+u
+|
+
+1
+2π
+
+This leads to
+
+a
+
+a
+
+C2
+
+φ(u)φ(t) K(t, u) dudt
+
+Z
+= C2 ·
+
+a Z
+−
+−
+1
+2π
+
+a
+
+∞
+
+Z
+
+−∞
+
+Φ1(φ;
+|
+
+2 dz.
+z)
+|
+
+±
+
+I0 + I1 ≤
+
+2 C1C2 ·
+
+1
+2π
+
+∞
+
+Z
+
+−∞
+
+2 dz + 2 C1C2 ·
+Φ1(φ; z)
+|
+|
+
+1
+2π
+
+∞
+
+Z
+
+−∞
+
+Φ1(φ;
+|
+
+2 dz.
+z)
+|
+
+−
+
+Following the above, we take C > 0 such that C > 3C1C2. Since
+
+Γ′
+Γ
+
+ℜ
+
+(cid:20)
+
+(σ + it)
+
+= log
+
+(cid:21)
+
+σ + it
+|
+
+|
+
+σ + it
++ O(
+|
+
+−
+|
+
+1)
+
+(4.10)
+
+for a ﬁxed σ, we can ﬁne t0 > 0 so that
+
+Γ′
+Γ
+
+ℜ
+
+(cid:20)
+
+(cid:18)
+
+1
+4 −
+
+iz
+2
+
+−
+
+(cid:19)
+
+1
+2
+
+log π
+
+C
+
+≥
+
+(cid:21)
+
+R and
+
+if z
+
+∈
+
+z
+|
+
+| ≥
+
+t0. We put
+
+C0 = max
+|≤
+|
+
+z
+
+t0 ℜ
+
+Γ′
+Γ
+
+(cid:20)
+
+(cid:18)
+
+1
+4 −
+
+iz
+2
+
+−
+
+(cid:19)
+
+1
+2
+
+log π
+
+.
+
+(cid:21)
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+15
+
+Then we have
+
+1
+2π
+
+Z
+
+1
+2
+
+Γ′
+Γ
+
+s
+2
+
+(cid:16)
+
+1
+2
+
+−
+
+log π
+
+(cid:21)
+(cid:17)
+2 dz
+Φ1(φ; z)
+|
+
+t0 |
+
+2 dz
+Φ1(φ; z)
+|
+|
+1
+2π
+
+C0 ·
+
+−
+
+∞
+
+−∞
+C
+
+≥
+
+≥
+
+C
+
+ℜ
+
+(cid:20)
+1
+2π
+1
+2π
+
+·
+
+·
+
+Z|
+
+z
+
+|≥
+∞
+
+Z
+
+−∞
+From the above calculations for I0, I1, and I
+
+2 dz
+Φ1(φ; z)
+|
+
+t0 |
+
+z
+|≤
+1
+2π
+
+Z|
+
+·
+
+Z|
+, we obtain
+
+z
+
+|≤
+
+∞
+
+2 dz
+Φ1(φ; z)
+|
+|
+
+−
+
+(C + C0)
+
+2 dz.
+Φ1(φ; z)
+|
+
+t0 |
+
+1
+2π
+
+Z|
+1
+2π
+
+·
+
+z
+
+Z|
+
+φ, φ
+
+h
+
+iGg ,a
+(C
+
+−
+
+≥
+
+2C1C2)
+
+1
+2π
+
+∞
+
+Z
+
+−∞
+∞
+
+1
+2π
+
+Z
+
+2 dz
+Φ1(φ; z)
+|
+|
+
+−
+
+(C + C0)
+
+·
+
+2 dz
+Φ1(φ; z)
+|
+
+t0 |
+
+z
+
+|≤
+
+(4.11)
+
++ (C
+
+2C1C2)
+
+−
+
+Φ1(φ;
+|
+
+2 dz
+z)
+|
+
+−
+
+−
+
+(C + C0)
+
+|≤
+For the second and fourth integrals on the right-hand side,
+
+−∞
+
+Φ1(φ;
+
+t0 |
+
+2 dz.
+z)
+|
+
+−
+
+1
+2π
+
+z
+
+Z|
+
+|≤
+
+2 dz =
+Φ1(φ; z)
+|
+
+t0 |
+
+a
+
+a
+
+Z
+
+−
+
+a Z
+
+−
+
+a
+
+φ(u)φ(t)
+
+1
+2π
+
+z
+
+Z|
+
+|≤
+
+t0
+
+eiuz
+−
+z
+
+itz
+
+1
+
+e−
+
+z
+
+1
+
+−
+
+dz
+
+dudt.
+
+!
+
+If 0 < a < a1 is suﬃciently small, we have
+
+eiuz
+−
+z
+
+1
+2
+(cid:18)
+R with
+
+itz
+
+1
+
+e−
+
+z
+
+1
+
+−
+
++
+
+iuz
+
+e−
+
+z
+
+1
+
+−
+
+1
+
+eitz
+−
+z
+
+z
+= ut (1 + O(
+|
+
+))
+|
+
+≪
+
+aK(t, u)
+
+(cid:19)
+
+for z
+tz
+|
+|
+there exists 0 < a2 < a1 and C3 > 0 such that
+
+t0, since both
+
+uz
+|
+
+and
+
+| ≤
+
+z
+|
+
+∈
+
+|
+
+are small in the range
+
+z
+|
+
+| ≤
+
+t0. Therefore,
+
+for every 0 < a
+
+1
+2π
+
+z
+
+t0
+
+Z|
+|≤
+a2. Hence,
+≤
+1
+2π
+
+t0 |
+
+z
+
+Z|
+
+|≤
+
+eiuz
+−
+z
+
+itz
+
+1
+
+e−
+
+z
+
+1
+
+−
+
+dz
+
+a
+
+C3 ·
+
+·
+
+≤
+
+K(t, u)
+
+2 dz
+Φ1(φ; z)
+|
+
+a
+
+C3 ·
+
+·
+
+≤
+
+1
+2π
+
+∞
+
+Z
+
+−∞
+
+2 dz.
+Φ1(φ; z)
+|
+|
+
+Applying this to (4.11), we obtain
+
+φ, φ
+h
+
+iGg ,a ≥
+
+((C
+
+−
+
+2C1C2)
+
+−
+
+a(C + C0)C3)
+
+1
+2π
+
++ ((C
+
+−
+
+2C1C2)
+
+−
+
+a(C + C0)C3)
+
+∞
+
+−∞
+
+Z
+1
+2π
+
+2 dz
+Φ1(φ; z)
+|
+|
+
+∞
+
+Z
+
+−∞
+
+Φ1(φ;
+|
+
+2 dz
+z)
+|
+
+−
+
+for 0 < a < a2. The coeﬃcients of the integrals on the right-hand side are positive if
+(cid:3)
+0 < a < a2 is suﬃciently small.
+
+To state another analog of Yoshida’s result, we deﬁne
+
+KN,0(a) :=
+
+φ
+
+L2(
+
+a, a)
+
+φ(0) = 0, I (a)
+
+0 (φ)
+
+∈
+
+−
+
+KN (a)
+
+,
+
+∈
+
+(cid:12)
+where KN (a) is the space in (4.1). The following is also used to prove Theorem 1.4.
+(cid:12)
+(cid:12) b
+
+n
+
+o
+
+Theorem 4.3. Let a0 > 0 and µ > 0 be given numbers. Then there exists N
+that
+
+≥
+
+0 such
+
+for every φ
+
+∈
+
+KN,0(a) and 0 < a
+
+≤
+
+φ, φ
+h
+
+iGg ,a ≥
+
+µ
+
+2 dz
+Φ1(φ, z)
+|
+|
+
+(4.12)
+
+∞
+
+Z
+
+−∞
+
+a0, where Φ1(φ, z) is the transform of φ in (4.2).
+
+ 
+16
+
+M. SUZUKI
+
+Proof. By taking a1 larger than a0 and taking C as C > 3C1C2 + µ in the proof of
+Theorem 4.2, we obtain the lower bound (4.11) for 0 < a
+2C1C2 >
+µ + C1C2. Therefore, the proof is complete if the estimate
+
+a0 with C
+
+≤
+
+−
+
+2 dz
+Φ1(φ; z)
+t0 |
+|
+KN,0(a) and 0 < a
+
+Z|
+
+|≤
+
+z
+
+≪
+
+1/2
+
+N −
+
+∞
+
+Z
+
+−∞
+
+2 dz
+Φ1(φ; z)
+|
+|
+
+(4.13)
+
+is proven for φ
+a0. This is shown in the same way as [33, Lemma 3] as follows.
+
+≤
+
+∈
+
+a0, where the implied constant depends only on
+
+KN,0(a) and put ψ = I (a)
+
+0 (φ) (
+
+KN (a)). Then ψ(
+
+−
+
+a) = 0, ψ(a) =
+
+φ(0) = 0,
+
+∈
+
+Let φ
+∈
+Φ1(φ, z) =
+
+ψ(z), and
+i
+
+−
+
+b
+
+∞
+
+2 dz =
+Φ1(φ, z)
+|
+|
+
+∞
+
+2 dz =
+ψ(z)
+|
+|
+
+ψ
+k
+
+2
+L2
+k
+
+b
+
+Z
+by the Parseval identity. Let ψ(t) = (2a)−
+of ψ in L2(
+
+a, a). Then
+
+−∞
+
+−∞
+
+Z
+1/2
+
+ψ
+k
+
+2
+L2 =
+k
+
+cn|
+
+n
+
+|
+
+|
+
+>N |
+a
+
+−
+
+ψ(z) =
+
+1
+√2a 
+
+b
+
+
+
+cn
+
+a
+πin
+
+>N
+n
+X|
+|
+
+P
+eπint/a eizt
+
+|
+
+b
+n
+|
+2, cn ≪
+P
+1
+√2a
+
+−
+
+
+
+
+
+t=
+
+a
+
+−
+
+>N cneπint/a be the Fourier expansion
+
+n−
+
+k for any k
+
+∈
+
+Z
+
+0, and
+
+≥
+
+cn
+
+a
+πin
+
+eπint/a izeizt dt
+
+>N
+n
+X|
+|
+
+1/2
+
+1
+(πn)2 
+
+ψ
+k
+
+kL2
+
+>N
+n
+X|
+|
+
+by applying integration by parts to the Fourier integral. Hence we obtain
+
+ψ(t)
+
+≤
+
+√2a(1 + a
+
+z
+|
+
+)
+|
+
+cn
+πn
+
+√2a(1 + a
+
+z
+|
+
+)
+|
+
+
+
+≤
+
+for z
+implies (4.13), since Φ1(φ, z) =
+
+b
+R. For the second inequality, we used the Schwartz inequality. This inequality
+(cid:3)
+
+
+
+
+
+∈
+
+Theorem 4.3 can also be proved using (3.8) and [33, Lemma 3], but here we performed
+
+n
+X|
+|
+
+>N (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+ψ(z).
+i
+
+−
+
+b
+
+a direct proof as above.
+
+5. Proof of Theorem 1.4
+
+First, we show the second half of Theorem 1.4. Since g(t) is continuous and hermitian
+on the real line, the integral operator Gg[a] on L2(
+a, a) deﬁned in (1.12) is a self-adjoint
+. Therefore, the spectrum of Gg[a] consists
+Hilbert–Schmidt operator for every 0 < a <
+∞
+of eigenvalues and zero. Whether or not zero is an eigenvalue is not determined by the
+·iGg ,a is non-negative deﬁnite if and only if all
+general theory. The hermitian form
+eigenvalues of Gg[a] are non-negative, and the nondegeneracy for
+·iGg ,a is equivalent
+,
+h·
+to that Gg[a] does not have zero as an eigenvalue, since
+Gg[a]φ1, φ2iL2
+φ1, φ2iGg,a =
+h
+h
+a, a) consisting of eigenfunctions of Gg[a].
+and there exists an orthonormal basis for L2(
+
+,
+h·
+
+−
+
+−
+
+5.1. Proof of necessity. If the RH is true, Gg(t, u) is non-negative deﬁnite on (
+for every 0 < a <
+([23, §8]).
+function by (3.1), (3.2), and Lemma 2.1. This is a contradiction. Hence,
+nondegenerate.
+
+a, a)
+by Theorem 1.2. Therefore, all eigenvalues Gg[a] are non-negative
+If there exists an eigenfunction for eigenvalue zero, it must be zero as a
+·iGg ,a is
+(cid:3)
+
+,
+h·
+
+∞
+
+−
+
+5.2. Proof of suﬃciency. We prove the suﬃciency with the same strategy as in the
+proof of [33, Theorem 2]. That is, we prove that
+a, a) at
+a = a0 for some a0 > 0 if the RH is false.
+
+,
+h·
+
+Let A be the set of all positive real numbers a such that
+
+deﬁnite on L2(
+that
+φ, φ
+h
+the kernel Gg(t, u). Hence B is open and A is a closed subset of (0,
+
+·iGg ,a is non-negative
+L2(
+b, b) such
+−
+ib′ < 0 if b′ is suﬃciently close to b by the continuity of
+). Assume that
+
+a, a) and set B = (0,
+φ, φ
+h
+
+−
+ib < 0. Then
+
+B, there exists φ
+
+A. If b
+
+∞
+
+∈
+
+∈
+
+\
+
+)
+
+·iGg ,a degenerates on L2(
+−
+,
+h·
+
+∞
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+the RH is false. Then A is bounded by Theorem 1.3. Therefore, we prove that
+degenerates on L2(
+
+a, a) at a = a0 for the maximum element a0 of A.
+
+−
+
+17
+
+,
+h·
+
+·iGg ,a
+
+Let a1 be a real number greater than a0 and let µ > 0. For n
+
+Z, we put
+
+∈
+
+Then
+
+χn[a]
+{
+
+}n
+
+χn[a](t) :=
+
+exp
+
+1
+√2a
+
+πint
+a
+
+.
+
+(cid:19)
+
+(cid:18)
+Z forms an orthonormal basis of L2(
+∈
+πin
+a
+
+χn,m[a](t) :=
+
+χn[a](t)
+
+(
+−
+
+−
+
+−
+
+1)n+m πim
+a
+
+a, a). We set
+
+χm[a](t)
+
+= 0. Then
+
+for m, n
+belong to KN (a) for every n > N
+
+N, because
+
+\
+χn,m[a](0) = 0 and integrals I (a)
+
+0 (χn,n+1[a]) and I (a)
+
+0 (χ
+
+(n+1)[a])
+
+n,
+
+−
+
+−
+
+∈
+I (a)
+0 (χn,m[a]) = χn[a]
+VN (a) the closed subspace of L2(
+−
+
+(
+−
+
+−
+
+1)m+nχm[a].
+
+We denote by
+
+χ
+
+n,
+
+−
+
+−
+
+(n+1)[a] for all n > N . Based on Theorem 4.3, we can take N such that
+
+a, a) spanned by χn,n+1[a] and
+
+for every v
+
+v, v
+h
+∈ VN (a) and 0 < a
+
+≤
+
+closure
+for every non-zero v
+
+VN (a) of a subspace of KN,0(a) and Φ1(v,
+
+∈ VN (a).
+
+µ
+
+I (a)
+0 (v)
+k
+
+a,a)
+
+kL2(
+−
+
+iGg ,a ≥
+a1, because inequality (4.12) extends to v in the L2-
+iGg ,a > 0
+
+\
+I (a)
+0 (v). In particular
+
+v, v
+h
+
+) =
+·
+
+(5.1)
+
+Let
+·iL2(
+−
+
+VN (a)⊥ be the orthogonal complement of
+a,a). We put
+
+,
+h·
+
+VN (a) in L2(
+−
+
+a, a) with respect to
+
+un[a] := χn[a]
+
+∞
+
+if
+
+n
+|
+1)k
+(
+−
+N + k ·
+
+N ,
+
+(N +k)
+
+| ≤
+
+χ
+
+±
+
+(N +1)[a] :=
+
+u
+
+±
+
+=
+
+Xk=1
+(
+−
+
+1)N +1
+√2a
+
+n[a] := χ
+
+u
+
+±
+
+n,
+
+±
+
+±
+
+1 + e±
+
+πit
+a
+
++
+
+N
+
+(cid:16)
+
+if n
+
+(cid:17)
+N + 1.
+
+Xk=1
+
+log
+
+"
+(n+1)[a]
+
+(5.2)
+
+1)k
+(
+−
+k
+
+πikt
+a
+
+e±
+
+,
+
+#
+
+≥
+= N + 1), uN +1[a] and u
+
+(N +1)[a] are
+VN (a)⊥ is a (2N + 3) dimensional
+N + 1),
+
+−
+
+n
+N +1. As we will show later, for each un[a] (
+|
+
+| ≤
+
+n
+
+|≤
+
+| 6
+
+Then u
+
+n
+(N +1)[a] are orthogonal to un[a] (
+|
+
+Each un[a]
+
+±
+orthogonal, and
+u
+space spanned by
+there exists vn[a]
+
+\
+(N +1)[a](0) = 0. Further the space
+±
+un[a]
+{
+}|
+∈ VN (a) such that
+v, vn[a]
+v, un[a]
+iGg ,a =
+iGg ,a
+h
+h
+vn[a] is orthogonal to
+VN (a) for
+φ, v
+a, a)
+AN (a) =
+be the annihilator of
+·iGg ,a. Then
+L2(
+−
+L2(
+−
+and v
+
+a, a) if and only if it is non-negative deﬁnite on
+a, a) can be written as a linear combination of un[a]
+∈ VN (a).
+By deﬁnition of a0,
+
+L2(
+φ
+{
+∈
+−
+VN (a) for
+
+for every v
+·iGg ,a. Let
+,
+h·
+iGg ,a = 0 for all v
+,
+h·
+
+,
+h·
+
+| h
+
+−
+
+is not non-negative deﬁnite for a0 < a
+represented by matrix coeﬃcients
+
+·iGg ,a is non-negative deﬁnite on
+AN (a), since any element of
+∈ AN (a) (
+N + 1)
+n
+vn[a]
+−
+|
+AN (a) for 0 < a
+·iGg ,a is non-negative deﬁnite on
+·iGg ,a on
+,
+h·
+
+a0 and
+≤
+AN (a) is
+
+a1. The hermitian form
+
+| ≤
+
+≤
+
+,
+h·
+
+∈ VN (a).
+
+(5.3)
+
+∈ VN (a)
+
+}
+
+um[a]
+h
+
+−
+
+vm[a], un[a]
+
+vn[a]
+
+iGg ,a,
+
+−
+
+m
+|
+
+,
+|
+
+n
+|
+
+| ≤
+
+N + 1.
+
+(5.4)
+
+6
+18
+
+M. SUZUKI
+
+By (5.3), we have
+
+−
+
+um[a]
+h
+
+vm[a], un[a]
+
+The continuity of
+reduced to the continuity of
+proof of [33, Theorem 2], since such fact implies that
+at a = a0.
+
+iGg ,a =
+
+um[a], un[a]
+h
+
+vn[a]
+iGg ,a − h
+iGg ,a is trivial. Therefore, the proof of Theorem 1.4 is
+iGg ,a in a neighborhood Ua0 of a = a0 as in the
+vm[a], vn[a]
+h
+a, a)
+
+vm[a], vn[a]
+
+iGg ,a.
+
+·iGg ,a degenerates on L2(
+−
+
+−
+um[a], un[a]
+h
+
+,
+h·
+
+,
+h·
+
+−
+ψk, v
+
+φk −
+h
+
+iGg ,a =
+
+ψk, Gg[a]v
+
+·iL2(
+−
+iL2(
+−
+
+a, a) with respect to
+
+d
+k=1 is also a basis of
+
+·iGg ,a. Put d = dim
+
+∈ VN (a) of u
+φk}
+{
+
+We show the existence of an orthogonal projection v
+
+VN (a)⊥ = 2N + 3. Take a basis
+
+∈ VN (a)⊥ with
+d
+VN (a)⊥
+k=1 of
+respect to
+and denote ψk the orthogonal projection of φk in the closed subspace Gg[a](
+VN (a))
+of L2(
+AN (a), since
+,
+h·
+ψk = uk −
+vk by
+φk −
+h
+uk ∈ VN (a)⊥ and vk ∈ VN (a) according to the direct sum L2(
+VN (a)⊥ ⊕ VN (a).
+−
+d
+k=1 is linearly dependent, a
+uk}
+VN (a)⊥, because, if
+Then
+uk}
+{
+{
+by
+0
+∩ VN (a) which is
+AN (a)
+non-zero linear combination of vk’s must belongs to
+}
+{
+VN (a). As a result, we obtain the direct sum L2(
+the positivity of
+a, a) =
+−
+∈ VN (a)⊥ there
+·iGg ,a, that is, for each u
+AN (a)
+exists v
+
+a,a). Then each φk −
+ψk belongs to
+a,a) = 0. We decompose it as φk −
+a, a) =
+
+·iGg ,a on
+,
+h·
+⊕ VN (a) which is also orthogonal for
+∈ AN (a).
+∈ VN (a) such that u
+We back to the proof of the continuity of
+
+iGg ,a. Hereafter in this proof,
+, I (a)
+we abbreviate χn[a] as χn, un[a] as un, vn[a] as vn,
+·iGg ,a as
+,
+0 (φ) as I(φ),
+·i
+h·
+τ +
+be orthonormal systems obtained from
+and
+·iL2 . Let
+,
+and
+,
+·iL2(
+k }
+{
+h·
+h·
+−
+n + χ
+N +1 by
+χ
+χn + χn+1}n
+N +1 =
+I(un)
+n)
+N +1 and
+(n+1)}n
+}n
+{
+{
+{
+−
+≥
+≥
+·iL2 , respectively. We
+the Gram–Schmidt orthogonalization process with respect to
+,
+h·
+have
+
+vm[a], vn[a]
+h
+,
+h·
+
+τ −k }
+{
+I(u
+{
+
+N +1 =
+
+a,a) as
+
+,
+h·
+
+}n
+
+−
+
+v
+
+−
+
+−
+
+≥
+
+≥
+
+τ ±j =
+
+1
+
+1)j
+
+(
+−
+−
+j(j + 1)  
+
+by the determinant formula
+
+p
+
+j
+
+1)k
+
+1χ
+
+−
+
+(N +k) −
+
+±
+
+j(
+
+−
+
+1)(j+1)
+−
+
+1χ
+
+(N +j+1)
+
+±
+
+!
+
+(5.5)
+
+(
+−
+Xk=1
+
+(5.6)
+
+,
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+where ωk = χ
+
+±
+
+(N +k+1), G0 = 1, and
+
+ω1, ω1iL2
+h
+ω2, ω1iL2
+h
+...
+ωj, ω1iL2
+h
+
+ω1, ω2iL2
+h
+ω2, ω2iL2
+h
+...
+ωj, ω2iL2
+h
+
+ω1, ωj
+h
+ω2, ωj
+h
+...
+ωj, ωj
+h
+
+· · ·
+· · ·
+. . .
+
+· · ·
+
+1iL2 ω1
+1iL2 ω2
+...
+1iL2 ωj
+
+−
+
+−
+
+−
+
+τ ±j =
+
+1
+Gj
+
+±
+
+−
+
+1Gj
+
+p
+(N +k) + χ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+ω1, ω1iL2
+h
+ω2, ω1iL2
+Gj = (cid:12)
+h
+...
+(cid:12)
+(cid:12)
+(cid:12)
+ωj.ω1iL2
+(cid:12)
+h
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1 = τ +
+
+ω1, ω2iL2
+h
+ω2, ω2iL2
+h
+...
+ωj, ω2iL2
+h
+n and τ2n = τ −n and deﬁne the basis
+
+· · ·
+· · ·
+. . .
+
+· · ·
+
+ηj = D(τj),
+
+j = 1, 2,
+
+ω1, ωjiL2
+h
+ω2, ωjiL2
+(cid:12)
+h
+...
+(cid:12)
+(cid:12)
+(cid:12)
+ωj, ωjiL2
+(cid:12)
+h
+(cid:12)
+(cid:12)
+ηj}
+(cid:12)
+{
+(cid:12)
+.
+
+· · ·
+
+We write τ2n
+
+−
+
+Then, there exists a sequence of positive numbers µ(M ), M
+such that limM
+
+and that
+
+µ(M ) =
+
+→∞
+
+∞
+
+µ(M )
+I(v)
+v, v
+kL2
+k
+h
+I(v), τiiL2 = 0 for every i
+iL2 =
+I(v), I(ηi)
+if v
+∈ VN (a) satisﬁes
+h
+h
+·iL2 and Theorem 4.3.
+the orthogonality of
+,
+for
+τk}
+h·
+{
+D(τj), D(τl)
+ηj, ηli
+τj, τliW ,
+=
+=
+We have
+h
+i
+h
+h
+a
+χn, ηji
+=
+un, ηji
+(
+χn −
+πin h
+h
+h
+−
+
+1)nχ0, τjiW (0 <
+
+i ≥
+
+=
+
+n
+|
+
+| ≤
+
+N )
+
+(= j + 1).
+
+(5.7)
+
+of
+
+VN (a) by
+
+N independent of a
+
+∈
+
+Ua0
+
+∈
+
+(5.8)
+
+M when a
+
+Ua0 by
+
+∈
+
+≤
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+19
+
+(χ
+
+(N +k) −
+
+±
+
+(
+−
+
+1)N +kχ0), τjiW
+
+by χn = D(a(πin)−
+
+∞
+
+a
+πi
+
+(
+−
+
+1)k
+(N + k)2 h
+
+Xk=1
+1)nχ0)),
+
+u
+h
+
+±
+
+=
+
+(N +1), ηji
+1(χn −
+(N +1) = D
+
+(
+−
+
+u
+
+±
+
+∞
+
+a
+πi
+
+1)k
+
+(
+(N + k)2 (χN +k −
+−
+
+"
+Z), the extension of (3.8) to
+
+Xk=1
+
+(
+−
+
+1)N +kχ0)
+#
+
+,
+
+∈
+
+1)kχ0 ∈
+VN (a), and the deﬁnition
+(
+χk −
+−
+un, ηji
+iW = W (u
+u, v
+h
+∗
+h
+Z), but they are
+N + 1) are reduced to the estimates of
+(0 <
+n
+| ≤
+|
+in [33,
+known as
+n
+χm, χniW | ≪ |
+e
+| → ∞
+|h
+Ua0 .
+(5.17) and (5.18)], where the implied constants can be taken independent of a
+From these estimates and the explicit formula (5.5), we can easily deduce the estimates
+
+C(a) (k
+v). Therefore, by deﬁnition (5.2), estimates of
+ηj, ηli
+h
+χm, χniW (m, n
+∈
+h
+n
+as
+n
+χn, χniW | ∼
+|
+|
+|
+|h
+
+= n and
+
+1 if m
+
+and
+
+log
+
+|−
+
+m
+
+−
+
+∈
+
+for j, l
+
+N with j
+
+ηj , ηli| ≪
+|h
+= l and
+
+1
+
+j
+|
+
+l
+
+|
+
+−
+
++
+
+1
+max
+
+j, l
+{
+
+}
+
+log max
+
+j, l
+{
+
+}
+
+(5.9)
+
+∈
+log j
+un, ηji|
+j
+|h
+|h
+N, where the implied constants independent of a
+
+χn, ηji| ≪
+|h
+
+(0 <
+
+N ),
+
+n
+|
+
+| ≤
+
+=
+
+u
+
+log j
+j
+
+±
+
+(N +1), ηji| ≪
+Ua0. Further, we obtain
+
+(5.10)
+
+for j
+
+∈
+
+u0, ηji|
+|h
+
+=
+
+χ0, ηji| ≪
+|h
+
+∈
+(log j)2
+j
+
+(5.11)
+
+N. This estimate cannot be reduced to the estimate of
+
+χm, χniW and must be
+for j
+h
+treated separately. But we leave that for later (Section 5.3 below) and continue with
+the proof of Theorem 1.4.
+
+∈
+
+Let
+
+ψk}
+{
+
+be the basis of
+
+ηk}
+{
+nalization process with respect to
+this orthogonalization process works. By (5.3), we have
+
+VN (a) obtained from
+,
+·i
+h·
+
+. The positivity of
+
+by the Gram–Schmidt orthogo-
+VN (a) ensures that
+
+,
+h·
+
+on
+
+·i
+
+∞
+
+vn =
+
+fniψi,
+
+fni =
+
+vn, ψii
+h
+
+=
+
+un, ψii
+h
+
+n
+(
+|
+
+| ≤
+
+N + 1).
+
+Xi=1
+
+Then fni is a continuous function of a by (5.2), (5.6), (5.7), and the obvious continuity
+of
+
+for a. We have
+
+χm, χni
+h
+
+vm, vni
+h
+
+=
+
+∞
+
+fmifni,
+
+Xi=1
+
+2
+
+fmifni|!
+
+|
+
+≤
+
+2
+
+fmi|
+|
+
+2.
+fni|
+|
+
+Xi>M
+for a reduces to the uniformity of convergence of
+
+Xi>M
+
+Xi>M
+
+Therefore the continuity of
+vm, vni
+h
+2 in Ua0 for every
+un, ψii|
+
+∞i=1 |
+To prove such convergence, we write
+
+∞i=1 |h
+
+fni|
+
+2 =
+
+P
+
+P
+
+n
+|
+
+| ≤
+
+N + 1.
+
+i
+
+i
+
+ψi =
+
+dijηj,
+
+ηi =
+
+cijψj
+
+Xj=1
+
+Xj=1
+
+by inﬁnite dimensional lower triangular matrices C = (cij) and D = (dij). For a positive
+integer M , we set
+
+C =
+
+Y1
+0
+Y3 Y4(cid:21)
+where X1 and Y1 denote the ﬁrst M
+A
+k
+k
+operator A on a Hilbert space ℓ2 of row vectors deﬁned by
+Using the estimates (5.1), (5.8), and (5.9)–(5.11), we obtain
+
+X1
+0
+X3 X4(cid:21)
+×
+
+M -blocks. Let
+
+, D =
+
+(cid:20)
+
+(cid:20)
+
+,
+
+be the operator norm of the
+kℓ2 .
+
+= sup
+k
+
+kℓ2 =1 k
+
+A
+k
+k
+
+xA
+
+x
+
+X −
+k
+
+1
+1 k ≪
+
+1,
+
+X3k ≪
+k
+
+1,
+
+X −
+k
+
+1
+4 k ≪
+
+(µ(M ) + O(1))−
+
+1
+
+(5.12)
+
+6
+6
+ 
+20
+
+M. SUZUKI
+
+Ua0 in the same way as the proof of [33,
+with implied constants independent of a
+∈
+Lemma 9], because the diﬀerence between (5.9) and (II) of [33, Lemma 9] and the
+diﬀerence between (5.10)–(5.11) and (III) of [33, Lemma 9] do not aﬀect the calculations
+to prove these boundedness.
+
+Finally, we estimate
+
+i>M |h
+
+un, ψii|
+
+2 for
+
+P
+
+Xi>M
+
+un, ψii|
+|h
+
+=
+
+we get
+
+,
+un, η1i
+where ξ = (
+h
+
+,
+un, η2i
+h
+
+Xi>M
+· · ·
+
+From CD = 1, we get Y4 = X −
+4
+
+1
+
+,
+
+un, ψii|
+|h
+,
+un, ηji
+h
+ξ
+k
+, Y3 =
+
+−
+
+· · ·
+kℓ2
+X −
+
+By (5.8), we obtain
+
+un, ψii|
+|h
+
+2 =
+
+Xi>M
+
+ξ
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+
+n
+|
+
+| ≤
+i
+
+N + 1. Since
+
+2
+
+Xi>M
+
+(cid:12)
+(cid:12)
+Xj=1
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+2 =
+
+dijh
+
+,
+
+un, ηji(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
+,
+
+ξ
+
+(cid:20)
+
+tY3
+tY4(cid:21)(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+). By (5.10)–(5.11),
+(cid:13)
+(cid:13)
+1.
+
+ℓ2
+
+≪
+1
+4 X3X −
+1
+tX −
+1 X3
+1
+
+(cid:20)
+
+1
+
+1 . Therefore,
+
+1
+
+tX −
+4
+
+(cid:21)
+
+2
+
+ℓ2
+
+.
+
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+
+ξ
+
+1
+tX −
+1 X3
+1
+
+2
+
+1
+
+tX −
+4
+
+(µ(M ) + O(1))−
+
+1
+
+ξ
+k
+
+kℓ2
+
+ℓ2 ≪
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+with implied constants independent of a
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+converges uniformly on Ua0, so the proof is complete.
+
+∈
+
+(cid:20)
+
+(cid:21)
+
+Ua0 . From (5.13) and (5.14),
+
+(5.13)
+
+(5.14)
+
+∞i=1 |h
+
+2
+un, ψii|
+(cid:3)
+
+P
+
+5.3. Proof of (5.11). To complete the proof of Theorem 1.4, we prove (5.11) using the
+same notation as in the second half of Section 5.2. We use the Weil explicit formula in
+the following form:
+
+lim
+X
+→∞
+
+φ(γ)
+
+X
+γ
+X|
+|≤
+
+b
+φ(i/2) +
+
+=
+
+i/2)
+
+φ(
+
+−
+
+−
+
+Λ(n)
+√n
+
+φ(log n)
+
+−
+
+∞
+
+Xn=1
+∞
+
+log n)
+
+(5.15)
+
+Λ(n)
+√n
+
+φ(
+
+−
+
+∞
+
+Xn=1
+
+φ(z) dz,
+
+b
+
+(log π)φ(0) +
+
+b
+−
+
+1
+2π
+
+Γ′
+Γ
+
+1
+4
+
++
+
+iz
+2
+
+Z
+
+−∞
+
+ℜ
+
+(cid:20)
+
+(cid:18)
+
+(cid:19)(cid:21)
+
+iz) counting with
+where the sum on the left-hand side ranges over all zeros γ of ξ(1/2
+multiplicity, that is, ρ = 1/2
+iγ for complex zeros ρ of the Riemann zeta-function.
+Formula (5.15) is obtained from the explicit formula in [1, p. 186] by taking φ(t) =
+et/2f (et) for f (x) in that formula and noting the symmetry of zeros γ
+γ . For the
+conditions for test functions, we use the conditions in [2, Section 3].
+
+7→ −
+
+−
+
+−
+
+b
+
+We prove (5.11) by calculating
+
+directly using (5.15) as in [33, (5.15)–(5.18)].
+χ0, ηji
+h
+However, we only give the outlines, since the argument of the proof is similar to [33]
+except for the choice of test functions φ(t).
+
+By integrating by parts using (1.9) and (1.10),
+
+χ0, χki
+h
+
+=
+
+γ
+X
+
+(cos(aγ)
+γ2
+
+1)
+
+−
+
+(
+−
+
+1)k2a sin(aγ)
+kπ + aγ
+
+·
+
+aγ cos(aγ)
+
+−
+aγ3
+
+sin(aγ)
+
+(
+−
+
+1)k2a sin(aγ)
+kπ + aγ
+
+.
+
+·
+
+(5.16)
+
+−
+
+γ
+X
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+21
+
+The functions on the right-hand side are expressed as Fourier transforms as follows:
+
+1
+2
+
+a
+
+a
+1
+4a
+
+Z
+a
+
+−
+
+a
+
+Z
+
+−
+a
+
+a)eizt dt =
+
+t
+(
+|
+
+| −
+
+(t2
+
+−
+
+a2)eizt dt =
+
+exp
+
+a
+
+Z
+
+−
+
+(cid:18)
+
+eizt dt =
+
+(
+−
+
+πikt
+a
+
+(cid:19)
+
+1
+
+,
+
+−
+
+cos(az)
+z2
+az cos(az)
+
+sin(az)
+
+,
+
+−
+az3
+1)k2a sin(az)
+πk + az
+
+.
+
+Therefore, if we set φ1,k(t) and φ2,k(t) as
+
+a
+
+φ1,k(t) : =
+
+exp
+
+φ2,k(t) : =
+
+Z
+
+a
+−
+a
+
+a
+
+Z
+
+−
+
+exp
+
+(cid:18)
+
+(cid:18)
+
+πik(t
+a
+πik(t
+a
+
+−
+
+−
+
+u)
+
+u)
+
+(cid:19)
+
+(cid:19)
+
+a,a)(t
+
+1(
+
+−
+
+−
+
+u)
+
+a,a)(t
+
+1(
+
+−
+
+−
+
+u)
+
+1
+2
+1
+4a
+
+u
+(
+|
+
+| −
+
+a) du,
+
+(u2
+
+−
+
+a2) du,
+
+we have
+
+φ1,k(z) = (
+
+−
+
+1)k2a
+
+(cos(az)
+
+1) sin(az)
+
+−
+z2(kπ + az)
+
+,
+
+d
+φ2,k(z) = (
+
+−
+
+1)k2
+
+d
+
+(az cos(az)
+
+sin(az)) sin(az)
+
+−
+
+z3(kπ + az)
+
+.
+
+These functions are compactly supported and continuously diﬀerentiable functions as
+follows:
+
+φ1,k(t) =
+
+0,
+1)k
+a(
+−
+2π2k2
+a
+2π2k2
+(cid:20)
+1)k
+a(
+−
+2π2k2
+
+
+
+
+
+
+a
+
+πik(t
+
+2a)
+
+,
+
+−
+
+πikt
+a
+
+−
+
+(cid:19)
+2) exp
+
+a exp
+
+(cid:18)
+1)k
+
+(cid:20)
+a((
+
+−
+
+−
+
+−
+πikt
+a
+
+(cid:18)
+
+πikt
+a
+
+a exp
+
+(cid:20)
+
+(cid:18)
+
+a
+
+−
+
+−
+
+(cid:19)
+
++ (
+
+−
+
+(cid:19)
+
+πik(t + 2a)
+
+(cid:16)
+,
+
+(cid:21)
+
+(cid:21)
+1)k
+
+a + πikt
+
+t
+|
+a
+
+| ≥
+t
+
+≤
+
+2a;
+
+2a;
+
+≤
+
+a < t < a;
+
+−
+
+(cid:17)(cid:21)
+
+2a
+
+−
+
+≤
+
+t
+
+≤ −
+
+a,
+
+0,
+
+t
+|
+
+| ≥
+
+2a;
+
+i(
+
+1)k+1
+
+−
+4π3k3
+
+(cid:20)
+
+0
+
+t
+
+≤
+
+≤
+
+2a;
+
+2a2(1 + πik) exp
+
+πikt
+a
+
+(cid:18)
+
+−
+
+(cid:19)
+
+2a2
+
+−
+
+2πiak(t
+
+−
+
+a) + π2k2t(t
+
+−
+
+2a)
+
+,
+
+(cid:21)
+
+1)k
+i(
+−
+4π3k3
+
+2a2(1
+
+−
+
+(cid:20)
+
+πik) exp
+
+πikt
+a
+
+(cid:18)
+
+2a2
+
+2πiak(t + a) + π2k2t(t + 2a)
+(cid:21)
+
+,
+
+−
+
+−
+
+(cid:19)
+
+2a
+
+0.
+
+t
+
+≤
+
+≤
+
+−
+
+φ2,k(t) =
+
+
+
+
+
+
+22
+
+M. SUZUKI
+
+Applying the Weil explicit formula (5.15) to φ1,k(t) and φ2,k(t), we obtain
+
+γ
+X
+
+(cos(aγ)
+γ2
+
+1)
+
+−
+
+(
+−
+
+1)k2a sin(aγ)
+kπ + aγ
+
+·
+
+1)k32a2i(cos(ia/2)
+
+= (
+
+−
+
+1)
+
+sin(ia/2)
+4π2k2 + a2
+
+−
+
+Λ(n)
+√n
+
+a2
+π2k2
+
+1)k
+
+((
+
+−
+
+−
+
+(cid:20)
+
+Λ(n)
+√n
+
+a2(
+
+1)k
+
+−
+π2k2
+
+cos
+
+(cid:20)
+
+(cid:18)
+
+2) cos
+
+(cid:18)
+πk log n
+a
+
+πk log n
+a
+
+1)k
+
++ (
+
+−
+
+(cid:21)
+
+(cid:19)
+
+1
+(cid:21)
+
+−
+
+(cid:19)
+
+(5.17)
+
+1) log π
+
+−
+a(4n+1)
+
+−
+
+2e−
+
+a(4n+1)/2)(
+
+1)k+1
+
+−
+
+(4n + 1)(a2(4n + 1)2 + 4π2k2)
+
+2(
+
+−
+
+1)k)
+
+Γ′
+Γ
+
+(cid:20)
+
+(cid:18)
+
+1
+4
+
++
+
+πik
+2a
+
+(cid:19)
+
++
+
+Γ′
+Γ
+
+(cid:18)
+
+1
+4 −
+
+πik
+2a
+
+(cid:19)(cid:21)
+
+−
+
+ea
+n
+X1
+≤
+≤
+
+−
+
+e2a
+
+Xea<n
+≤
+a2
+π2k2 ((
+−
+−
+(e−
++ 8a2 ∞
+
+1)k
+
+a2(
+
+1)k(1
+
+n=0
+X
+−
+
+a2(
+1)k
+−
+2π2k2
+
+−
+4π2k2
+1
+Γ′
+4
+Γ
+
+(cid:18)
+
+(cid:19)
+
++
+
++
+
+and
+
+γ
+X
+
+aγ cos(aγ)
+
+−
+aγ3
+
+sin(aγ)
+
+(
+−
+
+1)k2a sin(aγ)
+kπ + aγ
+
+·
+
+= 64a
+
+(ai/2) cos(ai/2)
+
+sin(ai/2)
+
+1)k sin(ia/2)
+(
+−
+4π2k2 + a2
+
+−
+1)k
+(
+π3k3 sin
+−
+
+Λ(n)
+√n
+
+(cid:17)
+πk log n
+a
+
+(cid:18)
+
+(cid:19)
+
+(cid:16)
+a2
+
+−
+
++ a
+
+n
+X1
+≤
+≤
+
+e2a
+
+e2a
+X1
+n
+≤
+≤
+1)k
+a2(
+
+−
+π2k2
+∞
+
++ 8a
+
+−
+
++
+
++
+
+1)k
+
+a2i(
+
+Xn=0
+−
+4π3k3
+1)k
+a(
+−
+4π2k2
+
+(cid:20)
+
+Γ′
+Γ
+Γ′
+Γ
+
+(cid:20)
+
+2a
+
+Λ(n)
+√n
+
+1)k
+(
+−
+π2k2
+
+(cid:18)
+
+(log n
+
+a)
+
+−
+
+−
+
+a cos
+
+πk log n
+a
+
+(cid:18)
+
+(cid:19)(cid:19)
+
+(5.18)
+
+log π
+
+1)k+1
+(a(4n + 1) + 2)e−
+(4n + 1)2(a2(4n + 1)2 + 4π2k2)
+
+a(4n+1)(
+
+−
+
+1
+4
+
++
+
+πik
+2a
+
+(1
+
+(cid:19)
++ ψ(1)
+
+(cid:18)
+
+1
+4
+
+(cid:19)
+
+(cid:18)
+
+−
+1
+4
+
+(cid:18)
+
+(cid:19)(cid:21)
+
+πik)
+
+Γ′
+Γ
+
+−
+
+1
+4 −
+
+πik
+2a
+
+(cid:18)
+
+(cid:19)
+
+(1 + πik)
+
+(cid:21)
+
+,
+
+respectively, where ψ(1)(z) := d2
+dz2 log Γ(z). The calculation for the integral on the right-
+hand side of (5.15) is performed in the same way as in [33, §5]. By substituting (5.17)
+and (5.18) into (5.16),
+
+χ0, χki ≪
+h
+
+log k
+k2 ,
+
+(5.19)
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+23
+
+where the implied constant depends only on a. On the other hand, we have
+
+χ0, D(τ ±j )
+i
+h
+
+=
+
+±
+
+(
+−
+a
+
+−
+
+1)j
+1πi
+j(j + 1) "
+
+p
+
+j
+
+Xk=1
+
+by (5.5). Therefore,
+
+(
+−
+
+1)k
+
+−
+
+1(N + k)
+χ0, χ
+h
+
+(N +k)i
+
+±
+
+j(
+
+−
+
+−
+
+1)(j+1)
+−
+
+1(N + j + 1)
+χ0, χ
+h
+
+±
+
+(N +j+1)i
+i
+
+χ0, D(τ ±j )
+h
+
+i ≪
+
+(log j)2
+j
+
+by (5.19), where the implied constant depends only on a. This implies (5.11) by deﬁni-
+tion of ηj.
+
+≥
+
+,
+h·
+
+·iW is positive deﬁnite on KN (a) if N
+\
+KN (a) of KN (a) with respect to
+[
+K(a) := W (a)
+
+5.4. Comparison with Yoshida’s results. For every 0 < a <
+N0(a) > 0 such that
+Therefore, we can take the completion
+W (a) by K(a) = W (a)
+⊕
+form can be extended to
+
+, there exists N0 =
+∞
+N0 ([33, Lemma 3]).
+·iW . Deﬁne
+,
+h·
+\
+KN (a) and set
+KN (a). Then the hermitian
+⊕
+[
+K(a). Yoshida proved that the RH is true if and only if
+·iW is
+·iW is non-degenerate on
+Theorem 1.4 is an analog of Yoshida’s result, but it has the advantage that the space
+[
+is simpler than
+K(a) and the hermitian forms are described by an integral operator
+with continuous kernel. Further, Proposition 3.1 and Yoshida’s result [33, Proposition
+2] imply that
+
+,
+h·
+non-degenerate on C(a) and K(a) for every a > 0 ([33, Propositions 2 and 7]).
+
+[
+K(a) for every a > 0. Further, he proved that
+
+,
+h·
+
+·iGg ,a is non-degenerate on C0(a).
+
+,
+h·
+
+6. Properties of the kernel Gg(t, u)
+In this part we prove Theorem 1.5 and study a little about eigenvalues of Gg[a].
+
+−
+
+(t)
+
+g
+∗
+
+(
+−
+
+(0) for
+
+u) + g
+∗
+
+6.1. Proof of Theorem 1.5. Using g
+u)
+(t
+−
+∗
+(t, u).
+so that Gg(t, u) = G0(t, u) + G1(t, u) + G
+g
+∗ ∈ {
+∗
+[
+a, a] is of trace class
+a, a]
+It is known that a continuous integral kernel K(t, u) on [
+−
+×
+α for some C > 0
+if it satisﬁes the Lipschitz condition
+u2|
+u1 −
+C
+K(t, u2)
+|
+1 ([9, Chapter IV, Theorem 8.2]). Therefore, G0(t, u) and G1(t, u) are
+and 1/2 < α
+(t, u), because
+trace class kernels, but the Lipschitz condition can not be applied to G
+
+(t) in (4.8), we deﬁne G
+∗
+
+(t, u) = g
+∗
+
+K(t, u1)
+|
+
+−
+| ≤
+
+−
+∞
+
+0, 1,
+
+∞}
+
+−
+
+≤
+
+e−
+
+t/2Φ(e−
+
+2t, 2, 1/4) = 2t log(1/t) + A t
+
+C
+
+−
+
+−
+
+ζ(2
+
+−
+
+k, 1/4)
+
+∞
+
+Xk=2
+
+∞
+(
+−
+
+2t)k
+k!
+
+2(log 2 + ψ(1/4)
+
+ψ(2)) = π + 4 log 2 + 2 and ζ(2
+
+for t > 0 by using the series expansion of Φ(z, s, a) for z in [7, p.30, (9)], where A =
+1)
+−
+(t, u) =
+)) =
+) + (g
+t
+log(1/
+|
+|
+|
+,2(t, u) is a trace class kernel. Therefore, it remains to show
+
+−
+with Bernoulli polynomials Bn(x). However, if we decompose the kernel as G
+G
+g
+∞
+that G
+
+,2(t), then G
+,1(t, u) is of trace class.
+
+,1(t, u) + G
+∞
+,1(t) + g
+
+,2(t, u) according to g
+
+∞
+t
+log(1/
+|
+
+t
+(t) = 2
+|
+
+1(1/4)/(k
+
+k, 1/4) =
+
+t
+2
+|
+
+Bk
+
+(t)
+
+−
+
+−
+
+−
+
+−
+
+∞
+
+∞
+
+∞
+
+∞
+
+∞
+
+−
+
+|
+
+|
+
+If a Hilbert–Schmidt kernel K(t, u) on [
+
+a, a] has the derivative in the mean
+−
+(∂/∂u)K(t, u) which is also a Hilbert–Schmidt kernel, then K(t, u) deﬁnes a trace class
+) is a piecewise continuously
+t
+,1(t) = 2
+operator ([10, p. 120, 3]). Since g
+|
+|
+a, a], the kernel
+diﬀerentiable function and its derivative is absolutely integrable on [
+(cid:3)
+G
+
+,1(t, u) is of trace class.
+
+t
+log(1/
+|
+
+[
+−
+
+a, a]
+
+−
+
+×
+
+∞
+
+|
+
+∞
+
+∞
+
+b
+
+If
+
+φ(0) = 0 for φ
+
+∈
+
+L2(
+
+a, a), we have
+
+−
+iGg ,a =
+
+φ, φ
+h
+
+a
+
+a
+
+Z
+
+−
+
+a (cid:18)Z
+−
+
+a
+
+g(t
+
+−
+
+u)φ(u) du
+
+φ(t) dt.
+
+(cid:19)
+
+24
+
+M. SUZUKI
+
+From this, if Gg(t, u) is non-negative deﬁnite, one may expect g(t
+it is not the case, because g(t
+proof of Theorem 1.5, and
+to be non-negative deﬁnite, we have g(t) = 0. This is a contradiction.
+
+u) to be so. However
+u) is a trace class kernel without any assumptions by the
+u) is assumed
+
+g(0)dt = 0. Therefore, if g(t
+
+t)dt =
+
+−
+g(t
+
+−
+
+−
+
+−
+
+R
+
+R
+
+6.2. Eigenvalues. For 0 < a <
+, we study the eigenvalues of the integral operator
+Gg[a] deﬁned in (1.12). Let φ(t) be the eigenfunction of Gg[a] with the eigenvalue λ.
+Then
+
+∞
+
+λφ(t) = 1[
+
+a,a](t)
+
+−
+
+γ  
+X
+
+φ(0)
+
+φ(
+
+−
+
+γ)
+−
+γ
+
+1
+
+eiγt
+−
+γ
+
+!
+
+b
+by formula (1.9) of the kernel Gg(t, u). If λ
+
+b
+= 0, we can write
+
+φ(t) = 1[
+
+a,a](t)
+
+−
+
+wγ
+
+1
+
+eiγt
+−
+γ
+
+γ
+X
+
+with wγ =
+
+1
+λ
+
+φ(
+
+−
+
+γ)
+−
+γ
+
+φ(0)
+
+C.
+
+∈
+
+b
+
+b
+
+In this case, we have φ(0) = 0 and
+
+ˆφ(0)
+
+ˆφ(
+
+−
+
+γ)
+−
+γ
+
+Therefore,
+
+a
+
+a
+
+Z
+−
+wµ
+µ
+
+=
+
+=
+
+wµ
+
+µ
+X
+2a
+γ
+
+µ
+X
+
+eiµt
+−
+µ
+
+iγt
+
+1
+
+e−
+
+γ
+
+1
+
+−
+
+dt
+
+sin(a(γ
+a(γ
+
+µ))
+−
+µ) −
+
+−
+
+(cid:18)
+
+sin(aγ)
+
+aγ −
+
+sin(aµ)
+aµ
+
++ 1
+
+.
+
+(cid:19)
+
+λwγ =
+
+2a
+γ
+
+Hence, if we put
+
+wµ
+µ
+
+(cid:18)
+
+µ
+X
+
+sin(a(γ
+a(γ
+
+µ))
+−
+µ) −
+
+−
+
+sin(aγ)
+
+aγ −
+
+sin(aµ)
+aµ
+
++ 1
+
+.
+
+(cid:19)
+
+y))
+−
+y) −
+then the non-zero eigenvalues of Gg[a] correspond to the eigenvalues of the linear system
+
+sin(a(x
+a(x
+
+sin(ay)
+ay
+
+H(x, y; a) =
+
+ax −
+
+sin(ax)
+
+2a
+xy
+
++ 1
+
+−
+
+(cid:18)
+
+(cid:19)
+
+,
+
+λwγ =
+
+H(γ, µ; a) wµ
+
+µ
+X
+
+iz) counting with multiplicity. The
+for wγ’s, where γ, µ runs over the zeros of ξ(1/2
+system is an analog of the linear system introduced in Bombieri [1, Section 7] to study
+Weil’s hermitian form
+
+−
+
+On the other hand, if λ = 0, we have
+
+,
+h·
+
+·iW .
+
+wγ
+
+eiγt
+
+1
+γ2 = 0
+−
+
+γ
+X
+
+∈
+
+= 0 for some γ by Lemma
+a, a) by writing wγ =
+(
+for t
+φ(0). Further, wγ 6
+−
+2.1, since
+φ(z) is a non-constant entire function of the exponential type. By Theorem
+b
+1.4, λ = 0 is actually an eigenvalue when the RH is false. Therefore, we obtain the
+following result similar to (iii) in the introduction or the corollary of Theorem 11 in [1].
+
+φ(
+
+γ)
+
+−
+
+−
+
+b
+
+b
+
+Theorem 6.1. Suppose that the RH is false. Then there exists a0 > 0 and a non-
+identically vanishing sequence of complex numbers
+
+wγ}γ such that
+{
+1
+γ2 = 0
+−
+
+eiγt
+
+wγ
+
+on the interval (
+
+−
+
+γ
+X
+
+a0, a0) as a function of t.
+
+6
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+25
+
+7. Proofs of Theorems 1.6, 1.7, and 1.8
+
+γ
+γ |
+
+|−
+
+∞
+
+7.1. Proof of Theorems 1.6. Suppose that the RH is true. Then all γ in (1.3) are
+real. Therefore, noting that ξ(1/2
+2
+
+iz) is an entire function of order one,
+
+Ψ(t)
+|
+
+2 <
+
+| ≤
+
+−
+
+.
+
+Conversely, suppose that Ψ(t) is bounded on [0,
+P
+
+). Then, the integral on the left-
+hand side of (1.2) converges absolutely and uniformly on any compact subset in C+.
+(cid:3)
+Hence, (ξ′/ξ)(1/2
+
+iz) has no poles in C+, which implies that the RH is true.
+
+∞
+
+−
+
+From Theorem 1.6 we are interested in the supreme of values of Ψ(t). It is clearly
+2 (< 0.094) by (1.3) under the RH. However, it is not easy
+less than or equal to 2
+to determine the the limit superior and limit inferior of Ψ(t) even if assuming the RH.
+iz) are real (RH) and simple and that the set of all
+Assuming that all zeros γ of ξ(1/2
+−
+positive zeros is linearly independent over the rationals, we can prove
+
+γ γ−
+
+P
+
+lim sup
+
+Ψ(t) = 2
+
+t
+→∞
+
+1
+γ2
+
+γ
+X
+
+and
+
+lim inf
+t
+→∞
+
+Ψ(t) = 0
+
+by Kronecker’s theorem in Diophantine approximations. The conjectural value of the
+limit inferior of Ψ(t) suggests the diﬃculty of proving the non-negativity of Ψ(t) by
+approximation.
+
+7.2. Proof of Theorems 1.7. Suppose that the RH is true. Then all γ in (1.3) are
+real. Therefore, each term of the middle sum is non-negative. Also, for each t > 0, not
+all terms are simultaneously zero by Lemma 2.1. Hence Ψ(t) > 0 for t > 0.
+
+∞
+
+) by the series expansion (1
+
+Conversely, suppose that Ψ(t)
+
+0 for t > 0. Because ζ(s) has no zeros in the half-
+(s) > 0,
+line [1/2,
+ℜ
+the logarithmic derivative (ξ′/ξ)(1/2
+) of
+[0,
+the imaginary axis. Then, by the integral formula (1.2) and the well-known result
+for the Laplace transform for non-negative functions ([32, Theorem 5b in Chap. II]),
+(cid:3)
+(ξ′/ξ)(1/2
+
+s for
+−
+iz) has no poles in the half-line i
+
+iz) has no poles in C+, which implies that the RH is true.
+
+s)ζ(s) =
+
+∞n=1(
+
+1n−
+
+1)n
+
+P
+
+21
+
+∞
+
+−
+
+≥
+
+−
+
+−
+
+−
+
+·
+
+−
+
+≥
+
+∞
+
+1e−
+
+µn}n
+{
+). Hence det ∆n ≥
+
+7.3. Proof of Theorem 1.8. Suppose that the RH is true. Then Ψ(t) > 0 for t > 0
+0 is a Stieltjes moment sequence for the measure
+by Theorem 1.7. Therefore,
+Z>0 ([17,
+t/2Ψ(t) dt on [0,
+4−
+Z>0.
+Chapter V, §1]). Conversely, suppose that det ∆n ≥
+0 for all n
+) ([17, Chapter V,
+Then
+c√t obtained from Proposition
+t/2Ψ(t)
+§1]). On the other hand, the estimate 4−
+2.1 implies that the Stieltjes moment problem for
+0 is uniquely determined by
+≥
+0 must be equal to the moment sequence of the measure
+[20, Theorem 2]. Hence
+(cid:3)
+4−
+
+0 and det ∆(1)
+n
+0 is a Stieltjes moment sequence of some measure on [0,
+
+µn}n
+{
+≥
+t/2Ψ(t) dt, and thus Ψ(t)
+
+0 and det ∆(1)
+n
+
+e−
+≪
+µn}n
+{
+
+0 for t > 0.
+
+0 for all n
+
+µn}n
+{
+
+≥
+∞
+
+1e−
+
+1e−
+
+≥
+
+∈
+
+∈
+
+≥
+
+≥
+
+8. Relations with Li coefficients
+
+Comparing formulas (1.14) and (1.15), the similarity between the moments
+
+and
+is obvious. In fact, they have the following explicit relation.
+
+µn}
+{
+
+the Li coeﬃcients
+
+λn+1}
+{
+
+Theorem 8.1. Li coeﬃcients (1.14) are represented by the moments (1.13) as
+
+λ1 = µ0,
+
+λ2 = 6µ0 −
+
+µ1,
+
+λ3 = 19µ0 −
+
+7µ1 +
+
+1
+2
+
+µ2
+
+and
+
+1
+n!
+
+λn =
+
+n
+
+1
+
+−
+
+Xk=0
+
+1
+k!(k + 3)!(n
+
+k
+
+−
+
+−
+
+1)!
+
+k
+(cid:18)(cid:16)
+
+−
+
+4n
+
+−
+2
+
+1
+
+2
+
+(cid:17)
+
++ 2n +
+
+7
+4
+
+(cid:19)
+
+1)kµk
+
+(
+−
+
+(8.1)
+
+(8.2)
+
+ξ′
+ξ
+
+−
+
+1
+z2
+
+26
+
+for n
+
+≥
+
+4. Conversely, the moments are represented by the Li coeﬃcients as
+
+M. SUZUKI
+
+1
+n!
+
+µn =
+
+n+1
+
+j+2
+
+n
+
+−
+
+Xj=1 "
+
+Xk=1
+
+k 2k
+
+−
+
+1
+
+n
+
+−
+
+(cid:18)
+
+k + 2
+j
+
+(cid:19)#
+
+1)j+1λj
+
+(
+−
+
+(8.3)
+
+for all non-negative integers n. The relations (8.1)–(8.2) and (8.3) are inverse to each
+other.
+
+Proof. We ﬁrst prove (8.1) and (8.2). Formula (1.14) means that Li coeﬃcients are
+deﬁned by the power series expansion
+
+∞
+
+Xn=0
+
+λn+1wn =
+
+1
+
+w)2
+
+(1
+
+−
+
+By the changing of variables z = (i/2)(1 + w)/(1
+
+1
+
+1
+
+(cid:18)
+
+−
+
+w
+
+(cid:19)
+
+.
+
+w), we have
+
+(8.4)
+
+1
+
+w)2
+
+(1
+
+−
+
+ξ′
+ξ
+
+1
+
+1
+
+(cid:18)
+
+−
+
+w
+
+(cid:19)
+
+=
+
+=
+
+=
+
+z2
+
+−
+1
+4
+
+w)2
+(1
+−
+(1 + w)2
+w)4
+(1
+
+−
+
+∞
+
+∞
+
+4−
+
+0
+Xn=0 Z
+
+−
+
+(cid:20)
+
+0
+
+Z
+1e−
+
+ξ′
+ξ
+
+(cid:18)
+
+1
+2 −
+
+iz
+
+∞
+
+Ψ(t) exp
+
+(cid:19)(cid:21)
+t
+2 ·
+
+−
+
+(cid:18)
+
+1 + w
+w
+1
+
+−
+wn,
+
+t/2Ψ(t)Pn(t) dt
+
+·
+
+dt
+
+(cid:19)
+
+(8.5)
+
+where Pn(t) are some polynomials. The exchanging of the order of the integral and
+sum is justiﬁed by the estimate in Proposition 2.1. Comparing (8.4) and (8.5), we have
+k cnktk. Therefore, we then calculate Pn(t) explicitly to
+λn+1 =
+conclude (8.1) and (8.2). Using the power series of the exponential,
+
+k cnkµk if Pn(t) =
+
+P
+
+P
+
+exp
+
+−
+
+(cid:18)
+
+t
+2 ·
+
+1 + w
+w
+1
+
+−
+t/2 + e−
+
+= e−
+
+= e−
+
+t/2 exp
+
+wt
+
+−
+
+1
+
+(cid:18)
+
+−
+wl+1 + e−
+
+w
+
+(cid:19)
+t/2 ∞
+
+(cid:19)
+
+t/2(
+
+−
+
+t)
+
+∞
+
+Xl=0
+
+t)k
+(
+−
+k!
+
+wk
+
+(k
+
+1
+
+−
+
+1)!
+
+∞
+
+k
+
+−
+
+1
+(l + i)wl.
+
+Xl=0
+
+Yi=1
+
+Xk=2
+
+On the other hand,
+
+(1 + w)2
+(1
+
+w)4 =
+
+−
+
+1
+3
+
+∞
+
+(m + 1)(2m2 + 4m + 3)wm.
+
+m=0
+X
+
+Multiplying these two expansions,
+
+∞
+
+Pn(t) wn = et/2
+
+n=0
+X
+
+·
+
+= 1 + (6
+
+−
+
+t)w +
+
+1
+3
+
+(1 + w)2
+(1
+
+w)4 exp
+
+−
+
+t
+2 ·
+
+1 + w
+w
+1
+
+−
+
+(cid:19)
+
+−
+
+(cid:18)
+
+∞
+
+(m + 1)(2m2 + 4m + 3)wm
+
+m=2
+X
+wl+2 + (
+
+1
+3
+
+t)
+
+−
+
+1
+
+Xm=2
+k
+i=1 (l + i)
+−
+1)!
+3k!(k
+Q
+
+−
+
+t)k
+
+(
+−
+
+∞
+
+7t)
+
+Xl=0
+∞
+∞
+
++ (
+
+−
+
+∞
+
++
+
+Xk=2
+
+Xl=0
+
+Xm=0
+
+∞
+
+(m + 1)(2m2 + 4m + 3)
+
+wm+l+1
+
+∞
+
+Xl=0
+
+(m + 1)(2m2 + 4m + 3)
+
+wk+l+m.
+
+·
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+27
+
+Rearranging the right-hand side concerning monomials wk, we obtain
+
+∞
+
+Pn(t) wn = 1 + (6
+
+−
+
+t)w +
+
+19
+
+(cid:18)
+
+7t +
+
+−
+
+w2
+
+t2
+2
+
+(cid:19)
+
+n=0
+X
+
+∞
+
++
+
+n=3 "
+X
+
+(n + 1)(2(n + 1)2 + 1)
+3
+
+−
+
+n
+
+1
+
+−
+
+t
+
+7 +
+
+(m + 1)(2(m + 1)2 + 1)
+3
+
+!
+
+n
+
++
+
+Xk=2
+
+t)k
+
+(
+−
+k!(k
+
+1)!
+
+−
+
+n
+
+k
+
+−
+
+m=0
+X
+
+m=2
+X
+(m + 1)(2(m + 1)2 + 1)
+3
+
+k
+
+−
+
+1
+(n
+
+Yi=1
+
+k
+
+−
+
+−
+
+m + i)
+
+#
+
+wn.
+
+On the right-hand side, we have
+
+7 +
+
+n
+
+1
+
+−
+
+m=2
+X
+
+(m + 1)(2(m + 1)2 + 1)
+3
+
+=
+
+n(n + 1)(n2 + n + 1)
+6
+
+,
+
+k
+
+−
+
+1
+(n
+
+Yi=1
+
+k
+
+−
+
+−
+
+m + i) =
+
+(n
+(n
+
+−
+−
+
+1)!
+m)!
+
+,
+
+m
+k
+
+−
+−
+
+and
+
+n
+
+k
+
+−
+
+Xm=0
+
+(m + 1)(2(m + 1)2 + 1)
+3
+
+(n
+(n
+
+1)!
+m)!
+
+m
+k
+
+−
+−
+
+−
+−
+(n + 1)!
+k)!
+(n
+
+=
+
+1
+k(k + 1)(k + 2)(k + 3)
+
+−
+by elementary calculations. Therefore,
+
+k
+
+−
+
+(cid:18)(cid:16)
+
+4(n + 1)
+
+2
+
+1
+
+2
+
+−
+
+(cid:17)
+
++ 2(n + 1) +
+
+7
+4
+
+(cid:19)
+
+∞
+
+Pn(t) wn = 1 + (6
+
+−
+
+t)w +
+
+19
+
+(cid:18)
+
+7t +
+
+−
+
+w2
+
+t2
+2
+
+(cid:19)
+
+(n + 1)(2(n + 1)2 + 1)
+3
+
+t
+
+n(n + 1)(n2 + n + 1)
+6
+
+−
+
+Xn=0
+
+∞
+
++
+
+n=3 (cid:20)
+X
+
+n
+
++
+
+t)k
+(
+−
+k!(k + 3)!
+
+(n + 1)!
+k)!
+(n
+
+4(n + 1)
+
+1
+
+2
+
+−
+
++ 2(n + 1) +
+
+k
+
+−
+
+2
+
+wn.
+
+7
+4
+
+(cid:19)#
+
+In the sum for n
+and k = 1, respectively, for the formula of coeﬃcients of tk for k
+the relations (8.1) and (8.2).
+
+Xk=2
+3, we ﬁnd that the ﬁrst and second terms are equal to cases of k = 0
+2. Hence, we obtain
+
+≥
+
+≥
+
+(cid:17)
+
+−
+
+(cid:18)(cid:16)
+
+We second prove (8.3). By the changing of variables w = X/(1
+
+X) in (8.4), we have
+
+∞
+
+λn+1
+
+X
+
+X
+
+1
+
+X)2
+
+−
+ρ−
+
+n=0
+X
+
+−
+1)n) in [19, (1.4)] to the left-hand side,
+
+n=0
+X
+
+(cid:18)
+
+(cid:19)
+
+n
+
+=
+
+∞
+
+−
+X n
+n!
+
+µn
+
+1
+2X)2(1
+
+(1
+
+−
+
+−
+
+(1
+
+−
+ρ(1
+
+.
+
+(8.6)
+
+Applying λn =
+
+P
+
+1
+2X)2(1
+
+X)2
+
+(1
+
+−
+
+n=0
+X
+On the other hand, λn =
+
+−
+
+∞
+
+λn+1
+
+X
+
+X
+
+1
+
+(cid:19)
+
+−
+
+(cid:18)
+
+n+1
+
+n
+
+=
+
+∞
+
+n=0 "
+X
+1)n) gives
+
+Xk=1
+
+k 2k
+
+−
+
+1
+
+(n
+
+ρ−
+
+−
+
+k+2)
+
+ρ
+X
+
+X n.
+
+(8.7)
+
+#
+
+ρ(1
+
+(1
+
+−
+
+−
+
+ρ−
+
+P
+
+ρ−
+
+m =
+
+ρ
+X
+
+m
+
+Xk=1
+
+1)k+1
+
+(
+−
+
+m
+k
+
+(cid:18)
+
+(cid:19)
+
+λk
+
+(8.8)
+
+in an inductive procedure. Substituting (8.8) into (8.7) and comparing its coeﬃcients
+with (8.6), we obtain the relation (8.3).
+
+ 
+28
+
+M. SUZUKI
+
+Since both relations (8.1)–(8.2) and (8.3) are obtained by diﬀerent power series ex-
+(cid:3)
+
+pansions of (8.4), it is clear that they are inverse to each other.
+
+If the RH is true, both
+
+are positive, but unfortunately in (8.1)–(8.2)
+and (8.3), the positivity of one does not directly lead to the positivity of the other.
+However, as an application of the relation (8.1)–(8.2), the following recurrence formula
+of the moments is obtained.
+
+µn}
+{
+
+λn}
+{
+
+and
+
+1 be coeﬃcients of the power series expansion ξ(1/(1
+
+w)) =
+
+−
+
+Theorem 8.2. Let
+1 +
+
+aj}j
+{
+∞j=1 ajwj. For n
+∈
+
+P
+bn,k :=
+
+n!
+k!(k + 3)!
+
+(n + 1)!
+k)!
+(n
+
+−
+
+(cid:20)
+
+k
+
+(cid:16)(cid:16)
+
++
+
+−
+
+n
+
+≥
+Z>0 and k
+
+Z
+
+0 with n
+
+∈
+
+≥
+4n + 3
+2
+
+k, we set
+
+≥
+
+2
+
++ 2n +
+
+15
+4
+
+(cid:16)
+Then, all bn,k are positive and the recurrence relation
+1
+(
+−
+
+1)nµn = (n + 1)! an+1 −
+
+(
+−
+
+−
+
+n
+
+Xj=k+1
+
+−
+
+−
+
+(cid:17)
+j!
+k
+
+(j
+
+(2j
+
+−
+
+1)!
+
+(cid:17)
+k)2 + k + 2
+(cid:17)
+
+an
+
+.
+
+j+1
+
+−
+
+
+
+1)kbn,k µk
+
+(8.9)
+
+Xk=0
+
+Xj=1
+
+holds for all non-negative n.
+
+Proof. The positivity of bn,k follows from the positivity of aj in [19, p. 327]. We recall
+that the recurrence formula
+
+n
+
+λn+1 = (n + 1)an+1 −
+
+an
+
+−
+
+j+1λj
+
+(8.10)
+
+holds for every non-negative integer n in [19, p. 327]. Substituting (8.1) to (8.10) and
+3, substituting (8.1)
+then calculating a little, (8.9) is obtained for n = 1 and 2. For n
+1)nµn/n! on the
+and (8.2) for both sides of (8.10), then moving the terms other than (
+left-hand side to the right-hand side, and ﬁnally grouping the right-hand side concerning
+(cid:3)
+moments µk, we obtain (8.9).
+
+−
+
+≥
+
+9. Relation with strings under the RH
+
+For a Kre˘ın string S[m, L] which consists of 0 < L
+
+and a right-continuous
+≤ ∞
+) = 0, we take solutions
+nondecreasing non-negative function m(x) on [0, L) with m(0
+−
+φ(x, z) and ψ(x, z) of the string equation dy′(x) + zy(x)dm(x) = 0 on [0, L) satisfying
+the initial condition φ′(0, z) = ψ(0, z) = 0, φ(0, z) = ψ′(0, z) = 1. Then the Titchmarsh–
+Weyl function q(z) = limx
+NS of
+the Nevanlinna class
+
+L ψ(x, z)/φ(x, z) exists and belongs to the subclass
+
+consisting of q(z) such that
+
+→
+
+N
+
+0 and a measure σ on [0,
+for some b
+proved that the correspondence S[m, L]
+
+∞
+7→ NS is bijective.
+R
+Using the meromorphic function Qξ(z) in (1.7), we deﬁne
+
+≥
+
+q(z) = b +
+
+∞
+
+dσ(λ)
+z
+λ
+−
+∞0 dσ(λ)/(λ + 1) <
+
+0
+Z
+) with
+
+. Kre˘ın [13]
+
+∞
+
+qξ(z) =
+
+Qξ(√z)
+√z
+
+and suppose that the RH is true. Then, both Qξ(z) and qξ(z) belong to
+we have
+
+N
+
+. Moreover,
+
+qξ(z) =
+
+i
+√z
+
+ξ′
+ξ
+
+1
+2 −
+
+(cid:18)
+
+i√z
+
+=
+
+(cid:19)
+
+γ>0
+X
+
+2
+
+γ2
+
+z
+
+−
+
+= b +
+
+∞
+
+dσ(λ)
+z
+λ
+
+−
+
+0
+Z
+
+(b = 0)
+
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+29
+
+) supported on points γ2. In other words, qξ ∈ NS. Hence,
+where σ is a measure on [0,
+there exists a string S[mξ, Lξ] corresponding to qξ(z). Such string is called Zeta string
+in Kotani [12, §3.2], where he proved that mξ(x)
+4x(log x)−
+
+2 as x
+
+0+.
+
+∞
+
+∼
+
+→
+
+Here we explain that the screw function g(t) in (1.1) and (1.8) is mean-periodic even
+
+10. Mean Periodicity
+
+without assuming the RH. Let
+
+η(t) := 2e−
+
+t/2 ∞
+
+2π2n4e−
+
+4t
+
+3πn2e−
+
+2t
+
+−
+
+exp(
+
+−
+
+πn2e−
+
+2t).
+
+(cid:1)
+
+n=1
+X
+(cid:0)
+η(z) for all z
+
+iz) =
+
+Then ξ(1/2
+for all z
+Therefore, by using (1.3) and putting φ = η′, we have
+
+−
+−
+C, since η(t) is smooth and decays faster than any exponential as
+
+C ([29, §10.1]). In addition,
+
+iz ξ(1/2
+
+−
+
+∈
+
+∈
+
+iz) =
+t
+|
+
+| →
+
+η′(z)
+.
++
+b
+
+∞
+
+b
+
+∗
+
+(g
+
+γ)
+
+φ(
+
+φ)(t) =
+
+φ(0)) = 0.
+
+1
+γ2 (eiγt
+Hence, if we chose a suitable function space X consisting of functions on R such that
+b
+g
+X and φ = η′ belongs to the dual space X ∗, then g is a X-mean periodic function
+(see [8, §2] for a quick overview of mean-periodic functions). In fact, we can chose the
+C∞exp(R) and S(R)∗ in [8] as such a space X by Theorem 1.1 (3). For the same
+spaces
+reason that the convolution equation g
+φ = 0 holds, if we chose the space X such that
+the dual space X ∗ contains the space
+
+γ
+X
+
+−
+
+−
+
+∈
+
+b
+
+∗
+
+:=
+
+d
+dt  
+
+e−
+
+t/2 ∞
+
+f (ne−
+
+t)
+
+f
+
+S(R), f (x) = f (
+
+x), f (0) =
+
+f (0) = 0
+
+∈
+
+−
+
+(
+
+n=1
+X
+
+like
+by r
+
+R is orthogonal to
+
+(g)
+,
+with respect to the pairing (
+·
+
+Z
+! (cid:12)
+(cid:12)
+(cid:12)
+C∞exp(R) and S(R)∗, then the space
+r)
+(cid:12)
+(cid:12)
+C. The space
+∈
+consists of the ﬁrst derivatives of functions in the space introduced by A. Connes in
+Z
+[3, Appendix I] (see also [5, §6.1] and R. Meyer [21]) to study the spectral realization
+of the zeros of ξ(s). In the above sense, the screw function g “generates” an orthogonal
+complement (which, depending on X, may be a subspace of this by the existence of
+trivial zeros of ζ(s)) of Connes’ space. This is a situation similar to [24, Theorem 3.1].
+φ = 0 yields
+
+Independent of the choice of function space, the convolution equation g
+
+X spanned by all translations g(t
+
+b
+X ∗ →
+
+) : X
+·
+
+)
+
+×
+
+⊂
+
+−
+
+Z
+
+T
+
+∗
+
+the integral representation
+
+that holds for all z
+φ+(t) = φ(t) if t
+
+≥
+
+φ+(z)
+
+\g
+∗
+φ+(z)
+
+=
+
+φ−(z)
+
+ξ′
+ξ
+C by the Fourier–Carleman transform ([8, Deﬁnition 2.8]), where
+
+1
+2 −
+
+1
+z2
+
+iz
+
+=
+
+−
+
+(cid:18)
+
+(cid:19)
+
+\g
+∗
+φ−(z)
+
+∈
+0 and = 0 otherwise and φ−(t) = 0 if t
+
+c
+
+c
+
+0 and = φ(t) otherwise.
+
+Although the screw function g(t) attached to ξ(s) is outside the framework of mean-
+periodic functions studied in [8], we may regard the positivity in Theorem 1.7 an example
+of the single sign property of mean-periodic functions in [8, §4.3], and the equality
+obtained from (1.1) and (1.3) is an analog of the summation formula [8, Corollary 4.6].
+
+≥
+
+We consider “shifted” variants of Ψ(t). For a real number ω, we deﬁne Ψω(t) by
+
+11. Variants of Ψ(t)
+
+Ψω(t) := e−
+
+ωtΨ(t) + 2ω
+
+t
+
+0
+
+e−
+
+ωuΨ(u) du + ω2
+
+t
+
+(t
+
+0
+
+−
+
+u)e−
+
+ωuΨ(u) du
+
+(11.1)
+
+Z
+
+Z
+
+for t > 0 and extend it as an even function on R. Then we have Ψ0(t) = Ψ(t) and
+ξ′
+ξ
+
+Ψω(t) eizt dt =
+
+( 1
+2 + ω
+
+(z) > 1/2
+
+1
+z2
+
+iz),
+
+ω
+
+∞
+
+−
+
+−
+
+−
+
+ℑ
+
+(11.2)
+
+0
+
+Z
+
+30
+
+M. SUZUKI
+
+by (1.2) and a little calculation. Therefore a nontrivial estimate of Ψω(t) leads to an
+expansion of the zero-free region of ξ(s) as in the case of Ψ(t).
+
+On the right-hand side of (11.2), the expansion
+
+ξ′
+ξ
+
+(cid:21)
+
+ℑ
+
+ℜ
+
+=
+
+(s + ω)
+
+i
+(cid:20)
+shows that i(ξ′/ξ)(1/2 + ω
+where ρ runs over all zeros of ξ(s) counting with multiplicity. Therefore, if ξ(s)
+
+(s) > 1/2 + ω,
+= 0 for
+(s) > 1/2 + ω, the function Ψω(t) is non-negative by (11.2) and [14, Satz 5.9] as in the
+ℜ
+case of g(t) =
+= 0 on
+the positive real line, if we use the same result of Laplace transforms as in the proof of
+Theorem 1.7, the following seemingly milder equivalent condition is obtained.
+
+Ψ(t). Furthermore, from formula (11.2) and the fact that ξ(s)
+
+iz) belongs to the class
+
+= 0 for
+
+ρ
+X
+
+N
+
+−
+
+−
+
+ℜ
+
+(s + ω)
+s + ω
+|
+
+(ρ)
+− ℜ
+2
+ρ
+|
+−
+if ξ(s)
+
+Theorem 11.1. Let ω
+= 0 for
+∈
+t0 > 0 such that Ψω(t) is non-negative when t
+
+R. Then ξ(s)
+
+(s) > 1/2 + ω if and only if there exists
+t0.
+
+ℜ
+≥
+
+The above result shows that Ψω(t)
+
+1/2, because it is
+well-known that ξ(s)
+(s) > 1. In contrast, Ψω(t) changes the sign inﬁnitely
+many if ω is negative, because it is known that ξ(s) has inﬁnitely many zeros on the
+critical line
+
+(s) = 1/2. Similar to the relation between Ψ(t) and Ψω(t), we have
+
+0 unconditionally if ω
+
+= 0 for
+
+≥
+
+≥
+
+ℜ
+
+ℜ
+
+Ψω+η(t) = e−
+
+ηtΨω(t) + 2η
+
+t
+
+0
+
+e−
+
+ηuΨω(u) du + η2
+
+t
+
+(t
+
+−
+
+u)e−
+
+ηuΨω(u) du
+
+0
+Z
+
+Z
+
+for two reals ω and η. Therefore, the nonnegativity of Ψω(t) on some interval [0, t0)
+implies the nonnegativity of Ψω+η(t) on the same range when η > 0.
+
+For t > 0, the analogs of (1.1) and (1.3) are as follows:
+
+Ψω(t) =
+
+γ
+X
+
+1
+(γ2 + ω2)2
+
+ωt(γ2 + ω2) + (γ2
+
+ω2)
+
+−
+
+h
+e−
+
+ωt
+
+−
+·
+( 1
+2 +ω)t
+e−
+(1 + 2ω)2 −
+
+(γ2
+
+ω2) cos(γt)
+
+ωt
+
+e−
+
+·
+
+−
+
+2γω sin(γt)
+
+4
+
+−
+
+2(1
+(1
+
+ωt)(1
+−
+4ω2)2
+
+−
+−
+
+4ω2)
+
+i
+
+#
+
+log π
+
+−
+
+(cid:21)
+( 1
+2 +ω)tΦ
+e−
+
+−
+
+(cid:19)
+log n),
+
+e−
+
+2t, 2,
+
+1
+4
+
++
+
+ω
+2
+
+(cid:18)
+
+(cid:19)(cid:21)
+
+= 4
+
+2 −
+
+e( 1
+(1
+
+−
+
+−
+
+ω)t
+
+2ω)2 +
+1
+ω
+2
+4
+
++
+
+ψ
+
+(cid:18)
+ψ(1)
+
+(cid:20)
+
+(cid:20)
+
+1
+4
+(cid:18)
+Λ(n)
+1
+2 +ω
+
+n
+
+(cid:19)
+ω
+2
+
++
+
+(t
+
+−
+
+"
+t
+2
+1
+4
+
++
+
++
+
+−
+
+et
+Xn
+≤
+
+where ψ(k)(s) = dk+1
+right-hand side of (11.1) using (1.1) and (1.3). We have Ψω(0) = 0 as well as Ψ(t).
+
+dsk+1 log Γ(s) and ψ(s) = ψ(0)(s). This is obtained by calculating the
+
+As a special case,
+
+Ψ1/2(t) =
+
+1
+2
+
+−
+
+−
+
+(t + 1)2
+
+3
+2
+
+−
+
+t
+
++ e−
+
+t
+2
+
+(γ0 + 2 log 2 + log π) +
+
+Λ(n)
+n
+
+(t
+
+−
+
+log n)
+
+π2
+2 −
+
+1
+4
+
+(cid:20)
+
+e−
+
+tΦ
+
+e−
+
+2t, 2,
+
+(cid:18)
+
+1
+2
+
+(cid:19)(cid:21)
+
+for t > 0. In this case, g1/2(t) :=
+i(ξ′/ξ)(1
+
+iz) belongs to
+
+−
+
+and satisﬁes (1.6).
+
+Ψ1/2(t) belongs to the class
+
+, because Q1/2(z) =
+
+G∞
+
+−
+
+et
+Xn
+≤
+
+N
+
+6
+6
+6
+6
+6
+ASPECTS OF THE SCREW FUNCTION OF ζ
+
+31
+
+References
+
+[1] E. Bombieri, Remarks on Weil’s quadratic functional in the theory of prime numbers. I, Atti Accad.
+Naz. Lincei Cl. Sci. Fis. Mat. Natur. Rend. Lincei (9) Mat. Appl. 11 (2000), no. 3, 183–233 (2001).
+[2] E. Bombieri, J. C. Lagarias, Complements to Li’s criterion for the Riemann hypothesis, J. Number
+
+Theory 77 (1999), no. 2, 274–287.
+
+[3] A. Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta function,
+
+Selecta Math. (N.S.) 5 (1999), no. 1, 29–106.
+
+[4] A. Connes, C. Consani, Weil positivity and trace formula the archimedean place, Selecta Math.
+
+(N.S.) 27 (2021), no. 4, Paper No. 77, 70 pp.
+
+[5] A. Connes, C. Consani, Spectral Triples and ζ-Cycles, https://arxiv.org/pdf/2106.01715.pdf.
+[6] J. B. Conrey, More than two ﬁfths of the zeros of the Riemann zeta function are on the critical line,
+
+J. Reine Angew. Math. 399 (1989), 1-26.
+
+[7] A. Erd´elyi, W. Magnus, F. Oberhettinger, F. G. Tricomi, Higher transcendental functions. Vol. I,
+
+Reprint of the 1953 original, Robert E. Krieger Publishing Co., Inc., Melbourne, Fla., 1981.
+
+[8] I. Fesenko, G. Ricotta, M. Suzuki, Mean-periodicity and zeta functions, Ann. Inst. Fourier (Greno-
+
+ble) 62 (2012), no. 5, 1819–1887.
+
+[9] I. Gohberg, S. Goldberg, N. Krupnik, Traces and determinants of linear operators, Operator Theory:
+
+Advances and Applications 116, Birkh¨auser Verlag, Basel, 2001.
+
+[10] I. Gohberg, M. G. Kre˘ın, Introduction to the theory of linear nonselfadjoint operators, Translations
+of Mathematical Monographs, Vol. 18, American Mathematical Society, Providence, R.I., 1969.
+[11] J. B. Keiper, Power series expansions of Riemann’s ξ function, Math. Comp. 58 (1992), no. 198,
+
+765–773.
+
+[12] S. Kotani, Riemann’s Zeta function and Krein’s
+
+string, unpublished but available at
+
+https://www.researchgate.net/publication/348522988_Riemann’s_Zeta_function_and_Krein’s_string.
+
+[13] M. G. Kre˘ın, On a generalization of investigations of Stieltjes (Russian), Doklady Akad. Nauk SSSR
+
+(N.S.) 87 (1952), 881–884.
+
+[14] M. G. Kre˘ın, H. Langer, ¨Uber einige Fortsetzungsprobleme, die eng mit der Theorie hermitescher
+Operatoren im Raume Πκ zusammenh¨angen. I. Einige Funktionenklassen und ihre Darstellungen,
+Math. Nachr. 77 (1977), 187–236.
+
+[15] M. G. Kre˘ın, H. Langer, On some continuation problems which are closely related to the theory of
+operators in spaces Πκ. IV. Continuous analogues of orthogonal polynomials on the unit circle with
+respect to an indeﬁnite weight and related continuation problems for some classes of functions, J.
+Operator Theory 13 (1985), no. 2, 299–417.
+
+[16] M. G. Kre˘ın, H. Langer, Continuation of hermitian positive deﬁnite functions and related questions,
+
+Integral Equations Operator Theory 78 (2014), no. 1, 1–69.
+
+[17] M. G. Kre˘ın, A. A. Nudel’man, The Markov moment problem and extremal problems, Ideas and
+problems of P. L. ˇCebyˇsev and A. A. Markov and their further development, Translated from the
+Russian by D. Louvish, Translations of Mathematical Monographs, Vol. 50, American Mathematical
+Society, Providence, R.I., 1977.
+
+[18] J. C. Lagarias, On a positivity property of the Riemann ξ-function, Acta Arith. 89 (1999), no. 3,
+
+217–234.
+
+[19] X.-J. Li, The positivity of a sequence of numbers and the Riemann hypothesis, J. Number Theory
+
+65 (1997), no. 2, 325–333.
+
+[20] G. D. Lin, Recent developments on the moment problem, Journal of Statistical Distributions and
+
+Applications 4 (2017), Article number: 5.
+
+[21] R. Meyer, A spectral interpretation for the zeros of the Riemann zeta function, Mathematisches
+Institut, Georg-August-Universit¨at G¨ottingen: Seminars Winter Term 2004/2005, 117–137, Uni-
+versit¨atsdrucke G¨ottingen, G¨ottingen, 2005.
+
+[22] T. Nakamura, M. Suzuki, On inﬁnitely divisible distributions related to the Riemann hypothesis,
+
+submitted.
+
+[23] J. Stewart, Positive deﬁnite functions and generalizations, an historical survey, Rocky Mountain J.
+
+Math. 6 (1976), no. 3, 409–434.
+
+[24] M. Suzuki, Two-dimensional adelic analysis and cuspidal automorphic representations of GL(2),
+Multiple Dirichlet series, L-functions and automorphic forms, 339–361, Progr. Math., 300,
+Birkh¨auser/Springer, New York, 2012.
+
+[25] M. Suzuki, The screw line of the Riemann zeta-function,
+
+https://arxiv.org/abs/2209.04658.
+
+[26] M. Suzuki, Screw functions of Dirichlet series in the extended Selberg class,
+
+https://arxiv.org/abs/2209.12832.
+
+[27] M. Suzuki, On the Hilbert space derived from the Weil distribution,
+
+https://arxiv.org/abs/2301.00421.
+
+32
+
+M. SUZUKI
+
+[28] M. Suzuki, Li coeﬃcients as norms of functions in a model space,
+
+https://arxiv.org/abs/2301.05779.
+
+[29] E. C. Titchmarsh, The theory of the Riemann zeta-function, Second edition, Edited and with a
+
+preface by D. R. Heath-Brown , The Clarendon Press, Oxford University Press, New York, 1986.
+
+[30] A. Weil, Sur les “formules explicites” de la th´eorie des nombres premiers, Comm. S´em. Math. Univ.
+
+Lund [Medd. Lunds Univ. Mat. Sem.], 1952 (1952), Tome Suppl´ementaire, 252–265.
+
+[31] A. Weil, Sur les formules explicites de la th´eorie des nombres, Izv. Akad. Nauk SSSR Ser. Mat., 36
+
+(1972), 3–18..
+
+[32] V. D. Widder, The Laplace Transform, Princeton Mathematical Series, vol. 6, Princeton University
+
+Press, Princeton, N. J., 1941.
+
+[33] H. Yoshida, On Hermitian forms attached to zeta functions, Zeta functions in geometry (Tokyo,
+
+1990), 281–325, Adv. Stud. Pure Math., 21, Kinokuniya, Tokyo, 1992.
+
+

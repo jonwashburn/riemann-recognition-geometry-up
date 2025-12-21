@@ -1,0 +1,2000 @@
+4
+2
+0
+2
+
+b
+e
+F
+0
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+2
+8
+0
+3
+1
+.
+2
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+HEAT EXPANSION AND ZETA
+
+ALAIN CONNES
+
+ABSTRACT. We compute the full asymptotic expansion of the heat kernel Tr(exp(−tD2))
+where D is, assuming RH, the self-adjoint operator whose spectrum is formed of the imag-
+inary parts of non-trivial zeros of the Riemann zeta function. The coefficients of the ex-
+pansion are explicit expressions involving Bernoulli and Euler numbers. We relate the di-
+vergent terms with the heat kernel expansion of the Dirac square root of the prolate wave
+operator investigated in our joint work with Henri Moscovici.
+
+Dedicated to Fedor Sukochev
+
+CONTENTS
+
+1.
+Introduction
+2. Explicit formula
+3. Archimedean contribution
+4. Contribution of the primes
+5. Counting function
+References
+
+1
+4
+5
+8
+9
+11
+
+1. INTRODUCTION
+
+We compute in closed form, using Bernoulli and Euler numbers, the full asymptotic ex-
+pansion of the heat trace Tr(exp(−tD2)) where D is, assuming RH, the self-adjoint op-
+erator whose spectrum is formed of the imaginary parts of non-trivial zeros of the Rie-
+mann zeta function. The heat expansion, i.e. the asymptotic expansion for t → 0, of the
+trace Tr(exp(−tD2)) where D is a self-adjoint operator, plays a key role in the theory of
+spectral asymptotics. It is a powerful tool in mathematical physics, differential geome-
+try, and spectral theory, describing how solutions to the heat equation on a manifold or
+more general spaces behave, especially in the context of the Laplace operator or more
+general elliptic operators. The expansion typically takes the form of an asymptotic series,
+with coefficients that reflect geometric and topological properties of the space. These co-
+efficients are often referred to as Seeley-DeWitt or heat kernel coefficients. This type of
+asymptotic expansion also plays a key role in noncommutative geometry as a way to ex-
+tend curvature invariants to noncommutative spaces such as noncommutative tori, and
+
+2020 Mathematics Subject Classification. Primary 11M06, 41A60; Secondary 34B24.
+Key words and phrases. Heat expansion, Riemann zeta function, Bernoulli numbers, Euler numbers.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+Fedor Sukochev has greatly contributed to this research together with his collaborators
+with whom he forms a very active research group.
+Computing the coefficients of the asymptotic expansion in closed form is a challenging
+problem, and there are only a few well-understood cases where all the coefficients can be
+explicitly calculated. Some of these examples include:
+1. Flat Spaces: In Euclidean spaces (Rn) or flat tori, the heat kernel and its coefficients
+can be computed exactly because the geometry is simple and fully understood. The heat
+kernel in these cases is given by explicit formulas involving exponential functions.
+2. Spheres: For the standard sphere (Sn ) in various dimensions, the heat kernel coeffi-
+cients can be computed due to the high symmetry of the space and the explicit knowledge
+of the eigenvalues and eigenfunctions of the Laplacian.
+3. Compact Lie Groups: For compact Lie groups equipped with a biinvariant metric, the
+heat kernel can be expressed in terms of the sum over the group’s representations. This
+allows for the explicit calculation the heat kernel coefficients due to the algebraic structure
+of the group and the representation theory.
+4. Certain Symmetric Spaces: Symmetric spaces of compact type can sometimes allow for
+the explicit computation of heat kernel coefficients, again due to the symmetry and the
+structure of the space allowing for the representation of the heat kernel in a manageable
+form.
+5. Hyperbolic Spaces: For constant negative curvature spaces (hyperbolic spaces), the heat
+kernel can be expressed in terms of special functions, and in some cases, the coefficients
+can be computed explicitly.
+In general, the ability to compute all heat kernel coefficients in closed form is rare and
+typically relies on having a deep understanding of the spectral properties of the operator
+and the geometry of the underlying space. Most of these examples rely on spaces with
+high degrees of symmetry or simplicity.
+In this paper we assume RH and compute in closed form the asymptotic expansion of a
+putative self-adjoint operator whose spectrum is formed of the imaginary parts of non-
+trivial zeros of the Riemann zeta function as follows:
+
+Theorem 1.1. Assume RH and let D be the self-adjoint operator whose spectrum is formed of the
+imaginary parts of non-trivial zeros of the Riemann zeta function. One then has the asymptotic
+expansion for t → 0
+
+Tr(exp(−tD2)) ∼
+
+log (cid:0) 1
+(cid:1)
+t
+√
+√
+π
+4
+
+t
+
+−
+
+(log 4π + 1
+2γ)
+√
+√
+t
+
+π
+
+2
+
++ 2 exp(t/4) + ∑ antn/2
+
+(1)
+
+where a0 = − 1
+
+4 and for k > 0, using Bernouilli numbers Bj and Euler numbers E(k),
+
+a2k−1 =
+
+Γ(k) (cid:0)22k−1 − 1(cid:1) B2k
+π(2k)!
+
+√
+
+2
+
+, a2k = −
+
+1
+4
+
+Γ(k +
+
+)
+
+1
+2
+
+√
+
+E(2k)
+π(2k)!
+
+.
+
+The Euler numbers are defined as
+
+E(2n) :=
+
+(cid:18)
+
+−
+
+2n
+∑
+k=1
+
+1
+2
+
+(cid:19)k 2k
+∑
+j=0
+2
+
+(−1) j
+
+(cid:19)
+
+(cid:18)2k
+j
+
+(k − j)2n
+
+(2)
+
+One has the asymptotic behavior when k → ∞
+
+E(2k)
+(2k)!
+
+∼ (−1)k22k 4
+π
+
+π −2k
+
+which shows that the asymptotic expansion (1) is by no means convergent since its general
+coefficient an diverges like a factorial.
+Figure 1 shows the graph of Tr(exp(−D2/a)) as a function of a ∈ R+.
+
+FIGURE 1. Graph of Tr(exp(−D2/a)).
+
+The proof of Theorem 1.1 is based on the Riemann-Weil explicit formulas which we recall
+in section 2. It is divided in two parts, we handle the contribution of the archimedean
+place in section 3 and the contribution of the primes in section 4.
+The first two terms of (1) are the only divergent ones and their form is already a great
+puzzle at the level of the geometry thus revealed at the spectral level. In our joint work
+with H. Moscovici [2], Theorem 5.1, we found a Dirac type square root D of the prolate
+wave operator whose counting function for the imaginary eigenvalues behaves as follows
+
+N(E) =
+
+E
+2π
+
+(cid:18)
+
+log
+
+E
+2π
+
+(cid:19)
+
+− 1
+
++ O(log E).
+
+(3)
+
+In section 5, we describe the link between the heat kernel asymptotic expansion and the
+counting function N(E) := #(Spec D ∩ [0, E]) and show in Theorem 5.1 that the knowl-
+edge of the behavior of N(E) in the form (3) suffices to secure the first terms of the heat
+kernel asymptotic expansion in the form of (1). This indicates that Theorem 5.1 of [2] gives
+a first approximation for the geometry underlying zeta zeros.
+
+3
+
+2000400060008000100001020304050Trace(Exp(-D2/a))2. EXPLICIT FORMULA
+
+Following [1], let f (x) be a smooth function on R∗
++, such that there is δ > 0 such that
+f (x) = O (cid:0)xδ(cid:1) as x → 0+ and f (x) = O (cid:0)x−1−δ(cid:1) as x → +∞. Let (cid:101)f (s) be the Mellin
+transform
+
+˜f (s) :=
+
+f (x)xs−1dx.
+
+(4)
+
+(cid:90) ∞
+
+0
+
+˜f (ρ) =
+
+∑
+ρ
+
+which is an analytic function of s for −δ < ℜ(s) < 1 + δ. Then, with f ♯(x) := x−1 f (x−1)
+the explicit formula takes the form
+(cid:90) ∞
+
+(cid:90) ∞
+
+f (x)dx +
+
+f ♯(x)dx − ∑
+
+Wv( f ),
+
+(5)
+
+0
+where v runs over all places {R, 2, 3, 5, . . .} of Q, the sum on the left hand side is over all
+complex zeros ρ of the Riemann zeta function, and for v = p
+
+v
+
+0
+
+Wp( f ) = (log p)
+
+(cid:16)
+
+∞
+∑
+m=1
+
+f (pm) + f ♯(pm)
+
+(cid:17)
+
+.
+
+The archimedean distribution is defined as
+
+WR( f ) := (log 4π + γ) f (1) +
+
+(cid:90) ∞
+
+(cid:18)
+
+1
+
+f (x) + f ♯(x) −
+
+2
+x
+
+f (1)
+
+(cid:19) dx
+
+x − x−1 .
+
+One then has
+
+WR( f ) = (log π) f (1) −
+
+(cid:90)
+
+1
+2πi
+
+1/2+iw
+
+ℜ
+
+(cid:18) Γ ′
+Γ
+
+(cid:16) w
+2
+
+(cid:17)(cid:19)
+
+˜f (w)dw.
+
+With the above notations, let F(x) := x1/2 f (x), one then has
+
+F(x−1) = x−1/2 f (x−1) = x1/2 f ♯(x)
+and the archimedean contribution (8) gives, using d∗x := dx/x,
+
+(6)
+
+(7)
+
+(8)
+
+WR(F) = (log 4π + γ)F(1) +
+
+(cid:90) ∞
+
+(cid:16)
+
+1
+
+F(x) + F(x−1) − 2x−1/2F(1)
+
+(cid:17) x1/2
+x − x−1 d∗x.
+
+(9)
+
+We consider the Fourier transform for the duality between R∗
+
++ and R in the form
+
+(cid:90)
+
+(cid:98)F(s) :=
+
+F(u)u−isd∗u
+
+(10)
+
+2 − is). Thus assuming RH and
+
+so that for F(x) := x1/2 f (x) one has, using (4), (cid:98)F(s) = ˜f ( 1
+letting Z := {ρ ∈ R | ζ( 1
+2 + iρ) = 0}, we can rewrite (5) as
+(cid:98)F(ρ) = (cid:98)F(i/2) + (cid:98)F(−i/2) − WR(F) − ∑
+p
+
+∑
+Z
+
+Wp(F),
+
+where for each prime p, Wp(F) = Wp( f ) which gives
+
+Wp(F) = (log p)
+
+∞
+∑
+m=1
+
+p−m/2 (cid:0)F(pm) + F(p−m)(cid:1)
+
+4
+
+(11)
+
+(12)
+
+3. ARCHIMEDEAN CONTRIBUTION
+
+We start from the Riemann-Weil explicit formula in the form (11) and first ignore the con-
+tributions of the finite places. With Z := {ρ ∈ R | ζ( 1
+2 + iρ) = 0} as above we are thus
+dealing with the first three terms in the right hand side of (11).
+We choose Ft such that (cid:98)Ft(s) = exp(−ts2). One has
+
+Ft(ey) =
+
+e− y2
+4t
+√
+√
+π
+
+t
+
+2
+
+, Ft(e−y) = Ft(ey)
+
+(13)
+
+Thus one gets with ψ(t) := ∑p Wp(Ft), (see (25) below),
+∑
+Z
+
+exp(−tρ2) = (cid:98)Ft(i/2) + (cid:98)Ft(−i/2) − WR(Ft) − ψ(t) = 2 exp(t/4) − WR(Ft) − ψ(t) (14)
+
+We let x = eu and get, using (9),
+
+WR(Ft) := (log 4π + γ)Ft(1) +
+
+(cid:90) ∞
+
+(cid:16)
+
+0
+
+Ft(eu) + Ft(e−u) − 2e−u/2Ft(1)
+
+(cid:17)
+
+eu/2
+eu − e−u du.
+
+(15)
+
+Our task now is to compute the full asymptotic expansion of (15) when t → 0. One has
+(cid:90) ∞
+
+(cid:90) a
+
+(cid:19)
+
+(cid:18)
+
+1
+eu − e−u
+
+−
+
+1
+2u
+
+0
+
+du +
+
+eu − e−u du = −
+
+a
+
+1
+
+1
+2
+
+log
+
+(cid:17)
+
+(cid:16) a
+2
+
+which taking a = 2 gives the equality
+
+(cid:90) 2
+
+(cid:18)
+
+0
+
+1
+eu − e−u
+
+−
+
+1
+2u
+
+(cid:19)
+
+du +
+
+(cid:90) ∞
+
+2
+
+1
+
+eu − e−u du = 0
+
+(16)
+
+One has for F(eu) even function of u,
+
+I :=
+
+(cid:90) ∞
+
+(cid:16)
+
+0
+
+F(eu) + F(e−u) − 2e−u/2F(1)
+
+(cid:17)
+
+eu/2
+
+eu − e−u du =
+
+(cid:90) 2
+
+(cid:16)
+
+=
+
+0
+
+2F(eu) − 2e−u/2F(1)
+
+(cid:17)
+
+eu/2
+
+eu − e−u du +
+
+(cid:90) ∞
+
+(cid:16)
+
+2
+
+2F(eu) − 2e−u/2F(1)
+
+(cid:17)
+
+eu/2
+eu − e−u du
+
+Using (16) one gets
+
+(cid:90) ∞
+
+(cid:16)
+
+2
+
+−2e−u/2F(1)
+
+(cid:17)
+
+eu/2
+
+eu − e−u du =
+
+(cid:90) 2
+
+0
+
+(cid:18) 2F(1)
+eu − e−u
+
+−
+
+2F(1)
+2u
+
+(cid:19)
+
+du
+
+Let
+
+Thus one obtains,
+
+I′ =
+
+(cid:90) ∞
+
+2
+
+(2F(eu))
+
+eu/2
+eu − e−u du
+
+I =
+
+(cid:90) 2
+
+(cid:32)
+
+(cid:16)
+
+0
+
+2F(eu) − 2e−u/2F(1)
+
+(cid:17)
+
+eu/2
+eu − e−u
+
++
+
+(cid:18) 2F(1)
+eu − e−u
+
+−
+
+2F(1)
+2u
+
+(cid:19)(cid:33)
+
+du + I′ =
+
+(cid:32)
+
+(cid:90) 2
+
+0
+
+2F(eu)
+
+eu/2
+eu − e−u
+
+−
+
+2F(1)
+2u
+
+(cid:33)
+
+du + I′ =
+
+F(eu) − F(1)
+u
+
+du +
+
+(cid:90) 2
+
+0
+
+2F(eu)r(u)du + I′
+
+(cid:90) 2
+
+0
+
+5
+
+where
+
+One has moreover
+
+r(u) :=
+
+eu/2
+eu − e−u
+
+−
+
+1
+2u
+
+and we obtain
+
+I′ =
+
+(cid:90) ∞
+
+2
+
+2F(eu)
+
+eu/2
+
+eu − e−u du =
+
+(cid:90) ∞
+
+2
+
+2F(eu)
+
+(cid:18) 1
+2u
+
+(cid:19)
+
+du
+
++ r(u)
+
+I =
+
+(cid:90) 2
+
+0
+
+F(eu) − F(1)
+u
+
+du +
+
+(cid:90) ∞
+
+0
+
+2F(eu)r(u)du +
+
+(cid:90) ∞
+
+2
+
+F(eu)
+u
+
+du
+
+which gives the formula, for F(eu) even function of u,
+
+WR(F) = (log 4π + γ)F(1) +
+
+(cid:90) 2
+
+0
+
+F(eu) − F(1)
+u
+
+du +
+
+(cid:90) ∞
+
+0
+
+2F(eu)r(u)du +
+
+(cid:90) ∞
+
+2
+
+F(eu)
+u
+
+du
+
+(17)
+
+We apply this formula to F = Ft as in (13). The last term gives
+(cid:90) ∞
+
+(cid:90) ∞
+
+(cid:90) ∞
+
+Ft(eu)
+u
+
+du =
+
+√
+
+√
+
+2
+
+t
+
+2
+
+1
+π
+
+e− u2
+
+4t
+
+du
+u
+
+=
+
+√
+
+√
+
+2
+
+t
+
+t−1/2
+
+1
+π
+
+e−v2 dv
+v
+
+=
+
+1
+π
+
+√
+
+t
+
+√
+
+4
+
+Γ(0, 1/t)
+
+Γ(0, a) =
+
+(cid:90) ∞
+
+a
+
+e−t dt
+t
+
+∼ e−a/a,
+
+for a → ∞
+
+(18)
+
+2
+
+where
+
+since
+
+(cid:90) ∞
+
+a
+
+e−t dt
+t
+
+= e−a/a
+√
+t
+√
+
+(cid:90) ∞
+
+0
+
+e−x
+
+dx
+1 + x/a
+π exp(−1/t) = O(t∞).
+
+.
+
+Thus when t → 0, the last term in (17) is ∼
+We now consider the second term in (17). One has
+(cid:90) a
+
+4
+
+1 − exp(−u)
+u
+
+0
+
+du = log(a) + Γ(0, a) + γ
+
+This gives, with u := y2
+(e− y2
+4t − 1)
+y
+
+(cid:90) 2
+
+0
+
+4t that
+
+dy = −
+
+1
+2
+
+(cid:90) 1/t
+
+0
+
+1 − exp(−u)
+u
+
+du = −
+
+(cid:18)
+
+1
+2
+
+log(
+
+1
+t
+
+) + Γ(0,
+
+(cid:19)
+
+) + γ
+
+1
+t
+
+Thus, up to a term which is infinitely flat when t → 0,
+− log (cid:0) 1
+(cid:1) − γ
+t
+√
+√
+π
+t
+4
+
+Ft(ey) − Ft(1)
+y
+
+dy =
+
+(cid:90) 2
+
+0
+
++ O(t
+
+∞)
+
+(19)
+
+and the sum of the first two terms in (17) gives
+
+(log 4π + γ)Ft(1) +
+
+(cid:90) 2
+
+0
+
+Ft(eu) − Ft(1)
+u
+
+du =
+
+− log (cid:0) 1
+(cid:1) − γ
+t
+√
+√
+π
+t
+4
+
++ (log 4π + γ)
+
+It remains to deal with the third term in (17), i.e. (cid:82) ∞
+
+0 2F(eu)r(u)du.
+
+6
+
+1
+π
+
+√
+
+t
+
+√
+
+2
+
++ O(t
+
+∞)
+
+(20)
+
+Lemma 3.1. One has the power series expansion, converging for |u| < π,
+
+r(u) =
+
+eu/2
+eu − e−u
+
+−
+
+1
+2u
+
+=
+
+∞
+∑
+0
+
+bn un,
+
+(21)
+
+where b0 = 1
+
+4 and
+
+b2k−1 = −
+
+(cid:0)1 − 21−2k(cid:1) B2k
+2(2k)!
+
+, b2k =
+
+1
+4
+
+2−2k E(2k)
+(2k)!
+
+in terms of the Bernoulli numbers Bn and the Euler numbers of (2).
+
+Proof. One has
+
+eu/2
+eu − e−u
+
+=
+
+eu/2
+(eu/2 − e−u/2)(eu/2 + e−u/2)
+
+=
+
+1
+2
+
+(cid:18)
+
+1
+(eu/2 + e−u/2)
+
++
+
+1
+(eu/2 − e−u/2)
+
+(cid:19)
+
+One has the Taylor expansion
+
+2
+eu/2 + e−u/2
+
+= 1 +
+
+∞
+∑
+1
+
+(cid:17)2n
+
+E(2n)
+(2n)!
+
+(cid:16) u
+2
+
+using Euler numbers defined in (2). Using Bernoulli numbers one has
+
+2
+eu/2 − e−u/2
+
+=
+
+2
+u
+
+−
+
+∞
+∑
+1
+
+2 (cid:0)22k−1 − 1(cid:1) B2k
+(2k)!
+
+(cid:16) u
+2
+
+(cid:17)2k−1
+
+One has
+
+and
+
+B2n ∼ (−1)n+14
+
+√
+
+πn
+
+(cid:16) n
+πe
+
+(cid:17)2n
+
+, B2n/(2n)! ∼ (−1)n+12 (2π)−2n
+
+E2n ∼ (−1)n8
+
+(cid:19)2n
+
+(cid:114) n
+π
+
+(cid:18) 4n
+πe
+
+, 2−2k E(2k)
+(2k)!
+
+∼ (−1)k 4
+π
+
+π −2k
+
+which checks the convergence of the series (21) for |u| < π as expected from the first poles
+□
+of r(u) at u = ±iπ.
+
+Lemma 3.2. One has the asymptotic expansion for t → 0
+
+(cid:90) ∞
+
+0
+
+2Ft(eu)r(u)du ≃ − ∑ antn/2, an = −
+
+(cid:1)
+
+2nΓ (cid:0) n+1
+2
+√
+π
+
+bn
+
+Proof. We use the equality
+
+(cid:90) ∞
+
+0
+
+2Ft(ey)yndy =
+
+(cid:1)
+
+2ntn/2Γ (cid:0) n+1
+2
+√
+π
+
+(22)
+
+(23)
+
+which gives the terms of the expansion (26).
+In order to show that we get an asymptotic expansion we need to estimate the remainder
+in the Taylor expansion (21). To avoid negative powers of u we let
+
+R(u) := 2u r(u) =
+
+7
+
+(cid:1)
+
+u exp (cid:0) u
+2
+sinh(u)
+
+− 1
+
+and we use the Taylor formula with integral remainder for R(u) at u = 0 which gives
+
+r(u) =
+
+eu/2
+eu − e−u
+
+−
+
+1
+2u
+
+=
+
+k
+∑
+0
+
+bn un +
+
+1
+2u k!
+
+(cid:90) u
+
+0
+
+R(k+1)(v)(u − v)kdv
+
+(24)
+
+By construction the function R(u) is smooth and moreover its derivatives fulfill
+
+R(n)(u) ∼ (−2)−(n−1)(2n − u)e−u/2
+
+and are thus bounded on [0, ∞), |R(n)(v)| ≤ cn which gives the inequality
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:90) u
+
+0
+
+R(k+1)(v)(u − v)kdv
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ ck+1
+
+uk+1
+k + 1
+
+Thus the third term in (17) gives
+
+where
+
+so that
+
+(cid:90) ∞
+
+0
+
+2Ft(eu)r(u)du =
+
+k
+∑
+0
+
+bn
+
+(cid:90) ∞
+
+0
+
+2Ft(ey)yndy + ρk(t)
+
+ρk(t) =
+
+1
+k!
+
+(cid:90) ∞
+
+0
+
+Ft(eu)
+
+(cid:18) 1
+u
+
+(cid:90) u
+
+0
+
+R(k+1)(v)(u − v)kdv
+
+(cid:19)
+
+du
+
+|ρk(t)| ≤
+
+ck+1
+(k + 1)!
+
+(cid:90) ∞
+
+0
+
+Ft(eu)ukdy =
+
+(cid:17)
+
+(cid:16) k+1
+2
+
+ck+1Γ
+√
+
+π(k + 1)!
+
+2k−1tk/2
+
+which gives the required bound for the remainder.
+
+□
+
+4. CONTRIBUTION OF THE PRIMES
+
+We also need to control the contribution of the finite places and it is given, using the von
+Mangoldt function Λ(n) as the sum
+
+ψ(t) = 2
+
+∞
+∑
+2
+
+Λ(n)n−1/2Ft(n) =
+
+∞
+∑
+2
+
+Λ(n)n−1/2 e− (log n)2
+
+4t
+√
+
+√
+
+π
+
+t
+
+(25)
+
+One has for any integer n ≥ 2 and t ≤ t0 = log 6
+
+8 ∼ 0.22397, the inequality
+
+e− (log n)2
+and one thus obtains, since Λ(n)n−1/2 ≤ 1 the estimate for t ≤ t0
+
+4t ≤ 4n−2e− (log 2)2
+
+4t = n− log n
+
+4t
+
+|ψ(t)| ≤ 4
+
+(cid:18) π 2
+6
+
+− 1
+
+(cid:19) e− (log 2)2
+4t
+√
+√
+π
+t
+
+which shows that it does not contribute to the asymptotic expansion when t → 0.
+
+8
+
+One can compute the discrepancy between Tr(exp(−tD2)) and the first terms of the ap-
+proximation (1) (using up to the linear term in t), i.e. the terms
+
+(cid:113)
+
+(cid:1)
+
+1
+
+t log (cid:0) 1
+√
+π
+4
+
+t
+
+−
+
+γ
+
+(cid:113)
+
+√
+
+1
+t
+π
+
+−
+
+(cid:113)
+
+1
+t log(4π)
+√
+π
+2
+
++
+
++
+
+7
+4
+
+√
+t
+√
+
++
+
+π
+
+9 t
+16
+
+24
+and for instance for t = 10−4 the difference gives −2.5 × 10−9.
+The graph of the difference in terms of a := 1/t ∈ [100, 10000] is plotted in Figure 2
+
+4
+
+FIGURE 2. Graph of discrepancy.
+
+5. COUNTING FUNCTION
+
+The next theorem provides the link between the asymptotic form of the counting function
+(compare with Theorem 5.1 of [2]) and the first terms of the heat expansion.
+
+Theorem 5.1. Let D be an operator with discrete real spectrum invariant under x (cid:55)→ −x and
+2π − 1(cid:1) +
+such that the counting function N(E) := #(Spec D ∩ [0, E]) fulfills N(E) = E
+2π
+O(log E), then one has for t → 0,
+
+(cid:0)log E
+
+log (cid:0) 1
+(cid:1)
+t
+√
+√
+π
+4
+Proof. Up to a bounded term one has, using ∂x(e−tx2) = −2txe−tx2
+
+(log 4π + 1
+2γ)
+√
+√
+t
+
+Tr(exp(−tD2)) =
+
++ O
+
+−
+
+(cid:18)
+
+π
+
+2
+
+t
+
+,
+
+log(
+
+(cid:19)
+
+1
+t
+
+)
+
+(26)
+
+Tr(exp(−tD2)) ∼ 2
+
+(cid:90) ∞
+
+1
+
+∂EN(E) exp(−tE2)dE ∼ 4
+
+(cid:90) ∞
+
+1
+
+N(E)tE exp(−tE2)dE
+
+Let
+
+n(x) :=
+
+(cid:1) − 1(cid:1)
+
+2x (cid:0)log (cid:0) x
+2π
+2π
+
+9
+
+2000400060008000100000.0010.0020.0030.0040.005In order to replace 2N(E) by n(E) we estimate the remainder due to the term in O(log E).
+We compute (integrating by parts) the integral
+
+R(t) =
+
+(cid:90) ∞
+
+1
+
+(cid:16)
+
+log(x)
+
+2txe−tx2 (cid:17)
+
+dx =
+
+Γ(0, t)
+2
+t ) bound for the remainder.
+
+1
+2
+
+=
+
+(− log(t) − γ) + O(t)
+
+and this suffices to give an O(log 1
+It remains to compute the integral
+2txe−tx2 (cid:17)
+(cid:12)
+(cid:18)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+e−t
+√
+2π
+
+etG3,0
+2,3
+
+J(t) :=
+
+n(x)
+
+(cid:90) ∞
+
+=
+
+(cid:18)
+
+(cid:16)
+
+t
+
+t
+
+1, 1
+0, 0, 3
+2
+
+dx
+
+(cid:19)
+
+− (1 + log(2π))
+
+(cid:16)√
+
+π et erfc
+
+(cid:16)√
+
+(cid:17)
+
+t
+
+(cid:17)(cid:19)
+
+√
+
+t
+
++ 2
+
+where the Meijer G-function in this special case is the integral
+
+G3,0
+2,3
+
+(cid:18)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+t
+
+1, 1
+0, 0, 3
+2
+
+(cid:19)
+
+=
+
+1
+2πi
+
+(cid:90) Γ(s)Γ(s)Γ(s + 3
+2 )
+Γ(1 + s)Γ(1 + s)
+
+t−sds =
+
+1
+2πi
+
+(cid:90) Γ(s + 3
+2 )
+
+s2
+
+t−sds
+
+The contribution of this function to the integral comes from the term in x log x in n(x)
+
+I(t) :=
+
+1
+π
+
+(cid:90) ∞
+
+1
+
+x log x
+
+(cid:16)
+
+2txe−tx2 (cid:17)
+
+dx
+
+(27)
+
+One obtains the asymptotic expansion of J(t) when t → 0 in the form
+
+(cid:1)
+
+√
+
+J(t) =
+
+− log(t) − 2 − 2 log(2π) + Γ ′/Γ (cid:0) 3
+2
+√
+π
+
+4
+(cid:1) we use the Legendre duplication formula
+1
+2
+
+) = 21−2z
+
+Γ(z)Γ(z +
+
+π Γ(2z)
+
+√
+
+t
+
++ O(t)
+
+To evaluate Γ ′/Γ (cid:0) 3
+2
+
+which gives
+
+Γ ′/Γ(z) + Γ ′/Γ(z +
+
+1
+2
+
+) = −2 log 2 + 2 Γ ′/Γ(2z)
+
+and thus, taking z = 1, and using Γ ′/Γ(2) = 1 − γ, Γ ′/Γ(1) = −γ
+
+Γ ′/Γ
+
+(cid:19)
+
+(cid:18) 3
+2
+
+= −2 log 2 + 2 Γ ′/Γ(2) − Γ ′/Γ(1) = −2 log 2 + 2 − γ
+
+(28)
+
+We thus get
+
+J(t) =
+
+− log(t) − 2 − 2 log(2π) + (−2 log 2 + 2 − γ)
+π
+
+√
+
+√
+
+t
+
+4
+
++ O(t) =
+
+=
+
+log (cid:0) 1
+(cid:1)
+t
+√
+√
+π
+4
+
+t
+
+−
+
+(log 4π + 1
+2γ)
+√
+√
+t
+
+π
+
+2
+
+10
+
++ O(t)
+
+□
+
+Let us give a direct way to compute the integral (27) up to an O(t) term for t → 0. We
+consider
+
+(cid:90) ∞
+
+0
+
+xze−tx2
+
+dx =
+
+t− z
+
+2 − 1
+
+2 Γ(
+
+1
+2
+
+1 + z
+2
+
+)
+
+√
+π
+2 and (28),
+
+and we take the derivative ∂z of both sides at z = 2 to obtain, using Γ( 3
+
+(cid:90) ∞
+
+0
+
+x2 log(x)e−tx2
+
+dx =
+
+π(−2 log 2 + 2 − γ)
+8t3/2
+
+−
+
+√
+
+√
+
+2 ) =
+π log(t)
+8t3/2
+
+Multiplying the result by 2t
+
+π one obtains
+
+I(t) =
+
+−2 log 2 + 2 − γ − log(t)
+π
+
+√
+
+√
+
+t
+
+4
+
++ O(t)
+
+The remaining term to obtain J(t) is, up to a term in O(t)
+
+−
+
+(1 + log(2π)
+π
+
+(cid:90) ∞
+
+0
+
+(cid:16)
+
+2txe−tx2 (cid:17)
+
+x
+
+dx = −
+
+1 + log(2π)
+π
+
+√
+
+√
+
+2
+
+t
+
+which gives
+
+J(t) =
+
+(cid:1)
+log (cid:0) 1
+t
+√
+√
+π
+4
+
+t
+
+−
+
+(log 4π + 1
+2γ)
+√
+√
+t
+
+π
+
+2
+
++ O(t).
+
+REFERENCES
+
+[1] E. Bombieri, The Riemann hypothesis. The millennium prize problems, 107–124, Clay Math. Inst., Cam-
+
+bridge, MA, 2006.
+
+[2] A. Connes, H. Moscovici, The UV prolate spectrum matches the zeros of zeta. Proc. Natl. Acad. Sci. USA
+
+119 (2022), no. 22.
+
+A. CONNES: COLLÈGE DE FRANCE, 3, RUE D’ULM, PARIS, F-75005 FRANCE, I.H.E.S. 35 ROUTE DE
+CHARTRES BURES SUR YVETTE, F-91440
+Email address: alain@connes.org
+
+11
+
+

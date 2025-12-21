@@ -1,0 +1,3652 @@
+5
+2
+0
+2
+
+t
+c
+O
+0
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+2
+v
+8
+8
+8
+0
+0
+.
+9
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+M -FUNCTIONS AND SCREW FUNCTIONS :
+APPLICATIONS TO GOLDBACH’S PROBLEM AND
+ZEROS OF THE RIEMANN ZETA-FUNCTION
+
+KOHJI MATSUMOTO AND MASATOSHI SUZUKI
+
+Abstract. We study the M -functions, which describe the limit theorem for the value-
+distributions of the secondary main terms in the asymptotic formulas for the summa-
+tory functions of the Goldbach counting function. One of the new aspects is a sufficient
+condition for the Riemann hypothesis provided by some formulas of the M -functions,
+which was a necessary condition in previous work. The other new aspect is the re-
+lation between the secondary main terms and the screw functions, which provides
+another necessary and sufficient condition for the Riemann hypothesis. We study such
+M -functions and screw functions in generalized settings by axiomatizing them.
+
+The absolutely convergent series
+
+1. Introduction
+
+H(X) :=
+
+X ρ−1/2
+ρ(ρ + 1)
+
+(cid:88)
+
+ρ
+
+, X ≥ 1
+
+(1.1)
+
+over nontrivial zeros ρ of the Riemann zeta function ζ(s) was studied by Fujii in his
+series of papers [10, 11, 12], motivated in part by its contribution to the study of the
+summatory function
+
+(cid:32)
+
+(cid:88)
+
+(cid:88)
+
+(cid:33)
+
+Λ(m)Λ(k)
+
+n≤X
+
+m+k=n
+
+related to the Goldbach conjecture, where Λ(n) is the von Mangoldt function defined by
+Λ(n) = log p if n = pk for some prime number p with k ∈ Z>0 and Λ(n) = 0 otherwise.
+The series H(X) is real-valued, since the set of nontrivial zeros of ζ(s) is closed under
+complex conjugation. The asymptotic formula
+
+(cid:32)
+
+(cid:88)
+
+(cid:88)
+
+n≤X
+
+m+k=n
+
+(cid:33)
+
+Λ(m)Λ(k)
+
+=
+
+1
+2
+
+X 2 − 2X 3/2 H(X) + R(X)
+
+(1.2)
+
+with the estimate R(X) = O((X log X)4/3) was proved first by Fujii [11] under the
+Riemann hypothesis, which asserts that ℜ(ρ) = 1/2 for all nontrivial zeros ρ. After
+that, R(X) = O(X 1+ε) was conjectured by Egami and Matsumoto [8], and R(X) =
+O(X(log X)5) was proven by Bhowmik and Schlage-Puchta [2] under the Riemann hy-
+pothesis. The conditional error term has been improved to O(X(log X)3) by Languasco
+and Zaccagnini [21] and later by Goldston and Yang [14] by a different method. These
+two estimates are close to the omega result Ω(X log log X) obtained in [2]. There are
+other interesting studies on the relation between formula (1.2) and zeros of the Riemann
+zeta function, such as Bhowmik and Ruzsa [1], Billington, Cheng, Schettler, and Suri-
+ajaya [3], and references therein, but we will not discuss them in detail here, since the
+subject of this paper is the value-distribution of somewhat general sums including (1.1).
+
+Date: Version of October 21, 2025.
+2020 Mathematics Subject Classification. Primary 11M41, Secondary 11P32, 11M26, 11M99 .
+Key words and phrases. Goldbach’s problem; M -function; Riemann Hypothesis; screw function;
+
+infinitely divisible characteristic function .
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+K. MATSUMOTO AND M. SUZUKI
+
+The series H(X) also appears in the average of the oscillatory term of the Chebyshev
+
+function as
+
+(cid:90) X
+
+0
+
+
+
+
+
+(cid:88)
+
+n≤y
+
+
+ dy = −X 3/2H(X) −
+
+Λ(n) − y
+
+ζ ′
+ζ
+
+(0)X
+
++
+
+ζ ′
+ζ
+
+(−1) − X
+
+∞
+(cid:88)
+
+n=1
+
+X −2n
+2n(2n − 1)
+
+(1.3)
+
+for X ≥ 1 ([11, p. 249]).
+
+Concerning the value of H(X), first, it is bounded under the Riemann hypothe-
+sis, more precisely |H(X)/2| < 0.023059 ([23, (1.7)]), due to the absolute conver-
+gence of the series. Fujii [12] proved that H(X)/2 > 0.012 for infinitely many X and
+H(X)/2 < −0.012 for infinitely many X. Mossinghoff and Trudgian [23] improved
+these inequalities into H(X)/2 > 0.021030 and H(X)/2 < −0.022978. They derived
+the results by assuming only the Riemann hypothesis. The first author [22] proved more
+detailed results for the value-distribution of H(X) further assuming the linear indepen-
+dence over rationals for the set of positive imaginary parts of the nontrivial zeros.
+
+We first highlight a few results which are later proved in a more general context.
+
+Theorem 1.1. We assume the Riemann hypothesis and the linear independence over
+rationals for the set of positive imaginary parts of the nontrivial zeros of the Riemann
+zeta function. Then, there exists an explicitly constructible density function MH : R →
+R≥0, for which
+
+lim
+T →∞
+
+1
+T
+
+(cid:90) T
+
+0
+
+Φ(H(et)) dt =
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+MH (u)Φ(u) du
+
+(1.4)
+
+holds for any test function Φ : R → C which is locally Riemann integrable. The function
+MH (u) is continuous, nonnegative, compactly supported, and
+
+(cid:82)
+R MH (u) du = 1.
+
+1√
+
+2π
+
+We immediately obtain this result as a corollary of [22, Theorem 2.3] (see also the
+proof of Corollary 2.1 below). We refer to the function MH appearing in formula (1.4)
+as the M -function, following [15] and [22]. Note that the Riemann hypothesis is not
+assumed in [22, Theorem 2.3], because it studies the series
+
+X iℑ(ρ)
+ρ(ρ + 1)
+
+,
+
+(cid:88)
+
+ρ
+
+not the series (1.1).
+
+Assuming the Riemann hypothesis, |X ρ−1/2| = 1 in (1.1). Thus, the absolute con-
+vergence of H(X) implies its boundedness. The compactness of the support of MH (u)
+in formula (1.4) is a consequence of the boundedness of H(X) under the Riemann hy-
+pothesis (see the proof of Theorem 1.1 after Corollary 2.1). As the converse of Theorem
+1.1, we observe that the boundedness of H(X) follows from formula (1.4). On the other
+hand, as will be shown in the more general setting in Section 3, boundedness of H(X)
+implies that all i(ρ − 1/2) are real (cf. Corollary 3.1), that is, the Riemann hypothesis
+holds. Therefore, we obtain the following:
+
+Theorem 1.2. We assume that the formula (1.4) holds for a compactly supported con-
+tinuous function MH : R → R and for any test function Φ : R → C which is locally
+Riemann integrable. Then H(X) is bounded, and hence the Riemann hypothesis holds.
+
+This is a special case of Corollary 3.2. In (1.4), the function MH is a nonnegative
+function, but it is not assumed to be nonnegative in Theorem 1.2 because it is not
+necessary for the proof.
+
+2
+√
+X
+
+(cid:33)
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+3
+
+Next, we consider the following variant of (1.1)
+X ρ−1/2
+ρ(1 − ρ)
+
+H1(X) :=
+
+(cid:88)
+
+ρ
+
+, X ≥ 1,
+
+(1.5)
+
+which not only has a value-distribution similar to (1.1), but also has richer properties.
+We find that asymptotic formula (1.2) implies
+
+(cid:88)
+
+n≤X
+
+1
+n2
+
+(cid:32)
+
+(cid:88)
+
+m+k=n
+
+(cid:33)
+
+Λ(m)Λ(k)
+
+= log X + c2 +
+
+H1(X) + E(X),
+
+(1.6)
+
+where
+
+c2 = lim
+X→∞
+
+
+
+
+
+(cid:88)
+
+n≤X
+
+1
+n2
+
+(cid:32)
+
+(cid:88)
+
+m+k=n
+
+Λ(m)Λ(k)
+
+− log X
+
+
+
+
+
+(1.7)
+
+and E(X) is the error term estimated as E(X) ≪ X −2R(X) + (cid:82) ∞
+X y−3R(y)dy using
+partial summation. Conversely, formula (1.2) with the estimate R(X) ≪ X 2E(X) +
+(cid:82) X
+1 yE(y)dy can be derived from (1.6) by partial summation (see Section 7 for details).
+In this sense, the contributions of series H(X) and H1(X) to the Goldbach problem are
+equivalent. Furthermore, the argument in [22] can be applied to H1(X), and therefore
+results similar to Theorems 1.1 and 1.2 hold for H1(X) (Corollary 2.1 and Theorem 3.1
+below).
+
+The series H1(X) also appears in the study of Euler’s totient function as follows
+(cid:19) √
+
+(cid:18) n
+
+lim sup
+n→∞
+
+φ(n)
+
+− eC0 log log n
+
+n = eC0(2 + lim sup
+X→∞
+= eC0(2 + H1(1))
+
+H1(X))
+
+(Nicolas [25, Theorem 1.1, p. 319]), where C0 is the Euler-Mascheroni constant. From
+the definition, the constant c2 in (1.7) may be considered an analog of C0.
+
+To discuss the advantages of H1(X), we briefly review the class of screw functions
+according to Kre˘ın and Langer [20]. A continuous function g(t) on R is called a screw
+function on R if it satisfies g(−t) = g(t) for all t ∈ R and the kernel
+
+Gg(t, u) := g(t − u) − g(t) − g(−u) + g(0)
+
+is nonnegative definite on R×R, that is, (cid:80)n
+i,j=1 Gg(ti, tj) ξiξj ≥ 0 for any n ∈ Z>0, ti ∈ R,
+and ξi ∈ C. The class of screw functions was introduced as a natural generalization
+of positive definite functions and is an interesting subject related to various topics in
+analysis as explained in [20, Section 1]. That class has recently been applied to the
+study of the zeta function by the second author [27]. The series H1(X) is related to the
+theory of screw functions as follows.
+
+Theorem 1.3. The function
+
+is a screw function on R if and only if the Riemann hypothesis holds.
+
+gH1(t) := H1(et) − H1(1)
+
+This is a special case of Corollary 4.1. It shows a remarkable property of H1(X) that
+H(X) does not have. In fact, any relation between the latter and a screw function is not
+known. Further, the M -function of H1(X) relates to an infinitely divisible distribution
+via the attached screw function. A distribution µ on R is called infinitely divisible if
+there exists a distribution µn on R such that µ = µn ∗ · · · ∗ µn (n-fold) for every positive
+integer n. We find that if g(t) is a screw function, then exp(g(t)) is the characteristic
+function of an infinitely divisible distribution by [20, Theorem 5.1] and [26, Theorem 8.1
+and Remark 8.4] (see also [24] and Section 5). Therefore, by Theorem 1.3, there exists an
+infinitely divisible distribution corresponding to gH1(t) under the Riemann hypothesis.
+
+4
+
+K. MATSUMOTO AND M. SUZUKI
+
+Theorem 1.4. We assume the Riemann hypothesis and the linear independence over
+rationals for the set of positive imaginary parts of the nontrivial zeros of ζ(s). Let
+MH1(w) be the M -function in the analog of Theorem 1.1 for H1(X) (Corollary 2.1 and
+Theorem 3.1 below). For y > 0, let µy(x) be the infinitely divisible distribution on R
+whose characteristic function is exp(ygH1(t)):
+
+exp(ygH1(t)) =
+
+(cid:90) ∞
+
+−∞
+
+eitxµy(dx).
+
+Then the value of the point mass of µy(x) at the origin is given by the M -function as
+follows:
+
+µy({0}) = e−yH1(1) (cid:103)MH1(−iy) = e−yH1(1) (cid:89)
+
+J0
+
+γ>0
+
+(cid:19)
+
+(cid:18) 2iymγ
+1/4 + γ2
+
+,
+
+(1.8)
+
+where
+
+(cid:103)MH1(z) =
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+MH1(u)eizu du (z ∈ C),
+
+the product (cid:81)
+γ>0 ranges over all positive imaginary parts γ of nontrivial zeros of ζ(s)
+without multiplicity, mγ is the multiplicity of the nontrivial zero 1/2 + iγ, and J0(z) is
+the Bessel function of the first kind of order zero.
+
+This is a special case of Theorem 5.1. We do not know what equation (1.8) can be
+applied to, but it is interesting in its own right, because, in general, it is difficult to
+calculate values of the corresponding infinitely divisible distribution for a given screw
+function (or a L´evy measure).
+
+In the following sections, we prove Theorems 1.1 to 1.4 in more general settings
+
+including the series
+
+Hℓ(X) :=
+
+X ρ−1/2
+(ρ − ℓ)((1 − ρ) − ℓ)
+
+(cid:88)
+
+ρ
+
+, X ≥ 1,
+
+ℓ ∈ R,
+
+(1.9)
+
+where the sum is taken with multiplicity. The series Hℓ(X) is nothing but (1.5) when
+ℓ = 1, and is real-valued by the same reasoning as (1.1). The difference H1/2(et)−H1/2(1)
+becomes the screw function of ζ(s) studied in [27] (see the comments after Proposition
+6.3). The reason why we proceed with the discussion in general settings is to show that
+the value distributions of absolutely convergent oscillatory sums such as (1.1), (1.5),
+and (1.9) can be discussed regardless of the specific form of the coefficients. As a result,
+such a theory can not only be applied to the sums replacing the nontrivial zeros of
+the Riemann zeta-function with those of Dedekind zeta-functions or automorphic L-
+functions in (1.1), (1.5), and (1.9), but also to sums of different analytic nature, such
+as
+
+(cid:88)
+
+ρ
+
+Γ((1 − ρ)/2)
+ζ ′(ρ)
+
+X ρ− 1
+2 ,
+
+(1.10)
+
+which appears in a formula of Ramanujan, and whose convergence is more delicate
+compared to (1.1) and (1.5). The conditional convergence of (1.10) is discussed in
+Titchmarsh [28, pp. 219–220]. Chirre and Gonek [5] proved that (1.10) converges
+absolutely under what they named the “Weak Mertens Hypothesis”, and studied its
+value distribution under the linear independence over rationals for the set of positive
+imaginary parts of the nontrivial zeros of ζ(s).
+
+The results mentioned in the introduction are proved in the following sections as
+special cases of the general theorems. In Sections 2 and 3 we study M -functions. In
+Section 2, we set up an axiomatic framework that includes H(X) and Hℓ(X) and prove
+formulas for M -functions (Theorem 2.1) as a generalization of Theorem 1.1. In Section
+3, we prove Theorem 3.1, which includes Theorem 1.2 and can be viewed as the converse
+of Theorem 2.1, with one additional condition to the setting in Section 2. In Sections 4
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+5
+
+and 5, we study screw functions by adding a few conditions to the axioms in Sections 2
+and 3. Theorem 1.3 is proven as a special case of Corollary 4.1 in Section 4. Theorem
+1.4 is proven as a special case of Theorem 5.1 in Section 5. Furthermore, we additionally
+provide explicit formulas for H(X) and Hℓ(X) that do not include nontrivial zeros of
+ζ(s) in their expressions in Section 6. Finally, we explain the equivalence of (1.2) and
+(1.6) under the Riemann hypothesis in Section 7.
+
+2. The axiomatic framework
+
+2.1. Generalization of Theorem 1.1. We prove Theorem 1.1 as a special case of the
+following general cases. Let Π = (Ω, a) be a pair of a countable set of nonzero complex
+numbers Ω with #Ω ≥ 5 and a function a : Ω → C \ {0} satisfying the following two
+conditions:
+(M1) (cid:80)
+(M2) There exists c ≥ 0 such that |ℑ(ω)| ≤ c for every ω ∈ Ω.
+
+ω∈Ω |a(ω)| converges.
+
+The reason why zero is excluded from Ω is that it is meaningless in (3.1) below, and it is
+inconvenient when considering the linear independence of Ω. Also, the reason why the
+function a is assumed to be nonzero is that the proof of Proposition 4.1 below works.
+
+Clearly, Ω ⊂ R implies (M2). Furthermore, we denote by LIC(Ω) the assertion
+that the set Ω is linearly independent over the rationals. The importance of linear
+independence in the theory of value-distribution of ζ(s) was probably first pointed out
+by Wintner [29].
+
+The pair of the set
+
+Ω+
+
+ζ := {ω = i(ρ − 1/2) | ζ(ρ) = 0, 0 < ℜ(ρ) < 1, ℑ(ρ) > 0},
+
+(2.1)
+
+(ρ = 1/2 − iω, ω ∈ Ω ⊂ C) and either
+
+aH (ω) : =
+
+2mω
+(1/2 − iω)(3/2 − iω)
+
+or
+
+aHℓ(ω) : =
+
+2mω
+(1/2 − iω − ℓ)(1/2 + iω − ℓ)
+
+is an example of pairs satisfying (M1) and (M2), where mω is the multiplicity of the
+nontrivial zero ρ = 1/2 − iω of ζ(s). Note that the claim LIC(Ω+
+ζ ) is different from the
+usual linear independence of the nontrivial zeros of ζ(s), which implies the simplicity
+of the zeros. As can be seen from the proof of [22, Proposition 4.1] together with [22,
+(3.1)], LIC in [22, Theorem 2.3] is used in the latter sense. On the other hand, LIC(Ω+
+ζ )
+does not imply the simplicity of nontrivial zeros, since it excludes information about the
+multiplicities of the nontrivial zeros.
+
+For a pair satisfying (M1) and (M2), we define
+
+fΠ(t) :=
+
+(cid:88)
+
+a(ω)e−itω.
+
+(2.2)
+
+ω∈Ω
+Theorem 2.1. Let Π = (Ω, a) be a pair satisfying (M1). We assume Ω ⊂ R and
+LIC(Ω). Then, there exists a M -function MΠ : C → R≥0, for which
+
+lim
+T →∞
+
+1
+T
+
+(cid:90) T
+
+0
+
+Φ(fΠ(t)) dt =
+
+(cid:90)
+
+C
+
+MΠ(w)Φ(w) |dw|
+
+(2.3)
+
+holds for any test function Φ : C → C which is locally Riemann integrable, where
+|dw| = dudv/(2π) for w = u + iv. The function MΠ(w) is explicitly constructible,
+continuous, nonnegative, compactly supported, and
+
+(cid:90)
+
+C
+
+MΠ(w) |dw| = 1.
+
+6
+
+K. MATSUMOTO AND M. SUZUKI
+
+More precisely,
+
+(cid:40)
+
+supp MΠ ⊆
+
+w ∈ C : |w| ≤
+
+(cid:41)
+
+|a(ω)|
+
+.
+
+(cid:88)
+
+ω∈Ω
+
+Equality holds in (2.4) if Π satisfies
+
+max
+ω∈Ω
+
+|a(ω)| <
+
+1
+2
+
+(cid:88)
+
+ω∈Ω
+
+|a(ω)|.
+
+(2.4)
+
+(2.5)
+
+Before proving Theorem 2.1, we show that Theorem 1.1 is proved by the following
+
+corollary.
+
+Corollary 2.1. Under the same assumptions in Theorem 2.1, we define
+
+M ℜ
+
+Π (u) :=
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+MΠ(u + iv) dv
+
+(u ∈ R)
+
+using the M -function MΠ(w) in (2.3). Then
+
+lim
+T →∞
+
+1
+T
+
+(cid:90) T
+
+0
+
+Φ(ℜ(fΠ(t))) dt =
+
+(cid:90)
+
+R
+
+M ℜ
+
+Π (u)Φ(u) |du|
+
+(2.6)
+
+(2.7)
+
+holds for any test function Φ : R → C which is locally Riemann integrable, where
+|du| = du/
+Π (u) is continuous, nonnegative, compactly supported,
+and
+
+2π. The function M ℜ
+
+√
+
+(cid:90)
+
+R
+
+M ℜ
+
+Π (u) |du| = 1.
+
+More precisely,
+
+(cid:40)
+
+supp M ℜ
+
+Π ⊆
+
+u ∈ R : |u| ≤
+
+(cid:41)
+
+|a(ω)|
+
+,
+
+(cid:88)
+
+ω∈Ω
+
+(2.8)
+
+and the equality holds in (2.8) if Π satisfies (2.5).
+
+Proof. Applying (2.3) to Φ(w) = ψz(w) = exp(iℜ(¯zw)) for z ∈ R,
+
+lim
+T →∞
+
+1
+T
+
+=
+
+(cid:90) T
+
+exp (izℜ(fΠ(t))) dt
+
+0
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+(cid:20) 1
+√
+
+2π
+
+(cid:90)
+
+R
+
+(cid:21)
+
+MΠ(u + iv)dv
+
+exp(izu) du.
+
+This implies (2.7) for Φ(w) = ψz(w). Then, formula (2.7) about general locally Riemann
+□
+integrable functions Φ follows from arguments similar to those in [22, Section 6].
+
+Theorem 1.1 is obtained as MH (u) = M ℜ
+ζ , aH ), since
+
+(Ω+
+
+Π (u) by applying Corollary 2.1 to Π =
+
+H(et) = ℜ(fΠ(t)) by fΠ(t) = 2
+
+(cid:88)
+
+ℑ(ρ)>0
+
+mρ
+ρ(ρ + 1)
+
+et(ρ−1/2),
+
+where mρ := mω if ρ = 1/2 − iω (cf. (2.1)).
+In particular, the compactness of the
+support of MH (u) follows from (2.8), i.e., from the boundedness of H(X). The analog
+of Theorem 1.1 for Hℓ(X) (ℓ ∈ R) is obtained by applying Corollary 2.1 to Π = (Ω+
+ζ , aHℓ)
+as well. See Section 2.3 for the confirmation that condition (2.5) is satisfied in these
+cases. If we take the pair of
+
+Ωℑ,+
+ζ
+
+:= {−ℑ(ρ) | ζ(ρ) = 0, 0 < ℜ(ρ) < 1, ℑ(ρ) > 0}
+
+and aH , the analog of Theorem 1.1 for Ψ(X) in [22, (1.2)] is obtained.
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+7
+
+2.2. Proof of Theorem 2.1. Theorem 2.1 is proved by almost the same argument as
+in the proof of [22, Theorem 2.3] under the assumptions (M1), Ω ⊂ R, and the LIC(Ω).
+Therefore, we only describe the outline of the proof.
+
+Let cω = |a(ω)| and βω = arg a(ω). Then,
+
+f (t) := fΠ(t) =
+
+cω e−i(tω−βω).
+
+(cid:88)
+
+ω∈Ω
+
+We first consider the finite truncation
+
+fN (t) =
+
+(cid:88)
+
+|ω|≤N
+
+cω e−i(tω−βω)
+
+(N ∈ Z>0).
+
+Let T be the unit circle on C, and TN = (cid:81)
+
+SN (tN ) =
+
+T. Define
+
+cω tω,
+
+|ω|≤N
+(cid:88)
+
+|ω|≤N
+
+where tN = (tω)|ω|≤N ∈ TN . Then obviously
+
+(2.9)
+
+fN (t) = SN ((e−i(tω−βω))|ω|≤N ).
+These fN (t) and SN (tN ) are analogs of (3.3) and (3.4) in [22], respectively, but differ in
+that ω are not subscripted. For example, in [22], fN (t) consists of N terms, but fN (t)
+above consists of all terms of ω that satisfy |ω| ≤ N .
+Proposition 2.1. We may construct a function MN : C → R≥0, for which
+
+(2.10)
+
+(cid:90)
+
+C
+
+MN (w)Φ(w)|dw| =
+
+(cid:90)
+
+TN
+
+Φ(SN (tN ))d∗tN
+
+holds for any continuous function Φ on C, where |dw| = dudv/(2π) for w = u + iv
+and d∗tN is the normalized Haar measure on TN , that is the product measure of d∗t =
+dθ/(2π) for t = eiθ ∈ T. In particular, we obtain
+
+(cid:90)
+
+C
+
+MN (w)|dw| = 1.
+
+Also, if two or more ω’s satisfy |ω| ≤ N , the function MN (w) is compactly supported,
+nonnegative, and MN ( ¯w) = MN (w). Moreover, if five or more ω’s satisfy |ω| ≤ N ,
+MN (w) is continuous.
+
+This is shown by the same argument as in the proof of [22, Proposition 3.1]. The
+condition that there are two or more (resp. five or more) ω’s that satisfy |ω| ≤ N
+corresponds to the condition N ≥ 2 (resp. N ≥ 5) in [22, Proposition 3.1] due to the
+difference in the definitions of fN (t) and SN (tN ). The function MN (w) is constructed
+as a multiple convolution of
+
+mω(w) =
+
+1
+r
+
+δ(r − cω), w = reiθ ∈ C, r = |w|, θ = arg w
+
+for |ω| ≤ N , where δ(·) stands for the Dirac delta distribution. In particular,
+
+supp MN ⊆
+
+
+
+
+w ∈ C :
+
+
+
+|w| ≤
+
+(cid:88)
+
+cω
+
+|ω|≤N
+
+
+
+
+
+
+(2.11)
+
+if five or more ω’s satisfy |ω| ≤ N . The inclusion follows from the fact that the support
+of MΠ coincides with the image of SN (tN ) (cf. [22, Proposition 3.4]). From this fact, we
+find that (2.11) holds in general by considering definition (2.9) geometrically. Moreover,
+the equality holds in (2.11) if
+
+max
+|ω|≤N
+
+cω <
+
+1
+2
+
+(cid:88)
+
+cω.
+
+|ω|≤N
+
+(2.12)
+
+8
+
+K. MATSUMOTO AND M. SUZUKI
+
+This can be shown as follows. (This type of argument originates from Bohr; see [4,
+Hilfssatz 1].) Assume that max|ω|≤N cω is attained by ω = ω1, and N is large enough to
+be |ω1| ≤ N . When tω1 runs over T, the set of all cω1tω1 forms a circle C1 whose center
+is the origin and the radius is cω1. For any other ω2 with |ω2| ≤ N , the set
+
+{cω1tω1 + cω2tω2 | tω1, tω2 ∈ T}
+is an annulus with inner radius cω1 − cω2 and outer radius cω1 + cω2. By adding a
+third ω3, we obtain a larger annulus, with inner radius cω1 − cω2 − cω3 and outer radius
+cω1 + cω2 + cω3. Repeating this procedure, we find that the interior of the circle C1 is
+completely included in the image of SN if condition (2.12) is satisfied and N is sufficiently
+large, and hence the equality holds in (2.11).
+
+By assumptions Ω ⊂ R and the LIC(Ω), the following holds by the same argument as
+
+in the proof of [22, Proposition 4.2].
+
+Proposition 2.2. We have
+(cid:90) T
+
+lim
+T →∞
+
+1
+T
+
+Ψ((e−i(tω−βω))|ω|≤N ) dt =
+
+(cid:90)
+
+TN
+
+Ψ(tN )d∗tN
+
+0
+
+for any continuous Ψ : TN → C.
+
+In view of (2.10), we have
+
+lim
+T →∞
+
+1
+T
+
+(cid:90) T
+
+0
+
+Φ(fN (t)) dt =
+
+(cid:90)
+
+TN
+
+Φ(SN (tN ))d∗tN
+
+for any continuous function Φ on C by Proposition 2.2. Then, combining this with
+Proposition 2.1, we have
+
+lim
+T →∞
+
+1
+T
+
+(cid:90) T
+
+0
+
+Φ(fN (t)) dt =
+
+(cid:90)
+
+C
+
+MN (w)Φ(w)|dw|
+
+for any continuous Φ, which is the “finite-truncation” analog of Theorem 2.1.
+
+Let ψz(w) = exp(iℜ(¯zw)), and define the Fourier transform of mω as
+
+(cid:101)mω(z) :=
+
+(cid:90)
+
+C
+
+mω(w)ψz(w)|dw|.
+
+We have
+
+(2.13)
+(cid:101)mω(z) = J0(cω|z|)
+by [22, Remark 5.1]. As stated there, this is originally due to Jessen and Wintner [18,
+Section 5] and Ihara [15, Section 3.1]. If we define
+
+(cid:102)MN (z) :=
+
+(cid:89)
+
+|ω|≤N
+
+(cid:101)mω(z),
+
+(2.14)
+
+then (cid:102)MN (z) converges to (cid:102)M (z) uniformly in C as N → ∞. The limit function (cid:103)MΠ(z) :=
+(cid:102)M (z) is continuous and belongs to Lp (for any p ∈ [1, ∞]), and the above convergence
+is also Lp-convergence. The proof of these facts is the same with the proof of [22,
+Proposition 5.5], because it is applied by (M1) and the definition of fN (t). Now define
+
+MΠ(w) :=
+
+(cid:90)
+
+C
+
+(cid:103)MΠ(z)ψ−w(z)|dz|.
+
+Then we obtain the following by the same argument as in the proof of [22, Proposition
+5.6] and (2.11).
+Proposition 2.3. When N → ∞, MN (w) converges to MΠ(w) uniformly in w ∈ C.
+The limit function MΠ(w) is continuous, nonnegative, compactly supported, MΠ( ¯w) =
+MΠ(w), and
+
+(cid:90)
+
+C
+
+MΠ(w)|dw| = 1.
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+9
+
+The functions MΠ and (cid:103)MΠ are Fourier duals of each other. In addition,
+(cid:40)
+
+(cid:41)
+
+supp MΠ ⊆
+
+w ∈ C :
+
+|w| ≤
+
+(cid:88)
+
+cω
+
+and the equality holds if Π satisfies (2.12) for N = ∞.
+
+ω∈Ω
+
+Finally, by applying the argument in [22, Section 6] to the above case, the proof of
+□
+
+Theorem 2.1 is completed.
+
+2.3. Examples satisfying condition (2.5). There are five nontrivial zeros of ζ(s)
+that satisfy 0 < ℑ(ρ) < 35 from a well-known numerical table. We order these zeros
+so that their imaginary parts increase, and denote them by ρn = 1/2 − iωn (ωn ∈ R<0,
+1 ≤ n ≤ 5). Then we verify that Π = (Ω+
+
+ζ , aH ) satisfies (2.5) by
+
+1
+2
+
+(cid:88)
+
+ℑ(ρ)>0
+
+mρ
+|ρ(ρ + 1)|
+
+>
+
+1
+2
+
+5
+(cid:88)
+
+n=1
+
+1
+|ρn(ρn + 1)|
+
+= 0.00541 . . . >
+
+1
+|ρ1(ρ1 + 1)|
+
+= 0.00497 . . . .
+
+Furthermore, we can verify that (2.5) also holds for Π = (Ω+
+follows. It suffices to prove that the inequality
+
+ζ , aHℓ) for general ℓ ∈ R as
+
+1
+2
+
+5
+(cid:88)
+
+n=1
+
+1
+|(ρn − ℓ)((1 − ρn) − ℓ)|
+
+>
+
+1
+|(ρ1 − ℓ)((1 − ρ1) − ℓ)|
+
+holds for general ℓ, that is equivalent to
+
+5
+(cid:88)
+
+n=2
+
+1
+|(ρn − ℓ)((1 − ρn) − ℓ)|
+
+>
+
+1
+|(ρ1 − ℓ)((1 − ρ1) − ℓ)|
+
+.
+
+(2.15)
+
+If ρ = 1/2 − iω (ω ∈ R), we have
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+(ρ − ℓ)((1 − ρ) − ℓ)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+=
+
+1
+ω2 + (ℓ − 1/2)2 .
+
+Hence, inequality (2.15) becomes
+
+5
+(cid:88)
+
+n=2
+
+1
+n + (ℓ − 1/2)2 >
+ω2
+
+1
+1 + (ℓ − 1/2)2 .
+ω2
+
+Setting x = ℓ − 1/2, define
+
+f (x) =
+
+5
+(cid:88)
+
+n=2
+
+1
+n + x2 −
+ω2
+
+1
+1 + x2 .
+ω2
+
+(2.16)
+
+It remains to show that f (x) > 0 for all x ≥ 0. For x = 0 (ℓ = 1/2), we have
+
+0.00586 . . . =
+
+5
+(cid:88)
+
+1
+ω2
+n
+
+1
+ω2
+1
+
+>
+
+= 0.00500 . . . ,
+
+n=2
+hence f (0) > 0. Extracting x2 from the denominators in (2.16), we obtain
+
+f (x) =
+
+1
+x2
+
+(cid:32) 5
+
+(cid:88)
+
+n=2
+
+1
+1 + (ωn/x)2 −
+
+1
+1 + (ω1/x)2
+
+(cid:33)
+
+∼
+
+1
+x2
+
+(cid:32) 5
+
+(cid:88)
+
+n=2
+
+(cid:33)
+
+1 − 1
+
+=
+
+3
+x2 > 0
+
+as x → ∞. More precisely, using
+
+1 − x <
+
+1
+1 + x
+
+< 1 − x + x2,
+
+10
+
+K. MATSUMOTO AND M. SUZUKI
+
+we estimate f (x) from below as
+
+5
+(cid:88)
+
+n=2
+
+1
+1 + (ωn/x)2 −
+
+1
+1 + (ω1/x)2 >
+
+5
+(cid:88)
+
+(cid:0)1 − (ωn/x)2(cid:1) − 1 + (ω1/x)2 − (ω1/x)4
+
+n=2
+
+= 3 −
+
+1
+x2
+
+(cid:32) 5
+
+(cid:88)
+
+n=2
+
+(cid:33)
+
+n − ω2
+ω2
+1
+
+−
+
+ω4
+1
+x4 .
+
+For x ≥ 60 we then have
+
+and hence
+
+0 <
+
+1
+x2
+
+(cid:32) 5
+
+(cid:88)
+
+n=2
+
+(cid:33)
+
+n + ω2
+ω2
+1
+
++
+
+ω4
+1
+x4 < 1,
+
+f (x) >
+
+2
+x2 > 0
+
+(x ≥ 60).
+
+Finally, for 0 ≤ x ≤ 60, one can directly verify numerically that f (x) > 0. Therefore,
+f (x) > 0 holds for all x ≥ 0.
+
+3. A condition for Ω to be a subset of R
+
+For a pair Π = (Ω, a) satisfying (M1) and (M2), we define
+
+gΠ(t) := fΠ(t) − fΠ(0) =
+
+(cid:88)
+
+ω∈Ω
+
+a(ω)(e−itω − 1)
+
+(3.1)
+
+for real t. The function gΠ(t) is a continuous function on the real line with gΠ(0) = 0,
+because the series on the right-hand side of (3.1) converges absolutely and uniformly on
+any finite closed interval of R by (M1) and (M2).
+
+Proposition 3.1. Let Π = (Ω, a) be a pair satisfying (M1) and (M2). Then, the real
+part ℜ(gΠ(t)) is bounded on [0, ∞) if and only if Ω is a subset of the closed lower half-
+plane C \ C+ = {z | ℑ(z) ≤ 0}.
+Proof. If Ω ⊂ C \ C+, the function gΠ(t) is obviously bounded on [0, ∞) by definition
+(3.1). Therefore, ℜ(gΠ(t)) is also bounded on [0, ∞). To show the converse, we consider
+the Fourier transform of ℜ(gΠ(t))1≥0(t). By the integral formula
+
+we obtain
+
+(cid:90) ∞
+
+0
+
+(cid:90) ∞
+
+0
+
+(e−itω − 1) eizt dt =
+
+iω
+z(z − ω)
+
+for ℑ(z) > max{0, ℑ(ω)},
+
+ℜ(gΠ(t)) eizt dt =
+
+(cid:90) ∞
+
+0
+
+1
+2
+
+(gΠ(t) + gΠ(t)) eizt dt = −
+
+i
+z2 QΠ(z)
+
+(3.2)
+
+for ℑ(z) > c, where
+
+QΠ(z) :=
+
+1
+2
+
+(cid:34)
+
+(cid:88)
+
+ω∈Ω
+
+a(ω)
+
+−zω
+z − ω
+
+(cid:88)
+
++
+
+a(ω)
+
+ω∈Ω
+
+(cid:35)
+
+−z(−¯ω)
+z − (−¯ω)
+
+and c ≥ 0 is the constant in (M2). By definition and (M2), QΠ(z) is meromorphic on C
+and holomorphic on C \ (Ω ∪ (−Ω)).
+
+Suppose that ℜ(gΠ(t)) is bounded on [0, ∞). Then, the left-hand side of (3.2)
+converges absolutely and uniformly on any compact subset in the upper half-plane
+C+ = {z | ℑ(z) > 0}. Therefore, QΠ(z) is holomorphic in C+. However, if Ω has an
+element in C+, it must be a pole of QΠ(z), since a(ω) ̸= 0 for every ω ∈ Ω by definition.
+□
+This is a contradiction. Hence, Ω ⊂ C \ C+ if ℜ(gΠ(t)) is bounded on [0, ∞).
+
+To prove an extension of Theorem 1.2 under the general setting in Section 2.1, we
+
+add the following third condition.
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+11
+
+(M3) The set Ω is closed under the complex conjugation ω (cid:55)→ ¯ω.
+
+Condition (M3) is satisfied by both (Ω+
+is a nontrivial zero of ζ(s), 1 − ¯ρ = 1/2 − i¯ω is also a zero with the same multiplicity.
+
+ζ , aH1), because, if ρ = 1/2 − iω
+
+ζ , aH ) and (Ω+
+
+Due to the symmetry of Ω in (M3), the following result immediately follows from
+
+Proposition 3.1.
+
+Corollary 3.1. Let Π = (Ω, a) be a pair satisfying (M1), (M2), and (M3). Then, the
+real part ℜ(gΠ(t)) is bounded on [0, ∞) if and only if Ω is a subset of R.
+Remark 3.1. In Corollary 3.1, if ℜ(gΠ(t)) is bounded on [0, ∞), then Ω ⊂ R, which
+implies that ℜ(gΠ(t)) is bounded on R by (3.1). Therefore, [0, ∞) in Corollary 3.1 can
+be replaced by R, but the behavior of ℜ(gΠ(t)) on (−∞, 0) is not necessary below.
+
+Using Corollary 3.1, we obtain the following result.
+
+Theorem 3.1. Let Π = (Ω, a) be a pair satisfying (M1), (M2), and (M3). We assume
+that equality (2.7) holds for any test function Φ : R → C which is locally Riemann
+integrable. Then Ω is a subset of R.
+
+Proof. By Corollary 3.1, it is sufficient to prove that ℜ(fΠ(t)) is bounded on [0, ∞) if
+(2.7) holds for any locally Riemann integrable function Φ. We prove the boundedness of
+ℜ(fΠ(t)) on [0, ∞) by contradiction. We denote |ℜ(fΠ(t))| by F (t) for simplicity. First,
+we note that there exists R > 0 such that
+
+supp M ℜ
+
+Π ⊂ {u ∈ R : |u| ≤ R},
+
+since the support of M ℜ
+unbounded on [0, ∞). Then, there exists t1 > 0 that satisfies
+
+Π (u) is compact by Corollary 2.1. We assume that F (t) (≥ 0) is
+
+F (t1) > R + 1
+
+and t1 > R + 1.
+
+For this, we write a1 = F (t1). Subsequently, again from the unboundedness, there exists
+t2 > t1 + 2 that satisfies F (t2) > a1 + 2. For this, we write a2 = F (t2). By repeating
+the above process, we obtain sequences {tn}n≥1 and {an}n≥1 that satisfy an = F (tn),
+
+tn+1 > tn + 2,
+
+and an+1 = F (tn+1) > an + 2.
+
+By definition, these two sequences are strictly monotonically increasing.
+
+For each tn, there exists 0 < δn < 1 such that |t − tn| < δn implies |F (t) − an| < 1
+by the continuity of F (t). Note that no t ∈ R satisfies |t − tn| < 1 for two different n
+simultaneously, because tn+1 > tn + 2.
+
+Now we define the test function (cid:101)Φ by
+
+(cid:101)Φ(u) :=
+
+
+
+
+
+
+tn
+δn
+0
+
+if |u − an| < 1,
+
+otherwise.
+
+This (cid:101)Φ is clearly a Riemann integrable function, with the support
+
+∞
+(cid:91)
+
+[an − 1, an + 1].
+
+n=1
+
+Note that no u ∈ R satisfies |u − an| < 1 for two different n simultaneously, because
+an+1 > an + 2 by definition.
+
+For the test function Φ(u) := (cid:101)Φ(|u|), the value of the right-hand side of (2.7) is zero,
+since the support of Φ is contained in {u > R} by a1 − 1 = F (t1) − 1 > R + 1 − 1, and
+M ℜ
+Π (u) = 0 if u > R. However, the value of the left-hand side of (2.7) is not zero as
+follows.
+
+12
+
+K. MATSUMOTO AND M. SUZUKI
+
+By definition of δn, if |t−tn| < δn, then |F (t)−an| < 1, and therefore (cid:101)Φ(F (t)) = tn/δn.
+
+Hence, for T = tN + δN ,
+(cid:90) T
+
+1
+T
+
+Φ(ℜ(fΠ(t))) dt =
+
+0
+
+≥
+
+=
+
+>
+
+1
+tN + δN
+
+1
+tN + δN
+
+1
+tN + δN
+2tN
+tN + δN
+
+0
+N
+(cid:88)
+
+n=1
+N
+(cid:88)
+
+n=1
+
+> 1.
+
+(cid:90) tN +δN
+
+(cid:101)Φ(F (t)) dt
+
+(cid:90) tn+δn
+
+tn−δn
+
+(cid:90) tn+δn
+
+tn−δn
+
+(cid:101)Φ(F (t)) dt
+
+tn
+δn
+
+dt =
+
+1
+tN + δN
+
+N
+(cid:88)
+
+n=1
+
+tn
+δn
+
+· 2δn
+
+The final inequality on the right-hand side follows from δN < 1 and tN ≥ t1 > R+1 > 1.
+That is, T −1 (cid:82) T
+0 Φ(F (t)) dt > 1 for the increasing sequence T = tN + δN , and hence, the
+□
+left-hand side of (2.7) cannot have zero as the limit. This is a contradiction.
+
+Applying Theorem 3.1 to (Ω+
+
+ζ , aH ), we obtain the following, because Ω+
+
+ζ ⊂ R implies
+
+the Riemann hypothesis.
+
+Corollary 3.2. Theorem 1.2 holds.
+
+ζ , aH1).
+
+The (obvious) analog of Theorem 1.2 for H1(X) is obtained by applying Theorem
+3.1 to (Ω+
+(cf. The comment after Corollary 2.1 at the end of Section 2.1.)
+Furthermore, the following result is also proven by replacing ℜ(fΠ(t)), M ℜ
+Π (u), and
+(cid:101)Φ(|u|) (u ∈ R) with fΠ(t), MΠ(w), and (cid:101)Φ(|w|) (w ∈ C), respectively, in the proof of
+Theorem 3.1.
+
+Theorem 3.2. Let Π = (Ω, a) be a pair satisfying (M1), (M2), and (M3). We assume
+that equality (2.3) holds for any test function Φ : C → C which is locally Riemann
+integrable. Then fΠ(t) is bounded on [0, ∞).
+
+4. A class of screw functions
+
+To relate the functions (2.2) attached to pairs Π = (Ω, a) with screw functions, we
+
+consider the following conditions:
+
+(S1) a(¯ω) = a(ω) for any ω ∈ Ω,
+(S2) Ω ⊂ R and a(ω) > 0 for all ω ∈ Ω.
+
+The former is a weaker condition than the latter, since (S2) implies (S1). The pairs
+(Ω+
+ζ , aHℓ) satisfy (S1) unconditionally and (S2) under the Riemann hypothesis. The
+pair (Ω+
+ζ , aH ) satisfies neither (S1) nor (S2) even if assuming the Riemann hypothesis.
+We have already noted that (M1) and (M2) imply the continuity of gΠ(t) and gΠ(0) = 0,
+but if we assume (M3) and (S1) in addition, gΠ(t) satisfies
+
+gΠ(−t) = gΠ(t).
+
+(4.1)
+
+Proposition 4.1. Let Π = (Ω, a) be a pair satisfying (M1), (M2), (M3), and (S1).
+Then, gΠ(t) defined in (3.1) is a screw function on R if and only if Π satisfies (S2).
+
+Proof. First, we prove that gΠ(t) is a screw function if Π satisfies (S2). It suffices to
+show that Gg(t, u) is nonnegative definite on R, since we already confirm (4.1). We have
+
+Gg(t, u) =
+
+(cid:88)
+
+ω∈Ω
+
+a(ω)(e−itω − 1)(eiuω − 1)
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+13
+
+by a direct calculation, and therefore
+
+n
+(cid:88)
+
+i,j=1
+
+Gg(ti, tj) ξiξj =
+
+a(ω)
+
+(cid:88)
+
+ω∈Ω
+
+(cid:12)
+n
+(cid:12)
+(cid:88)
+(cid:12)
+(cid:12)
+(cid:12)
+
+i=1
+
+(e−itiω − 1)ξi
+
+(cid:12)
+2
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ 0
+
+(4.2)
+
+for any n ∈ Z>0, ti ∈ R and ξi ∈ C by (S2). Hence, Gg(t, u) is nonnegative definite on
+R.
+
+Conversely, we suppose that gΠ(t) is a screw function on R. We define the function
+
+Q(z) by using the right Fourier integral as
+
+(cid:90) ∞
+
+0
+
+gΠ(t) eizt dt = −
+
+i
+z2 Q(z).
+
+By (M1), (M2), and (3.1), the left-hand side is integrated term by term, defining a
+holomorphic function on ℑ(z) > c such that
+(cid:88)
+
+Q(z) =
+
+a(ω)
+
+ω∈Ω
+
+−zω
+z − ω
+
+holds. Furthermore, the assumption implies that Q(z) extends to a holomorphic function
+defined on C+ mapping C+ into C+ ∪ R by [19, Satz 5.9]. Hence, Ω ⊂ R is shown in
+the same way as in the proof of Proposition 3.1 and Corollary 3.1. By the definition of
+screw functions, Gg(t, u) must be nonnegative definite, which implies that a(ω) > 0 for
+□
+all ω ∈ Ω by (4.2).
+
+Applying Proposition 4.1 to Ω = Ω+
+
+ζ ∪ (−Ω+
+
+ζ ) and a = 1
+
+2 aHℓ, we obtain the following,
+
+where the right-hand side of a is an obvious extension to Ω.
+
+Corollary 4.1. The function
+
+gHℓ(t) := Hℓ(et) − Hℓ(1)
+is a screw function on R if and only if the Riemann hypothesis holds. In particular,
+Theorem 1.3 holds.
+
+5. A point mass formula at the origin for
+infinitely divisible distributions
+
+In this section we discuss the connection between the M -functions and the theory of
+infinitely divisible distributions, with the aid of screw functions. First, we review the
+following result:
+
+Proposition 5.1. For a function h(t) on R, exp(h(t)) is the characteristic function of
+an infinitely divisible distribution µ on R: exp(h(t)) = (cid:82) ∞
+
+−∞ eitxµ(dx), if and only if
+
+h(t) = −
+
+1
+2
+
+At2 + iBt +
+
+(cid:90) ∞
+
+−∞
+
+(cid:18)
+
+eitω − 1 −
+
+(cid:19)
+
+itω
+1 + ω2
+
+dν(ω)
+
+(5.1)
+
+for some A ≥ 0, B ∈ R, and a measure ν on R satisfying
+
+ν({0}) = 0 and
+
+(cid:90) ∞
+
+−∞
+
+min(1, ω2)dν(ω) < ∞.
+
+If the measure ν in (5.1) satisfies (cid:82)
+
+|ω|≤1 |ω|dν(ω) < ∞, then (5.1) can be rewritten as
+
+h(t) = −
+
+1
+2
+
+At2 + iB0t +
+
+(cid:90) ∞
+
+−∞
+
+(eitω − 1)dν(ω)
+
+(5.2)
+
+for some B0 ∈ R.
+
+Proof. The first half is obtained by applying [26, Theorem 8.1 and Remark 8.4] to the
+case of R, and the second half is obtained by applying [26, (8.7)] to the case of R. □
+
+Using Proposition 5.1, we obtain:
+
+14
+
+K. MATSUMOTO AND M. SUZUKI
+
+Proposition 5.2. Let Π = (Ω, a) be a pair satisfying (M1) and (S2). Then, for any
+y > 0, there exists an infinitely divisible distribution µΠ,y(x) on R whose characteristic
+function is exp(yℜ(gΠ(t))), that is,
+
+exp(yℜ(gΠ(t))) =
+
+(cid:90)
+
+R
+
+eitxµΠ,y(dx).
+
+(5.3)
+
+Proof. First, we note that Π = (Ω, a) satisfies (M1), (M2), (M3), (S1), and (S2) because
+(M2), (M3), and (S1) follow from (S2). For any y > 0, yℜ(gΠ(t)) is a real-valued screw
+function satisfying yℜ(gΠ(0)) = 0 and fΠ(0) > 0 by assumptions, (3.1), and Proposition
+4.1. Therefore, yℜ(gΠ(t)) has the form (5.1) with A = 0 by [20, Theorem 5.1]. Then, for
+any y > 0, there exists an infinitely divisible distribution µΠ,y(x) such that (5.3) holds
+□
+by Proposition 5.1.
+
+Remark 5.1. In the proof of Proposition 5.2, we referred to [20, Theorem 5.1] to prove
+(5.3), but if we use (5.2) based on (3.1), the result in [20] is not necessary. Such an
+argument is similar to that made in [24, Proof of (1)⇒(2) in Theorem 1.1]. However, in
+order to clarify the relation between screw functions and infinitely divisible distributions
+for the readers, we provided a proof using [20].
+
+Theorem 1.4 is obtained by applying the following result to Π = (Ω+
+
+ζ , aH1) under the
+
+Riemann hypothesis and LIC(Ω+
+
+ζ ) since H1(et) = ℜ(fΠ(t)).
+
+Theorem 5.1. Let Π = (Ω, a) be a pair satisfying (M1) and (S2). We assume LIC(Ω).
+For y > 0, let µΠ,y(x) be the infinitely divisible distribution in Proposition 5.2, and let
+M ℜ
+Π (u) be the M -function in Corollary 2.1. Then the value of the point mass of µΠ,y(x)
+at the origin is given by the M -function as follows:
+
+µΠ,y({0}) = exp(−y fΠ(0))(cid:103)M ℜ
+
+Π (−iy) = exp(−y fΠ(0))
+
+(cid:89)
+
+ω∈Ω
+
+J0(iy|a(ω)|),
+
+(5.4)
+
+where
+
+(cid:103)M ℜ
+
+Π (z) =
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+M ℜ
+
+Π (u)eizu du (z ∈ C).
+
+Proof. The pair Π = (Ω, a) satisfies (M1), (M2), (M3), (S1), and (S2) as in the proof of
+Proposition 5.2. We have
+
+(cid:103)MΠ(z) =
+
+(cid:90)
+
+C
+
+MΠ(w) exp(iℜ(¯zw)) |dw| =
+
+J0(|z||a(ω)|)
+
+(z ∈ C)
+
+(cid:89)
+
+ω∈Ω
+
+from (2.13), (2.14), and Proposition 2.3. Restricting this equation to real z, we get
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+M ℜ
+
+Π (u)eizu du =
+
+(cid:89)
+
+ω∈Ω
+
+J0(z|a(ω)|)
+
+(z ∈ R)
+
+(5.5)
+
+by (2.6), because the power series expansion of J0(x) at the origin consists of even powers
+of x. The left-hand side of (5.5) is the definition of (cid:103)M ℜ
+Π (z) for real z and extends to
+z ∈ C by the compactness of the support of M ℜ
+Π (u) in Corollary 2.1. The right-hand
+side of (5.5) also extends to z ∈ C, because J0(x) = 1 + O(|x|) as |x| → 0. Hence,
+
+(cid:103)M ℜ
+
+Π (z) =
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+M ℜ
+
+Π (u) exp(izu) du =
+
+(cid:89)
+
+ω∈Ω
+
+J0(z|a(ω)|)
+
+(5.6)
+
+holds for z ∈ C.
+
+On the other hand, for x ∈ R, we have
+
+µΠ,y({x}) = lim
+T →∞
+
+1
+2T
+
+(cid:90) T
+
+−T
+
+exp(y ℜ(gΠ(t)))e−ixt dt
+
+= exp(−y fΠ(0)) lim
+T →∞
+
+1
+T
+
+(cid:90) T
+
+0
+
+exp(y ℜ(fΠ(t)))e−ixt dt
+
+(5.7)
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+15
+
+by (5.3) and the inversion formula [7, Theorem 3.10.4], since ℜ(gΠ(t)) is even by (4.1)
+and equals to ℜ(fΠ(t)) − fΠ(0) by (3.1), (M3), and (S1). If we take x = 0 in (5.7), the
+right-hand side is
+
+exp(−y fΠ(0))
+
+1
+√
+2π
+
+(cid:90)
+
+R
+
+M ℜ
+
+Π (u) exp(i(−iy)u) du
+
+= exp(−y fΠ(0))(cid:103)M ℜ
+
+Π (−iy) = exp(−y fΠ(0))
+
+(cid:89)
+
+ω∈Ω
+
+J0(iy|a(ω)|)
+
+by (2.7) for Φ(u) = exp(yu) and (5.6), since J0(x) is even. Therefore, we obtain (5.4). □
+
+6. Explicit formulas for H(X) and Hℓ(X)
+
+The boundedness of the series H(X) and H1(X) can be observed without using the
+information about the nontrivial zeros, at least numerically, by the following formulas
+(Proposition 6.1). As seen in the proof, they are obtained by just combining classical
+results [6, Section 17, (1)], [13, (2.6)], and [17, p. 81]. Also, (6.1) below is essentially
+the same as Fujii’s (1.3), which is obtained by integrating formula (6.5). Similarly, (6.2)
+below is essentially a special case of Ihara, Murty, and Shimura [16, Theorem 1]. In this
+sense, these two formulas are not new. However, the formula for H1(X) is extended to
+the more general cases of Hℓ(X) (Propositions 6.2 and 6.3). This provides an alternative
+proof of [27, Theorem 1.1 (2)], which is used to establish several key results in [27].
+
+Proposition 6.1. The following formulas hold unconditionally for X > 1:
+
+H(X) =
+
+√
+
+1
+2
+
+X −
+
+1
+√
+X
+
+(cid:88)
+
+Λ(n)
+
+(cid:16)
+
+1 −
+
+n≤X
+
+(cid:17)
+
+n
+X
+
+log 2π −
+
+12ζ ′(−1)
+
+(6.1)
+
+1
+√
+
+X
+
+X
+
+−
+
+−
+
+1
+√
+X
+1
+√
+X
+
+2
+
+(cid:20)
+
+log(1 − X −2) +
+
+1
+X
+
+log
+
+(cid:21)
+
+,
+
+X + 1
+X − 1
+
+H1(X) =
+
+(cid:88)
+
+Λ(n)
+√
+n
+
+(cid:32)(cid:114)
+
+X
+n
+
+−
+
+(cid:33)
+
+√
+
+−
+
+X (log X − C0 − 1)
+
+(cid:114) n
+X
+(cid:20) 1
+2
+
+1
+√
+X
+
+n≤X
+1
+√
+X
+
+−
+
+log 2π −
+
+log(1 − X −2) +
+
+X
+2
+
+log
+
+X + 1
+X − 1
+
+(cid:21)
+
+− 1
+
+.
+
+(6.2)
+
+Furthermore, formulas (6.1) and (6.2) hold for X = 1 in the sense that the right limits
+of the right-hand sides at X = 1 are equal to the values of the left-hand sides at X = 1.
+
+Proof. We obtain
+
+and
+
+H(X) =
+
+1
+√
+X
+
+(cid:88)
+
+ρ
+
+X ρ
+ρ
+
+1
+√
+
+−
+
+X
+
+(cid:88)
+
+X
+
+ρ
+
+X ρ+1
+ρ + 1
+
+H1(X) =
+
+1
+√
+X
+
+(cid:88)
+
+ρ
+
+X ρ
+ρ
+
+√
+
+X
+
+−
+
+(cid:88)
+
+ρ
+
+X ρ−1
+ρ − 1
+
+(6.3)
+
+(6.4)
+
+by partial fraction decomposition, where the sum is understood as
+
+(cid:88)
+
+ρ
+
+= lim
+T →∞
+
+(cid:88)
+
+|ℑ(ρ)|≤T
+
+as usual. On the other hand, it is known that
+X ρ
+ρ
+
+= X −
+
+(cid:88)′
+
+(cid:88)
+
+ρ
+
+n≤X
+
+Λ(n) − log 2π −
+
+1
+2
+
+log(1 − X −2)
+
+(6.5)
+
+16
+
+K. MATSUMOTO AND M. SUZUKI
+
+for X > 1 by [6, Section 17, (1)],
+
+X ρ+1
+ρ + 1
+
+=
+
+1
+2
+
+(cid:88)
+
+ρ
+
+X 2 −
+
+(cid:88)′
+
+n≤X
+
+nΛ(n) + 12ζ ′(−1) +
+
+1
+2
+
+log
+
+X + 1
+X − 1
+
+for X > 1 by [13, (2.6)], and
+
+X ρ−1
+ρ − 1
+
+(cid:88)
+
+ρ
+
+= log X −
+
+(cid:88)′
+
+n≤X
+
+Λ(n)
+n
+
+− C0 −
+
+1
+X
+
++
+
+1
+2
+
+log
+
+X + 1
+X − 1
+
+for X > 1 by [17, p. 81] with the replacements 1/x (cid:55)→ X and ρ (cid:55)→ 1 − ρ, where
+
+(6.6)
+
+(6.7)
+
+(cid:88)′
+
+an
+
+n≤X
+
+means
+
+(cid:88)
+
+n≤X
+
+an −
+
+1
+2
+
+aX when X is a prime power and
+
+(cid:88)
+
+n≤X
+
+an otherwise. Applying (6.5)
+
+and (6.6) to (6.3), we obtain (6.1) for X > 1. Applying (6.5) and (6.7) to (6.4), we
+obtain (6.2) for X > 1.
+
+By definition (1.1) (resp.
+
+(6.2)) is right
+continuous at X = 1. On the other hand, the right-hand side of (6.1) (resp. (6.2)) has
+the right limit at X = 1, because
+
+(1.9)), the left-hand side of (6.1) (resp.
+
+log(1 − X −2) +
+
+1
+X
+
+log
+
+X + 1
+X − 1
+
+= 2 log
+
+X + 1
+X
+
++
+
+X − 1
+X
+
+log
+
+X − 1
+X + 1
+
+
+
+1
+2
+
+
+resp.
+
+log(1 − X −2) +
+
+X
+2
+X + 1
+2
+Therefore, (6.1) and (6.2) hold in the sense stated in the proposition.
+
+log(X + 1) − log X −
+
+X + 1
+X − 1
+
+X − 1
+2
+
+log
+
+=
+
+
+
+
+ .
+
+log(X − 1)
+
+Finally, we outline the derivation of (6.1) from (1.3). The left-hand side of (1.3) can
+n≤X Λ(n)(X − n) − X 2/2, and the right-hand side becomes
+
+be written as (cid:80)
+
+−X 3/2H(X) − X log 2π − 12ζ ′(−1) − X
+
+∞
+(cid:88)
+
+n=1
+
+X −2n
+2n(2n − 1)
+
+using the well known formulas ζ ′/ζ(0) = log 2π and ζ(−1) = −1/12. Here, we note that
+
+X
+
+∞
+(cid:88)
+
+n=1
+
+X −2n
+2n(2n − 1)
+
+= −
+
+∞
+(cid:88)
+
+n=1
+
+X −2n+1
+2n
+
+=
+
+X
+2
+
+log(1 − X −2) + arctanh
+
+1
+X
+
++
+
+=
+
+Thus, (1.3) can be rewritten as (6.1).
+
+We obtain
+
+∞
+(cid:88)
+
+n=1
+(cid:20)
+X
+2
+
+X −2n+1
+2n − 1
+
+log(1 − X −2) +
+
+1
+X
+
+log
+
+(cid:21)
+
+.
+
+X + 1
+X − 1
+
+□
+
+H(1) =
+
+(cid:88)
+
+ρ
+
+1
+ρ(ρ + 1)
+
+=
+
+1
+2
+
+− log 4π − 12ζ ′(−1) = −0.045970 . . .
+
+by taking the limit X → 1 + 0 on the right side of (6.1). On the other hand, noting the
+symmetry of nontrivial zeros for ρ (cid:55)→ 1 − ρ,
+
+H1(1) = 2
+
+(cid:88)
+
+ρ
+
+1
+ρ
+
+= C0 + 2 − log 4π = 0.046191 . . .
+
+by taking the limit X → 1 + 0 on the right side of (6.2). This is a well-known equation
+found in [6, Section 12, (10) and (11)], for example.
+
+Formula (6.2) is generalized to Hℓ(X) as follows.
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+17
+
+Proposition 6.2. Let ℓ be a real number that is not equal to any of
+
+−2n, 0,
+
+1
+2
+
+, 1, 2n + 1
+
+(n ∈ Z>0).
+
+Then the following formula holds unconditionally for X > 1:
+
+Hℓ(X) =
+
+X 1/2
+ℓ(ℓ − 1)
+
+(cid:88)
+
+−
+
+n≤X
+
+Λ(n)
+√
+n
+
+1
+1 − 2ℓ
+
+(cid:34)(cid:18) X
+n
+
+(cid:19)ℓ−1/2
+
+−
+
+(cid:18) X
+n
+
+(cid:19)−(ℓ−1/2)(cid:35)
+
+(ℓ)X ℓ−1/2 −
+
+(1 − ℓ)X −(ℓ−1/2)
+
+(cid:21)
+
+ζ ′
+ζ
+
+(6.8)
+
+−
+
++
+
+1
+1 − 2ℓ
+X −1/2
+2
+
+(cid:20) ζ ′
+ζ
+X −2
+1 − 2ℓ
+
+·
+
+(cid:104)
+Φ(X −2, 1, 1 + ℓ/2)
+
+− Φ(X −2, 1, 1 + (1 − ℓ)/2)
+
+(cid:105)
+,
+
+where Φ(z, s, a) = (cid:80)∞
+n=0 zn(n + a)−s is the Hurwitz-Lerch zeta function for |z| < 1 and
+a ̸= 0, −1, −2, · · · . Furthermore, formula (6.8) holds for X = 1 in the sense that the
+right limit of the right-hand side at X = 1 is equal to the value of the left-hand side at
+X = 1.
+
+Proof. We have
+
+Hℓ(X) =
+
+X ℓ−1/2
+1 − 2ℓ
+
+(cid:88)
+
+ρ
+
+X ρ−ℓ
+ρ − ℓ
+
+−
+
+X 1/2−ℓ
+1 − 2ℓ
+
+X ρ−(1−ℓ)
+ρ − (1 − ℓ)
+
+(cid:88)
+
+ρ
+
+(6.9)
+
+by partial fraction decomposition since ℓ ̸= 1/2. On the other hand,
+
+X ρ−s
+ρ − s
+
+(cid:88)
+
+ρ
+
+= −
+
+(cid:88)′
+
+n≤X
+
+Λ(n)
+ns +
+
+X 1−s
+1 − s
+
+−
+
+ζ ′(s)
+ζ(s)
+
++
+
+1
+2
+
+X −s−2Φ(X −2, 1, 1 +
+
+s
+2
+
+)
+
+(6.10)
+
+for X > 1, s ̸= 1, ρ, −2n (n ∈ Z>0) by [13, (2.6)] and [9, 1.11 (1)]. Applying (6.10) to
+(6.9), we get (6.8) for X > 1 since ℓ ̸= −2n, 0, 1/2, 1, 2n + 1 (n ∈ Z>0).
+
+By definition (1.9), the left-hand side of (6.8) is right continuous at X = 1. On the
+
+other hand, the right-hand side of (6.8) has the right limit at X = 1, because
+
+Φ(X −2, 1, 1 + ℓ/2) − Φ(X −2, 1, 1 + (1 − ℓ)/2)
+
+(cid:18)
+
+= −
+
+ℓ −
+
+1
+2
+
+(cid:19) ∞
+(cid:88)
+
+n=0
+
+X −2n
+(n + 1 + ℓ/2)(n + 1 + (1 − ℓ)/2)
+
+.
+
+Hence we complete the proof.
+
+Proposition 6.3. The following formula holds unconditionally for X > 1:
+
+H1/2(X) = −4
+
+√
+
+(cid:88)
+
+X +
+
+n≤X
+(cid:19)
+
+(cid:19)′ (cid:18) 1
+2
+
++
+
+(cid:18) ζ ′
+ζ
+
+Λ(n)
+√
+n
+
+log
+
+X
+n
+
++
+
+(cid:19)
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+log X
+
+−
+
+4
+√
+X
+
++
+
+1
+√
+X
+
+4
+
+Φ(X −2, 2, 1/4).
+
+□
+
+(6.11)
+
+Furthermore, formula (6.11) holds for X = 1 in the sense that the right limit of the
+right-hand side at X = 1 is equal to the value of the left-hand side at X = 1.
+
+18
+
+K. MATSUMOTO AND M. SUZUKI
+
+Proof. By taking the limit ℓ → 1/2 on the right-hand side of (6.8),
+
+H1/2(X) = −4
+
+√
+
+X +
+
+(cid:88)
+
+n≤X
+
+Λ(n)
+√
+n
+
+log
+
+X
+n
+
++
+
+(cid:19)
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+log X +
+
+(cid:19)
+
+(cid:18) ζ ′
+ζ
+
+(cid:19)′ (cid:18) 1
+2
+
++
+
+1
+√
+X
+
+2
+
+lim
+ℓ→1/2
+
+X −2
+1 − 2ℓ
+
+(cid:104)
+Φ(X −2, 1, 1 + ℓ/2)
+
+− Φ(X −2, 1, 1 + (1 − ℓ)/2)
+
+(cid:105)
+
+.
+
+The second line on the right-hand side is equal to
+
+by l’Hˆopital’s rule, because
+
+1
+√
+X
+4
+
+· X −2Φ(X −2, 2, 1 + 1/4)
+
+∂
+∂a
+
+Φ(z, s, a) = −sΦ(z, s + 1, a)
+
+is established by term-by-term differentiation of the series representation for |z| < 1.
+Further, we have X −2Φ(X −2, 2, 1 + 1/4) = −16 + Φ(X −2, 2, 1/4) by applying
+
+Φ(z, s, a) = zkΦ(z, s, a + k) +
+
+k−1
+(cid:88)
+
+n=0
+
+zn
+(n + a)s
+
+([9, 1.11 (2)]) to z = X −2, s = 2, a = 1/4, and k = 1. Hence, we obtain (6.11) for
+X > 1. The right-hand side of (6.11) is right continuous at X = 1 by [9, 1.11 (3)], so
+□
+the equation holds for X = 1.
+
+Proposition 6.3 gives an alternative proof of [27, Theorem 1.1 (2)]. In fact, we obtain
+
+H1/2(1) − H1/2(et) = 4(et/2 + e−t/2 − 2) −
+
+(cid:88)′
+
+n≤et
+
+Λ(n)
+√
+n
+
+(t − log n)
+
+−
+
+(cid:19)
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+t +
+
+1
+4
+
+(cid:104)
+Φ(1, 2, 1/4) − e−t/2Φ(e−2t, 2, 1/4)
+
+(cid:105)
+,
+
+whose right-hand side coincides with the right-hand side of [27, (1.1)] because
+(cid:19)
+
+(cid:19)
+
+(cid:19)
+
+(cid:21)
+
+ξ′
+ξ
+
+(cid:18) 1
+2
+
+=
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
++
+
+(cid:20) Γ′
+Γ
+
+(cid:18) 1
+4
+
+1
+2
+
+− log π
+
+= 0
+
+by the functional equation ξ(1 − s) = ξ(s) := s(s − 1)π−s/2Γ(s/2)ζ(s). The left-hand
+side H1/2(1) − H1/2(et) is equal to Ψ(t) of [27] by definition (1.9), [27, (1.3)], and the
+symmetry of nontrivial zeros for ρ (cid:55)→ 1 − ρ. Therefore, [27, Theorem 1.1 (2)] is proved.
+
+7. On the equivalence of (1.2) and (1.6)
+
+We show the equivalence of (1.2) and (1.6) assuming the Riemann hypothesis. First,
+m+k=n Λ(m)Λ(k) as in [10, 11, 12],
+
+we derive (1.6) from (1.2). If we write r2(n) = (cid:80)
+then
+
+
+ y−3 dy
+
+r2(n)
+
+(cid:88)
+
+n≤X
+
+r2(n)
+n2 =
+
+1
+X 2
+
+=
+
+1
+2
+
+−
+
+(cid:90) X
+
+1
+
+
+
+(cid:88)
+
+
+
+n≤y
+
+1
+X 2 R(X)
+
+(cid:88)
+
+r2(n) + 2
+
+H(X) +
+
+n≤X
+2
+√
+X
+(cid:18) 1
+2
+
+(cid:90) X
+
+1
+
++ 2
+
+y−1 − 2 y−3/2H(y) + y−3R(y)
+
+(cid:19)
+
+dy,
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+19
+
+by partial summation and (1.2). The middle term of the integral on the right-hand side
+is calculated as
+
+(cid:90) X
+
+1
+
+y−3/2H(y) dy =
+
+X ρ−1 − 1
+ρ(ρ + 1)(ρ − 1)
+
+(cid:88)
+
+ρ
+
+by Fubini’s theorem. For the sum on the right-hand side, we have
+
+(cid:88)
+
+ρ
+
+2X ρ−1
+ρ(ρ + 1)(ρ − 1)
+
++
+
+1
+√
+X
+
+H(X) = −
+
+1
+√
+X
+
+H1(X).
+
+On the other hand, the equality
+
+(cid:90) X
+
+1
+
+y−3R(y) dy =
+
+(cid:90) ∞
+
+1
+
+y−3R(y) dy −
+
+(cid:90) ∞
+
+X
+
+y−3R(y) dy
+
+is justified under R(y) = O(y1+ε), which follows from the Riemann hypothesis ([2, 21]).
+By the above, we obtain
+
+(cid:88)
+
+n≤X
+
+r2(n)
+n2 = log X +
+
+(cid:32)
+
+1
+2
+
+(cid:88)
+
++
+
+ρ
+
+4
+ρ(ρ + 1)(ρ − 1)
+
++ 2
+
+(cid:90) ∞
+
+1
+
+(cid:33)
+
+y−3R(y) dy
+
++
+
+2
+√
+X
+
+H1(X) +
+
+1
+X 2 R(X) − 2
+
+(cid:90) ∞
+
+X
+
+y−3R(y) dy.
+
+This gives (1.6) with
+
+and
+
+c2 =
+
+1
+2
+
+(cid:88)
+
++
+
+ρ
+
+4
+ρ(ρ + 1)(ρ − 1)
+
++ 2
+
+(cid:90) ∞
+
+1
+
+y−3R(y) dy
+
+E(X) =
+
+1
+X 2 R(X) − 2
+
+(cid:90) ∞
+
+X
+
+y−3R(y) dy.
+
+Then, (1.7) holds under the Riemann hypothesis, since H1(X) = O(1) and E(X) =
+O(X −1+ε) by R(y) = O(y1+ε).
+
+Next, we derive (1.2) from (1.6). We have
+
+(cid:88)
+
+r2(n) = X 2 (cid:88)
+
+n≤X
+
+n≤X
+
+r2(n)
+n2 − 2
+
+(cid:90) X
+
+1
+
+
+
+
+
+(cid:88)
+
+n≤y
+
+
+
+ y dy
+
+r2(n)
+n2
+
+= X 2 log X + c2X 2 + 2X 3/2 H1(X) + X 2E(X)
+
+− 2
+
+(cid:90) X
+
+1
+
+(y log y + c2y + 2
+
+√
+
+y H1(y) + yE(y)) dy
+
+by partial summation and (1.6). The third term of the integral on the right-hand side
+is calculated as
+
+(cid:90) X
+
+1
+
+√
+
+yH1(y) dy = −
+
+X ρ+1 − 1
+ρ(ρ + 1)(ρ − 1)
+
+(cid:88)
+
+ρ
+
+by Fubini’s theorem. For the sum on the right-hand side, we have
+
+2X ρ+1
+ρ(ρ + 1)(ρ − 1)
+
+(cid:88)
+
+ρ
+
++ X 3/2 H1(X) = −X 3/2H(X).
+
+On the other hand,
+
+(cid:90) X
+
+2
+
+1
+
+(y log y + c2y)dy = X 2 log X + (X 2 − 1)
+
+(cid:18)
+
+c2 −
+
+(cid:19)
+
+.
+
+1
+2
+
+20
+
+K. MATSUMOTO AND M. SUZUKI
+
+Therefore, we obtain
+
+(cid:88)
+
+n≤X
+
+r2(n) =
+
+1
+2
+
+X 2 − 2X 3/2 H(X) + X 2E(X)
+
+− 2
+
+(cid:90) X
+
+1
+
+yE(y) dy + c2 −
+
+1
+2
+
+(cid:88)
+
+−
+
+ρ
+
+4
+ρ(ρ + 1)(ρ − 1)
+
+.
+
+This gives (1.2) with
+
+R(X) = X 2E(X) − 2
+
+(cid:90) X
+
+1
+
+yE(y) dy + c2 −
+
+1
+2
+
+(cid:88)
+
+−
+
+ρ
+
+4
+ρ(ρ + 1)(ρ − 1)
+
+.
+
+From this, the conjectural estimate E(X) = O(X −1+ε) implies R(X) = O(X 1+ε), since
+the constants on the right-hand side are absorbed into other terms.
+
+Acknowledgments The authors thank the referee for careful reading of the manu-
+script and providing valuable comments, and Masahiro Mine for several helpful com-
+ments, including those on the support of M -functions in Theorem 2.1. The first and
+second authors were supported by JSPS KAKENHI Grant Number JP22K03276 and
+JP23K03050, respectively. This work was also supported by the Research Institute for
+Mathematical Sciences, an International Joint Usage/Research Center located in Kyoto
+University.
+
+References
+
+[1] G. Bhowmik, I. Z. Ruzsa, Average Goldbach and the quasi-Riemann hypothesis, Anal. Math. 44
+
+(2018), no. 1, 51–56.
+
+[2] G. Bhowmik, J.-C. Schlage-Puchta, Mean representation number of integers as the sum of primes,
+
+Nagoya Math. J. 200 (2010), 27–33.
+
+[3] K. Billington, M. Cheng, J. Schettler, A.I. Suriajaya, The average number of Goldbach representa-
+tions and zero-free regions of the Riemann zeta function, Int. J. Number Theory 21 (2025), no. 2,
+289–316.
+
+[4] H. Bohr, ¨Uber die Funktion ζ ′/ζ(s), J. Reine Angew. Math. 141 (1912), 217–234.
+[5] A. Chirre, S.M. Gonek, Remarks on a formula of Ramanujan, Proc. Royal Soc. Edinburgh A, 155
+
+(2025), no. 4, 1543–1554.
+
+[6] H. Davenport, Multiplicative number theory. Second edition. Revised by Hugh L. Montgomery,
+
+Graduate Texts in Mathematics, 74, Springer-Verlag, New York-Berlin, 1980.
+
+[7] R. Durrett, Probability—theory and examples, Fifth edition, Cambridge Series in Statistical and
+
+Probabilistic Mathematics, 49, Cambridge University Press, Cambridge, 2019.
+
+[8] S. Egami, K. Matsumoto, Convolutions of the von Mangoldt function and related Dirichlet series,
+Number theory, 1—23, Ser. Number Theory Appl., 2, World Sci. Publ., Hackensack, NJ, 2007
+[9] A. Erd´elyi, W. Magnus, F. Oberhettinger, F. G. Tricomi, Higher transcendental functions. Vol. I.
+Based on notes left by Harry Bateman. With a preface by Mina Rees. With a foreword by E. C.
+Watson. Reprint of the 1953 original, Robert E. Krieger Publishing Co., Inc., Melbourne, FL, 1981
+
+[10] A. Fujii, An additive problem of prime numbers, Acta Arith. 58 (1991), no. 2, 173–179.
+[11] A. Fujii, An additive problem of prime numbers. II, Proc. Japan Acad. Ser. A Math. Sci. 67 (1991),
+
+no. 7, 248–252.
+
+[12] A. Fujii, An additive problem of prime numbers. III, Proc. Japan Acad. Ser. A Math. Sci. 67
+
+(1991), no. 8, 278–283.
+
+[13] A. P. Guinand, A summation formula in the theory of prime numbers, Proc. London Math. Soc.
+
+(2), 50 (1948), 107–119.
+
+[14] D. A. Goldston, L. Yang, The average number of Goldbach representations, in: Prime numbers and
+
+representation theory, Edited by Ye Tian & Yangbo Ye, Science Press, Beijing, 2017, 1–12.
+
+[15] Y. Ihara, On “M -functions” closely related to the distribution of L′/L-values, Publ. RIMS Kyoto
+
+Univ. 44 (2008) 893–954.
+
+[16] Y. Ihara, V. K. Murty, M. Shimura, On the logarithmic derivatives of Dirichlet L-functions at s = 1,
+
+Acta Arith. 137 (2009), no. 3, 253–276.
+
+[17] A. E. Ingham, The distribution of prime numbers, Cambridge Tracts in Mathematics and Mathe-
+
+matical Physics, No. 30, Stechert-Hafner, Inc., New York, 1964.
+
+M -FUNCTIONS AND SCREW FUNCTIONS
+
+21
+
+[18] B. Jessen, A. Wintner, Distribution functions and the Riemann zeta function, Trans. Amer. Math.
+
+Soc. 38 (1935) 48–88.
+
+[19] M. G. Kre˘ın, H. Langer, ¨Uber einige Fortsetzungsprobleme, die eng mit der Theorie hermitescher
+Operatoren im Raume Πκ zusammenh¨angen. I. Einige Funktionenklassen und ihre Darstellungen,
+Math. Nachr. 77 (1977), 187–236.
+
+[20] M. G. Kre˘ın, H. Langer, Continuation of hermitian positive definite functions and related questions,
+
+Integral Equations Operator Theory 78 (2014), no. 1, 1–69.
+
+[21] A. Languasco, A. Zaccagnini, The number of Goldbach representations of an integer, Proc. Amer.
+
+Math. Soc. 140 (2012), no. 3, 795–804.
+
+[22] K. Matsumoto, An M -function associated with Goldbach’s problem, J. Ramanujan Math. Soc. 36
+
+(2021), no. 4, 339–352.
+
+[23] M. J. Mossinghoff, T. S. Trudgian, Oscillations in the Goldbach conjecture, J. Th´eor. Nombres
+
+Bordeaux 34 (2022), no. 1, 295–307.
+
+[24] T. Nakamura, M. Suzuki, On infinitely divisible distributions related to the Riemann hypothesis,
+
+Statist. Probab. Lett. 201 (2023), 109889.
+
+[25] J.-L. Nicolas, Small values of the Euler function and the Riemann hypothesis, Acta Arith. 155
+
+(2012), no. 3, 311–321..
+
+[26] K. Sato, L´evy processes and infinitely divisible distributions, Translated from the 1990 Japanese
+original, Revised by the author, Cambridge Studies in Advanced Mathematics, 68, Cambridge
+University Press, Cambridge, 1999.
+
+[27] M. Suzuki, Aspects of the screw function corresponding to the Riemann zeta function, J. Lond.
+
+Math. Soc. 108 (2023), no.4, 1448-1487.
+
+[28] E. C. Titchmarsh, The theory of the Riemann zeta-function, Second edition, Edited and with a
+
+preface by D. R. Heath-Brown, The Clarendon Press, Oxford University Press, New York, 1986.
+
+[29] A. Wintner, Asymptotic distributions and infinite convolutions, Lecture Notes, the Institute for
+
+Advanced Study, Princeton, N. J., 1938.
+
+Kohji Matsumoto,
+
+Graduate School of Mathematics
+Nagoya University
+Chikusa-ku
+Nagoya 464-8602, Japan
+and
+Center for General Education
+Aichi Institute of Technology
+1247 Yachigusa, Yakusa-cho
+Toyota 470-0392, Japan
+Email: kohjimat@math.nagoya-u.ac.jp
+
+Masatoshi Suzuki,
+
+Department of Mathematics, School of Science,
+Institute of Science Tokyo
+2-12-1 Ookayama, Meguro-ku,
+Tokyo 152-8551, Japan
+Email: msuzuki@math.sci.isct.ac.jp
+
+

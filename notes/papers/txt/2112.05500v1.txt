@@ -1,0 +1,1870 @@
+1
+2
+0
+2
+
+c
+e
+D
+0
+1
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+0
+0
+5
+5
+0
+.
+2
+1
+1
+2
+:
+v
+i
+X
+r
+a
+
+PROLATE SPHEROIDAL OPERATOR AND ZETA
+
+ALAIN CONNES AND HENRI MOSCOVICI
+
+Abstract. In this paper we describe a remarkable new property of the self-
+adjoint extension Wsa of the prolate spheroidal operator introduced in [1],[3].
+The restriction of this operator to the interval J whose characteristic function
+commutes with it is well known, has discrete positive spectrum and is well
+understood [14, 15, 16, 9]. What we have discovered is that the restriction of
+Wsa to the complement of J admits (besides a replica of the above positive
+spectrum) negative eigenvalues whose ultraviolet behavior reproduce that of
+the squares of zeros of the Riemann zeta function. Furthermore, their corre-
+sponding eigenfunctions belong to the Sonin space. This feature ﬁts with the
+proof [4] of Weil’s positivity at the archimedean place, which uses the compres-
+sion of the scaling action to the Sonin space. As a byproduct we construct an
+isospectral family of Dirac operators whose spectra have the same ultraviolet
+behavior as the zeros of the Riemann zeta function.
+
+1. Introduction
+
+The prolate spheroidal wave functions play a key role in [2, 4, 5] in relation with the
+Riemann zeta function. In all these applications they appear as eigenfunctions of
+the angle operator between two orthogonal projections in the Hilbert space L2(R)ev
+of even square integrable function on R. These projections depend on a parameter
+λ > 0, the projection Pλ is given by the multiplication with the characteristic
+function of the interval [−λ, λ] ⊂ R. The projection (cid:99)Pλ is its conjugate by the
+Fourier transform FeR which is the unitary operator in L2(R)ev deﬁned by
+(cid:90)
+
+FeR(ξ)(y) =
+
+ξ(x) exp(−2πixy)dx.
+
+In all the above applications of prolate spheroidal wave functions the miraculous
+existence, discovered by the Bell Labs group [14, 15, 16], of a diﬀerential operator
+Wλ commuting with the angle operator, plays only an auxiliary role. In the present
+paper we uncover another “miracle”: a careful study of the natural self-adjoint
+extension of Wλ introduced in [1, Lemma 6] (see also [3, §3.3]) to L2(R) shows
+that it still has discrete spectrum and that its negative eigenvalues reproduce the
+In a
+ultraviolet behavior of the squares of zeros of the Riemann zeta function.
+similar way the positive spectrum corresponds, in the ultraviolet regime, to the
+2. The
+trivial zeros. This coincidence holds for two values λ = 1 and λ =
+conceptual reason for this coincidence is the link between the operator
+
+√
+
+(Wλξ)(x) = −∂x(λ2 − x2)∂xξ(x) + (2πλ)2x2ξ(x)
+and the square of the scaling operator S := x∂x. In [4] the compression of f (S)
+to Sonin’s space (for λ = 1) was shown to be the root of Weil’s positivity at the
+archimedean place on test functions with support in the interval [2−1/2, 21/2], but
+
+(1)
+
+The work of H. M. was partially supported by NSF award 1600541.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+since Sonin’s space is not preserved by scaling, one could not restrict scaling to this
+space. It turns out that Wλ commutes with the orthogonal projection on Sonin’s
+space. Thus one can restrict Wλ to Sonin’s space and the ultraviolet spectral sim-
+ilarity with the squares of non-trivial zeros of zeta suggests that one has spectrally
+captured the contribution of the archimedean place to the mysterious zeta spec-
+trum. In fact using the Darboux process we construct a Dirac square root of Wλ
+depending on a deformation parameter, and whose spectrum has the same ultravi-
+olet behavior as the zeros of the Riemann zeta function.
+
+Our paper is organized as follows: In Section 2 we show that there exists a unique
+selfadjoint extension Wsa of the symmetric operator Wmin deﬁned on Schwartz
+space S(R) by (1). Moreover Wsa commutes with Fourier transform and has discrete
+spectrum unbounded in both directions. In Section 3 we show that the eigenvectors
+for negative eigenvalues of Wsa belong to Sonin’s space. In Section 4 we compute
+the semiclassical approximation to the number of negative eigenvalues of Wsa whose
+absolute value is less than E2. In Section 5, we use the Darboux method combined
+with solutions of a Riccati equation to construct an isospectral family of Dirac
+operators D/ whose squares are direct sums of two copies of Wsa. In Section 6 we
+2 and show that the operator 2D/ has discrete simple
+specialize to the case λ =
+spectrum contained in R ∪ iR with imaginary eigenvalues symmetric under complex
+conjugation and counting function N (E) (counting those of positive imaginary part
+less than E) fulﬁlling the same as the Riemann formula
+
+√
+
+N (E) ∼
+
+E
+2π
+
+(cid:18)
+
+log
+
+(cid:19)
+
+(cid:18) E
+2π
+
+(cid:19)
+
+− 1
+
++ O(1)
+
+(2)
+
+We also show the numerical evidence for the ultraviolet spectral similarity between
+the eigenvalues of 2D/ and the zeros of the Riemann zeta function. Lastly, Section 7
+contains more speculative ﬁnal remarks, in particular on a natural two-dimensional
+black hole geometry intrinsically related to the operator 2D/ .
+
+2. The selfadjoint prolate wave operator
+
+The prolate spheroidal operator (1) is an operator of Sturm-Liouville type,
+
+(Wλξ)(x) = −∂x
+
+(cid:0)p(x)∂xξ(x)(cid:1) + q(x)ξ(x),
+
+x ∈ R
+
+where
+
+p(x) = λ2 − x2,
+
+q(x) = (2πλ)2x2,
+
+(3)
+
+but having two interior singular points it is not directly treatable by the usual
+Sturm-Liouville theory. However its restrictions to each of the intervals (−∞, −λ),
+(−λ, λ) and (λ, ∞) are standard, in fact quasi-regular, Sturm-Liouville operators.
+
+Henceforth Wλ will be simply denoted W whenever λ is a general parameter. To
+begin with, we regard W as an unbounded operator on L2(R) with core the Schwartz
+space S(R). As such, W is real, symmetric and invariant under the parity exchange
+x (cid:55)→ −x. These features are inherited by its closure in the graph norm Wmin, as
+well as by Wmax = Wmin
+
+∗, the latter having domain
+
+Dom(Wmax) = {ξ ∈ L2(R) | W ξ ∈ L2(R)},
+2
+
+(4)
+
+with W ξ viewed as a tempered distribution. In addition W has the remarkable
+property of commuting with the Fourier transform
+
+FeR (f )(y) :=
+
+(cid:90) ∞
+
+−∞
+
+f (x) exp (−2πixy)dx.
+
+(5)
+
+Since both the Schwartz space S(R) and its dual are globally invariant under the
+Fourier transform, the domains DomWmin and DomWmax are invariant too, there-
+fore both Wmin and Wmax commute with FeR .
+
+Lemma 2.1. The deﬁciency indices of Wmin are (4, 4).
+
+Proof. Any ξ ∈ Dom(Wmax) satisfying W ξ = ±iξ is a piecewise real analytic
+function and is uniquely speciﬁed by six parameters in the complement of the two
+regular singular points ±λ. The known form of the solutions (cf..
+[13]) together
+with the fact that W ξ ∈ L2(R) imply that the logarithmic singularities of ξ on the
+left and the right of ±λ have to match. This reduces the number of parameters to
+4. Conversely, since all 4 singular points are LC (limit circle case), any solution of
+(cid:3)
+W ξ = ±iξ belongs to Dom(Wmax), hence dim Ker(Wmax ± iI) = 4.
+
+Lemma 2.2. Let ξ ∈ DomWmax and denote a = ±λ. The distribution p(x)∂xξ
+coincides with a continuous function f in a neighborhood of a and the evaluation
+map L(ξ) := f (a) deﬁnes a non-zero continuous linear form on DomWmax which
+vanishes on the closed subspace DomWmin.
+
+Proof. Let V = [b, c] be a compact interval neighborhood of a = ±λ where a is the
+only zero of p(x). Let ψ be the distribution ψ = p(x)∂xξ(x), one has by deﬁnition,
+
+(cid:104)ψ | φ(cid:105) = −
+
+(cid:90)
+
+R
+
+ξ(x)∂x(p(x)φ(x))dx , ∀φ ∈ S(R)
+
+Let η = Wmaxξ, one has by deﬁnition,
+
+(cid:104)η | φ(cid:105) = (cid:104)ξ | Wminφ(cid:105) =
+
+(cid:90)
+
+R
+
+ξ(x) (∂x(p(x)∂xφ(x)) + q(x)φ(x)) dx , ∀φ ∈ S(R)
+
+Let ξ1 ∈ L2(R) coincide with q(x)ξ(x) on V . Then for any smooth function φ with
+support in V ,
+
+(cid:104)ψ | ∂xφ(cid:105) = −
+
+(cid:90)
+
+R
+
+ξ(x)∂x(p(x)∂xφ(x))dx = (cid:104)ξ1 − η | φ(cid:105)
+
+The restriction of ξ1 − η to V belongs to L2(V ) ⊂ L1(V ) and the function f1(x) =
+− (cid:82) x
+
+b (ξ1 − η)(t)dt is continuous and fulﬁlls
+
+(cid:90)
+
+V
+
+f1(x)∂xφ(x)dx = (cid:104)ξ1 − η | φ(cid:105)
+
+It follows that (cid:104)ψ − f1 | ∂xφ(cid:105) = 0 for all smooth functions φ with support in V
+and choosing a positive smooth function φ1 with support in V and integral 1, one
+obtains
+
+(cid:104)ψ | φ(cid:105) = (cid:104)f1 + s | φ(cid:105) , ∀φ ∈ C∞
+
+c (V ), s = (cid:104)(ψ − f1) | φ1(cid:105).
+
+Thus the distribution p(x)∂xξ coincides with the function f (x) := f1(x) + s on V .
+One has
+
+f (a) = s + f1(a) = (cid:104)(ψ − f1) | φ1(cid:105) −
+
+(ξ1 − η)(x)dx
+
+(cid:90) a
+
+3
+
+b
+
+Moreover (cid:104)ψ | φ1(cid:105) = (cid:82) p(x)∂xξ(x)φ1(x)dx = − (cid:82) ξ(x)∂x(p(x)φ1(x))dx = (cid:104)ξ | η1(cid:105)
+where η1 ∈ C∞
+
+c (V ). One has also,
+(cid:90) a
+
+−(cid:104)f1 | φ1(cid:105) −
+
+(ξ1 − η)(x)dx =
+
+b
+
+(cid:90) c
+
+(cid:90) x
+
+b
+
+b
+
+(ξ1 − η)(t)φ1(x)dtdx −
+
+(cid:90) a
+
+b
+
+(ξ1 − η)(x)dx
+
+= (cid:104)ξ | η2(cid:105) + (cid:104)η | η3(cid:105)
+where the vectors ηj ∈ L2(R). Thus the linear form L(ξ) := f (a) is continuous
+in the graph norm of DomWmax. For ξ ∈ S(R) the distribution ψ = p(x)∂xξ(x)
+is a function vanishing at x = a and thus L(ξ) = 0. By the density of S(R) in
+DomWmin for the graph norm, it follows that L vanishes on the closed subspace
+(cid:3)
+DomWmin.
+
+Let Pλ be the cutoﬀ projection associated to the interval [−λ, λ], i.e. the multi-
+plication operator by the characteristic function 1[−λ,λ], and let (cid:98)Pλ = FeR PλF−1
+eR
+denote its conjugate by the Fourier transform.
+
+Lemma 2.3. If ξ ∈ DomWmin then Pλξ ∈ DomWmax and W Pλξ = PλW ξ. The
+same holds with respect to (cid:98)Pλ.
+
+Proof. Let f ∈ C∞(V ) where V is a neighborhood of the interval [−λ, λ]. Then
+Pλf ∈ DomWmax and viewing W (Pλf ) as distribution one gets, for any φ ∈ S(R)
+
+(cid:104)W (Pλf ), φ(cid:105) =
+
++
+
+f (x)(W φ)(x)dx =
+
+(cid:90) λ
+
+−λ
+
+f (x)(2πλ)2x2φ(x)dx.
+
+(cid:90) λ
+
+−λ
+(cid:90) λ
+
+−λ
+
+−f (x)∂x(λ2 − x2)∂xφ(x)dx
+
+Using twice integration by parts, together with the fact that (λ2 − x2)φ(cid:48)(x) and
+(λ2 − x2)f (cid:48)(x) vanish on the boundary, one obtains
+
+(cid:104)W (Pλf ), φ(cid:105) =
+
+(cid:90) λ
+
+f (cid:48)(x)((λ2 − x2)φ(cid:48))(x)dx +
+
+(cid:90) λ
+
+−λ
+
+f (x)(2πλ)2x2φ(x)dx
+
+−λ
+(cid:90) λ
+
+= −
+
+−λ
+
+(∂x((λ2 − x2)f (cid:48)(x)))φ(x)dx +
+
+(cid:90) λ
+
+−λ
+
+f (x)(2πλ)2x2φ(x)dx
+
+=
+
+(cid:90) λ
+
+−λ
+
+W f (x)φ(x)dx,
+
+which shows that W (Pλf ) = PλW f . In particular the same is true for any f ∈
+S(R), and by the density of S(R) in DomWmin for the graph norm it follows that
+
+ξ ∈ DomWmin =⇒ Pλξ ∈ DomWmax
+
+and WmaxPλξ = PλW ξ.
+
+The claim now follows from the fact that W commutes with FeR.
+
+(cid:3)
+
+The selfadjoint extensions of Wmin are parametrized by self-orthogonal subspaces
+of E := Dom(Wmax)/Dom(Wmin) with respect to the anti-symmetric sesquilinear
+form given by the pairing
+
+Ω(ξ, η) :=
+
+(cid:16)
+
+1
+i
+
+(cid:104)Wmaxξ | η(cid:105) − (cid:104)ξ | Wmaxη(cid:105)
+
+(cid:17)
+,
+
+which descends to a non-degenerate form on E.
+
+4
+
+ξ, η ∈ Dom(Wmax)
+
+(6)
+
+The Ω-pairing can be expressed in terms of boundary values as usual. One starts
+with the Lagrange identity
+
+d
+dx
+
+[ξ, η] = ξ W η − η W ξ,
+
+where ξ, η ∈ C 1(R) ∩ DomWmax, and
+
+(cid:18)
+
+[ξ, η] := p
+
+ξ
+
+dη
+dx
+
+− η
+
+(cid:19)
+
+,
+
+dξ
+dx
+
+p(x) = λ2 − x2,
+
+(7)
+
+(8)
+
+is the (generalized) Wronskian. By integrating it on compact subintervals [a, b] ⊂
+R \ {±λ} one obtains Green’s formula
+
+(cid:90) b
+
+a
+
+(W (ξ)¯η − ξW (¯η)) (x)dx = [ξ, ¯η]|b
+
+a := lim
+x→b
+
+[ξ, ¯η](x) − lim
+x→a
+
+[ξ, ¯η](x).
+
+(9)
+
+Passage to the lateral limits towards the endpoints of the three subintervals par-
+titioning R extends this identity to the whole real line, allowing to express Ω in
+terms of Lagrange brackets as follows:
+
+iΩ(ξ, η) = [ξ, ¯η]|−λ
+
+−∞ + [ξ, ¯η]|λ
+
+−λ + [ξ, ¯η]|∞
+λ
+
+(10)
+
+for all pairs ξ, η ∈ DomWmax.
+
++(R) ⊕ L2
+
+Since W is invariant under parity exchange, it preserves the orthogonal decomposi-
+−(R) into even, resp. odd functions, which in turn induces
+tion L2(R) = L2
+corresponding splittings W = W + ⊕ W −, Ω = Ω+. ⊕ Ω− and E = E+ ⊕ E−. Note
+also that E± are invariant under Fourier transform.
+The following auxiliary lemma will be used in the ensuing discussion.
+
+Lemma 2.4. (i) Let f (x) = 1
+2 log((λ2 − x2)−2) viewed as a tempered distribution.
+Then the Fourier transform FeR f is a distribution which coincides outside 0 with
+the function
+
+(ii) Let 1I be the characteristic function of the interval I = [−λ, λ] then
+
+(cid:101)f (y) =
+
+cos(2πλy)
+|y|
+
+.
+
+.
+
+FeR 1I (y) =
+
+sin(2πλy)
+πy
+Proof. (i) One has f (x) = 1
+2 log((λ+x)−2), thus we start by com-
+puting the Fourier transform of the distribution (cid:96) = − log(x2). One has x∂x(cid:96) = −2.
+Thus one gets ∂yy(cid:98)(cid:96) = 2. Therefore y(cid:98)(cid:96) is equal to sign(y) and (cid:98)(cid:96) is the Weil princi-
+pal value 1/|y|. Translation of the variable means multiplication by an imaginary
+exponential in Fourier and this gives the required equality.
+(ii) One has ∂x1I = δ−λ − δλ and in general FeR f (y) = 2πiy FeR f (y).
+
+2 log((λ−x)−2)+ 1
+
+(cid:3)
+
+We now proceed to construct a basis of E. First, for E+ we pick an even function
+c (R) such that α+(x) = log |λ2 − x2| for x ∈ [ 3
+α+ ∈ C∞
+4 λ] and with support
+in ( 1
+2 λ, 3
+2 λ). Then we take β+(x) = 1I , the characteristic function of the interval
+I = [−λ, λ], which belongs to PλS(R) and hence to DomWmax. Next for E− we let
+α−(x) := xα+(x) and β−(x) := xβ+(x).
+
+4 λ, 5
+
+Lemma 2.5. The quadruplet {α±, β±, (cid:98)α±, (cid:98)β±} forms a basis of E±.
+
+5
+
+Proof. One checks using the expression (10) of the Ω-pairing together with Lemma
+2.4 that the matrix representation of Ω+ with respect to the given quadruplet has
+a single nonzero entry in each row and column.
+In the odd case we note that on the one hand [α−, β−](x) = x2[α+, β+](x), and
+on the other hand the derivatives involved in their Fourier transforms (cid:98)α−(x) =
+2π ∂x (cid:98)α+(x), resp. (cid:98)β−(x) = i
+2π ∂x (cid:98)β+(x). exchange the two functions cos and sin in
+the leading terms at inﬁnity. With this observation the calculation becomes similar
+(cid:3)
+to that for the even case, and so is the result.
+
+i
+
+The Ω-pairings with the above basis elements yield boundary conditions of Sturm-
+Liouville type. Denoting, for ξ ∈ Dom(W ±
+
+(cid:32)Lα±(ξ) := iΩ±(ξ, α+),
+
+(cid:32)Lβ±(ξ) := iΩ±(ξ, β+),
+
+max),
+(cid:98)α± (ξ) := iΩ±(ξ, (cid:98)α+),
+(cid:32)L
+(ξ) = iΩ±(ξ, (cid:98)β−),
+
+(cid:32)L
+
+(cid:98)β±
+
+(11)
+
+the minimal domains are characterized in these terms as being the intersection
+
+Dom(W ±
+
+min) = Ker (cid:32)Lα± ∩ Ker (cid:32)Lβ± ∩ Ker (cid:32)L
+
+(cid:98)α± ∩ Ker (cid:32)L
+
+(cid:98)β±
+
+(12)
+
+min) form a basis of E ∗
+and the induced functionals on E± = Dom(W +
+±.
+By straightforward calculation, using the fact that one can always restrict the
+computation to R+, one obtains explicit expressions for the boundary functionals.
+Up to a nonzero constant factor they are as follows. In the even case,
+
+max)/Dom(W ±
+
+(cid:32)Lα+(ξ) = lim
+x(cid:37)λ
+
+((x − λ) log(λ − x)∂xξ(x) − ξ(x))
+
+(cid:32)Lβ+(ξ) := lim
+x(cid:37)λ
+2
+π
+
+(cid:98)α+(ξ) :=
+(cid:32)L
+
+(cid:32)L
+
+(cid:98)β+
+
+(ξ) := −
+
+lim
+x→∞
+2
+π
+
+lim
+x→∞
+
+− lim
+x(cid:38)λ
+
+((x − λ) log(x − λ)∂xξ(x) − ξ(x)) ;
+
+((λ − x)∂xξ(x)) = lim
+x(cid:38)λ
+
+((λ − x)∂xξ(x)) ;
+
+(cid:0)xcos(2πλx)∂xξ(x) + (cid:0)2πλxsin(2πλx) + cos(2πλx)(cid:1)ξ(x)(cid:1) ;
+
+(cid:0)xsin(2πλx)∂xξ(x) − (cid:0)2πλxcos(2πλx) − sin(2πλx)(cid:1)ξ(x)(cid:1) .
+
+(13)
+
+We note that the existence of the limit deﬁning (cid:32)Lβ+(ξ), i.e. the equality of the
+lateral limits, is ensured by Lemma 2.2.
+Similar formulas deﬁne the functionals (cid:32)Lα− , (cid:32)Lβ− , (cid:32)L
+
+in the odd case.
+
+(cid:98)α− , (cid:32)L
+
+(cid:98)β−
+
+Since both Dom(Wmin) and Dom(Wmax), as well as the symplectic form Ω, are
+globally invariant under the Fourier transform, the quotient inherits induced trans-
+formations f ±
+
+eR : E± → E± which relates the boundary functionals as follows:
+
+(cid:32)L
+
+(cid:98)β±
+
+= (cid:32)Lβ± ◦ feR
+
+and (cid:32)L
+
+(cid:98)α± = (cid:32)Lα± ◦ feR .
+
+(14)
+
+This association gives rise to two distinguished self-orthogonal subspaces, namely
+
+Lβ =
+
+(cid:92)
+
+±
+
+Ker(cid:32)Lβ± ∩
+
+(cid:92)
+
+±
+
+Ker(cid:32)L
+
+(cid:98)β±
+
+and Lα =
+
+(cid:92)
+
+±
+
+Ker(cid:32)Lα± ∩
+
+(cid:92)
+
+±
+
+Ker(cid:32)L
+
+(cid:98)α±
+
+(15)
+
+Deﬁnition. We denote by Wsa the restriction of the operator Wmax to the subspace
+Lβ = (cid:84)
+. Explicitly, its domain DomWsa consists of the
+
+± Ker(cid:32)Lβ± ∩ (cid:84)
+
+± Ker(cid:32)L
+
+(cid:98)β±
+
+6
+
+elements ξ ∈ Dom(Wmax) satisfying the following boundary conditions:
+
+lim
+x→±λ
+
+(λ2 − x2)∂xξ(x) = 0,
+
+and at ±∞, writing ξ = ξ+ + ξ− with ξ± ∈ Dom(W ±
+
+max),
+
+lim
+x→±∞
+lim
+x→±∞
+
+(cid:0)xsin(2πλx)∂xξ+(x) − (cid:0)2πλxcos(2πλx) − sin(2πλx)(cid:1)ξ+(x)(cid:1) = 0,
+(cid:0)xcos(2πλx)∂xξ−(x) + (cid:0)2πλxsin(2πλx) + cos(2πλx)(cid:1)ξ−(x)(cid:1) = 0.
+
+(16)
+
+(17)
+
+(18)
+
+We are now in a position to establish the main result of this section.
+
+Theorem 2.6. (i) Wsa is selfadjoint and commutes with the Fourier transform.
+(ii) Wsa commutes with the projections Pλ and (cid:98)Pλ.
+(iii) Wsa is the only selfadjoint extension of Wmin commuting with Pλ and (cid:98)Pλ.
+(iv) The spectrum of Wsa is discrete and unbounded on both sides.
+
+Proof. (i) Wsa is selfadjoint by construction, and its domain Lβ is invariant under
+the Fourier transform also by construction.
+(ii) Since DomWmin is given by (12). every element of Lβ is a linear combination
+of an element ξ ∈ DomWmin and the 4 vectors β±, (cid:98)β± of Lemma 2.1. Each β± is
+of the form Pλf± with f± smooth with compact support and thus one has, using
+Lemma 2.3,
+
+Pλβ± = β± ∈ S, WsaPλβ± = WsaPλf± = PλW f±,
+
+which shows that WsaPλβ± = PλWsaPλβ± = PλWsaβ± giving the required com-
+mutation for the β±.
+(iii) The domain of a selfadjoint extension of Wmin commuting with Pλ and (cid:98)Pλ
+must be contained in DomWmax and also contain both PλS(R) and (cid:98)PλS(R). Thus
+it must contain Lβ, and cannot be larger due to self-adjointness.
+(iv) The operators PλWsa and (I − Pλ)Wsa are selfadjoint on (−λ, λ), resp. on
+(−∞, λ) (cid:116) (−λ, ∞), and thus covered by standard results in Sturm-Liouville the-
+ory (cf.[11], [17], [9]). Indeed all four endpoints are limit circle case in the Weyl
+classiﬁcation (see e.g. [17, §§5-6] for relevant deﬁnitions and properties), which can
+be easily checked by using explicit bases of formal solutions for W ξ − µξ = 0,
+µ ∈ C, around each singular point (cf.e.g. [13, §2]). The endpoints ±λ are LCNO
+(non-oscillatory limit circle), while ±∞ are LCO (oscillatory limit circle) since the
+prolate spheroidal wave functions (which provide principal solutions around ±λ)
+have inﬁnitely many zeros in the neighborhood of ±∞ (cf.[14, 15, 16]). By well-
+known results (cf.e.g. [11] page 90, [18]) it follows that both PλWsa and (I −Pλ)Wsa
+have discrete spectrum and that the spectrum of the latter is unbounded on both
+(cid:3)
+sides.
+
+Corollary 2.7. If φ is an eigenfunction of Wsa
+
+± then
+
+(i) φ is regular on [λ, λ + (cid:15)) and on (λ − (cid:15), λ] for some (cid:15) > 0, with a possible
+
+discontinuity at λ;
+
+(ii) the leading term of the asymptotic expansion of φ at ∞ is proportional to
+
+sin(2πλx)
+x
+
+if φ is even and to cos(2πλx)
+
+x
+7
+
+if φ is odd.
+
+Proof. This follows from the above characterization (16), (17), (18) of the domain of
+Wsa combined with the known bases of formal solutions for the equation W ξ = µξ,
+(cid:3)
+µ ∈ R, around ±λ and ±∞ (cf.[13]).
+
+3. Sonin space and negative eigenvalues
+We translate the requirement that the Fourier transform FeRf of an f ∈ DomWmax
+has no logarithmic singularity at the singular points into a condition on the asymp-
+totic behavior of f at ∞. For simplicity we only deal with even functions, and for
+notational convenience take λ = 1.
+We can then ﬁnd the asymptotic expansion at ∞ using the boundary condition
+that the leading term there is sin(2πλy)
+. We take for simplicity λ = 1 and use [13]
+y
+to get for the tentative eigenvector for eigenvalue µ the expansion at ∞
+−µ2 + 8π2µ + 2µ − 16π4 + 8π2
+32π2x3
+
+(µ − 4π2)cos(2πx)
+4πx2
+
+sin(2πx)
+x
+
+ξµ(x) ∼
+
++
+
++
+
+sin(2πx)+0(x−4)
+
+In fact as shown in Proposition 14 of [13], the coeﬃcients of this expansion are
+directly related to the coeﬃcients of the expansion of the ﬁnite solution at λ and
+taking for simplicity λ = 1, if the latter is of the form
+
+fµ(x) =
+
+(cid:88)
+
+Un(µ)(x − 1)n, U0(µ) = 1, U1(µ) =
+
+µ − 4π2
+2
+
+U2(µ) =
+
+µ2 − 8π2µ − 2µ + 16π4 − 8π2
+16
+
+, . . .
+
+then the asymptotic series at inﬁnity which governs the solution which has leading
+term in exp(−2πix)/x is equal to v(x) exp(−2πix)/x where
+
+(cid:88)
+
+v(x) ∼
+
+n!Un(µ)(2πix)−n
+
+When one applies the Borel summation to this series the ﬁrst step is to replace it
+by its Borel transform which is, up to normalization,
+
+B(y) :=
+
+(cid:88)
+
+Un(µ)yn
+
+and is related to v(x) by (cid:82) ∞
+0
+transform
+
+v(x)
+2πix
+
+tn exp(−zt) dt = z−n−1Γ(n + 1) i.e. the Laplace
+
+=
+
+(cid:90) ∞
+
+0
+
+exp(−2πixt)B(t)dt
+
+Lemma 3.1. For any µ ∈ R the asymptotic expansion of the unique solution
+ξµ which at ∞ is asymptotically ∼ − sin(2πx)
+is Borel summable and is equal to the
+πx
+Fourier transform of the unique even solution φµ which is zero on [−1, 1] and agrees
+with fµ(x) for x > 1.
+
+Proof. One has the equality
+
+v(x)
+2πix
+
+=
+
+(cid:90) ∞
+
+0
+
+exp(−2πixt)B(t)dt =
+
+(cid:90) ∞
+
+0
+
+exp(−2πixt)fµ(t + 1)dt =
+
+=
+
+(cid:90) ∞
+
+1
+
+exp(−2πix(y − 1))fµ(y)dy
+
+Thus one gets
+
+v(x) exp(−2πix)/(2πix) =
+
+(cid:90) ∞
+
+exp(−2πixy)fµ(y)dy
+
+1
+
+8
+
+The function φµ is even and vanishes on [−1, 1] so
+(cid:90) ∞
+
+(cid:90) ∞
+
+(cid:90) ∞
+
+exp(−2πixy)φµ(y)dy =
+
+exp(−2πixy)fµ(y)dy+
+
+exp(−2πixy)fµ(y)dy =
+
+−∞
+
+1
+
+1
+
+= v(x) exp(−2πix)/(2πix) + v(x) exp(−2πix)/(2πix)
+
+Now these two terms are asymptotic solutions since µ is real and v(x) exp(−2πix)/(2πix)
+is an asymptotic solution. Moreover the leading behavior at ∞ is in
+
+exp(−2πix)/(2πix) − exp(2πix)/(2πix) = −
+
+sin(2πx)
+πx
+
+Thus it follows that the Fourier transform FeR φµ = ξµ.
+
+(cid:3)
+
+Corollary 3.2. With the above notation, assume µ is a negative eigenvalue. Then
+φµ belongs to the Sonin space.
+
+Proof. In fact Sonin’s space is the orthogonal of the eigenspaces of Wsa associated
+(cid:3)
+to the classical prolate functions and their Fourier transforms.
+
+We should note that at this point we do not claim (although this is supported by
+numerical evidence) that all eigenvalues of the restriction of Wsa to Sonin’s space
+are negative, however there could be only ﬁnitely many exceptions.
+
+4. Semiclassical approximation and counting function
+
+In this section we use the semiclassical estimate for the function counting the num-
+ber of eigenvalues and investigate the negative eigenvalues of the operator Wsa. We
+consider the classical Hamiltonian
+
+Hλ(p, q) = (p2 − λ2)(q2 − λ2)
+
+and use it as a semiclassical approximation of Wsa via the formal relation
+
+Wλ ∼ −4π2Hλ + 4π2λ4
+
+(19)
+
+(20)
+
+using the correspondence q → x and p → 1
+2πi ∂x associated to the choice of the
+Fourier transform FeR . Sonin’s space corresponds to the conditions p2 − λ2 ≥ 0 and
+q2 − λ2 ≥ 0 and the region of interest for the counting of eigenvalues is thus
+
+Ωλ(E) := {(q, p) | q ≥ λ, p ≥ λ, Hλ(p, q) ≤
+
+(cid:19)2
+
+(cid:18) E
+2π
+
++ λ4}
+
+The area of Ωλ(E) is given, with a = (cid:0) E
+
+(cid:1)2
+
++ λ4, by the convergent integral
+
+2π
+
+Iλ(a) =
+
+(cid:32) √
+
+(cid:90) ∞
+
+λ
+
+a + λ2x2 − λ4
+x2 − λ2
+
+√
+
+(cid:33)
+
+− λ
+
+dx
+
+One has, with x = λy, the equality
+(cid:32) (cid:112)a + λ4y2 − λ4
+(cid:112)λ2y2 − λ2
+
+Iλ(a) = λ
+
+(cid:90) ∞
+
+1
+
+− λ
+
+(cid:33)
+
+dy = λ2
+
+(cid:90) ∞
+
+1
+
+(cid:32) (cid:112)a λ−4 + y2 − 1
+(cid:112)y2 − 1
+
+(cid:33)
+
+− 1
+
+dy
+
+Thus one obtains the equality
+
+Iλ(a) = λ2I1(a λ−4)
+9
+
+(21)
+
+Figure 1. The subset Ωλ(E) in the ﬁrst quadrant
+
+We recall that the elliptic integrals E(m) and K(m) are deﬁned by
+
+E(m) :=
+
+(cid:90) π/2
+
+(cid:112)
+
+0
+
+1 − m sin2θ dθ, K(m) :=
+
+(cid:90) π/2
+
+0
+
+1
+1 − m sin2θ
+
+(cid:112)
+
+dθ
+
+Lemma 4.1. The integral I(a) = I1(a) is given by the sum of elliptic integrals
+
+I(a) = aK(1 − a) − E(1 − a) + 1
+
+(22)
+
+Proof. One has, with m = 1 − a, x = 1/t
+(cid:32) √
+1 − mt2
+√
+1 − t2
+
+I(a) =
+
+(cid:90) 1
+
+0
+
+(cid:33)
+
+− 1
+
+dt
+t2
+
+Let
+
+√
+
+g(t) := −
+
+√
+
+√
+
+1 − t2 (cid:0)mt2 +
+√
+t
+
+1 − t2
+1 − mt2
+
+1 − mt2 − 1(cid:1)
+
+One has g(0) = 0, g(1) = 0 and the derivative of g is equal to
+
+g(cid:48)(t) = −
+
+(cid:32) √
+1 − mt2
+√
+1 − t2
+
+(cid:33)
+
+− 1
+
+t−2 +
+
+√
+
+1 − m
+√
+
+1 − t2
+
+1 − mt2
+
+so that the equality (cid:82) 1
+
+0 g(cid:48)(t)dt = 0 gives (22).
+
+10
+
+√
+1 − mt2
+√
+1 − t2
+
+−
+
++ 1
+
+(cid:3)
+
+(p2-λ2)(q2-λ2)≤(E/2π)2+λ4Ωλ(E)p≥λ,q≥λ51015205101520We thus get
+
+Proposition 4.2. The semiclassical approximation to the number of negative eigen-
+values ξ of Wsa with −ξ ≤ E2 on even functions is the same as on odd functions
+and is equal to 2σ(E, λ) where
+
+σ(E, λ) ∼
+
+E
+2π
+
+(cid:18)
+
+log
+
+(cid:19)
+
+(cid:18) E
+2π
+
+− 1 + log(4) − 2 log(λ)
+
+(cid:19)
+
++ λ2 + o(1)
+
+(23)
+
+Proof. The semiclassical approximation corresponds, for the restriction to even
+functions (or to odd functions), to twice the area of Ωλ(E) and hence to Iλ(a) =
+λ2I(a λ−4), for a = (cid:0) E
+
++ λ4. One has the asymptotic expansion for a → ∞
+(cid:19)
+
+(cid:1)2
+
+2π
+
+a (log(a) − 2 + 4 log(2)) + 1 +
+
+(− log(a) − 4 log(2)) + 0
+
+(cid:114) 1
+a
+
+1
+8
+
+(cid:18) 1
+a
+
+√
+
+1
+2
+
+I(a) ∼
+
+so that
+
+Iλ(a) ∼
+
+√
+
+1
+2
+
+a (log(a) − 2 + 4 log(2) − 4 log λ) + λ2 + o(1)
+
+We then use the expansions
+
+√
+
+a =
+
+E
+2π
+
++ O(1/E),
+
+log(a) = 2 log
+
+(cid:19)
+
+(cid:18) E
+2π
+
++ O(1/E2)
+
+and obtain (23).
+
+5. Dirac operators
+
+(24)
+
+(25)
+
+(cid:3)
+
+The results of Section 4 show that for suitable values of λ the negative spectrum
+of Wsa has the same ultraviolet behavior as the squares of zeros of the Riemann
+zeta function. Since Wsa is a diﬀerential operator of second order we liken it to
+the Klein-Gordon operator and construct the analogue of the Dirac operator. We
+ﬁrst use the Darboux process (see [7], [8]) to factorize Wsa as a product of two ﬁrst
+order diﬀerential operators.
+
+Lemma 5.1. Let p(x) = x2 − λ2, V (x) = 4π2λ2x2, L = ∂(p(x)∂) + V (x),
+(∇f )(x) := p(x)1/2∂f (x) and U the unitary operator
+
+U : L2([λ, ∞), dx) → L2([λ, ∞), p(x)−1/2dx), U (ξ)(x) := p(x)1/4ξ(x).
+
+Let w(x) be a solution of the equation
+
+∇w(x) + w(x)2 = −V (x) +
+
+(cid:18) p(cid:48)(cid:48)(x)
+4
+
+−
+
+p(cid:48)(x)2
+16p(x)
+
+(cid:19)
+
+, ∀x ∈ [λ, ∞)
+
+(26)
+
+then one has L = U ∗(∇ + w)(∇ − w)U .
+Proof. Let f be a smooth function on R and consider the diﬀerential operators
+T1 := f ∂xf and T2 := ∂xf 4∂x. Let us show that T 2
+1 − T2 is an operator of order
+zero: one has
+
+1 = f ∂xf 2∂xf = −f (cid:48)f 2∂xf + ∂xf 3∂xf
+T 2
+−f (cid:48)f 2∂xf = −f (cid:48)2f 2 − f (cid:48)f 3∂x, ∂xf 3∂xf = ∂xf 4∂x + ∂xf 3f (cid:48)
+
+so that T 2
+p(x)1/4 gives
+
+1 − T2 is the multiplication by 2f (cid:48)2f 2 + f 3f (cid:48)(cid:48). Applying this for f (x) =
+
+(U ∗∇U )2 = ∂xp(x)∂x +
+
+p(cid:48)(cid:48)(x)
+4
+
+−
+
+p(cid:48)(x)2
+16p(x)
+
+from which the conclusion follows using (26).
+
+11
+
+(cid:3)
+
+We now determine all solutions of the Riccati equation (26) which gives
+
+(cid:112)
+
+x2 − λ2 w(cid:48)(x) + w(x)2 = −4π2λ2x2 −
+
+1
+4
+
+x2
+x2 − λ2 +
+
+1
+2
+
+(27)
+
+The next Lemma is standard using the reduction of a Riccati equation to a Bernoulli
+equation.
+
+Lemma 5.2. Let uj be two real valued solutions of Lu = 0 which generate the
+linear space of solutions in (λ, ∞).
+(i) For z ∈ C and u = u1 + zu2 the solution u has no zero in (λ, ∞) if z /∈ R and
+an inﬁnity of zeros otherwise.
+(ii) All solutions of the Riccati equation (27) are given by
+
+wz(x) =
+
+(x2 − λ2)1/4∂ (cid:0)(x2 − λ2)1/4u(x)(cid:1)
+u(x)
+
+(28)
+
+where u = u1 + zu2 and z ∈ C \ R.
+(iii) The map z (cid:55)→ wz from C \ R to the space of solutions of (27) is a homeomor-
+phism.
+Proof. (i) Let x ∈ (λ, ∞) and z ∈ C \ R, u = u1 + zu2. Assume u(x) = 0. Then
+u1(x) + zu2(x) = 0 and since z ∈ C \ R this implies u1(x) = 0 and u2(x) = 0. The
+Wronskian p(x)(u(cid:48)
+2(x)u1(x)) is constant and non-zero since the uj are
+independent solutions. Thus we get a contradiction and u has no zero. Moreover
+since the equation Lu = 0 is in the LCO case any real valued solution has inﬁnitely
+many zeros.
+(ii) The standard solution of the Riccati equation (26) is of the form
+
+1(x)u2(x) − u(cid:48)
+
+w(x) =
+
+p(x)1/4∂ (cid:0)p(x)1/4u(x)(cid:1)
+u(x)
+
+(29)
+
+which gives
+
+∇w(x) + w(x)2 =
+
+p(cid:48)(cid:48)(x)
+4
+
++
+
+p(cid:48)(x)u(cid:48)(x)
+u(x)
+
+−
+
+p(cid:48)(x)2
+16p(x)
+
++
+
+p(x)u(cid:48)(cid:48)(x)
+u(x)
+
+so that
+
+Lu = 0 ⇒ ∇w(x) + w(x)2 = −V (x) +
+
+(cid:18) p(cid:48)(cid:48)(x)
+4
+
+−
+
+p(cid:48)(x)2
+16p(x)
+
+(cid:19)
+
+Thus by (i) any wz, z ∈ C \ R is a solution of (27). Using the three values {i, −i, j}
+for z and the reduction to a Bernoulli equation one can express the general solution
+of (27) in the form
+
+w = wi +
+
+(w−i − wi)(wj − wi)
+(1 − t)(wj − wi) + t (w−i − wi)
+
+= wz(t)
+
+(30)
+
+where
+
+i(i(t − 1) + j(t + 1))
+i(t + 1) + j(t − 1)
+(iii) The formula (30) establishes an homeomorphism between the space of solutions
+of the Riccati equation and the complement in P1(C) of the circle
+
+∈ C \ R
+
+z(t) =
+
+{t ∈ P1(C) | z(t) ∈ P1(R)}
+and thus the map z (cid:55)→ wz from C \ R to the space of solutions of (27) is a homeo-
+(cid:3)
+morphism.
+
+12
+
+Proposition 5.3. Let w be a solution of the Riccati equation (27) and D/ be the
+matrix of order one operators
+
+(cid:18)
+
+D/ =
+
+0
+∇ − w(x)
+
+∇ + w(x)
+0
+
+(cid:19)
+
+(31)
+
+Then the square of D/ is diagonal with each diagonal term spectrally equivalent to
+L,
+
+U ∗D/ 2U =
+
+(cid:18) L
+
+0
+
+(cid:19)
+
+0 L + 2∇w(x)
+
+The proof is straightforward. The use of the Darboux process in this construction
+is related to the theory of isospectral deformations [7, 8].
+
+6. Ultraviolet behavior of spectrum of Dirac, case λ =
+
+√
+
+2
+
+2, and consider the operator 2D/ where D/ is as deﬁned
+
+In this section we take λ =
+in Proposition 5.3.
+
+√
+
+Theorem 6.1. The operator 2D/ has discrete simple spectrum contained in R ∪
+iR. Its imaginary eigenvalues are symmetric under complex conjugation and the
+counting function N (E) counting those of positive imaginary part less than E fulﬁlls
+
+N (E) ∼
+
+E
+2π
+
+(cid:18)
+
+log
+
+(cid:19)
+
+(cid:18) E
+2π
+
+(cid:19)
+
+− 1
+
++ O(1)
+
+(32)
+
+√
+
+Proof. By Proposition 5.3 the spectrum of 2D/ consists of the complex numbers of
+the form ξ = ±2
+α where α varies in the spectrum of L. The latter is real and the
+number of negative eigenvalues α ≥ −E2 is given by Proposition 4.2 as 2σ(E, λ),
+thus selecting the root with positive imaginary part one gets
+
+0 < (cid:61)(ξ) ≤ E ⇐⇒ α ≥ −(E/2)2
+
+and the number N (E) of such ξ is thus
+
+2σ(E/2,
+
+√
+
+2) =
+
+E
+2π
+
+(cid:18)
+
+log
+
+(cid:19)
+
+(cid:18) E/2
+2π
+
+− 1 + log(4) − 2 log(
+
+√
+
+(cid:19)
+
+2)
+
++ O(1) =
+
+=
+
+E
+2π
+
+(cid:18)
+
+log
+
+(cid:19)
+
+(cid:18) E
+2π
+
+(cid:19)
+
+− 1
+
++ O(1)
+
+which gives the required estimate.
+
+13
+
+(cid:3)
+
+Figure 2. The spectrum (in blue) compared to zeros of zeta (red)
+
+Figure 3. The spectrum compared to zeros of zeta
+
+14
+
+5101520253020406080100010203040506050100150Figure 4. The spectrum compared to zeros of zeta
+
+We gather in this ﬁnal section a number of more speculative remarks.
+
+7. Final remarks
+
+7.1. Geometric meaning of Theorem 6.1. The operator 2D/ of Theorem 6.1 to-
+gether with the action by multiplication of smooth functions on the interval [
+2, ∞)
+would deﬁne a spectral triple if 2D/ were self-adjoint (or skew adjoint) but its spec-
+x2 − 2(cid:1) ∂x
+trum contains both real and imaginary pieces. The leading term ∇ = (cid:0)2
+shows that the corresponding classical metric is (with λ =
+
+2 from now on)
+
+√
+
+√
+
+√
+
+ds2 = −
+
+1
+4
+
+dx2/(x2 − 2) =
+
+1
+α(x)
+
+dx2, α(x) = −4(x2 − 2)
+
+This ds2 changes sign when crossing the boundary x =
+2 and this suggests, in
+order to handle all even functions on R and to take into account the real and
+imaginary eigenvalues of the square of 2D/ , to look for a two dimensional metric
+with signature (−1, 1) of the form
+
+√
+
+ds2 = −α(x)dt2 +
+
+1
+α(x)
+
+dx2
+
+√
+
+This geometry corresponds to a black hole in two space-time dimensions with hori-
+zon at x = ±
+2. It fulﬁls the 2-dimensional analogue of Einstein’s equation with a
+cosmological constant = 8 and no source [10]. One can look at the null curves and
+this means
+
+dx
+dt
+
+= α(x) = −4(x2 − 2) ⇒ t(x) =
+
+(cid:16)
+
+√
+(
+
+log
+
+1
+√
+
+2
+
+8
+
+2 + x)/(x −
+
+√
+
+(cid:17)
+
+2)
+
++ c
+
+one then passes to the new coordinates v = t − t(x), and x unchanged. In these
+new coordinates one re-expresses the metric in the smooth form
+
+ds2 = 4 (cid:0)x2 − 2(cid:1) dv2 − 2dvdx
+
+15
+
+2040608010050100150200250Figure 5. Light rays in the two dimensional geometry, and in
+black the original curve. The vertical lines are the horizons at
+x = ±
+
+√
+
+2.
+
+In this metric the light rays are given by v = v0 (i.e. the horizontal lines of Figure
+5) and by the curves
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+i.e. the solutions of the equation dv = dx
+corresponds to the graph of v = −t(x) as shown in black in Figure 5.
+
+x −
+x +
+
+1
+√
+4
+
+v(x) =
+
++ c
+
+log
+
+2
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
+2(x2−2) . The original curve given by t = 0
+
+√
+√
+
+7.2. Positive eigenvalues of Wsa and trivial zeros of Zeta. The eigenvalues
+χ(n) of the restriction of Wsa to even functions in the interval [−λ, λ] have a well
+understood asymptotic form which by [12] Theorem 3.11 implies that, indepen-
+dently of the value of λ, (note that we only consider even functions so that the
+index n of op.cit. is replaced by 2n)
+
+(cid:18)
+
+χ(n) =
+
+2n +
+
+(cid:19)2
+
+1
+2
+
++ O(1), n → ∞
+
+This behavior is the same as that of the squares of the trivial zeros of the Riemann
+zeta function with the same shift of 1
+2 as for the critical line. To obtain a convincing
+relation one would need to analyze the extension of 2D/ to (two copies of) the even
+functions on R as well as the conditioning of the Hilbert space needed to eliminate
+the positive square roots of the χ(n).
+
+7.3. Spectral truncation. In order to eliminate the real eigenvalues of 2D/ coming
+from the positive eigenvalues of Wsa one can eﬀect a spectral truncation [6], the
+algebra of functions acting by multiplication is then replaced by the operator system
+16
+
+obtained by compression on Sonin’s space. In a similar manner one can use spectral
+truncation to eliminate the positive square roots with the notations of §7.2.
+
+References
+
+[1] A. Connes, Formules explicites, formules de trace et r´ealisation spectrale des z´eros de la
+fonction zˆeta. Cours au Coll`ege de France (1998). https://alainconnes.org/wp-content/
+uploads/UPL8550790458066685627_AN_99_connes.pdf
+
+[2] A. Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta
+
+function. Selecta Math. (N.S.) 5 (1999), no. 1, 29–106.
+
+[3] A. Connes, M. Marcolli, Noncommutative Geometry, Quantum Fields, and Motives, Collo-
+
+quium Publications, Vol.55, American Mathematical Society, 2008.
+
+[4] A. Connes, C. Consani, Weil positivity and trace formula, the archimedean place. Selecta
+
+Math. (N.S.) 27 (2021) no 4.
+
+[5] A. Connes, C. Consani, Spectral triples and ζ-cycles. Preprint (2021). Available at https:
+
+//arxiv.org/pdf/2106.01715.pdf
+
+[6] A. Connes, W. van Suijlekom, Spectral truncations in noncommutative geometry and operator
+
+systems. Comm. Math. Phys. 383 (2021), no. 3, 2021–2067.
+
+[7] P. A. Deift, Applications of a commutation formula. Duke Math. J. 45 (1978), no. 2, 267–310.
+[8] F. A. Gr¨unbaum, Commuting integral and diﬀerential operators and the master symmetries
+
+of the Korteweg–de Vries equation. Inverse Problems 37 (2021), no 8.
+
+[9] V. Katsnelson, Self-adjoint boundary conditions for the prolate spheroid diﬀerential operator,
+in: Indeﬁnite inner product spaces, Schur analysis and diﬀerential equations, pp. 357-386,
+Oper. Theory Adv. Appl. 263, Birkh¨auser-Springer, 2018.
+
+[10] R. B. Mann, A. Shiekh, L. Tarasov, Classical and Quantum properties of two-dimensional
+
+black holes. Nuclear Physics B341 (1990), 134–154.
+
+[11] M. A. Naimark, Linear Diﬀerential Operators, Part II, Ungar Publishing Company, New
+
+York, 1968.
+
+[12] A. Osipov, V. Rokhlin, H. Xiao, P rolate spheroidal wave functions of order zero. Mathemati-
+cal tools for bandlimited approximation. Applied Mathematical Sciences, 187. Springer, New
+York, 2013. xii + 379 pp.
+
+[13] F. Richard-Jung, J.-P. Ramis, J. Thomann, F. Fauvet, New characterization for the eigen-
+
+values of the prolate spheroidal wave equation. Stud. Appl. Math. 138 (2017), 3–42.
+
+[14] D. Slepian, H. Pollak, Prolate Spheroidal Wave Functions, Fourier Analysis and Uncertainty,
+
+The Bell System technical Journal (1961), 43–63.
+
+[15] D. Slepian, Some asymptotic expansions for prolate spheroidal wave functions, J. Math. Phys.
+
+Vol. 44 (1965), 99–140.
+
+[16] D. Slepian, Some comments on Fourier analysis, uncertainty and modeling, Siam Review.
+
+Vol. 23 (1983), 379–393.
+
+[17] J. Weidmann, Spectral theory of ordinary diﬀerential operators, Lecture Notes in Mathemat-
+
+ics 1258, Springer, Berlin, 1987.
+
+[18] A. Zettl, Sturm-Liouville Theory, AMS Surv. Mono. 121, American Mathematical Society,
+
+2005.
+
+A. Connes: Coll`ege de France, 3, rue d’Ulm, Paris, F-75005 France, I.H.E.S. and The
+Ohio State University
+Email address: alain@connes.org
+
+H. Moscovici: Department of mathematics, The Ohio State University, Columbus, OH
+43210, USA
+Email address: henri@math.ohio-state.edu
+
+17
+
+

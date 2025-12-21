@@ -1,0 +1,10424 @@
+4
+2
+0
+2
+
+y
+a
+M
+5
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+2
+v
+5
+4
+5
+2
+1
+.
+5
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE FOR
+THE RIEMANN ZETA-FUNCTION
+
+CHIARA BELLOTTI
+
+Abstract. We will provide an explicit log-free zero-density estimate for ζ(s)
+of the form N (σ, T ) ≤ AT B(1−σ). In particular, this estimate becomes the
+sharpest known explicit zero-density estimate uniformly for σ ∈ [α0, 1], with
+0.985 ≤ α0 ≤ 0.9927 and 3 · 1012 < T ≤ exp(6.7 · 1012).
+
+1. Introduction
+
+Consider the Riemann zeta function ζ(s) and let ρ = β + iγ be a zero of ζ(s)
+with 0 < Re(ρ) < 1. Studying the zeros of ζ(s) is a classical problem in number
+theory and several approaches have been followed throughout the years to have a
+better understanding of the behaviour of the zeros of ζ(s) inside the critical strip.
+Among them, one is ﬁnding upper bounds for the number of zeros of ζ(s) inside a
+ﬁxed region. These estimates are commonly known as zero-density estimates. More
+precisely, for ﬁxed 1/2 < σ < 1 and T > 0, we deﬁne the quantity
+
+N (σ, T ) = #
+{
+
+ρ = β + iγ : ζ(ρ) = 0, 0 < γ < T, σ < β < 1
+
+,
+
+}
+
+which counts the number of non-trivial zeros of ζ(s) with real part greater than
+the ﬁxed value σ. The goal is to ﬁnd upper bounds for N (σ, T ) that are as sharp
+as possible. Trivially, if the Riemann Hypothesis is true then all the non-trivial
+zeros of ζ(s) would lie on the half-line σ = 1/2 and hence N (σ, T ) = 0 for every
+1/2 < σ < 1.
+
+≪
+
+Zero-density estimates for ζ(s) often take the form N (σ, T )
+
+T B(1−σ)(log T )D,
+where B, D are constants which might depend on σ. There is an extensive literature
+on such results, some of which will be recalled in the following paragraph. Usually,
+a large amount of work is done in trying to minimize the exponent B for a wide
+range of σ, while allowing D to be a large absolute constant. In particular, it has
+T 2(1−σ)+ǫ holds uniformly for every
+been conjectured that the estimate N (σ, T )
+1/2 < σ < 1 and T > 0 (this conjecture, also known as the Density Hypothesis,
+is actually weaker than what one would get if the Riemann Hypothesis is true).
+However, our goal is to focus on estimates where D = 0, that is, estimates of the
+form
+
+≪
+
+N (σ, T )
+
+(1.1)
+≪
+This type of estimate is commonly known as a log-free zero-density estimate. There
+is a vast number of research works on the log-free zero-density estimates, starting
+with Linnik [Lin44a; Lin44b] and following with many other authors, including
+Tur´an [Tur61], Fogels [Fog65], Bombieri [Bom74], Jutila [Jut77], Gallagher [Gal70],
+
+T B(1−σ).
+
+2020 Mathematics Subject Classiﬁcation. Primary 11M06, 11M26. Secondary 11Y35.
+Key words and phrases. Riemann zeta function, zero-density estimates, explicit estimates.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+C. BELLOTTI
+
+·
+
+Graham [Gra81] and Heath-Brown [HB92].
+For completeness, we mention some of the known results for N (σ, T ). In 2021, Platt
+and Trudgian [PT21] veriﬁed that the Riemann Hypothesis is true up to height
+1012.
+3
+Hence, we can restrict the range of values of T for which we want to ﬁnd an upper
+bound for N (σ, T ) to T > 3
+
+1012 and, as a consequence, N (σ, T ) = 0 for every 1/2 < σ < 1, T
+
+1012.
+
+≤
+
+3
+
+·
+
+·
+
+≥
+
+≤
+
+25/32 and, actually, for 25/32
+
+Furthermore, in 2000, Bourgain [Bou00] proved that the Density Hypothesis is
+true for σ
+σ < 1 it is possible to get upper
+bounds for the quantity N (σ, T ) which are sharper than the Density Hypothesis
+(see [TY24] and [Pin23] for more recent results). However, although the Density
+Hypothesis is known to be true when σ is suﬃciently close to 1, the sharpest uni-
+form non-explicit bound for N (σ, T ) which holds for every 1/2 < σ
+1 and T > 0
+T 12(1−σ)/5+ε, which can be obtained ([Ivi03]) by combining Ingham’s
+is N (σ, T )
+≪
+T 3(1−σ)/(2−σ) log5 T for 1
+3
+4 with Huxley’s one
+estimate [Ing40] N (σ, T )
+≤
+T 3(1−σ)/(3σ−1) log44 T , which holds for 3
+[Hux71] N (σ, T )
+1. Another
+important result due to Ingham is a connection between bounds for ζ(s) on the
+tc+ǫ
+half line and N (σ, T ). More precisely, he proved [Ing37] that if ζ
+T (2+4c)(1−σ)(log T )5. In particular, the
+for a certain constant c, then N (σ, T )
+Lindel¨of Hypothesis ζ
+
+(cid:0)
+tǫ implies the Density Hypothesis.
+
+1
+2 + it
+
+4 ≤
+
+2 ≤
+
+≪
+
+≪
+
+≪
+
+≪
+
+≤
+
+≤
+
+σ
+
+σ
+
+(cid:1)
+
+While non-explicit estimates for N (σ, T ) are widely studied, much less is known
+about explicit estimates for N (σ, T ). Ingham’s estimate has been made explicit by
+Ramar´e [Ram16] and then improved by Kadiri, Lumley and Ng [KLN18]. When σ
+is really close to the 1/2 line, an explicit version of Selberg’s estimate [Sel46] is pro-
+vided by the work of Simoniˇc in [Sim20]. When instead σ is really close to 1 and T
+quite large, the author provided an explicit version of the upper bound of the form
+(log T )D [Bel23]. Explicit log-free zero density estimates for
+N (σ, T )
+Dirichlet L-Functions have been found by Thorner and Zaman in [TZ24]. The es-
+timate found in [TZ24] holds also for ζ(s), but in this case the exponent is too big
+to be used in some applications which might beneﬁt from the existence of a log-
+free zero density estimate for ζ(s) and which we will list in the following paragraph.
+
+T B(1−σ)
+
+≪
+
+3/2
+
+1
+2 + it
+
+(cid:0)
+
+≪
+
+(cid:1)
+
+The aim of this paper is to provide a new explicit log-free zero density estimate
+for ζ(s) of the form (1.1). Furthermore, this estimate becomes the sharpest known
+(T0, T1],
+explicit zero-density estimate for ζ(s) uniformly for α0 ≤
+whose values are listed in Table 2 in Appendix A. The whole range of T will be
+1012), while α0 is a ﬁxed value in [0.985, 0.9927], and depends
+3
+on the interval (T0, T1] in which we are working.
+
+1012 < T
+
+1 and T
+
+exp(6.7
+
+≤
+
+≤
+
+∈
+
+σ
+
+·
+
+·
+
+Theorem 1.1. For every T
+following estimate holds:
+
+∈
+
+(T0, T1] and σ
+
+∈
+
+[α0, 1] as displayed in Table 2, the
+
+where C = C(α0, T0, T1) and B = B(α0, T0, T1) and numerical values are listed in
+Table 2 in Appendix A.
+
+N (σ, T )
+
+CT B(1−σ),
+
+≤
+
+In particular, if we want a uniform upper bound which holds for every 3
+
+exp(6.7
+
+T
+
+≤
+
+·
+
+1012) and σ
+
+∈
+
+[0.9927, 1], the following estimate holds:
+
+N (σ, T )
+
+≤
+
+CT B(1−σ),
+
+1012 <
+
+·
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+3
+
+·
+
+1011. The constant C is quite big; however, as we
+with B = 1.448 and C = 1.62
+explained before, Theorem 1.1 provides much sharper estimates depending on the
+size of T . An analysis of the values of both C and B listed in Table 2 shows that
+when T increases, C increases, but on the contrary B decreases quite consistently.
+This balance between increasing values of C and decreasing values of B when T
+becomes larger allow us to get sharp upper bounds for N (σ, T ) in a certain region
+on the left of the zero-free region for ζ(s). The python program used to compute
+C and B is available on github at [Bel]. Furthermore, a detailed analysis of the
+computational aspects of this work can be found in Appendix A.
+
+Remark. The method can be adapted to get log-free zero-density estimates for
+ζ(s) for values of σ which are smaller than 0.985, and which can be sharper than
+the current known estimates of the type (1.6), provided that T is in suﬃciently
+large (T > exp(90)). However, we limit ourselves to provide a log-free zero-density
+0.985, as values of σ which are really close to 1 are usually needed
+estimate for σ
+in the majority of the applications.
+
+≥
+
+We will divide the proof of Theorem 1.1 in two cases. Given ρ = β + iγ a
+1012, since we are working with
+, since
+1012 by Platt and Trudgian
+
+zero of ζ(s), if 0 < γ
+T
+the Riemann Hypothesis has been veriﬁed up to 3
+[PT21]. From now on, we then consider γ > 0.447 log T .
+
+0.447 log T then γ
+1012). Hence N (σ, t) = 0 for t
+
+3
+·
+0.447 log T and T
+
+exp(6.7
+
+e6.7·10
+
+≤
+≤
+
+≤
+
+≤
+
+≤
+
+12
+
+·
+
+·
+
+Remark. The above choice of splitting the proof of Theorem 1.1 in two cases and
+using the partial veriﬁcation of the Riemann Hypothesis when γ
+0.447 log T
+prevents us from ﬁnding a log-free zero-density estimate for ζ(s) which holds for
+every T . However, this is not a big limitation, since when T is suﬃciently large,
+estimates of the form N (σ, T )
+
+logD T become sharper.
+
+T B(1−σ)
+
+≤
+
+3/2
+
+≪
+
+1.1. Importance and applications. Log-free zero-density estimates of the form
+(1.1) are particularly powerful when σ is suﬃciently close to 1 and close to the
+zero-free region, as N (σ, T ) is absolutely bounded by a constant when σ
+1.
+→
+More precisely, consider both the usual estimate with the log-factor of the form
+
+≪
+and the log-free zero density estimate
+
+N (σ, T )
+
+T B1(1−σ) logD T
+
+(1.2)
+
+N (σ, T )
+
+T B2(1−σ),
+
+≪
+where B1, B2, D are absolute constants which may depend on σ. Given a certain
+λ/ log T is outside the zero-free
+positive constant λ which is large enough so that 1
+−
+λ
+. Using (1.2) we have
+log T , T
+region, we want to bound the quantity N
+
+1
+
+N
+
+1
+
+(cid:18)
+while by (1.3) it follows that
+
+λ
+log T
+
+−
+
+, T
+
+−
+
+(cid:16)
+
+≪
+
+(cid:19)
+
+(cid:17)
+
+eλB1 logD T,
+
+(1.3)
+
+(1.4)
+
+(1.5)
+
+N
+
+1
+(cid:18)
+
+−
+
+λ
+log T
+
+, T
+
+≪
+
+(cid:19)
+
+eλB2 .
+
+If we compare (1.4) and (1.5), it is evident that (1.5) is much sharper than the
+λ
+log T , T
+
+is absolutely bounded by a constant
+
+ﬁrst estimate, as the quantity N
+
+1
+
+−
+
+(cid:16)
+
+(cid:17)
+
+4
+
+C. BELLOTTI
+
+(which depends on B2), while in (1.4) the upper bound contains a factor logD T
+which increases with T and hence it is not absolutely bounded.
+
+Theorem 1.1, combined with the results in [Bel23] can lead to improvements in
+several other topics in computational number theory, such as the error term in the
+Prime Number Theorem (see [JY23; FKS23]), primes between consecutive powers
+(see [CH23; JCH24]), Ramanujan’s inequality (see [PT20; CHJ23]).
+
+1.2. Comparison with existent estimates. In this subsection, we try to com-
+pare Theorem 1.1 with the existing explicit zero-density estimates. Since we are
+1012), we just need to compare Theorem 1.1 with
+working with T
+Kadiri-Lumley-Ng’s zero-density estimate [KLN18] of the form
+3 (1−σ) log5−2σ T + C2 log2 T,
+
+N (σ, T )
+
+exp(6.7
+
+(1.6)
+
+C1T
+
+≤
+
+·
+
+8
+
+≤
+
+where C1, C2 are absolute constants which depend on σ. The values of C1, C2 have
+been slightly improved by Johnston and Yang in [JY23] and we will refer to these
+new values throughout the comparison with the estimate found in Theorem 1.1.
+To verify that the estimate found in Theorem 1.1 is always sharper than (1.6) in
+(T0, T1] listed in Table 2 in Appendix A, we
+all the intervals σ
+just need to verify that in each of the above intervals the following relation holds:
+
+[α0, 1] and T
+
+∈
+
+∈
+
+CT B(1−σ)
+
+C1T
+
+8
+
+3 (1−σ) log5−2σ T
+
+≤
+
+σ
+
+∀
+
+∈
+
+[α0, 1], T
+
+(T0, T1],
+
+(1.7)
+
+∈
+
+∈
+
+[α0, 1], T
+
+where the values of C, B are displayed in Table 2 in Appendix A and C1 is the
+same as in (1.6). If (1.7) is true, in particular Theorem 1.1 is sharper than (1.6) for
+each of the intervals σ
+(T0, T1], since in (1.6) there is an additional
+∈
+positive term C2 log2 T , which does not appear in (1.7).
+To verify (1.7), we use two diﬀerent techniques depending on whether T1 ≤
+For T1 ≤
+Table 2 in Appendix A), we rewrite (1.7) as
+C1
+C
+
+exp(500).
+3 (the values of B can be found in
+
+exp(500), being the exponent B > 8
+
+log5−2σ T,
+
+T (B− 8
+
+3 )(1−σ)
+
+≤
+and then we apply the logarithm, getting
+
+−
+
+1
+
+B
+
+8
+3
+
+−
+
+(cid:18)
+
+(cid:19)
+
+σ)
+
+(1
+
+−
+
+≤
+
+log
+
+The last inequality is equivalent to
+
+C1
+C
+
+(cid:18)
+
+·
+
+(cid:19)
+
+1
+log T
+
++ (5
+
+2σ)
+
+log log T
+log T
+
+.
+
+·
+
+1
+
+σ
+
+≥
+
+B
+
+8
+3
+
+2 log log T
+log T
+
+·
+
+B
+
+−
+
+8
+3 −
+
+log
+
+C1
+C
+
+5
+
+log log T
+log T
+
+·
+
+log T −
+
+.
+
+(1.8)
+
+(cid:0)
+
+(cid:1)
+
+∈
+
+∈
+
+(cid:19)
+
+(cid:18)
+
+(cid:18)
+
+−
+
+−
+
+[α0, 1].
+
+(cid:19)
+(T0, T1], with (T0, T1] ﬁxed,
+At this point, it remains to verify that, for every T
+the RHS of (1.8) is always less than the α0 corresponding to that particular interval
+(T0, T1]. Simple numerical calculations show that (1.8) holds for every T
+(T0, T1]
+and σ
+When T0 > exp(500), we observe that the exponent B in (1.7) given by Theorem
+1.1 in each of the intervals (T0, T1] is smaller than 8
+3 , and hence the factor T B(1−σ)
+3 (1−σ). Furthermore, for a ﬁxed σ, the RHS in (1.7) is an
+is always smaller than T
+increasing function in T and the exponent of the log-factor is 5
+3. Hence,
+we just need to verify that C1 log3(T0)
+C in each interval (T0, T1], where C1
+≥
+is the same as in (1.6) and C is given by Theorem 1.1. Again, a straightforward
+
+2σ
+
+≥
+
+−
+
+∈
+
+8
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+5
+
+calculation shows that this is always true in the intervals we are considering.
+exp(1000), the
+Another remark is that, when T is suﬃciently large, that is, T
+exponent B is less than 2 which is the exponent conjectured in the Density Hypoth-
+esis. This makes sense, since it has already been proved non-explicitly that when
+σ is suﬃciently close to 1, we can get upper bounds for N (σ, T ) which are sharper
+than the one conjectured in the Density Hypothesis, as we already mentioned be-
+fore.
+To give an idea of the size of the improvements of Theorem 1.1 on (1.6), we just
+list a few cases, keeping σ ﬁxed and letting T vary or vice versa.
+
+≥
+
+Table 1. Comparison between Theorem 1.1 and estimate (1.6)
+
+σ
+
+0.9930
+
+T
+1013
+
+0.9930
+
+exp(46.2)
+
+0.9930
+
+exp(170.2)
+
+0.9900
+
+exp(46.2)
+
+0.9900
+
+exp(170.2)
+
+0.9850
+
+exp(90)
+
+0.9900
+
+exp(90)
+
+0.9930
+
+exp(90)
+
+Improvement
+
+13.4%
+
+58.4%
+
+97.4%
+
+4.1%
+
+96.2%
+
+16.2%
+
+72.6%
+
+86.0%
+
+2. Background and useful lemmas
+
+We list some results that will be used throughout the proof of Theorem 1.1. As
+we already mentioned in the previous section, since the Riemann Hypothesis has
+1012 by Platt and Trudgian [PT21], we can restrict to
+been veriﬁed up to height 3
+T > 3
+
+1012.
+
+·
+
+·
+
+2.1. Zeros and bounds of ζ(s). We start recalling some important results about
+the number of zeros inside a circle centered at a point of the critical strip close to
+the 1-line.
+
+Lemma 2.1. Let σ
+
+≥
+
+n(r, σ + it) := #
+{
+
+The bound
+
+1, 0 < r
+
+1, T
+
+3
+
+1012, t
+
+R, 3
+
+1012
+
+≤
+
+·
+·
+ρ = β + iγ : 0 < β < 1, ζ(ρ) = 0,
+
+≥
+
+∈
+
+≤ |
+σ + it
+
+| ≤
+ρ
+
+t
+
+T . Deﬁne
+
+|
+
+−
+
+| ≤
+
+r
+
+.
+
+}
+
+n(r, σ + it)
+
+n(r, 1 + it)
+
+≤
+
+≤
+
+n(2r, 1 + r + it)
+
+r(2 log(T )
+
+1) + 4
+
+−
+
+≤
+
+holds.
+
+Proof. See Lemma 2.9 of [TZ24] with q = 1.
+
+(cid:3)
+
+6
+
+C. BELLOTTI
+
+Lemma 2.2. Let 3
+
+Re
+
+(cid:18)
+
+Xζ(ρ)=0
+|1+it−ρ|≤r
+
+1 + r + it
+
+≤
+
+ρ
+
+(cid:19)
+
+−
+
+1012
+
+·
+
+t
+
+| ≤
+
+≤ |
+
+1
+
+T , and 0 < r < 1
+
+2 . The following bound holds
+
+log(T ) + 4.7098
+4 + 8r
+
++
+
+4
+π −
+
+1
+
+(cid:0)
+
+1 + r−1
+
+log
+1 + 2r
+(cid:1)
+(cid:0)
+
+(cid:1)
+
++ 2.6908
+
++
+
+8r
+
+(1 + 2r)2 (r(2 log(T )
+
+−
+
+1) + 4) + r−1.
+
+Proof. Use Proposition 2.11 of [TZ24] with q = 1.
+
+(cid:3)
+
+An immediate corollary is the following result for the number of zeros close to a
+
+point of the 1-line.
+
+Corollary 2.3. Using the same notations as in Lemma 2.1, the following estimate
+holds for 3
+
+1012
+
+T :
+
+t
+
+·
+
+≤ |
+
+| ≤
+
+n(r, 1 + it)
+
+2r
+
+≤
+
+log(T ) + 4.7908
+4 + 8r
+
++
+
+4
+π −
+
+1
+
+(cid:0)
+
+1 + r−1
+
+log
+1 + 2r
+(cid:1)
+(cid:0)
+
+(cid:1)
+
++ 2.6908
+
++
+
+8r
+
+(1 + 2r)2 (r(2 log(T )
+
+−
+
+1) + 4) + r−1
+
+.
+
+(cid:19)
+
+In particular, if
+
+1
+
+a log T ≤
+
+1
+b
+
+r
+
+≤
+
+we get
+
+n(r, 1 + it)
+
+log T
+b
+
+≤
+
+0.5 +
+
+(cid:18)
+
+32
+b2
+
+(cid:19)
+
++
+
+0.573803
+b
+
+log b +
+
+2.4 + 5.3816
+b
+
++
+
+64
+b2 + 2
+
+−
+
+272
+b3 .
+
+Proof. The ﬁrst part follows from Lemma 2.2. If
+
+1
+
+a log T ≤
+
+1
+b
+
+r
+
+≤
+
+we get
+
+n(r, 1 + it)
+
+2r
+
+≤
+
+log(T ) + 4.7908
+4 + 8r
+
++
+
+4
+π −
+
+1
+
+(cid:0)
+
+1 + r−1
+
+log
+1 + 2r
+(cid:1)
+(cid:0)
+
+(cid:1)
+
++ 2.6908
+
++
+
+8r
+
+(1 + 2r)2 (r(2 log(T )
+
+−
+
+1) + 4) + r−1
+
+r(0.5 log T + 2.4) + 0.573803r log
+
+(cid:19)
++ 5.3816r + 64r2 + r3(32 log T
+
+1
+r
+
+(cid:18)
+
+(cid:19)
+
+r
+
+log T
+
+0.5 +
+
++ 0.573803 log b + 2.4 + 5.3816 +
+
+≤
+
+≤
+
+≤
+
+32
+b2
+
+(cid:18)
+log T
+b
+
+(cid:18)
+0.5 +
+
+(cid:18)
+
+32
+b2
+
+(cid:19)
+
+(cid:19)
++
+
+0.573803
+b
+
+log b +
+
+2.4 + 5.3816
+b
+
++
+
+64
+b2 + 2
+
+−
+
+since 32 log T
+
+272
+
+−
+
+≥
+
+0 for T
+
+1012.
+
+3
+
+·
+
+≥
+
+Corollary 2.3 can be used to determine the following result.
+
+64
+b −
+
+272
+b2
+
++ 2
+
+(cid:19)
+272
+b3 ,
+
+272) + 2
+
+−
+
+(cid:3)
+
+ 
+ 
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+7
+
+Lemma 2.4. Given 0.985
+Riemann zeta function ζ(s) inside the square
+
+α0 ≤
+
+≤
+
+≤
+
+α
+
+1, the number of non trivial zeros for the
+
+α
+
+σ
+
+1,
+
+t
+
+T
+
+1
+
+α,
+
+|
+T0 ﬁxed, is bounded by the following quantity depending on α:
+
+| ≤
+
+≤
+
+≤
+
+−
+
+−
+
+with T
+
+≥
+
+−
+where the values of b1 = b1(α0, T0) and b2 = b2(α0, T0) can be found in Table 3 in
+Appendix A.
+
+˜n(α) = b1(1
+
+α) log T + b2,
+
+Proof. First, we observe that the square
+
+≤
+is contained inside the circle of center 1 + iT and radius
+
+| ≤
+
+≤
+
+−
+
+−
+
+|
+
+α
+
+σ
+
+1,
+
+t
+
+T
+
+1
+
+α
+
+r = √2(1
+
+α).
+
+−
+
+Hence, the number of zeros inside the square is less than the number of zeros inside
+the circle in which the square is contained. The conclusion follows by an application
+of Corollary 2.3 with r = √2(1
+
+α) to n(r, 1 + iT ).
+
+−
+
+(cid:3)
+
+Other important tools for the proof of Theorem 1.1 are the bounds for the
+
+Riemann zeta function on the half line.
+
+Lemma 2.5. The following estimates hold:
+
+1.461
+
+if 0
+
+3
+
+t
+
+| ≤
+
+≤ |
+
+0.618
+
+t
+
+|
+
+|
+
+1/6 log
+
+t
+
+|
+
+|
+
+if 3 <
+
+t
+
+|
+
+| ≤
+
+exp(105)
+
+66.7t27/164
+
+if
+
+t
+
+|
+
+|
+
+> exp(105).
+
+1
+2
+
+(cid:18)
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++ it
+
+≤
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+
+
+
+
+
+In order of appearance, these estimates are due to Hiary [Hia16], Hiary–Patel–
+
+Yang [HPY24], Patel–Yang [PY24].
+Finally, we list the currently best-known explicit zero-free regions for the Riemann
+zeta function. Although all of them hold for every
+3, we indicate the range
+of values for
+|
+For 3
+·
+one:
+
+e46.2 the classical zero-free region [MTY24] is the widest
+
+for which each of them is the sharpest one.
+
+T
+|
+1012 <
+
+| ≥
+
+| ≤
+
+T
+
+T
+
+•
+
+|
+
+|
+
+1
+
+For e46.2 <
+
+T
+
+1
+
+σ
+
+≥
+
+−
+
+5.558691 log
+
+−
+e170.2 the currently largest known zero-free region is
+
+T
+
+|
+
+|
+
+|
+
+=: 1
+
+T
+
+ν1(
+|
+
+).
+
+(2.1)
+
+•
+
+•
+
+|
+
+|
+
+|
+
+T
+
+−
+
+−
+
+σ > 1
+
+) + 1.15)
+
+0.0196/(J(
+|
+
+) + 0.685 + 0.155 log log
+
+| ≤
+0.04962
+T
+J(
+|
+|
+where J(T ) := 1
+6 log T + log log T + log 0.618. As per [Yan24], this result is
+obtained by substituting Theorem 1.1 of [HPY24] in Theorem 3 of [For22]
+and observing that J(T ) < 1
+4 log T + 1.8521 for T
+For e170.2 <
+T
+|
+Littlewood one:
+
+e481958, the sharpest zero-free region [Yan24] is the
+
+ν2(
+|
+
+(2.2)
+
+=: 1
+
+| ≤
+
+3.
+
+≥
+
+−
+
+),
+
+T
+
+T
+
+|
+
+|
+
+σ
+
+1
+
+−
+
+≥
+
+T
+log log
+|
+21.233 log
+
+|
+T
+|
+
+|
+
+=: 1
+
+T
+
+ν3(
+|
+
+|
+
+).
+
+−
+
+(2.3)
+
+8
+
+C. BELLOTTI
+
+Finally, for
+T
+|
+becomes the largest one:
+
+|
+
+> e481958, the Korobov–Vinogradov zero-free region [Bel24]
+
+•
+
+σ
+
+1
+
+≥
+
+−
+
+53.989 log2/3
+
+=: 1
+
+T
+
+ν4(
+|
+
+|
+
+).
+
+−
+
+)1/3
+
+(2.4)
+
+1
+
+|
+
+|
+
+T
+
+(log log
+
+T
+
+|
+
+|
+
+2.2. Arithmetic functions. Now, we recall some explicit results involving some
+arithmetic functions. In particular, estimates for the divisor function d(n) and for
+the M¨obius function µ(n) will play an important role in our argument. We will use
+the following notation: if f = O ∗(g) then
+
+g.
+
+f
+
+|
+Lemma 2.6 ([CHT19], Theorem 2). For x
+
+| ≤
+
+≥
+
+2 we have
+
+d2(n) = D1x log3 x+D2x log2 x+D3x log x+D4x+O ∗
+
+9.73x
+
+3
+
+4 log x + 0.73x
+
+(cid:16)
+
+1
+2
+
+(cid:17)
+
+Xn≤x
+where
+
+D1 =
+
+1
+π2 , D2 = 0.745 . . . , D3 = 0.824 . . . , D4 = 0.461 . . .
+
+are exact constants. Furthermore, for x
+
+d2(n)
+
+xj we have
+Kx log3 x
+
+≥
+
+≤
+
+where one may take
+
+K, xj}
+
+{
+
+Xn≤x
+to be, among others,
+
+1
+4 , 433
+
+or
+
+1, 7
+
+.
+
+}
+
+{
+
+Lemma 2.6 will be used in two diﬀerent cases, when x = V W = T v+w and
+when x = W 2 = T 2w, where v, w are parameters we will deﬁne in Section 3 and
+T1, in which we are working.
+whose values depend on the range for T , T0 ≤
+Throughout the paper, we will use the following notation:
+
+≤
+
+T
+
+(cid:8)
+
+(cid:9)
+
+d2(n)
+
+≤
+
+d1x log3 x,
+
+Xn≤x
+
+where d1 = d1(v, w, T0, T1) is equal to d1,1 if x = V W , while d1 = d1,2 if x = W 2.
+The numerical values for d1,1 and d1,2 can be found in Table 5 in Appendix A . By
+Lemma 2.6, we can easily deduce the following result.
+
+Lemma 2.7. For every ﬁxed x, the following estimate holds:
+
+d2(n)
+
+n ≤
+
+d2 log4 X,
+
+Xn≤x
+
+where d2 = d2(v, w, T0, T1) is equal to d2,1 if x = V W or d2,2 if x = W 2. The
+numerical values can be found in Table 5 in Appendix A.
+
+Proof. By partial summation and Theorem 2.6 we get
+
+X
+
+1 
+Z
+
+
+
+Xn≤u
+
+d2(n)
+
+
+
+1
+u2 du
+
+
+
+d2(n)
+n
+
+=
+
+1
+X
+
+Xn≤X
+
+d1 log3 X +
+
+≤
+
+= d1 log3 X +
+
+1
+Z
+d1
+4
+
+d2(n) +
+
+Xn≤X
+X
+
+d1 log3 u
+u
+
+du
+
+log4 X
+
+≤
+
+d2 log4 X.
+
+(cid:3)
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+9
+
+Lemma 2.8 ([Ram15] Corollary 1.10). For any real number x
+integer q, we have
+
+≥
+
+1 and any positive
+
+0
+
+≤
+
+Xn≤x,(n,q)=1
+
+µ(n) log(x/n)/n
+
+1.00303
+
+q/ϕ(q).
+
+·
+
+≤
+
+Now, deﬁne
+
+c0 = ˜c +
+
+where ˜c is Euler’s constant.
+
+log p
+
+p(p
+
+1)
+
+−
+
+Xp≥2
+
+= 1.332582275733 . . .,
+
+Lemma 2.9 ([Ram19], Theorem 3.1). For D > 1, we have
+
+µ2(d)
+ϕ(d)
+
+Xd≤D
+
+= log D + c0 + O ∗
+
+11
+√D log D
+
+,
+
+(cid:19)
+
+(cid:18)
+
+and equally for D > 1, we have
+µ2(d)
+ϕ(d)
+
+Xd≤D
+
+Finally, deﬁne
+
+= log D + c0 + O ∗
+
+61/25
+√D (cid:19)
+
+.
+
+(cid:18)
+
+Gq(D) =
+
+Xd≤D,(d,q)=1
+Lemma 2.10 ([RA17], Theorem 1.2.). When D
+
+µ2(d)
+ϕ(d)
+
+.
+
+1, we have
+
+≥
+
+G1(D) = log D + c0 + O ∗(3.95/√D).
+
+When D > 1, we have
+
+G1(D) = log D + c0 + O ∗(18.4/
+
+D log D).
+
+2.3. Miscellaneous. We recall an explicit estimate for the Γ function ([Olv74],
+p.294).
+
+p
+
+Lemma 2.11 (Explicit Stirling formula). For z = σ + it, with
+
+Γ(z)
+
+| ≤
+
+|
+
+(2π)1/2
+
+t
+
+|
+
+|
+
+σ− 1
+
+2 exp
+
+π
+2 |
+
+t
+
+|
+
++
+
+1
+z
+
+|
+
+6
+
+|(cid:19)
+
+−
+
+(cid:18)
+
+arg z
+
+|
+
+< π we have
+
+|
+
+.
+
+Finally, a fundamental role in the proof of Theorem 1.1 will be played by Hal´asz–
+
+Montgomery inequality.
+
+Theorem 2.12 ([Ivi03] A.39, A.40). Let ξ, ϕ1, . . . , ϕR be arbitrary vectors in an
+inner-product vector space over C, where (a, b) will be the notation for the inner
+product and
+
+2 = (a, a). Then
+
+a
+
+||
+
+||
+
+(ξ, ϕr)
+
+| ≤ ||
+
+|
+
+Xr≤R
+
+ξ
+
+|| 
+
+
+
+|
+
+Xr,s≤R
+
+and
+
+(ξ, ϕr)
+
+| ≤ ||
+
+ξ
+
+||
+
+2 max
+r≤R
+
+|
+
+Xr≤R
+
+Xs≤R
+
+1/2
+
+(ϕr, ϕs)
+
+|
+
+
+
+(ϕr, ϕs)
+|
+
+.
+
+|
+
+10
+
+C. BELLOTTI
+
+3. Construction of the zero-detector
+
+Throughout the proof, we will often refer to some techniques used by Pintz in
+a recent work [Pin19] on some new non-explicit zero-density estimates for some
+L-functions.
+We start deﬁning the following Barban-Vehov weights (ψd)d and (θd)d by
+
+and
+
+ψd =
+
+θd =
+
+µ(d)
+
+d
+
+1
+
+≤
+
+≤
+
+U,
+
+µ(d) log(V /d)
+
+log(V /U) U < d
+
+V,
+
+≤
+
+0
+
+d > V,
+
+µ(d) log(W/d)
+
+log W
+
+1
+
+d
+
+≤
+
+≤
+
+W,
+
+d > W.
+
+
+
+
+
+
+
+
+
+0
+
+Then, we denote
+
+
+Ψ(n) =
+
+ψd,
+
+Θ(n) =
+
+θd.
+
+(3.1)
+
+Xd|n
+
+Xd|n
+
+n
+
+≤
+
+U .
+
+We observe that θd is a special case of ψd with U = 1 and V = W . Also, Ψ(n) = 0
+for 2
+We aim to ﬁnd some explicit bounds for sums involving both Ψ and Θ. In order to
+do that, we introduce two other quantities due to Graham [Gra78]. Assume that
+1
+
+z2, and we let
+
+≤
+
+z1 ≤
+
+≤
+
+Λi(d) = µ(d) log (zi/d)
+
+= 0
+
+if d
+zi
+≤
+if d > zi.
+
+We observe that, if z1 < z2, and z1 = U , z2 = V , we have exactly
+
+ψd =
+
+Λ2(d)
+
+Λ1(d)
+
+−
+log(V /U )
+
+.
+
+(3.2)
+
+Furthermore, if we put z1 = W , we have
+
+θd =
+
+Λ1(d)
+log W
+
+.
+
+Lemma 3.1. Using the above notations, the following estimate holds for z1z2 < N
+and 1
+
+N :
+
+z1 ≤
+
+z2 ≤
+
+≤
+
+X1≤n≤N
+.
+
+
+
+
+
+Xd|n
+
+Λ1(d)
+
+
+
+
+
+
+
+
+
+Xe|n
+
+Λ2(e)
+
+
+
+≤
+
+1.0061(N
+
+−
+
+1)
+
+log z1 + 1.333 +
+
+(cid:18)
+
+11
+√z1 log z1 (cid:19)
+
++N.
+
+
+
+Proof. Following Graham’s argument [Gra78] for the case z1z2 < N , we have
+
+
+
+
+
+Xd|n
+1)
+
+X1<n≤N
+(N
+
+≤
+
+−
+
+Λ1(d)
+
+
+
+
+
+Λ2(e)
+
+
+
+Xe|n
+
+
+
+
+Λ1(d)Λ2(e)
+[d, e]
+
+Xd≤z1,e≤z2
+
+
++
+
+Xd≤z1,e≤z2
+
+Λ1(d)
+
+| |
+
+Λ2(e)
+|
+
+.
+
+|
+
+(3.3)
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+11
+
+Trivially,
+
+Λ1(d)
+
+| |
+
+|
+
+Λ2(e)
+
+| ≤
+
+log(z1)
+
+1)(z2 −
+
+−
+
+Xd≤z1,e≤z2
+(z1 −
+≤
+
+log
+
+Xd≤z1
+log(z2)
+
+(cid:16)
+
+−
+
+z1
+d
+
+1)
+
+log
+
+(cid:17) Xe≤z2
+≤
+
+z1z2 ≤
+
+z2
+e
+
+(cid:16)
+N.
+
+(cid:17)
+
+(3.4)
+
+Now, we analyze the main term. By Lemma 2.8 and Lemma 2.9, we have
+
+Λ1(d)Λ2(e)
+[d, e]
+
+Xd≤z1,e≤z2
+=
+
+Λ1(d)Λ2(e)
+de
+
+ϕ(r)
+
+Xr|(d,e)
+
+Xd≤z1,e≤z2
+
+Xm≤z1/r
+(m,r)=1
+
+
+
+
+(1.00303)2
+
+µ(m)
+m
+
+log
+
+z1
+mr
+
+(cid:16)
+
+r2
+ϕ2(r)
+
+·
+
+
+
+
+
+(cid:17)
+
+
+
+
+
+Xn≤z2/r
+(n,r)=1
+
+
+
+
+
+µ(n)
+n
+
+log
+
+z2
+nr
+
+(cid:16)
+
+
+
+(cid:17)
+
+
+
+
+
+(3.5)
+
+µ2(r)ϕ(r)
+r2
+
+
+
+=
+
+Xr≤z1
+
+Xr≤z1
+1.0061
+
+µ2(r)ϕ(r)
+r2
+
+·
+
+µ2(r)
+ϕ(r)
+
+Xr≤z1
+
+≤
+
+≤
+
+≤
+
+1.0061
+
+·
+
+log z1 + 1.333 +
+
+(cid:18)
+
+11
+√z1 log z1 (cid:19)
+
+.
+
+Combining (3.3), (3.4), (3.5), we get
+
+X1<n≤N
+
+
+
+
+
+Xd|n
+
+Λ1(d)
+
+
+
+
+
+
+
+
+
+Xe|n
+
+Λ2(e)
+
+
+
+≤
+
+1.0061(N
+
+−
+
+1)
+
+log z1 + 1.333 +
+
+(cid:18)
+
+11
+√z1 log z1 (cid:19)
+
++N.
+
+
+
+(cid:3)
+
+Lemma 3.2. Let Ψ the function deﬁned in (3.1). The following estimate holds
+when N > U V :
+
+N
+
+n=1
+X
+
+Ψ2(n)
+
+4
+log2(V /U )
+
+≤
+
+1.0061
+
+(N
+
+(cid:18)
+
+−
+
+1)
+
+log U + 1.333 +
+
+(cid:18)
+
+11
+√U log U
+
++ N
+
+.
+
+(cid:19)
+
+(cid:19)
+
+12
+
+C. BELLOTTI
+
+Proof. By (3.2),
+
+log2(V /U )Ψ2(n) = log2(V /U )
+
+
+
+
+
+Xd|n
+
+ψd
+
+
+=
+
+
+
+
+
+Xd|n
+
+(Λ2(d)
+
+Λ1(d))
+
+
+
+−
+
+
+
+
+
+
+
+Xe|n
+
+(Λ2(e)
+
+−
+
+
+
+Xe|n
+
+
+Λ1(e))
+
+ψe
+
+
+
+
+Λ2(d)Λ2(e)
+
+Λ2(d)Λ1(e)
+
+−
+
+Xd|n Xe|n
+
+
+
+−
+
+Xd|n Xe|n
+
+Λ1(d)Λ2(e) +
+
+Xd|n Xe|n
+
+Λ1(d)Λ1(e)
+
+
+
+
+
+Xd|n Xe|n
+
+
+4 max
+
+i,j=1,2 (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+=
+
+
+
+≤
+
+N
+
+n=1
+X
+
+Xd|n Xe|n
+
+.
+
+Λi(d)Λj(e)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Hence, by Lemma 3.1, we can conclude that
+
+Ψ2(n)
+
+4
+log2(V /U )
+
+≤
+
+(N
+
+(cid:18)
+
+1)
+
+·
+
+−
+
+1.0061
+
+·
+
+log U + 1.333 +
+
+(cid:18)
+
+11
+√U log U
+
++ N
+
+.
+
+(cid:19)
+
+(cid:19)
+
+(cid:3)
+
+In particular, for our purpose we will choose U = T u and V = T v, with T0 ≤
+T1 (numerical values of u, v depending on the range of T can be found in
+T
+≤
+Table 4 in Appendix A). Under these assumptions, whenever N > U V , Lemma 3.2
+implies
+
+Ψ2(n)
+
+d3 ·
+
+≤
+
+N
+log T
+
+,
+
+(3.6)
+
+N
+
+n=1
+X
+
+where d3 = d3(u, v, T0, T1) and numerical values for d3 can be found in Table 5 in
+Appendix A.
+Finally, we recall a result due to Ramar´e and Zuniga-Altmerman about a sum
+involving Ψ(n).
+
+Lemma 3.3 ([RZA24], Corollary 1.2). The following estimate holds:
+
+N
+
+Ψ2(n)
+
+n ≤
+
+3.09
+
+log N
+log (z2/z1)
+
+1.084(t + 1) + 1.301
+1
+(cid:0)
+
+t
+
+−
+
+1 + t2
+
+0.116
+
+.
+
+−
+
+(cid:1)
+
+(3.7)
+
+1 and for any N
+
+100. In particular, at t = 2, and z1 = z, we
+
+n=1
+X
+where z2 = zt
+have
+
+≥
+N
+
+z1 ≥
+Ψ2(n)
+
+n=1
+X
+
+30
+
+log N
+log z
+
+.
+
+n ≤
+
+3.1. Setting up the argument. We start deﬁning some parameters that will be
+1012, we deﬁne the following
+used throughout the proof. Given a ﬁxed T
+quantities:
+
+≥
+
+3
+
+·
+
+L := log T, U = T u,
+
+V = T v, W = T w, X = T x,
+
+(3.8)
+
+where 0 < u < v and w, x > 0, with w < u, u + v < x, are suitably chosen positive
+constants whose values can be found in Table 4 in Appendix A and depend on both
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+13
+
+∈
+
+(T0, T1] and α0 ≤
+
+the range of T
+σ. We split the range of values for T into several
+sub-intervals (T0, T1], in order to have sharper estimates in each of these smaller
+ranges. The criteria with which the sizes of the diﬀerent intervals are chosen will
+be explained in Appendix A.
+From now on, we will present the argument in terms of x, u, v, w. Then, depending
+on the range of T , we just need to substitute the values in the table inside the
+argument to get the ﬁnal numerical estimate of Theorem 1.1 for each of the intervals.
+
+Lemma 3.4. If ρ is a non-trivial zero of ζ(s) with Re(ρ) > α0 and γ > 0.447 log T ,
+T
+
+1012, then
+
+3
+
+(T0, T1], T0 ≥
+
+∈
+
+·
+∞
+
+(cid:12)
+n=1
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+Ψ(n)Θ(n)n−ρ
+
+e−n/X
+
+(cid:16)
+
+e−nL 2
+
+/U
+
+−
+
+(cid:17)
+
+c1,
+
+≥
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+where c1 = c1(α0, x, u, v, w, T0, T1) and numerical values can be found in Table 6 in
+Appendix A.
+
+Proof. As per [Pin19], we have
+
+∞
+
+S(X) =
+
+Ψ(n)Θ(n)n−ρe−n/X =
+
+n=1
+X
+
+where
+
+1+i∞
+
+1−i∞
+
+Z
+
+ζ(s + ρ)M (s + ρ)Γ(s)X sds,
+
+M (s) =
+
+ψvθw[v, w]−s.
+
+Xv≤V Xw≤W
+
+Moving the line of integration to the the line Re(s) = 1
+
+β, we get
+
+2 −
+1
+2 −β+i∞
+
+1
+2 −β−i∞
+
+Z
+
+S(X) = ζ(ρ)M (ρ) + M (1)Γ(1
+
+ρ)X 1−ρ +
+
+−
+
+1
+2πi
+
+ζ(s + ρ)M (s + ρ)Γ(s)X sds
+
+= M (1)Γ(1
+
+ρ)X 1−ρ
+
++
+
+1
+2πi
+
+−
++∞
+
+ζ
+
+−∞
+
+Z
+
+(cid:18)
+
+1
+2
+
++ iγ + it
+
+M
+
+(cid:19)
+
+(cid:18)
+
+1
+2
+
++ iγ + it
+
+Γ
+
+(cid:19)
+
+(cid:18)
+
+1
+2 −
+
+β + it
+
+1
+
+2 −β+itdt.
+
+X
+
+(cid:19)
+
+(3.9)
+
+First, since by Lemma 2.7 one has
+
+M (1)
+|
+
+|
+
+=
+
+≤
+
+Xn≤V W
+
+(cid:12)
+(cid:12)
+Xv≤V Xw≤W
+(cid:12)
+(cid:12)
+n−1
+d2(n)
+(cid:12)
+(cid:12)
+
+·
+
+≤
+
+ψvθw[v, w]−1
+
+[v, w]−1
+
+≤
+
+Xv≤V Xw≤W
+
+d2 log4(V W ),
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+using X = T x, V W = T v+w, we get
+
+M (1)Γ(1
+
+|
+
+−
+
+ρ)X 1−ρ
+
+| ≤
+
+1
+
+6γ log4(V W )X 1−β
+2 γβ−1+ 1
+
+2
+
+πγ
+
+(2π)1/2e
+
+d2 ·
+
+e
+6γ (log T )4T x(1−β)
+
+1
+
+(3.10)
+
+d2 ·
+
+≤
+
+(u + w)4(2π)1/2e
+eπ·0.447 log T /2(0.447 log T )β−1+ 1
+
+2
+
+.
+
+14
+
+C. BELLOTTI
+
+Now, we estimate the second term of (3.9).
+By Lemma 2.7,
+
+1
+2
+
+(cid:18)
+
+M
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+≤
+
+Xn≤V W
+
++ i(γ + t)
+
+=
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+n−1/2
+(cid:12)
+
+d2(n)
+
+·
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+≤
+
+Xv≤V Xw≤W
+d2 ·
+
+ψvθw[v, w]−( 1
+
+2 +i(γ+t))
+
+(V W )1/2 log4(V W ).
+
+[v, w]−1/2
+
+Xv≤V Xw≤W
+
+≤
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Hence, being V W = T v+w, log4(V W ) = (v + w)4 log4 T , X = T x, the second term
+of (3.9) becomes
+
++∞
+
+ζ
+
+1
+2
+
+1
+2π
+
+≤
+
+−∞
+
+(cid:12)
+Z
+(cid:12)
+d2
+(cid:12)
+(cid:12)
+2π ·
+
++ iγ + it
+
+M
+
++ iγ + it
+
+Γ
+
+(cid:18)
+
+(cid:18)
+(v + w)4T (v+w)/2 log4 T
+
+(cid:19)
+
+T x( 1
+
+2 −β)
+
+1
+2
+
+·
+
+Now, it remains to estimate the integral
+
+1
+2 −
+
+β + it
+
+1
+
+2 −β+itdt
+
+X
+
+(cid:19)
+
+(cid:18)
++∞
+
+ζ
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:18)
+
+(cid:19)
+
++ iγ + it
+
+(cid:12)
+(cid:12)
+1
+(cid:12)
+(cid:12)
+2 −
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:18)
+
+β + it
+
+dt.
+
+(cid:19)(cid:12)
+(3.11)
+(cid:12)
+(cid:12)
+(cid:12)
+
++∞
+
+ζ
+
+1
+2
+
++ iγ + it
+
+Γ
+
+β + it
+
+dt.
+
+1
+2 −
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+We split the integral in three intervals of integration, that is,
+
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:18)
+
+(cid:18)
+
++∞
+
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+ζ
+
+(cid:18)
+
++ iγ + it
+
+1
+2 −
+
+(cid:18)
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+β + it
+
+dt =
+
++
+
++
+
+,
+
+−3−γ
+
+3−γ
+
+∞
+
+−∞
+
+Z
+
+−3−γ
+
+Z
+
+3−γ
+
+Z
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+and we estimate each term individually.
+By Lemma 2.5 and Lemma 2.11,
+
+−3−γ
+
+ζ
+
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+
+(2π)1/2
+
+≤
+
+(2π)1/2
+
+(2π)1/2
+
+(2π)1/2
+
+(2π)1/2
+
+≤
+
+≤
+
+≤
+
+≤
+
+·
+
+·
+
+·
+
+·
+
+·
+
+1
+2
+
+(cid:18)
+
+1
+2 −
+
++ iγ + it
+
+Γ
+
+β + it
+
+dt
+
+ζ
+
+e1/6|1/2−β|
+
+(cid:12)
+(cid:19)(cid:12)
+(cid:18)
+(cid:12)
+(cid:12)
+−3−γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+e1/6|1/2−α0|
+(cid:12)
+−∞ |
+Z
+−3−γ
+
+1
+2
+(cid:18)
+−3−γ
+
+66.7
+
+·
+
+e1/6|1/2−α0|
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++ iγ + it
+
+t + γ
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+27/164
+(cid:12)
+|
+
+|
+
+−βe− π
+
+2 |t|dt
+
+t
+
+|
+
+−βe− π
+
+2 |t|dt
+
+t
+
+|
+
+|
+
+(3.12)
+
+66.7
+
+66.7
+
+66.7
+
+·
+
+·
+
+·
+
+e1/6|1/2−α0|
+
+e1/6|1/2−α0|
+
+2t
+
+27/164
+|
+
+t
+
+|
+
+|
+
+−βe− π
+
+2 |t|dt
+
+27/164
+
+−βe− π
+
+2 |t|dt
+
+t
+
+|
+
+|
+
+−∞ |
+Z
++∞
+
+2t
+
+|
+
+3+γ |
+Z
++∞
+
+(2t)27/164t−α0 e− π
+
+2 tdt
+
+10−10,
+
+≤
+
+3+0.447 log(T0)
+
+Z
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+15
+
+where we use γ > 0.447 log T , 3
+Similarly,
+
+·
+
+1012
+
+T0, β
+
+α0 ≥
+
+≥
+
+≤
+
+0.985.
+
+1
+2
+
+3−γ
+
+ζ
+
+−3−γ (cid:12)
+(cid:18)
+Z
+(cid:12)
+(cid:12)
+(2π)1/2
+(cid:12)
+
+≤
+
+·
+
++ iγ + it
+
+Γ
+
+β + it
+
+dt
+
+e1/6|1/2−β|
+
+(cid:12)
+(cid:19)(cid:12)
+(cid:18)
+(cid:12)
+(cid:12)
+3−γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+−3−γ (cid:12)
+Z
+(cid:12)
+(cid:12)
+e1/6|1/2−α0|
+1.461
+(cid:12)
+
+ζ
+
+·
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++ iγ + it
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+−βe− π
+2 |t|dt
+(cid:12)
+
+−βe− π
+
+2 |t|dt
+
+t
+
+|
+
+|
+
+e1/6|1/2−α0|
+
+1.461
+
+·
+
+t−α0 e− π
+
+2 tdt
+
+10−8.
+
+≤
+
+1
+2 −
+
+1
+2
+3−γ
+
+(cid:18)
+
+t
+
+|
+
+−3−γ |
+Z
+3+γ
+
+γ−3
+
+Z
+
+(3.13)
+
+(2π)1/2
+
+(2π)1/2
+
+·
+
+·
+
+≤
+
+≤
+
+Finally, we consider
+
+1
+2
+
+ζ
+
+(cid:18)
+
+∞
+
+3−γ (cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:18)
+
+t + γ
+
+∞
+
+ζ
+
+(cid:12)
+(cid:12)
+1
+(cid:12)
+(cid:12)
+0 |
+Z
+
+I2 =
+
+0
+Z
+
+66.7
+
+66.7
+
+·
+
+1.01243
+
+·
+
++ iγ + it
+
+Γ
+
+β + it
+
+dt =
+
++
+
+= I1 + I2.
+
+0
+
+∞
+
+We start with I2. By Lemma 2.5 and Lemma 2.11,
+
+3−γ
+
+Z
+
+0
+Z
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2 −
+
+(cid:18)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2 −
+
++ iγ + it
+
+Γ
+
+β + it
+
+dt
+
+27/164
+|
+
+(cid:12)
+(cid:12)
+(cid:12)
+γ27/164
+(cid:12)
+
+Γ
+
+(cid:18)
+
+β + it
+
+(cid:12)
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+1
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+2 −
+(cid:18)
+1.808 + 197.515
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+·
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+dt + (2π)1/2e1/666.7
+(cid:12)
+
+∞
+
+(t + γ)27/164t−α0 e− π
+
+2 tdt
+
+∞
+
+1
+Z
+
+t + γ
+
+|
+
+27/164
+|
+
+|
+
+t
+
+|
+
+−βe− π
+
+2 |t|dt
+
+122.092γ27/164 + 197.515
+
+γ27/164
+
+·
+
+140.297γ27/164.
+
+∞
+
+1
+Z
+t
+γ
+
+1 (cid:18)
+Z
+
+27/164
+
++ 1
+
+(cid:19)
+
+t−α0e− π
+
+2 tdt
+
+(3.14)
+
+−1
+
+3−γ |
+Z
+
+t + γ
+
+27/164
+|
+
+|
+
+t
+
+|
+
+−βe− π
+
+2 |t|dt
+
+Similarly,
+
+0
+
+I1 =
+
+1
+2
+
+(cid:18)
+
+ζ
+3−γ (cid:12)
+Z
+(cid:12)
+0
+(cid:12)
+(cid:12)
+−1 |
+Z
+
+66.7
+
+t + γ
+
+66.7
+
+·
+
+1.01243
+
+·
+
++ iγ + it
+
+Γ
+
+β + it
+
+dt
+
+1
+2 −
+
+β + it
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt + 197.515
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+γ−3
+
+(cid:18)
+
+(cid:12)
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+1
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+2 −
+(cid:18)
+
+Γ
+
+27/164
+|
+
+(cid:12)
+(cid:12)
+(cid:12)
+γ27/164
+(cid:12)
+
+·
+
+120.092γ27/164 + 197.515γ27/164
+
+140.297γ27/164.
+
+1.808 + 197.515
+
+(t + γ)27/164t−α0e− π
+
+2 tdt
+
+1
+Z
+t
+γ
+
++ 1
+
+∞
+
+1 (cid:18)
+Z
+
+27/164
+
+t−α0e− π
+
+2 tdt
+
+(cid:19)
+
+(3.15)
+
+Hence,
+
+1
+2
+
+ζ
+
+(cid:18)
+
+∞
+
+Z
+
+3−γ (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++ iγ + it
+
+1
+2 −
+
+(cid:18)
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+β + it
+
+dt
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+280.594γ27/164.
+
+(3.16)
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+16
+
+C. BELLOTTI
+
+Combining (3.12), (3.13), (3.16), being
+
+γ
+
+|
+
+| ≤
+
+T , we can conclude that (3.11) is
+
+d2 ·
+
+280.594
+2π
+
+·
+
+44.66
+
+44.66
+
+d2 ·
+d2 ·
+
+·
+
+·
+
+≤
+
+≤
+
+≤
+
+(v + w)4T (v+w)/2 log4 T
+
+T x( 1
+
+2 −β)
+
+γ27/164 + 10−6
+
+·
+
+·
+T x( 1
+
+2 −β)
+
+T 27/164
+
+(3.17)
+
+(v + w)4T (v+w)/2 log4 T
+(v + w)4T (v+w)/2+x( 1
+
+·
+
+·
+
+2 −α0)+27/164 log4 T.
+
+Hence, combining (3.10) and (3.17), we have
+
+S(X)
+
+| ≤
+
+|
+
+d2 ·
+
++ 44.66
+
+d2 ·
+
+·
+
+1
+
+6γ (log T )4T x(1−β)
+
+(u + w)4(2π)1/2e
+eπ·0.447 log T /2(0.447 log T )β−1+ 1
+(v + w)4T (v+w)/2+x( 1
+
+2 −α0)+27/164 log4 T.
+
+2
+
+(3.18)
+
+Now, it remains to estimate the quantity
+
+Ψ(n)Θ(n)n−ρe−nL 2
+
+/U .
+
+∞
+
+n=1
+X
+
+Since Ψ(n) = 0 for 2
+
+n
+
+≤
+
+≤
+
+U , one has
+
+S(U/L 2) =
+
+∞
+
+n=1
+X
+
+Ψ(n)Θ(n)n−ρe−nL 2
+
+/U = e−L 2
+
+/U +
+
+Ψ(n)Θ(n)n−ρe−nL 2
+
+/U .
+
+Xn>U
+
+(3.19)
+
+Using the trivial inequality,
+
+Ψ(n)Θ(n)n−ρe−nL 2
+
+/U
+
+Ψ(n)Θ(n)n−α0 e−nL 2
+
+/U .
+
+≤
+
+Xn>U
+
+(cid:12)
+Xn>U
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Furthermore, by deﬁnition of Ψ(n), one has, for n > U ,
+
+Ψ(n) =
+
+1
+
+log(V /U ) 
+
+
+
+log V
+
+µ(d)
+
+Xd|n
+
+−
+
+Xd|n
+
+µ(d) log d
+
+
+
+=
+
+Λ(n)
+log(V /U )
+
+,
+
+
+
+and similarly, Θ(n) satisﬁes
+
+Hence,
+
+Θ(n) =
+
+µ(e)
+
+Xe|n
+
+log(W/e)
+log W
+
+=
+
+Λ(n)
+log W
+
+.
+
+Ψ(n)Θ(n)
+
+log2 n
+log W log(V /U )
+
+.
+
+≤
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+17
+
+It follows that
+
+Ψ(n)Θ(n)n−ρe−nL 2
+
+/U
+
+n−α0e−nL 2
+
+/U
+
+Xn>U
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+≤
+
+w(v
+
+≤
+
+w(v
+
+≤
+
+w(v
+
+=
+
+w(v
+
+3.8
+u) log2 T
+3.8
+u) log2 T
+
+3.8
+u) log2 T
+
+3.8
+u) log2 T
+
+−
+
+−
+
+−
+
+−
+
+log2 n
+log W (log(V /U )) ·
+
+Xn>U
+n−0.985e−nL 2
+
+/U dn
+
+∞
+
+Z
+
+n=U
+∞
+
+≤
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+log2 n
+(cid:12)
+
+·
+ne−nL 2
+
+/U dn
+
+(3.20)
+
+n=U
+
+Z
+e−L 2
+
+L 2 + 1
+L 4
+(cid:0)
+U 2
+e−L (L −2u)
+
+=
+
+w(v
+(cid:1)
+L 2 + 1
+L 4
+
+(cid:1)
+
+· (cid:0)
+
+3.8
+u) log2 T
+
+U 2
+
+·
+
+−
+
+e−L 2
+
+L 2 + 1
+L 4
+(cid:0)
+
+(cid:1)
+
+10−20.
+
+≤
+
+Combining (3.18), (3.19) and (3.20), we can conclude that
+
+∞
+
+n=1
+X
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+≥ |
+
+Ψ(n)Θ(n)n−ρ
+
+e−n/X
+
+(cid:16)
+
+−
+
+e−L 2
+
+/U
+
+| − |
+
+S(x)
+
+e−nL 2
+
+/U
+
+(cid:12)
+(cid:12)
+(cid:17)
+(cid:12)
+(cid:12)
+Ψ(n)Θ(n)n−ρe−nL 2
+(cid:12)
+
+/U
+
+(3.21)
+
+c1,
+
+≥
+
+Xn>U
+
+| − (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+where c1 = c1(u, x, v, w, T0, T1) is a constant whose numerical values are collected
+(cid:3)
+in Table 6 in Appendix A.
+
+4. Proof of Theorem 1.1
+
+Consider the rectangle
+
+≤
+and divide R(α, T ) into smaller rectangles:
+
+{
+
+|
+
+R(α, T ) =
+
+σ + it
+
+α
+
+1, 0
+
+σ
+
+≤
+
+t
+
+T
+
+}
+
+≤
+
+≤
+
+α
+
+σ
+
+≤
+
+≤
+
+1,
+
+(n
+
+1)δ
+
+t
+
+≤
+
+≤
+
+nδ,
+
+−
+
+δ = 1
+
+α
+
+−
+
+(4.1)
+
+where n = 1, . . . , T /δ. Furthermore, we observe that δ > νi(T ) by the properties of
+the zero-free regions mentioned before in Section 2, where i = 1, 2, 3, 4, depending on
+the range of T in which we are working. Then, for each of these smaller rectangles,
+we choose a representative zero arbitrarily.
+Denote with J the total number of these representative zeros. Our main goal is to
+ﬁnd an upper bound for the quantity
+
+Ψ(n)Θ(n)n−ρ
+
+e−n/X
+
+(cid:16)
+
+e−nL 2
+
+/U
+
+−
+
+(cid:17)
+
+2
+
+,
+
+!
+
+(4.2)
+
+J
+
+∞
+
+n=1
+X
+
+r=1 (cid:12)
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+which, combined with Lemma 3.4 will give an upper bound for J.
+The type of estimate for J that we aim to ﬁnd is of the form
+
+J
+
+c
+
+·
+
+≤
+
+X 2−2α
+δ log T
+
+,
+
+so that, when combined with Lemma 2.4 to get an upper bound for the total
+number of zeros counted by N (α, T ), will give us a log-free zero density estimate
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ 
+18
+
+C. BELLOTTI
+
+for N (α, T ). More precisely, by Lemma 2.4, we will have a ﬁnal estimate of the
+following form:
+
+N (α, T )
+
+J ˜n(α)
+
+J(b1δ log T + b2)
+
+≤
+
+≤
+
+≤
+
+CX 2−2α = CT 2x(1−α),
+
+where X = T x for a certain x whose values are listed in Table 4 in Appendix A.
+
+4.1. Estimate for J. In this subsection we will prove the following lemma.
+
+Lemma 4.1. Under the above conditions the following estimate holds:
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+J
+
+∞
+
+n=1
+X
+
+r=1 (cid:12)
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+Ψ(n)Θ(n)n−ρ
+
+e−n/X
+
+(cid:16)
+
+e−nL 2
+
+/U
+
+−
+
+(cid:17)
+
+2
+
+J
+
+·
+
+≤
+
+!
+
+(c2 +c3 +c4)
+
+X 2−2α
+δ log T
+
+·
+
++J 2
+
+c5,
+
+·
+
+where c2, c3, c4, c5 are constants which depend on α0, u, x, v, w, T0, T1 and whose
+numerical values can be found in Table 6 in Appendix A.
+
+First of all, we observe that, since X > U/L 2,
+
+Applying Lemma 2.12 to (4.2) with
+
+0 < (e−n/X
+
+−
+
+e−n(L 2
+
+/U)) < 1.
+
+ξn = Ψ(n)(e−n/X
+
+−
+
+e−n(L 2
+
+/U))1/2n−1/2
+
+n = 1, 2, . . .
+
+∀
+
+and
+
+n=1, ϕr,n = Θ(n)n1/2−σr −itr (e−n/X
+∞
+
+ϕr =
+
+ϕr,n}
+it follows that (4.2) is
+
+{
+
+e−n(L 2
+
+/U))1/2
+
+−
+
+n = 1, 2, . . . ,
+
+∀
+
+∞
+
+≤  
+
+n=1
+X
+
+Ψ2(n)
+n
+
+(e−n/X
+
+−
+
+e−n(L 2
+
+/U))
+
+∞
+
+! 
+
+
+Xr,s≤J (cid:12)
+n=1
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+(4.3)
+We will estimate the two factors separately. About the ﬁrst factor, we prove the
+following result.
+
+Θ2(n)n1−ρr −ρk (e−n/X
+
+e−n(L 2
+
+−
+
+.
+
+/U))
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+
+
+
+
+Lemma 4.2. With the same notations as before, the following estimate holds:
+
+Ψ2(n)
+n
+
+(e−n/X
+
+−
+
+e−n(L 2
+
+/U))
+
+d4,
+
+≤
+
+∞
+
+n=1
+X
+
+where d4 = d4(α0, u, x, v, w, T0, T1) and numerical values can be found in Table 5
+in Appendix A.
+
+Proof. First, we observe that by our assumptions
+
+∞
+
+Ψ2(n)
+n
+
+(e−n/X
+
+e−n(L 2
+
+/U))
+
+−
+
+∞
+
+≤
+
+n=1
+X
+
+Ψ2(n)
+n
+
+e−n/X <
+
+Ψ2(n)
+n
+
+.
+
+∞
+
+n=1
+X
+
+n=1
+X
+Since Ψ(n) = 0 for 2
+
+n
+
+≤
+
+≤
+
+U , we have
+
+∞
+
+n=1
+X
+
+Ψ2(n)
+n
+
+e−n/X
+
+1 +
+
+≤
+
+Ψ2(n)
+n
+
+UV
+
+Xn=U
+
+e−n/X +
+
+∞
+
+Xn=UV
+
+Ψ2(n)
+n
+
+e−n/X .
+
+ 
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+19
+
+We estimate the two quantities separately.
+Regarding the ﬁrst term, by Lemma 3.3 with z1 = U = T u, z2 = V = T v, t = v/u,
+one has
+
+Ψ2(n)
+n
+
+e−n/X
+
+≤
+
+UV
+
+Xn=U
+
+3.09
+
+·
+
+≤
+
+3.09
+
+·
+
+≤
+
+log(U V )
+log(V /U ) ·
+u + v
+v
+
+u ·
+
+UV
+
+Ψ2(n)
+n
+
+Xn=U
+1.301((v/u)2 + 1) + 1.084((v/u) + 1)
+
+1.301((v/u)2 + 1) + 1.084((v/u) + 1)
+
+(v/u)
+
+1
+
+−
+
+(v/u)
+
+1
+
+−
+
+0.116
+
+−
+
+0.116
+
+.
+
+−
+
+−
+For the second term,
+
+∞
+
+Xn=UV
+
+Ψ2(n)
+n
+
+e−n/X = lim
+N→∞
+
+N
+
+n=z1z2
+X
+
+Ψ2(n)
+n
+
+e−n/X ,
+
+and, by (3.6),
+
+N
+
+Xn=UV
+
+Ψ2(n)
+n
+
+e−n/X
+
+=
+
+1
+N eN/X
+
+Xn≤N
+
+Ψ2(n)
+
+1
+U V eUV /X
+
+−
+
+d3
+eN/X log T
+
++
+
+d3
+eUV /X log T
+
+≤
+
++
+
+d3
+log T
+
+N
+
+Ψ2(n) +
+
+Xn≤UV
+N
+
+UV (cid:18)
+Z
+
+UV 
+Z
+e−u/X
+X
+
++
+
+
+e−u/X
+u
+
+X1≤n≤u
+
+du.
+
+(cid:19)
+
+e−u/X
+Xu
+
++
+
+e−u/X
+u2
+
+du
+
+(cid:19)
+
+Ψ2(u)
+
+
+
+(cid:18)
+
+
+
+Now,
+
+Then,
+
+∞
+
+e−u/X
+
+X ≤
+
+UV
+
+Z
+
+e−UV /X
+
+1.
+
+≤
+
+e−u/X
+u
+
++
+
+∞
+
+e−u/X
+
+u ≤
+
+X
+
+Z
+
+log(X/U V ) + 1
+
+1 + (x
+
+−
+
+≤
+
+(u + v)) log T.
+
+, we have
+
+e−n/X
+
+d3
+eUV /X log T
+
++
+
+d3
+log T
+
+≤
+
+(2 + (x
+
+−
+
+(u + v) log T )) .
+
+∞
+
+e−u/X
+u
+
+=
+
+UV
+
+Z
+Hence, for N
+
+X
+
+UV
+
+Z
+
+→ ∞
+Ψ2(n)
+n
+
+∞
+
+Xn=UV
+
+It follows that
+∞
+
+Ψ2(n)
+n
+
+(e−n/X
+
+−
+
+e−n(L 2
+
+/U))
+
+n=1
+X
+
+≤
+
+3.09
+
+·
+
+u ·
+
+u + v
+v
+−
+d3
+eUV /X log T
+
++
+
+1.301((v/u)2 + 1) + 1.084((v/u) + 1)
+
+0.116
+
+−
+
+(v/u)
+
+1
+
+−
+
++
+
+d3
+log T
+
+(2 + (x
+
+−
+
+(u + v) log T ))
+
+d4,
+
+≤
+
+where d4 is a constant which depends on α0, u, x, v, w, T0, T1 and whose numerical
+(cid:3)
+values can be found in Table 5 in Appendix A.
+
+20
+
+C. BELLOTTI
+
+Now, we deal with the second factor of (4.3), that is,
+
+∞
+
+n=1
+X
+
+Xr,s≤J (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Θ2(n)n1−ρr −ρk (e−n/X
+
+e−nL 2
+
+−
+
+.
+
+/U )
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+We have
+∞
+
+n=1
+X
+=
+
+1
+2πi
+
+2+i∞
+
+2−i∞
+
+Z
+
+where
+
+Θ2(n)n1−ρr −ρs (e−n/X
+
+e−nL 2
+
+/U )
+
+−
+
+ζ (s + ρr + ρs −
+
+1) G (s + ρr + ρs −
+
+1) Γ(s)
+
+X s
+
+(cid:18)
+
+U
+L 2
+
+s
+
+ds,
+
+(cid:19)
+
+(cid:19)
+
+−
+
+(cid:18)
+
+G(s) =
+
+θjθk[j, k]−s.
+
+(4.4)
+
+Xj≤W,k≤W
+Moving the line of integration to Re(s) = 3
+
+2 −
+
+βr −
+
+βs, we get
+
+1
+2πi
+
+2+∞
+
+2−i∞
+
+Z
+
+ζ (s + ρr + ρs −
+
+1) G (s + ρr + ρs −
+
+1) Γ(s)
+
+X s
+
+ρr −
+1
+2
+
+(cid:18)
+
+= G(1)Γ (2
+
+−
+
++
+
+1
+2πi
+
+Γ
+
+×
+
++∞
+
+ζ
+−∞ (cid:18)
+Z
+3
+2 −
+
+βr −
+
+(cid:18)
+
+ρs)
+
+X 2−ρr −ρs
+
+−
+
+(cid:18)
+
+U
+L 2
+
++ i(γr −
+
+γs + t)
+
+G
+
+(cid:19)
+
+(cid:18)
+
+3
+2 −βr−βs+it
+
+βs + it
+
+X
+
+(cid:19)  
+
+(cid:18)
+
+!
+
+2−ρr −ρs
+
+(cid:19)
+1
+2
+
++ i(γr −
+U
+L 2
+
+(cid:19)
+
+−
+
+(cid:18)
+
+γs + t)
+
+(cid:19)
+3
+2 −βr−βs+it
+
+dt.
+
+!!
+
+U
+L 2
+
+s
+
+ds
+
+(cid:19)
+
+(cid:19)
+
+−
+
+(cid:18)
+
+(4.5)
+
+4.1.1. Contribution from residues. We start estimating the overall contribution
+coming from the residues in (4.5), that is,
+
+G(1)Γ(2
+
+ρr −
+
+−
+
+ρs)
+
+X 2−ρr −ρs
+
+U
+L 2
+
+−
+
+(cid:18)
+
+2−ρr −ρs
+
+(cid:19)
+
+Xr,s≤J (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+G(1)
+2
+(cid:12)
+|
+|
+≤
+
+X 2−2α
+
+Xr,s≤J
+
+Γ(2
+
+|
+
+ρr −
+
+ρs)
+|
+
+.
+
+−
+
+!(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(4.6)
+
+The following estimate holds for
+
+G(1)
+|
+
+.
+
+|
+
+Lemma 4.3. Given G(s) deﬁned as in (4.4), the following estimate holds:
+
+G(1)
+
+| ≤
+
+|
+
+d5
+log W
+
+,
+
+where d5 = d5(u, x, v, w, T0, T1) and the numerical values can be found in Table 5
+in Appendix A.
+
+Proof. By deﬁnition of G(s), we have
+
+G(1) =
+
+θjθk[j, k]−1.
+
+Xj≤W,k≤W
+
+ 
+ 
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+21
+
+Following Graham’s argument [Gra78], by Lemma 2.8 and Lemma 2.10, one has
+
+θjθk
+[j, k]
+
+Xj,k≤W
+=
+
+Xl,k≤W
+
+θjθk
+jk
+
+ϕ(r)
+
+Xr|(j,k)
+
+=
+
+1
+(log W )2
+
+Xr≤W
+
+µ2(r)ϕ(r)
+r2
+
+
+
+Xm≤W/r
+(m,r)=1
+
+
+
+
+(1.00303)2
+
+µ(m)
+m
+
+log
+
+W
+mr
+
+(cid:18)
+
+r2
+ϕ2(r)
+
+·
+
+
+
+
+
+(cid:19)
+
+
+
+
+
+
+
+
+
+Xn≤W/r
+(n,r)=1
+
+µ(n)
+n
+
+log
+
+W
+nr
+
+(cid:18)
+
+
+
+(cid:19)
+
+
+
+
+
+µ2(r)ϕ(r)
+r2
+
+·
+
+1
+(log W )2
+
+Xr≤W
+
+1
+
+(log W )2 1.0061
+
+1
+
+(log W )2 1.0061
+
+d5
+(log W )
+
+,
+
+≤
+
+≤
+
+≤
+
+≤
+
+µ2(r)
+ϕ(r)
+
+Xr≤W
+
+log W + 1.333 +
+
+(cid:18)
+
+3.95
+√W (cid:19)
+
+where d5 = d5(u, x, v, w, T0, T1).
+
+By Lemma 4.3 it follows that (4.6) is
+
+2d5
+w log T ·
+
+≤
+
+X 2−2α
+
+Γ (2
+
+|
+
+ρr −
+
+ρk)
+|
+
+.
+
+−
+
+Xr,s≤J
+
+Γ(z) =
+
+∞
+
+1
+z
+
+0
+Z
+
+tze−tdt,
+
+Since
+
+one has
+
+(cid:3)
+
+(4.7)
+
+Γ(z)
+
+|
+
+| ≤
+
+1
+z
+
+∞
+
+tze−tdt
+
+1
+z
+
+≤
+
+|
+
+|
+
+0
+
+0
+| (cid:12)
+| Z
+Z
+(cid:12)
+where we used the fact that, as before, 0 < x
+(cid:12)
+(cid:12)
+Then, we consider three separate cases.
+γs|
+ρr −
+
+ρk) X 2−ρr−ρk
+
+γr −
+|
+Γ (2
+
+< δ, we have
+
+When
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+−
+
+≤
+
+•
+
+∞
+
+≤
+
+txe−tdt
+
+≤
+
+2α
+
+2
+
+−
+
+≤
+
+2
+
+1
+z
+
+|
+
+|
+
+−
+
+1.0067,
+
+·
+2α0, α0 ≥
+
+(4.8)
+
+0.985.
+
+X 2−βj−βk
+
+1.0067
+βj −
+
+−
+
+βk|
+
+·
+
+2
+
+|
+
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+≤
+
+,
+
+·
+
+·
+
+1.0067
+
+X 2−2α
+
+1
+2δ
+being the function X 2−y/(2
+y) decreasing for y > 1/2. Since by our
+assumptions in (4.1) for every ﬁxed γr there is a unique representative zero
+with imaginary part γs such that
+< δ, (4.7) restricted to the case
+γr −
+< δ becomes
+γr −
+
+γs|
+
+γs|
+
+−
+
+|
+
+|
+
+J
+
+·
+
+≤
+
+d5
+
+1.0067
+w
+
+·
+
+X 2−2α
+δ log T
+
+.
+
+(4.9)
+
+22
+
+C. BELLOTTI
+
+Multiplying (4.9) by the bound for the ﬁrst factor in (4.3) found in Lemma
+4.2, we have
+
+where
+
+J
+
+c2 ·
+
+·
+
+X 2−2α
+δ log T
+
+,
+
+c2 =
+
+1.0067
+
+·
+w
+
+d5
+
+d4 ·
+
+(4.10)
+
+•
+
+•
+
+is a constant depending on α0, u, x, v, w, T0, T1 whose numerical values can
+be found in Table 6 in Appendix A.
+γs|
+γr −
+Now, we consider the case δ <
+|
+, δ−1
+every ﬁxed γr and for each n = 1
+−
+· · ·
+zero with imaginary part γs such that nδ
+γr −
+≤ |
+γs| ≤
+γr −
+(4.8), (4.7) restricted to the case δ
+
+< 2 . By the construction (4.1), for
+1 there is a unique representative
+(n + 1)δ. Hence, by
+
+γs| ≤
+1 is
+
+≤ |
+
+Γ (2
+
+ρr −
+
+−
+
+ρk) X 2−ρr−ρk
+
+2d5
+w log T
+
+Xr6=s≤J
+
+(cid:12)
+(cid:12)
+X 2−2α
+
+2d5
+w log T ·
+
+≤
+
+J
+
+·
+
+r=1
+X
+
+Xδ≤|γr−γs|≤1
+1
+δ −1
+
+(cid:12)
+(cid:12)
+Γ (2
+
+−
+
+|
+
+ρr −
+
+ρk)
+
+|
+
+(4.11)
+
+J
+
+J
+
+·
+
+·
+
+≤
+
+≤
+
+X 2−2α
+δ log T
+
+2
+
+·
+
+X 2−2α
+δ log T ·
+
+2
+
+1.0067
+d5 ·
+w
+1.0067
+d5 ·
+w
+
+·
+
+n=1
+X
+
+1
+n
+
+1.12
+
+·
+
+·
+
+log((νi(T1))−1),
+
+where we used the fact that δ > νi(T1) (i = 1, 2, 3 or 4 depending on the
+range (T0, T1]). Again, multiplying (4.11) by the bound for the ﬁrst factor
+in (4.3) given in Lemma 4.2, we get
+
+J
+
+c3 ·
+
+·
+
+X 2−2α
+δ log T
+
+,
+
+(4.12)
+
+where
+
+c3 =
+
+2
+
+d4 ·
+
+d5 ·
+
+·
+
+1.12
+
+1.0067
+w
+
+·
+
+·
+
+log(νi(T1))−1
+
+is always a constant depending on α0, u, x, v, w, T0, T1 whose numerical val-
+ues can be found in Table 6 in Appendix A.
+T , similarly to what we said for the previous case, by the
+If 1 <
+construction (4.1), for every ﬁxed γr and for each n = δ−1, . . . , T δ−1
+1,
+there is a unique representative zero with imaginary part γs such that
+(n + 1)δ. Hence, by (4.8), (4.7) restricted to the case
+nδ
+
+γs| ≤
+
+γr −
+
+−
+
+|
+
+γr −
+
+γs| ≤
+
+≤ |
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+23
+
+γr −
+
+|
+
+γs| ≤
+
+T is an application of Lemma 2.11 gives
+
+1 <
+
+Γ (2
+
+ρr −
+
+−
+
+ρk) X 2−ρr−ρk
+
+(cid:12)
+(cid:12)
+
+2d5
+w log T
+
+Xr6=s≤J
+1<|γr−γs|≤T (cid:12)
+(cid:12)
+J
+
+2d5
+w log T ·
+
+X 2−2α
+
+r=1
+X
+
+X 2−2α
+
+J
+
+2d5
+w log T ·
+X 2−2α
+δ log T
+
+·
+
+J
+
+·
+
+2
+
+·
+d5 ·
+w
+
+2.4
+
+·
+
+·
+
+≤
+
+≤
+
+≤
+
+Γ (2
+
+|
+
+ρr −
+
+ρk)
+|
+
+−
+
+(4.13)
+
+·
+T
+
+T /δ
+
+e1/6(nδ)e(nδ)1.5−2·α
+
+1/δ
+
+Z
+e1/6yy1.5−2·α0
+
+e−πy/2dy.
+
+·
+
+e−πnδ/2dn
+
+·
+
+X1<|γr−γs|≤T
+(2π)1/2
+
+2.4
+
+·
+(2π)1/2
+
+1
+Z
+
+As before, multiplying (4.13) by the quantity d4 found in Lemma 4.2 we
+have
+
+X 2−2α
+δ log T
+
+,
+
+(4.14)
+
+J
+
+c4 ·
+
+·
+
+where
+
+c4 =
+
+2
+
+·
+
+(2π)1/2
+
+2.4
+
+·
+w
+
+d5 ·
+
+·
+
+d4
+
+T
+
+e1/6yy1.5−2·α0
+
+e−πy/2dy.
+
+·
+
+1
+Z
+
+Summing (4.10),(4.12),(4.14) together we can conclude that (4.7) becomes
+
+J
+
+·
+
+≤
+
+(c2 + c3 + c4)
+
+X 2−2α
+δ log T
+
+.
+
+·
+
+4.1.2. Contribution from integral. At this point, it remains to study the contribu-
+tion given by the integral in (4.5), that is
+
+1
+2πi
+
++∞
+
+ζ
+−∞ (cid:18)
+Z
+3
+2 −
+
+Γ
+
+(cid:18)
+
+×
+
+1
+2
+
+(cid:18)
+
++ i(γr −
+
+γs + t)
+
+G
+
+(cid:19)
+
+(cid:18)
+
+1
+2
+
+βr −
+
+βs + it
+
+X
+
+(cid:19)  
+
+3
+2 −βr−βs+it
+
++ i(γr −
+U
+L 2
+
+−
+
+(cid:18)
+
+γs + t)
+
+(cid:19)
+3
+2 −βr−βs+it
+
+(cid:19)
+
+dt.
+
+!!
+
+First, we observe that
+
+1
+2
+
+(cid:18)
+
++ i(γj −
+
+γk + t)
+
+θjθk[j, k]−1/2
+
+(W 2)1/2
+
+≤
+
+G(1)
+
+| ≤
+
+· |
+
+W
+d5 ·
+log W
+
+,
+
+≤
+
+Xj≤W,k≤W
+
+where in the last inequality we used Lemma 4.3. Hence,
+
+G
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+γs + t)
+
+(cid:19)
+
+3
+2 −βr−βs+it
+
++ i(γr −
+U
+L 2
+
+−
+
+(cid:19)
+
+(cid:18)
+3
+2 −βr−βs
+
+1
+2πi
+
+×
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++∞
+
+ζ
+−∞ (cid:18)
+Z
+3
+2 −
+
+Γ
+
+(cid:18)
+
+1
+2
+
+(cid:18)
+
++ i(γr −
+
+γs + t)
+
+G
+
+(cid:19)
+
+(cid:18)
+
+1
+2
+
+3
+2 −βr−βs+it
+
+βr −
+
+βs + it
+
+X
+
+(cid:19)  
+
+3
+
+2 −βr−βs +
+
+X
+
+W
+
+U
+L 2
+
+(cid:18)
+
+≤
+
+d5
+2π ·
+∞
+
+×
+
+Z
+
+ζ
+−∞ (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+log W ·  
+1
+2
+
+(cid:18)
+
++ i(γr −
+
+(cid:19)
+3
+2 −
+
+(cid:18)
+
+βr −
+
+!
+
+βs + it
+
+dt.
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+γs + t)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt
+
+!!
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(4.15)
+
+24
+
+C. BELLOTTI
+
+It remains to estimate the integral
+
+∞
+
+ζ
+
+1
+2
+
++ i(γr −
+
+3
+2 −
+
+βj −
+
+γs + t)
+
+Γ
+
+βk + it
+
+dt.
+
+(4.16)
+
+(cid:18)
+
+−∞ (cid:12)
+(cid:19)(cid:12)
+(cid:19)(cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+T , since
+γs =: a. Furthermore, we just consider the case 0
+We denote γr −
+(cid:12)
+(cid:12)
+(cid:12)
+the same contribution is given when a < 0 after a change of variable. Hence, from
+0. We split (4.16) as
+now on, we will work with a
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+
+≤
+
+(cid:18)
+
+a
+
+≥
+
+3
+2 −
+
+∞
+
+1
+2
+
+Γ
+
+(cid:18)
+
+γs + t)
+
++ i(γr −
+
+ζ
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+and we estimate each term separately.
+(cid:12)
+For the ﬁrst term, similarly to what we did for (3.12), an application of Lemma 2.5
+and Lemma 2.11 gives
+
+βj −
+
+βk + it
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt =
+
+−3−a
+
+3−a
+
+−∞
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++
+
++
+
+(cid:18)
+
+Z
+
+Z
+
+Z
+
+−3−a
+
+3−a
+
++∞
+
+J1 =
+
+−3−a
+
+ζ
+
+1
+2
+
++ i(γr −
+
+γs + t)
+
+Γ
+
+3
+2 −
+
+βr −
+
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+e1/6(2α0−1.5)
+(2π)1/2
+(cid:12)
+
+(cid:18)
+
+·
+
+(2π)1/2
+
+(2π)1/2
+
+(2π)1/2
+
+(2π)1/2
+
+·
+
+·
+
+·
+
+·
+
+e1/6(2α0−1.5)
+
+e1/6(2α0−1.5)
+
+e1/6(2α0−1.5)
+
+e1/6(2α0−1.5)
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+ζ
+
+−3−a
+
+(cid:19)(cid:12)
+(cid:12)
+1
+(cid:12)
+(cid:12)
+2
+−∞ (cid:12)
+(cid:18)
+Z
+(cid:12)
+−3−a
+(cid:12)
+(cid:12)
+−∞ |
+Z
+−3−a
+
+66.7
+
+·
+
+(cid:18)
+
+(cid:12)
+(cid:12)
+(cid:12)
++ ia + it
+(cid:12)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+27/164
+(cid:12)
+|
+
+t + a
+
+βs + it
+
+dt
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1−βr−βse− π
+
+2 |t|dt
+
+t
+
+|
+
+|
+
+1−βr−βse− π
+
+2 |t|dt
+
+t
+
+|
+
+|
+
+(4.17)
+
+66.7
+
+66.7
+
+66.7
+
+·
+
+·
+
+·
+
+−∞ |
+Z
++∞
+
+3+a |
+Z
++∞
+
+3
+Z
+
+27/164
+
+2t
+
+|
+
+t
+
+|
+
+|
+
+1−βr−βse− π
+
+2 |t|dt
+
+2t
+
+27/164
+|
+
+t
+
+|
+
+|
+
+1−βr−βse− π
+
+2 |t|dt
+
+(2t)27/164t1−α0−α0 e− π
+
+2 tdt
+
+0.24113,
+
+≤
+
+where we used β
+α
+Then, an application of Lemma 2.5 gives
+
+α0.
+
+≥
+
+≥
+
+J2 =
+
+1.461
+
+≤
+
+3−a
+
+(cid:18)
+
+Γ
+
+ζ
+−3−a (cid:12)
+Z
+(cid:12)
+3
+(cid:12)
+(cid:12)
+−∞ (cid:12)
+Z
+(cid:12)
+(cid:12)
+(cid:12)
+
+Now, we consider
+
+1
+2
+
+(cid:18)
+
++ i(γr −
+3
+2 −
+
+βr −
+
+γs + t)
+
+βs + it
+
+dt
+
+3
+2 −
+
+βr −
+
+(cid:18)
+
+βs + it
+
+1.461
+
+·
+
+≤
+
+4.05206
+
+(4.18)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+≤
+
+5.921.
+
+Γ
+(cid:12)
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+dt
+(cid:12)
+(cid:12)
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++∞
+
+1
+2
+
++ i(γr −
+
+ζ
+3−a (cid:12)
+Z
+(cid:12)
+(cid:12)
+For J4, similarly to what we did for J1, we have
+(cid:12)
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+βr −
+
+γs + t)
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:18)
+
+(cid:18)
+
+βs + it
+
+3
+2 −
+
+a
+
++∞
+
+dt =
+
++
+
+= J3+J4.
+
+3−a
+
+Z
+
+a
+Z
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+∞
+
+t + a
+
+|
+
+27/164
+|
+
+|
+
+Γ (1
+
+βr −
+
+βs + it)
+|
+
+dt
+
+−
++∞
+
+e1/6(2α0−1.5)
+
+(2t)27/164t1−2α0 e− π
+
+2 tdt
+
+66.7
+
+·
+
+3
+Z
+
+J4 = 66.7
+
+a
+Z
+(2π)1/2
+
+·
+0.24113.
+
+≤
+
+≤
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+25
+
+We now shift our attention on J3.
+We start considering the case a > 3. If 3 < a
+
+1
+
+4, then we split J3 as
+≤
+a
+
+J3 =
+
++
+
+,
+
+1
+Z
+while if a > 4, then we split J3 into three parts:
+
+−1
+
+Z
+
+−1
+
+1
+
+a
+
+J3 =
+
++
+
++
+
+= J3,1 + J3,2 + J3,3.
+
+Z
+
+Z
+
+−1
+
+3−a
+
+1
+Z
+Since we are estimating the absolute values of each of the integrals in which we
+divided J3, we will just estimate J3 when a > 4 (although for some estimates
+where we divide by a we use the worse bound a > 3), as it will give the biggest
+contribution.
+To estimate J3,1, an application of Lemma 2.5 and Lemma 2.11 gives
+
+J3,1 ≤
+
+66.7
+
+16.329
+
+·
+
+≤
+
+e1/6(2α0−1.5)a27/164
+
+∞
+
+1
+Z
+
+(2π)1/2
+
+·
+a27/164.
+
+·
+
+(t/3 + 1)27/164 t1−2α0 e− π
+
+2 tdt
+
+The same holds for J3,3, which becomes
+
+J3,3 ≤
+About J3,2, we use the same argument as for J2,2 and we get
+
+16.329
+
+·
+
+a27/164.
+
+1
+
+J3,2 = 66.7
+
+t + a
+
+−1 |
+Z
+a27/164
+
+1
+
+−1 |
+Z
+a27/164.
+
+66.7
+
+·
+
+≤
+
+253.419
+
+·
+
+≤
+
+3
+2 −
+
+27/164
+|
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+t/3 + 1
+(cid:12)
+|
+
+(cid:18)
+27/164
+
+βs + it
+
+βr −
+
+βr −
+3
+2 −
+
+(cid:18)
+
+Γ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+βs + it
+
+dt
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+
+Combining the estimates for J3,1, J3,2, J3,3 when a > 3, we can conclude that, when
+3 < a
+
+T ,
+
+a27/164.
+
+·
+
+a
+
+≤
+
+≤
+
+286.077
+
+J3 ≤
+
+3. However, the contribution given by (4.16) when 0
+
+(4.19)
+T can be applied to the
+The same method used to estimate (4.16) when 3 < a
+case 0
+3 is
+smaller. Hence, from now on, we will use the largest contribution which is given
+when 3 < a
+To conclude, combining the estimates we found for J1, J2, J3, J4 with (4.15) and
+α0, it follows that (4.15) is
+the fact that βr, βs ≥
+d5
+2π ·
+
+(J1 + J2 + J3 + J4) ,
+
+2 −2α0 +
+
+U
+L 2
+
+(4.20)
+
+3
+2 −2α0
+
+≥
+3
+
+T .
+
+W
+
+X
+
+≤
+
+≤
+
+≤
+
+≤
+
+≤
+
+α
+
+a
+
+log W ·  
+
+(cid:18)
+
+(cid:19)
+
+!
+
+and, multiplying (4.20) by the ﬁrst factor in (4.3) one gets
+
+d4 ·
+
+≤
+
+d5
+2π ·
+
+W
+
+log W ·  
+
+3
+
+2 −2α0 +
+
+X
+
+U
+L 2
+
+(cid:18)
+
+(cid:19)
+
+3
+2 −2α0
+
+(J1 + J2 + J3 + J4)
+
+c5,
+
+≤
+
+!
+
+(4.21)
+where c5 < 1 is a constant depending on α0, u, x, v, w, T0, T1 whose values can be
+found in Table 6 in Appendix A.
+
+26
+
+C. BELLOTTI
+
+4.2. Conclusion. If we combine Lemma 3.4 and Lemma 4.1, it follows that
+
+J 2
+
+c2
+1 ≤
+
+·
+
+J
+
+·
+
+(c2 + c3 + c4)
+
+X 2−2α
+δ log T
+
+·
+
++ J 2
+
+c5,
+
+·
+
+J 2
+
+(c2
+
+1 −
+
+·
+
+c5)
+
+J
+
+·
+
+≤
+
+(c2 + c3 + c4)
+
+X 2−2α
+δ log T
+
+,
+
+·
+
+and hence,
+
+or equivalently,
+
+(c2 + c3 + c4)
+
+J
+
+X 2−2α
+δ log T
+
+.
+
+(4.22)
+
+c5)
+To conclude the proof of Theorem 1.1, it remains to multiply the upper bound (4.22)
+for J by the number of zeros contained in each rectangle (4.1). More precisely,
+multiplying (4.22) by the quantity ˜n(α) in Lemma 2.4 we have
+
+1 −
+
+≤
+
+·
+
+(c2
+
+N (α, T )
+
+≤
+X 2−2α
+
+·
+
+where
+
+≤
+
+(c2 + c3 + c4)
+
+X 2−2α
+δ log T ·
+(C1 + C2) = CT 2x(1−α),
+
+1 −
+
+(c2
+
+c5)
+
+·
+
+δ
+
+(b1 ·
+
+·
+
+log T + b2)
+
+(4.23)
+
+C1 =
+
+C2 =
+
+(c2 + c3 + c4)
+(c2
+c5)
+1 −
+(c2 + c3 + c4)
+(c2
+
+1 −
+
+b1
+
+,
+
+·
+
+b2
+
+·
+c5)δ log T ≤
+
+·
+Theorem 1.1 follows taking B = 2x and C = C1 + C2 in (4.23) and replacing α
+with σ.
+
+·
+
+(c2 + c3 + c4)
+
+b2
+·
+νi(T ) log T ≤
+
+(c2
+
+1 −
+
+c5)
+
+(c2 + c3 + c4)
+
+b2
+
+·
+νi(T0) log T0
+
+.
+
+(c2
+
+1 −
+
+c5)
+
+Acknowledgements
+
+I would like to thank O. Ramar´e and S. Zuniga Alterman for their insightful
+comments upon this article and in particular for having shared with me some useful
+I am grateful to N. Ng, A. Zaman, J.
+unpublished results about Lemma 3.3.
+Thorner, B. Kerr, and A. Yang for some suggestions upon this paper. Thanks also
+to my supervisor Timothy S. Trudgian for his support and helpful advice while
+working on this manuscript.
+
+Appendix A. Computation and Numerical Values
+
+In this Appendix, we list the numerical values for all the parameters and con-
+stants we encountered throughout the proof of Theorem 1.1 for every ﬁxed interval
+(T0, T1], and [α0, 1]. To compute all the constants deﬁned throughout the proof
+of Theorem 1.1, one can use the python program available on github at [Bel] with
+t = T0, tupp = T1, sigma = α0, and u, x, v, w equal to the corresponding values
+listed in Table 4 (t, tupp, sigma, u, x, v, w are the variables deﬁned in the python
+program). Furthermore, the values of u, x, v, w were chosen using a stochastic op-
+timization routine.
+
+We brieﬂy explain our choice for the length of the intervals (T0, T1]. First of
+all, none of the intervals (T0, T1] intersects the range of values of T for which two
+diﬀerent zero-free regions become the sharpest ones (the range of values of T for
+which each of the known zero-free regions becomes the widest are mentioned in
+Section 2).
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+27
+
+The most sensitive area in which it is more diﬃcult to get an improvement on
+exp(46.2) which is just above the Riemann height,
+(1.6) is the range 3
+and which correspond to the range of T for which the classical zero-free region (2.1)
+is the largest. Hence, when 3
+exp(46.2), we choose (T0, T1] so that, if
+T0 = exp(n), then T1 = exp(n + 1).
+
+≤
+1012 < T
+
+1012 < T
+
+≤
+
+·
+
+·
+
+When exp(46.2) < T
+
+exp(170.2), that is, when Ford’s zero-free region (2.2)
+becomes sharper, a slightly enlargement of the intervals (T0, T1] still allows us to
+get improvements on (1.6), but with the beneﬁt of dealing with less cases. More
+precisely, we choose (T0, T1] so that, if T0 = exp(n), then T1 = exp(n + 10).
+
+≤
+
+Then, for exp(170.2) < T
+
+exp(481958), which is the range of T for which the
+Littlewood zero-free region (2.3) is the sharpest, we further enlarge the size of the
+intervals for the same reason as before. More precisely, when exp(170.2) < T
+exp(3000), if T0 = exp(n), then T1 = exp(n + 500). When instead exp(3000) < T
+exp(481958), we just consider a single interval.
+
+≤
+≤
+
+≤
+
+·
+
+When T > exp(481958), as we mentioned in Section 2, the Korobov–Vinogradov
+zero-free region (2.4) becomes the widest one. Although the range (exp(481958),
+1012)] is unlikely to be required in many applications, for completeness we
+exp(6.7
+provide anyway a log-free zero-density estimate which holds uniformly for every σ
+∈
+[0.985, 1]. More precisely, if we take u = 0.3520926, x = 0.7238738, v = 0.3616651,
+T 1.448(1−σ) for all σ
+1011
+w = 0.0000662, we get N (σ, T )
+[0.985, 1] and
+∈
+1012), the estimate ﬁnd by
+T
+exp(6.7
+(exp(481958), exp(6.7
+·
+[0.98, 1].
+the author in [Bel23] is sharper than (1.6) for every σ
+
+1.62
+1012)]. When T
+
+·
+≥
+
+≤
+
+∈
+
+·
+
+·
+∈
+
+28
+
+C. BELLOTTI
+
+Table 2. Values of constants C, B of Theorem 1.1
+
+T0
+1012
+
+3
+
+·
+
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+T1
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+α0
+0.9927
+
+C
+
+B
+
+37341.72
+
+14.160
+
+0.9927
+
+37564.18
+
+14.084
+
+0.9925
+
+40014.59
+
+13.588
+
+0.9923
+
+42840.01
+
+13.108
+
+0.9921
+
+46015.02
+
+12.647
+
+0.9919
+
+49270.71
+
+12.226
+
+0.9918
+
+52249.66
+
+11.856
+
+0.9916
+
+55524.80
+
+11.505
+
+0.9914
+
+59715.72
+
+11.134
+
+0.9912
+
+64228.93
+
+10.782
+
+0.9910
+
+68446.65
+
+10.475
+
+0.9909
+
+71907.32
+
+10.217
+
+0.9907
+
+76267.80
+
+0.9906
+
+80004.48
+
+0.9905
+
+83811.09
+
+0.9903
+
+89209.33
+
+0.9901
+
+95233.68
+
+9.951
+
+9.720
+
+9.501
+
+9.259
+
+9.020
+
+8.843
+
+exp(46.2)
+
+0.9900
+
+99227.30
+
+exp(46.2)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+0.9899
+
+104761.04
+
+8.634
+
+0.9892
+
+128806.85
+
+7.936
+
+0.9876
+
+194323.75
+
+6.661
+
+0.9860
+
+278045.07
+
+5.809
+
+0.9850
+
+370655.73
+
+5.216
+
+exp(100)
+
+0.9850
+
+425721.47
+
+4.831
+
+exp(100)
+
+exp(110)
+
+0.9850
+
+488901.14
+
+4.513
+
+exp(110)
+
+exp(120)
+
+0.9850
+
+545744.21
+
+4.264
+
+exp(120)
+
+exp(130)
+
+0.9850
+
+629490.27
+
+4.032
+
+exp(130)
+
+exp(140)
+
+0.9850
+
+694045.43
+
+3.855
+
+exp(140)
+
+exp(150)
+
+0.9850
+
+771373.78
+
+3.696
+
+exp(150)
+
+exp(160)
+
+0.9850
+
+825913.07
+
+3.572
+
+exp(160)
+
+exp(170.2)
+
+0.9850
+
+exp(170.2)
+
+exp(500)
+
+0.9850
+
+exp(500)
+
+exp(1000)
+
+0.9850
+
+exp(1000)
+
+exp(1500)
+
+0.9850
+
+exp(1500)
+
+exp(2000)
+
+0.9850
+
+exp(2000)
+
+exp(2500)
+
+0.9850
+
+exp(2500)
+
+exp(3000)
+
+0.9850
+
+exp(3000)
+
+exp(481958)
+
+0.9850
+
+·
+
+·
+
+1.12
+
+6.23
+
+2.12
+
+909966.07
+106
+106
+107
+107
+108
+108
+108
+
+6.47
+
+1.73
+
+2.56
+
+5.76
+
+·
+
+·
+
+·
+
+·
+
+·
+
+3.448
+
+3.337
+
+2.152
+
+1.820
+
+1.684
+
+1.610
+
+1.577
+
+1.551
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+29
+
+Table 3. Values of constants b1, b2
+
+T0
+1012
+
+3
+
+·
+
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+exp(46.2)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+T1
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+α0
+0.9927
+
+b1
+0.711
+
+b2
+2.113
+
+0.9927
+
+0.711
+
+2.113
+
+0.9925
+
+0.711
+
+2.116
+
+0.9923
+
+0.711
+
+2.119
+
+0.9921
+
+0.711
+
+2.122
+
+0.9919
+
+0.712
+
+2.125
+
+0.9918
+
+0.712
+
+2.127
+
+0.9916
+
+0.712
+
+2.130
+
+0.9914
+
+0.712
+
+2.133
+
+0.9912
+
+0.712
+
+2.136
+
+0.9910
+
+0.712
+
+2.139
+
+0.9909
+
+0.713
+
+2.141
+
+0.9907
+
+0.713
+
+2.144
+
+0.9906
+
+0.713
+
+2.145
+
+0.9905
+
+0.713
+
+2.147
+
+0.9903
+
+0.713
+
+2.150
+
+0.9901
+
+0.713
+
+2.153
+
+exp(46.2)
+
+0.9900
+
+0.714
+
+2.155
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+0.9899
+
+0.714
+
+2.156
+
+0.9892
+
+0.715
+
+2.169
+
+0.9876
+
+0.717
+
+2.194
+
+0.9860
+
+0.719
+
+2.219
+
+0.9850
+
+0.721
+
+2.235
+
+exp(100)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(100)
+
+exp(110)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(110)
+
+exp(120)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(120)
+
+exp(130)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(130)
+
+exp(140)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(140)
+
+exp(150)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(150)
+
+exp(160)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(160)
+
+exp(170.2)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(170.2)
+
+exp(500)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(500)
+
+exp(1000)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(1000)
+
+exp(1500)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(1500)
+
+exp(2000)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(2000)
+
+exp(2500)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(2500)
+
+exp(3000)
+
+0.9850
+
+0.721
+
+2.235
+
+exp(3000)
+
+exp(481958)
+
+0.9850
+
+0.721
+
+2.235
+
+30
+
+C. BELLOTTI
+
+Table 4. Choice of parameters in (3.8)
+
+T0
+1012
+
+3
+
+·
+
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+exp(46.2)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+T1
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+u
+
+x
+
+v
+
+w
+
+2.1781287
+
+7.0798370 4.4744028
+
+0.4808273
+
+2.1653098
+
+7.0418787 4.4543359
+
+0.4781452
+
+2.1031623
+
+6.7936945 4.2847829
+
+0.4594357
+
+2.0368399
+
+6.5537594 4.1225941
+
+0.4381695
+
+1.9765605
+
+6.3232916 3.9645830
+
+0.4185077
+
+1.9180226
+
+6.1129209 3.8226214
+
+0.3996157
+
+1.8662754
+
+5.9277629 3.7007007
+
+0.3836159
+
+1.8173525
+
+5.7524453 3.5838346
+
+0.3679799
+
+1.7666469
+
+5.5665117 3.4573946
+
+0.3515541
+
+1.7189733
+
+5.3905275 3.3372497
+
+0.3356460
+
+1.6775968
+
+5.2374475 3.2330781
+
+0.3226654
+
+1.6401586
+
+5.1084977 3.1503483
+
+0.3118339
+
+1.6037571
+
+4.9754347 3.0601163
+
+0.3005496
+
+1.5712431
+
+4.8596030 2.9846610
+
+0.2913112
+
+1.5381371
+
+4.7502479 2.9152677
+
+0.2813016
+
+1.5053035
+
+4.6290398 2.8330162
+
+0.2710128
+
+1.4748658
+
+4.5099741 2.7513548
+
+0.2612853
+
+exp(46.2)
+
+1.4468014
+
+4.4210629 2.6949834
+
+0.2533034
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+1.4190314
+
+4.3167121 2.6279248
+
+0.2455362
+
+1.3227366
+
+3.9675279 2.3928627
+
+0.2159253
+
+1.1443596
+
+3.3303140 1.9746460
+
+0.1634613
+
+1.0275277
+
+2.9044834 1.6974785
+
+0.1318565
+
+0.9414561
+
+2.6078943 1.5092573
+
+0.1103318
+
+exp(100)
+
+0.8812460
+
+2.4151753 1.3944136
+
+0.0986500
+
+exp(100)
+
+exp(110)
+
+0.8345856
+
+2.2564675 1.2987862
+
+0.0906041
+
+exp(110)
+
+exp(120)
+
+0.7956163
+
+2.1317435 1.2246505
+
+0.0835439
+
+exp(120)
+
+exp(130)
+
+0.7597190
+
+2.0159946 1.1545049
+
+0.0758754
+
+exp(130)
+
+exp(140)
+
+0.7329142
+
+1.9273879 1.1018686
+
+0.0711966
+
+exp(140)
+
+exp(150)
+
+0.7086575
+
+1.8478283 1.0532314
+
+0.0671401
+
+exp(150)
+
+exp(160)
+
+0.6879899
+
+1.7855813 1.0184406
+
+0.0633382
+
+exp(160)
+
+exp(170.2)
+
+0.6693878
+
+1.7239944 0.9794391
+
+0.0599159
+
+exp(170.2)
+
+exp(500)
+
+0.6496901
+
+1.6680151 0.9471296
+
+0.0558721
+
+exp(500)
+
+exp(1000)
+
+0.4648597
+
+1.0757433 0.5873406
+
+0.0212707
+
+exp(1000)
+
+exp(1500)
+
+0.4140847
+
+0.9099961 0.4838796
+
+0.0123507
+
+exp(1500)
+
+exp(2000)
+
+0.3945241
+
+0.8417122 0.4385802
+
+0.0077839
+
+exp(2000)
+
+exp(2500)
+
+0.3814614
+
+0.8045939 0.4158624
+
+0.0048886
+
+exp(2500)
+
+exp(3000)
+
+0.3756629
+
+0.7880794 0.4059352
+
+0.0039808
+
+exp(3000)
+
+exp(481958)
+
+0.3750548
+
+0.7752255 0.3959471
+
+0.0049674
+
+AN EXPLICIT LOG-FREE ZERO DENSITY ESTIMATE
+
+31
+
+Table 5. Values of constants d1, d2, d3, d4, d5
+
+T1
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+d1,1
+0.107
+
+d1,2
+0.130
+
+d2,1
+0.027
+
+d2,2
+0.030
+
+d3
+0.003
+
+d4
+84.796
+
+0.107
+
+0.130
+
+0.027
+
+0.030
+
+0.003
+
+84.570
+
+0.107
+
+0.130
+
+0.027
+
+0.030
+
+0.003
+
+86.156
+
+0.107
+
+0.130
+
+0.027
+
+0.030
+
+0.003
+
+87.265
+
+0.107
+
+0.131
+
+0.027
+
+0.030
+
+0.003
+
+88.852
+
+0.107
+
+0.131
+
+0.027
+
+0.030
+
+0.003
+
+90.014
+
+0.107
+
+0.132
+
+0.027
+
+0.030
+
+0.003
+
+90.957
+
+0.107
+
+0.132
+
+0.027
+
+0.030
+
+0.002
+
+92.011
+
+0.107
+
+0.133
+
+0.027
+
+0.030
+
+0.002
+
+93.509
+
+0.107
+
+0.133
+
+0.027
+
+0.030
+
+0.003
+
+95.141
+
+0.107
+
+0.134
+
+0.027
+
+0.031
+
+0.003
+
+96.691
+
+0.107
+
+0.134
+
+0.027
+
+0.031
+
+0.002
+
+97.416
+
+0.107
+
+0.134
+
+0.027
+
+0.031
+
+0.002
+
+98.881
+
+0.107
+
+0.135
+
+0.027
+
+0.031
+
+0.002
+
+99.901
+
+d5
+1.104
+
+1.104
+
+1.104
+
+1.106
+
+1.107
+
+1.109
+
+1.110
+
+1.111
+
+1.113
+
+1.115
+
+1.117
+
+1.118
+
+1.119
+
+1.120
+
+0.107
+
+0.135
+
+0.027
+
+0.031
+
+0.002
+
+100.416
+
+1.121
+
+0.107
+
+0.135
+
+0.028
+
+0.031
+
+0.002
+
+102.078
+
+1.123
+
+0.107
+
+0.136
+
+0.028
+
+0.031
+
+0.002
+
+104.242
+
+1.124
+
+exp(46.2)
+
+0.107
+
+0.136
+
+0.028
+
+0.031
+
+0.002
+
+104.616
+
+1.125
+
+T0
+1012
+
+3
+
+·
+
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+exp(46.2)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+0.107
+
+0.136
+
+0.028
+
+0.031
+
+0.002
+
+106.106
+
+1.126
+
+0.108
+
+0.138
+
+0.028
+
+0.031
+
+0.002
+
+112.559
+
+1.132
+
+0.108
+
+0.142
+
+0.028
+
+0.032
+
+0.002
+
+128.201
+
+1.146
+
+0.108
+
+0.145
+
+0.028
+
+0.032
+
+0.002
+
+146.704
+
+1.156
+
+0.108
+
+0.147
+
+0.028
+
+0.032
+
+0.002
+
+162.542
+
+1.164
+
+exp(100)
+
+0.107
+
+0.147
+
+0.027
+
+0.032
+
+0.002
+
+170.404
+
+1.163
+
+exp(100)
+
+exp(110)
+
+0.107
+
+0.146
+
+0.027
+
+0.032
+
+0.002
+
+181.448
+
+1.159
+
+exp(110)
+
+exp(120)
+
+0.107
+
+0.145
+
+0.027
+
+0.032
+
+0.002
+
+189.419
+
+1.157
+
+exp(120)
+
+exp(130)
+
+0.107
+
+0.146
+
+0.027
+
+0.032
+
+0.002
+
+199.542
+
+1.158
+
+exp(130)
+
+exp(140)
+
+0.107
+
+0.145
+
+0.027
+
+0.032
+
+0.002
+
+208.767
+
+1.156
+
+exp(140)
+
+exp(150)
+
+0.107
+
+0.144
+
+0.027
+
+0.032
+
+0.002
+
+219.463
+
+1.153
+
+exp(150)
+
+exp(160)
+
+0.106
+
+0.144
+
+0.027
+
+0.032
+
+0.002
+
+223.399
+
+1.151
+
+exp(160)
+
+exp(170.2)
+
+0.106
+
+0.143
+
+0.027
+
+0.032
+
+0.002
+
+235.581
+
+1.150
+
+exp(170.2)
+
+exp(500)
+
+0.106
+
+0.144
+
+0.027
+
+0.032
+
+0.002
+
+239.663
+
+1.151
+
+exp(500)
+
+exp(1000)
+
+0.104
+
+0.139
+
+0.027
+
+0.031
+
+0.001
+
+575.833
+
+1.135
+
+exp(1000)
+
+exp(1500)
+
+0.103
+
+0.133
+
+0.026
+
+0.030
+
+0.001
+
+1252.961
+
+1.116
+
+exp(1500)
+
+exp(2000)
+
+0.103
+
+0.135
+
+0.026
+
+0.030
+
+0.001
+
+2659.132
+
+1.122
+
+exp(2000)
+
+exp(2500)
+
+0.103
+
+0.142
+
+0.026
+
+0.031
+
+0.001
+
+3968.354
+
+1.147
+
+exp(2500)
+
+exp(3000)
+
+0.103
+
+0.142
+
+0.026
+
+0.031
+
+0.001
+
+4910.047
+
+1.144
+
+exp(3000)
+
+exp(481958)
+
+0.102
+
+0.128
+
+0.026
+
+0.029
+
+0.001
+
+9955.727
+
+1.097
+
+32
+
+C. BELLOTTI
+
+Table 6. Values of constants c1, c2, c3, c4, c5
+
+T0
+1012
+
+3
+
+·
+
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+exp(46.2)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+T1
+exp(29)
+
+exp(30)
+
+exp(31)
+
+exp(32)
+
+exp(33)
+
+exp(34)
+
+exp(35)
+
+exp(36)
+
+exp(37)
+
+exp(38)
+
+exp(39)
+
+exp(40)
+
+exp(41)
+
+exp(42)
+
+exp(43)
+
+exp(44)
+
+exp(45)
+
+exp(46.2)
+
+exp(50)
+
+exp(60)
+
+exp(70)
+
+exp(80)
+
+exp(90)
+
+exp(100)
+
+exp(100)
+
+exp(110)
+
+exp(110)
+
+exp(120)
+
+exp(120)
+
+exp(130)
+
+exp(130)
+
+exp(140)
+
+exp(140)
+
+exp(150)
+
+exp(150)
+
+exp(160)
+
+exp(160)
+
+exp(170.2)
+
+exp(170.2)
+
+exp(500)
+
+exp(500)
+
+exp(1000)
+
+c1
+0.981
+
+0.981
+
+0.983
+
+0.984
+
+0.984
+
+0.984
+
+0.984
+
+0.984
+
+0.983
+
+0.983
+
+0.983
+
+0.982
+
+0.982
+
+0.982
+
+0.982
+
+0.981
+
+0.981
+
+0.981
+
+0.981
+
+0.979
+
+0.977
+
+0.974
+
+0.972
+
+0.973
+
+0.972
+
+0.973
+
+0.972
+
+0.972
+
+0.972
+
+0.971
+
+0.974
+
+0.972
+
+0.965
+
+c2
+195.230
+
+195.734
+
+207.656
+
+220.851
+
+235.760
+
+250.519
+
+263.991
+
+278.761
+
+297.070
+
+317.207
+
+335.811
+
+350.391
+
+369.491
+
+385.420
+
+401.673
+
+424.491
+
+450.335
+
+466.658
+
+488.558
+
+592.937
+
+903.661
+
+1293.789
+
+1725.506
+
+2021.343
+
+2336.236
+
+2639.408
+
+3065.682
+
+3409.926
+
+3792.749
+
+4086.320
+
+4549.556
+
+4968.978
+
+c3
+2222.717
+
+2243.325
+
+2395.206
+
+2563.120
+
+2752.392
+
+2941.458
+
+3116.775
+
+3308.747
+
+3544.300
+
+3803.499
+
+4046.112
+
+4241.658
+
+4493.302
+
+4707.817
+
+4927.512
+
+5229.292
+
+5570.341
+
+5799.757
+
+6132.446
+
+7615.822
+
+11836.516
+
+17238.260
+
+23340.471
+
+27715.348
+
+32428.941
+
+37050.947
+
+43481.947
+
+48829.688
+
+54797.783
+
+59533.271
+
+66812.743
+
+82847.292
+
+c4
+286.182
+
+286.921
+
+304.415
+
+323.779
+
+345.657
+
+367.319
+
+387.084
+
+408.766
+
+435.641
+
+465.199
+
+492.513
+
+513.913
+
+541.959
+
+565.341
+
+589.199
+
+622.708
+
+660.661
+
+684.629
+
+716.781
+
+870.132
+
+1326.769
+
+1900.434
+
+2535.355
+
+2970.040
+
+3432.726
+
+3878.189
+
+4504.530
+
+5010.341
+
+5572.839
+
+6004.194
+
+6684.845
+
+7301.119
+
+30904.962
+
+555939.909
+
+45409.906
+
+c5
+0.062
+
+0.061
+
+0.062
+
+0.064
+
+0.064
+
+0.066
+
+0.066
+
+0.066
+
+0.068
+
+0.069
+
+0.070
+
+0.071
+
+0.072
+
+0.072
+
+0.073
+
+0.074
+
+0.075
+
+0.075
+
+0.074
+
+0.081
+
+0.085
+
+0.090
+
+0.096
+
+0.093
+
+0.095
+
+0.093
+
+0.092
+
+0.089
+
+0.093
+
+0.088
+
+0.088
+
+0.093
+
+0.086
+
+exp(1000)
+
+exp(1500)
+
+0.973
+
+113906.164
+
+2137924.019
+
+167366.915
+
+0.079
+
+exp(1500)
+
+exp(2000)
+
+0.988
+
+385838.839
+
+7457165.183
+
+566928.551
+
+0.040
+
+exp(2000)
+
+exp(2500)
+
+0.965
+
+936749.186
+
+18512203.901 1376403.319 0.094
+
+exp(2500)
+
+exp(3000)
+
+0.975
+
+1419982.450 28568596.811 2086437.421 0.100
+
+exp(3000)
+
+exp(481958)
+
+0.984
+
+2211776.039 67229207.111 3249851.641 0.131
+
+REFERENCES
+
+References
+
+33
+
+[Bel]
+
+[Bel23]
+
+[Bel24]
+
+C. Bellotti. Log-free zero density. GitHub repository available at. url:
+https://github.com/ChiaraBellotti/Log-free-zero-density-estimates-for-zeta.
+C. Bellotti. “Explicit zero density estimate near unity” (Nov. 2023).
+arXiv:2311.05136.
+C. Bellotti. “Explicit bounds for the Riemann zeta function and a new
+zero-free region”. J. Math. Anal. Appl. 536.2 (2024), p. 128249.
+
+[Bom74] E. Bombieri. Le grand crible dans la th´eorie analytique des nombres.
+
+[Bou00]
+
+[CH23]
+
+Ast´erisque 18. Soci´et´e math´ematique de France, 1974.
+J. Bourgain. “On large values estimates for Dirichlet polynomials and
+the density hypothesis for the Riemann zeta function”. Int. Math. Res.
+Not. 2000 (2000), pp. 133–146.
+M. Cully-Hugill. “Primes between consecutive powers”. J. Number The-
+ory 247 (2023), pp. 100–117.
+
+[CHJ23] M. Cully-Hugill and D. R. Johnston. “On the error term in the ex-
+plicit formula of Riemann–von Mangoldt”. Int. J. Number Theory 19.06
+(2023), pp. 1205–1228.
+
+[CHT19] M. Cully-Hugill and T. Trudgian. “Two explicit divisor sums”. Ramanu-
+
+jan J. 56 (2019), pp. 141 –149.
+
+[For22]
+
+[Gal70]
+
+[Fog65]
+
+[FKS23] A. Fiori, H. Kadiri, and J. Swidinsky. “Sharper bounds for the error
+term in the prime number theorem”. Res. Number Theory 9.3 (2023),
+p. 63.
+E. Fogels. “On the zeros of L-Functions”. Acta Arith. 11.1 (1965), pp. 67–
+96.
+K. Ford. “Zero-free regions for the Riemann zeta function” (2022).
+Preprint available at arXiv:1910.08205.
+P. X. Gallagher. “A large sieve density estimate near σ = 1”. Invent.
+Math. 11.4 (1970), pp. 329–339.
+S Graham. “An asymptotic estimate related to Selberg’s sieve”. J. Num-
+ber Theory 10.1 (1978), pp. 83–94.
+S. Graham. “On Linnik’s constant”. Acta Arith. 39.2 (1981), pp. 163–
+179.
+D. R. Heath-Brown. “Zero-Free Regions for Dirichlet L-Functions, and
+the Least Prime in an Arithmetic Progression”. Proc. Lond. Math. Soc.
+s3-64.2 (1992), pp. 265–338.
+G. A. Hiary. “An explicit van der Corput estimate for ζ(1/2 + it)”.
+Indag. Math. 27.2 (2016), pp. 524–533.
+
+[Gra81]
+
+[Gra78]
+
+[Hia16]
+
+[HB92]
+
+[HPY24] G. A. Hiary, D. Patel, and A. Yang. “An improved explicit estimate for
+
+ζ(1/2 + it)”. J. Number Theory 256 (2024), pp. 195–217.
+
+[Hux71] M. Huxley. “On the Diﬀerence between Consecutive Primes.” Invent.
+
+[Ing37]
+
+[Ing40]
+
+[Ivi03]
+
+Math. 15 (1971/72), pp. 164–170.
+A. E. Ingham. “On the diﬀerence between consecutive primes”. Q. J.
+Math. 1 (1937), pp. 255–266.
+A. E. Ingham. “On the estimation of N (σ, T )”. Q. J. Math. 1 (1940),
+pp. 201–202.
+A. Ivi´c. The Riemann Zeta-Function : Theory and Applications. Dover
+Books on Mathematics Series. Dover Publications, Incorporated, 2003.
+
+34
+
+REFERENCES
+
+[JCH24] D. R. Johnston and M. Cully-Hugill. “On the error term in the explicit
+
+[JY23]
+
+formula of Riemann-von Mangoldt II” (2024). arXiv:2402.04272.
+D. R. Johnston and A. Yang. “Some explicit estimates for the error
+term in the prime number theorem”. J. Math. Anal. Appl. 527.2 (2023),
+p. 127460.
+M. Jutila. “On Linnik’s Constant”. Math. Scand. 41.1 (1977), pp. 45–62.
+[Jut77]
+[KLN18] H. Kadiri, A. Lumley, and N. Ng. “Explicit zero density for the Riemann
+zeta function”. J. Math. Anal. Appl. 465.1 (2018), pp. 22–46.
+[Lin44a] Y. V. Linnik. “On the least prime in an arithmetic progression. I. The
+basic theorem”. Rec. Math. [Mat. Sbornik] N.S. 15.57 (2 1944), pp. 139–
+178.
+
+[Lin44b] Y. V. Linnik. “On the least prime in an arithmetic progression. II:
+The Deuring- Heilbronn theorem”. Rec. Math. [Mat. Sbornik] N.S. 57.3
+(1944), 347–368.
+
+[PY24]
+
+[Pin23]
+
+[Olv74]
+
+[MTY24] M. J. Mossinghoﬀ, T. S. Trudgian, and A. Yang. “Explicit zero-free re-
+gions for the Riemann zeta-function”. Res. Number Theory 10.11 (2024).
+F. W. J. Olver. Asymptotics and Special Functions. Academic Press,
+New York, 1974.
+D. Patel and A. Yang. “An explicit sub-Weyl bound for ζ(1/2 + it)”. J.
+Number Theory (2024). To appear.
+J. Pintz. “A remark on density theorems for Riemann’s zeta-function”
+(Sept. 2023). arXiv:2310.04544.
+J. Pintz. “Some new density theorems for Dirichlet L-functions”. Banach
+Center Publ. 118 (2019), pp. 231–244.
+D. J. Platt and T. S. Trudgian. “The Riemann hypothesis is true up to
+3
+D. J. Platt and T. S. Trudgian. “The error term in the prime number
+theorem”. Math. Comp. 90.328 (2020), pp. 871–881.
+
+1012”. Bull. Lond. Math. Soc. 53.3 (2021), pp. 792–797.
+
+[Pin19]
+
+[PT21]
+
+[PT20]
+
+·
+
+[Ram15] O. Ramar´e. “Explicit estimates on several summatory functions involv-
+ing the Moebius function”. Math. Comp. 84.293 (2015), pp. 1359–1387.
+[Ram16] O. Ramar´e. “An explicit density estimate for Dirichlet L-series”. Math.
+
+[RA17]
+
+Comp. 85.297 (2016), pp. 325–356.
+O. Ramar´e and P. Akhilesh. “Explicit averages of non-negative multi-
+plicative functions: going beyond the main term”. Colloq. Math. 147.2
+(2017), pp. 275–313.
+
+[Ram19] O. Ramar´e. “Explicit average orders: news and problems”. Banach Cen-
+
+ter Publ. 118 (2019), pp. 153–176.
+
+[RZA24] O. Ramar´e and S. Zuniga Alterman. “An L2-bound for the Barban-
+
+[Sel46]
+
+[Sim20]
+
+[TZ24]
+
+[TY24]
+
+Vehov weights” (2024). arXiv:2405.12662.
+A. Selberg. “Contribution to the theory of the Riemann zeta-function”.
+Arch. Math. Naturvidensk. 48.5 (1946), pp. 89–155.
+A. Simoniˇc. “Explicit zero density estimate for the Riemann zeta-function
+near the critical line”. J. Math. Anal. Appl. 491.1 (2020), p. 124303.
+J. Thorner and A. Zaman. “An explicit version of Bombieri’s log-free
+density estimate and S´ark¨ozy’s theorem for shifted primes”. Forum
+Math. (2024). To appear.
+T. S. Trudgian and A. Yang. “On optimal exponent pairs”. Math. Comp.
+(2024). To appear.
+
+REFERENCES
+
+35
+
+[Tur61]
+
+[Yan24]
+
+P. Tur´an. “On a density theorem of Yu. V. Linnik”. Magyar Tud. Akad.
+Mat. Kutat´o Int. K¨azl., 6 (1961), pp. 165–170.
+A. Yang. “Explicit bounds on ζ(s) in the critical strip and a zero-free
+region”. J. Math. Anal. Appl. 534.2 (2024), p. 128124.
+
+School of Science, The University of New South Wales, Canberra, Australia
+Email address: c.bellotti@unsw.edu.au
+
+

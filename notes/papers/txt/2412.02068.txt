@@ -1,0 +1,1434 @@
+4
+2
+0
+2
+
+c
+e
+D
+3
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+8
+6
+0
+2
+0
+.
+2
+1
+4
+2
+:
+v
+i
+X
+r
+a
+
+AN EXPLICIT VERSION OF CARLSON’S THEOREM
+
+SHASHI CHOURASIYA
+
+Abstract. Let N (σ, T ) denote the number of nontrivial zeros of the Riemann
+zeta function with real part greater than σ and imaginary part lying between
+0 and T .
+In this article, we provide an explicit version of Carlson’s zero
+density estimate, that is, N (σ, T ) ≤ 0.78T 4σ(1−σ)(log T )5−2σ , with a slight
+improvement in the exponent of the logarithm factor.
+
+1. Introduction
+
+Let ζ(s) denote the Riemann zeta function and ρ denote a non-trivial zero in
+
+the critical strip 0 < Re(s) < 1. For 1
+
+2 ≤ σ ≤ 1 and T > 0, let
+
+N (σ, T ) := #{ρ = β + iγ : ζ(ρ) = 0, β > σ, 0 < γ ≤ T },
+
+where the zeta zeros are counted with multiplicities. While the Riemann hypothesis
+asserts that N (σ, T ) = 0 for σ ≥ 1/2, weaker bounds of N (σ, T ) play a crucial role
+in several applications of the theory of the zeros of ζ(s) such as study of primes
+in short intervals. To bound N (σ, T ) is generally referred to as the zero density
+estimate of ζ(s). In 2021, Platt and Trudgian [PT20] veriﬁed that N (σ, T ) = 0,
+for T ≤ H0 = 3 · 1012. Consequently, we can restrict ourselves to the range of
+T ≥ 3 · 1012 throughout the article.
+
+Depending on the range of σ, various zero-density estimates exist, for instance
+
+the ﬁrst one was provided by Bohr and Landau [BL13] in 1914, as follows:
+
+N (σ, T ) = O
+
+T
+σ − 1
+
+2 (cid:19)
+
+,
+
+(cid:18)
+
+for T large, and Carlson then improved the bound in [Car20] to:
+
+N (σ, T ) = O(T 4σ(1−σ) log4 T ).
+
+In 1937, considering a bound of the zeta function on the critical line ζ
+O(tc+ǫ), Ingham [Ing37] proved
+
+N (σ, T ) = O
+
+T (2+4c)(1−σ) log5 T
+
+.
+
+When σ is close to the line 1
+
+(cid:16)
+
+2 -line, Selberg [Sel46] showed that
+4 (σ− 1
+
+N (σ, T ) = O(T 1− 1
+
+2 ) log T ).
+
+(cid:17)
+
+(1.1)
+
+(1.2)
+
+1
+2 + it
+
+=
+
+(cid:0)
+
+(cid:1)
+(1.3)
+
+(1.4)
+
+Some other notable contributions are [Tur61], [Hux71], [Hux75], [Jut77], [Bou00]
+
+and [GM24].
+
+Date: December 4, 2024.
+2020 Mathematics Subject Classiﬁcation. Primary 11N56, 11N37 Secondary 11M06.
+Key words and phrases. Zero density estimate, Approximate functional equation, Riemann
+
+zeta-function.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+S. CHOURASIYA
+
+Several non-explicit zero-density estimates are known, however, less is known
+In 2014, Kadiri [KL14] provided an explicit version of
+about explicit versions.
+Bohr and Landau’s estimate and around the same time, Ingham’s bound (1.3) was
+made explicit by Ramar´e [Ram15] and further improved by Kadiri, Lumley and Ng
+[KLN18] as:
+
+N (σ, T ) ≤ C1T
+
+8
+
+3 (1−σ) log5−2σ T + C2 log2 T,
+
+(1.5)
+
+where C1 and C2 are absolute constants depending on σ. Simoniˇc [Sim19] gave the
+following explicit version of (1.4):
+
+T
+2
+
+4 (σ− 1
+
+21− 1
+
+T 1− 1
+
+2 ) log
+
+N (σ, T ) ≤
+
+K2
+2 )
+4 (σ− 1
+for some constant K2 and T ≥ 2H0. Moreover, near to the 1-line, Bellotti gave
+two explicit results, one is log-free [Bel24] another one is Korobov-Vinogradov type
+estimate [Bel23]. However, an explicit version of Carlson’s bound is not known yet.
+The aim of this paper is to provide the ﬁrst explicit version of Carlson’s bound
+in Theorem (1.1). Furthermore, some values of the constant is listed in the Table
+1 while varying T0 and σ.
+Theorem 1.1. For T ≥ T0 ≥ 3 · 1012 and σ ≥ 0.6, the following estimate holds:
+N (σ, T ) ≤ K(σ, T0)T 4σ(1−σ) log5−2σ T,
+
+(1.6)
+
+(1.7)
+
+where K(σ, T0) is deﬁned in (5.3).
+
+Our result improves the Carlson’s estimate asymptotically as we get the exponent
+
+5 − 2σ of log T instead of 4.
+
+The fact that the Carlson method uses some basic techniques, will reﬂect in
+the respective generalization for other L-functions as well. Some values of T0 and
+K(σ, T0) are given below:
+
+Table 1
+
+T0
+3 · 1012
+3 · 1012
+1020
+1020
+1050
+1050
+1070
+1070
+10200
+
+σ K(σ, T0)
+0.7756
+0.2781
+0.0686
+0.0963
+0.0597
+0.0453
+0.2447
+0.0253
+0.1414
+
+0.60
+0.66
+0.60
+0.65
+0.61
+0.65
+0.62
+0.66
+0.62
+
+Here, the constant K(σ, T0) approaches 1
+2π
+large.
+
+(cid:16)
+
+0.68σ(2σ−1)2
+1−0.54σ(1−σ)
+
+(cid:17)
+
+when T0 is suﬃciently
+
+1.1. Comparison with existent estimates. Simoniˇc’s result (1.6) gives the best
+bound for T ≥ 6 · 1012 and σ ∈ (1/2, 0.64). Bellotti’s two estimates are sharpest,
+one for the range 3 · 1012 ≤ T ≤ exp(6.7 · 1012) when σ ∈ (0.985, 1], and the other
+for T ≥ exp(6.7 · 1012) when σ ∈ (0.98, 1]. For the rest of the region in the critical
+strip, the bound given by Kadiri, Lumley and Ng is the sharpest one. For Theorem
+1.1, we consider the region σ ∈ [0.6, 2/3], and hence the only existing estimates we
+
+AN EXPLICIT VERSION OF CARLSON’S THEOREM
+
+3
+
+need to look for the comparison are due to Simoniˇc and Kadiri, Lumley and Ng. If
+we ﬁx T0 = 3 · 1012, then on comparing numerically, the Theorem 1.1 gives better
+bound than (1.6) for T ≥ 9.48 · 10308 when σ ∈ [0.6, 2/3]. If we increase the value
+of T0, for instance, T0 = 10200, then Theorem 1.1 becomes sharper for σ ∈ [0.6, 2/3]
+and T ≥ 1.43 · 10236.
+
+If we compare the exponents of T , Theorem 1.1 should be a better estimate than
+(1.5), for σ ≤ 2/3 when T is large. However, if this method were further improved,
+then there would be some scope of improvement for σ > 2/3 as well, in a ﬁnite
+region.
+
+Below is the diagram demonstrating the regions where some existing zero density
+
+estimates including Theorem 1.1 are sharpest, for the range σ ∈ [0.5, 0.8]:
+
+8
+
+3 (1−σ)(log T )5−2σ
+
+N (σ, T ) ≤ K1T
+N (σ, T ) ≤ K(σ, T0)T 4σ(1−σ)(log T )5−2σ
+4 (σ− 1
+N (σ, T ) ≤ K ′
+
+2 ) log(T /2)
+
+2T 1− 1
+
+Im(s)
+
+T = 1.43 · 10236
+
+T = 3 · 1012
+
+1
+2
+
+0.6
+
+37
+58
+
+2
+3
+
+0.8
+
+Re(s)
+
+Figure 1
+
+Our approach to the main theorem strongly relies on Carlson’s original proof.
+The structure of this paper is as follows. In § 2, we give the classical method of
+Littlewood to count the zeros. Further, in § 3, some explicit results are provided.
+The key idea is to obtain a second moment of the molliﬁed zeta function in § 4,
+on which this zero density estimate is heavily based. The proof of Theorem 1.1 is
+given in § 5.
+
+2. Littlewood’s classical method to count the zeros
+
+In this section, we set up the proof for the zero density estimate. We begin with
+the assumption that T is not the ordinate of a zero of zeta function. Let F (s) be
+an entire function. Consider the meromorphic function h(s) = ζ(s)F (s) and
+Nh(σ, T ) = #{ρ′ = β′ + iγ′ : h(ρ′) = 0, σ < β′ < 1 and 0 < γ′ < T }.
+
+(2.1)
+
+Let H0 = 3·1012 be deﬁned as in the previous section. Observe that, for a parameter
+H ∈ (0, H0), we have N (σ, H) = 0. Subsequently, for T ≥ H0, using the fact
+
+4
+
+S. CHOURASIYA
+
+N (σ, T ) ≤ Nh(σ, T ), we can write
+
+N (σ, T ) = N (σ, T ) − N (σ, H) ≤ Nh(σ, T ) − Nh(σ, H).
+
+On comparing to its average, we have
+
+Nh(σ, T ) − Nh(σ, H) ≤
+
+1
+σ − α
+
+α
+
+Z
+
+β
+
+(Nh(τ, T ) − Nh(τ, H))dτ,
+
+(2.2)
+
+where β > 1 and α is a parameter satisfying 1
+2 < α < σ. Here h(s) 6= 0 on σ = β
+and hence the function log h(s) is regular in the neighbourhood of σ = β. Now
+consider a rectangle R with vertices α + iH, β + iH, β + iT, and α + iT and apply
+the classical lemma of Littlewood [Tit86], as following:
+
+β
+
+(Nh(τ, T ) − Nh(τ, H))dτ = −
+
+1
+2πi
+
+α
+
+Z
+
+Combining the above equation with (2.2), we write
+
+log h(s)ds.
+
+(2.3)
+
+R
+
+Z
+
+N (σ, T ) ≤
+
+1
+2π(σ − α)   Z
+
+H
+
+T
+
+log |h(α + it)|dt
+
+β
+
+β
+
+T
+
++
+
+arg h(τ + iT )dτ −
+
+arg h(τ + iH)dτ −
+
+log |h(β + it)|dt
+
+α
+
+Z
+
+α
+
+Z
+
+H
+
+Z
+
+(2.4)
+
+.
+!
+
+We apply this lemma with a suitable choice of the function F (s). Here the ﬁrst
+integral contributes signiﬁcantly when T is suﬃciently large. We will discuss more
+about the contribution of these integrals in § 5.
+
+3. Preliminaries lemmas
+
+To begin with, we require some explicit estimates that involve sums over divisor
+functions in diﬀerent settings. Let X ≥ X0 be a parameter which will be chosen in
+terms of T later on. Let γ be the Euler’s constant.
+
+Lemma 3.1. Let τ > 1. Then for X ≥ 433,
+
+d(n)2
+nτ ≤
+
+τ
+4X τ −1
+
+(cid:18)
+
+Xn≥X
+
+(log X)3
+τ − 1
+
++
+
+3 log2 X
+(τ − 1)2 +
+
+6 log X
+(τ − 1)3 +
+
+6
+(τ − 1)4
+
+(3.1)
+
+.
+
+(cid:19)
+
+Proof. By partial summation, we have
+
+∞
+
+d(n)2
+nτ ≤ τ
+
+n≤t d(n)2
+tτ +1
+
+dt.
+
+(3.2)
+
+Xn≥X
+For t ≥ 433, using the bound
+Trudgian in [CHT21], and then upon integrating, we get the result.
+
+X P
+Z
+n≤t d(n)2 ≤ 1
+
+4 t log3 t obtained by Cully-Hugill and
+
+P
+
+In particular, for X ≥ X0 and 0.6 ≤ σ ≤ 2/3, we have
+d(n)2
+n2σ ≤ C(σ, X0)X 1−2σ log3 X,
+
+Xn≥X
+
+where
+
+C(σ, X0) =
+
+σ
+2(2σ − 1)4
+
+(cid:18)
+
+(2σ − 1)3 +
+
+3(2σ − 1)2
+log X0
+
++
+
+6(2σ − 1)
+log2 X0
+
++
+
+6
+log3 X0 (cid:19)
+
+.
+
+(3.4)
+
+(cid:3)
+
+(3.3)
+
+AN EXPLICIT VERSION OF CARLSON’S THEOREM
+
+5
+
+One of the crucial elements required here is a weaker version of the approximate
+functional equation for ζ(s). On choosing some speciﬁc parameters, the classical
+identity is as follows:
+
+Lemma 3.2 ([Sim19]). Let s = σ + it with σ ≥ 1/2 and t ≥ 14.1347. Then
+
+ζ(s) =
+
+X1≤n≤t
+
+1
+ns + R(s)
+
+(3.5)
+
+with |R(s)| ≤ 1.755t−σ.
+
+Next, we prove a mean value estimate for Dirichlet polynomials that leads to an
+
+upper bound of the ﬁrst integral in (2.4).
+
+Lemma 3.3. Let X be a real parameter and m0 =
+estimate holds:
+
+1 + 2
+3
+
+r
+
+q
+
+6
+5 . The following
+
+T
+
+T /2 (cid:12)
+(cid:12)
+Z
+X1<m≤T
+(cid:12)
+(cid:12)
+(cid:12)
++ 1.36
+(cid:12)
+
+m−s
+
+X1<n≤X
+2πm0
+T
+
+0.5 +
+
+(cid:18)
+
+µ(n)
+ns (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)
+
+2
+
+dt ≤ 2πm0K(σ, T )(XT )2−2σ log2(XT )
+
+C(σ, X0)T X 1−2σ log3 X,
+
+(3.6)
+
+where C(σ, X0) and K(σ, T ) are deﬁned in (3.4) and (3.8), respectively.
+
+Proof. First, consider the following product of two ﬁnite sums
+
+where
+
+m−s
+
+X1<m≤T
+
+X1<n≤X
+
+µ(n)
+ns =
+
+X1≤n≤XT
+
+an(X)
+ns
+
+,
+
+an(X) =
+
+µ(e) ≤
+
+Xe|n
+e≤X
+
+0
+d(n)
+
+(
+
+if n ≤ X
+if n > X.
+
+Now we implement Montgomery and Vaughan’s mean value theorem for Dirichlet
+polynomials in the form derived by Ramar´e in [Ram15], with un = an(X)n−σ, as
+following:
+
+T
+
+|
+
+T /2
+
+Z
+
+n
+X
+
+unnit|2dt ≤
+
+|un|2
+
+n
+X
+
+T
+2
+
+(cid:18)
+
++ 2πm0(n + 1)
+
+.
+
+(3.7)
+
+(cid:19)
+
+On invoking the bound (3.3), we get
+
+|un|2(0.5T +2πm0) ≤ (0.5T + 2πm0)
+
+|d(n)|2
+n2σ
+
+n
+X
+
+≤ 1.36
+
+0.5 +
+
+(cid:18)
+
+2πm0
+T
+
+(cid:19)
+
+Xn≥X
+C(σ, X0)T X 1−2σ log3 X.
+
+6
+
+S. CHOURASIYA
+
+For the other part of the sum, we use the partial summation formula
+
+d(n)2
+n2σ−1
+
+XX≤n≤XT
+= (XT )1−2σ
+
+d(n)2 − X 1−2σ
+
+d(n)2 + (2σ − 1)
+
+XT
+
+Xn≤XT
+
+Xn≤X
+(XT )2−2σ log2(XT ) − 4X 2−2σ +
+
+1
+4
+
+−
+
+4
+T 2−2σ log2(XT )
+
+−
+
+(2σ − 1)
+4(2σ − 2)
+
+≤ K(σ, T )(XT )2−2σ log2(XT ),
+
+1
+4
+
+≤
+
+≤
+
+(cid:18)
+
+(2σ − 1)
+4
+
+X
+Z
+1
+T 2−2σ
+
+1 −
+
+(cid:18)
+
+XT
+
+X P
+
+Z
+log2 t
+t2σ−1 dt
+
+(XT )2−2σ log2(XT )
+
+(cid:19)(cid:19)
+
+n≤t d(n)2
+t2σ
+
+dt
+
+where
+
+K(σ, T ) =
+
+(cid:18)
+Combining these estimates completes the proof.
+
+1
+4
+
+−
+
+(2σ − 1)
+4(2σ − 2)
+
+1 −
+
+1
+T 2−2σ
+
+.
+
+(cid:19)
+
+(3.8)
+
+(cid:3)
+
+4. Upper bound for the second moment of mollified zeta function
+
+Let σ ≥ 0.6 and T ≥ T0 ≥ 3 · 1012. Now, consider the molliﬁer
+
+MX(s) =
+
+µ(n)
+ns ,
+
+Xn≤X
+
+(4.1)
+
+where µ(n) is M¨obius function. Now, let fX (s) = ζ(s)MX (s) − 1. Choose h = hX
+as following:
+
+hX (s) = 1 − f 2
+
+X(s) = ζ(s)MX (s)(2 − ζ(s)MX (s)).
+
+(4.2)
+
+Observe that zeros of ζ(s) are zeros of hX (s). Here the function F (s), mentioned
+in § 2, is MX(s)(2 − ζ(s)MX (s)). Now
+
+m−s + R(s)
+
+fX (s) =
+
+=
+
+
+
+
+
+X1≤m≤T
+
+m−s
+
+X1<m≤T
+=: A + B.
+
+Xn<X
+
+
+
+Xn≤X
+
+µ(n)
+ns + R(s)
+
+µ(n)
+ns − 1
+
+µ(n)
+ns
+
+Xn≤X
+
+In order to obtain bounds for the second moment of fX(s), write |A + B|2 ≤
+
+2|A|2 + 2|B|2, and hence
+
+T
+
+T /2
+
+Z
+
+|fX (s)|2dt ≤ 2
+
+T
+
+T /2
+
+Z
+
+T
+
+|A|2dt + 2
+
+|B|2dt.
+
+T /2
+
+Z
+
+(4.3)
+
+Now we compute the contributions of the above two integrals seperately. In Lemma
+3.3, the mean value estimate of A is established. The two terms in (3.6) are of the
+
+AN EXPLICIT VERSION OF CARLSON’S THEOREM
+
+7
+
+same order if X = T 2σ−1 log T. On rewriting it
+
+T
+
+T /2 (cid:12)
+Z
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+am(X)
+ms
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+where
+
+C(σ, X0)T 4σ(1−σ) log3(T 2σ−1 log T )
+
+dt ≤ 1.36
+
+0.5 +
+
+2πm0
+T0 (cid:19)
++ 2πm0K(σ, T )T 4σ(1−σ) log2(T 2σ log T )
+≤ C1(σ, T0)T 4σ(1−σ) log4−2σ T,
+
+(cid:18)
+
+C1(σ, T0) = 1.36
+
+0.5 +
+
+2σ − 1 +
+
+2πm0
+T0 (cid:19) (cid:18)
+2σ +
+
+(cid:18)
+K(σ, T )
+log T0 (cid:18)
+
+log log T0
+log T0 (cid:19)
+
++ 2πm0
+
+log log T0
+log T0 (cid:19)
+.
+
+2
+
+3
+
+C(σ, T 2σ−1
+0
+
+)
+
+(4.4)
+
+Note that here we get the exponent of logarithm factor as 4 − 2σ whereas Carlson
+obtained as 3 by comparing the terms in (3.6) on ignoring the log factors.
+
+Further, in (3.5), we have |R(s)| ≤ 1.755t−σ and hence
+
+2
+
+1
+nσ 
+
+dt
+
+T
+
+T /2
+
+Z
+
+|B|2dt ≤ 3.09
+
+T
+
+t−2σ
+
+T /2
+
+Z
+
+
+
+Xn≤X
+2
+
+
+X 1−σ
+
+1
+1 − σ
+
+(cid:19)
+22σ−1 − 1
+
+= 3.09
+
+(cid:18)
+83.17
+2σ − 1
+
+≤
+
+
+1
+2σ − 1
+(cid:18)
+T −(2σ−1)2
+
+1
+
+21−2σ − 1
+log1−σ T.
+
+T 1−2σ
+
+(cid:19)
+
+Observe that the above integral contributes negligibly towards the estimation of the
+second moment of fX(s). Putting all these estimates together in (4.3), we deduce
+
+(cid:0)
+
+(cid:1)
+
+T
+
+T /2
+
+Z
+
+where
+
+|fX (s)|2dt ≤ C2(σ, T0)T 4σ(1−σ) log3 T,
+
+(4.5)
+
+C2(σ, T0) = 2C1(σ, T0) +
+
+166.34
+(2σ − 1) (cid:0)
+22 T, . . . in (4.5) and adding, we get
+
+1 − 21−2σ
+T0 log3 T0
+
+(cid:1)
+
+.
+
+Now, on replacing T by 1
+
+2 T, 1
+
+T
+
+H
+
+Z
+
+|fX (s)|2dt ≤
+
+C2(σ, T0)
+
+1 − 0.54σ(1−σ) T 4σ(1−σ) log3 T
+
+=: C3(σ, T0)T 4σ(1−σ) log3 T.
+
+(4.6)
+
+Here the constant C3(σ, T0) tends to 0.68σ(2σ−1)2
+
+1−0.54σ(1−σ) when T0 is large.
+
+5. Proof of Zero Density Result
+
+The remainder of this paper will be devoted to the proof of Theorem 1.1. Now
+we are in a position to bound the integrals present in (2.4) in order to get the
+estimate for N (σ, T ).
+
+8
+
+S. CHOURASIYA
+
+From the deﬁnitions of hX and fX , we have |hX (s)| ≤ log{1 + |fX (s)|2} ≤
+
+|fX(s)|2, so that combining it with (4.6), we get
+
+T
+
+log |hX (α + it)|dt ≤ C3(σ, T0)T 4σ(1−σ) log3 T,
+
+(5.1)
+
+where C3(σ, T0) is deﬁned in the previous section.
+
+H
+
+Z
+
+For the rest of the three integrals, we make use of some explicit results obtained
+by Kadiri, Lumley, and Ng [KLN18]. To deal with the integals containing the
+argument function, on setting β = 1.25 and choosing α = σ − 1
+log T , we apply the
+following lemma:
+
+Lemma 5.1 ([KLN18] Lemma 4.12). Let 0 < H ≤ H0 ≤ T and X ≤ T . Let
+η = 0.2561 with η0 = 0.23622 · · · , α and β satisfying 1
+2 ≤ α < 1 < β ≤ 1 + η. Then,
+on ﬁxing some parameters, we have
+
+β
+
+β
+
+arg hX (σ + iT )dσ −
+
+arg hX (σ + iH)dσ
+
+≤ 17.29
+
+1.25 − σ +
+
+log T.
+
+α
+
+α
+
+(cid:12)
+Z
+(cid:12)
+(cid:12)
+Remark. For the case f (s) to be Dirichlet L-functions, the bound for the arg func-
+(cid:12)
+(cid:12)
+tion is provided by McCurley [McC84]. Moreover, Kadiri and Ng [KN12] worked it
+out for the Dedekind zeta function case.
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:19)
+
+(cid:18)
+
+Z
+
+1
+log T
+
+Now there remains to consider the fourth integral, for which we have:
+
+Lemma 5.2 ([KLN18] Lemma 4.13). Let β ≥ 1 + η0 where η0 = 0.23622 · · · . Let
+X = hT where T ≥ H0, and X0 = hH0. Then
+
+T
+
+−
+
+log |hX (β + it)|dt ≤ 0.05 log T.
+
+(5.2)
+
+H
+
+Z
+
+Now, we are all set to compile our previous bounds to obtain upper bounds for
+
+N (σ, T ). Invoking the above estimates in the equation (2.4) yields
+
+N (σ, T )
+
+≤
+
+C3(σ, T0)T 4σ(1−σ) log3 T + 17.29
+
+1.25 − σ +
+
+log T
+2π
+(cid:18)
+C3(σ, T0)
+2π
+
+≤
+
+17.29
+2π log2 T0
+≤ K(σ, T0)T 4σ(1−σ) log4 T,
+
++
+
+(cid:18)
+
++
+
+0.05
+4π log2 T0 (cid:19)
+
+(cid:18)
+T 4σ(1−σ) log4 T
+
+1
+log T
+
+log T + 0.05 log T
+
+(cid:19)
+
+(cid:19)
+
+where
+
+K(σ, T0) =
+
+C3(σ, T0)
+2π
+
+(cid:18)
+
++ 0.004
+
+1.25 − σ +
+
+(cid:18)
+
+1
+log T
+
++
+
+(cid:19)
+
+0.05
+4π log2 T0 (cid:19)
+
+.
+
+(5.3)
+
+6. Future Work
+
+Here, the involvement of the classical approximate functional equation (3.5) as
+a crucial tool makes the Carlson method less complicated than the most of the
+other methods. This functional equation can be easily generalized for other L-
+functions such as Dirichlet L-functions, Dedekind zeta functions, etc. One more
+ingredient of this method is the Littlewood’s classical method to count the zeros
+for which suﬃcient tools have been provided to generalize for Dirichlet L-functions
+
+REFERENCES
+
+9
+
+by McCurley in [McC84] and for Dedekind zeta functions, by Kadiri and Ng in
+[KN12]. Therefore, this method is easier to extend to other L-functions.
+
+Titchmarsh [Tit86] made a remark about the functional equation (3.5) not being
+suﬃcient for the estimation of the second moment of ζ(s). Whereas, combining (3.5)
+with the mean value estimate (3.7) given by Montgomery and Vaughan yields
+
+2T
+
+|ζ(1/2 + it)|2dt ≤ T log T + 26.48T + 8.27 log T + 17.20 +
+
+8.27
+T
+
+.
+
+T
+Z
+
+Better estimates are available these days, due to more advanced tools.
+
+On the other hand, when the same functional equation is applied to obtain the
+
+fourth moment of ζ(s) on the critical line, it gives
+
+2T
+
+T
+Z
+
+|ζ(1/2 + it)|4dt ≤24T 2 log3(8T ) + 1022T 2 log2(2T ) + 2T log3(4T )
+
++ 1181.16T log2 T + 19.86T log T + 364.25T
+
++ 177.07 log T + 355.83 +
+
+181.83
+T
+
+.
+
+One can investigate a reﬁned version which is one of the main ingredients for the
+zero density estimate proved by Ingham in [Ing40].
+
+7. Acknowledgements
+
+The author would like to thank her supervisor Timothy S. Trudgian for encour-
+aging her to prove the main theorem and for his continuous support. The author
+would also like to thank Chiara Bellotti and Andrew Yang for sharing useful un-
+published results. She wants to extend her thankful gesture to Bryce Kerr and
+Nicol Leong for having some fruitful discussions.
+
+References
+
+[BL13]
+
+[Bel23]
+
+[Bel24]
+
+C. Bellotti. “Explicit zero density estimate near unity”. In: arXiv preprint
+arXiv:2311.05136 (2023).
+C. Bellotti. “An explicit log-free zero density estimate for the Riemann
+zeta-function”. In: J. Number Theory 269 (2024), pp. 37–77.
+H. Bohr and E. V. Landau. “Beitr¨age zur Theorie der Riemannschen
+Zetafunktion”. In: Math. Ann. 74 (1913), pp. 3–30.
+J. Bourgain. “On large values estimates for Dirichlet polynomials and
+the density hypothesis for the Riemann zeta function”. In: Int. Math.
+Res. Not. IMRN 2000.3 (2000), pp. 133–146.
+F. Carlson. “Uber die Nullstellen der Dirichlet’schen Reihen und der
+Riemann’schen t-Funktion”. In: Ark. Mat. Astr. Fys. 20 (1920), p. 28.
+[CHT21] M. Cully-Hugill and T. Trudgian. “Two explicit divisor sums”. In: The
+
+[Bou00]
+
+[Car20]
+
+[GM24]
+
+Ramanujan Journal (2021), pp. 1–9.
+L. Guth and J. Maynard. “New large value estimates for Dirichlet poly-
+nomials”. In: arXiv preprint arXiv:2405.20552 (2024).
+
+[Hux71] M. N. Huxley. “On the diﬀerence between consecutive primes”. In: In-
+
+vent. Math. 15 (1971), pp. 164–170.
+
+[Hux75] M. N. Huxley. “Large values of Dirichlet polynomials, III”. In: Acta
+
+Arith. 26 (1975), pp. 435–444.
+
+10
+
+[Ing40]
+
+[Ing37]
+
+REFERENCES
+
+A. E. Ingham. “On the estimation of N (σ, T )”. In: Q. J. Math. 1 (1940),
+pp. 201–202.
+A. E. Ingham. “On the diﬀerence between consecutive primes”. In: The
+Quarterly Journal of Mathematics 1 (1937), pp. 255–266.
+
+[Jut77] M. Jutila. “Zero-density estimates for L-functions”. In: Acta Arith. 32
+
+[KL14]
+
+(1977), pp. 55–62.
+H. Kadiri and A. Lumley. “Short eﬀective intervals containing primes”.
+In: Integers 14 (2014), A61.
+
+[KLN18] H. Kadiri, A. Lumley, and N. Ng. “Explicit zero density for the Riemann
+
+[KN12]
+
+zeta function”. In: J. Math. Anal. Appl. 465.1 (2018), pp. 22–46.
+H. Kadiri and N. Ng. “Explicit zero density theorems for Dedekind zeta
+function”. In: J. Number Theory 132 (2012), pp. 748–775.
+
+[McC84] K. S. McCurley. “Explicit estimates for the error term in the prime num-
+ber theorem for arithmetic progressions”. In: Math. Comp. 42 (1984),
+pp. 265–285.
+D. Platt and T. Trudgian. “The Riemann hypothesis is true up to 3 ·
+1012”. In: Bull. Lond. Math. Soc. 53 (2020).
+
+[PT20]
+
+[Ram15] O. Ramar´e. “An explicit density estimate for Dirichlet L-series”. In:
+
+[Sel46]
+
+[Sim19]
+
+[Tit86]
+
+[Tur61]
+
+Math. Comp. 85 (2015), pp. 325–356.
+A. Selberg. “Contribution to the theory of the Riemann zeta-function”.
+In: Arch. Math. Naturvidensk. 48.5 (1946), pp. 89–155.
+A. Simoniˇc. “Explicit zero density estimate for the Riemann zeta-function
+near the critical line”. In: J. Math. Anal. Appl. (2019).
+E. C. Titchmarsh. The Theory of the Riemann Zeta-function. The Claren-
+don Press Oxford University Press, 1986.
+P. Tur`an. “On a density theorem of Yu. V. Linnik”. In: Magyar Tud.
+Akad. Mat. Kutat`o Int. K¨azl. 6 (1961), pp. 165–170.
+
+School of Science, The University of New South Wales, Canberra, Australia
+Email address: s.chourasiya@unsw.edu.au
+
+

@@ -1,0 +1,11820 @@
+3
+2
+0
+2
+
+y
+a
+M
+9
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+2
+v
+9
+2
+7
+1
+1
+.
+6
+0
+2
+2
+:
+v
+i
+X
+r
+a
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+JAMES MAYNARD AND KYLE PRATT
+
+Abstract. We introduce a new method to detect the zeros of the Riemann zeta function
+which is sensitive to the vertical distribution of the zeros. This allows us to prove there
+are few ‘half-isolated’ zeros. By combining this with classical methods, we improve the
+Ingham-Huxley zero-density estimate under the assumption that the non-trivial zeros of the
+zeta function are restricted to lie on a ﬁnite number of ﬁxed vertical lines. This has new
+consequences for primes in short intervals under the same assumption.
+
+1. Introduction
+
+The Riemann Hypothesis is the claim that all of the non-trivial zeros of the Riemann zeta
+function ζ(s) have real part equal to 1
+2, and this would have important consequences for the
+distribution of prime numbers. One consequence would be an asymptotic formula for primes
+in short intervals; for any function f (x)
+, we could obtain an asymptotic formula for
+the number of primes in the interval [x, x + f (x)√x(log x)] under the assumption of the
+Riemann Hypothesis.
+
+→ ∞
+
+For many of these applications to the distribution of primes, one can still obtain results of
+2, provided these
+
+a similar strength even if there are some zeros with real part larger than 1
+exceptions are suﬃciently rare. If we deﬁne the counting function
+
+N(σ, T ) :=
+
+ρ = β + iγ : ζ(ρ) = 0, β
+
+σ, 0
+
+γ
+
+T
+
+,
+
+|{
+
+≤
+σ)+o(1) for a ﬁxed constant A would imply an
+then a bound of the form N(σ, T )
+1/A+o(1)]. In particular, the ‘Density
+asymptotic formula for primes in the interval [x, x + x1
+−
+σ)+o(1) would imply an asymptotic formula for
+Hypothesis’ which claims N(σ, T )
+primes in the interval [x, x + x1/2+o(1)], which is almost as strong as the result obtained under
+the Riemann Hypothesis.
+
+T A(1
+−
+
+T 2(1
+−
+
+≪
+
+≪
+
+}|
+
+≥
+
+≤
+
+Although the Density Hypothesis remains unproven, weaker results in this direction can
+be obtained unconditionally. After some early work by Carlson [4], Ingham [15] proved the
+estimate
+
+(1)
+
+N(σ, T )
+
+T 3(1
+−
+
+σ)/(2
+
+−
+
+σ)+o(1).
+
+≪
+
+≪
+
+Huxley [14] built on work of Montgomery [18] and Hal´asz [7], and proved the estimate
+T 3(1
+−
+
+N(σ, T )
+
+1)+o(1),
+
+σ)/(3σ
+
+(2)
+
+−
+
+which is superior to Ingham’s estimate for σ > 3/4. Taken together, these bounds imply
+
+(3)
+
+N(σ, T )
+
+12
+5 (1
+
+−
+
+σ)+o(1),
+
+T
+
+≪
+
+and so as consequence one has an asymptotic formula for the number of primes in an interval
+[x, x + x7/12+o(1)]. This remains essentially the best asymptotic result on primes in short
+intervals to date (Heath-Brown [12] reﬁned the o(1) term via sieve methods). We note that
+any improvement to the exponent in (3) in the neighbourhood of σ = 3/4 would yield a
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+JAMES MAYNARD AND KYLE PRATT
+
+stronger result. Various authors have improved estimates when σ > 3/4, but improving zero
+density estimates for σ
+3/4 remains a large open problem in analytic number theory which
+has seen essentially no progress in the 80 years since Ingham’s estimate (beyond reﬁnements
+to the o(1) term).
+
+≤
+
+Even if one cannot improve upon (3), one might hope to obtain an improved estimate for
+primes in short intervals by considering the vertical distribution of zeros close to the line
+Re(s) = 3/4. If one could show suitable cancellation in sums similar to
+
+1
+
+xρ
+−
+
+3/4+δ
+
+δ
+Re(ρ)
+X3/4
+≤
+Im(ρ)
+0
+≤
+
+−
+≤
+
+≤
+
+x5/12+δ
+
+then one could show that we obtain an asymptotic formula for primes in the interval
+[x, x7/12
+δ+o(1)]. However, there are putative bad conﬁgurations of zeros where the sum
+−
+would exhibit essentially no cancellation. For example, for T = x5/12+δ one would need to
+rule out the possibility that there are T 3/5 zeros in the set
+
+3
+4
+
++ i
+
+2πn
+log x
+
+: n
+
+Z
+
+∩
+
+∈
+
+n
+
+[0, T ]
+
+.
+
+o
+
+Thus vertical arithmetic progressions of zeros present obstacles to progress on results about
+primes.
+
+Our ﬁrst main result allows us to improve on these zero density results, if we assume some
+rigidity in the real parts of the zeros of ζ(s). We therefore introduce the following hypothesis.
+
+Hypothesis
+vertical lines.
+
+F
+
+. The non-trivial zeros of the zeta function lie on a ﬁnite number of ﬁxed
+
+We note that even under the assumption of Hypothesis
+
+, we have not ruled out conﬁg-
+
+urations of zeros such as the vertical arithmetic progressions mentioned earlier.
+
+F
+
+Theorem 1 (Density Hypothesis under Hypothesis
+have
+
+F
+
+). Assume Hypothesis
+
+. Then we
+
+F
+
+N(σ, T )
+
+≪
+
+T 2(1
+−
+
+σ) exp((log log T )O(1)).
+
+An immediate consequence of this result is a conditional improvement to primes in short
+intervals. It is well-known that the Density Hypothesis yields a result on primes in short
+intervals nearly as strong as that coming from the Riemann Hypothesis.
+
+Corollary 2 (Primes in short intervals under Hypothesis
+ǫ > 0. Then
+
+F
+
+). Assume Hypothesis
+
+and let
+
+F
+
+p
+
+#
+{
+
+∈
+
+[x, x + x1/2+ǫ]
+}
+
+= (1 + oǫ(1))
+
+x1/2+ǫ
+log x
+
+.
+
+Another consequence of Theorem 1 is a conditional improvement on primes in almost all
+
+short intervals.
+
+Corollary 3 (Primes in almost all short intervals under Hypothesis
+
+). Assume Hypothesis
+
+. Let C > 0 be a suﬃciently large constant, and let y = exp((log log X)C). Then
+
+F
+
+F
+
+for all but O(X exp(
+
+−
+
+p
+
+#
+{
+
+[x, x + y]
+}
+
+∈
+2)) integers x
+(log log X)−
+
+= (1 + o(1))
+
+y
+log x
+
+[X, 2X].
+
+∈
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+3
+
+F
+
+One should be able to relax Hypothesis
+
+considerably and still obtain similar results via
+our method. For example, we could allow for zeros with ordinate in [T, 2T ], say, to lie on
+(log T )/(log log T )2 well-spaced vertical lines. We have chosen to just present the simplest
+≪
+case in the interest of clarity. However, at our current state of knowledge it appears that
+some assumption of rigidity of real parts in necessary - see Section 8 for a discussion of this.
+Underlying Theorem 1 is a new unconditional way of detecting certain ‘half-isolated’ zeros
+of ζ(s). The key point is that this method is sensitive to the vertical distribution of zeros.
+The precise deﬁnition of a half-isolated zero is somewhat technical (see Deﬁnition 9 below),
+but roughly speaking ρ0 = β0 + iγ0 is half-isolated if all nearby zeros have real part very
+close to β0 and imaginary part at least γ0 (so these zeros lie vertically ‘above’ ρ0). We prove,
+unconditionally, that half-isolated zeros have very short zero-detecting polynomials.
+
+Theorem 4 (Half-isolated zeros have short zero-detecting polynomials). There exists an
+1 and a ﬁxed non-negative smooth function w0 supported in [1/2, 2]
+absolute constant C
+such that the following holds.
+
+≥
+
+If ρ0 = β0 + iγ0 is a half-isolated zero (see Deﬁnition 9 for the precise statement) with
+
+γ0 ∈
+
+[T, 2T ], then there exists a real Y
+
+∈
+
+[T (log log T )3/ log T , T 5/ log log T ] such that
+
+Λ(n)
+nρ0
+
+w0(n/Y )
+
+(log T )−
+
+C.
+
+≥
+
+n
+(cid:12)
+X
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Since short Dirichlet polynomials rarely take large values, one immediate consequence of
+the existence of short zero-detecting polynomials for half-isolated zeros is that there are few
+half-isolated zeros.
+
+Corollary 5 (Half-isolated zeros satisfy Density Hypothesis). The number of half-isolated
+zeros ρ0 = β + iγ such that β
+
+[T, 2T ] is at most T 2(1
+−
+
+σ and γ
+
+σ)+o(1).
+
+≥
+
+∈
+
+Similar results on eﬃciently detecting certain zeros of ζ(s) have been obtained in earlier
+work of Heath-Brown (unpublished), Balasubramanian and Ramachandra [1], and Conrey
+and Iwaniec [5]. The key distinguishing feature of our work is that we can detect zeros even
+when there are many other zeros nearby, and this allows us to address possible obstructions
+such as vertical arithmetic progressions of zeros.
+
+We hope that the ideas underlying this estimate might evenually be extended to give an
+improvement to the Huxley-Ingham bound (3). Unfortunately we have been unable, thus far,
+to exploit half-isolated zeros to unconditionally provide improvements to bounds for N(σ, T );
+see Section 8 for a discussion of what we perceive to be the key obstacles to obtaining an
+unconditional version of Theorem 1.
+
+Lastly, we mention a more speculative result. One may hypothesize about the vertical
+distribution of the zeros when Hypothesis
+occurs. Since the zeros are constrained to
+F
+vertical lines, and any vertical line with real part larger than 1/2 must have relatively few
+zeros (by the Ingham-Huxley bounds), we see that the zeros must occur in separate ‘clusters’
+of nearby zeros (where a zero of height T is ‘nearby’ another if it is within (log T )3, say, of the
+other zero.) One might naively expect that if the zeros were somehow randomly distributed
+on the vertical lines, then any cluster of zeros would have to be quite short. If this is indeed
+the case, then we obtain stronger information on moments of the Riemann zeta function.
+
+4
+
+JAMES MAYNARD AND KYLE PRATT
+
+Theorem 6. Assume Hypothesis
+F
+18 for a precise statement) has size
+
+, and assume that every cluster of zeros (see Deﬁnition
+
+T ε0 for some ε0 ≥
+
+≤
+
+0. Then
+
+T
+
+0
+
+Z
+
+ζ( 1
+
+2 + it)
+
+5dt
+
+|
+
+≪ε0 T 1+O(ε0)+o(1).
+
+|
+
+We leave the proof of Theorem 6 to an appendix since it has a slightly diﬀerent ﬂavour
+
+from the rest of our paper.
+
+2. Outline
+
+2.1. Zero detecting polynomials. The methods of Ingham and Huxley are based on show-
+ing that if ρ is a zero of ζ(s), then there must be a Dirichlet polynomial which takes a large
+value at ρ; one then shows that these Dirichlet polynomials rarely take large values. The
+proof of the existence of the zero-detecting polynomial does not give much control over the
+length of the Dirichlet polynomial produced, but the bounds for the frequency of large values
+are quite sensitive to the length of the Dirichlet polynomial. The method works well if the
+Dirichlet polynomial has a convenient length, but the current estimates are limited by large
+value estimates for Dirichlet polynomials of inconvenient length (for σ = 3/4 the critical
+case is Dirichlet polynomials of length T 2/5). If the Dirichlet polynomial has length T ǫ, for
+example, then the number of large values on the line Re(s) = σ is O(T 2(1
+σ)+ǫ+o(1)), giving
+−
+Density Hypothesis-strength bounds when ǫ is small.
+
+There is another, less well-known, circle of ideas for detecting zeros of the zeta function,
+going back to the above-mentioned work of Heath-Brown, Balasubramanian and Ramachan-
+dra, and Conrey and Iwaniec. This is our starting point.
+
+Choose a smooth function w with compact support, and for a parameter Y > 0 we consider
+
+the Dirichlet polynomial
+
+SY (s) :=
+
+n
+X
+
+Λ(n)
+ns w(n/Y ).
+
+We use Mellin inversion to rewrite the sum as an integral involving
+the line of integration and pick up contributions from the zeros of ζ. Hence
+
+−
+
+ζ ′/ζ, and then shift
+
+SY (s) =
+
+n
+X
+
+Λ(n)
+ns w(n/Y )
+
+≈
+
+Y ρ
+−
+
+sW (ρ
+
+s),
+
+−
+
+ρ
+X
+
+where W is the Mellin transform of w and ρ ranges over non-trivial zeros of ζ. The rapid
+decay of W reduces the sum over zeros to zeros ρ which are close to s. If s = ρ0 is a zero of
+ζ, then there is a large contribution W (0) from ρ = ρ0, and so we ﬁnd
+
+(4)
+
+SY (ρ0)
+
+W (0) +
+
+Y ρ
+−
+
+ρ0W (ρ
+
+≈
+
+ρ0).
+
+−
+
+small
+
+ρ0
+ρ
+X0<
+|
+−
+|
+If there are no other nearby zeros, then the sum above is empty and SY (s) takes a large
+value at ρ0. Therefore SY (s) is a zero detecting polynomial with controlled length Y , and by
+choosing Y = T ǫ we are in a favourable situation for our large-values estimates. This gives
+Heath-Brown’s result that there are few ‘isolated’ zeros. The work of Balasubramanian-
+Ramachandra and Conrey-Iwaniec used Tur´an power-sum estimates to show that SY (ρ0) is
+large for some suitable Y provided there are few zeros in the neighbourhood of ρ0. However,
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+5
+
+if a zero ρ0 = β0 + iγ0 has
+zeros for the power sum methods to handle.
+
+log T zeros nearby (assuming γ0 ≈
+
+≍
+
+T ), then this is too many
+
+2.2. Improved power-sum estimates. Following the above strategy, by considering the
+distribution of zeros close to ρ0 one might hope to be able to choose Y to avoid the ‘inconve-
+nient’ lengths which arise in the Ingham-Huxley methods and still show that SY (ρ0) is large.
+Unfortunately this is not possible in general; if the zeros in the neighbourhood of ρ0 are
+approximately in a vertical arithmetic progression with common diﬀerence 2πci/ log T then
+SY (ρ0) is small for all choices of smooth w and Y < T 1/c
+ǫ. Therefore vertical arithmetic
+progressions again indicate a barrier to this approach, and this potential barrier is not ruled
+out by Hypothesis
+
+−
+
+.
+
+One might speculate that the only obstruction to SY (ρ0) being uniformly small in this way
+is caused by the local distribution of zeros being a pertubation of a small number of vertical
+arithmetic progressions. This would mean that the only obstructions to the approach are
+quite rigid, and in particular half-isolated zeros would be detectable since locally there would
+not be any arithmetic progressions of zeros extending below the half-isolated zero.
+
+F
+
+The key technical ingredient in the deduction of Theorem 4 is an improved power sum
+result which can be adapted to detect half-isolated zeros. This then does allow us to deduce
+that there is a choice of small Y where SY (ρ0) is large when ρ0 is half-isolated. There are
+several technical assumptions in the full statement of the result, but the following special
+case is indicative.
+Lemma 7 (Simple case of power sum inequality). Let θ1 ≤ · · · ≤
+exists an absolute constant B0 ≥
+[A, 2A] such that
+exists a real t
+∈
+
+θR be real numbers. There
+1 such that the following is true. For any A > 0, there
+
+R
+
+exp(itθr)
+
+(B0R)−
+
+99.
+
+≥
+
+(cid:12)
+(cid:12)
+Traditional power-sum methods would yield a lower bound which is exponentially small
+(cid:12)
+in R, but versions of this result have appeared before. See Section 4 for a full statement of
+the result and further discussion.
+
+r=1
+(cid:12)
+X
+(cid:12)
+(cid:12)
+
+2.3. Local-global structure using Hypothesis
+is that
+if the zeros lie on ﬁnitely many vertical lines, then zeros come in vertical ‘clusters’, with a
+half-isolated zero at the bottom of each cluster (see Deﬁnition 18 for a precise deﬁnition of
+cluster, but imagine two zeros ρ, ρ′ of height T are in the same cluster if there is a sequence
+(log T )3
+of zeros ρ1, . . . , ρj on the same vertical line with ρ1 = ρ, ρj = ρ′ and
+for all 1
+
+. A key point of Hypothesis
+
+ρi+1| ≤
+
+ρi −
+
+i < j.)
+
+F
+
+F
+
+|
+
+We exploit the clustering phenomenon by averaging over zeros within a single cluster, as
+well as averaging over clusters themselves. To do this successfully requires a combination of
+the ﬂexible zero-detecting polynomials for half-isolated zeros, as well as the more classical
+zero-detecting techniques.
+
+≤
+
+We thank Roger Heath-Brown for comments on an earlier version of this paper, and for his
+generosity in allowing us to incorporate his ideas on an improved arrangement for bounding
+
+Acknowledgements
+
+6
+
+JAMES MAYNARD AND KYLE PRATT
+
+the relevant Dirichlet polynomials in Section 7. This led to a stronger bound for N(σ, T )
+and a cleaner proof compared with our earlier version.
+
+JM is supported by a Royal Society Wolfson Merit Award, and this project has received
+funding from the European Research Council (ERC) under the European Union’s Horizon
+2020 research and innovation programme (grant agreement No 851318).
+
+3. Notation
+
+It is always the case that T denotes a large real number.
+We utilize the traditional Landau and Vinogradov notations O(
+
+f = O(g) if there is a constant with
+implied constant in a O(
+with a subscript, such as f
+to inﬁnity.
+
+) or
+
+·
+
+f
+
+), o(
+. We say
+f mean f = O(g). If the
+depends on some other quantity we sometimes indicate this
+≪
+≪ε g. We write o(1) for a quantity that tends to zero as T goes
+
+Cg, and f
+
+g or g
+
+·
+≫
+
+, and
+
+| ≤
+
+≪
+
+≫
+
+≪
+
+),
+
+·
+
+|
+
+We write n
+For a function f : R
+
+∼
+
+transform
+
+0 →
+
+≥
+
+N for the condition N < n
+
+2N.
+
+C with suitable convergence properties we deﬁne the Mellin
+
+≤
+
+F (s) =
+
+∞
+
+f (x)xs
+
+1dx.
+
+−
+
+In general, we follow the convention of using a capital letter to denote the Mellin transform
+of a function.
+
+0
+Z
+
+Throughout the paper w0(x) denotes a ﬁxed, non-negative smooth function supported in
+
+[ 1
+2, 2] with certain bounds on its derivatives. We construct such a w0 in Lemma 43.
+
+For a real number c we write
+
+1
+2πi
+
+Z(c)
+
+f (z)dz =
+
+1
+2πi
+
+c+i
+
+∞
+
+i
+
+c
+Z
+
+−
+
+∞
+
+f (z)dz.
+
+C, so that
+
+We write Re(z) and Im(z) for the real and imaginary parts, respectively, of z
+z = Re(z) + iIm(z). If z = reiθ with r
+
+∈
+π, π] we write arg(z) = θ.
+
+0 and θ
+
+(
+
+≥
+
+∈
+
+−
+
+As usual, we write e(x) = e2πix. We write P +(n) and P −(n) for the greatest and least
+prime factor of a positive integer n, where P +(1) = P −(1) = 1. We write τ (n) for the usual
+divisor function, and µ(n) for the M¨obius function.
+
+A set
+notation
+
+of real numbers if G-separated if
+
+−
+denotes the cardinality of a ﬁnite set.
+
+α
+
+|
+
+S
+|S|
+
+β
+
+| ≥
+
+G for all distinct α, β
+
+. The
+
+∈ S
+
+4. Half-isolated zeros
+
+In this section we introduce half-isolated zeros and then establish Theorem 4 in the more
+quantitative form of Proposition 16. This section is essentially self-contained and can be read
+separately from the rest of the paper. We begin by giving a precise deﬁnition of half-isolated
+zero.
+
+Deﬁnition 8. Given a real Y > 1, we call a zero ρ0 = β0 + iγ0 of ζ(s) ‘Y -half-isolated’ if
+)2 satisﬁes at least one of the following:
+every zero ρ′ = β′ +iγ′ of ζ(s) with
+
+(log
+
+ρ′
+
+γ0|
+(1) (Similar real part and larger imaginary part)
+
+ρ0| ≤
+
+−
+
+|
+
+|
+
+β′
+
+|
+
+β0| ≤
+
+−
+
+1
+10 log Y
+
+and
+
+γ′
+
+≥
+
+γ0.
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+7
+
+(2) (Smaller real part)
+
+β′
+
+β0 −
+
+≤
+
+(log log
+
+|
+log Y
+
+γ0|
+
+)2
+
+.
+
+Deﬁnition 9. We call a zero ρ0 = β0 + iγ0 of ζ(s) ‘half-isolated’ if it is Y -half-isolated for
+some Y satisfying
+
+(log log
+
+γ0|
+γ0|
+|
+[T, 2T ] and Y
+The reader should bear in mind the situation when γ0 ∈
+which case any zero β +iγ within (log T )2 of ρ0 must satisfy either β
+β0−
+β
+or
+
+(log log T )/(10 log T ) and γ
+
+log
+|
+log log
+
+)3
+γ0|
+
+log Y
+
+≤
+
+≤
+
+≤
+
+|
+
+.
+
+γ0.
+
+β0| ≤
+
+|
+
+−
+
+≥
+
+T 1/ log log T , in
+(log log T )3/ log T
+
+≈
+
+Possible zeros
+vertically above ρ0
+
+log log T
+10 log T
+
+No nearby zeros
+to the right of ρ0
+
+Possible zeros
+to the left of ρ0
+
+(log log T )3
+log T
+
+ρ0
+
+(log T )2
+
+No nearby zeros
+below ρ0
+
+Possible zeros
+far away from ρ0
+
+Figure 1. Possible locations of zeros near a half-isolated zero
+
+We use H to denote the upper half-plane, and H the completed upper half-plane:
+
+H :=
+
+{
+
+x + iy : y > 0
+
+,
+
+}
+
+H := H
+
+R =
+
+{
+
+∪
+
+x + iy : y
+
+0
+
+.
+
+}
+
+≥
+
+Lemma 10 (Subharmonic inequality for subexponential analytic functions on H). Let f :
+C be an analytic function on H which is continuous on H and such that for all z
+H
+H
+→
+= 0 we have
+we have
+
+1/2)). Then for every z = x + iy
+
+H with f (z)
+
+exp(O(
+
+f (z)
+
+∈
+
+z
+
+|
+
+| ≤
+
+|
+
+|
+
+f (z)
+
+log
+
+|
+
+| ≤
+
+y
+π
+
+∞
+
+log
+
+Z
+
+−∞
+
+(t
+
+−
+
+∈
+f (t)
+x)2 + y2 dt.
+|
+|
+
+6
+(cid:17)
+
+< 1, continuous on
+(0, 1) we have
+
+|
+∈
+
+s :
+
+{
+
+s
+
+|
+
+| ≤
+
+1, s
+
+= 1
+
+}
+
+8
+
+JAMES MAYNARD AND KYLE PRATT
+
+Proof. Let g be given by
+
+g(s) := f
+
+iy(1 + s)
+
++ x
+
+.
+
+−
+By our hypotheses on f we see g is analytic on
+and g(0)
+
+s
+s
+|
+= 0. Thus by Jensen’s formula, for any r
+
+(cid:16)
+
+1
+
+Since
+
+f (s)
+
+|
+
+| ≤
+
+exp(O(
+
+s
+
+|
+
+|
+
+log
+
+g(0)
+
+1
+2π
+|
+1/2)) we have that
+
+| ≤
+
+2π
+
+0
+
+Z
+
+g(s)
+
+log
+
+|
+
+| ≪x,y
+
+log
+
+|
+
+g(reiθ)
+
+dθ.
+
+|
+
+1
+s
+
+1
+
+|
+
+−
+
+|
+
+1/2 .
+
+Therefore by the dominated convergence theorem we deduce that
+2π
+
+2π
+
+with this integral converging absolutely. Thus we ﬁnd
+
+lim
+1−
+r
+→
+
+0
+Z
+
+g(reiθ)
+
+log
+
+|
+
+dθ =
+
+|
+
+log
+
+|
+
+g(eiθ)
+
+dθ,
+
+|
+
+0
+Z
+
+log
+
+|
+
+f (x + iy)
+
+= log
+
+g(0)
+
+|
+
+| ≤
+
+|
+
+1
+2π
+
+2π
+
+g(eiθ)
+
+log
+
+|
+
+dθ =
+
+|
+
+y
+π
+
+0
+Z
+
+where in the last equality we made the change of variables
+
+log
+
+f (t)
+x)2 + y2 dt,
+|
+|
+
+∞
+
+Z
+
+−∞
+
+(t
+
+−
+
+t = iy(1 + eiθ)/(1
+
+eiθ) + x = x
+
+−
+
+y cot(θ/2).
+
+−
+
+(cid:3)
+
+Lemma 11 (Reﬁned power sum estimate). Let A, B > 0 with B suﬃciently large, and
+z1, . . . , zR and c1, . . . , cR be complex numbers, such that
+
+0 for all 1
+
+(1) z1 = 0 and c1 = 1
+(2) Im(zr)
+Re(zr)
+(3)
+|
+(4) If
+(5) B
+
+≥
+| ≤
+≤
+(log B)2/A, then
+Im(zr)
+| ≤
+|
+R
+cr|
+.
+r=1 |
+≥
+Then there is a real t
+
+r
+≤
+1
+10A for all 1
+
+R
+≤
+r
+≤
+
+[A, 2A] such that
+
+P
+
+∈
+
+R.
+arg(cr)
+
+|
+
+| ≤
+
+1/10.
+
+R
+
+cr exp(tzr)
+
+B−
+
+99.
+
+≥
+
+r=1
+(cid:12)
+X
+(cid:12)
+(cid:12)
+
+exp(itθr)
+
+R−
+
+99.
+
+≫
+
+t
+∈
+
+sup
+[A,2A]
+r=1
+(cid:12)
+X
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Remark 12. The reader should have in mind the case when all the zr = iθr are purely
+imaginary, when cr = 1 for all r and B = R > A. In this case Lemma 11 gives
+R
+
+Standard Tur´an power sum methods (see, for example [19, Chapter 5, Theorem 1]) would
+show that there is an integer t
+cR) for some
+constant c > 0. In this case we obtain an exponential improvement in the lower bound and
+a tighter bound on t by exploiting positivity of the coeﬃcients and the fact that we consider
+t real. Other variants of Tur´an’s method do exploit positivity of the coeﬃcients (see [19,
+Chapter 5, §6]), but we are not aware of any results which allow us to restrict the range of
+t to a short interval, which is vital for our applications.
+
+[A, A + R] such that the sum is at least exp(
+
+−
+
+∈
+
+6
+6
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+9
+
+Remark 13. Several of the conditions in Lemma 11 which appear artiﬁcial at ﬁrst sight are
+in fact necessary in some form.
+
+(1) The relaxation to real values of t is important. If zr = 2πi(r
+R, then the sum vanishes for all integers t
+1/10 if
+
+(2) The positivity condition that
+
+all r
+
+arg(cr)
+
+≤
+
+(0, R).
+∈
+zr| ≤
+|
+
+then by choosing zr = iθr and cr such that
+
+|
+
+| ≤
+
+we allow cr ∈ {−
+
+1, 1
+
+1)/R and cr = 1 for
+
+−
+
+(log B)2/A is important. If
+
+}
+2k
+
+r=1
+X
+
+cr exp(itθr) =
+
+1
+
+e
+
+−
+
+t
+20A2
+
+k
+
+,
+
+we see that the sum has size
+
+log A for all t
+(3) The discreteness condition that c1 = 1 and Im(zr)
+
+(cid:17)(cid:17)
+[A, 2A].
+Im(z1) is important. If we choose
+a smooth non-negative function f supported on [0, 1], cr = f (r/R) and zr = πir/(2A),
+then we see that by Poisson summation
+
+(2k)−
+
+∈
+≥
+
+≤
+
+(cid:16)
+
+(cid:16)
+
+R
+
+cr exp(tzr) =
+
+f
+
+r
+R
+
+e
+
+rt
+4A
+
+= R
+
+R
+
+ℓ
+
+t
+4A
+
+−
+
+ˆf
+(cid:16)
+
+.
+
+(cid:17)(cid:17)
+
+Z
+Xr
+∈
+
+r=1
+(cid:17)
+X
+t/(4A) is always at least 1/4 away from any integer for t
+Since
+has rapid decay since f is smooth, we see that the sum is Oj(R−
+
+[A, 2A], and ˆf (ξ)
+Z>0.
+(4) There are choices of c1, . . . , cR and z1, . . . , zR satisfying the hypotheses of Lemma 11
+[A, 2A]. Consider ﬁrst
+
+such that the sum is genuinely polynomially small for all t
+
+∈
+j) for every j
+
+−
+
+∈
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+(cid:16)
+
+Z
+Xℓ
+∈
+
+ei 4πt
+
+3A + 3ei 2πt
+
+3A + 4 + 3e−
+
+i 2πt
+3A + e−
+
+i 4πt
+3A =
+
+ei πt
+
+3A + e−
+
+i πt
+3A
+
+4
+
+[A, 2A] this is of the form u4
+
+1, and hence takes
+
+1/4, 0]. Thus if we take R = 12k and choose cr = 1, zr = iθr such that
+
+|
+− |
+u2 for some real
+
+|
+
+u
+
+|
+
+| ≤
+
+−
+
+∈
+ei πt
+
+3A + e−
+
+i πt
+3A
+
+2.
+
+|
+
+For t
+values in [
+
+∈
+
+−
+
+R
+
+exp(itθr) =
+
+3A + 3ei 2πt
+
+3A + 4 + 3e−
+
+r=1
+X
+we see that the sum is
+example was shown to us by Jean Bourgain.
+
+k = R−
+
+≤
+
+ei 4πt
+(cid:16)
+4−
+
+i 2πt
+3A + e−
+
+i 4πt
+3A
+
+k
+
+,
+
+(cid:17)
+
+log 4/ log 12 = R−
+
+0.55... for all t
+
+[A, 2A]. This
+
+∈
+
+Remark 14. A version of Lemma 11 was independently shown by Jean Bourgain (private
+communication to the ﬁrst author), with essentially the same proof. Will Sawin [21] also
+independently proved a version of Lemma 11, again with fundamentally the same proof. It
+seems plausible a version of this lemma has existed in the literature for some time; Terence
+Tao pointed out to us that this can be viewed as a consequence of a quantiﬁed version of
+the F. and M. Riesz Theorem.
+
+Proof of Lemma 11. Let f : C
+
+→
+
+C be deﬁned by
+
+R
+
+f (s) :=
+
+creszr .
+
+Assume for a contradiction that
+
+[A, 2A].
+|
+Let zr = xr + iyr. We wish to apply Lemma 10, but if xr 6
+
+= 0 for some r in the sum
+then f can have exponential growth, so we ﬁrst take a Taylor series approximation. Since
+
+f (t)
+
+B−
+
+| ≤
+
+∈
+
+r=1
+X
+99 for all t
+
+10
+
+xr| ≤
+
+|
+
+where
+
+JAMES MAYNARD AND KYLE PRATT
+
+1/(10A), we see that uniformly for
+
+s
+
+2A
+
+| ≤
+
+|
+sjxj
+r
+j!
+
+esxr =
+
+J
+
+j=0
+X
+
++ O(B−
+
+2 log log B),
+
+We therefore deﬁne
+
+f : C
+
+C by
+
+→
+
+J :=
+
+3 log B
+⌊
+
+.
+⌋
+
+R
+
+J
+
+e
+
+f (s) :=
+
+creisyr
+
+sjxj
+r
+j!
+
+.
+
+r=1
+X
+H with
+
+j=0
+X
+
+s
+
+2A
+
+B, we have that for s
+
+e
+
+Since
+
+cr| ≤
+
+r |
+
+(5)
+
+P
+
+Since we sum over a ﬁnite set,
+s
+
+H, so
+
+∈
+(6)
+on H. In particular, we may apply Lemma 10 to
+
+f (s)
+
+s
+
+|
+
+|
+
+J
+
+|
+
+∈
+
+log log B).
+
+| ≤
+f (s) = f (s) + O(B−
+f is analytic on C. Since yr ≥
+e
+e
+≪A,B 1 +
+
+≪A,B exp(
+
+s
+
+|
+
+1/2)
+
+|
+f and ﬁnd
+
+e
+
+0 for all r, Re(isyr)
+
+0 for
+
+≤
+
+(7)
+
+f (iA)
+
+log
+
+|
+
+| ≤
+
+A
+π
+
+∞
+
+Z
+
+−∞
+
+|
+
+f (t)
+log
+t2 + A2 dt.
+e
+e
+
+|
+
+e
+We wish to obtain a contradiction by obtaining a lower bound for log
+bound for the integral. First we note that since B is large
+
+and an upper
+
+f (iA)
+
+|
+
+|
+
+e
+
+(8)
+
+f (iA) = f (iA) + O(B−
+
+200) =
+
+We see that if yr > (log B)2/(2A), then
+
+e
+
+R
+
+r=1
+X
+
+cr exp(
+
+Ayr) exp(iAxr) + O(B−
+
+−
+
+200).
+
+cr exp(
+
+Ayr) exp(iAxr)
+
+B exp(
+
+(log B)2/2)
+
+B−
+
+201.
+
+≪
+
+−
+
+≤
+
+−
+
+Therefore the contribution of r with yr > (log B)2/(2A) to (8) is negligible. By assumption
+1/(10A), we also
+of the lemma, if yr ≤
+have that
+
+(log B)2/(2A) then
+
+1/10. Since
+
+xr| ≤
+
+arg(cr)
+
+| ≤
+
+|
+
+|
+
+In particular, for all r such that yr ≤
+
+arg(exp(iAxr))
+
+|
+
+1
+10
+
+.
+
+| ≤
+
+(log B)2/(2A) we have
+
+Re(cr exp(
+
+Ayr) exp(iAxr))
+
+0.
+
+−
+
+≥
+
+Therefore, by taking real parts of (8) and separating the term z1 = 0 (which contributes 1)
+and dropping other terms with yr ≤
+(9)
+| ≥
+
+(log B)2/(2A) for a lower bound, we ﬁnd
+
+f (iA))
+
+O(B−
+
+f (iA)
+
+200).
+
+Re(
+
+≥
+
+−
+
+1
+
+|
+
+We now consider the integral on the right hand side of (7). By assumption, log
+e
+
+e
+
+99 log B for t
+
+[A, 2A]. Therefore by (5) log
+
+f (t)
+
+| ≤
+99 log B + O(1) on [A, 2A], and so
+
+|
+
+f (t)
+
+−
+
+(10)
+
+∈
+
+A
+π
+
+2A
+
+A
+
+Z
+
+|
+
+f (t)
+log
+t2 + A2 dt
+e
+
+|
+
+≤
+
+|
+
+| ≤ −
+99 log B
+5π
+
+e
+−
+
++ O(1).
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+11
+
+1/(10A) for all r, on the real axis we have the bound
+
+Since
+
+xr| ≤
+
+|
+
+(11)
+
+B + B sup
+J
+
+1
+
+j
+
+≤
+
+≤
+
+x
+|
+|
+jA
+
+j
+
+(cid:17)
+
+(cid:16)
+
+≪
+
+f (x)
+
+≪
+
+e
+
+These bounds give
+
+(12)
+
+(13)
+
+A
+π
+
+A
+π
+
+Z|
+
+A(log B)2
+[A,2A]
+
+t
+|≤
+t /
+∈
+
+>A(log B)2
+
+Z|
+
+t
+|
+
+|
+
+|
+
+f (t)
+log
+t2 + A2 dt
+e
+f (t)
+log
+t2 + A2 dt
+e
+
+|
+
+|
+
+Putting together (7), (10), (12) and (13) gives
+
+x
+|
+|
+A
+(cid:18)
+3 log B
+
+(cid:19)
+,
+
+B exp
+
+x
+|
+|
+A
+
+(cid:18)
+
+
+
+
+
+
+(cid:19)
+
+,
+
+x
+
+| ≤
+
+|
+
+A(log B)2,
+
+> A(log B)2.
+
+x
+|
+
+|
+
+log B + O(log log B),
+
+O(1).
+
+≤
+
+≤
+
+f (iA)
+
+log
+
+|
+
+| ≤
+
+A
+π
+
+∞
+
+Z
+
+−∞
+
+|
+
+|
+
+f (t)
+log
+t2 + A2 dt
+e
+f (iA)
+
+log B.
+
+≤ −
+
+But this contradicts our lower bound (9) that
+some t
+
+[A, 2A] such that
+
+B−
+
+e
+f (t)
+
+∈
+
+|
+
+| ≥
+
+1
+99, giving the result.
+e
+
+| ≥
+
+|
+
+−
+
+O(B−
+
+100). Thus there must be
+(cid:3)
+
+Lemma 15 (Large values of the zero sum). Let T and Y be suﬃciently large and satisfy
+
+100 log T.
+
+≤
+W (s)
+
+W ′(s)
+
+,
+
+|
+
+|
+
+| ≪
+
+min(1,
+
+s
+
+|
+
+|
+
+2) for Re(s)
+
+−
+
+∈
+
+[T, 2T ]. Deﬁne
+
+γ0 + (log T )2,
+
+≤
+
+β
+
+|
+
+β0| ≤
+
+−
+
+1
+10 log Y
+
+,
+
+o
+
+≤
+
+→
+
+log Y
+C be analytic with W (0) = 1 and
+
+(log log T )3
+
+Let W : C
+1, 1].
+[
+−
+Let ρ0 = β0 + iγ0 be a zero of ζ(s) with γ0 ∈
+γ
+ρ = β + iγ : ζ(ρ) = 0, γ0 ≤
+n
+:= [Y, Y 2]
+
+(ρ0) :=
+
+1 +
+
+S≈
+
+: j
+
+j
+
+|
+
+1
+(log T )150
+
+V
+
+Then there is a Z
+
+∈ V
+
+∩
+
+n(cid:16)
+such that
+
+∈
+
+Z
+
+.
+
+o
+
+(cid:17)
+
+W (ρ
+
+≈(ρ0)
+
+Xρ
+(cid:12)
+∈S
+(cid:12)
+C be deﬁned by
+(cid:12)
+
+ρ0)Z (ρ
+−
+
+ρ0)
+
+−
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Proof. Let f : R
+
+→
+
+1
+(log T )100 .
+
+≥
+
+f (t) :=
+
+≈(ρ0)
+
+Xρ
+∈S
+
+W (ρ
+
+−
+
+ρ0)et(ρ
+−
+
+ρ0).
+
+Let the elements of
+and A := log Y . Then certainly z1 = 0, Im(zr)
+(ρ0). By the decay of W , we see that
+of
+
+(ρ0) be ρ1, . . . , ρR, with ρ1 = ρ0, and let zr := ρr −
+≥
+
+Re(zr)
+
+0 and
+
+| ≤
+
+S≈
+
+|
+
+ρ0)
+ρ0, cr := W (ρr −
+1/(10A) by the deﬁnition
+
+S≈
+
+W (ρ
+
+|
+
+−
+
+ρ0)
+
+| ≪
+
+≈(ρ0)
+
+Xρ
+∈S
+
+min
+
+1,
+
+Xρ: ζ(ρ)=0
+
+(cid:16)
+
+1
+ρ0|
+
+−
+
+2
+
+ρ
+
+|
+
+≪
+
+(cid:17)
+
+log T.
+
+12
+
+JAMES MAYNARD AND KYLE PRATT
+
+Therefore we can choose B
+(log log T )3, we see that if
+s
+
+≍
+| ≪
+
+|
+
+log T such that
+(log B)2/A
+
+R
+cr| ≤
+r=1 |
+1/ log log T then
+
+B. Finally, since log Y
+
+≥
+
+W (s) = 1 + O
+
+≪
+
+P
+1
+log log T
+
+,
+
+(cid:17)
+
+(cid:16)
+arg(cr)
+
+and so for T suﬃciently large we have
+Im(zr)
+Therefore all the conditions of Lemma 11 are satisﬁed, and so there is a t0 ∈
+such that
+
+1/10 whenever
+
+| ≤
+
+|
+
+|
+
+(log B)2/A.
+[log Y, 2 log Y ]
+
+| ≤
+
+By deﬁnition, if ρ
+1 for all ρ
+
+∈ S≈
+(ρ0) and
+
+(ρ0) then
+
+∈ S≈
+
+f (t0)
+
+|
+ρ0| ≤
+
+−
+
+ρ
+
+|
+
+1
+(log T )99 .
+
+| ≫
+(log T )2. Therefore, if t
+
+3 log Y then
+
+et(ρ
+−
+
+ρ0)
+
+|
+
+| ≪
+
+≤
+
+f ′(t)
+
+|
+
+| ≪
+
+W (ρ
+
+ρ0)(ρ
+
+ρ0)et(ρ
+−
+
+ρ0)
+
+−
+
+−
+
+≪
+
+(log T )2
+
+min
+
+1,
+
+Xρ
+∈S
+We recall that
+whenever
+such that
+
+t
+−
+log Z
+
+≈(ρ0)(cid:12)
+(cid:12)
+(cid:12)
+f (t0)
+|
+t0| ≤
+−
+
+|
+|
+
+(log T )−
+
+| ≫
+(log T )−
+t0| ≤
+
+(log T )−
+
+|
+99. By our derivative bound we see that
+
+(cid:12)
+(cid:12)
+(cid:12)
+110. Since log(1 + (log T )−
+
+150)
+120. This gives the result.
+
+(log T )−
+
+≤
+
+Xρ:ζ(ρ)=0
+
+(cid:18)
+
+(log T )3.
+
+≪
+
+2
+
+(cid:19)
+
+ρ
+
+1
+ρ0|
+f (t)
+
+−
+
+(log T )−
+
+100
+
+|
+
+| ≥
+150, there is a Z
+
+∈ V
+(cid:3)
+
+Proposition 16 (Short zero detecting polynomial for Y -half-isolated zeros). Let T be
+[exp((log log T )3), T 2] and
+suﬃciently large. Then there is a set
+=
+(log T )152 such that the following holds.
+#
+
+U ⊆
+U ≤
+Let w0 be the smooth function of Lemma 43. Let (log log T )3
+Y -half-isolated zero ρ0 = β0 + iγ0 with γ0 ∈
+that
+
+log Y
+[T, 2T ], there is a choice of U
+
+log T . For any
+[Y, Y 2] such
+
+≤
+∈ U ∩
+
+(T ) with
+
+≤
+
+U
+
+U
+
+Proof. We choose the set
+
+Λ(n)
+nρ0
+
+w0
+
+n
+U
+
+(cid:16)
+
+≫
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+n
+(cid:12)
+X
+(cid:12)
+to be
+(cid:12)
+
+U
+
+(log T )−
+
+100.
+
+:= [exp((log log T )3), T 2]
+
+∩
+
+U
+
+1 +
+
+1
+(log T )150
+
+j
+
+: j
+
+∈
+
+n(cid:16)
+
+(cid:17)
+
+Z
+
+.
+
+o
+
+(log T )152, so it remains to show that for every Y -half-isolated
+
+Then it is clear that #
+zero ρ0 there is a suitable Dirichlet polynomial in terms of some U
+.
+∈ U
+[T, 2T ] and β0 ≥
+Let ρ0 = β0 + iγ0 be a Y -half-isolated zero of ζ(s) with γ0 ∈
+(log T )2 satisfy either β
+β0 −
+ρ0| ≤
+≤
+
+1/(10 log Y ). Given such a Y , we note that the set
+
+1/2. Then
+(log log T )2/ log Y or
+deﬁned in
+
+U ≤
+
+β
+
+V
+
+γ0 and
+
+all zeros ρ = β + iγ with
+γ
+β0| ≤
+|
+Lemma 15 is a subset of
+
+≥
+−
+We consider the function S : R
+
+−
+
+U
+
+ρ
+
+|
+
+.
+
+C, given by
+
+→
+
+S(U) :=
+
+Λ(n)
+nρ0
+
+w0
+
+n
+U
+
+(cid:16)
+
+(cid:17)
+
+n
+X
+
+for U
+
+∈
+
+[Y, Y 2]. We rewrite w0 using Mellin inversion, giving
+
+S(U) =
+
+1
+2πi
+
+Z(1)
+
+U sW0(s)
+
+ζ ′
+ζ
+
+−
+
+h
+
+(ρ0 + s)
+
+ds.
+
+i
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+13
+
+We shift the line of integration to Re(s) =
+at s = 1
+−
+follows that
+
+ρ0 and s = ρ
+
+−
+
+2, picking up contributions from simple poles
+ρ0, where ρ ranges over non-trivial zeros of the zeta function. It
+
+−
+
+U ρ
+−
+
+ρ0W0(ρ
+
+ρ0) +
+
+−
+
+1
+2πi
+
+U sW0(s)
+
+ζ ′
+ζ
+
+−
+
+h
+
+(ρ0 + s)
+
+ds.
+
+i
+
+2)
+
+Z(
+−
+
+T 4, by the rapid decay of W0(s) (see Lemma 43) we have
+
+S(U) = U 1
+−
+
+ρ0W0(1
+
+ρ0)
+
+−
+
+−
+
+ρ
+X
+
+≤
+
+Y 2
+
+ζ ′
+ζ
+
+Since Im(ρ0)
+ρ0W0(1
+U 1
+−
+
+−
+
+T and U
+T −
+
+≥
+ρ0)
+
+≤
+
+≪
+
+2. Similarly, inside the integral W0(s)
+
+s
+
+−
+
+|
+
+≪ |
+
+2 and
+
+so (since U
+
+≥
+
+(cid:12)
+(cid:12)
+log T ) the integral contributes O(U −
+(cid:12)
+
+(z + s)
+
+log(T +
+
+s
+
+),
+
+≪
+
+(cid:12)
+(cid:12)
+(cid:12)
+ρ0W0(ρ
+
+|
+
+|
+1) and we have
+
+ρ0) + O(U −
+
+1).
+
+−
+
+S(U) =
+
+−
+
+ρ
+X
+
+U ρ
+−
+
+We wish to simplify the sum over zeros ρ. We ﬁrst note that if
+W0(ρ
+
+2 by Lemma 43, and so these terms are negligible, giving
+
+ρ0|
+
+ρ0)
+
+T −
+
+1/100
+
+−
+
+ρ
+
+ρ
+
+−
+
+|
+
+> (log T )2/2 then
+
+−
+
+≪
+S(U) =
+
+ρ0|
+
+|
+
+−
+
+U ρ
+−
+
+ρ0W0(ρ
+
+−
+
+ρ0) + O(exp(
+
+(log log T )10)).
+
+−
+
+−
+
+ρ
+X
+(log T )2/2
+|≤
+
+ρ0
+
+ρ
+
+−
+
+|
+
+We now separate the contribution from zeros ρ such that Re(ρ)
+Y , we see that these terms contribute
+Since U
+
+≥
+
+Re(ρ0)
+
+≤
+
+(log log T )2/(2 log Y ).
+
+−
+
+(log log T )2/2
+
+exp
+
+≪
+
+−
+
+(cid:16)
+
+Thus we have (noting that U −
+
+1
+
+≪
+
+ρ
+(cid:17) X
+(log T )2/2
+ρ0
+−
+
+ρ
+
+|≤
+(log T )−
+
+|
+Y −
+
+1
+
+200)
+
+≪
+
+W0(ρ
+
+|
+
+−
+
+ρ0)
+
+| ≪
+
+(log T )−
+
+200.
+
+S(U) =
+
+−
+
+Re(ρ)
+
+≥
+
+ρ
+ρ0
+−
+Re(ρ0)
+
+|
+
+ρ
+X
+(log T )2/2
+|≤
+(log log T )2/(2 log Y )
+−
+
+U ρ
+−
+
+ρ0W0(ρ
+
+−
+
+ρ0) + O
+
+(log T )−
+
+200
+
+.
+
+(cid:16)
+
+(cid:17)
+
+We now use the assumption that ρ0 is a Y -half-isolated zero to see that all the zeros ρ = β+iγ
+appearing in the sum must satisfy
+
+β0| ≤
+Reintroducing some negligible terms if necessary, we then see that
+
+and
+
+γ0.
+
+≥
+
+−
+
+β
+
+γ
+
+|
+
+,
+
+1
+10 log Y
+
+S(U) =
+
+(log 2)
+
+−
+
+|
+
+Xρ=β+iγ
+γ0+(log T )2
+≤
+1/(10 log Y )
+|≤
+
+γ0
+β
+
+γ
+≤
+β0
+−
+
+U ρ
+−
+
+ρ0 W0(ρ
+
+−
+log 2
+
+ρ0)
+
++ O
+
+1
+(log T )200
+
+.
+
+(cid:17)
+
+(cid:16)
+
+Lemma 43 gives W0(0) = log 2, so Lemma 15 shows that there is a choice of U
+that S(U)
+
+, this gives the result.
+
+100. Since
+
+(log T )−
+
+∈ V
+
+such
+(cid:3)
+
+≫
+
+V ⊆ U
+
+Theorem 4 is a consequence of Proposition 16, since every half-isolated zero with ordinate
+
+in [T, 2T ] is Y -half-isolated for some Y
+
+[exp((log log T )3), T 2/ log log T ].
+
+∈
+
+14
+
+JAMES MAYNARD AND KYLE PRATT
+
+5. Zero-density estimates
+
+In this section we introduce the key results we need to prove Theorem 1. We begin with
+some notation and deﬁnitions. The ﬁrst deﬁnition is the notion of Type I zeros in the theory
+of density estimates.
+
+Deﬁnition 17. Let ρ = β + iγ be a non-trivial zero of the zeta function with γ
+We say that ρ is ‘detected by a Dirichlet polynomial of length N’, if
+
+∈
+
+[T, 2T ].
+
+(14)
+
+where
+
+(15)
+
+(16)
+
+DN (ρ)
+
+|
+
+| ≥
+
+1
+3 log T
+
+,
+
+DN (s) :=
+
+N
+n
+X
+∼
+
+a(n) :=
+
+a(n)
+ns exp
+
+(cid:16)
+µ(d).
+
+n
+T 1/2
+
+−
+
+,
+
+(cid:17)
+
+≤
+Next, we need to deﬁne a cluster of zeros, as mentioned in the introduction.
+
+n
+Xd
+|
+2T 1/100
+
+d
+
+Deﬁnition 18. A set
+is a cluster if
+
+ρ1,
+
+{
+
+· · ·
+
+, ρr}
+
+of non-trivial zeros of ζ(s) with imaginary parts in [T, 2T ]
+
+(1) The zeros lie on the same vertical line: There is a σ
+
+[0, 1] such that
+
+∈
+
+Re(ρj) = σ
+
+(1
+
+j
+
+r).
+
+≤
+
+≤
+
+(2) The imaginary parts are ordered and increase by at most (log T )3: We have
+
+Im(ρj) < Im(ρj+1) < Im(ρj) + (log T )3
+
+(1
+
+≤
+
+j < r).
+
+We remark that the zeros in a cluster are taken without multiplicity. Indeed, the multi-
+log T
+
+plicity of zeros has no import in our arguments, since the bound N(T + 1)
+means multiplicities only contribute harmless logarithmic factors.
+
+N(T )
+
+≪
+
+−
+
+Furthermore:
+
+•
+
+•
+
+We say that two clusters
+Re(t1)
+We say that
+
+= Re(t2) for all t1 ∈ C1 and t2 ∈ C2.
+
+C2 are separated if
+
+is a maximal cluster if there is no cluster
+
+C1,
+
+Im(t1)
+
+|
+
+−
+
+Im(t2)
+
+| ≥
+
+(log T )3 or if
+
+C
+
+C
+is separated from any cluster which is not a subset of
+every non-trivial zero with imaginary part in [T, 2T ] lies in some
+
+C
+
+C
+
+′ strictly containing
+
+.
+
+We note that a maximal cluster
+
+. Under Hypothesis
+
+C
+maximal cluster.
+
+F
+
+It will be proﬁtable to consider separately clusters of diﬀerent sizes, and according to the
+
+length of the Dirichlet polynomial which detects many elements of the cluster.
+
+Deﬁnition 19. Given a parameter H
+number of zeros ρ = β + iγ such that:
+
+≥
+
+1 and σ
+
+∈
+
+[ 1
+2, 1], we deﬁne RN,H (σ) to be the
+
+σ.
+[T, 2T ].
+
+(1) β
+(2) γ
+(3) There is a maximal cluster
+
+≥
+∈
+
+for every ρ′
+polynomial of length N.
+
+∈ C
+
+C
+such that at least H(log T )−
+
+|C| ∈
+
+4 zeros ρ′
+
+containing ρ with
+
+[H, 2H] and Im(ρ′)
+
+[T, 2T ]
+are detected by a Dirichlet
+
+∈
+
+∈ C
+
+6
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+15
+
+(4) There is a half-isolated zero ρ0 = β0 + iγ0 such that β0 ≥
+|
+
+γ0| ≤ |C|
+
+(log T )5
+
+−
+
+γ
+
+σ and
+
+for every σ + iγ
+
+.
+
+∈ C
+
+With the above notation introduced, we are now in a position to state the main proposition
+
+which reduces bounding N(σ, T ) to bounding RN,H (σ) for various values of N and H.
+
+Proposition 20. Assume Hypothesis
+zeros with real part equal to σ. Then there is an absolute constant c
+
+. Let σ
+
+F
+
+∈
+
+[1/2, 1] be such that there are non-trivial
+
+> 0 such that
+
+F
+
+N(σ, 2T )
+
+N(σ, T )
+
+−
+
+T 2(1
+−
+≪
++ (log T )O(1)
+
+σ)(log T )O(1) + N(σ + c
+
+T 1/100
+
+sup
+N
+≤
+1
+
+≤
+H
+
+≤
+
+≪
+
+T
+
+T 1/2(log T )2
+
+, 3T )(log T )O(1)
+
+F
+RN,H(σ).
+
+Proposition 20 is the key place in the argument where we make use of the combinatorial
+. With this proposition established, our task is to obtain
+
+structure imposed by Hypothesis
+suitable bounds on RN,H (σ).
+
+F
+
+Proposition 21 (Half-isolated zeros with clustering). Assume Hypothesis
+[ 1
+2, 1]. Then
+
+F
+
+, and let σ
+
+∈
+
+RN,H(σ)
+
+≪
+
+T 2(1
+−
+
+σ) exp((log log T )O(1)).
+
+Proof of Theorem 1 assuming Propositions 20 and 21. The two propositions together imply
+
+N(σ, 2T )
+
+N(σ, T )
+
+−
+
+≪
+
+T 2(1
+−
+
+σ) exp((log log T )O(1)) + N(σ + c
+
+, 3T )(log T )O(1).
+
+F
+
+Using this with T /2, T /4, . . . in place of T , we ﬁnd
+
+(17)
+
+N(σ, 2T )
+
+≪
+
+T 2(1
+−
+
+σ) exp((log log T )O(1)) + N(σ + c
+
+, 3T )(log T )O(1).
+
+F
+
+By repeated application of (17) we ﬁnally obtain
+
+N(σ, 2T )
+
+≪
+
+T 2(1
+−
+
+σ) exp((log log T )O(1)),
+
+noting that, under Hypothesis
+
+F
+
+, we apply (17) at most O(1) times.
+
+(cid:3)
+
+Proof of Corollary 2 and Corollary 3. Corollaries 2 and 3 both follow from Theorem 1 via
+the explicit formula by standard techniques. Using the bound of Theorem 1 in the argument
+of [17, Theorem 10.5] or [8, Section 7.1] gives Corollary 2 immediately. For Corollary 3 one
+xo(1) in handling possible zeros very close to the line
+needs to be slightly careful when y
+σ)3/2 (log T )17 (see [18, Corollary 12.5])
+T 167(1
+σ = 1. By using the sharper bound N(σ, T )
+−
+6 in the standard argument as given in
+6 and Theorem 1 when σ
+when σ
+10−
+[8, Section 9.1], we obtain Corollary 3.
+(cid:3)
+
+≪
+1
+≤
+
+10−
+
+−
+
+≤
+
+≥
+
+−
+
+1
+
+6. Proof of Proposition 20–Combinatorics of zeros
+
+We review the classical set-up for detecting zeros of the Riemann zeta function. Since most
+of the technical details are somewhat standard but slightly diﬀerent from other treatments,
+we have included full proofs in the appendix.
+
+Deﬁnition 22 (Type I/II zeros). Let ρ = β + iγ be a non-trivial zero with γ
+
+[T, 2T ].
+
+∈
+
+16
+
+JAMES MAYNARD AND KYLE PRATT
+
+(1) We say ρ is a ‘Type I zero’ if
+
+(18)
+
+for some N = 2j
+
+DN (ρ)
+
+1
+3 log T
+[T 1/100, T 1/2(log T )2], where DN (s) is given by (15).
+
+| ≥
+
+|
+
+(2) We say ρ is a ‘Type II zero’ if
+
+∈
+
+(19)
+
+where
+
+1
+2πi
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+β+1/2)
+
+Z(
+−
+
+T s/2Γ(s)M(ρ + s)ζ(ρ + s)ds
+
+M(s) :=
+
+µ(m)
+ms .
+
+1
+3
+
+,
+
+≥
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xm
+≤
+Standard zero-detecting arguments (see [18, Chapter 12] or Appendix C) show the follow-
+
+2T 1/100
+
+ing.
+
+Lemma 23. Let T be suﬃcently large. Then every non-trivial zero ρ = β+iγ with γ
+is either a Type I zero or a Type II zero (or both).
+
+∈
+
+[T, 2T ]
+
+The strategy is to show that these conditions can only hold infrequently. Let RI(σ, T )
+σ and γ
+[T, 2T ], and let RII(σ, T ) denote the
+[T, 2T ]. The Type II zeros cause few problems.
+
+denote the number of Type I zeros with β
+σ and γ
+number of Type II zeros with β
+
+∈
+
+≥
+
+≥
+∈
+
+Lemma 24. We have
+
+Proof. See Appendix C.
+
+RII(σ, T )
+
+≪
+
+T 2(1
+−
+
+σ)(log T )O(1).
+
+(cid:3)
+
+We now turn our attention to bounding the number RI(σ, T ) of Type I zeros. Under
+the zeros of ζ(s) lie on ﬁnitely many vertical lines, say Re(s) = σ1, σ2, . . . , σk.
+[T, 2T ] on the line into maximal
+
+Hypothesis
+For each vertical line, we put the zeros ρ = β + iγ with γ
+clusters (recall Deﬁnition 18).
+
+F
+
+∈
+
+{
+
+ρ1}
+
+We initially take the ﬁrst cluster
+
+C1 =
+to consist of the zero with smallest imaginary
+C1 any zeros on the vertical line which are within (log T )3
+part, and then repeatedly add to
+C1 are at least (log T )3
+of a zero already included in this cluster until all zeros not included in
+away from all elements on
+to
+C2 =
+consist of the zero of smallest imaginary part not in
+C1, and then repeatedly adding any zero
+within (log T )3 of an element of
+C2. Repeating this procedure all zeros on each vertical line
+are put into a ﬁnite number of (log T )3-separated maximal clusters. We do this separately
+for all vertical lines.
+
+C1. We then repeat the process by initially taking
+
+ρ2}
+
+{
+
+(Equivalently, we can deﬁne a relation by saying ρ1 ∼
+Im(ρ2)
+equivalence classes are then our maximal clusters of zeros.)
+
+−
+(log T )3, and then extend this to an equivalence relation by transitivity. The
+
+ρ2 if Re(ρ1) = Re(ρ2) and
+
+Im(ρ1)
+
+| ≤
+
+|
+
+We now separately treat clusters according to the following deﬁnition.
+
+be a maximal cluster of zeros on the line Re(s) = σ which contains a
+
+Deﬁnition 25. Let
+zero having imaginary part in [T, 2T ].
+(Mainly Type II zeros) We say
+Type II zeros.
+
+C
+
+•
+
+is a ‘Type A cluster’ if at least
+
+/2 zeros in
+
+are
+
+C
+
+|C|
+
+C
+
+•
+
+•
+
+•
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+(Zeros past the endpoints) We say
+are Type I zeros, and there is some ρ = β + iγ
+(Many nearby zeros to the right) We say
+or Type B and
+
+C
+
+C
+
+is a ‘Type B cluster’ if at least
+
+/2 zeros in
+
+such that γ < T or γ > 2T .
+
+|C|
+
+∈ C
+
+is a ‘Type C cluster’ if it is not Type A
+
+17
+
+C
+
+is a ‘Type D cluster’
+
+ρ : Re(ρ) > σ, min
+∈C |
+(cid:12)
+n
+(cid:12)
+(Mainly Type I zeros and few nearby zeros to the right) We say
+(cid:12)
+if at least
+
+are Type I zeros, if
+
+/2 zeros in
+
+o(cid:12)
+(cid:12)
+(cid:12)
+
+| ≤
+
+|C|
+
+≥
+
+−
+
+ρ′
+
+ρ
+
+ρ′
+
+(log T )3
+
+C
+
+is not Type B, and
+
+(log T )100 .
+|C|
+
+C
+
+C
+(log T )3
+
+ρ : Re(ρ) > σ, min
+∈C |
+
+ρ′
+
+ρ
+
+−
+
+ρ′
+
+| ≤
+
+|C|
+
+<
+
+(log T )100 .
+|C|
+
+|C|
+
+(cid:12)
+n
+(cid:12)
+(cid:12)
+
+It is easy to see that every maximal cluster is at least one of Type A, B, C, or D. Type
+
+A, Type B, and Type C clusters will be relatively straightforward to handle.
+
+o(cid:12)
+(cid:12)
+(cid:12)
+
+Lemma 26. Let
+
+C1, . . . ,
+
+CJ be the Type A clusters in the region Re(s)
+
+≥
+
+σ. Then
+
+J
+
+j=1
+X
+
+ρ
+∈Cj
+X
+Im(ρ)
+∈
+
+[T,2T ]
+
+T 2(1
+−
+
+σ)(log T )O(1).
+
+1
+
+≪
+
+Proof. Since the
+that
+
+Cj are disjoint, and at least half of the elements are Type II zeros, we have
+
+J
+
+j=1
+X
+
+ρ
+∈Cj
+X
+Im(ρ)
+∈
+
+[T,2T ]
+
+2RII(σ, T ).
+
+1
+
+≤
+
+Lemma 24 now gives the result.
+
+(cid:3)
+
+Before continuing on to Type B clusters we pause to state several auxiliary results, which
+will be used here and throughout the paper. The ﬁrst result allows us to pass from discrete
+averages of Dirichlet polynomials to continuous averages.
+
+Lemma 27. Let N be a large, positive real number. Let ℓ be a positive integer, and let an
+N A. Then for
+be a sequence of complex numbers supported on n
+t
+
+R one has the bound
+
+N which satisﬁes
+
+an| ≤
+
+≤
+
+|
+
+∈
+
+it
+
+ann−
+
+≪A (log N)
+
+u
+
+Z|
+
+|≤
+
+(log N )2
+
+N
+Xn
+(cid:12)
+≤
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+N
+Xn
+(cid:12)
+≤
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Proof. This is a slight reformulation of [3, Lemma 4.48].
+
+ann−
+
+iu
+
+it
+
+−
+
+du + exp(
+
+(log N)1.1).
+
+−
+
+(cid:3)
+
+Next, we need a result which facilitates summing a Dirichlet polynomial over points with
+
+diﬀerent real parts.
+
+Lemma 28. Let z1 = σ1 + it1, . . . , zr = σr + itr be complex numbers with 1
+for all 1
+
+2 ≤
+r. Then for any ﬁnite sequence of complex numbers an we have
+
+k
+
+σ
+
+σk ≤
+
+1
+
+≤
+
+≤
+
+≤
+r
+
+an
+nσk+itk
+
+1/2
+
+r
+
+≤
+
+0
+Z
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xk=1  
+(cid:12)
+(cid:12)
+(cid:12)
+
+n
+X
+
+2an
+nσ+itk
+
++
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+n
+X
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+an
+nσ+itk
+
+log n
+nα
+
+dα.
+
+!
+(cid:12)
+(cid:12)
+(cid:12)
+
+n
+X
+
+Xk=1 (cid:12)
+(cid:12)
+(cid:12)
+
+18
+
+JAMES MAYNARD AND KYLE PRATT
+
+Proof. We have
+
+1
+nσk
+
+=
+
+1
+nσ −
+
+log n
+nσ
+
+so by the triangle inequality we derive
+
+σ
+
+σk−
+
+dα
+nα ,
+
+0
+Z
+
+Extending the integral by positivity and summing over k then gives the result.
+
+an
+nσk+itk (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+n
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+an
+nσ+itk (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ (cid:12)
+n
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+σ
+
+σk−
+
++
+
+0
+
+Z
+
+(cid:12)
+n
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+an
+nσ+itk
+
+dα.
+
+log n
+nα (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+s, we write ˜F (s) =
+
+Remark 29. Given a Dirichlet polynomial F (s) =
+for a Dirichlet polynomial that results after applying Lemma 28.
+log(3n)
+
+n f (n)n−
+
+f (n)
+
+P
+
+.
+
+In particular
+P
+
+|
+
+(cid:3)
+˜f (n)n−
+n
+˜f (n)
+
+s
+
+| ≪
+
+|
+
+|
+
+Finally, we need a result establishing a relationship between N, the length of a zero-
+
+detecting polynomial, and H, the number of elements in a cluster.
+
+be a maximal cluster with
+
+C
+[T /2, 3T ] for all ρ
+
+Lemma 30. Let
+Im(ρ)
+. Assume also that
+∈
+are detected by a Dirichlet polynomial of length N.
+H(log T )O(1).
+
+∈ C
+
+|C|
+
+= H
+
+1. Assume Re(ρ)
+
+≥
+H(log T )−
+
+2 + 1
+≥
+O(1) of the elements of
+If T is suﬃciently large, then N
+
+1
+
+log log T ,
+
+≥
+
+C
+≥
+
+Proof. Assume for contradiction that N
+
+H(log T )O(1). Since
+
+H(log T )−
+
+O(1) elements of
+
+are detected by a Dirichlet polynomial DN (s) of length N
+
+≤
+
+≥
+T 1/100, we see that
+
+C
+
+H
+
+(log T )O(1) ≪
+
+Xρ=β+it
+
+∈C
+
+≥
+2 .
+
+DN (β + it)
+|
+
+|
+
+We apply Lemma 28 with σ = 1
+
+log log T and then take a supremum in α to obtain
+
+2 + 1
+H
+
+DN (σ + it)
+
+Xρ=β+it
+
+∈C (cid:12)
+(cid:12)
+(cid:12) e
+
+2
+
+.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(log T )O(1) ≪
+
+By Lemma 27 we have
+
+H
+
+(log T )O(1) ≪
+
+T −
+
+1 + (log T )O(1)
+
+u
+
+Xρ=σ+it
+
+∈C Z|
+|≤
+H(log T )O(1)
+
+DN (σ + it + iu)
+
+2du
+
+|
+
+(log T )2 |
+
+e
+
+DN (σ + iT0 + iw)
+
+2dw,
+
+|
+
+T −
+
+1 + (log T )O(1)
+
+≪
+
+H(log T )O(1) |
+
+Z
+
+−
+
+1 term on the right-hand side may be deleted since H
+for some T0 ≍
+mean value theorem for Dirichlet polynomials [17, Theorem 9.1] we then obtain
+
+T . The T −
+
+e
+
+≥
+
+1. By the
+
+H
+
+(log T )O(1) ≪
+
+(log T )O(1)H
+
+XN/2<n
+≤
+
+2N
+
+τ (n)2
+n2σ ≪
+
+(log T )O(1)HN −
+
+(2σ
+
+−
+
+1)
+
+HT −
+
+(log log T )−3/2
+
+,
+
+≤
+
+and this is a contradiction for T suﬃciently large.
+
+(cid:3)
+
+Now we show that the number of zeros in Type B clusters is small.
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+Lemma 31. Let
+log log T , 1] then
+
+1
+
+C1, . . . ,
+
+CJ be the Type B clusters in the region Re(s)
+
+≥
+
+σ. If σ
+
+J
+
+19
+
+[ 1
+2 +
+
+∈
+
+T 2(1
+−
+
+σ)(log T )O(1).
+
+|Cj| ≪
+
+j=1
+X
+
+Proof. By the deﬁnition of a Type B cluster and Lemma 30 we see that the imaginary parts
+of elements of
+
+J
+
+j=1 Cj are contained in
+
+[T
+
+−
+Write R =
+such that
+length N. Let 1
+≤
+then Lemma 27 we have
+
+≫
+
+S
+
+≤
+
+k
+
+T 1/2(log T )O(1), T + T 1/2(log T )O(1)]
+
+S
+J
+j=1 |Cj|
+R/ log T of the elements of
+
+∪
+. By the pigeonhole principle there is some N
+J
+
+−
+
+[2T
+
+[T 1/100, T 1/2(log T )2]
+j=1 Cj are detected by a Dirichlet polynomial of
+N k+1. By Lemma 28 and
+
+T 1/2(log T )O(1)
+
+∈
+
+T 1/2(log T )O(1), 2T + T 1/2(log T )O(1)].
+
+100 be such that N k
+S
+
+≤
+
+≤
+
+and the mean-value theorem for Dirichlet polynomials [17, Theorem 9.1] yields
+
+(log T )O(1)
+
+R
+
+≪
+
+2
+
+ℓT +T 1/2(log T )O(1)
+
+T 1/2(log T )O(1)
+
+−
+
+|
+
+DN (σ + it)
+
+2kdt,
+
+|
+
+ℓT
+
+Xℓ=1 Z
+
+T 1/2(log T )O(1)N −
+
+k(2σ
+
+1)
+
+−
+
+T 1
+−
+
+≪
+
+2k+2 (log T )O(1).
+
+e
+σ+ 2σ−1
+
+T 1
+−
+
+σ+ 2σ−1
+
+2k+2 (log T )O(1)
+
+T 2(1
+−
+
+σ)(log T )O(1)
+
+≤
+
+R
+
+≪
+1 we deduce
+
+Since k
+
+≥
+
+for σ
+
+[ 1
+2, 5
+
+∈
+
+6]. Work of Huxley [14] gives the result when σ
+
+Lemma 32. Assume Hypothesis
+Then
+
+. Let
+
+F
+
+C1, . . . ,
+
+5
+6.
+
+(cid:3)
+CJ be the Type C clusters on Re(s) = σ.
+
+≥
+
+J
+
+|Cj| ≪
+
+(log T )105
+
+N(σ + c
+
+(cid:16)
+
+, 3T )
+
+F
+
+−
+
+N(σ + c
+
+F
+
+, T /2)
+
+.
+
+(cid:17)
+
+j=1
+X
+Proof. By Hypothesis
+C cluster on Re(s) = σ with
+
+F
+
+any zero ρ with Re(ρ) > σ has Re(ρ)
+
+[L, 2L], then we see
+
+σ + c
+
+F
+
+≥
+
+. Thus, if
+
+C
+
+is a Type
+
+1.
+
+|C| ∈
+
+|C| ≤
+
+(log T )100
+
+XRe(ρ)
+≥
+ρ′
+ρ
+−
+|≤
+T 1/2(log T )O(1). Summing over all such
+
+minρ′∈C |
+
+2L(log T )3
+
+σ+cF
+
+By Lemma 30 we have L
+order of summation, we see
+
+≤
+
+(log T )100
+
+|Cj| ≤
+
+[L,2L]
+
+X|Cj |∈
+
+T
+
+−
+
+2L(log T )3
+
+σ+cF
+
+XRe(ρ)
+≥
+Im(ρ)
+≤
+≤
+
+2T +2L(log T )3 XC
+L
+|C|≥
+
+maximal
+
+2L(log T )3
+
+(log T )104
+
+N(σ + c
+
+, 3T )
+
+F
+
+−
+
+N(σ + c
+
+F
+
+≪
+
+Summing over the O(log T ) possibilities for L a power of two gives the result.
+
+(cid:3)
+
+(cid:16)
+
+Lemma 33. Let
+such that Re(ρ0)
+
+C
+≥
+
+be a Type D cluster on Re(s) = σ. Then there is a half-isolated zero ρ0
+σ and minρ′
+.
+
+(log T )3
+
+ρ′
+
+ρ0 −
+
+∈C |
+
+| ≤
+
+|C|
+
+ρ
+
+|
+−C|≤
+, T /2)
+
+.
+
+(cid:17)
+
+and swapping the
+
+C
+
+1
+
+∈
+(
+C
+
+•
+
+•
+
+•
+
+20
+
+JAMES MAYNARD AND KYLE PRATT
+
+Proof. We construct a sequence of zeros. Let ρ1 ∈ C
+part. Given ρj = βj + iγj, let
+
+be the zero with smallest imaginary
+
+|
+
+{
+
+ρ
+
+−
+
+Zj :=
+
+ρ = β + iγ : 0 <
+
+ρj| ≤
+Zj is empty, then ρj is half-isolated. If
+|
+
+2(log T )2, β > βj or β = βj and γ < γj}
+Zj is non-empty, we take ρj+1 to be an element of
+If
+2(log T )2 for each i, so minρ′
+ρi+1 −
+Zj with largest real part. We note that
+| ≤
+2j(log T )2. Moreover, either βj+1 = βj and γj+1 < γj or βj+1 > βj, so these zeros are all
+is a cluster and ρ1 has smallest real part, either ρ1 is half-isolated or
+distinct. Since
+β2 > β1. Therefore if there are no half-isolated zeros within (log T )3
+, this procedure
+|C|
+and all to the right of
+will produce a sequence of at least
+Re(s) = σ. But this contradicts the assumption that
+(cid:3)
+
+zeros within (log T )3
+
+|C|
+C
+is of Type D.
+
+ρi| ≤
+
+ρj −
+
+∈C |
+
+|C|
+
+of
+
+of
+
+ρ′
+
+C
+
+C
+
+.
+
+C
+
+Lemma 34. Let
+N = 2j
+
+C
+
+be a Type D cluster on Re(s) = σ. Then there is a subset
+
+′
+
+C
+
+⊆ C
+
+and
+
+[T 1/100, T 1/2(log T )2] such that all of the following hold:
+′ is not too small)
+
+′
+
+|C
+
+| ≥ |C|
+
+/(log T )2.
+
+(There is a nearby half-isolated zero) There is a half-isolated zero ρ0 such that Re(ρ0)
+σ and
+ρ
+ρ0 −
+′.
+|
+(All zeros in
+
+| ≤
+′ are detected by a polynomial of length N) If ρ
+C
+
+(log T )5
+
+for all ρ
+
+′ then
+
+∈ C
+
+∈ C
+
+|C
+
+|
+
+′
+
+≥
+
+(cid:12)
+(cid:12)
+(cid:12)
+Proof. Let
+(18) every Type I zero satisﬁes
+
+C1 be the set of Type I zeros in
+
+N
+n
+X
+∼
+
+C
+
+a(n)
+nρ exp
+
+n
+T 1/2
+
+−
+
+(cid:16)
+. Since
+
+1
+log T
+
+.
+
+≫
+
+is a Type D cluster,
+
+|C1| ≥ |C|
+
+/2. From
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+C
+
+a(n)
+nρ exp
+
+n
+T 1/2
+
+−
+
+(cid:16)
+
+1
+log T
+
+,
+
+≫
+
+M
+Xn
+(cid:12)
+∼
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+C
+
+for some M = 2j
+such that at least
+so
+|C
+(log T )3
+(log T )3
+
+C
+
+′
+
+| ≫ |C|
+of
+|C|
+we see that ρ0 must satisfy
+|C|
+
+[T 1/100, T 1/2(log T )2]. By the pigeonhole principle there is some N = 2j
+∈
+/ log T zeros satisfy this with M = N. We let
+′ be this set of zeros,
+|C1|
+/ log T .
+It follows from Lemma 33 that there is a half-isolated zero within
+is contained in an interval of length
+
+to the right of Re(s) = σ. Since
+
+C
+
+This gives the result.
+
+ρ0 − C
+
+|
+
+′
+
+| ≤
+
+2(log T )3
+
+|C| ≪
+
+(log T )4
+
+.
+
+′
+
+|
+
+|C
+
+(cid:3)
+
+We are now in a position to prove Proposition 20.
+
+Proof of Proposition 20. We may assume σ
+otherwise the result is trivial by Hypothesis
+
+1
+2 + c for some absolute constant c > 0, since
+.
+
+By Hypothesis
+
+, all zeros have real part in a ﬁnite set
+
+F
+> 0. By the above discussion, every non-trivial zero ρ = β +iγ
+
+σ1, . . . , σJ }
+
+{
+
+with σj+1 > σj + c
+
+≥
+F
+
+[T, 2T ] lies in a cluster of Type A, Type B, Type C, or Type D. Therefore
+
+for some absolute constant c
+with γ
+
+F
+
+F
+
+∈
+
+N(σ, 2T )
+
+N(σ, T )
+
+−
+
+≤
+
+NA(σj) + NB(σj) + NC(σj) + ND(σj)
+
+,
+
+σj ≥
+X
+
+σ(cid:16)
+
+(cid:17)
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+21
+
+where NA(σ) counts the number of zeros ρ = β + iγ with β = σ and γ
+[T, 2T ] which lie
+on a cluster of Type A, and similarly for NB(σ), NC(σ), ND(σ). By Lemmas 26, 31, and 32
+and we have
+
+∈
+
+NA(σ), NB(σ)
+
+NC(σ)
+
+≤
+
+≤
+
+T 2(1
+σ)(log T )O(1),
+−
+(log T )O(1)N(σ + c
+
+, 3T ).
+
+F
+
+We split the count ND(σ) by dyadically pigeonholing on the length of the cluster. This gives
+(20)
+N(σ, 2T )
+
+σ) + (log T )O(1)N(σ + c
+
+(log T )O(1)T 2(1
+−
+
+N(σ, T )
+
+, 3T ) +
+
+ND(σj; H),
+
+−
+
+≤
+
+F
+
+σ
+σj ≥
+X
+
+XH=2j
+
+H
+
+T
+
+1
+
+≤
+
+≪
+
+where ND(σ; H) counts the total number of zeros ρ = σ + iγ with γ
+[T, 2T ] in a cluster
+of Type D which has cardinality between H and 2H. By Lemma 34 every Type D cluster
+has a large subset
+′ are detected by a Dirichlet polynomial of
+length N = 2j
+[T 1/100, T 1/2(log T )2]. We split ND(σ; L) according to this quantity N, and
+note that these zeros are all counted by RN,H(σ) (by Lemma 34). Thus
+
+′ such that all elements of
+
+∈
+
+∈
+
+C
+
+C
+
+NC(σj; L)
+
+≤
+
+(log T )O(1)
+
+σ
+σj ≥
+X
+
+T 1/100
+
+T 1/2(log T )2
+
+XN =2j
+
+N
+
+RN,H(σ).
+
+≤
+Substituting this into our bound (20) for N(σ, 2T )
+O(log T )2 diﬀerent terms L, N in the summation then gives the result.
+
+N(σ, T ) and noting that there are
+(cid:3)
+
+−
+
+≤
+
+7. Proof of Proposition 21–Half-isolated zeros with clustering
+
+We prove an auxiliary result, which says that, under Hypothesis
+
+have zero-detecting polynomials of ﬂexible length.
+
+, half-isolated zeros
+
+F
+
+Lemma 35 (Half-isolated zero detector of ﬂexible length). Assume Hypothesis
+T be suﬃciently large. There is a set
+=
+exp((log log T )3) such that the following holds.
+
+(T ) of Dirichlet polynomials with #
+
+D
+
+D
+
+F
+
+, and let
+
+D ≤
+
+[T, 2T ] and any choice of A with log A
+
+∈
+
+For any half-isolated zero ρ0 = σ + iγ, with γ
+
+[(log log T )4, log T ] there is some B
+
+B(ρ0)
+B(s) =
+
+| ≥
+
+• |
+•
+
+∈ D
+(log log T )3), and
+b(m)
+
+s with
+
+exp(
+−
+m b(m)m−
+
+|
+
+| ≤
+
+∈
+such that
+
+exp((log log T )3) and b(m) supported on
+
+P
+
+m
+
+[A exp(
+
+2(log log T )4), A exp((log log T )2)].
+
+−
+
+∈
+and the deﬁnition of a Y -half-isolated zero, we deduce that ρ0 is
+[exp((log log T )3), T ]. Set A1 = A, and note that ρ0 is A1/2
+-half-
+
+1
+
+Proof. By Hypothesis
+F
+Y -half-isolated for any Y
+isolated. Proposition 16 then implies there is some U1 ∈ U ∩
+(log T )−
+
+w0(n/U1)
+
+∈
+
+100.
+
+(A1/2
+1
+
+, A1] such that
+
+Λ(n)
+nρ0
+
+n
+X
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+If A1/U1 ≤
+process with A1 replaced by A2.
+
+exp((log log T )4) then we stop. Otherwise, we set A2 = A1/U1 and repeat the
+
+22
+
+JAMES MAYNARD AND KYLE PRATT
+
+Continuing in this fashion, we obtain sequences A1, A2, . . . , Ak and U1, U2, . . . , Uk such
+k, Ai > exp((log log T )4)
+
+, Ai] for all 1
+
+1 for 2
+
+1/Ui
+
+i
+
+i
+exp((log log T )4). Furthermore, we have
+
+k, Ai = Ai
+
+≤
+
+≤
+
+≤
+
+−
+
+−
+
+≤
+
+that Ui ∈
+k
+for i
+−
+≤
+
+(A1/2
+i
+1 and Ak ≤
+
+Λ(n)
+nρ0
+
+w0(n/Ui)
+
+(log T )−
+
+100
+
+≫
+
+(cid:12)
+(cid:12)
+k
+for 1
+(cid:12)
+exp((log log T )4) we deduce k
+and
+
+≤
+
+≤
+
+−
+
+i
+
+n
+X
+
+1. By induction we ﬁnd that Ai ≤
+
+log log T . By construction we have U1U2 · · ·
+
+≪
+
+1 ≤
+
+−
+
+A2−i+1
+1
+
+T 2−i+1, and since Ak
+Uk
+
+1 >
+−
+A1 = A,
+
+≤
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+exp((log log T )4)
+
+Ak =
+
+≥
+
+so
+
+Ak
+Uk
+
+1
+
+−
+1
+
+−
+
+=
+
+Ak
+
+2
+−
+1Uk
+
+Uk
+
+−
+
+=
+
+=
+
+· · ·
+
+2
+
+−
+
+A1
+
+Uk
+
+−
+
+1Uk
+
+2 · · ·
+
+−
+
+U1
+
+=
+
+A
+
+Uk
+
+−
+
+1Uk
+
+2 · · ·
+
+−
+
+,
+
+U1
+
+We deﬁne a Dirichlet polynomial B(s) by
+
+A exp(
+
+(log log T )4)
+
+−
+
+U1U2 · · ·
+
+Uk
+
+1 ≤
+
+−
+
+≤
+
+A.
+
+B(s) =
+
+k
+
+1
+
+−
+
+b(m)
+ms =
+
+Λ(ni)
+ns
+i
+
+w0(ni/Ui),
+
+m
+X
+(log log T )3). The coeﬃcients b(m) are supported on integers
+
+ni
+X
+
+i=1
+Y
+
+1
+
+−
+
+m
+
+2k
+
+−
+
+1U1 · · ·
+
+Uk
+
+1 ≤
+
+−
+
+≤
+
+≤
+
+A exp((log log T )2).
+
+and note that
+m with
+
+|
+
+B(ρ0)
+
+| ≥
+
+exp(
+
+A exp(
+
+2(log log T )4)
+
+−
+
+Furthermore, we have
+
+−
+U1 · · ·
+2k
+
+Uk
+1
+
+−
+
+≤
+
+b(m)
+
+|
+
+| ≤
+
+Λ(n1)
+
+Λ(nk
+
+1)
+
+−
+
+≤
+
+· · ·
+
+(2 log m)k
+
+1(log 2T )k
+
+−
+
+−
+
+1
+
+exp((log log T )3).
+
+≤
+
+nk−1=m
+X
+2Ui
+ni≤
+≤
+
+n1
+···
+Ui/2
+Here we noted that if m = pe1
+is
+
+j
+
+i=1 ei ≤
+
+The bound for #
+P
+
+D
+
+pej
+j then the number of choices of prime powers dividing n
+1 choices of n1, . . . , nk
+2 log m, and so there are
+
+(2 log m)k
+
+1 · · ·
+
+1.
+
+−
+
+≤
+arises from the trivial bound #
+
+O(log log T ).
+
+−
+
+(cid:3)
+
+D ≤ |U|
+
+Proof of Proposition 21. We ﬁrst show that we may assume N is not too near T 1/2. Indeed,
+(log log T )10). Then by the deﬁnition of RN,H(σ) (Deﬁnition
+assume that N
+19) we have
+
+T 1/2 exp(
+
+−
+
+≥
+
+for some zeros ρ = β + iγ with β
+
+RN,H(σ)
+
+≪
+
+(log T )O(1)
+
+≥
+
+σ and γ
+
+∈
+(log T )O(1)
+
+RN,H(σ)
+
+≪
+
+DN (β + iγ)
+
+|
+
+4
+
+|
+
+Xρ=β+iγ
+[T, 2T ]. By Lemmas 28 and 27 we obtain
+
+3T
+
+T /2 |
+Z
+
+˜DN (σ + iw)
+
+4dw,
+
+|
+
+and the mean-value theorem for Dirichlet polynomials yields
+
+RN,H(σ)
+
+≪
+
+(log T )O(1)T N −
+
+4σ+2
+
+T 2(1
+−
+
+σ) exp((log log T )O(1)).
+
+≤
+T 1/2 exp(
+
+Therefore, we may henceforth assume N
+we
+−
+1
+2 +c for some absolute constant c > 0, for otherwise the result is trivial.
+
+(log log T )10). By Hypothesis
+
+may also assume σ
+
+≤
+
+F
+
+≥
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+23
+
+Further, we may assume that N
+N
+
+H(log T )O(1).
+≤
+Consider a cluster
+(log T )−
+
+≫
+therefore
+
+C
+
+H(log T )O(1), since Lemma 30 implies RN,H(σ) = 0 if
+
+≥
+
+C
+O(1) of the elements of
+
+of zeros of length
+
+H which is considered by RN,H(σ). A proportion
+are detected by a Dirichlet polynomial of length N, and
+
+≍
+
+H(log T )−
+
+O(1)
+
+DN (ρ)
+
+2.
+
+|
+
+≪
+
+|
+
+ρ
+X
+∈C
+
+To avoid technical complications later in the proof, it is convenient now to decompose D(ρ)
+into level sets according to the size of the divisor function. We write
+
+DN (ρ) =
+
+N
+Xn
+∼
+
+a(n)
+nρ exp(
+
+n/T 1/2) =
+
+−
+
+V
+X1
+≪
+≪
+
+N o(1)
+
+N
+Xn
+∼
+V
+τ (n)
+∼
+
+a(n)
+nρ exp(
+
+n/T 1/2) =
+
+−
+
+DN,V (ρ),
+
+V
+X1
+≪
+≪
+
+N o(1)
+
+say. We then apply Cauchy-Schwarz to deduce
+
+H(log T )−
+
+O(1)
+
+DN,V (ρ)
+
+|
+
+2.
+
+|
+
+≪
+
+XV Xρ
+∈C
+
+We may still use Lemma 28 to remove the dependence on the real parts of the zeros ρ,
+
+but we must proceed more carefully than we have heretofore. Lemma 28 implies
+
+H(log T )−
+
+O(1)
+
+1/2
+
+≪
+
+0
+Z
+
+|
+
+j=1,2
+X
+
+XV Xρ
+∈C
+
+˜Dj,N,V (σ + iγ)
+
+2dα,
+
+|
+
+where the Dirichlet polynomials ˜Dj,N,V depend on α, but we do not denote this in the
+notation. By the deﬁnition of RN,H (σ), there is a half-isolated zero ρ0 = β0 + iγ0 such that
+γ
+
+H(log T )O(1) for every ρ = β + iγ
+
+. By Lemma 27 we then ﬁnd
+
+γ0| ≤
+
+|
+
+−
+
+∈ C
+
+H(log T )−
+
+O(1)
+
+≪
+
+1/2
+
+γ0+H ′
+
+(log T )O(1)
+
+˜Dj,N,V (σ + it)
+
+2dtdα,
+
+|
+
+γ0
+
+H ′
+
+|
+
+j=1,2
+X
+where H ′ = H(log T )O(1). Now let f be a smooth, non-negative function with Fourier
+transform supported in
+
+1. We deduce
+
+1 with f (x)
+
+1 for
+
+XV Z
+
+x
+
+y
+
+−
+
+0
+Z
+
+|
+
+| ≤
+
+≫
+
+|
+
+| ≤
+
+H(log T )−
+
+O(1)
+
+1/2
+
+≪
+
+0
+Z
+
+= H ′
+
+R
+
+XV Z
+
+j
+X
+1/2
+
+f
+
+t
+H ′ (cid:19)
+
+|
+
+(cid:18)
+
+˜Dj,N,V (σ + iγ0 + it)
+
+2dt
+
+|
+
+0
+
+Z
+
+j=1,2
+X
+
+V
+X
+
+N
+n1,n2
+X X
+τ (n1),τ (n2)
+∼
+
+∼
+
+V
+
+˜aj(n1)˜aj(n2)
+(n1n2)σ
+
+iγ0
+
+n2
+n1 (cid:19)
+
+(cid:18)
+
+H ′
+2π
+
+f
+
+b
+
+(cid:18)
+
+log(n2/n1)
+
+dα.
+
+(cid:19)
+
+The contribution from n1 = n2 to the right-hand side is
+and this is smaller than the lower bound H(log T )−
+diagonal contribution. For the other terms, we note that
+
+for some constant c′ > 0,
+O(1). We may therefore ignore this
+1/H ′ by the
+
+log(n2/n1)
+
+H ′T −
+
+≪
+
+c′
+
+|
+
+| ≪
+
+24
+
+JAMES MAYNARD AND KYLE PRATT
+
+support of
+
+f , and this implies
+
+n2 −
+
+|
+
+n1| ≪
+
+N/H ′
+
+≪
+
+N/H. If we deﬁne
+
+1/2
+
+b
+S(γ) =
+
+0
+Z
+
+j=1,2
+X
+
+˜aj(n1)˜aj(n2)
+(n1n2)σ
+
+iγ
+
+n2
+n1 (cid:19)
+
+(cid:18)
+
+H ′
+2π
+
+f
+
+b
+
+(cid:18)
+
+log(n2/n1)
+
+dα
+
+(cid:19)
+
+N
+XV X Xn1,n2
+∼
+n2
+≤|
+|≪
+−
+τ (n1),τ (n2)
+∼
+
+n1
+
+1
+
+N/H
+V
+
+1/2
+
+=
+
+0
+Z
+
+Sj,V (γ)dα
+
+j=1,2
+X
+
+XV
+
+then we have
+|
+associated to a cluster of length
+
+S(γ0)
+
+| ≫
+
+(log T )−
+
+O(1) for every half-isolated zero ρ0 = β0 + iγ0 which is
+H as in the deﬁnition of RN,H (σ).
+
+We require zero-detecting polynomials for the half-isolated zeros of a convenient length.
+exp((log log T )10) to obtain a Dirichlet polynomial
+
+2
+
+We apply Lemma 35 with A = T N −
+B(s) with the properties stated there. We deﬁne
+
+≥
+
+≍
+
+K =
+
+|
+
+ρ0
+X
+
+B(ρ0)
+
+2
+
+|
+
+|
+
+S(γ0)
+
+2,
+
+|
+
+where the sum is over half-isolated zeros ρ0 = β0 + iγ0 as in the deﬁnition of RN,H(σ). It
+follows that
+
+(21)
+
+RN,H (σ)
+
+≪
+
+exp((log log T )O(1))HK,
+
+since we are counting zeros in clusters of length
+apply Cauchy-Schwarz and the pigeonhole principle to obtain
+
+≍
+
+H. We take the supremum in α, then
+
+(log T )O(1)
+
+(log T )O(1)
+
+K
+
+≪
+
+≪
+
+ρ0
+XV X
+2
+B(ρ0)
+
+|
+
+j=1,2
+X
+
+|
+
+ρ0
+X
+
+B(ρ0)
+
+|
+
+2
+
+|
+
+|
+
+Sj,V (γ0)
+
+2
+
+|
+
+Sj,V (γ0)
+
+|
+
+|
+
+2 = (log T )O(1)KV
+
+for some 1
+may assume B(s) is supported on integers m
+
+N o(1) and j
+
+∈ {
+
+1, 2
+
+≪
+
+≪
+
+V
+
+}
+
+M, where
+
+∼
+
+. By dyadic subdivision and Cauchy-Schwarz, we
+
+T
+N 2 exp(
+
+(log log T )5)
+
+M
+
+T
+N 2 exp((log log T )5).
+
+≤
+We apply Lemma 28 to B to remove the dependency on the real parts of ρ0, obtaining
+
+−
+
+≤
+
+KV ≪
+
+|
+
+ρ0
+X
+
+˜B(σ + iγ0)
+
+2
+
+|
+
+|
+
+Sj,V (γ0)
+
+2.
+
+|
+
+By a minor variant of Lemma 27 we ﬁnd
+
+˜B(σ + iγ0)
+
+|
+
+2
+
+|
+
+|
+
+SV (γ0)
+
+2
+
+|
+
+≪
+
+(log T )O(1)
+
+(log T )O(1) |
+
+u
+
+Z|
+
+|≤
+
+˜B(σ + iγ0 + iu)
+
+2
+
+|
+
+|
+
+Sj,V (γ0 + iu)
+
+2du,
+
+|
+
+and therefore
+
+KV ≪
+
+(log T )O(1)
+
+3T
+
+T /2 |
+
+Z
+
+˜B(σ + it)
+
+2
+
+|
+
+|
+
+Sj,V (t)
+
+2dt.
+
+|
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+25
+
+Let Ψ be a suitable non-negative smooth function whose Fourier transform is supported
+y
+1. Smoothing by Ψ, opening the squares, interchanging, and applying the triangle
+
+in
+inequality, we obtain
+
+| ≤
+
+|
+
+KV ≪
+
+(log T )O(1)
+
+Ψ(t/T )
+
+|
+
+R
+Z
+
+˜B(σ + it)
+
+2
+
+Sj,V (t)
+
+2dt
+
+|
+
+|
+
+|
+˜b(m1)˜b(m2)
+|
+(m1m2)σ
+
+|
+
+|
+
+˜aj(n1)˜aj(n2)˜aj(n3)˜aj(n4)
+(n1n2n3n4)σ
+
+|
+
+T
+
+≪
+
+≪
+
+1
+1
+
+· · ·
+M
+Xm1,m2
+X
+∼
+N
+n1,n2,n3,n4
+∼
+N/H
+n1
+n2
+|≪
+−
+N/H
+n3
+n4
+|≪
+−
+τ (ni)
+V
+∼
+m1n1n4
+exp((log log T )O(1))V 4T M −
+
+M N 2/T
+
+m2n2n3
+
+≤|
+≤|
+
+|≪
+
+−
+
+|
+
+1.
+
+2σN −
+
+4σ
+
+|
+
+· · ·
+M
+Xm1,m2
+X
+∼
+N
+n1,n2,n3,n4
+∼
+N/H
+n1
+n2
+|≪
+−
+n4
+N/H
+n3
+|≪
+−
+τ (ni)
+V
+∼
+m1n1n4
+
+≤|
+≤|
+
+1
+1
+
+m2n2n3
+
+−
+
+M N 2/T
+
+|≪
+
+Here we have used the bound on the coeﬃcients b(m) from Lemma 35 and the fact that
+N/H, and then change variables
+n4 −
+˜aj(n)
+|
+w1 = m1n4, w2 = m2n3. By the size of M we obtain
+
+V . We drop the condition 1
+
+n3| ≪
+
+τ (n)
+
+| ≤
+
+≤ |
+
+∼
+
+KV ≪ L
+
+V 4T 1
+−
+
+2σ
+
+1
+
+≤|
+
+N
+n1,n2
+X X
+∼
+n1
+n2
+|≪
+−
+V
+τ (ni)
+∼
+
+N/H
+
+|
+
+M N
+w1,w2
+X X
+∼
+n2w2
+
+n1w1
+
+−
+
+|≤L
+
+τ (w1)τ (w2),
+
+where we have written
+
+L
+
+= exp((log log T )O(1)). We apply the inequality
+
+τ (w1)τ (w2)
+
+1
+2
+
+≤
+
+(τ (w1)2 + τ (w2)2)
+
+and use symmetry to deduce
+
+KV ≪ L
+
+V 4T 1
+−
+
+2σ
+
+τ (w2)2.
+
+N
+X Xn1,n2
+∼
+n2
+n1
+|≪
+−
+V
+τ (ni)
+∼
+We rewrite n1 as n and w2 as w, and then change variables n2 = n + r, w1 = w + s, to obtain
+
+M N
+X Xw1,w2
+∼
+n2w2
+n1w1
+−
+
+N/H
+
+|≤L
+
+≤|
+
+1
+
+|
+
+KV ≪ L
+
+V 4T 1
+−
+
+2σ
+
+τ (w)2.
+
+1
+
+N
+n
+ℓ
+|≤L X X
+X|
+∼
+N/H
+r
+|≪
+≤|
+V
+τ (n)
+∼
+
+M N
+w
+X X
+∼
+M N
+s
+|≪
+|
+rw=ℓ
+ns
+−
+
+Observe that s
+implies n
+|
+
+| ≪
+
+s
+
+= 0 since r
+MN 2/H, and therefore
+
+= 0, and similarly ns
+s
+
+ℓ
+MN/H. Since w
+
+= 0. The condition
+ns
+
+rw
+ns
+|
+ℓ, it follows that
+
+−
+
+−
+
+| ≤ L
+
+|
+
+| ≪
+
+KV ≪ L
+
+V 4T 1
+−
+
+2σ
+
+N
+n
+s
+V X1
+ℓ
+|≤L X
+X|
+∼
+≤|
+τ (n)
+∼
+
+|≪
+
+M N/H
+
+τ (
+
+|
+
+|
+ns
+
+−
+ℓ
+
+|
+
+−
+
+)3.
+
+6
+6
+6
+26
+
+JAMES MAYNARD AND KYLE PRATT
+
+We multiply by τ (n)4V −
+
+4 > 1 and then change variables f = n
+|
+
+s
+
+|
+
+to obtain
+
+KV ≪ L
+
+T 1
+−
+
+2σ
+
+ℓ
+f
+|≤L XN
+X|
+≪
+
+≪
+2σMN 2/H,
+
+M N 2/H
+
+3T 1
+−
+
+≪ L
+
+τ (f )5τ (f + ℓ)3
+
+the last inequality following by Cauchy-Schwarz and standard estimates for the divisor func-
+1, and combining with (21) yields the
+4T 2
+tion. The constraints on M imply KV ≪ L
+−
+result.
+(cid:3)
+
+2σH −
+
+8. Obstructions
+
+We hope that the ideas we have introduced in this paper can lead to new and improved
+zero-density estimates. However, as alluded to in the introduction, there are potential ob-
+structions one must rule out in order to have a chance of making our results unconditional.
+We call these potential bad conﬁgurations “bows” of zeros.
+
+A bow of zeros is a set of zeros where the imaginary parts lie in an arithmetic progression
+1
+log T , and where the real parts of the zeros vary smoothly between
+T ǫ of
+
+with common diﬀerence
+2 and some σ > 1
+1
+complex numbers coincided with consecutive zeros of ζ(s), where xj is given by
+
+2 again. An example is if the sequence (xj)j
+
+2 and then back to 1
+
+≈
+
+≤
+
+log T + iT0,
+
+1
+
+3
+
+2 + j
+4 + i cj
+
+T ε + i cj
+log T + iT0,
+T ε + i cj
+j
+
+3
+2 −
+
+log T + iT0,
+T .
+
+j
+1
+≤
+≤
+1
+4T ε < j
+4T ε < j
+
+3
+
+1
+
+4 T ε,
+
+3
+
+4T ε,
+T ε.
+
+≤
+≤
+
+(22)
+
+xj = 
+
+
+Here c > 0 is an absolute constant and T0 ≍
+(s)
+
+
+
+ℑ
+
+1/2
+
+σ
+
+(s)
+
+ℜ
+
+Figure 2. A bow of zeros, marked by crosses
+
+Locally (at a scale T o(1)) every zero (except for the few zeros near the ends of the bow)
+looks like a zero in the middle of a vertical arithmetic progression, since the real parts are
+almost constant at this scale. Therefore it seems impossible to make the “local” power
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+27
+
+sum-type arguments of Section 4 work, since a variation of Remark 13 (3) using Poisson
+summation would show that the corresponding sum over zeros would be uniformly small
+when trying to detect any zero in the middle of a bow.
+On the other hand, since the bow is based on the 1
+
+2-line and only has length T ǫ, it does
+not seem possible to use “global” clustering arguments to advantage either. Finding a short
+zero detector of a zero at the end of the bow would be of no use, since the zero would lie
+on the 1
+2 line and so would not correspond to an unusually large value of the zero detecting
+polynomial. Since the length of the cluster is only of length T ǫ, we could only hope to
+improve bounds by T O(ǫ), which would be negligible as ǫ
+0. Therefore none of the new
+→
+ideas in this paper appear to help with detecting these bows.
+
+Finally, classical zero detecting arguments appear to oﬀer no help in detecting bows of
+zeros. It appears entirely consistent with the Ingham-Huxley density estimate (3) (and the
+underlying methods) that there are ' T 3/5 bows of zeros (22) at height T0 ≍
+If the
+vertical gaps between zeros were signiﬁcantly smaller than the average gap, then one might
+hope to use zero-repulsion techniques to rule out the possibility of there being so many nearby
+zeros away from the 1
+2-line, but this argument appears break down unless c is suﬃciently
+small. When the clusters have small length, quantities such as N ∗(σ, T ) from [10, 11] which
+estimate the approximate additive energy also appear to be of no help.
+
+T .
+
+For these reasons the rigidity on the real parts of zeros imposed by Hypothesis
+
+seems
+diﬃcult to dispense with. If one could show that the only conﬁgurations of points where the
+corresponding sums are uniformly small come from a small number of vertical arithmetic
+progressions, then detecting bows of zeros would be essentially the only obstacle to an
+unconditional result.
+
+F
+
+Remark 36. The conﬁguration of “bows” of zeros has some similarities to problematic con-
+ﬁgurations of zeros which obstruct improvements to the least quadratic non-residue (see [6,
+Appendix]). We thank Roger Heath-Brown for pointing this out to us.
+
+Appendix A. The fifth moment of the zeta function
+
+For the convenience of the reader we restate Theorem 6 as the following proposition.
+
+Proposition 37. Suppose that all of the non-trivial zeros of the Riemann zeta function lie
+on ﬁnitely many vertical lines. Suppose further that on each vertical line with real part > 1
+2
+the zeros only occur in clusters of size
+
+T ε0. Then we have
+
+T
+
+ζ
+
+1
+2
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+0
+Z
+
+≤
+
++ it
+
+5
+
+dt
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+≪ǫ T 1+O(ε0)+ǫ.
+
+The key input (beyond our short zero-detecting Dirichlet polynomials), will be Watt’s
+
+mean value theorem.
+
+Lemma 38 (Watt’s mean value theorem).
+
+T
+
+ζ
+
+T
+
+1
+2
+
+4
+
++ it
+
+amm−
+
+it
+
+2
+
+dt
+
+Z
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+Proof. See [22, Theorem 1].
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+−
+
+M
+m
+(cid:12)
+X
+≤
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≪ǫ MT 1+ǫ
+
+1 +
+
+M 2
+T 1/2
+
+(cid:16)
+
+(cid:17)
+
+max
+m |
+
+am|
+
+2.
+
+(cid:3)
+
+28
+
+JAMES MAYNARD AND KYLE PRATT
+
+Lemma 39 (Approximate functional equation). There is a smooth function w2(x) = w2(x; T )
+supported on [1/2, 2] with w(j)
+
+2 (x)
+
+≪j 1 such that
+
+1
+2
+
+ζ
+
++ it
+
+1 + log T
+
+≪
+
+w2(n/N)
+n1/2+it+iu
+
+du.
+
+(cid:16)
+
+XN =2j
+(cid:17)(cid:12)
+≤
+(cid:12)
+(cid:12)
+Proof. We apply [16, Theorem 12.2] with T 1/2
+and integrate over the range of x. After a change of variables we derive
+
+n
+(cid:12)
+(cid:12)
+X
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+, then multiply both sides by 1
+x
+
+2 T 1/2
+√2π
+
+√2π ≤
+
+T 1/2+o(1) Z|
+
+≤
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+x
+
+|≤
+
+u
+
+log T
+
+ζ
+
++ it
+
+1
+2
+
+≪
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+We use Lemma 43 to obtain
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+2T 1/2/√2π
+
+Z
+
+T 1/2/2√2π (cid:12)
+1
+n
+(cid:12)
+X
+≥
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+
+n1/2+it exp(
+
+n/x)
+
+−
+
+dx
+x
+
++ 1.
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ζ
+
++ it
+
+1
+2
+
+T 1/2/2√2π (cid:12)
+1
+n
+XN =2j
+(cid:12)
+X
+≥
+≤
+(cid:12)
+(cid:12)
+We then perform Mellin inversion on the factor exp(
+(cid:12)
+
+T 1/2(log T )2 Z
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+≪
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+2T 1/2/√2π
+
+w0(n/N)
+n1/2+it exp(
+
+n/x)
+
+−
+
+n/x) to deduce
+
+−
+
+dx
+x
+
++ 1.
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1/ log T
+
+w0(n/N)
+n1/2+it exp(
+
+n/x)
+
+−
+
+By Stirling’s formula we can truncate the integral to
+error, and then we use a trivial bound for the Gamma function.
+
+|
+
+1
+log T
+
+(cid:18)
+
++ iu
+
+∞
+
+Γ
+
+−∞ (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≪
+
+Z
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+w0(n/N)(n/N)−
+n1/2+it+iu
+
+du.
+
+(cid:12)
+(cid:19)(cid:12)
+1
+n
+(cid:12)
+X
+(cid:12)
+≥
+(cid:12)
+(cid:12)
+(cid:12)
+log T at the cost of an admissible
+(cid:12)
+(cid:12)
+| ≤
+(cid:3)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+u
+
+(cid:12)
+1
+n
+(cid:12)
+X
+≥
+(cid:12)
+(cid:12)
+(cid:12)
+
+We now turn to the proof of Proposition 37. By dyadic subdivision it suﬃces to show
+
+2T
+
+ζ
+
+1
+2
+
+T
+Z
+
++ it
+
+5
+
+dt
+
+≪ǫ T 1+O(ε0)+ǫ
+
+(cid:17)(cid:12)
+(cid:12)
+for all T suﬃciently large. We decompose the ﬁfth moment as 5 = 4 + 1, and represent
+(cid:12)
+one factor of ζ( 1
+2 + it) with the approximate functional equation. We then manipulate the
+resulting Dirichlet polynomials so that the moment integral can be handled by a combination
+of Watt’s mean value theorem and short zero-detecting polynomials.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+By Lemma 39, it suﬃces to show
+
+2T
+
+T
+
+Z
+
+1
+2
+
+ζ
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+4
+
++ it
+
+ω(n/N)
+n1/2+it
+
+dt
+
+≪ε T 1+O(ε0)+ε
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+n
+(cid:12)
+X
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+N
+
+≪
+
+for 100
+bound if N < 100). Here ω(x) = w2(x)x−
+ω(j)(x)
+
+≤
+u
+≪j (log T )j. We shall write Ω(s) for the Mellin transform of ω.
+
+T 1/2+o(1) (one can immediately use a trivial bound and a fourth moment
+log T . Note that
+
+We now split up the Dirichlet polynomial according to the prime factors of n. Write
+X ǫ < P −(n2). We split our attention depending on whether
+
+iu for some ﬁxed real
+
+| ≤
+
+|
+
+n = n1n2 with P +(n1)
+n1 > T 1/4 or not. Thus
+
+≤
+
+ω(n/N)
+ns
+
+=
+
+n
+X
+
+T 1/4
+
+Xn1
+≤
+P +(n1)
+≤
+
+T ǫ XP −(n2)>T ǫ
+
+ω(n1n2/N)
+(n1n2)s +
+
+ω(n1n2/N)
+(n1n2)s
+
+.
+
+Xn1>T 1/4
+P +(n1)
+≤
+
+T ǫ XP −(n2)>T ǫ
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+29
+
+Therefore, it suﬃces to show that for each N < T 1/2+o(1) that
+
+2T
+
+2T
+
+T
+Z
+
+T
+Z
+
+1
+2
+
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
+
+4
+
+4
+
++ it
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
++ it
+
+T 1/4
+
+(cid:12)
+Xn1
+≤
+(cid:12)
+P +(n1)
+(cid:12)
+≤
+
+T ǫ XP −(n2)>T ǫ
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1>T 1/4
+(cid:12)
+(cid:12)
+P +(n1)
+(cid:12)
+≤
+
+T ǫ XP −(n2)>T ǫ
+
+ω(n1n2/N)
+(n1n2)s
+
+ω(n1n2/N)
+(n1n2)s
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt
+
+≪ǫ T 1+O(ε0)+ǫ,
+
+dt
+
+≪ǫ T 1+ǫ.
+
+We ﬁrst deal with the terms when n1 > T 1/4, which can be handled unconditionally by
+factoring the Dirichlet polynomials and using Watt’s mean value theorem.
+
+Lemma 40. For 100
+
+2T
+
+ζ
+
+≤
+1
+2
+
+4
+
++ it
+
+N
+
+T 1/2+o(1), we have
+
+≤
+
+T
+Z
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+T ǫ XP −(n2)>T ǫ
+
+Xn1>T 1/4
+(cid:12)
+(cid:12)
+P +(n1)
+(cid:12)
+≤
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+Proof. We write the prime factorization of n1n2 as n1n2 = pe1
+Then there is a unique j such that pe1
+moreover pj ≤
+n, p, e, m with P +(n) < p < P −(m) and n
+
+T ǫ since P +(n1)
+
+pej−1
+j
+−
+
+≤
+
+ω(n1n2/N)
+(n1n2)s
+
+< pr.
+since n1 > T 1/4, and
+1 · · ·
+T ǫ. Thus we may rewrite n1n2 as n1n2 = npem for some
+
+per
+r with p1 < p2 <
+pej
+j
+
+1 · · ·
+T 1/4 < pe1
+
+1 · · ·
+
+1 ≤
+
+· · ·
+
+T 1/4 < pen. Thus we see that
+
+≤
+
+dt
+
+≪ε T 1+ε.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+ω(n1n2/N)
+(n1n2)s =
+
+Xn1>T 1/4
+P +(n1)
+≤
+
+T ǫ XP −(n2)>T ǫ
+
+ω(npem/N)
+(npem)s
+
+.
+
+n,m,pe
+X
+P +(n)<p<P −(m)
+T 1/4<npe
+T ǫ
+p
+
+≤
+
+n
+
+≤
+
+We now wish to separate the variables n, m and pe. We do this by using Mellin inversion
+and Perron’s formula. For integers n, pe, m
+
+T 1/2+ǫ, we see that
+
+≤
+
+log
+
+p + 1/2
+P +(n)
+
+,
+
+log
+
+P −(m)
+p + 1/2
+
+,
+
+log
+
++ 1/2
+
+T 1/4
+⌊
+
+⌋
+npe
+
+1
+T 1/2+ǫ .
+
+≫
+
+Thus, setting δ = 1
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+log T and using the rapid decay of Ω(s) we ﬁnd
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+ω(npem/N)
+(npem)s =
+
+1
+(2π)4
+
+n,pe,m
+X
+P +(n)<p<P −(m)
+T 1/4<npe
+p<T ǫ
+
+≤
+
+n
+
+A(s)B(s)C(s)Ω(iu4)N iu4
+
+3
+
+(
+
+T 1/4
+⌊
+
+⌋
+
++ 1/2)δ+iu3
+
+Z
+uj|≤
+j
+1
+≤
+≤
+
+T 10
+4
+
+|
+
+j=1
+Y
+
+(δ + iuj)−
+
+1du + O
+
+1
+T 2
+
+,
+
+(cid:17)
+
+(cid:16)
+
+where we have deﬁned (suppressing the dependency on u1, u2, u3, u4)
+
+A(s) :=
+
+an
+ns ,
+
+B(s) :=
+
+bp,e
+pes ,
+
+C(s) :=
+
+cm
+ms ,
+
+T 1/4
+Xn
+≤
+an := P +(n)−
+
+δ
+
+iu1nδ+iu3
+
+−
+
+iu4,
+
+−
+
+log T Xp<T ǫ
+Xe
+≤
+bp,e := (p + 1/2)iu1
+
+iu2pe(δ+iu3
+
+−
+
+iu4),
+
+−
+
+Xm<T 1/4+ǫ
+cm := P −(m)δ+iu2m−
+
+iu4.
+
+30
+
+JAMES MAYNARD AND KYLE PRATT
+
+The O(T −
+(and the fact the integral of
+
+2) term is clearly negligible, and so can be ignored. By the triangle inequality
+1 over u1, u2, u3, u4 is T o(1)), we ﬁnd that
+
+Ω(iu4)
+
+−
+
+2T
+
+ζ
+
+T
+Z
+
+≪
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+T o(1)
+
+1
+2
+
+4
+
++ it
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+sup
+u1,u2,u3,u4 Z
+T
+
+Xn1>T 1/4
+(cid:12)
+(cid:12)
+P +(n1)
+(cid:12)
+≤
+2T
+
+T ǫ XP −(n2)>T ǫ
+1
+2
+
++ it
+
+4
+
+A
+
+3
+j=1 |
+
+|
+
+Q
+
+δ + iuj|
+ω(n1n2/N)
+(n1n2)s
+
+dt
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:16)
+
++ it
+
+B
+
+(cid:17)
+
+(cid:16)
+
+bp,e
+
+|
+
+(cid:16)
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+We now note that trivially we have the bound
+
+1
+2
+
+1
+2
+
++ it
+
+C
+
+(cid:17)
+
+(cid:16)
+
++ it
+
+dt + O(1).
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+B
+
++ it
+
+=
+
+pe/2+eit ≪
+
+T ǫ/2,
+
+T ǫ
+p
+log T X
+≤
+so the B factor is always acceptably small. Thus, by Cauchy-Schwarz, it suﬃces to show
+
+Xe
+≤
+
+(cid:17)
+
+(cid:16)
+
+sup
+u1,u2,u3,u4 Z
+T
+
+2T
+
+ζ
+
+1
+2
+
++ it
+
+4
+
+A
+
+2
+
++ it
+
+1
+2
+
+≪ǫ T 1+ǫ,
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+and similarly for C(1/2 + it) in place of A(1/2 + it). But this follows immediately from
+(cid:12)
+(cid:12)
+Lemma 38 since these Dirichlet polynomials have length at most T 1/4+ǫ.
+(cid:3)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
+
+We now consider the terms with n1 ≤
+
+T 1/2+o(1) we think of n2 as being
+somewhat large. By factoring n2 we introduce sums over primes, and by Mellin inversion we
+turn the sums over primes into sums over zeros. This transforms the moment integral into
+an integral centred on non-trivial zeros. We then use Hypothesis
+and short zero-detecting
+polynomials to control the integral centred on zeros by sums which can be handled with
+Watt’s mean value theorem.
+
+T 1/4. Since n1n2 ≤
+
+F
+
+The next result is the unconditional lemma to reduce to an integral centred on zeros ρ.
+
+Lemma 41 (Reduction to sum over zeros). We have
+
+1
+2
+
+(cid:16)
+
+ζ
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+4
+
++ it
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+2T
+
+T
+Z
+
++ T ǫ
+
+sup
+<T ǫ
+u
+ρ
+T 1/4 XT /2
+|
+|≤
+N1
+
+≤|
+
+|
+≪
+
+T 1/4
+
+T ǫ XP −(n2)>T ǫ
+(cid:12)
+Xn1
+≤
+(cid:12)
+P +(n1)
+(cid:12)
+≤
+T 1/2
+N1
+
+Re(ρ)
+
+−
+
+1/2
+
+3T(cid:16)
+
+(cid:17)
+
+ω(n1n2/N)
+(n1n2)s
+
+dt
+
+T 1+ǫ
+
+≪
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Z|
+
+t
+−
+
+Im(ρ)
+|
+
+<T 3ǫ
+
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+4
+
++ it
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+n1<2N1
+XN1
+≤
+P +(n1)<T ǫ
+n1<T 1/4
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+n1/2+it+iu
+1
+
+dt.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Proof. The contribution from n2 = 1 is O(T 1+o(1)) by Cauchy-Schwarz and Lemma 38, so we
+may assume n2 > 1. We expand the n2 sum according to the number of distinct prime factors
+T ǫ).
+of n2 (which must be at most 1/ǫ since the sum is supported on n2 ≤
+By inclusion-exclusion, there are constants ce = cJ,e1,...,eℓ ≪ǫ 1 such that
+1 · · ·
+1 · · ·
+
+ω(n1n2/N)
+(n1n2)s =
+
+ω(n1pe1
+(n1pe1
+
+peJ
+J /N)
+peJ
+J )s
+
+T with P −(n2)
+
+ce
+
+≥
+
+.
+
+1
+
+1
+
+J
+X1
+≤
+≤
+
+e1,...,eJ ≥
+ǫ X
+
+T ǫ<p1,...,pJ
+X
+
+XP −(n2)>T ǫ
+n2>1
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+31
+
+We use Lemma 43 to apply a smooth partition of unity 1 =
+p1, . . . , pJ . We also restrict n1 to lie in dyadic intervals [N1, 2N1). This gives
+
+P =2r w0(p/P ) to each variable
+
+ω(n1pe1
+(pe1
+
+1 · · ·
+1 · · ·
+
+peJ
+J /N)
+peJ
+J )s
+
+T 1/4
+
+Xn1
+≤
+P +(n1)
+≤
+
+T ǫ<p1,...,pJ
+
+T ǫ X
+
+P
+
+=
+
+S(s),
+
+XN1=2j0
+≪
+
+T 1/4
+
+XP1=2r1 ,...,PJ =2rJ
+
+where
+
+S(s) :=
+
+ω(n1pe1
+
+1 · · ·
+
+X
+
+T ǫ<p1,...,pJ X
+N1
+≤
+P +(n1)
+≤
+T 1/4
+n1
+
+n1<2N1
+T ǫ
+
+≤
+
+peJ
+J /N)w0(p1/P1)
+peJ
+J )s
+
+(n1pe1
+
+1 · · ·
+
+w0(pJ/PJ )
+
+.
+
+· · ·
+
+With these restrictions, we see there is no contribution unless N1P1 · · ·
+separate variables. By Mellin inversion and the rapid decay of Ω, we have for Re(s)
+
+PJ ≪
+
+N. We now
+[0, 1]
+
+∈
+
+S(s) =
+
+1
+2πi
+
+i
+
+∞
+
+Z
+
+i
+−
+T ǫ
+
+∞
+
+Ω(z)P1(s + z)
+
+· · ·
+
+PJ (s + z)N(s + z)dz
+
+Ω(iu)P1(s + iu)
+
+· · ·
+
+T ǫ
+
+Z
+
+−
+
+PJ(s + iu)N(s + iu)du + O(T −
+
+1),
+
+=
+
+1
+2π
+
+where
+
+Pj(s) :=
+
+w0(pj/Pj)
+pej s
+j
+
+,
+
+T ǫ<pj
+X
+
+N(s) :=
+
+1
+ns
+1
+
+.
+
+n1<2N1
+N1
+X
+≤
+T ǫ
+P +(n1)
+≤
+T 1/4
+n1
+
+≤
+
+The O(T −
+
+1) term above makes a negligible contribution, and so can be ignored.
+
+Since there are O(T o(1)) choices of J, ℓ, e1, . . . , eℓ, N1, P1, . . . , PJ and u is restricted to an
+1, we see that it suﬃces to show that for any choice of
+
+interval of length T ǫ and Ω(iu)
+J, ℓ, e1, . . . , eℓ, N1, P1, . . . , PJ and u under consideration we have
+
+≪
+
++ i(t + u)
+
++ i(t + u)
+
+N
+
++ i(t + u)
+
+dt
+
+1
+2
+
+1
+2
+
+1
+2
+
+2T
+
+4
+
+ζ
+
+T
+Z
+
++ it
+
+(cid:12)
+(cid:16)
+(cid:12)
+T 1+ǫ + T ǫ
+(cid:12)
+
+P1
+(cid:12)
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+ρ
+XT /2
+|≤
+≤|
+If ej > 1 then we see that
+
+≪
+
+(cid:16)
+
+T 1/2
+N1
+
+PJ
+
+1
+2
+
+(cid:16)
+
+· · ·
+1/2
+
+(cid:17)
+Re(ρ)
+−
+
+3T(cid:16)
+
+(cid:17)
+
+Z|
+
+t
+−
+
+Im(ρ)
+|
+
+<T 3ǫ
+
+(cid:17)
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
++ it
+
+4
+
+N
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
++ it + iu
+
+dt.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Thus we restrict our attention to Pj with ej = 1. Similarly, we see that if ej = 1
+
+Pj
+
+1
+2
+
+(cid:16)
+
++ it
+
+(cid:17)
+
+≪
+
+Pj
+Xpj≍
+
+1
+pj ≪
+
+1.
+
+Pj
+
+1
+2
+
+(cid:16)
+
++ it
+
+=
+
+(cid:17)
+
+T ǫ<n
+X
+
+Λ(n)w0(n/Pj)
+n1/2+it log n
+
++ O(1).
+
+To simplify notation we let
+
+w0(t) =
+
+w0(t)
+log t + log Pj
+
+,
+
+e
+
+32
+
+JAMES MAYNARD AND KYLE PRATT
+
+which is smooth, supported on [1/2, 2] and satisﬁes
+formula to remove the condition T ǫ < n (which only intrudes if Pj ≍
+If Pj ≍
+
+T ǫ we have
+
+0 (t)
+
+e
+
+|
+
+w(j)
+
+| ≪j 1. We now use Perron’s
++1/2.
+
+T ǫ). Let T0 =
+
+T ǫ
+⌊
+
+⌋
+
+(23)
+
+Pj
+
+1
+2
+
+(cid:16)
+
++ it
+
+=
+
+(cid:17)
+
+=
+
+Λ(n)
+
+T ǫ<n
+X
+1
+2πi
+
+T 2ǫ
+
+T 2ǫ
+
+Z
+
+−
+
+w0(n/Pj)
+n1/2+it
+e
+(2Pj)iv
+(cid:16)
+
++ O(1)
+
+−
+
+T iv
+0
+
+n
+(cid:17)(cid:16)X
+
+Λ(n)
+
+w0(n/Pj)
+
+n1/2+i(v+t)
+e
+
++ O(1).
+
+dv
+v
+
+(cid:17)
+
+However, using Mellin inversion again and moving the line of integration, we see that
+
+Λ(n)
+
+w0(n/Pj)
+n1/2+i(v+t) =
+
+1
+2πi
+
+2+i
+
+∞
+
+P s
+j
+
+−
+
+W0(s)
+
+n
+X
+
+e
+
+2
+Z
+= P 1/2
+−
+j
+
+i
+
+∞
+
+−
+
+i(v+t)
+
+ζ ′
+ζ
+
+1
+2
+
+(cid:16)
+
+i(v + t)
+
++ i(v + t) + s
+
+ds
+
+1
+f
+2 −
+
+W0
+
+(cid:16)
+2+i
+
+f
+−
+
++
+
+1
+2πi
+
+∞
+
+P s
+j
+
+−
+
+W0(s)
+
+Z
+
+−
+
+i
+
+2
+
+−
+
+∞
+
++ i(v + t) + s
+
+−
+
+(cid:17)
+ζ ′
+ζ
+
+ρ
+X
+1
+2
+
+(cid:16)
+
+(cid:17)
+
+P ρ
+−
+j
+
+1/2
+
+−
+
+i(v+t)
+
+W0
+
+ρ
+
+1
+2 −
+
+−
+
+i(v + t)
+
+(cid:17)
+
+By the rapid decay of
+for
+
+v + t
+
+|
+
+| ≫
+
+W0 and the bound
+
+for Re(s) =
+
+3/2, we see that
+
+T o(1), where the o(1) term goes to zero suﬃciently slowly with T , we have
+
+f
+ζ ′/ζ(s)
+
+|
+
+log
+
+s
+
+|
+
+|
+
+| ≪
+
+(cid:16)
+
+f
+ds.
+
+(cid:17)
+
+−
+
+f
+
+n
+X
+
+Λ(n)
+
+w0(n/Pj)
+n1/2+i(v+t) ≪
+
+e
+
+γ
+
+|
+
+−
+
+T o(1)
+
+Xρ=β+iγ
+i(v+t)
+|≤
+T ǫ then
+
+1/2
+
+P β
+j
+
+−
+
++ O(1).
+
+1/2
+
+P β
+j
+
+−
+
++ O(T o(1)).
+
+Substituting this into (23), we ﬁnd that if Pj ≍
+
+Pj
+
+1
+2
+
+(cid:16)
+
++ it
+
+(cid:17)
+
+T o(1)
+
+≪
+
+1
+1 +
+
+v
+
+|
+
+v
+
+Z|
+
+|≤
+
+T 2ǫ
+
+| Xρ=β+iγ
+
+(t+v)
+
+γ
+
+T o(1)
+
+−
+T ǫ we may obtain the same upper bound by using Lemma 27 and then arguing with
+
+|≤
+
+|
+
+If Pj ≫
+Mellin inversion as above. It follows that
+
++ i(t + u)
+
+1
+2
+
+P1
+
++ i(t + u)
+
+(cid:16)
+T o(1) + T o(1)
+
+≪
+
+PJ
+
+· · ·
+
+(cid:17)
+
+1
+2
+J
+
+(cid:16)
+
+Z|
+
+T 2ǫ
+J
+
+vj |≤
+j
+1
+≤
+≤
+
+j=1
+Y
+
+1
+1 +
+
+|
+
+vj|
+
+(cid:17)
+
+ρ1,...,ρJ
+X
+ρj =βj+iγj
+(t+u+vj )
+
+|≤
+
+γj−
+
+|
+
+T o(1)
+
+P
+
+βj−
+j
+
+1
+2
+
+.
+
+J
+
+j=1
+Y
+
+Since P1 · · ·
+
+PJ ≪
+
+N/N1 and N
+
+≪
+
+T 1/2+ǫ, we have
+
+J
+
+j=1
+Y
+
+P
+
+1
+2
+
+βj−
+j ≪
+
+(cid:18)
+
+maxjβj−
+
+T 1/2+ǫ
+N1 (cid:19)
+
+1
+2
+
+,
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+and therefore by symmetry
+
+P1
+
+1
+2
+
+(cid:16)
+
++ i(t + u)
+
+PJ
+
+· · ·
+
+(cid:17)
+
+1
+2
+
+(cid:16)
+
++ i(t + u)
+
+T o(1)
+
+≪
+
+(cid:17)
+
+v1
+
+Z|
+
+|≤
+
+T 2ǫ
+
+1
+1 +
+
+|
+
+33
+
+β1
+
+1
+2
+
+−
+
+T 1/2+ǫ
+N1 (cid:19)
+
+(cid:18)
+
+×
+
+T 2ǫ
+
+v
+
+|≤
+
+(cid:16) Z|
+
+1
+1 +
+
+v
+
+|
+
+T o(1)
+
+≪
+
+v1
+
+Z|
+
+|≤
+
+T 2ǫ
+
+|(cid:16) Xρ=β+iγ
+
+(t+u+v)
+
+γ
+
+−
+
+|≤
+
+|
+1
+1 +
+
+J
+
+1
+
+−
+
+1
+
+dv
+
+(cid:17)
+
+(cid:17)
+
+T o(1)
+
+v1| Xρ1=β1+iγ1
+
+(t+u+v1)
+
+γ
+
+|
+
+T o(1)
+
+|≤
+
+−
+
+|
+1/2
+
++ T ǫ.
+
+v1| Xρ1=β1+iγ1
+
+(t+u+v1)
+
+γ
+
+T o(1)
+
+|≤
+
+−
+
+|
+dv1 + T ǫ
+
+β1
+
+1
+2
+
+−
+
+T 1/2+ǫ
+N1 (cid:19)
+
+(cid:18)
+
+dv1 + T ǫ
+
+T ǫ
+
+≪
+
+Xρ=β+iγ
+t
+γ
+|≤
+−
+
+T 3ǫ(cid:16)
+
+|
+
+T 1/2
+N1
+
+β
+
+−
+
+(cid:17)
+
+This in turn gives
+
++ i(t + u)
+
++ i(t + u)
+
+N
+
++ i(t + u)
+
+dt
+
+2T
+
+ζ
+
+1
+2
+
++ it
+
+(cid:12)
+(cid:16)
+(cid:12)
+T 1+ǫ + T ǫ
+(cid:12)
+
+T
+Z
+
+≪
+
+1
+2
+
+4
+
+(cid:16)
+
+P1
+(cid:12)
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+ρ
+XT /2
+|≤
+≤|
+
+3T(cid:16)
+
+T 1/2
+N1
+
+PJ
+
+1
+2
+
+(cid:16)
+
+· · ·
+1/2
+
+(cid:17)
+Re(ρ)
+−
+
+(cid:17)
+
+Z|
+
+t
+−
+
+Im(ρ)
+|
+
+<T 3ǫ
+
+1
+2
+
+(cid:17)
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
++ it
+
+4
+
+N
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
++ it + iu
+
+dt,
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:3)
+
+as required.
+
+In order to ﬁnish the proof of Proposition 37 it suﬃces to prove the following result.
+
+Lemma 42. Assume Hypothesis
+length
+
+T ε0. Then we have
+
+≤
+
+and that every non-trivial zero occurs in a cluster of
+
+F
+
+sup
+<T ǫ
+u
+ρ
+T 1/4 XT /2
+|
+|≤
+N1
+
+≤|
+
+|
+≪
+
+Re(ρ)
+
+−
+
+1/2
+
+T 1/2
+N1
+
+(cid:17)
+
+3T(cid:16)
+
+Z|
+
+t
+−
+
+Im(ρ)
+|
+
+<T 3ǫ
+
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+4
+
++it
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+n1<2N1
+XN1
+(cid:12)
+≤
+P +(n1)<T ǫ
+(cid:12)
+(cid:12)
+n1<T 1/4
+
+1
+n1/2+it+iu
+1
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+T 1+O(ε0)+ǫ.
+
+dt
+
+≪
+
+F
+
+Proof. By Hypothesis
+the non-trivial zeros lie on ﬁnitely many vertical lines, and so it
+suﬃces to consider each of the possibilities for Re(ρ) separately. Moreover, since we assume
+T ε0 zeros, every zero with real part β0 is within O(T ε0+o(1))
+that all zeros lie in a cluster of
+of a half-isolated zero with real part β0. Upon redeﬁning ǫ, it suﬃces to show that for any
+choice of β0
+T 1/2
+N1
+
+T 1+O(ε0)+ǫ.
+
++ it + iu
+
++ it
+
+1
+2
+
+1
+2
+
+≪
+
+dt
+
+N
+
+≤
+
+1/2
+
+β0
+
+ζ
+
+−
+
+4
+
+<T ε0+ǫ
+
+(cid:16)
+
+(cid:17)
+
+ρ0=β0+iγ0
+XT /2<
+|
+half-isolated
+
+|≤
+
+3T
+
+Z|
+
+t
+−
+
+γ0
+
+|
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+We now recall from Proposition 16 that half-isolated zeros have short zero-detecting Dirich-
+T ǫ and a Dirichlet
+
+let polynomials. In particular, there is an R with exp((log log T )3)
+polynomial
+
+≪
+
+≪
+
+R
+
+R(s) =
+
+XR/2<n
+≤
+
+R
+
+an
+ns
+
+34
+
+JAMES MAYNARD AND KYLE PRATT
+
+|
+
+an| ≪
+
+Λ(n) such that
+
+with
+isolated zero. Thus we have for any positive integer κ
+that
+
+R(1/2 + iγ0)
+
+| ≫
+
+−
+
+|
+
+≪
+
+Rβ0
+
+1/2(log T )−
+
+100 whenever β0 + iγ0 is a half-
+T ǫ
+
+(log T )/(log log T )3 with Rκ
+
+≥
+
+1/2
+
+β0
+
+−
+
+T 1/2
+N1
+
+(cid:16)
+
+(cid:17)
+
+T 1/2
+N1Rκ
+
+T o(1)
+
+≪
+
+(cid:16)
+
+Z|
+
+t
+−
+
+γ0
+
+|
+
+<T ε0+ǫ
+
+3T
+ρ0
+XT /2<
+|≤
+|
+half-isolated
+β0
+
+1/2
+
+−
+
+(cid:17)
+
+T /4
+
+Z
+
+4T
+
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
++ it
+
+4
+
+N
+
+1
+2
+
++ it + iu
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
++ it + iu
+
+ζ
+
+1
+2
+
+4
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
++ it
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+4T
+
+N
+
+1
+2
+
+(cid:16)
+
+1
+2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+3T
+ρ0
+XT /2<
+|
+|≤
+half-isolated
+<T ε0+ǫ
+t
+γ0
+|
+−
+|
+
+1
+2
+
+(cid:18)
+
+R
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++ iγ0
+
+κ
+
+dt
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+κ
+
+β0
+
+1/2
+
+T 1/2
+N1Rκ
+
+−
+
+(cid:16)
+
+≪ǫ T o(1)
+where the last inequality follows from Lemma 27. Let j1 be the non-negative integer such
+that N1Rj1
+Rj2+1.
+We now choose
+
+N1Rj1+1. Let j2 be the positive integer such that Rj2
+
++ it + iu
+
++ it + iv
+
+dtdv,
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+T 1/4
+
+T 1/4
+
++ it
+
+T ε0+2ǫ
+
+T /4
+
+N
+
+≤
+
+≤
+
+≤
+
+≤
+
+Z|
+
+R
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+Z
+
+|≤
+
+ζ
+
+v
+
+4
+
+1
+2
+
+1
+2
+
+κ = j1 + j2 =
+
+log(T 1/2/N1)
+log R
+
++ O(1).
+
+Cauchy-Schwarz then implies that
+
+4T
+
+T /4
+
+Z
+
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
++ it
+
+4
+
+N
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:16)
+
++ it + iu
+
+R
+
+(cid:12)
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:16)
+
++ it + iv
+
+κ
+
+dt
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+1 I 1/2
+I 1/2
+
+2
+
+,
+
+≪
+
+where
+
+I1 :=
+
+I2 :=
+
+4T
+
+Z
+
+−
+
+4T
+4T
+
+4T
+
+Z
+
+−
+
+1
+2
+
+1
+2
+
+(cid:16)
+
+(cid:16)
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+4
+
++ it
+
+(cid:17)(cid:12)
+(cid:12)
+4
+(cid:12)
+
++ it
+
+N
+
+(cid:12)
+(cid:12)
+(cid:12)
+R
+
+1
+2
+
++ it + iu
+
+2
+
+R
+
+(cid:12)
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+2j2
+(cid:12)
+(cid:12)
+
+(cid:16)
+dt.
+
++ it + iv
+
+1
+2
+
++ it + iv
+
+2j1
+
+dt,
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+1
+2
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Since N1Rj1 < T 1/4 and Rj2 < T 1/4 in both cases we are estimating a twisted fourth moment
+T 1+ǫ.
+with a Dirichlet polynomial of length at most T 1/4. Lemma 38 therefore gives I1, I2 ≪
+Thus we obtain the bound
+
+3T
+
+|≤
+
+t
+−
+
+Z|
+
+γ0
+
+|
+
+<T ε0+ǫ
+
+1
+2
+
+ζ
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
++ it
+
+4
+
+N
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+(cid:16)
+
++ it + iu
+
+dt
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+1/2
+
+β0
+
+−
+
+T 1/2
+N1
+
+(cid:16)
+
+(cid:17)
+
+T 1/2
+N1Rκ
+
+≪
+
+(cid:16)
+
+(cid:17)
+
+≫
+
+ρ0=β0+iγ0
+XT /2<
+|
+half-isolated
+β0
+
+1/2
+
+−
+
+T 1+ε0+4ǫ.
+
+Recalling that Rκ
+required.
+
+T 1/2
+−
+
+ǫN −
+1
+
+1
+
+, we see that we obtain an overall bound of T 1+ε0+5ǫ, as
+(cid:3)
+
+We need a smooth function with certain standard properties.
+
+Appendix B. Smooth functions
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+35
+
+Lemma 43. There is a ﬁxed non-negative smooth function w0(x) bounded by 1 and supported
+on [ 1
+
+1 then
+
+2 , 2] such that if x
+
+≥
+
+The function w0(x) satisﬁes the uniform derivative estimate
+
+1 =
+
+∞
+
+w0
+
+m=0
+X
+
+x
+2m
+
+.
+
+(cid:16)
+
+(cid:17)
+
+w(j)
+
+0 (x)
+
+|
+
+| ≪
+
+1 +
+
+j
+
+4j2
+e2
+
+(cid:18)
+
+(cid:19)
+
+0. The Mellin transform W0(s) of w0(x) satisﬁes W0(0) = log 2, and
+
+for j
+
+≥
+
+W0(σ + it)
+
+|
+
+| ≪
+
+σ
+
+2|
+
+| exp
+
+−
+
+(cid:16)
+
+p
+
+t
+|
+
+|
+
+/2
+
+(cid:17)
+
+uniformly in σ and t.
+
+Proof. Deﬁne
+
+h(x) =
+
+1
+x(1
+
+−
+
+x)
+
+−
+
+exp
+
+(
+
+0,
+
+(cid:16)
+
+and
+
+where
+
+H(y) =
+
+1
+C
+
+x
+
+(0, 1),
+
+∈
+
+otherwise,
+
+,
+
+(cid:17)
+
+y
+
+h(x)dx,
+
+Z
+
+−∞
+
+1
+
+We then set w0(x) = H(2x
+−
+It is easy to check that w0 is smooth and supported in [ 1
+
+H(x
+
+1)
+
+−
+
+−
+
+0
+Z
+1), and claim that w0 has the required properties.
+2 , 2]. Checking that
+
+C =
+
+h(x)dx.
+
+for x
+
+1 is an exercise in telescoping series.
+
+≥
+
+We turn our attention to the derivative bounds. For j
+
+1 we have
+
+∞
+
+w0
+
+m=0
+X
+
+= 1
+
+x
+2m
+
+(cid:17)
+
+(cid:16)
+
+w(j)
+
+0 (x) =
+
+−
+
+2j
+C h(j
+C h(j
+
+1
+
+1)(2x
+1)(x
+
+−
+
+(
+
+−
+
+1),
+1),
+
+−
+−
+
+w′0(x)
+
+|
+
+| ≤
+
+4
+
+2e−
+C
+
+.
+
+≥
+1
+2 ≤
+1
+≤
+
+1,
+2,
+
+x
+x
+
+≤
+≤
+
+so
+
+For j
+
+≥
+w(j)
+
+|
+
+0 (x)
+
+2 we use [16, Corollary A.2] and then Stirling’s formula [20] to get
+
+2j
+C
+2j
+C
+
+| ≤
+
+≤
+
+h(j
+
+1)(x)
+
+−
+
+sup
+x |
+
+2j
+C
+
+(j
+
+−
+
+| ≤
+
+j
+e
+
+(cid:18)
+
+j
+
+(cid:19)
+
+(cid:18)
+
+2j
+e
+
+j
+
+2πj exp
+
+(cid:19)
+
+p
+
+1)!
+
+(cid:18)
+1
+12j
+
+(cid:18)
+
+2(j
+
+−
+e
+
+1)
+
+j
+
+1
+
+−
+
+(cid:19)
+
+e
+2j(j
+
+(cid:19)
+
+1)
+
+1
+(cid:18)
+
+−
+
+−
+
+1
+j
+
+j
+
+≤
+
+(cid:19)
+
+1
+C
+
+4j2
+e2
+
+(cid:18)
+
+j
+
+.
+
+(cid:19)
+
+36
+
+JAMES MAYNARD AND KYLE PRATT
+
+It remains to bound the Mellin transform of w0. By repeated integration by parts we have
+
+W0(s) =
+
+s(s + 1)
+
+1)k
+(s + k
+
+(
+
+−
+· · ·
+
+∞
+
+w(k)
+
+0 (x)xs+k
+
+1dx
+
+−
+
+1)
+
+0
+Z
+
+−
+
+0. On the one hand, using this for k = 0 and the triangle inequality we
+
+for any integer k
+have the trivial bound
+
+≥
+
+W0(s)
+
+|
+
+| ≤
+
+2|
+
+σ
+
+|
+
+2
+
+1/2
+
+Z
+
+w0(x)
+
+dx
+x
+
+σ
+
+= 2|
+
+|W0(0).
+
+On the other hand, using the bound for
+
+w(k)
+
+0 (x)
+
+|
+
+|
+
+gives
+
+W0(s)
+
+|
+
+| ≪
+
+2|
+
+σ
+
+|
+
+(cid:18)
+
+k
+
+.
+
+8k2
+e2
+t
+| (cid:19)
+
+|
+
+If
+
+t
+| ≥
+
+|
+
+8 we set we set
+
+so that
+
+k =
+
+1/2
+
+t
+|
+|
+2√2 (cid:23)
+
+,
+
+(cid:22)
+
+W0(s)
+
+|
+
+| ≪
+
+σ
+
+2|
+
+| exp(
+
+2k)
+
+−
+
+≪
+
+σ
+
+2|
+
+| exp
+
+t
+|
+|
+√2 !
+
+ −p
+
+.
+
+It remains to show that W0(0) = log 2. We have
+
+2
+
+W0(0) =
+
+w0(x)
+
+1/2
+
+Z
+
+dx
+x
+
+=
+
+1
+
+1/2
+
+Z
+
+H(2x
+
+1)
+
+dx
+x
+
+−
+
++
+
+2
+
+(1
+
+1
+Z
+
+H(x
+
+1))
+
+−
+
+−
+
+dx
+x
+
+,
+
+and some changes of variables reveal
+
+1
+
+1/2
+
+Z
+
+H(2x
+
+1)
+
+dx
+x
+
+−
+
+2
+
+=
+
+H(x
+
+1
+Z
+
+1)
+
+dx
+x
+
+.
+
+−
+
+Appendix C. Zero detecting setup
+
+(cid:3)
+
+Proof of Lemma 23. The technique is essentially that of [18, Chapter 12], but with some
+small technical reﬁnements. Let ρ = β + iγ be a non-trivial zero of the Riemann zeta
+function with γ
+log T . For convenience we write
+
+[T, 2T ] and T large. We assume β
+
+2 + 1
+
+1
+
+∈
+
+Now consider the Dirichlet series
+
+Xm
+≤M
+Y = T 1/2.
+
+= 2T 1/100,
+
+M
+M(s) =
+
+≥
+
+µ(m)
+ms ,
+
+I(z) :=
+
+a(n)
+nz exp
+
+n
+Y
+
+,
+
+(cid:17)
+
+−
+
+(cid:16)
+
+1
+n
+X
+≥
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+37
+
+where
+
+a(n) :=
+
+µ(m).
+
+Observe that a(1) = 1, a(n) = 0 for 2
+and using the rapid decay of exp(
+
+n
+Xm
+|
+m
+≤M
+M, and
+| ≤
+n/Y ) for n > Y (log T )2/2
+
+a(n)
+
+≤
+
+≤
+
+n
+
+|
+
+I(z) = exp
+
+−
+
+1
+Y
+
+−
+
++
+
+(cid:17)
+
+<n<Y (log T )2/2
+
+XM
+
+a(n)
+nz exp
+
+n
+Y
+
+(cid:17)
+
+−
+
+(cid:16)
+
++ O
+
+1
+T
+
+.
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+Splitting into dyadic blocks,
+
+τ (n). Hence, separating n = 1
+
+I(z) = exp
+
+1
+Y
+
++
+
+(cid:17)
+
+−
+
+(cid:16)
+
+M
+
+N
+/2<N <Y (log T )2 X
+
+XN =2j
+
+∼
+
+n
+
+a(n)
+nz exp
+
+n
+Y
+
+(cid:17)
+
+−
+
+(cid:16)
+
++ O
+
+1
+T
+
+.
+
+(cid:17)
+
+(cid:16)
+
+On the other hand, by using Mellin inversion to rewrite exp(
+
+n/Y ), we see that
+
+−
+
+I(z) =
+
+1
+2πi
+
+Z(2)
+
+Y sΓ(s)M(z + s)ζ(z + s)ds.
+
+We are interested in this expression when z = ρ = β + iγ. We move the line of integration
+to Re(s) =
+ρ,
+since the simple pole of the gamma function at s = 0 is cancelled out by the zero ρ of zeta.
+Therefore
+
+2 , in the process picking up only a contribution from the pole at s = 1
+
+β + 1
+
+−
+
+−
+
+I(ρ) = Y 1
+−
+
+ρΓ(1
+
+ρ)M(1) +
+
+−
+
+1
+2πi
+
+β+1/2)
+
+Z(
+−
+
+Y sΓ(s)M(ρ + s)ζ(ρ + s)ds.
+
+The rapid decay of the gamma function in vertical strips implies
+Y 1
+−
+
+ρ)M(1) = O(T −
+
+ρΓ(1
+
+1),
+
+1) we ﬁnd by comparing our two expressions for I(ρ) that
+
+−
+
+a(n)
+nρ exp
+
+and since exp(
+
+1/Y ) = 1 + O(Y −
+
+−
+
+1 + O
+
+1
+T 1/2
+
++
+
+(cid:17)
+
+(cid:16)
+
+/2<N <Y (log T )2 Xn
+M
+At least one of the following is true:
+
+XN =2j
+
+N
+
+∼
+
+a(n)
+nρ exp
+
+n
+Y
+
+−
+
+(cid:16)
+
+1
+3 log T
+
+,
+
+≥
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+or
+
+N
+n
+X
+∼
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+n
+Y
+
+(cid:17)
+
+−
+
+(cid:16)
+
+=
+
+1
+2πi
+
+β+1/2)
+
+Z(
+−
+
+Y sΓ(s)M(ρ + s)ζ(ρ + s)ds.
+
+for some N = 2j
+
+/2, T 1/2(log T )2]
+
+[
+M
+
+∈
+
+Y sΓ(s)M(ρ + s)ζ(ρ + s)ds
+
+β+1/2)
+
+Z(
+−
+
+1
+3
+
+.
+
+≥
+
+(cid:3)
+
+Proof of Lemma 24. We may assume that T is suﬃciently large and σ
+1/2 + 1/ log T since
+otherwise the result is trivial. We change variables in (19) and use the triangle inequality to
+see that any zero ρ = β + iγ counted by RII(σ, T ) satisﬁes
+
+≥
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2πi
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+β/2
+
+1
+3 ≤
+
+T 1/4
+−
+2π
+
+∞
+
+Z
+
+−∞
+
+Γ(
+
+|
+
+−
+
+1
+2 + β + iu)
+
+|
+
+M
+
+1
+2 + iγ + iu
+
+ζ
+
+1
+2 + iγ + iu
+
+du.
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(log T )2, say, using the rapid decay of the gamma
+
+38
+
+JAMES MAYNARD AND KYLE PRATT
+
+We may truncate the integral to
+function. Since β
+
+σ
+
+≥
+
+≥
+
+|
+
+u
+1/2 + 1/ log T , we have
+1
+2 + β + iu)
+
+| ≤
+
+Γ(
+
+Γ(
+
+|
+
+−
+
+| ≤
+
+1
+2 + β)
+
+−
+
+≪
+
+log T.
+
+Thus
+
+T σ/2
+−
+
+1/4
+
+Z|
+(cid:16)
+Taking fourth powers and using H¨older’s inequality yields
+
+(cid:16)
+
+(cid:17)
+
+|≤
+
+log T ≪
+
+u
+
+(log T )2
+
+M
+
++ iγ + iu
+
+ζ
+
+1
+2
+
+1
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
+1
+2
+
++ iγ + iu
+
+du.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+4
+
+du.
+
++ iγ + iu
+
+1
+
+T 2σ
+
+−
+(log T )10 ≪
+
+M
+
++ iγ + iu
+
+ζ
+
+u
+
+Z|
+
+(log T )2
+
+|≤
+
+(cid:16)
+of (log T )3-separated Type II zeros with imaginary parts in [T, 2T ]
+
+(cid:17)
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+We may choose a set
+such that
+
+T
+
+and therefore
+
+RII(σ, T )
+
+≪
+
+(log T )14
+T 2σ
+
+1
+
+−
+
+RII(σ, T )
+
+(log T )4
+
+,
+
+|T |
+
+≪
+
+1
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+ζ
+
+(cid:16)
+1
+2
+
+u
+
+(log T )2
+
+∈T Z|
+
+Xβ+iγ
+3T
+
+M
+
+T /2
+
+Z
+
+|≤
+1
+2
+
++ it
+
++ it
+
+M
+
++ iγ + iu
+
+ζ
+
+1
+2
+
++ iγ + iu
+
+4
+
+du
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)
+
+(cid:16)
+
+4
+
+dt.
+
+(log T )17
+T 2σ
+
+1
+
+−
+
+≪
+
+(cid:17)
+By bounds for the twisted fourth moment of the zeta function (see [13, Theorem 1.1], [2,
+Theorem 1.2], or [9, Proposition 5.1]) we have
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+and therefore
+
+M
+
+1
+2
+
+(cid:16)
+
+3T
+
+T /2
+
+Z
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+2
+
++ it
+
+ζ
+
+(cid:17)
+
+(cid:16)
+
+RII(σ, T )
+
+≪
+
+T (log T )O(1),
+
++ it
+
+4
+
+dt
+
+≪
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+σ)(log T )O(1).
+
+T 2(1
+−
+
+(cid:3)
+
+References
+
+[1] R. Balasubramanian and K. Ramachandra. On the zeros of the Riemann zeta function and L-series. II.
+
+Hardy-Ramanujan J., 5:1–30, 1982.
+
+[2] S. Bettin, H. M. Bui, X. Li, and M. Radziwi l l. A quadratic divisor problem and moments of the Riemann
+
+zeta-function. J. Eur. Math. Soc. (JEMS), 22(12):3953–3980, 2020.
+
+[3] J. Bourgain. On large values estimates for Dirichlet polynomials and the density hypothesis for the
+
+Riemann zeta function. Internat. Math. Res. Notices, (3):133–146, 2000.
+
+[4] F. Carlson. ¨Uber die Nullstellen der Dirichletschen Reihen und der Riemannschen ζ-Funktion. Ark. Mat.
+
+Astron. Fys., 15(20):28 pp., 1921.
+
+[5] J. B. Conrey and H. Iwaniec. Small populations of zeros of L-functions. In Number theory, analysis,
+
+and combinatorics, De Gruyter Proc. Math., pages 11–23. De Gruyter, Berlin, 2014.
+
+[6] H. G. Diamond, H. L. Montgomery, and U. M. A. Vorhauer. Beurling primes with large oscillation.
+
+Math. Ann., 334(1):1–36, 2006.
+
+[7] G. Hal´asz. ¨Uber die Mittelwerte multiplikativer zahlentheoretischer Funktionen. Acta Math. Acad. Sci.
+
+Hungar., 19:365–403, 1968.
+
+[8] Glyn Harman. Prime-detecting sieves, volume 33 of London Mathematical Society Monographs Series.
+
+Princeton University Press, Princeton, NJ, 2007.
+
+[9] W. Heap, M. Radziwi l  l, and K. Soundararajan. Sharp upper bounds for fractional moments of the
+
+Riemann zeta function. Q. J. Math., 70(4):1387–1396, 2019.
+
+HALF-ISOLATED ZEROS AND ZERO-DENSITY ESTIMATES
+
+39
+
+[10] D. R. Heath-Brown. The diﬀerences between consecutive primes. II. J. London Math. Soc. (2),
+
+19(2):207–220, 1979.
+
+[11] D. R. Heath-Brown. Zero density estimates for the Riemann zeta-function and Dirichlet L-functions. J.
+
+London Math. Soc. (2), 19(2):221–232, 1979.
+
+[12] D. R. Heath-Brown. The number of primes in a short interval. J. Reine Angew. Math., 389:22–63, 1988.
+[13] C. P. Hughes and M. P. Young. The twisted fourth moment of the Riemann zeta function. J. Reine
+
+Angew. Math., 641:203–236, 2010.
+
+[14] M. N. Huxley. On the diﬀerence between consecutive primes. Invent. Math., 15:164–170, 1972.
+[15] A. E. Ingham. On the estimation of N (σ, T ). Quart. J. Math. Oxford Ser., 11:291–292, 1940.
+[16] H. Iwaniec. Lectures on the Riemann zeta function, volume 62 of University Lecture Series. American
+
+Mathematical Society, Providence, RI, 2014.
+
+[17] H. Iwaniec and E. Kowalski. Analytic number theory, volume 53 of American Mathematical Society
+
+Colloquium Publications. American Mathematical Society, Providence, RI, 2004.
+
+[18] H. L. Montgomery. Topics in multiplicative number theory. Lecture Notes in Mathematics, Vol. 227.
+
+Springer-Verlag, Berlin-New York, 1971.
+
+[19] H. L. Montgomery. Ten lectures on the interface between analytic number theory and harmonic analysis,
+volume 84 of CBMS Regional Conference Series in Mathematics. Published for the Conference Board of
+the Mathematical Sciences, Washington, DC; by the American Mathematical Society, Providence, RI,
+1994.
+
+[20] H. Robbins. A remark on Stirling’s formula. Amer. Math. Monthly, 62:26–29, 1955.
+[21] W.
+
+Sawin. Can
+
+exponential
+
+a whole
+
+interval?
+
+small
+
+sums
+
+on
+
+be
+
+MathOverﬂow.
+
+https://mathoverflow.net/q/228792 (version: 2016-01-20).
+
+[22] N. Watt. Kloosterman sums and a mean value for Dirichlet polynomials. J. Number Theory, 53(1):179–
+
+210, 1995.
+
+Mathematical Institute, Woodstock Road, Oxford OX2 6GG, UK
+Email address, James Maynard: james.alexander.maynard@gmail.com
+
+All Souls College, University of Oxford, UK
+Email address, Kyle Pratt: kyle.pratt@all-souls.ox.ac.uk
+
+

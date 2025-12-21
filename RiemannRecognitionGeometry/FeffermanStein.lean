@@ -702,6 +702,25 @@ def InBMOWithBound (f : ℝ → ℝ) (M : ℝ) : Prop :=
 def InBMO (f : ℝ → ℝ) : Prop :=
   ∃ M : ℝ, InBMOWithBound f M
 
+/-! ### Local (interval-restricted) BMO certificates
+
+The global predicate `InBMOWithBound f M` quantifies over **all** intervals `[a,b] ⊂ ℝ`.
+For the B2′ renormalized-tail architecture we also want a localized version that only quantifies
+over subintervals of a fixed base interval `I_R = [t0-L, t0+L]`.
+
+These definitions are intentionally lightweight; they are used to express “BMO on a window”
+without committing to any particular renormalization implementation.
+-/
+
+/-- `InBMOWithBoundOn f a b M`: mean oscillation of `f` is bounded by `M` on every subinterval
+of `[a,b]`. -/
+def InBMOWithBoundOn (f : ℝ → ℝ) (a b : ℝ) (M : ℝ) : Prop :=
+  0 < M ∧ ∀ x y : ℝ, a ≤ x → y ≤ b → x < y → meanOscillation f x y ≤ M
+
+/-- Local BMO certificate on the Whitney base segment `I.interval = [t0-L, t0+L]`. -/
+def InBMOWithBoundOnWhitney (f : ℝ → ℝ) (I : WhitneyInterval) (M : ℝ) : Prop :=
+  InBMOWithBoundOn f (I.t0 - I.len) (I.t0 + I.len) M
+
 lemma InBMOWithBound.inBMO {f : ℝ → ℝ} {M : ℝ} (h : InBMOWithBound f M) : InBMO f :=
   ⟨M, h⟩
 
@@ -2910,43 +2929,71 @@ theorem phase_decomposition_exists (I : WhitneyInterval) (ρ : ℂ)
   · -- Apply the Weierstrass tail bound hypothesis
     exact h_tail_bound
 
-/-! ## Dyadic Annulus Structure and Renormalized Tail
+/-! ## Local-window geometry and renormalized tails (B2′-compatible notes)
 
-The key to achieving small K_tail is the **renormalized tail** approach:
-- Instead of bounding log|ξ| in BMO globally (which gives ~25 due to zeros)
-- We subtract the local Blaschke factors for zeros in dyadic annuli above I
-- The remaining function f_tail^I has localized BMO norm ~0.11
+The B2′ architecture controls oscillation on a *base interval* `I_R = [t₀-L, t₀+L]` by
+renormalizing out the logarithmic singularities contributed by zeros in a controlled **local window**.
 
-### Dyadic Annulus Structure B(I,K)
+The key points (see `B2_LONG_TERM_STRATEGY.md`):
+- Global tiny-BMO for raw `log|ζ(1/2+it)|` is obstructed by critical-line zeros.
+- The correct target is a **localized** BMO bound for a **renormalized tail** datum.
 
-For I = [t₀-L, t₀+L] and K ∈ ℕ, define B(I,K) as the union of dyadic Whitney annuli:
-- A₀: {ρ : σ ∈ [0.75L, 1.5L], |γ-t₀| ≤ L}           (local box)
-- Aⱼ: {ρ : σ ∈ (1.5·2ʲL, 1.5·2^{j+1}L], |γ-t₀| ≤ 2^{j+1}L}  for j=1..K
+### Local window `Q_K(I)` (informal)
 
-### Annulus Decay
+For a base interval `I_R` and cutoff `K`, the local window is an enlarged Carleson-style box
+above `I_R`, including the small-σ regime:
 
-For t ∈ I and ρ ∈ Aⱼ, the Poisson weight satisfies:
-  ∫_I P(t-γ, σ) dt ≤ C · (L/σ) ≤ C · 2^{-j}
+  - `0 ≤ σ ≤ 2^(K+3)·L`
+  - `|γ - t₀| ≤ 2^(K+1)·L`
 
-Summing j > K gives tail ≤ C' · 2^{-K}.
+This is encoded as the predicate `inLocalWindow` below. (The older cutoff `inLocalAnnuli`
+required `σ ≥ 0.75·L` and is deprecated.)
 
-### Renormalized Tail
+### Far-field / annulus decay
 
-  f_tail^I(t) := log|ξ(1/2+it)| - (1/2)∑_{ρ∈B(I,K)} log((t-γ_ρ)² + σ_ρ²)
-
-With K = 3-4 annuli: ∥f_tail^I∥_BMO(I) ≤ C_tail ≈ 0.11
+Zeros outside the local window are “far” from `I_R`. The Poisson weight integral on `I_R`
+decays geometrically in the dyadic distance, and summing the dyadic tail yields a bound of
+order `2^{-K}`. This is exactly what the lemmas `annulus_decay_bound` and
+`far_field_geometric_bound` formalize.
 -/
 
-/-- Predicate: zero is in the local annulus collection B(I,K).
+/-- Deprecated cutoff from an earlier “renormalized tail” draft.
 
-    For a Whitney interval with half-length L centered at t₀,
-    a zero ρ = σ + iγ is in B(I,K) if:
-    - σ ≥ 0.75L (in the band interior or above)
-    - The annulus index j ≤ K -/
+This predicate enforced `σ ≥ 0.75·L`. That becomes **vacuous** on some Whitney scales and,
+more importantly, it excludes the **small-σ regime** where critical-line zeros create the
+`log|t-γ|` singularities that B2′ must renormalize away.
+
+Use `inLocalWindow` below instead (it includes `0 ≤ σ`).
+-/
+@[deprecated "Deprecated cutoff (σ ≥ 0.75·L). Use `inLocalWindow` for B2′-compatible renormalization windows." (since := "2025-12-20")]
 def inLocalAnnuli (L t0 : ℝ) (K : ℕ) (σ γ : ℝ) : Prop :=
   σ ≥ 0.75 * L ∧
   (σ ≤ 1.5 * (2 : ℝ)^K * L) ∧
   (|γ - t0| ≤ (2 : ℝ)^(K+1) * L)
+
+/-- B2′-compatible local window predicate (includes the small-σ regime).
+
+Interpretation: for a Whitney base interval with half-length `L` centered at `t0`, a zero
+with half-plane coordinates `(γ,σ)` is “local” at cutoff `K` if it lies in the enlarged
+Carleson-style box above `I_R`, with dyadic horizontal dilation `2^(K+1)` and vertical height
+`2^(K+3)·L`.
+
+This matches the plan’s `Q_K(I)` window and, crucially, allows `σ = 0` (critical-line zeros).
+-/
+def inLocalWindow (L t0 : ℝ) (K : ℕ) (σ γ : ℝ) : Prop :=
+  0 ≤ σ ∧
+  (σ ≤ (2 : ℝ)^(K+3) * L) ∧
+  (|γ - t0| ≤ (2 : ℝ)^(K+1) * L)
+
+/-- The B2′ local window as a subset of half-plane coordinates `(γ,σ) ∈ ℝ×ℝ`.
+
+This is the set-theoretic packaging of `inLocalWindow` used for measure bookkeeping (μ-Carleson,
+dyadic annuli, etc.). We store points as `(γ,σ)` to match the measure conventions in the plan. -/
+def localWindowBox (L t0 : ℝ) (K : ℕ) : Set (ℝ × ℝ) :=
+  { p : ℝ × ℝ | inLocalWindow L t0 K p.2 p.1 }
+
+lemma mem_localWindowBox_iff {L t0 : ℝ} {K : ℕ} {p : ℝ × ℝ} :
+    p ∈ localWindowBox L t0 K ↔ inLocalWindow L t0 K p.2 p.1 := Iff.rfl
 
 /-- arctan is positive for positive x. -/
 lemma arctan_pos_of_pos {x : ℝ} (hx : 0 < x) : 0 < Real.arctan x := by

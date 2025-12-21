@@ -1,0 +1,4872 @@
+Cyclic cocycles in the spectral action
+
+Teun D.H. van Nuland*,
+
+Walter D. van Suijlekom†
+
+Radboud University, Heyendaalseweg 135,
+6525 AJ Nijmegen, The Netherlands
+
+September 19, 2022
+
+Abstract
+
+We show that the spectral action, when perturbed by a gauge potential, can be written
+as a series of Chern–Simons actions and Yang–Mills actions of all orders. In the odd orders,
+generalized Chern–Simons forms are integrated against an odd (b, B)-cocycle, whereas, in the
+even orders, powers of the curvature are integrated against (b, B)-cocycles that are Hochschild
+cocycles as well. In both cases, the Hochschild cochains are derived from the Taylor series
+expansion of the spectral action Tr( f (D + V)) in powers of V = πD(A), but unlike the Taylor
+expansion we expand in increasing order of the forms in A. This extends [11], which computes
+only the scale-invariant part of the spectral action, works in dimension at most 4, and assumes
+the vanishing tadpole hypothesis. In our situation, we obtain a truly inﬁnite odd (b, B)-cocycle.
+The analysis involved draws from recent results in multiple operator integration, which also
+allows us to give conditions under which this cocycle is entire, and under which our expansion
+is absolutely convergent. As a consequence of our expansion and of the gauge invariance of
+the spectral action, we show that the odd (b, B)-cocycle pairs trivially with K1.
+
+Contents
+
+1
+
+Introduction
+
+2 Preliminaries on multiple operator integrals
+
+3 Estimating the multiple operator integral in the s-summable case
+
+3.1 Bound on the multiple operator integral . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2 Continuity of the multiple operator integral . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+
+4
+
+7
+.
+9
+. 11
+
+2
+2
+0
+2
+
+p
+e
+S
+6
+1
+
+]
+
+A
+Q
+.
+h
+t
+a
+m
+
+[
+
+2
+v
+9
+9
+8
+9
+0
+.
+4
+0
+1
+2
+:
+v
+i
+X
+r
+a
+
+4 Cyclic cocycles and universal forms underlying the spectral action
+
+11
+4.1 Hochschild and cyclic cocycles
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+4.2 Cyclic cocycles associated to multiple operator integrals . . . . . . . . . . . . . . . . . 14
+4.3 Derivatives of the spectral action in terms of universal forms . . . . . . . . . . . . . . 15
+4.4 Near-tracial behavior of (cid:82)
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+. 18
+4.5 Higher-order generalized Chern–Simons forms . . . . . . . . . . . . . . . . . . . . .
+
+φ .
+
+*t.vannuland@math.ru.nl
+†waltervs@math.ru.nl
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+5 Expansion of the spectral action in terms of (b, B)-cocycles
+
+5.1 Truncated expansion .
+.
+5.2 Convergence .
+
+.
+
+.
+
+.
+
+.
+
+.
+.
+
+.
+.
+
+19
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 24
+.
+
+.
+
+6 Gauge invariance and the pairing with K-theory
+
+27
+
+1 Introduction
+
+The spectral action [2, 3] is one of the key instruments in the applications of noncommutative ge-
+ometry to particle physics. With inner ﬂuctuations [10] of a noncommutative manifold playing
+the role of gauge potentials, the spectral action principle yields Lagrangians for them. In fact, the
+asymptotic behavior of the spectral action for small momenta leads in this way to local ﬁeld the-
+ories. For example, this provides the simplest way known to geometrically explain the dynamics
+and interactions of the gauge bosons and the Higgs boson in the Standard Model Lagrangian as
+an effective ﬁeld theory [4] (see also the textbooks [13, 25]). These techniques extend to more gen-
+eral noncommutative manifolds, and, indeed, if one restrict to the scale-invariant part, one may
+naturally identify a Yang–Mills term and a Chern–Simons term to elegantly appear in the spectral
+action [11]. However, it remains an open problem to determine the general form of the spectral
+action without resorting to the scale-invariant part, even though from the physical perspective
+there is a strong desire to go beyond this effective ﬁeld theory approach.
+
+Motivated by this, we study the spectral action when it is expanded in terms of inner ﬂuc-
+tuations associated to an arbitrary noncommutative manifold, without resorting to heat-kernel
+techniques. Indeed, the latter are not always available and an understanding of the full spectral
+action could provide deeper insight in the origin of these gauge theories from noncommutative
+geometry. Let us now give a more precise description of our setup.
+
+We let (A, H, D) be an s-summable spectral triple (cf. Deﬁnition 12 below). If f : R → C is a
+
+suitably nice function we may deﬁne the spectral action [3]:
+
+An inner ﬂuctuation, as explained in [10], is given by a Hermitian universal one-form
+
+Tr( f (D)).
+
+A =
+
+n
+∑
+j=1
+
+ajdbj ∈ Ω1(A),
+
+for elements aj, bj ∈ A. The terminology ‘ﬂuctuation’ comes from representing A on H as
+
+V := πD(A) :=
+
+n
+∑
+j=1
+
+aj[D, bj] ∈ B(H)sa,
+
+(1)
+
+(2)
+
+and ﬂuctuating D to D + V in the spectral action. The variation of the spectral action under the
+inner ﬂuctuation is then given by
+
+Tr( f (D + V)) − Tr( f (D)).
+
+(3)
+
+As spectral triples can be understood as noncommutative spin manifolds encoding the gauge
+ﬁelds as an inner structure, one could hope that perturbations of the spectral action could be un-
+derstood in terms of noncommutative versions of geometrical, gauge theoretical concepts. Hence
+
+2
+
+we would like to express (3) in terms of universal forms constructed from A. To express an action
+functional in terms of universal forms, one is naturally led to cyclic cohomology. As it turns out,
+hidden inside the spectral action we will identify an odd (b, B)-cocycle ( ˜ψ1, ˜ψ3, . . .) and an even
+(b, B)-cocycle (φ2, φ4, . . .) for which bφ2k = Bφ2k = 0, i.e., each Hochschild cochain φ2k forms its
+own (b, B)-cocycle (0, . . . , 0, φ2k, 0, . . .). On the other hand, the odd (b, B)-cocycle ( ˜ψ2k+1) is truly
+inﬁnite.
+
+The main result of this paper is that for suitable f : R → C we may expand
+
+Tr( f (D + V) − f (D)) =
+
+(cid:18)(cid:90)
+
+∞
+∑
+k=1
+
+ψ2k−1
+
+cs2k−1(A) +
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+(cid:19)
+
+,
+
+Fk
+
+(4)
+
+in which the series converges absolutely. Here ψ2k−1 is a scalar multiple of ˜ψ2k−1, Ft = tdA + t2 A2,
+so that F = F1 is the curvature of A, and cs2k−1(A) = (cid:82) 1
+dt is a generalized noncommutative
+Chern–Simons form. We also give a bound on the remainder of this expansion.
+
+0 AFk−1
+
+t
+
+As already mentioned, a similar result was shown earlier to hold for the scale-invariant part
+of the spectral action. Indeed, Connes and Chamseddine [11] expressed the scale-invariant part in
+dimension ≤ 4 as
+
+ζD+V(0) − ζD(0) = −
+
+(cid:90)
+
+1
+4
+
+τ0
+
+(dA + A2) +
+
+(cid:90)
+
+(cid:18)
+
+ψ
+
+1
+2
+
+AdA +
+
+(cid:19)
+
+,
+
+A3
+
+2
+3
+
+for a certain Hochschild 4-cocycle τ0 and cyclic 3-cocycle ψ.
+
+Interestingly, a key role in our extension of this result to the full spectral action will be played
+by multiple operator integrals. It is the natural replacement of residues in this context, and also
+allows to go beyond dimension 4. For our analysis of the cocycle structure that appears in the full
+spectral action we take the Taylor series expansion as a starting point. This explains the appear-
+ance of multiple operator integrals, as traces thereof are multilinear extensions of the derivatives
+of the spectral action. This viewpoint is also studied in [22, 24], where multiple operator integrals
+are used to investigate the Taylor expansion of the spectral action. As we will show, multiple op-
+erator integrals can also be used to deﬁne cyclic cocycles, because of some known properties of
+the multiple operator integral that have been proved in increasing generality in the last decades
+(e.g., in [1, 12, 17, 22, 24]). We push these results a bit further, in Section 3, by proving estimates
+and continuity properties for the multiple operator integral when the self-adjoint operator has an
+s-summable resolvent. Extending these results to the case of non-unital spectral triples is left open
+for future research.
+
+These techniques also allow us to show that the found (b, B)-cocycles are entire in the sense of
+[8]. This makes it meaningful to analyze their pairing with K-theory, which we ﬁnd to be trivial in
+Section 6.
+
+Conventions
+
+Throughout, we ﬁx a separable Hilbert space H. If we say D is self-adjoint in H, it is possibly
+unbounded and self-adjoint with a domain dense in H. We let B(H) be the C*-algebra of bounded
+operators on H. For M ⊆ B(H), Msa denotes the self-adjoint elements in M. We denote by
+S s ⊆ B(H) the Schatten class of s-summable operators, for s ∈ N = {1, 2, . . .}. We write N0 =
+{0, 1, 2, . . .}.
+
+3
+
+Universal forms When considering a spectral triple (A, H, D), we write Ω•(A) = ⊕n∈N
+Ωn(A)
+for the universal differential graded algebra over A =: Ω0(A), endowed with grading d. We
+D(A) := πD(Ω1(A)) where πD : Ω1(A) → B(H) is deﬁned by (1) and (2). Whenever
+write Ω1
+A ∈ Ω1(A), we write F := dA + A2 ∈ Ω2(A) for the curvature of A.
+
+0
+
+Functions We write Cn for the space of n times continuously differentiable functions, C := C0,
+C0 for the space of continuous functions vanishing at inﬁnity, Cn
+c for the space of compactly sup-
+ported functions in Cn, D := C∞
+for the space of smooth compactly supported functions, S for
+c
+the Schwartz space, and Lp for the Lebesgue spaces (p ∈ [1, ∞]). All these functions are deﬁned
+on R and have values in C. We deﬁne u(x) := x − i, and write u−1 for the multiplicative inverse
+of u ∈ C.
+
+dy
+
+Fourier transforms We deﬁne the Fourier transform of an integrable function f on R by ˆf (x) :=
+(cid:82)
+2π f (y)e−iyx. For a general (not necessarily tempered) distribution f ∈ D(cid:48) we can still deﬁne the
+R
+Fourier transform as a distribution ˆf : ˆD → C by (cid:104) ˆf |ϕ(cid:105) := (cid:104) f | ˆϕ(cid:105) for all Schwartz functions ϕ with
+ˆϕ ∈ D. The restriction ˆ : S (cid:48) → S (cid:48) is bijective with inverse denoted by ˇ : S (cid:48) → S (cid:48).
+
+This more general deﬁnition of the Fourier transform will be applied in the following way. For
+an arbitrary continuous function f (which is in D(cid:48) but not a priori in S (cid:48)) we will often assume that
+ˆˇˆf = ˆf ,
+ˆf ∈ L1. Because then ˆf ∈ S (cid:48) and ˇˆf ∈ C0 by the Riemann-Lebesgue lemma, we ﬁnd that
+which implies (cid:104) f |ϕ(cid:105) = (cid:104) ˇˆf |ϕ(cid:105) for all ϕ ∈ D. Therefore f = ˇˆf ∈ C0 and f (x) = (cid:82) ˆf (y)eixy dy.
+
+2 Preliminaries on multiple operator integrals
+
+In this section, we introduce the subject of multiple operator integration in a sufﬁciently light way
+to ﬁt our purposes. For a more extensive discussion, we refer to [1, 20, 23].
+
+For every n ∈ N0 and f ∈ Cn, deﬁne the divided difference f [n] recursively as follows:
+
+f [0](x0) := f (x0)
+
+f [n+1](x0, . . . , xn+1) :=
+
+(cid:40) f [n](x0,...,xn)− f [n](x0,...,xn−1,xn+1)
+xn−xn+1
+f [n](x0, . . . , xn)
+
+∂
+∂xn
+
+if xn (cid:54)= xn+1
+if xn = xn+1.
+
+Let σ denote the standard measure on the n-simplex,
+
+(cid:40)
+
+∆n :=
+
+(s0, . . . , sn) ∈ Rn+1
+≥0
+
+:
+
+(cid:41)
+
+sj = 1
+
+.
+
+n
+∑
+j=0
+
+In order to deﬁne a multilinear operator integral, we need the following lemma.
+
+Lemma 1. Whenever f ∈ Cn is such that (cid:100)f (n) ∈ L1, we can write f [n] as
+
+f [n](x0, . . . , xn) =
+
+(cid:90)
+
+(cid:90)
+
+∆n
+
+R
+
+eits0x0 · · · eitsn xn (cid:100)f (n)(t) dt dσ(s0, . . . , sn).
+
+Proof. One simply combines the proofs of [20, Lemma 5.1] and [20, Lemma 5.2].
+
+4
+
+It is easily seen that (Σ, σf ) := (∆n × R, σ × (cid:100)f (n)) is a ﬁnite measure space with total variation
+
+equal to 1
+
+n! (cid:107)(cid:100)f (n)(cid:107)1.
+
+Deﬁnition 2. Let D0 . . . , Dn be self-adjoint in H and let f ∈ Cn such that (cid:100)f (n) ∈ L1. The multiple
+operator integral TD0,...,Dn
+
+: B(H)×n → B(H) is deﬁned on V1, . . . , Vn ∈ B(H) by
+
+f [n]
+
+TD0,...,Dn
+f [n]
+
+(V1, . . . , Vn)y :=
+
+(cid:90)
+
+(cid:90)
+
+∆n
+
+R
+
+eits0D0V1eits1D1 · · · Vneitsn Dn y (cid:100)f (n)(t) dt dσ(s0, . . . , sn),
+
+(5)
+
+for y ∈ H. In the case that Dj = D for all j, we also write TD
+
+f [n] := TD,...,D
+
+f [n]
+
+.
+
+This is a special case of the operator integral Tφ in [1, Deﬁnition 4.1] for the function φ = f [n].
+We use the properties of Tφ proven there, e.g. we use [1, Lemma 4.3], to conclude that (5) does
+not depend on the representation of f [n] as given by Lemma 1. We also note that (5) in particular
+implies TD
+
+f [0] = f (D).
+
+An important property of the multiple operator integral TD
+higher-order derivative of a trace functional like the spectral action:
+
+f [n] is that it allows us to compute a
+
+1
+n!
+
+dn
+dtn Tr( f (D + tV))(cid:12)
+
+(cid:12)t=0
+
+= Tr(TD
+
+f [n] (V, . . . , V)),
+
+(6)
+
+see for instance [1, Theorem 5.7]. Under other assumptions, this formula is proven in [23, Theorem
+5.3.5], [17, Theorem 3.12] and [20, equation (5.30)]. In other words, multiple operator integrals are
+multilinear extensions of higher-order derivatives of the spectral action, which is why they are of
+interest to us. We write the Taylor series expansion of the spectral action as
+
+Tr( f (D + V)) ∼
+
+∞
+∑
+n=0
+
+Tr(TD
+
+f [n] (V, . . . , V)).
+
+(7)
+
+The remainder of this Taylor series can be written in terms of a single multiple operator integral:
+
+Proposition 3. For any K ∈ N0, let f ∈ CK+1 be such that (cid:100)f (n) ∈ L1 for n ∈ {0, . . . , K + 1}. Then
+
+f (D + V) − f (D) −
+
+K
+∑
+n=1
+
+1
+n!
+
+dn
+dtn f (D + tV)
+
+(cid:12)
+(cid:12)
+(cid:12)t=0
+
+= TD+V,D,...,D
+f [K+1]
+
+(V, . . . , V).
+
+(8)
+
+Proof. The proof of [17, Theorem 3.13] exactly goes through for the stated class of functions.
+
+The following lemma is an adaptation of [1, Lemma 4.6]. We give its proof for convenience of
+
+the reader.
+Lemma 4. Fix n ∈ N0 and f ∈ Cn such that (cid:100)f (n) ∈ L1, and let D0, . . . , Dn be self-adjoint in H. Suppose
+α, αj ∈ [1, ∞] with 1
+
+, and let Vj ∈ S αj, where we set S ∞ = B(H). We then have
+
+α = 1
+α1
+
++ . . . + 1
+αn
+
+(cid:13)
+(cid:13)TD0,...,Dn
+(cid:13)
+f [n]
+
+(V1, . . . , Vn)
+
+(cid:13)
+(cid:13)
+(cid:13)α
+
+≤
+
+1
+n!
+
+(cid:13)
+(cid:13)
+(cid:13)(cid:100)f (n)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+(cid:107)V1(cid:107)α1
+
+· · · (cid:107)Vn(cid:107)αn
+
+.
+
+5
+
+Proof. Assume that α < ∞. Deﬁne
+
+As,t := eits0D0V1eits1D1 · · · Vneitsn Dn,
+
+for all (s, t) ∈ ∆n × R = Σ. Using H ¨older’s inequality we ﬁnd that As,t ∈ S α and
+
+Let B ∈ S α(cid:48)
+
+be arbitrary, for α(cid:48) the H ¨older conjugate exponent of α. Deﬁne
+
+(cid:107)As,t(cid:107)α ≤ (cid:107)V1(cid:107)α1
+
+· · · (cid:107)Vn(cid:107)αn
+
+.
+
+g(s, t) := As,tB,
+
+and notice that g : Σ → S 1 is uniformly S 1-bounded. For all j ≤ n, the map (s, t) (cid:55)→ eitsj Dj is
+strongly continuous, and therefore g : Σ → S 1 is so*-continuous. By [1, Lemma 3.10], we obtain
+
+(cid:12)
+(cid:12)Tr(TD0,...,Dn
+(cid:12)
+f [n]
+
+(V1, . . . , Vn)B)
+
+(cid:12)
+(cid:12)
+(cid:12) =
+
+≤
+
+Tr(As,tB) dσf (s, t)
+
+Σ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Tr |As,tB| d|σf |(s, t)
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:90)
+
+Σ
+
+≤ (cid:107)V1(cid:107)α1
+
+· · · (cid:107)Vn(cid:107)αn
+
+(cid:107)B(cid:107)α(cid:48)
+
+(cid:13)
+(cid:13)
+(cid:13)(cid:100)f (n)
+
+(cid:13)
+(cid:13)
+(cid:13)∞
+
+.
+
+1
+n!
+
+When α = 1, simply taking a unitary B such that TD0,...,Dn
+(V1, . . . , Vn)|
+yields the result. If α ∈ (1, ∞), then an application of (S α(cid:48) )∗ = S α gives the result. If α = ∞, one
+obtains the lemma directly by the triangle inequality
+
+(V1, . . . , Vn)B = |TD0,...,Dn
+
+(cid:13)
+(cid:13) ≤ (cid:82) (cid:107)As,t(cid:107).
+
+(cid:82) As,t
+
+(cid:13)
+(cid:13)
+
+f [n]
+
+f [n]
+
+Lemma 4 shows in particular that TD0,...,Dn
+
+: B(H)×n → B(H) is (cid:107)·(cid:107)-continuous. When we
+replace (B(H), (cid:107)·(cid:107)) by (B(H)1, s.o.t.), this is known to still hold true (see [1, Proposition 4.9]).
+These results can be uniﬁed and generalized by writing Lα := (S α, (cid:107)·(cid:107)α) for α ∈ [1, ∞) and L∞
+:=
+(B(H)1, s.o.t.). We then have the following.
+
+f [n]
+
+Lemma 5. Let f ∈ Cn with (cid:100)f (n) ∈ L1 and let α, αj ∈ [1, ∞] with 1
+αn < ∞ or α1 = . . . = αn = ∞. Then
+
+α = 1
+α1
+
++ . . . + 1
+αn
+
+. Assume that either
+
+TD0,...,Dn
+f [n]
+
+: Lα1 × · · · × Lαn → Lα
+
+is continuous.
+
+Proof. If α = ∞, then all αj = ∞, and the result is proven in [1, Proposition 4.9]. If α < ∞, we can
+use the same technique and notation as in the proof of Lemma 4 to ﬁnd
+
+Tr(TD0,...,Dn
+f [n]
+
+(V1, . . . , Vn)B) =
+
+(cid:90)
+
+Σ
+
+Tr(As,tB)dσf (s, t),
+
+(9)
+
+for every B ∈ S α(cid:48)
+
+. By H ¨older’s inequality and the continuity of the product B(H)1 × Lp → Lp,
+
+Lp × Lq → Lr,
+
+(A, B) (cid:55)→ AB
+
+(10)
+
+6
+
+r and either q < ∞ or p = q = ∞. Therefore
+is continuous for every p, q, r ∈ [1, ∞] with 1
+also the product Lp × (Lq × Ls) → Lr is continuous whenever p, q, r, s ∈ [1, ∞] satisfy 1
+s =
+r and either s < ∞ or p = q = s = ∞. By repeatedly applying this continuity property, we ﬁnd
+1
+that the product
+
+q = 1
+
+p + 1
+
+p + 1
+
+q + 1
+
+Lα1 × · · · × Lαn → Lα,
+
+(V1, . . . , Vn) (cid:55)→ V1 · · · Vn
+
+(11)
+
+is continuous under the standing assumptions on α, αj. Hence, for every (s, t) ∈ Σ, the operator
+As,tB ∈ L1 depends continuously on (V1, . . . , Vn) ∈ Lα1 × · · · × Lαn. Since a convergent sequence
+in Lp is bounded w.r.t. (cid:107)·(cid:107)p (where (cid:107)·(cid:107)∞ = (cid:107)·(cid:107)) an application of the dominated convergence
+theorem shows that (9) depends sequentially continuously on (V1, . . . , Vn). By our speciﬁc choice
+of L∞
+
+, every Lp is a metric space, hence sequential continuity implies continuity.
+
+The relation 1
+
+is central to the above Lemma. When the resolvent of D is s-
+Schatten, however, for an explicit class W s,n of functions f , deﬁned in Section 3, we can do away
+with this relation. We will prove this in §3.2.
+
++ . . . + 1
+αn
+
+α = 1
+α1
+
+3 Estimating the multiple operator integral in the s-summable case
+
+We specialize the class of functions f that appear in Proposition 3 and consider for s, n ∈ N0:
+
+W s,n := { f ∈ Cn :
+
+(cid:92)
+( f um)(k) ∈ L1 for all m ≤ s and k ≤ n},
+
+where u(x) := x − i. Examples of functions in W s,n are n + 1-differentiable functions such that
+( f us)(k) ∈ L2 for all k ≤ n + 1, such as Schwartz functions, or functions in Cn+1
+
+.
+
+c
+
+The main result of this section will be the following bound on the multiple operator integral.
+Theorem 6. Let D be self-adjoint in H such that (D − i)−1 ∈ S s for s ∈ N. For every n ∈ N0, every
+f ∈ W s,n and every V1, . . . , Vn ∈ B(H), the multiple operator integral TD
+f [n] (V1, . . . , Vn) is trace-class and
+satisﬁes the bound
+
+(cid:13)
+(cid:13)TD
+(cid:13)
+
+f [n] (V1, . . . , Vn)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤ cs,n( f ) (cid:107)V1(cid:107) · · · (cid:107)Vn(cid:107) (cid:13)
+
+(cid:13)(D − i)−1(cid:13)
+(cid:13)
+
+s
+s,
+
+where
+
+cs,n( f ) :=
+
+min(s,n)
+∑
+k=0
+
+(cid:18)s
+k
+
+(cid:13)
+(cid:13)
+(cid:13)
+
+(cid:19)
+
+(cid:92)
+( f us−k)(n−k)
+
+(n − k)!
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+.
+
+More generally, when V ∈ B(H)sa,
+
+(cid:13)
+(cid:13)TD+V,D,...,D
+(cid:13)
+
+f [n]
+
+(V1, . . . , Vn)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤ cs,n( f ) (cid:107)V1(cid:107) · · · (cid:107)Vn(cid:107) (1 + (cid:107)V(cid:107))2s(cid:13)
+
+(cid:13)(D − i)−1(cid:13)
+(cid:13)
+
+s
+s.
+
+This theorem allows us to freely work with the traces of multiple operator integrals up to
+order n. This is the sole analytical ingredient for a truncated version of our main result, namely
+Theorem 29. However, if we want the expansion (4) to converge, we will need to impose inﬁnite
+
+7
+
+differentiability of f , as well as a growth condition on the L1-norms occurring in Theorem 6, as n
+goes to inﬁnity. We therefore introduce the space
+
+E s,γ :=
+
+(cid:110)
+
+∞
+
+f ∈ C
+
+: there exists C f ≥ 1 s.t. (cid:107)
+
+(cid:92)
+( f um)(n)(cid:107)1 ≤ Cn+1
+
+f
+
+n!γ for all m ≤ s and n ∈ N0
+
+(cid:111)
+
+,
+
+for γ ∈ (0, 1]. Our main result is that the expansion (4) holds for all functions f ∈ E s,γ, and
+certain perturbations A. If γ = 1, the expansion converges absolutely whenever the perturbation
+A is sufﬁciently small. If γ < 1 the expansion converges absolutely for all perturbations. The
+following Lemma underlies both results.
+Lemma 7. Let s ∈ N, D self-adjoint in H with (D − i)−1 ∈ S s, and γ ∈ (0, 1]. For any f ∈ E s,γ there
+exists a C ≥ 1 such that for all n ∈ N0, V1, . . . , Vn ∈ B(H), and V ∈ B(H)sa, we have
+
+(cid:13)
+(cid:13)TD+V,D,...,D
+(cid:13)
+
+f [n]
+
+(V1, . . . , Vn)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+(cid:16)
+
+Cn+1n!γ−1(cid:17)
+
+≤
+
+(cid:107)V1(cid:107) · · · (cid:107)Vn(cid:107) (1 + (cid:107)V(cid:107))2s(cid:13)
+
+(cid:13)(D − i)−1(cid:13)
+(cid:13)
+
+s
+s.
+
+Proof. Apply the deﬁnition of E s,γ to Theorem 6, and absorb 2s into the constant C.
+
+This lemma will be used in Subsection 5.2 and Section 6.
+Examples of functions in E s,1 are Schwartz functions with compactly supported Fourier trans-
+
+form. The following proposition gives more examples.
+Proposition 8. Let f ∈ C∞ and s, t ∈ N0.
+
+(i) If f ∈ E s,1 and g ∈ E t,1, then f g ∈ E s+t,1.
+
+(ii) If ˆf ∈ L1 with | ˆf (x)| ≤ e−c|x| a.e. for some c > 0, then f ∈ E 0,1.
+
+(iii) If (cid:100)f us ∈ L1 with |(cid:100)f us(x)| ≤ e−c|x| a.e. for some c > 0, then f ∈ E s,1.
+
+(iv) Rational functions in O(|x|−s−1) are in E s,1.
+
+(v) The function x (cid:55)→ e−x2
+
+is in E s,1/2 for any s ∈ N0.
+
+Proof.
+
+(i) For m ≤ s and p ≤ t, Young’s inequality gives
+
+(cid:92)
+
+( f gum+p)(n)(cid:107)1 ≤
+
+(cid:107)
+
+(cid:19)
+
+(cid:18)n
+k
+
+n
+∑
+k=0
+
+(cid:92)
+( f um)(k)(cid:107)1(cid:107)
+
+(cid:92)
+(gup)(n−k)(cid:107)1
+
+(cid:107)
+
+≤ (n + 1)n!(C f Cg)n+1.
+
+Any polynomial in n is O(Cn) for some C ≥ 1.
+
+(ii) As
+
+1
+n!
+
+2 c)n|x|n ≤
+( 1
+
+∞
+∑
+m=0
+
+1
+m!
+
+2 c|x|)m = e
+( 1
+
+1
+2 c|x|,
+
+we ﬁnd (cid:107)(cid:100)f (n)(cid:107)1 = (cid:107)|x|n ˆf (cid:107)1 ≤ (cid:107)e
+
+1
+2 c|x| ˆf (cid:107)1( 1
+
+2 c)−nn!, thereby obtaining f ∈ E 0,1.
+
+8
+
+(iii) Item (ii) gives that f us ∈ E 0,1. It is easy to see that u−s ∈ E s−1,1. Therefore (i) gives f ∈ E s−1,1,
+(cid:92)
+( f us)(n)(cid:107)1 ≤ Cn+1n! for some
+n! for m ≤ s − 1. Similar to (ii) we get (cid:107)
+
+(cid:92)
+( f um)(n)(cid:107)1 ≤ Cn+1
+
+f
+
+i.e., (cid:107)
+C ≥ 1.
+
+(iv) Follows from (iii).
+
+(v) Let f (x) = e−x2
+
+and m ∈ N0. The Fourier transform of f um is a polynomial times a Gaussian,
+
+say ( f um)ˆ(x) = p(x)e−x2/c2
+
+. Therefore,
+
+Furthermore, |x|n = cn(cid:112)(x2/c2)n ≤ cn
+
+(cid:92)
+( f um)(n)
+
+(cid:13)
+(cid:13)
+(cid:13)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+√
+
+=
+
+(cid:13)
+(cid:13)
+
+(cid:13)|x|n p(x)e−x2/c2 (cid:13)
+(cid:13)
+(cid:13)1
+
+.
+
+n!ex2/c2 =
+
+√
+
+n!cne
+
+x2
+2c2 , so
+
+(cid:92)
+( f um)(n)
+
+(cid:13)
+(cid:13)
+(cid:13)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤
+
+√
+
+n!cn
+
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+
+p(x)e
+
+− x2
+2c2
+
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)1
+
+.
+
+Therefore, f ∈ E s,1/2 for any s ∈ N0.
+
+3.1 Bound on the multiple operator integral
+
+We will now give a proof of Theorem 6, which uses the summability of D to obtain a trace class
+estimate on the multiple operator integral TD
+f [n]. For summability s = 2, a similar estimate was
+found by Anna Skripka in [22, Lemma 3.6]. This was later generalized to the case of so-called
+relative Schatten perturbations in [17, Theorem 3.10], but only holds for k-multilinear operator
+integrals of order k ≥ s.
+
+The core idea of our proof is the same as of [22, Lemma 3.6] and [17, Theorem 3.10], namely to
+expand Tf [n] (V1, . . . , Vn) as a sum of operator integrals, which should then be bounded using the
+triangle inequality and (a noncommutative) H ¨older’s inequality. For brevity, we sometimes write
+{j}
+(V1, . . . , Vk){j} := TD0,...,Dk
+V
+k
+Lemma 9. For s, n ∈ N0, f ∈ W s,n, V1, . . . , Vn ∈ B(H), and D0, . . . , Dn self-adjoint in H, we have
+
+:= Vk(Dk − i)−j, and TD0,...,Dk
+
+(V1, . . . , Vk)(Dk − i)−j.
+
+φ
+
+φ
+
+TD0,...,Dn
+f [n]
+
+(V1, . . . , Vn) =
+
+min(s,n)
+∑
+k=0
+
+(−1)k ∑
+
+j0≥0, j1,...,jk≥1,
+j0+...+jk=s
+
+TD0,...,Dn−k
+( f us−k)[n−k] (V1, . . . , Vn−k){j0}V
+
+{jk}
+{j1}
+n−k+1 · · · V
+n
+
+.
+
+If s = 0, the statement follows easily. For the
+Proof. We prove the lemma by induction on s.
+induction step, we note that the proof of [17, Theorem 3.10(i)] implies that, for all f ∈ W s,n, we
+have
+
+TD0,...,Dn
+f [n]
+
+(V1, . . . , Vn) = TD0,...,Dn
+
+( f u)[n]
+
+(V1, . . . , Vn)(Dn − i)−1 − TD0,...,Dn−1
+
+f [n−1]
+
+(V1, . . . , Vn−1)Vn(Dn − i)−1.
+
+9
+
+Suppose the claim of the lemma holds for a certain s ∈ N0. Then
+
+TD0,...,Dn
+f [n]
+
+(V1, . . . , Vn)
+
+=
+
+min(s,n)
+∑
+k=0
+
+∑
+j0≥0, j1,...,jk≥1
+j0+...+jk=s
+
+(−1)kTD0,...,Dn−k
+
+( f us−k+1)[n−k] (V1, . . . , Vn−k){j0+1}V
+
+{jk}
+{j1}
+n−k+1 · · · V
+n
+
++
+
+min(s,n−1)
+∑
+k=0
+
+∑
+j0≥0, j1,...,jk≥1
+j0+...+jk=s
+
+(−1)k+1TD0,...,Dn−k−1
+
+( f us−k)[n−k−1] (V1, . . . , Vn−k−1)V
+
+{j0+1}
+n−k V
+
+{jk}
+{j1}
+n−k+1 · · · V
+n
+
+=
+
+min(s,n)
+∑
+k=0
+
+∑
+j0≥1, j1,...,jk≥1
+j0+...+jk=s+1
+
+(−1)kTD0,...,Dn−k
+
+( f us+1−k)[n−k] (V1, . . . , Vn−k){j0}V
+
+{jk}
+{j1}
+nk+1 · · · V
+n
+
++
+
+min(s+1,n)
+∑
+k=1
+
+∑
+j0=0, j1,...,jk≥1
+j0+...+jk=s+1
+
+(−1)kTD0,...,Dn−k
+
+( f us+1−k)[n−k] (V1, . . . , Vn−k){j0}V
+
+{jk}
+{j1}
+n−k+1 · · · V
+n
+
+.
+
+In the ﬁrst term we can freely replace the sum from k = 0 to min(s, n) by a sum from k = 0 to
+min(s + 1, n), because the appearing sum over j0, . . . , jk is trivial for k = s + 1. Similarly, in the
+second term, we can freely let k run from 0 to min(s + 1, n). Combining the two terms gives the
+claim of the lemma for s + 1, which completes the induction step.
+
+We prove the main result of this section.
+
+Proof of Theorem 6. We apply Lemma 9, and ﬁnd
+
+(cid:13)
+(cid:13)TD
+(cid:13)
+
+f [n] (V1, . . . , Vn)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤
+
+min(s,n)
+∑
+k=0
+
+∑
+j0≥0, j1,...,jk≥1,
+j0+...+jk=s
+
+Apply Lemma 4, to ﬁnd
+
+(cid:13)
+(cid:13)TD
+(cid:13)
+
+( f us−k)[n−k] (V1, . . . , Vn−k){j0}(cid:13)
+
+(cid:13)
+(cid:13) s
+j0
+
+(cid:13)
+(cid:13)
+(cid:13)V
+
+{j1}
+n−k+1
+
+(cid:13)
+(cid:13)
+(cid:13) s
+j1
+
+· · ·
+
+(cid:13)
+{jk}
+(cid:13)
+(cid:13)V
+n
+
+(cid:13)
+(cid:13)
+(cid:13) s
+jk
+
+.
+
+(cid:13)
+(cid:13)TD
+(cid:13)
+
+f [n] (V1, . . . , Vn)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤
+
+min(s,n)
+∑
+k=0
+
+∑
+j0≥0, j1,...,jk≥1,
+j0+...+jk=s
+
+1
+(n − k)!
+
+(cid:13)
+(cid:13)
+(cid:13)
+
+(cid:92)
+( f us−k)(n−k)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+(cid:107)V1(cid:107) · · · (cid:107)Vn(cid:107) (cid:107)(D − i)−1(cid:107)s
+s.
+
+A bit of combinatorics shows that the sum over j0, . . . , jk adds a factor
+
+(cid:19)
+
+(cid:18)s
+k
+
+, which implies the ﬁrst
+
+statement of the theorem. The second statement follows similarly, with the added remark that
+
+(cid:107)(D + V − i)−1(cid:107)s
+
+s ≤ (1 + (cid:107)V(cid:107))2s(cid:107)(D − i)−1(cid:107)s
+s.
+
+See, e.g., [14, Appendix B, Lemma 6].
+
+10
+
+3.2 Continuity of the multiple operator integral
+Theorem 10. Let s ∈ N, D self-adjoint in H with (D − i)−1 ∈ S s, n ∈ N0, and f ∈ W s,n. The map
+
+is continuous. (Recall that L∞ = B(H)1, endowed with the strong operator topology.)
+
+f [n] : L∞ × · · · × L∞ → L1
+TD
+
+Proof. Suppose that Vm
+
+1 → V1, . . . , Vm
+
+n → Vn in L∞
+
+. By continuity of (10), we obtain that
+
+We invoke Lemma 5 to ﬁnd that
+
+(Vm
+
+n−k+l){jl } → V
+
+{jl }
+n−k+l
+
+in Ls/jl .
+
+( f us−k)[n−k] (Vm
+TD
+
+1 , . . . , Vm
+
+n−k){j0} → TD
+
+( f us−k)[n−k] (V1, . . . , Vn−k){j0}
+
+in Ls/j0.
+
+By Lemma 9 and the continuity of the product (11) (for which we remark that the assumptions on
+αj, α are indeed satisﬁed for all terms obtained from Lemma 9) we ﬁnd that
+
+TD
+f [n] (Vm
+
+1 , . . . , Vm
+
+n ) → TD
+
+f [n] (V1, . . . , Vn)
+
+in L1,
+
+so we are done.
+
+To emphasize the strength of this result, we compare it to Lemma 5 which is (at least in the
+separate cases α1, . . . , αn < ∞ and α = ∞) known in the literature. Using the continuity of the
+inclusion Lα (cid:44)→ L∞
+Corollary 11. Let s ∈ N, D self-adjoint in H with (D − i)−1 ∈ S s, n ∈ N0, and f ∈ W s,n. For any
+α1, . . . , αn ∈ [1, ∞] and any α ∈ [1, ∞] (no relation between α and the αj’s assumed) the map
+
+we obtain the following clear improvement.
+
+is continuous.
+
+TD
+f [n] : Lα1 × · · · × Lαn → Lα
+
+4 Cyclic cocycles and universal forms underlying the spectral action
+
+Mainly to ﬁx our conventions, we start with the deﬁnition of a ﬁnitely summable spectral triple,
+which is the situation in which our main result is stated.
+Deﬁnition 12. Let s ∈ N. An s-summable spectral triple (A, H, D) consists of a separable Hilbert
+space H, a self-adjoint operator D in H and a unital *-algebra A ⊆ B(H), such that, for all a ∈ A,
+a dom D ⊆ dom D and [D, a] extends to a bounded operator, and (D − i)−1 ∈ S s.
+
+Throughout this section, we let (A, H, D) be an s-summable spectral triple for s ∈ N, and we
+
+let f ∈ W s,n for n ∈ N0, unless stated otherwise.
+Deﬁnition 13. Deﬁne a multilinear function (cid:104)·(cid:105) : B(H)×n → C by
+
+(cid:104)V1, . . . , Vn(cid:105) :=
+
+n
+∑
+j=1
+
+Tr(TD
+
+f [n] (Vj, . . . , Vn, V1, . . . , Vj−1)).
+
+(12)
+
+11
+
+For our algebraic results (which make up most of Section 4 and §5.1) we only need two simple
+properties of the bracket (cid:104)·(cid:105), stated in the following lemma. After proving this lemma, all ana-
+lytical subtleties (related to the unboundedness of D) are taken care of, and we can focus on the
+algebra that ensues from these simple rules.
+
+Lemma 14. For V1, . . . , Vn ∈ B(H) and a ∈ A we have
+
+(I) (cid:104)V1, . . . , Vn(cid:105) = (cid:104)Vn, V1, . . . , Vn−1(cid:105),
+
+(II) (cid:104)V1, . . . , aVj, . . . , Vn(cid:105) − (cid:104)V1, . . . , Vj−1a, . . . , Vn(cid:105) = (cid:104)V1, . . . , Vj−1, [D, a], Vj, . . . , Vn(cid:105),
+
+where it is understood that for the edge case j = 1 we need to substitute n for j − 1 on the left-hand side,
+and f ∈ W s,n+1 is assumed to deﬁne the right-hand side.
+
+Proof. Property (I) follows immediately from Deﬁnition 13. By writing out the deﬁnitions for
+rank-1 operators V1, . . . , Vn, we have,
+
+f [n] (V1, . . . , Vj, aVj+1, . . . , Vn) − TD
+TD
+= TD
+
+f [n+1] (V1, . . . , Vj, [D, a], Vj+1, . . . , Vn),
+
+f [n] (V1, . . . , Vja, Vj+1, . . . , Vn)
+
+and the two edge cases,
+
+TD
+f [n] (aV1, . . . , Vn) − aTD
+f [n] (V1, . . . , Vn)a − TD
+TD
+
+f [n] (V1, . . . , Vn) = TD
+f [n] (V1, . . . , Vna) = TD
+
+f [n+1] ([D, a], V1, . . . , Vn),
+f [n+1] (V1, . . . , Vn, [D, a]).
+
+(13)
+
+(14)
+
+(15)
+
+By Theorem 10, and the fact that the ﬁnite-rank operators lie strongly dense in B(H), we ﬁnd that
+formulas (13) , (14) and (15) hold for all V1, . . . , Vn ∈ B(H). Hence,
+
+(cid:104)aV1, V2, . . . , Vn(cid:105) − (cid:104)V1, V2, . . . , Vna(cid:105)
+
+Tr(TD
+
+f [n] (Vj, . . . , Vn, [D, a], V1, . . . , Vj−1))
+
+f [n] (aV1, . . . , Vn)) − Tr(TD
+
+f [n] (V1, . . . , Vna))
+
+Tr(TD
+
+f [n+1] (Vj, . . . , Vn, [D, a], V1, . . . , Vj−1))
+
+=
+
+=
+
+=
+
+n
+∑
+j=2
++ Tr(TD
+n
+∑
+j=2
++ Tr(TD
+n
+∑
+j=2
++ Tr(TD
+
+f [n+1] ([D, a], V1, . . . , Vn)) + Tr(aTD
+
+f [n] (V1, . . . , Vn)) − Tr(TD
+
+f [n] (V1, . . . , Vna))
+
+Tr(TD
+
+f [n+1] (Vj, . . . , Vn, [D, a], V1, . . . , Vj−1))
+
+f [n+1] ([D, a], V1, . . . , Vn)) + Tr(TD
+
+f [n+1] (V1, . . . , Vn, [D, a]))
+
+= (cid:104)[D, a], V1, . . . , Vn(cid:105),
+
+and therefore (II) follows by applying (I).
+
+12
+
+Remark 15. Under additional assumptions – for instance when V1, . . . , Vn ∈ S 1 and f ∈ W s,n is such
+that f (cid:48) is compactly supported and analytic in a region of C containing a rectiﬁable curve γ which surrounds
+the support of f in R – we have
+
+(cid:104)V1, . . . , Vn(cid:105) =
+
+1
+2πi
+
+(cid:73)
+
+Tr
+
+γ
+
+f (cid:48)(z)
+
+n
+∏
+j=1
+
+Vj(z − D)−1.
+
+This occurs in [24, Corl. 20] in the case where V1 = V2 = · · · = Vn. It would be interesting to confront
+these resolvent formulas with the ones appearing in the work of Paycha [19].
+
+4.1 Hochschild and cyclic cocycles
+
+When the above brackets (cid:104)·(cid:105) are evaluated at one-forms a[D, b] associated to a spectral triple,
+the relations found in Lemma 14 can be translated nicely in terms of the coboundary operators
+appearing in cyclic cohomology. This is very similar to the structure appearing in the context of
+index theory, see for instance [15, 16].
+
+Let us start by recalling the deﬁnition of the boundary operators b and B from [7].
+
+Deﬁnition 16. If A is an algebra, and n ∈ N0, we deﬁne the space of Hochschild n-cochains, denoted
+by C n(A), as the space of (n + 1)-linear functionals φ on A with the property that if aj = 1 for some j ≥ 1,
+then φ(a0, . . . , an) = 0. Deﬁne operators b : C n(A) → C n+1(A) and B : C n+1(A) → C n(A) by
+
+bφ(a0, a1, . . . , an+1) :=
+
+Bφ(a0, a1, . . . , an) :=
+
+(−1)jφ(a0, . . . , ajaj+1, . . . , an+1)
+
+n
+∑
+j=0
++ (−1)n+1φ(an+1a0, a1, . . . , an),
+n
+∑
+j=0
+
+(−1)njφ(1, aj, aj+1, . . . , aj−1).
+
+Note that B = AB0 in terms of the operator A of cyclic anti-symmetrization and the operator
+
+deﬁned by B0φ(a0, a1, . . . , an) = φ(1, a0, a1, . . . , an).
+
+One may check that the pair (b, B) deﬁnes a double complex, i.e. b2 = 0, B2 = 0 and bB + Bb =
+0. Hochschild cohomology then arises as the cohomology of the complex (C n(A), b), while the
+for us relevant periodic cyclic cohomology is deﬁned as the cohomology of the totalization of the
+(b, B)-complex. That is to say,
+
+Cev(A) = (cid:77)
+k
+
+C2k(A);
+
+Codd(A) = (cid:77)
+k
+
+C2k+1(A),
+
+form a complex with differential b + B and the cohomology of this complex is called periodic cyclic
+cohomology. We will also refer to a periodic cyclic cocycle as a (b, B)-cocycle. Explicitly, an odd
+(b, B)-cocycle is thus given by a sequence
+
+where φ2k+1 ∈ C2k+1(A) and
+
+(φ1, φ3, φ5, . . .),
+
+bφ2k+1 + Bφ2k+3 = 0,
+
+for all k ≥ 0, and also Bφ1 = 0. An analogous statement holds for even (b, B)-cocycles.
+
+13
+
+4.2 Cyclic cocycles associated to multiple operator integrals
+
+We deﬁne the following Hochschild n-cochain:
+
+φn(a0, . . . , an) := (cid:104)a0[D, a1], [D, a2], . . . , [D, an](cid:105)
+
+(a0, . . . , an ∈ A).
+
+(16)
+
+We easily see that B0φn is invariant under cyclic permutations, so that Bφn = nB0φn for odd n and
+Bφn = 0 for even n. Also, φn(a0, . . . , an) = 0 when aj = 1 for some j ≥ 1. We put φ0 := 0.
+Lemma 17. We have bφn = φn+1 for odd n and we have bφn = 0 for even n.
+
+Proof. As bφ0 = 0 by deﬁnition, and b2 = 0, we need only check the case in which n is odd.
+We ﬁnd, by splitting up the sum, and shifting the second appearing sum by one, that
+
+bφn(a0, . . . , an+1)
+
+= (cid:104)a0a1[D, a1], [D, a2], . . . , [D, an+1](cid:105) − (cid:104)a0a1[D, a1], [D, a2], . . . , [D, an+1](cid:105)
+
++
+
+−
+
+n
+∑
+j=2
+
+(−1)j(cid:104)a0[D, a1], [D, a2], . . . , aj[D, aj+1], . . . , [D, an+1](cid:105)
+
+n+1
+∑
+j=2
+
+(−1)j(cid:104)a0[D, a1], [D, a2], . . . , [D, aj−1]aj, . . . , [D, an+1](cid:105)
+
+=
+
++ (cid:104)an+1a0[D, a1], [D, a2], . . . , [D, an](cid:105)
+n
+∑
+j=2
++ (cid:104)an+1a0[D, a1], . . . , [D, an](cid:105)
+
+(−1)j(cid:104)a0[D, a1], [D, a2], . . . , [D, an+1](cid:105) − (cid:104)a0[D, a1], [D, a2], . . . , [D, an]an+1(cid:105)
+
+= (cid:104)[D, an+1], a0[D, a1], [D, a2], . . . , [D, an](cid:105)
+= φn+1(a0, . . . , an+1),
+
+by (I) and (II) of Lemma 14.
+
+Lemma 18. Let n be even. We have bB0φn = 2φn − B0φn+1.
+
+Proof. Splitting the sum in two, and shifting the index of the second sum, we ﬁnd
+
+bB0φn(a0, . . . , an) =
+
+(−1)j(cid:104)[D, a0], . . . , aj[D, aj+1], . . . , [D, an](cid:105)
+
+(−1)j(cid:104)[D, a0], . . . , [D, aj−1]aj, . . . , [D, an](cid:105) + (cid:104)[D, ana0], . . . , [D, an−1](cid:105)
+
+= (cid:104)a0[D, a1], [D, a2], . . . , [D, an](cid:105) +
+
+n−1
+∑
+j=1
+
+(−1)j(cid:104)[D, a0], . . . , [D, an](cid:105)
+
+− (cid:104)[D, a0], . . . , [D, an−2], [D, an−1]an(cid:105) + (cid:104)[D, ana0], . . . , [D, an−1](cid:105)
+
+= φn(a0, . . . , an) − (cid:104)[D, a0], . . . , [D, an](cid:105) + (cid:104)[D, an], [D, a0], . . . , [D, an−1](cid:105)
+
++ (cid:104)[D, an]a0, [D, a1], . . . , [D, an−1](cid:105)
+= 2φn(a0, . . . , an) − B0φn+1(a0, . . . , an),
+
+by using both properties of the bracket (cid:104)·(cid:105) in the last step.
+
+14
+
+n−1
+∑
+j=0
+n
+∑
+j=1
+
+−
+
+Motivated by this we deﬁne
+
+so that
+
+ψ2k−1 := φ2k−1 − 1
+
+2 B0φ2k,
+
+Bψ2k+1 = 2(2k + 1)bψ2k−1.
+
+We can rephrase this property in terms of the (b, B)-complex as follows.
+Proposition 19. Let φn and ψ2k−1 be as deﬁned above and set ˜ψ2k−1 := (−1)k−1 (k−1)!
+
+(2k−1)! ψ2k−1.
+
+1. The sequence (φ2k) is a (b, B)-cocycle and each φ2k deﬁnes an even Hochschild cocycle: bφ2k = 0.
+
+2. The sequence ( ˜ψ2k−1) is an odd (b, B)-cocycle.
+
+We use an integral notation that is deﬁned by linear extension of
+
+(cid:90)
+
+φ
+
+a0da1 · · · dan :=
+
+(cid:90)
+
+φn
+
+a0da1 · · · dan := φ(a0, a1, . . . , an),
+
+and similarly for ψ.
+
+4.3 Derivatives of the spectral action in terms of universal forms
+
+In this section we will express the derivatives of the ﬂuctuated spectral action (occurring in the
+Taylor series) in terms of universal forms that are integrated along φ. We thus make the jump from
+D(A)sa to an expression in terms of A ∈ Ω1(A). By (6)
+an expression in terms of V = πD(A) ∈ Ω1
+and the deﬁnition of (cid:104)V, . . . , V(cid:105), we have, for n ∈ N,
+
+1
+n!
+
+dn
+dtn Tr( f (D + tV))(cid:12)
+
+(cid:12)t=0
+
+= Tr(TD
+
+f [n] (V, . . . , V))
+
+=
+
+1
+n
+
+(cid:104)V, . . . , V(cid:105).
+
+(17)
+
+As V decomposes as a ﬁnite sum V = ∑ aj[D, bj], our task is to express (cid:104)aj1[D, bj1], . . . , ajn [D, bjn ](cid:105)
+in terms of universal forms a0da1 · · · dan integrated along φ. This will turn out to be possible by
+just using (II) and [D, a1a2] = a1[D, a2] + [D, a1]a2. To ﬁnd the exact expression we need to work
+in the algebra M2(Ω•(A)) = M2(C) ⊗ Ω•(A).
+Proposition 20. Let n ∈ N. For a1, . . . , an, b1, . . . , bn ∈ A, denoting Aj := ajdbj, we have
+
+(cid:104)a1[D, b1], . . . , an[D, bn](cid:105) =
+
+(cid:90)
+
+φ
+
+(cid:0)A1 0(cid:1)
+
+(cid:18)Aj + dAj −Aj
+−Aj
+
+dAj
+
+(cid:19) (cid:18)1
+0
+
+(cid:19)
+
+.
+
+n
+∏
+j=2
+
+Proof. If we combine, for every n ∈ N0, the n-multilinear function (cid:104)·(cid:105) from (12), we obtain a linear
+function
+
+(cid:104)·(cid:105) : TB(H) → C
+
+on the tensor algebra TB(H). For any ω, ν ∈ TB(H), a straightforward calculation using the
+commutation rule (II) from Lemma 14 shows that
+
+(cid:104)ω ⊗ aj−1[D, bj−1] ⊗ (cid:0)aj
+
+ajbj
+
+(cid:1) ν(cid:105) = (cid:104)ω ⊗ (cid:0)aj−1
+
+aj−1bj−1
+
+(cid:1) Mj ⊗ ν(cid:105),
+
+(18)
+
+15
+
+where Mj ∈ M2(TB(H)) is deﬁned by
+
+Mj :=
+
+(cid:18)[D, bj−1aj] + [D, bj−1] ⊗ [D, aj]
+−[D, aj]
+
+[D, bj−1ajbj] + [D, bj−1] ⊗ [D, ajbj]
+−[D, ajbj]
+
+(cid:19)
+
+.
+
+(19)
+
+Repeating (18), and subsequently using (16), it follows that
+
+(cid:104)a1[D, b1], . . . , an[D, bn](cid:105) = (cid:104)a1[D, b1] ⊗ . . . ⊗ an−1[D, bn−1] ⊗ (cid:0)an
+
+(cid:1)
+
+anbn
+
+(cid:18)[D, bn]
+0
+
+(cid:19)
+
+(cid:105)
+
+= (cid:104)(cid:0)a1
+
+(cid:1)
+
+a1b1
+
+Mj
+
+(cid:18) n
+∏
+j=2
+(cid:18) n
+∏
+j=2
+
+(cid:1)
+
+Nj
+
+(cid:19) (cid:18)[D, bn]
+
+(cid:19)
+
+(cid:105)
+
+0
+(cid:19) (cid:18)dbn
+0
+
+(cid:19)
+
+,
+
+a1b1
+
+(cid:90)
+
+=
+
+(cid:0)a1
+
+φ
+
+where from (19) we obtain
+
+(cid:18)d(bj−1aj) + dbj−1daj d(bj−1ajbj) + dbj−1d(ajbj)
+
+(cid:19)
+
+Nj =
+
+=
+
+By also writing
+
+(cid:19)
+
+(cid:18)dbn
+0
+
+=
+
+(cid:18)dbj−1
+0
+(cid:18)dbn
+
+bn
+0 −1
+
+−daj
+bj−1
+−1
+(cid:19) (cid:18)1
+0
+
+(cid:19) (cid:18)aj + daj
+
+daj
+
+(cid:19)
+
+, we ﬁnd that
+
+−d(ajbj)
+ajbj + dajbj + ajdbj
+dajbj + ajdbj
+
+(cid:19)
+
+.
+
+(cid:104)a1[D, b1], . . . an[D, bn](cid:105)
+(cid:18)db1
+
+(cid:90)
+
+(cid:1)
+
+(cid:0)a1
+
+a1b1
+
+=
+
+φ
+
+φ
+
+(cid:90)
+
+=
+
+(cid:0)A1 0(cid:1)
+
+(cid:32) n
+∏
+j=2
+
+(cid:19) (cid:32) n
+∏
+j=2
+
+b1
+0 −1
+(cid:18)Aj + dAj −Aj
+−Aj
+
+(cid:18)aj + daj
+daj
+(cid:19)(cid:33) (cid:18)1
+0
+
+dAj
+
+ajbj + dajbj + ajdbj
+dajbj + ajdbj
+
+(cid:19) (cid:18)dbj
+
+bj
+0 −1
+
+(cid:19)
+
+(cid:19)(cid:33) (cid:18)1
+0
+
+(cid:19)
+
+,
+
+which concludes the proof.
+
+Corollary 21. If n ∈ N, A ∈ Ω1(A) and V := πD(A) ∈ Ω1
+
+D(A), then
+
+(cid:104)V, . . . , V(cid:105) =
+
+(cid:90)
+
+φ
+
+(cid:0)A 0(cid:1)
+
+(cid:18)A + dA −A
+−A
+
+dA
+
+(cid:19)n−1 (cid:18)1
+0
+
+(cid:19)
+
+.
+
+(20)
+
+Example 22. Using (20), we obtain in particular
+
+(cid:104)V(cid:105) =
+
+(cid:104)V, V(cid:105) =
+
+(cid:104)V, V, V(cid:105) =
+
+(cid:104)V, V, V, V(cid:105) =
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+φ1
+
+φ2
+
+φ3
+
+φ4
+
+A,
+
+A2 +
+
+A3 +
+
+A4 +
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+φ3
+
+φ4
+
+φ5
+
+AdA,
+
+AdAA +
+
+(cid:90)
+
+φ5
+
+AdAdA,
+
+(A3dA + AdAA2) +
+
+16
+
+(cid:90)
+
+φ6
+
+AdAdAA +
+
+(cid:90)
+
+φ7
+
+AdAdAdA.
+
+With (17), and in the sense of (7), this implies that
+
+Tr( f (D + V) − f (D)) =
+
+(cid:90)
+
+φ1
+
+A +
+
+(cid:90)
+
+1
+2
+
+φ2
+
+A2 +
+
+(cid:90)
+
+(cid:16) 1
+2
+
+φ3
+
+AdA +
+
+(cid:90)
+
+A3(cid:17)
+
++
+
+1
+3
+
+(cid:16) 1
+3
+
+φ4
+
+AdAA +
+
+A4(cid:17)
+
+1
+4
+
++ . . . ,
+
+where the dots indicate terms of degree 5 and higher. Using φ2k−1 = ψ2k−1 + 1
+
+Tr( f (D + V) − f (D)) =
+
+(cid:90)
+
+A +
+
+ψ1
+1
+4
+
++
+
+(cid:90)
+
+φ4
+
+1
+2
+(cid:16)
+
+(cid:90)
+
+φ2
+
+(A2 + dA) +
+
+(cid:90)
+
+(cid:16) 1
+2
+
+ψ3
+
+AdA +
+
+2 B0φ2k, this becomes
+1
+3
+
+A3(cid:17)
+
+dAdA +
+
+(dAA2 + AdAA + A2dA) + A4(cid:17)
+
++ . . . .
+
+2
+3
+
+Notice that, if φ4 would be tracial, we would be able to identify the terms dAA2, AdAA and A2dA, and
+thus obtain the Yang–Mills form F2 = (dA + A2)2, under the fourth integral. In the general case, however,
+cyclic permutations under (cid:82)
+
+φ produce correction terms, of which we will need to keep track.
+
+4.4 Near-tracial behavior of (cid:82)
+
+φ
+
+In §4.3, we have not used the cyclicity property (I) from Lemma 14. Doing so yields the following
+proposition, which shows how (cid:82)
+φ differs from being tracial. This proposition and its corollary are
+crucial for Section 5.
+
+For a universal n-form X ∈ Ωn(A), deﬁne odd(X) := 1 if n is odd, and odd(X) := 0 if n is
+
+even.
+
+Proposition 23. Let X and Y be universal forms. Then
+
+(cid:90)
+
+φ
+
+XY −
+
+(cid:90)
+
+φ
+
+YX = odd(Y)
+
+(cid:90)
+
+φ
+
+YdX − odd(X)
+
+(cid:90)
+
+φ
+
+XdY.
+
+Proof. Without loss of generality, assume that X = x0dx1 . . . dxn and Y = y0dy1 . . . dyk for some
+x0, . . . , xn, y0, . . . , yk ∈ A. By using dab = d(ab) − adb repeatedly, we get
+
+(cid:90)
+
+φ
+
+XY =
+
+=
+
+(cid:90)
+
+φ
+
+(cid:90)
+
+x0dx1 · · · dxn−1(d(xny0) − xndy0)dy1 · · · dyk
+
+(cid:0)dx1 · · · dxn−1d(xny0) − dx1 · · · dxn−2d(xn−1xn)dy0 + . . .
+
+x0
+
+φ
+. . . + (−1)n−1d(x1x2)dx3 · · · dxndy0 + (−1)nx1dx2 · · · dxndy0
+
+(cid:1)dy1 · · · dyk
+
+=(cid:10)x0[D, x1], . . . , [D, xn−1], [D, xny0], [D, y1], . . . , [D, yk](cid:11)
+
+− (cid:10)x0[D, x1], . . . , [D, xn−2], [D, xn−1xn], [D, y0], [D, y1], . . . , [D, yk](cid:11) + . . .
+. . . + (−1)n−1(cid:10)x0[D, x1x2], [D, x3], . . . , [D, xn], [D, y0], [D, y1], . . . , [D, yk](cid:11)
++ (−1)n(cid:10)x0x1[D, x2], [D, x3], . . . , [D, xn], [D, y0], [D, y1], . . . , [D, yk](cid:11)
+
+=(cid:10)x0[D, x1], . . . , [D, xn]y0, [D, y1], . . . , [D, yk](cid:11)
+
++
+
+n−2
+∑
+j=0
+
+(−1)j(cid:10)x0[D, x1], . . . , [D, xn], [D, y0], . . . , [D, yk](cid:11)
+
+=(cid:10)x0[D, x1], . . . , [D, xn], y0[D, y1], . . . , [D, yk](cid:11) − odd(X)
+
+(cid:90)
+
+φ
+
+XdY.
+
+17
+
+Doing the same for (cid:82)
+
+φ YX and using cyclicity (Lemma 14(I)) yields the proposition.
+
+A quick check shows that the above proposition implies the following handy rules.
+
+Corollary 24. Let X, Y ∈ Ω•(A), and A ∈ Ω1(A).
+
+(i) If X and Y are both of even degree, then
+
+(ii) If X has odd degree, then
+
+(iii) If X has even degree, then
+
+(cid:90)
+
+φ
+
+XY =
+
+(cid:90)
+
+φ
+
+YX.
+
+(cid:90)
+
+φ
+
+(AX − XA) =
+
+(cid:90)
+
+φ
+
+d(AX).
+
+(cid:90)
+
+φ
+
+(XA − AX) =
+
+(cid:90)
+
+φ
+
+dXA +
+
+(cid:90)
+
+φ
+
+dAdX.
+
+4.5 Higher-order generalized Chern–Simons forms
+
+As a ﬁnal preparation for our main result, we brieﬂy recall from [21] the deﬁnition of Chern–
+Simons forms.
+Deﬁnition 25. Let (Ω•, d) be a differential graded algebra. The Chern–Simons form of degree 2k − 1 is
+given for A ∈ Ω1 by
+
+cs2k−1(A) :=
+
+A(Ft)k−1dt,
+
+(21)
+
+(cid:90) 1
+
+0
+
+where Ft = tdA + t2 A2 is the curvature two-form of the (connection) one-form At = tA.
+
+We will only work with the universal differential graded algebra Ω• = Ω•(A) for the algebra
+
+A.
+
+Example 26. For the ﬁrst three Chern–Simons forms one easily derives the following explicit expressions:
+
+cs1(A) = A;
+
+cs3(A) =
+
+(cid:18)
+
+1
+2
+
+AdA +
+
+2
+3
+
+(cid:19)
+
+;
+
+A3
+
+cs5(A) =
+
+(cid:18)
+
+1
+3
+
+A(dA)2 +
+
+AdAA2 +
+
+3
+4
+
+A3dA +
+
+3
+4
+
+(cid:19)
+
+.
+
+A5
+
+3
+5
+
+These are well-known expressions from the physics literature, cf. [18, Section 11.5.2].
+
+18
+
+5 Expansion of the spectral action in terms of (b, B)-cocycles
+
+In this section we prove our main theorem.
+
+Theorem 27. Let (A, H, D) be an s-summable spectral triple, and let f ∈ E s,γ for γ ∈ (0, 1). The spectral
+action ﬂuctuated by V = πD(A) ∈ Ω1
+
+Tr( f (D + V) − f (D)) =
+
+D(A)sa can be written as
+(cid:18)(cid:90)
+
+∞
+∑
+k=1
+
+cs2k−1(A) +
+
+ψ2k−1
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+(cid:19)
+
+,
+
+Fk
+
+where the series converges absolutely.
+
+We prove this theorem in two steps. Firstly, we deal with the algebraic part of this statement,
+in §5.1. Here we only need to assume f ∈ W s,n for a ﬁnite n ∈ N. Secondly, in §5.2, we tackle
+the analytical part. We there obtain a strong estimate on the remainder of the above expansion
+in Theorem 33 for a function f ∈ E s,γ for general γ ∈ (0, 1]. This estimate will imply that the
+conclusion of Theorem 27 still holds in the case of γ = 1, when the perturbation V is sufﬁciently
+small. When f ∈ E s,γ for γ ∈ (0, 1), the expansion follows for all perturbations, and thus we prove
+Theorem 27.
+
+5.1 Truncated expansion
+Let K ∈ N, f ∈ W s,2K, and V = πD(A) ∈ Ω1
+D(A)sa. We prove a truncated version of Theorem 27,
+showing that the ﬂuctuation of the spectral action can be expressed in terms of Chern–Simons and
+Yang–Mills forms, up to a remainder which involves forms of degree higher than K. To enumerate
+the remainder forms we use the index set
+
+(cid:40)
+
+TK :=
+
+(v, w, p) ∈ (cid:228)
+m∈N
+
+0
+
+(N0 × Nm−1) × Nm × N0
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+|v| + |w| +
+
+(cid:107)
+
+(cid:106) p
+2
+
+< K, 2|v| + |w| + p ≥ K
+
+.
+
+(cid:41)
+
+(22)
+
+Proposition 28. We have the asymptotic expansion
+
+Tr( f (D + V) − f (D)) ∼
+
+∞
+∑
+k=1
+
+(cid:90)
+
+(cid:18)
+
+φ
+
+cs2k−1(A) +
+
+(cid:19)
+
+tA dt
+
+,
+
+AFk−1
+t
+
+(cid:90) 1
+
+0
+
+by which we mean that we can write the Kth remainder of this expansion as
+
+Tr( f (D + V) − f (D)) −
+
+K
+∑
+k=1
+
+(cid:90)
+
+(cid:18)
+
+φ
+
+cs2k−1(A) +
+
+(cid:19)
+
+AFk−1
+t
+
+tA dt
+
+(cid:90) 1
+
+0
+
+(cid:16)
+
+= Tr
+
+TD+V,D,...,D
+f [K+1]
+
+(V, . . . , V)
+
+(cid:17)
+
+− ∑
+
+(v,w,p)∈TK
+
+1
+2|v| + |w| + p + 1
+
+(cid:90)
+
+φ
+
+AA2v1(dA)w1 · · · A2vm (dA)wm Ap,
+
+where TK, deﬁned by (22), satisﬁes |TK| ≤ 2K+1, and where f ∈ W s,2K.
+
+19
+
+Proof. We start with the 2x2 matrix equation from Corollary 21 and separate the 1-forms A from
+the two-forms dA. The n-th term in the Taylor expansion of Tr( f (D + V)) is given (by use of (17)
+and Corollary 21) by
+
+1
+n!
+
+dn
+dtn Tr( f (D + tV))
+
+(cid:12)
+(cid:12)
+(cid:12)t=0
+
+=
+
+≡
+
+=
+
+1
+n
+
+1
+n
+1
+n
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+φ
+
+φ
+
+φ
+
+(cid:0)A 0(cid:1)
+
+(cid:19)
+
+(cid:18)(cid:18)A −A
+0 −A
+
++
+
+(cid:0)A 0(cid:1) (αA + βdA)n−1
+
+(cid:18)dA 0
+dA 0
+(cid:19)
+(cid:18)1
+0
+
+(cid:19)
+
+(cid:19)(cid:19)n−1 (cid:18)1
+0
+
+A et
+
+1(αA + βdA)n−1e1.
+
+(23)
+
+for some scalar-valued 2x2 matrices α and β, and e1 =
+
+(cid:19)
+
+(cid:18)1
+0
+
+. The α’s and β’s have very nice alge-
+
+braic properties, which can be used to regroup the terms in the expansion in n. When summing
+(23) from n = 1 to inﬁnity, and grouping the universal forms by their degree as in Example 22,
+we need some machinery to keep track of the coefﬁcient 1/n. We will work in the space of (ﬁ-
+nite) polynomials M2(Ω•(A))[t], and deﬁne an integration with respect to t as the linear map
+(cid:82) 1
+0 dt : M2(Ω•(A))[t] → M2(Ω•(A)) given by integration of polynomials. We thus obtain
+(cid:90) 1
+
+(cid:90)
+
+1
+n!
+
+dn
+dtn Tr( f (D + tV))
+
+(cid:12)
+(cid:12)
+(cid:12)t=0
+
+=
+
+dt tn−1
+
+A et
+
+1(αA + βdA)n−1e1
+
+φ
+
+0
+(cid:90) 1
+
+0
+
+=
+
+(cid:90)
+
+dt
+
+φ
+
+A et
+
+1(αtA + βtdA)n−1e1.
+
+(24)
+
+We now expand the (n − 1)-th power, which is complicated because α and β do not commute.
+
+To avoid notational clutter, let us denote X := tA and Y := tdA. We ﬁnd
+
+1(αX + βY)n−1e1 =
+et
+
+(cid:100) n−1
+2 (cid:101)
+∑
+k=0
+
+∑
+v1≥0, v2,...,vk≥1
+w1,...,wk≥1, p≥0
+|v|+|w|+p=n−1
+
+1(αv1 βw1 · · · αvk βwk αp)e1 Xv1Yw1 · · · XvkYwk X p.
+et
+
+(25)
+
+We can summarize the identities involving α and β that we will use as
+
+α2 = 1;
+et
+1(αβα)e1 = 0;
+
+β2 = β;
+et
+1(αβ)e1 = 0;
+
+βαβ = 0;
+et
+1(βα)e1 = 1;
+
+et
+1(α)e1 = 1;
+et
+1(β)e1 = 1.
+
+From these identities follow the following two remarks:
+
+• If k ≥ 2 and vi is odd for a certain i ∈ {2, . . . , k}, then somewhere in αv1 βw1 · · · αvk βwk αp a
+
+factor βαβ = 0 occurs, so in particular
+
+et
+1(αv1 βw1 · · · αvk βwk αp)e1 = 0.
+
+• If v1 is odd and v2, . . . , vk are all even, then
+
+1(αv1 βw1 · · · αvk βwk αp)e1 = et
+et
+
+1(αβαp)e1 = 0.
+
+20
+
+Therefore, for all k ≥ 0, we conclude that in (25) only terms remain in which v1, . . . , vk are even.
+In fact, we ﬁnd
+
+1(αX + βY)n−1e1 =
+et
+
+(cid:100) n−1
+2 (cid:101)
+∑
+k=0
+
+=
+
+(cid:100) n−1
+2 (cid:99)
+∑
+k=0
+
+=
+
+(cid:100) n−1
+2 (cid:101)
+∑
+k=0
+
+∑
+0, v2,...,vk∈2N
+
+v1∈2N
+
+w1,...,wk≥1, p≥0,
+|v|+|w|+p=n−1
+
+∑
+0, v2,...,vk∈2N
+
+v1∈2N
+
+w1,...,wk≥1, p≥0,
+|v|+|w|+p=n−1
+
+1(αv1 βw1 · · · αvk βwk αp)e1 Xv1Yw1 · · · XvkYwk X p
+et
+
+1(βαp)e1 Xv1Yw1 · · · XvkYwk X p
+et
+
+(X2)v1Yw1 · · · (X2)vkYwk X p.
+
+∑
+v1≥0, v2...,vk≥1,
+w1,...,wk≥1, p≥0,
+2|v|+|w|+p=n−1
+
+Summing this from n = 1 to K, we can write
+
+K
+∑
+n=1
+
+1(αX + βY)n−1e1 = ∑
+et
+
+(X2)v1Yw1 · · · (X2)vmYwm X p,
+
+(26)
+
+(v,w,p)∈PK
+
+where PK is the set of (v, w, p) ∈ (cid:228)m(N0 × Nm−1) × Nm × N0 such that 2|v| + w + p < K. In this
+last expression we can almost recognize an expansion of (X2 + Y)k−1 = Fk−1
+
+. Indeed, we have
+
+t
+
+K
+∑
+k=1
+
+(X2 + Y)k−1(1 + X) = ∑
+
+(X2)v1Yw1 · · · (X2)vmYwm X p,
+
+(27)
+
+(v,w,p)∈SK
+
+where SK is the set of (v, w, p) ∈ (cid:228)m(N0 × Nm−1) × Nm × N0 such that |v| + |w| + (cid:98) p
+2 (cid:99) < K. By
+(27) we have |SK| ≤ 2K+1. By using TK = SK \ PK, we can combine (24), (26) and (27), and obtain
+
+K
+∑
+n=1
+
+1
+n!
+
+dn
+
+dtn Tr (cid:0) f (D + tV)(cid:1)(cid:12)
+
+K
+∑
+k=1
+
+−
+
+(cid:12)
+(cid:12)t=0
+1
+2|v| + |w| + p + 1
+
+(cid:90)
+
+(cid:90) 1
+
+φ
+
+0
+
+AFk−1
+t
+
+(1 + tA) dt
+
+(cid:90)
+
+φ
+
+AA2v1(dA)w1 · · · A2vm (dA)wm Ap.
+
+(28)
+
+= − ∑
+
+(v,w,p)∈TK
+
+Together with (8), and the deﬁnition (21) of cs2k−1(A), (28) implies the proposition.
+
+Theorem 29. We have
+
+(cid:90)
+
+(cid:18)
+
+φ
+
+cs2k−1(A) +
+
+AFk−1
+t
+
+tA dt
+
+(cid:19)
+
+(cid:90)
+
+=
+
+(cid:90) 1
+
+0
+
+ψ2k−1
+
+cs2k−1(A) +
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+Fk.
+
+Therefore, with the same remainder term as in Proposition 28, we have
+
+Tr( f (D + V) − f (D)) ∼
+
+(cid:18) (cid:90)
+
+∞
+∑
+k=1
+
+ψ2k−1
+
+cs2k−1(A) +
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+(cid:19)
+
+.
+
+Fk
+
+21
+
+The Chern–Simons term in Proposition 28, integrated along φ, yields the correct Chern–Simons
+2 B0φ2k so
+
+term integrated along ψ, plus an additional term. Indeed, recall that φ2k−1 = ψ2k−1 + 1
+that we ﬁnd
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+AFk−1
+
+t +
+
+tAFk−1
+
+t A =
+
+AFk−1
+
+t +
+
+d(AFk−1
+t
+
+) + tAFk−1
+
+t A
+
+(cid:17)
+
+φ2k−1
+
+φ2k−1
+
+(cid:90)
+
+=
+
+ψ2k−1
+
+ψ2k−1
+
+(cid:16) 1
+2
+
+φ2k
+(cid:90)
+1
+2
+
+φ2k
+
+AFk−1
+
+t +
+
+(dAFk−1
+
+t + tA2Fk−1
+
+t + tAFk−1
+
+t A),
+
+where we used the repeated Bianchi identity d(Fk−1
+
+t
+
+) = −[At, Fk−1
+
+t
+
+] in going to the last line.
+
+We arrive at the following formula:
+
+Tr( f (D + V) − f (D)) ∼
+
+(cid:18)(cid:90)
+
+∞
+∑
+k=1
+
+ψ2k−1
+
+cs2k−1(A) +
+
+1
+2
+
+(cid:90) 1
+
+(cid:90)
+
+dt
+
+0
+
+φ2k
+
+We are now to show that the second term, namely
+
+(dAFk−1
+
+t + tA2Fk−1
+
+t + tAFk−1
+
+t A)
+
+(cid:19)
+
+.
+
+YMk :=
+
+=
+
+(cid:90)
+
+dt
+
+(cid:90) 1
+
+1
+2
+0
+(cid:90) 1
+
+dt
+
+1
+2t
+
+0
+
+φ2k
+(cid:90)
+
+φ2k
+
+(dAFk−1
+
+t + tA2Fk−1
+
+t + tAFk−1
+
+t A)
+
+(dAtFk−1
+
+t + A2
+
+t Fk−1
+
+t + AtFk−1
+
+t At),
+
+equals 1
+2k
+
+(cid:82)
+
+φ2k
+
+Fk. After some rearrangement we can use Corollary 24(ii), to ﬁnd
+
+YMk =
+
+=
+
+(cid:90)
+
+(cid:90)
+
+(cid:90) 1
+
+0
+(cid:90) 1
+
+0
+
+dt
+
+dt
+
+1
+2t
+1
+2t
+
+φ2k
+
+φ2k
+
+(dAt + 2A2
+
+t )Fk−1
+
+t +
+
+(dAt + 2A2
+
+t )Fk−1
+
+t −
+
+(cid:90)
+
+(cid:90)
+
+(cid:90) 1
+
+0
+(cid:90) 1
+
+0
+
+dt
+
+dt
+
+1
+2t
+1
+2t
+
+(cid:16)
+
+φ2k
+
+φ2k+1
+
+AtFk−1
+
+t At − A2
+
+t Fk−1
+
+t
+
+(cid:17)
+
+d(A2
+
+t Fk−1
+
+t
+
+).
+
+(29)
+
+We will ﬁrst show that the second term of (29) vanishes. We use the following rule, which allows
+us to replace the integrand by a form which is two degrees lower.
+
+Lemma 30. For every m ≥ 0, we have
+
+(cid:90)
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) = −
+
+(cid:90)
+
+(cid:16)
+
+φ2m+1
+
+d(A2
+
+t Fm−1
+
+t
+
+) + dAtd(Fm−1
+
+t
+
+)
+
+(cid:17)
+
+.
+
+Proof. We use the deﬁnition of Ft, the repeated Bianchi identity d(Fm
+quently Proposition 23, to obtain
+(cid:90)
+
+(cid:90)
+
+(cid:17)
+
+d(A2
+
+t Fm−1
+
+t
+
+) =
+
+d(FtFm−1
+t
+
+) − d(dAtFm−1
+
+)
+
+t
+
+φ2m+1
+
+t ) = [Fm
+
+t , At], and subse-
+
+(cid:16)
+
+φ2m+1
+
+(cid:16)
+
+φ2m+1
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+=
+
+=
+
+=
+
+=
+
+φ2m+1
+
+φ2m+2
+
+φ2m+2
+
+(cid:17)
+
+)
+
+d(Fm
+
+t ) − dAtd(Fm−1
+(cid:90)
+
+t
+
+(Fm
+
+t At − AtFm
+
+t ) −
+
+(cid:90)
+
+Atd(Fm
+
+t ) −
+
+(cid:0)AtFm
+
+t At − A2
+
+φ2m+1
+t Fm
+t
+
+(cid:1) −
+
+φ2m+1
+dAtd(Fm−1
+(cid:90)
+
+t
+
+)
+
+dAtd(Fm−1
+
+)
+
+t
+
+dAtd(Fm−1
+
+).
+
+t
+
+φ2m+1
+
+22
+
+Applying Corollary 24(ii) to the ﬁrst term gives
+
+(cid:90)
+
+φ2m+1
+
+d(A2
+
+t Fm−1
+
+t
+
+(cid:90)
+
+) = −
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) −
+
+(cid:90)
+
+φ2m+1
+
+dAtd(Fm−1
+
+t
+
+),
+
+which implies the lemma.
+
+We obtain the following result.
+
+Lemma 31. For every m ≥ 0, we have
+
+(cid:90)
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) = 0.
+
+Proof. This is easily checked when m = 0, and when m = 1, it follows from Lemma 30. If m ≥ 2,
+we apply Lemma 30 twice, and ﬁnd
+
+(cid:90)
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) = −
+(cid:90)
+
+=
+
+(cid:90)
+
+φ2m+1
+
+d(A2
+
+t Fm−1
+
+t
+
+(cid:90)
+
+) −
+
+dAtd(Fm−1
+
+t
+
+)
+
+φ2m+1
+
+d(A2
+
+t Fm−2
+
+t
+
+(cid:90)
+
+) +
+
+dAtd(Fm−2
+
+t
+
+) −
+
+φ2m−1
+
+(cid:90)
+
+φ2m+1
+
+dAtd(Fm−1
+
+t
+
+).
+
+φ2m−1
+
+We recognize Ft = A2
+
+t + dAt in the ﬁrst two terms above, so by the Bianchi identity we obtain
+
+(cid:90)
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) =
+
+=
+
+(cid:90)
+
+(cid:90)
+
+φ2m−1
+
+φ2m−1
+
+(cid:90)
+
+d(Fm−1
+t
+
+) −
+
+φ2m+1
+
+(Fm−1
+t
+
+At − AtFm−1
+
+) −
+
+t
+
+dAtd(Fm−1
+(cid:90)
+
+t
+
+)
+
+dAtd(Fm−1
+
+t
+
+).
+
+φ2m+1
+
+By Corollary 24(iii), the Bianchi identity, and Corollary 24(i), this gives
+
+(cid:90)
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) =
+
+=
+
+=
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+φ2m
+
+φ2m
+
+φ2m
+
+d(Fm−1
+t
+
+)At
+
+(Fm−1
+t
+
+A2
+
+t − AtFm−1
+
+t
+
+At)
+
+(A2
+
+t Fm−1
+
+t
+
+− AtFm−1
+t
+
+At).
+
+We apply Corollary 24(ii), to ﬁnd
+
+(cid:90)
+
+φ2m+3
+
+d(A2
+
+t Fm
+
+t ) =
+
+(cid:90)
+
+φ2m+1
+
+By induction, it follows that (cid:82)
+
+φ d(A2
+
+t Fm
+
+t ) = 0 for all m.
+
+d(A2
+
+t Fm−1
+
+t
+
+).
+
+By the above Lemma, only the ﬁrst term of (29) remains, namely,
+
+YMk =
+
+(cid:90)
+
+(cid:90) 1
+
+0
+
+dt
+
+1
+2t
+
+φ2k
+
+(dAt + 2A2
+
+t )Fk−1
+
+t =
+
+(cid:90) 1
+
+(cid:90)
+
+dt
+
+0
+
+φ2k
+
+2 dA + tA2)Fk−1
+( 1
+
+t
+
+.
+
+(30)
+
+To express YMk in an even simpler form, we now remove the integral over t, which is possible by
+the following lemma.
+
+23
+
+Lemma 32. We have
+
+(cid:90) 1
+
+(cid:90)
+
+dt
+
+0
+
+φ2k
+
+2 dA + tA2)Fk−1
+( 1
+
+t =
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+Fk.
+
+Proof. Recall that Ω•(A)[t] is the space of polynomials with coefﬁcients in the algebra Ω•(A). The
+dt (tnB) := ntn−1B for B ∈ Ω•(A), and satisﬁes
+linear map d
+the Leibniz rule. Therefore,
+
+dt : Ω•(A)[t] → Ω•(A)[t] is deﬁned by d
+
+d
+dt
+
+(Fk
+
+t ) =
+
+d
+dt
+
+(Ft)Fk−1
+
+t + Ft
+
+d
+dt
+
+(Ft)Fk−2
+
+t + . . . + Fk−1
+
+t
+
+d
+dt
+
+(Ft).
+
+Both Ft and d
+
+dt (Ft) are 2-forms, so, after a few applications of Corollary 24(i), we arrive at
+
+(cid:90)
+
+d
+dt
+
+φ2k
+
+(Fk
+
+t ) = k
+
+(cid:90)
+
+d
+dt
+
+φ2k
+
+(Ft)Fk−1
+
+t = k
+
+(cid:90)
+
+φ2k
+
+(dA + 2tA2)Fk−1
+
+t
+
+.
+
+The fundamental theorem of calculus (for polynomials) gives
+
+(cid:90) 1
+
+(cid:90)
+
+dt
+
+0
+
+φ2k
+
+(dA + 2tA2)Fk−1
+
+t =
+
+1
+k
+
+(cid:90)
+
+(cid:90) 1
+
+φ2k
+
+0
+
+dt
+
+d
+dt
+
+(Fk
+
+t ) =
+
+(cid:90)
+
+1
+k
+
+φ2k
+
+from which the lemma follows.
+
+(Fk
+
+1 − Fk
+
+0 ) =
+
+(cid:90)
+
+1
+k
+
+φ2k
+
+Fk,
+
+Proof of Theorem 29. Applying Lemma 32 to our earlier expression for YMk (equation (30)), we ﬁnd
+that
+
+YMk =
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+Fk.
+
+We therefore obtain the theorem.
+
+5.2 Convergence
+
+We prove a strong bound on the asymptotic expansion given by Theorem 29, in particular giving
+sufﬁcient conditions for the series to converge, effectively replacing ∼ by =. A crucial ingredient
+is Lemma 7.
+Theorem 33. Let (A, H, D) be an s-summable spectral triple, let n ∈ N, and ﬁx f ∈ E s,γ for γ ∈
+(0, 1]. Then there exists C f ,s,n,γ such that, for A = ∑n
+j=1 aj[D, bj] self-adjoint with
+(cid:107)aj(cid:107), (cid:107)bj(cid:107), (cid:107)[D, aj](cid:107), (cid:107)[D, bj](cid:107) ≤ R, we have
+
+j=1 ajdbj and V = ∑n
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Tr( f (D + V) − f (D)) −
+
+(cid:18)(cid:90)
+
+K
+∑
+k=1
+
+ψ2k−1
+
+cs2k−1(A) +
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+Fk
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+
+CK+1
+f ,s,n,γ
+K!1−γ max(R2K+2, R4K+2+4s) Tr |(D − i)−s|,
+
+(31)
+
+for all K ∈ N0. Moreover, we have
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ψ2k−1
+
+cs2k−1(A)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
++
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ2k
+
+Fk
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+
+f ,s,n,γ
+
+Ck
+k!1−γ max(R2k, R4k) Tr |(D − i)−s|.
+
+24
+
+Proof. Theorem 29 gives
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Tr( f (D + V) − f (D)) −
+
+≤
+
+(cid:13)
+(cid:13)TD+V,D,...,D
+(cid:13)
+f [K+1]
+
+(V, . . . , V)
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+Fk
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:18)(cid:90)
+
+K
+∑
+k=1
+(cid:13)
+(cid:13)
+(cid:13)1
+
+cs2k−1(A) +
+
+ψ2k−1
+
++ ∑
+
+(v,w,p)∈TK
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+AA2v1(dA)w1 · · · A2vm (dA)wm Ap
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+(32)
+
+We ﬁrst focus on the ﬁrst term. Lemma 7 gives a C ≥ 1 such that
+
+(cid:13)
+(cid:13)TD+V,D,...,D
+(cid:13)
+f [K+1]
+
+(V, . . . , V)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤
+
+≤
+
+CK+1
+K!1−γ
+
+∑
+j1,...,jK+1∈{1,...,n}
+
+K+1
+∏
+m=1
+
+(cid:13)
+(cid:13)ajm
+
+(cid:13)
+(cid:13)
+
+(cid:13)[D, bjm ](cid:13)
+(cid:13)
+
+(cid:13) (1 + (cid:107)V(cid:107))2s Tr |(D − i)−s|
+
+CK+1
+K!1−γ nK+1R2K+2(1 + (cid:107)V(cid:107))2s Tr |(D − i)−s|,
+
+for all K ∈ N0. We conclude that there exists ˜C f ,s,n,γ such that
+
+(cid:13)
+(cid:13)TD+V,D,...,D
+(cid:13)
+f [K+2]
+
+(V, . . . , V)
+
+(cid:13)
+(cid:13)
+(cid:13)1
+
+≤
+
+˜CK+1
+f ,s,n,γ
+K!1−γ max(R2K+2, R2K+2+4s) Tr |(D − i)−s|.
+
+We now move on to the second term (the ﬁnite sum) on the right-hand side of (32). It contains
+
+terms of the form
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+B1 · · · BM
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+,
+
+for B1, . . . , BM ∈ {ajdbj, dajdbj : j ∈ {1, . . . , n}}. Let l be the degree of B1 · · · BM. By the deﬁnition
+of TK (equation (22)) K + 1 ≤ l ≤ 2K + 1 and K + 1 ≤ M ≤ 2K + 1. By using the Leibniz rule
+repeatedly, we can write
+
+(cid:90)
+
+B1 · · · BM = ∑
+j∈J
+
+φ
+
+(cid:90)
+
+φ
+
+e0,jde1,j · · · del,j,
+
+for a set J with |J| ≤ 3M ≤ 32K+1, and ei,j ∈ A such that e0,j · · · el,j = ∏M
+
+m=1 ajm bjm. We get
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+B1 · · · BM
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ ∑
+j∈J
+= ∑
+j∈J
+
+(cid:90)
+
+|
+
+φ
+
+e0,jde1,j · · · del,j|
+
+|φl(e0,j, . . . , el,j)|
+
+≤ ∑
+j∈J
+
+l
+∑
+i=1
+
+| Tr(TD
+
+f [l] ([D, ei], . . . , [D, el], e0[D, e1], [D, e2], . . . , [D, ei−1])|,
+
+(33)
+
+where we suppressed the index j for readability. We now apply Lemma 7 with V = 0 to (33) and
+obtain
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+B1 · · · BM
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ lCl+1l!γ−1 ∑
+j∈J
+
+(cid:107)e0(cid:107)
+
+(cid:16) l
+∏
+i=1
+
+(cid:17)
+
+(cid:107)[D, ei](cid:107)
+
+Tr |(D − i)−s|,
+
+25
+
+for a constant C ≥ 1. Because we have
+e0 · · · el = ∏M
+
+m=1 ajm bjm, with K + 1 ≤ M ≤ 2K + 1, we ﬁnd
+
+(cid:13)
+(cid:13)aj
+
+(cid:13)
+(cid:13) ,
+
+(cid:13)
+(cid:13)bj
+
+(cid:13)
+(cid:13),
+
+(cid:13)[D, aj](cid:13)
+(cid:13)
+(cid:13) ,
+
+(cid:13)[D, bj](cid:13)
+(cid:13)
+
+(cid:13) ≤ R by assumption, and
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+B1 · · · BM
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ ˜Cl+1l!γ−1 ∑
+j∈J
+
+R2M Tr |(D − i)−s|
+
+≤ ˆCK+1|J|K!γ−1 max(R2K+2, R4K+2) Tr |(D − i)−s|
+≤ ˇCK+1K!γ−1 max(R2K+2, R4K+2) Tr |(D − i)−s|.
+
+We can now bound the second term on the right-hand side of (32). We use that |TK| ≤ 2K+1, and
+that nM ≤ (n2)K+1, to ﬁnd
+
+∑
+(v,w,p)∈TK
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+AA2v1(dA)w1 · · · A2vm (dA)wm Ap
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ 2K+1(n2)K+1 ˇCK+1K!γ−1 max(R2K+2, R4K+2) Tr |(D − i)−s|
+≤ ˘CK+1
+
+f ,s,n,γK!γ−1 max(R2K+2, R4K+2) Tr |(D − i)−s|.
+
+Combining the ﬁrst and second term of (32), we obtain a number C f ,s,n,γ such that (31) holds.
+Moving on to the last claim of the theorem, we notice that, because ψ2k−1 = φ2k−1 − 1
+
+2 B0φ2k,
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ψ2k−1
+
+cs2k−1(A)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ
+
+≤ ∑
+j∈J
+
+e0,jde1,j · · · delj,j
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+,
+
+where the sum is over certain ei,j ∈ A (because A is unital) with e0,j · · · elj,j = ∏M
+M with k ≤ M ≤ 2k − 1. The number of elements in J is exponential in k. We obtain
+
+m=1 ajm bjm for some
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ψ2k−1
+
+cs2k−1(A)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ ˇCk
+
+f ,s,n,γk!γ−1 max(R2k, R4k−2) Tr |(D − i)−s|,
+
+for some number ˇC f ,s,n,γ ≥ 1. Similarly, we obtain a number ˆC f ,s,n,γ ≥ 1 such that
+
+(cid:90)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+φ2k
+
+Fk
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ ˆCk
+
+f ,s,n,γk!γ−1 max(R2k, R4k) Tr |(D − i)−s|,
+
+thereby proving the theorem.
+
+This theorem has two important corollaries, for f ∈ E s,1 (hence, for all f ∈ E s,γ) and for
+
+f ∈ E s,γ, γ < 1.
+Corollary 34. Let (A, H, D) be an s-summable spectral triple, let f ∈ E s,1 and V = πD(A) ∈ Ω1
+Then there exists a δ > 0 such that for all t ∈ R with |t| < δ, we have
+
+D(A)sa.
+
+Tr( f (D + tV) − f (D)) =
+
+(cid:18)(cid:90)
+
+∞
+∑
+k=1
+
+ψ2k−1
+
+cs2k−1(tA) +
+
+(cid:90)
+
+1
+2k
+
+φ2k
+
+(cid:19)
+
+,
+
+Fk
+t
+
+and the series converges absolutely.
+
+26
+
+Proof. Write V = ∑n
+
+j=1 aj[D, bj]. First take C f ,s,n,1 ≥ 1 from Theorem 33, deﬁne R := 1/(C f ,s,n,1 + 1)
+
+such that C f ,s,n,1R < 1, and deﬁne δ :=
+
+R
+maxj{(cid:107)aj(cid:107),(cid:107)bj(cid:107),(cid:107)[D,aj](cid:107),(cid:107)[D,bj](cid:107)}
+
+. By writing
+
+(cid:16)
+
+(cid:17)2
+
+tV =
+
+(cid:113)
+
+n
+∑
+j=1
+
+|t|aj[D, sign(t)
+
+(cid:113)
+
+|t|bj],
+
+the corollary follows.
+
+Proof of Theorem 27. This follows from Theorem 33 by taking γ < 1.
+
+6 Gauge invariance and the pairing with K-theory
+
+Since the spectral action is a spectral invariant, it is in particular invariant under conjugation of D
+by a unitary in the algebra A. More generally, in the presence of an inner ﬂuctuation we ﬁnd that
+the spectral action is invariant under the transformation
+
+D + V (cid:55)→ u(D + V)u∗ = D + Vu;
+
+Vu = u[D, u∗] + uVu∗.
+
+This transformation also holds at the level of the universal forms, with a gauge transformation of
+the form A (cid:55)→ Au = udu∗ + uAu∗. Let us analyze the behavior of the Chern–Simons and Yang–
+Mills terms appearing in Theorem 27 under this gauge transformation, and derive an interesting
+consequence for the pairing between the odd (b, B)-cocycle ˜ψ with the odd K-theory group of A.
+Lemma 35. The Yang–Mills terms (cid:82)
+tion A (cid:55)→ Au for every k ≥ 1.
+
+Fk with F = dA + A2 are invariant under the gauge transforma-
+
+φ2k
+
+Proof. Since the curvature of Au is simply given by uFu∗, the claim follows from Corollary 24(i).
+
+We are thus led to the conclusion that the Chern–Simons forms are gauge invariant as well.
+Indeed, arguing as in [11], since both Tr f (D + V) and the Yang-Mills terms are invariant under
+V (cid:55)→ Vu, we ﬁnd that, under the assumptions stated in Theorem 27:
+
+(cid:90)
+
+∞
+∑
+k=0
+
+ψ2k+1
+
+cs2k+1(Au) =
+
+(cid:90)
+
+∞
+∑
+k=0
+
+ψ2k+1
+
+cs2k+1(A).
+
+Each individual Chern–Simons form behaves non-trivially under a gauge transformation. Never-
+theless, it turns out that we can conclude, just as in [11], that the pairing of the whole (b, B)-cocycle
+with K-theory is trivial. Since the (b, B)-cocycle ˜ψ is given as an inﬁnite sequence, we should ﬁrst
+carefully study the analytical behavior of ˜ψ. In fact, we should show that it is an entire cyclic cocycle
+in the sense of [8] (see also [9, Section IV.7.α]). For this purpose, we can without loss of generality
+assume that A is complete in the Banach algebra norm deﬁned by (cid:107)a(cid:107)1 := (cid:107)a(cid:107) + (cid:107)[D, a](cid:107), because
+(cid:107)·(cid:107)1) is an extension of the
+(A
+one in C2k+1(A). Recall that for Banach algebras A an odd cochain such as ˜ψ is called entire if
+
+(cid:107)·(cid:107)1, H, D) is also a spectral triple, and the resulting ˜ψ2k+1 ∈ C2k+1(A
+
+27
+
+the power series ∑k
+IV.7.7a,c] to the condition that for any bounded subset Σ ⊂ A there exists a constant CΣ so that
+
+(cid:107) ˜ψ2k+1(cid:107)zk converges everywhere in C. This is equivalent [9, Remark
+
+(2k+1)!
+k!
+
+| ˜ψ2k+1(a0, . . . , a2k+1)| ≤
+
+CΣ
+k!
+
+(∀aj ∈ Σ).
+
+In our case it turns out that Lemma 7 implies the following growth condition, guaranteeing that
+indeed ˜ψ is entire.
+Lemma 36. Fix f ∈ E s,γ for γ < 1 and equip A with the norm (cid:107)a(cid:107)1 = (cid:107)a(cid:107) + (cid:107)[D, a](cid:107). Then, for any
+bounded subset Σ ⊂ A there exists CΣ such that
+
+| ˜ψ2k+1(a0, . . . , a2k+1)| ≤
+
+CΣ
+k!
+
+,
+
+for all aj ∈ Σ.
+
+Proof. Assume that (cid:107)aj(cid:107)1 ≤ R for all aj ∈ Σ so that both (cid:107)aj(cid:107), (cid:107)[D, aj](cid:107) ≤ R. By deﬁnition of φ,
+the expression ψ2k+1(a0, . . . , a2k+1) is given by a linear combination of multiple operator integrals
+with arguments in {V ∈ B(H) : (cid:107)V(cid:107) ≤ R} except for a0[D, a1], which is bounded by R2. By
+applying Lemma 7, we obtain the estimate
+
+|ψ2k+1(a0, . . . , a2k+1)| ≤
+
+(cid:18)
+
+(2k + 1)
+
+C2k+2
+(2k + 1)!1−γ
+
++ (k + 1)
+
+(cid:19)
+
+C2k+3
+(2k + 2)!1−γ
+
+R2k+2(cid:107)(D − i)−1(cid:107)s
+s.
+
+(34)
+
+We recall from Proposition 19 that
+
+˜ψ2k+1 = (−1)k
+
+k!
+(2k + 1)!
+
+ψ2k+1,
+
+so that (34) in particular implies the lemma by use of, for instance, Stirling’s approximation.
+
+For u ∈ Mq(A), deﬁne a pairing
+
+(cid:104)u, ˜ψ(cid:105) := (2πi)−1/2
+
+∞
+∑
+k=0
+
+(−1)kk! ˜ψq
+
+2k+1(u∗, u, . . . , u∗, u),
+
+(35)
+
+(36)
+
+where ˜ψq
+2k+1 := Tr # ˜ψ2k+1 : (µ0 ⊗ a0, . . . , µ2k+1 ⊗ a2k+1) (cid:55)→ Tr(µ0 · · · µ2k+1) ˜ψ2k+1(a0, . . . , a2k+1) for
+µ0, . . . , µ2k+1 ∈ Mq(C) and a0, . . . , a2k+1 ∈ A. Since ˜ψ is a (b, B)-cocycle, it follows from [9, Corol-
+lary IV.7.27] (see also [9, Sections III.3 and IV.7]) that this pairing only depends on the class of u in
+K1(A).
+Theorem 37. Let f ∈ E s,γ for γ < 1. Then the pairing of the odd entire cyclic cocycle ˜ψ with K1(A) is
+trivial, i.e.
+
+for all unitary u ∈ Mq(A).
+
+(cid:104)u, ˜ψ(cid:105) = 0
+
+28
+
+Proof. Apply Theorem 27 to a bigger spectral triple, namely (Aq, Hq, Dq) := (Mq(C) ⊗ A, Cq ⊗
+H, Iq ⊗ D). Take A = u∗du for u unitary in Mq(A) = Mq(C) ⊗ A. Clearly, then V = u∗[Dq, u],
+and because the multiple operator integral behaves naturally with respect to tensor products, we
+obtain
+
+Tr( f (Dq + u∗[Dq, u]) − f (Dq)) =
+
+(cid:32)(cid:90)
+
+∞
+∑
+k=0
+
+ψ
+
+q
+2k+1
+
+cs2k+1(u∗du) +
+
+(cid:90)
+
+1
+2k + 2
+
+φ
+
+q
+2k+2
+
+(cid:33)
+
+Fk+1
+
+,
+
+where F = d(u∗du) + (u∗du)2 = 0. Also notice that the left-hand side equals Tr( f (u∗Dqu) −
+f (Dq)) = 0. Therefore,
+
+(cid:90)
+
+∞
+∑
+k=0
+
+ψ
+
+q
+2k+1
+
+cs2k+1(u∗du) = 0.
+
+(37)
+
+From the deﬁnition of the Chern–Simons form (Deﬁnition 25) and the fact that Ft = tdA + t2 A2 =
+(t − t2)dA + t2F = (t − t2)du∗du we ﬁnd that
+
+cs2k+1(u∗du) =
+
+(cid:90) 1
+
+0
+
+dt (t − t2)ku∗dudu∗du · · · du∗du,
+
+so that by a straightforward integration we may conclude that
+
+(cid:90)
+
+ψ
+
+q
+2k+1
+
+cs2k+1(u∗du) =
+
+k!2
+(2k + 1)!
+
+ψq
+2k+1(u∗, u, . . . , u∗, u).
+
+Combining this with (35), (36) and (37), the theorem follows.
+
+Acknowledgements We would like to thank Steven Lord and Fedor Sukochev for their generous
+hospitality during a visit in Summer 2019. We also thank them, the members in their research
+group, as well as the other participants in the workshop ”Noncommutative Calculus and the
+Spectral Action” at UNSW in August 2019 for fruitful discussions. We also thank Alain Connes
+and Anna Skripka for useful comments. Research supported by NWO Physics Projectruimte (680-
+91-101).
+
+References
+
+[1] N. A. Azamov, A. L. Carey, P. G. Dodds, and F. A. Sukochev. Operator integrals, spectral shift,
+
+and spectral ﬂow. Canad. J. Math. (2) 61 (2009), 241–263.
+
+[2] A. H. Chamseddine and A. Connes. Universal formula for noncommutative geometry ac-
+tions: Uniﬁcations of gravity and the Standard Model. Phys. Rev. Lett. 77 (1996), 4868–4871.
+
+[3] A. H. Chamseddine and A. Connes. The spectral action principle. Commun. Math. Phys. 186
+
+(1997), 731–750.
+
+[4] A. H. Chamseddine, A. Connes, and M. Marcolli. Gravity and the Standard Model with
+
+neutrino mixing. Adv. Theor. Math. Phys. (6) 11 (2007) 991–1089.
+
+29
+
+[5] Y. Choquet-Bruhat and C. DeWitt-Morette. Analysis, manifolds and physics. Part II. North-
+
+Holland Publishing Co., Amsterdam, 1989. 92 applications.
+
+[6] Y. Choquet-Bruhat, C. DeWitt-Morette, and M. Dillard-Bleick. Analysis, manifolds and physics.
+
+North-Holland Publishing Co., Amsterdam-New York-Oxford, 1977.
+
+[7] A. Connes. Non-commutative differential geometry. Publ. Math. IHES 62 (1985) 257–360.
+
+[8] A. Connes. Entire cyclic cohomology of Banach algebras and characters of θ-summable Fred-
+
+holm modules. K-Theory 1 (1988) 519–548.
+
+[9] A. Connes. Noncommutative Geometry. Academic Press, San Diego, 1994.
+
+[10] A. Connes. Gravity coupled with matter and the foundation of non-commutative geometry.
+
+Commun. Math. Phys. 182 (1996) 155–176.
+
+[11] A. Connes and A. H. Chamseddine. Inner ﬂuctuations of the spectral action. J. Geom. Phys.
+
+57 (2006) 1–21.
+
+[12] A. Chattopadhyay and A. Skripka. Trace formulas for relative Schatten class perturbations.
+
+J. Funct. Anal. (12) 274 (2018), 3377–3410.
+
+[13] A. Connes and M. Marcolli. Noncommutative Geometry, Quantum Fields and Motives. AMS,
+
+Providence, 2008.
+
+[14] A. Carey and J. Phillips. Unbounded Fredholm modules and spectral ﬂow Can. J. Math. (4)
+
+50 (1998), 673–718.
+
+[15] E. Getzler and A. Szenes. On the Chern character of a theta-summable Fredholm module. J.
+
+Funct. Anal. (2) 84 (1989) 343–357.
+
+[16] N. Higson. The residue index theorem of Connes and Moscovici. In Surveys in noncommutative
+geometry, volume 6 of Clay Math. Proc., pages 71–126. Amer. Math. Soc., Providence, RI, 2006.
+
+[17] T. D. H. van Nuland and A. Skripka. Spectral shift for relative Schatten class perturbations.
+
+arXiv:2102.00090 [math.FA].
+
+[18] M. Nakahara. Geometry, Topology and Physics. IOP Publishing, 1990.
+
+[19] S. Paycha. (Second) Quantised resolvents and regularised traces. J. Geom. Phys. (5) 57 (2007)
+
+1345–1369.
+
+[20] D. Potapov, A. Skripka, and F. Sukochev. Spectral shift function of higher order. Invent. Math.
+
+(3) 193 (2013), 501–538.
+
+[21] D. Quillen. Chern-Simons forms and cyclic cohomology. In The interface of mathematics and
+particle physics (Oxford, 1988), volume 24 of Inst. Math. Appl. Conf. Ser. New Ser., pages 117–134.
+Oxford Univ. Press, New York, 1990.
+
+[22] A. Skripka. Asymptotic expansions for trace functionals. J. Funct. Anal. (5) 266 (2014) 2845–
+
+2866.
+
+30
+
+[23] A. Skripka and A. Tomskova. Multilinear Operator Integrals: Theory and Applications. Lecture
+
+Notes in Math. 2250, Springer International Publishing, 2019, XI+192 pp.
+
+[24] W. D. van Suijlekom. Perturbations and operator trace functions. J. Funct. Anal. (8) 260 (2011)
+
+2483–2496.
+
+[25] W. D. van Suijlekom. Noncommutative Geometry and Particle Physics. Springer, 2015.
+
+31
+
+

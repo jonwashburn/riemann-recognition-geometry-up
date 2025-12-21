@@ -1,0 +1,3063 @@
+5
+2
+0
+2
+
+v
+o
+N
+7
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+3
+v
+1
+2
+4
+0
+0
+.
+1
+0
+3
+2
+:
+v
+i
+X
+r
+a
+
+ON THE HILBERT SPACE DERIVED FROM
+THE WEIL DISTRIBUTION
+
+MASATOSHI SUZUKI
+
+Abstract. We study the Hilbert space obtained by completing the space of all smooth
+and compactly supported functions on the real line with respect to the hermitian form
+arising from the Weil distribution under the Riemann hypothesis. It turns out that
+this Hilbert space is isomorphic to a de Branges space by a composition of the Fourier
+transform and a simple map. This result is applied to state new equivalence conditions
+for the Riemann hypothesis in a series of equalities.
+
+1. Introduction
+
+The Weil distribution is a distribution associated with the Riemann zeta-function
+
+ζ(s). Let
+
+ξ(s) =
+
+1
+2
+
+s(s − 1)π−s/2Γ
+
+(cid:17)
+
+(cid:16) s
+2
+
+ζ(s)
+
+be the Riemann xi-function, where Γ(s) is the gamma-function. Let Γ be the set of all
+zeros of ξ(1/2 − iz) without multiplicity and let mγ denote the multiplicity of γ ∈ Γ.
+The Riemann hypothesis (RH, for short) claims that all nontrivial zeros of ζ(s) lie on
+the critical line ℜ(s) = 1/2. It is equivalent to the assertion that all γ ∈ Γ are real.
+
+The Weil distribution is the linear functional W : C∞
+
+C∞
+
+c (R) ∋ ψ (cid:55)→ W (ψ) :=
+
+(cid:88)
+
+γ∈Γ
+
+c (R) → C defined by
+mγ (cid:98)ψ(−γ),
+
+where C∞
+
+c (R) is the space of all smooth and compactly supported functions on R and
+(cid:90) ∞
+
+(cid:98)ψ(z) := (Fψ)(z) :=
+
+ψ(x) eizx dx
+
+−∞
+
+(1.1)
+
+c (R), since we
+is the Fourier transform. We omit the description of the topology of C∞
+do not need it later. Weil [17] (see also the note in [14, Section 3.2]) discovered that the
+RH is true if and only if the Weil distribution W is nonnegative definite, that is,
+
+W (ψ ∗ (cid:101)ψ) ≥ 0
+
+for every ψ ∈ C∞
+
+c (R),
+
+where
+
+(ϕ ∗ ψ)(x) :=
+
+(cid:90) ∞
+
+−∞
+
+ϕ(y)ψ(x − y) dy
+
+and
+
+(cid:101)ψ(x) := ψ(−x).
+
+Further, if the RH is true, the Weil distribution is positive definite, that is, W (ψ ∗ (cid:101)ψ) > 0
+for every nonzero ψ ∈ C∞
+
+c (R).
+
+Using the Weil distribution, we define the hermitian form ⟨·, ·⟩W on C∞
+
+c (R) by
+
+⟨ψ1, ψ2⟩W = W (ψ1 ∗ (cid:102)ψ2) =
+
+(cid:88)
+
+γ∈Γ
+
+where
+
+mγ (cid:99)ψ1(−γ)((cid:99)ψ2)♯(−γ), ψ1, ψ2 ∈ C∞
+
+c (R),
+
+(1.2)
+
+F ♯(z) := F (¯z)
+
+Date: Version of November 10, 2025.
+2020 Mathematics Subject Classification. 11M26 42A82 46E22 .
+Key words and phrases. Riemann zeta-function; Riemann Hypothesis; Weil distribution; de Branges
+
+spaces; screw function; screw line .
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+M. SUZUKI
+
+for complex-valued functions of a complex variable. We often use this ♯ notation. We
+call this hermitian form the Weil hermitian form. Yoshida [19] has studied the Weil
+hermitian form in detail by restricting it to a function space on a finite interval [−a, a]
+(a > 0). The subject of the present article is the behavior of the Weil hermitian form on
+the whole line R. Yoshida proposed a method to complete a function space on a finite
+interval with respect to the Weil hermitian form without assuming the RH, but it does
+not extend to the whole line.
+
+c (R). Therefore, the completion HW of the pre-Hilbert space C∞
+
+Suppose that the RH is true. Then the Weil hermitian form ⟨·, ·⟩W is positive definite
+c (R) with respect
+on C∞
+to ⟨·, ·⟩W is defined. The first main result is an explicit description of the Hilbert space
+HW . The elements of HW are equivalence classes of Cauchy sequences with respect
+to ⟨·, ·⟩W , where two Cauchy sequences are equivalent if their difference converges to
+zero with respect to ⟨·, ·⟩W . The representative of each class can be chosen from L2(R)
+(Theorem 5.5 below). Such a result is expected from Lemmas 2 and 3 in [19]. Therefore,
+we denote the class represented by ψ ∈ L2(R) as [ψ] and often identify ψ with [ψ].
+
+For the concrete description of HW , we use a de Branges space and a model space.
+
+The entire function Eξ defined by
+
+Eξ(z) := ξ(1/2 − iz) + ξ′(1/2 − iz)
+belongs to the Hermite–Biehler class under the RH [8, Theorem 1] and hence it defines
+the de Branges space H(Eξ), where the dash on the right-hand side of (1.3) means
+differentiation of ξ(s) with respect to s. Furthermore, the meromorphic function
+
+(1.3)
+
+Θξ(z) := E♯
+
+(1.4)
+in C is a meromorphic inner function in the upper-half plane C+ = {z | ℑ(z) > 0} under
+the RH, and therefore it defines the model space K(Θξ). These two Hilbert spaces
+H(Eξ) and K(Θξ) are isomorphic with ∥EξF ∥H(Eξ) = ∥F ∥K(Θξ) for every F ∈ K(Θξ)
+(see Section 2 for details on the Hermite–Biehler class, de Branges spaces, and model
+spaces). Then the first result is stated as follows.
+
+ξ(z)/Eξ(z)
+
+Theorem 1.1. Assume that the RH holds. Let HW , H(Eξ), and K(Θξ) be Hilbert spaces
+as above. Then, the map K(Θξ) → HW defined by
+
+F (cid:55)→ [ψF ], ψF := F−1(F )
+
+is an isomorphism between Hilbert spaces and satisfies
+H(Eξ) = ∥F ∥2
+
+∥EξF ∥2
+
+K(Θξ) = π⟨ψF , ψF ⟩W = π⟨[ψF ], [ψF ]⟩W
+
+for F ∈ K(Θξ), where F−1 is the Fourier inversion on L2(R).
+
+This result is proved in Section 5. Note that Theorem1.1 provides an isomorphism as
+a Hilbert space, not as a reproducing kernel Hilbert space. The space HW is a space of
+equivalence classes of functions, not a space of functions.
+
+Lagarias suggested after Theorem 1 of [8] that the norm of the de Branges space
+H(Eξ) and the Weil hermitian form (the spectral side of the “explicit formula” of prime
+number theory) are similar. Theorem 1.1 shows that they are naturally coincident.
+Hence, HW and H(Eξ) must have an “arithmetic structure” through the Weil explicit
+formula (3.3) below, but we will not discuss this further.
+
+Connes, Consani, and Moscovici [4, Section 4.8] also describe the relation between the
+theory of de Branges spaces and the Weil hermitian form, but their de Branges spaces BS
+λ
+and H(Eξ) have completely different properties. Due to the difference in the generators
+of the de Branges spaces, they are not isomorphic, and a more obvious difference is that
+they have different spectral properties (see the second half of Section 6).
+
+One of the remarkable properties of de Branges spaces is the structure of subspaces.
+The set of all de Branges subspaces of a given de Branges space is totally ordered by
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+3
+
+set-theoretical inclusion (see [18, pp. 500–506] for details). Such a structure also comes
+to HW through the isomorphism of Theorem 1.1 as stated in Theorem 5.7 below.
+
+Another notable property of de Branges spaces is the explicit description of the fam-
+ily of self-adjoint extensions of the multiplication operator by an independent variable
+F (z) (cid:55)→ zF (z). It enables us to interpret the set of zeros Γ as the set of eigenvalues of
+a self-adjoint operator on HW . This means that one of the Hilbert–P´olya spaces is the
+Hilbert space HW naturally obtained from the Weil distribution (see Sections 2.3 and 6
+for details).
+
+As stated in Theorem 1.1, the Hilbert space HW is isomorphic to a de Branges
+space under the RH. Moreover, representatives of classes in HW can be chosen from the
+concrete subspace V (0) of L2(R) defined in (5.2) below. It is surprising that such an
+explicit description of HW is possible, and interesting in itself. However, it is a matter of
+concern that it is not even possible to define HW , H(Eξ), and K(Θξ) without assuming
+the RH. Fortunately, by considering a screw line of the screw function attached to ζ(s),
+which will be explained in Sections 2.1 and 4.2, we can unconditionally construct two
+special Hilbert spaces H0 and K0 (in Section 3.3) to be isomorphic to HW and K(Θξ),
+respectively, under the RH (Theorem 5.6). The construction of such spaces leads to an
+equivalence condition for the RH stated below. That is the second main result.
+
+In Selberg’s answer to the second question in [1, p. 632], he states that the construc-
+tion of a space assuming the RH will not be useful for attacking the RH. However, H0
+and K0 may be useful in future research on the RH, since they are defined without the
+RH.
+
+Let L2(R) be the usual L2-space on the real line with respect to the Lebesgue measure.
+
+We define
+
+with
+
+Pt(z) :=
+
+St(z) :=
+
+i(1 + Θ♯
+2
+
+ξ(z))
+
+Pt(z)
+
++
+
+4(et/2 − 1)
+1 + 2iz
+e−izt − 1
+iz
+(cid:20) Γ′
+Γ
+
+ζ ′
+ζ
+(cid:18) 1
+4
+
+4(e−t/2 − 1)
+1 − 2iz
+(cid:19)
+
+− iz
+
++
+
+(cid:18) 1
+2
+
+(cid:19)
+
+−
+
+−
+
+iz
+2
+
+Γ′
+Γ
+
+(cid:19)(cid:21)
+
+n≤et
+(cid:18) 1
+4
+
++
+
+−
+
+−
+
+1
+2iz
+1
+2iz
+
+e−t/2 (cid:2)Φ(e−2t, 1, 1
+
+2 ( 1
+
+2 − iz)) − Φ(e−2t, 1, 1
+
+4 )(cid:3)
+
+(cid:88)
+
+Λ(n)
+√
+n
+
+e−iz(t−log n) − 1
+iz
+
+(1.5)
+
+(1.6)
+
+for a nonnegative real number t and a complex number z, where Λ(n) is the von Mangoldt
+function defined by Λ(n) = log p if n = pk with k ∈ Z>0 and Λ(n) = 0 otherwise, and
+
+Φ(z, s, a) =
+
+∞
+(cid:88)
+
+n=0
+
+zn
+(n + a)s
+
+is the Hurwitz–Lerch zeta-function. For negative t, we set St(z) := S−t(z). The
+definition of Pt(z) is quite complicated. However, using the set Γ of zeros of ξ(1/2 − iz),
+it can be expressed in the simple form (3.2) (see Proposition 3.1 below). Nevertheless,
+as a tool for stating an equivalent condition for the RH, it seems preferable to have a
+representation that does not involve Γ. Thus, here we adopt a version of (3.2) rewritten
+without Γ using Weil’s explicit formula (3.3). In Weil’s explicit formula, the first, second,
+and the third-fourth lines on the right-hand side of (1.6) correspond to the poles of the
+completed zeta-function π−s/2Γ(s/2)ζ(s), the non-archimedean part (Euler product),
+and the archimedean part (gamma factor), respectively.
+
+For this St, we first obtain the following.
+
+4
+
+M. SUZUKI
+
+Proposition 1.2. For any fixed t ∈ R, St(z) belongs to L2(R) as a function of z.
+
+Proof. See Section 3.2.
+
+□
+
+From this result, the mapping t (cid:55)→ St(z) from R to L2(R) is defined. By the unifor-
+mity of the L2-norm of St(z) on a compact set of t obtained in the proof of Proposition
+1.2 and Minkowski’s integral inequality, the following holds.
+
+Proposition 1.3. For ϕ ∈ C∞
+(cid:90) ∞
+
+c (R), we define
+
+(cid:99)Pϕ(z) :=
+
+S♯
+
+t(z)ϕ(t) dt
+
+(cid:90) ∞
+
+(cid:18)
+
+=
+
+−∞
+
+(cid:19)
+
+St(¯z) ϕ(t) dt
+
+(1.7)
+
+−∞
+
+using (1.5). Then (cid:99)Pϕ(z) belongs to L2(R).
+
+Using the image of the composition (cid:99)PD := (cid:98)P ◦ D of the integral operator (cid:98)P and the
+
+differential operator
+
+(Dψ)(t) := iψ′(t),
+
+(1.8)
+
+we obtain the following equivalence condition for the RH.
+
+Theorem 1.4. The RH is true if and only if the equality
+
+holds for all ψ ∈ C∞
+(1.9) holds for countably many choices of ψ’s, then the RH follows.
+
+(1.9)
+c (R). Furthermore, by choosing the test functions appropriately, if
+
+L2(R) = π⟨ψ, ψ⟩W
+
+∥ (cid:100)PDψ∥2
+
+Proof. See Section 4.3.
+
+Equation (1.9) is reformulated to the following simpler form.
+
+Corollary 1.5. Define the subspace V ◦(0) of L2(R) by
+(cid:12)
+(cid:12) ψ ∈ C∞
+(cid:12)
+
+(cid:110)
+F−1 (cid:100)PDψ
+
+V ◦(0) :=
+
+c (R)
+
+(cid:111)
+.
+
+Then the RH is true if and only if the equality
+
+2∥ψ∥2
+
+L2(R) = ⟨ψ, ψ⟩W
+
+holds for all ψ ∈ V ◦(0).
+
+Proof. See Section 4.3 and Theorem 5.6.
+
+□
+
+(1.10)
+
+□
+
+The advantage of Theorem 1.4 and Corollary 1.5 is that it has turned the criterion
+It
+of the RH from a set of inequalities like Weil’s criterion into a set of equalities.
+should also be noted that equations (1.9) and (1.10) can be expressed without zeros of
+ξ(1/2 − iz) by (1.5) and (1.6). Furthermore, equations (1.9) and (1.10) claim that the
+nonnegativity of Weil’s hermitian form is explained by the nonnegativity of the L2-norm.
+
+In the following sections, first, in Section 2, we briefly review necessary notions such
+as screw functions, screw lines, the Hermite–Biehler class, de Branges spaces, and model
+spaces. Then, in Section 3, we state and prove unconditional results that we need to
+prove the main results. Moreover, we unconditionally define two Hilbert spaces H0 and
+K0 that agree with the Hilbert spaces HW and K(Θ), respectively, under the RH.
+
+In Section 4, we show that St(z) in (1.5) gives a screw line of the screw function
+corresponding to the Riemann zeta-function under the RH (Theorem 4.2). Furthermore,
+we prove Theorem 1.4 and Corollary 1.5. The strategy of the proof of Theorem 4.2 is
+basically the same as that of [15, Theorem 1.1], with Proposition 4.1 playing an essential
+role in both cases. To carry this out, the rewriting of (1.5) into (3.6), prepared in
+Section 3 using Weil’s explicit formula, corresponds to the transformation from (1.7) to
+(3.6) in [15], although the technical details of the calculations differ considerably. On
+the other hand, the analytic or geometric meaning of the functions giving the norms was
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+5
+
+unclear in [15], whereas in the present article, these functions have a clear interpretation
+as a screw line. Furthermore, as an advantage of employing the screw line St(z), we
+obtain Theorem 1.4, for which no analog was obtained in [15].
+
+In Section 5, we prove Theorem 1.1 in a more detailed form. In addition, we prove
+that H0 = HW and K0 = K(Θξ) under the RH. Afterward, we explain that the Hilbert
+space HW is one of the Hilbert–P´olya spaces in Section 6. Finally, we mention two
+special values of St(z) in Section 7 as an appendix.
+
+2. Review on necessary notions
+
+2.1. Screw functions and screw lines. In this and the next part, we refer to [7,
+Sections 5 and 12]. See also its references for details. Following Kre˘ın, we denote by G∞
+the space of all continuous functions g(t) on R such that g(−t) = g(t) and the kernel
+
+Gg(t, u) := g(t − u) − g(t) − g(−u) + g(0)
+
+(2.1)
+
+is nonnegative definite on R, that is, (cid:80)n
+ξi ∈ C (i = 1, 2, ..., n). Functions belonging to G∞ are called screw functions on R.
+
+i,j=1 Gg(ti, tj) ξiξj ≥ 0 for all n ∈ N, ti ∈ R, and
+
+If an (even) real-valued function g(t) is a screw function, then there exists a Hilbert
+
+space H and a continuous mapping t (cid:55)→ x(t) from R into H such that
+
+⟨x(t + v) − x(v), x(u + v) − x(v)⟩H
+is independent of v ∈ R for all t, u ∈ R and the equality ⟨x(t) − x(0), x(u) − x(0)⟩H =
+H = −2g(t) if g(0) = 0. A mapping x : R → H
+Gg(t, u) holds. Therefore, ∥x(t) − x(0)∥2
+endowed with the translation-invariance described above is called a screw line for g(t).
+
+2.2. Hilbert spaces associated with screw functions. Each g ∈ G∞ defines a non-
+negative definite hermitian form on R by
+
+⟨ϕ1, ϕ2⟩Gg :=
+
+(cid:90) ∞
+
+(cid:90) ∞
+
+−∞
+
+−∞
+
+Gg(t, u)ϕ1(u)ϕ2(t) dudt.
+
+(2.2)
+
+According to [7, Section 5], we denote by L(Gg) the space C0(R) of all continuous and
+compactly supported functions ϕ on R such that (cid:98)ϕ(0) = 0 equipped with the hermitian
+inner product ⟨·, ·⟩Gg . We also denote by H(Gg) the completion of the factor space
+L(Gg)/L◦(Gg), where L◦(Gg) = {ϕ ∈ L(Gg) | ⟨ϕ, ϕ⟩Gg = 0}. Note that even if ⟨·, ·⟩Gg is
+positive definite on L(Gg), that is, L◦(Gg) = {0}, there possibly exists a sequence (ϕn)n
+of L(Gg) such that ϕn → 0 as n → ∞ with respect to ⟨·, ·⟩Gg . The completion H(Gg) is
+a space of equivalence classes of Cauchy sequences with respect to ⟨·, ·⟩Gg . Two Cauchy
+sequences are equivalent if their difference converges to zero with respect to ⟨·, ·⟩Gg . We
+denote by [ϕ] ∈ H(Gg) the equivalence class represented by ϕ. In general, elements of
+H(Gg) are not necessarily represented by functions unlike HW (cf. [7, Section 4.3]).
+
+Every g ∈ G∞ admits a representation
+(cid:90) ∞
+
+g(t) = g(0) + ibt +
+
+−∞
+
+(cid:18)
+
+eiλt − 1 −
+
+iλt
+1 + λ2
+
+(cid:19) dτ (λ)
+λ2
+
+(2.3)
+
+with b ∈ R and a measure τ on R such that (cid:82) ∞
+g(t) is real-valued, b = 0. Without loss of generality, we suppose that g(0) = 0.
+
+−∞ dτ (λ)/(1 + λ2) < ∞ and vice versa. If
+
+We define
+
+Φ1(ϕ, λ) :=
+
+(cid:90) ∞
+
+−∞
+
+eiλx − 1
+λ
+
+ϕ(x) dx =
+
+(cid:98)ϕ(λ) − (cid:98)ϕ(0)
+λ
+
+=
+
+(cid:98)ϕ(λ)
+λ
+
+for ϕ ∈ L(Gg). Then, ⟨ϕ1, ϕ2⟩Gg = ⟨Φ1(ϕ1), Φ1(ϕ2)⟩L2(τ ) for ϕ1, ϕ2 ∈ L(Gg) and Φ1
+establishes an isomorphism between H(Gg) and L2(τ ).
+
+6
+
+M. SUZUKI
+
+2.3. De Branges spaces. In this part, we refer to [12, 18]. See also those references for
+details. Let H 2 := H 2(C+) = F(L2(0, ∞)) be the Hardy space in the upper half-plane.
+As usual, we identify H 2 with a closed subspace of L2(R) via boundary values. Then,
+the inner product of H 2 coincides with the standard inner product of L2(R).
+
+The Hermite–Biehler class consists of entire functions E satisfying |E♯(z)| < |E(z)|
+for all z ∈ C+. For each entire function E belonging to the Hermite–Biehler class, the
+de Branges space H(E) is defined as a Hilbert space consisting of entire functions F (z)
+such that both F (z)/E(z) and F ♯(z)/E(z) belong to H 2 and have the norm
+
+∥F ∥H(E) := ∥F/E∥L2(R).
+The multiplication operator M by an independent variable is defined by D(M) =
+{F (z) ∈ H(E) | zF (z) ∈ H(E)} and (MF )(z) = zF (z) for F ∈ D(M). The domain
+D(M) is dense in H(E) if and only if
+i
+2
+
+(eiθE(z) − e−iθE♯(z))
+
+Sθ(z) :=
+
+(2.4)
+
+does not belong to H(E) for all θ ∈ [0, π) [12, Theorem 11]. The particular two θ cases
+are often written as A(z) := −Sπ/2(z) and B(z) := S0(z).
+
+If D(M) is dense in H(E), all self-adjoint extensions of M are parametrized by θ ∈ [0, π)
+
+and are described as follows. The domain of Mθ is
+
+D(Mθ) =
+
+(cid:26)
+
+G(z) =
+
+Sθ(w0)F (z) − Sθ(z)F (w0)
+z − w0
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:27)
+
+F (z) ∈ H(E)
+
+,
+
+(2.5)
+
+and the operation is defined by
+
+MθG(z) = z G(z) + F (w0)Sθ(z),
+where w0 is a fixed complex number with Sθ(w0) ̸= 0 [6, Propositions 4.6 and 6.1]. The
+domain D(Mθ) is independent of the choice of the number w0. For a fixed θ ∈ [0, π), we
+confirm that G(z) = Sθ(z)/(z − γ) belongs to D(Mθ) by taking
+
+(2.6)
+
+Sθ(z)
+Sθ(w0)
+for every zero γ of Sθ(z) and is an eigenfunction of Mθ with the eigenvalue γ. Further,
+{Sθ(z)/(z − γ) | Sθ(γ) = 0} forms an orthogonal basis of H(E) [5, Theorem 22].
+
+γ − w0
+z − γ
+
+F (z) =
+
+2.4. Model subspaces. In this part, we refer to [9, Section 2], [13, Section 3.5] and
+[15, Section 3.1]. See also those references for details.
+
+Let H ∞ = H ∞(C+) be the space of all bounded analytic functions in C+. A function
+Θ ∈ H ∞ is called an inner function in C+ if limy→0+ |Θ(x+iy)| = 1 for almost all x ∈ R.
+For an inner function Θ, a model space K(Θ) is defined as the orthogonal complement
+K(Θ) = H 2 ⊖ ΘH 2 and has the alternative representation
+
+K(Θ) = H 2 ∩ Θ ¯H 2,
+(2.7)
+where ΘH 2 = {Θ(z)F (z) | F ∈ H 2} and ¯H 2 = H 2(C−) is the Hardy space in the
+lower half-plane. The model space K(Θ) is a subspace of L2(R) as a Hilbert space. In
+particular, the inner product of K(Θ) matches that of L2(R) on the real line.
+
+If an inner function Θ in C+ extends to a meromorphic function in C, then it is
+called a meromorphic inner function in C+. For any meromorphic inner function Θ,
+there exists E of the Hermite–Biehler class such that Θ = E♯/E. The de Branges
+space H(E) is isometrically isomorphic to K(Θ) by F (z) (cid:55)→ E(z)F (z). In particular,
+H(E) = E H 2 ∩ E♯ ¯H 2
+
+For a meromorphic inner function Θ, let µΘ be the positive discrete measure on R
+
+supported on σ(Θ) = {x ∈ R | Θ(x) = −1} and
+
+µΘ(x) =
+
+2π
+|Θ′(x)|
+
+.
+
+(2.8)
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+7
+
+Then the restriction map F (cid:55)→ F |σ(Θ) is an isometric operator from K(Θ) to L2(µΘ) [9,
+Theorem 2.1]. The isometric property of the map implies that the family of functions
+
+(cid:115)
+
+fγ(z) =
+
+2
+π|Θ′(γ)|
+
+1 + Θ(z)
+2(z − γ)
+
+=
+
+(cid:115)
+
+2
+π|Θ′(γ)|
+
+A(z)
+(z − γ)E(z)
+
+(2.9)
+
+parametrized by all zeros γ of A(z) = −Sπ/2(z) forms an orthonormal basis of K(Θ) if
+D(M) is dense in H(E).
+
+3. Unconditional results
+
+Throughout this and later sections, we denote E = Eξ and Θ = Θξ = E♯
+
+ξ/Eξ for
+
+functions defined in (1.3) and (1.4), respectively. Otherwise, it is mentioned.
+
+3.1. Expansion of Pt(z) over the zeros. For the basic properties of the Riemann
+zeta-function, we refer to [16]. By the two functional equations ξ(s) = ξ(1 − s) and
+ξ(s) = ξ♯(s), if γ belongs to the set of zeros Γ, then both −γ and γ also belong to Γ
+with the same multiplicity. On the other hand, |ℑ(γ)| < 1/2 for every γ ∈ Γ, since all
+zeros of ξ(s) lie in the strip 0 < ℜ(s) < 1. For E(z) of (1.3), we define
+
+A(z) := (E(z) + E♯(z))/2
+
+(3.1)
+
+as in Section 2.3. Then A(z) = ξ(1/2 − iz), because E♯(z) = E(¯z) = ξ(1/2 − iz) −
+ξ′(1/2 − iz) by functional equations of ξ(s). Therefore, the set Γ coincides with the set
+of all zeros of both A(z) and 1 + Θ(z). We define
+
+Pt(z) :=
+
+(cid:88)
+
+γ∈Γ
+
+mγ
+
+e−iγt − 1
+γ
+
+·
+
+1
+z − γ
+
+(3.2)
+
+for nonnegative t. For negative t, we set Pt(z) := P−t(z). The series on the right-hand
+side of (3.2) converges absolutely and uniformly on every compact subset of C \ Γ, since
+(cid:80)
+γ∈Γ mγ|γ|−1−δ < ∞ for any δ > 0, because A(z) is an entire function of order one.
+Therefore, Pt(z) is a meromorphic function on C with Γ as the set of all poles.
+
+Proposition 3.1. Let Pt(z) and Pt(z) be meromorphic functions defined by (1.6) and
+(3.2), respectively. Then, both coincide.
+
+Proof. For t ≥ 0 and z ∈ C+, we define
+
+ϕz,t(x) =
+
+
+
+
+
+
+(iz)−1 eizx(e−izt − 1),
+(iz)−1 eizx(e−izx − 1),
+0,
+
+t < x,
+0 ≤ x ≤ t,
+x < 0.
+
+The main tool for the proof is the Weil explicit formula
+
+lim
+X→∞
+
+(cid:88)
+
+γ∈Γ
+|γ|≤X
+
+mγ
+
+(cid:90) ∞
+
+−∞
+
+ϕ(x) e−iγx dx
+
+=
+
+(cid:90) ∞
+
+−∞
+
+ϕ(x)(ex/2 + e−x/2)dx −
+
+∞
+(cid:88)
+
+n=1
+
+Λ(n)
+√
+n
+
+ϕ(log n) −
+
+∞
+(cid:88)
+
+n=1
+
+Λ(n)
+√
+n
+
+ϕ(− log n)
+
+(3.3)
+
+− (log 4π + γ0)ϕ(0) −
+
+(cid:90) ∞
+
+0
+
+(cid:110)
+
+ϕ(x) + ϕ(−x) − 2e−x/2ϕ(0)
+
+(cid:111) ex/2dx
+ex − e−x
+
+which is obtained from the explicit formula in [3, p. 186] by taking ϕ(x) = ex/2f (ex) for
+test functions f (t) in that formula with the conditions for f (t) in [2, Section 3], where γ0
+is the Euler–Mascheroni constant. (Note that the formula in [2] has two typographical
+errors in the second line of the right-hand side.)
+
+8
+
+M. SUZUKI
+
+As is easily seen, Weil’s explicit formula can be applied to ϕ(x) = ϕz,t(x). We have
+
+(cid:90) ∞
+
+−∞
+
+ϕz,t(x) e−iγx dx =
+
+e−iγt − 1
+γ
+
+·
+
+1
+z − γ
+
+when ℑ(z) > ℑ(γ).
+
+Therefore, the left-hand side of Weil’s explicit formula for ϕz,t(x) gives Pt(z) of (3.2)
+when ℑ(z) > 1/2. Hence, if it is shown that the right-hand side is equal to Pt(z) for
+ℑ(z) > 1/2, then the conclusion of the proposition follows by analytic continuation.
+
+It is easy to verify
+
+(cid:90) ∞
+
+−∞
+
+ϕz,t(x)(ex/2 + e−x/2)dx =
+
+4(et/2 − 1)
+1 + 2iz
+
++
+
+4(e−t/2 − 1)
+1 − 2iz
+
+and
+
+∞
+(cid:88)
+
+n=1
+
+Λ(n)
+√
+n
+
+ϕz,t(log n) =
+
+1
+iz
+
+= −
+
+(cid:88)
+
+n≤et
+
+(cid:88)
+
+n≤et
+
+Λ(n)
+√
+n
+
+(1 − niz) +
+
+e−izt − 1
+iz
+
+(cid:88)
+
+Λ(n)
+√
+n
+
+e−iz(t−log n) − 1
+iz
+
+−
+
+Λ(n)
+n1/2−iz
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+(cid:19)
+
+− iz
+
+,
+
+t<log n
+e−izt − 1
+iz
+
+∞
+(cid:88)
+
+n=1
+
+Λ(n)
+√
+n
+
+ϕz,t(− log n) = 0,
+
+ϕz,t(0) = 0
+
+for ℑ(z) > 1/2 by direct calculation.
+
+Therefore, the remaining task is to calculate the fifth term on the right-hand side.
+
+We split it into (cid:82) ∞
+t
+
+and (cid:82) t
+
+0 . For the first integral,
+
+(cid:90) ∞
+
+t
+
+(cid:110)
+
+ϕz,t(x) + ϕz,t(−x) − 2e−x/2ϕz,t(0)
+
+(cid:111) ex/2dx
+ex − e−x
+(cid:90) ∞
+
+e−izt − 1
+iz
+
+(cid:90) ∞
+
+t
+
+eizx ex/2dx
+
+ex − e−x =
+
+e−izt − 1
+iz
+
+t
+
+eizx e−x/2
+
+∞
+(cid:88)
+
+n=0
+
+e−2nx dx
+
+e−izt − 1
+2iz
+
+e−t( 1
+
+2 −iz)
+
+∞
+(cid:88)
+
+n=0
+
+e−2nt
+2 ( 1
+
+2 − iz)
+
+n + 1
+
+=
+
+e−izt − 1
+2iz
+
+e−t( 1
+
+2 −iz)Φ(e−2t, 1, 1
+
+2 ( 1
+
+2 − iz)).
+
+=
+
+=
+
+For the second integral,
+
+(cid:110)
+
+(cid:90) t
+
+0
+
+ϕz,t(x) + ϕz,t(−x) − 2e−x/2ϕz,t(0)
+
+(cid:111) ex/2dx
+ex − e−x
+(cid:90) t
+
+= −
+
+1
+iz
+
+(cid:90) t
+
+0
+
+(eizx − 1)
+
+ex/2dx
+ex − e−x = −
+
+1
+iz
+
+0
+
+(eizx − 1) e−x/2
+
+∞
+(cid:88)
+
+n=0
+
+e−2nx dx.
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+9
+
+To handle the right-hand side, we calculate as
+
+(cid:90) t
+
+0
+
+(eizx − 1) e−x/2
+
+N
+(cid:88)
+
+e−2nx dx
+
+n=0
+(cid:34)
+N
+(cid:88)
+
+n=0
+
+=
+
+1
+2
+
+1 − e−2t(n+ 1
+n + 1
+
+2 ( 1
+2 − iz)
+
+2 ( 1
+
+2 −iz))
+
+(cid:35)
+
+−
+
+1 − e−2t(n+ 1
+4 )
+n + 1
+4
+
+= −
+
+1
+2
+
+e−t( 1
+
+2 −iz)
+
+N
+(cid:88)
+
+n=0
+
+e−2tn
+2 ( 1
+
+2 − iz)
+
+n + 1
+
++
+
+1
+2
+
+e−t/2
+
+N
+(cid:88)
+
+n=0
+
+e−2tn
+n + 1
+4
+
+(cid:34)
+
+N
+(cid:88)
+
+1
+2 ( 1
+2 − iz)
+
+n + 1
+
+−
+
+1
+n + 1
+4
+
+(cid:35)
+
+1
+2
+
++
+
+= −
+
+−
+
+n=0
+e−t( 1
+(cid:20) Γ′
+Γ
+
+1
+2
+1
+2
+
+2 −iz)Φ(e−2t, 1, 1
+(cid:18) 1
+4
+
+2 ( 1
+Γ′
+Γ
+
+iz
+2
+
+2 − iz)) +
+(cid:19)(cid:21)
+(cid:18) 1
+4
+
+−
+
+−
+
+(cid:19)
+
+1
+2
+
+e−t/2Φ(e−2t, 1, 1
+4 )
+
++ O(e−2N t) + O(N −1)
+
+using the well-known series expansion
+
+Γ′
+Γ
+
+(w) = −γ0 −
+
+∞
+(cid:88)
+
+(cid:18) 1
+
+w + n
+
+n=0
+
+−
+
+1
+n + 1
+
+(cid:19)
+
+,
+
+(3.4)
+
+where the implied constant depends on t and z. Therefore, we obtain
+
+(cid:90) t
+
+0
+
+(cid:110)
+
+ϕz,t(x) + ϕz,t(−x) − 2e−x/2ϕz,t(0)
+
+(cid:111) ex/2dx
+ex − e−x
+
+=
+
+1
+2iz
+
++
+
+e−t( 1
+(cid:20) Γ′
+Γ
+
+1
+2iz
+
+2 ( 1
+2 − iz)) −
+(cid:19)(cid:21)
+(cid:18) 1
+Γ′
+4
+Γ
+
+.
+
+−
+
+2 −iz)Φ(e−2t, 1, 1
+
+(cid:19)
+
+−
+
+(cid:18) 1
+iz
+4
+2
+and (cid:82) t
+0 ,
+
+Combining the results for (cid:82) ∞
+t
+
+1
+2iz
+
+e−t/2Φ(e−2t, 1, 1
+4 )
+
+(cid:110)
+
+(cid:90) ∞
+
+0
+
+ϕz,t(x) + ϕz,t(−x) − 2e−x/2ϕz,t(0)
+
+=
+
+1
+2iz
+
+e−t/2(cid:104)
+(cid:20) Γ′
+1
+Γ
+2iz
+
++
+
+Φ(e−2t, 1, 1
+2 ( 1
+(cid:19)
+(cid:18) 1
+4
+
+iz
+2
+
+−
+
+−
+
+(cid:111) ex/2dx
+ex − e−x
+2 − iz)) − Φ(e−2t, 1, 1
+4 )
+Γ′
+Γ
+
+(cid:18) 1
+4
+
+(cid:19)(cid:21)
+
+.
+
+(cid:105)
+
+From the calculation of the five terms on the right-hand side above, we conclude that
+□
+the right-hand side of the Weil explicit formula for ϕz,t(x) equals (1.6).
+3.2. Proof of Proposition 1.2. We have |Θ(z)| = 1 for every z ∈ R by definition.
+In fact, zeros of E(z) in the denominator cancel out in the numerator E♯(z), even if
+they exist. Further, Pt(z) has poles of order one at γ ∈ Γ, but St(z) is holomorphic
+there, since (1 + Θ(z))/2 = A(z)/E(z) = A(z)/(A(z) + iA′(z)) = (z − γ)(−i/mγ + o(1))
+near z = γ by direct calculation. Hence, St(z) is bounded and holomorphic on the real
+line by (1.5), (3.2), and Proposition 3.1. On the other hand, in the horizontal strip
+|ℑ(z)| ≤ 1/2, we have the well-known estimate (Γ′/Γ)(1/4 + iz/2) ≪ log |z| and
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+(cid:19)
+
+− iz
+
+=
+
+(cid:88)
+
+|ℜ(z)−γ|≤1
+
+i
+z − γ
+
++ O(log |z|)
+
+by [16, Theorem 9.6 (A)]. In both estimates, implied constants are uniform in |ℑ(z)| ≤
+1/2. The number of zeros γ ∈ Γ satisfying |ℜ(z) − γ| ≤ 1 is O(log |z|) counting with
+
+(3.8)
+
+(3.9)
+
+10
+
+M. SUZUKI
+
+multiplicity by [16, Theorem 9.2]. Therefore, St(z) ≪ |z|−1 log |z| as |z| → ∞ with
+an implied constant depending on a compact set of t by (1.6). Hence St(z) belongs to
+□
+L2(R) and the norm is uniformly bounded on a compact set of t.
+
+3.3. Two special Hilbert spaces. We first introduce the set of meromorphic functions
+
+Then, we have
+
+Fγ(z) :=
+
+(cid:114) mγ
+π
+
+i(1 + Θ(z))
+2(z − γ)
+
+,
+
+γ ∈ Γ.
+
+St(z) =
+
+(cid:88)
+
+√
+
+πmγ
+
+γ∈Γ
+
+e−iγt − 1
+γ
+
+F ♯
+
+γ(z)
+
+by Proposition 3.1. Therefore,
+
+(cid:99)Pϕ(z) =
+
+(cid:88)
+
+√
+
+πmγ
+
+γ∈Γ
+
+(cid:98)ϕ(γ) − (cid:98)ϕ(0)
+γ
+
+Fγ(z)
+
+(3.5)
+
+(3.6)
+
+(3.7)
+
+c (R) by definition (1.7) and the symmetry γ (cid:55)→ ¯γ of Γ with mγ = m¯γ.
+
+for any ϕ ∈ C∞
+This implies
+
+(cid:100)PDψ(z) =
+
+(cid:88)
+
+√
+
+γ∈Γ
+
+πmγ (cid:98)ψ(γ) Fγ(z)
+
+for any ψ ∈ C∞
+
+c (R), since ((cid:100)Dψ(z) − (cid:100)Dψ(0))/z = (cid:100)Dψ(z)/z = (cid:98)ψ(z) for D in (1.8).
+
+On the other hand, we define the norm ∥ ∥0 on C∞
+
+c (R) by
+
+∥ψ∥0 :=
+
+1
+√
+π
+
+∥ (cid:100)PDψ∥L2(R), ψ ∈ C∞
+
+c (R)
+
+based on Proposition 1.3. Then, we have the following.
+c (R).
+
+Lemma 3.2. Equation (3.9) defines a norm on C∞
+
+Proof. We obtain ∥ψ1 + ψ2∥0 ≤ ∥ψ1∥0 + ∥ψ2∥0 and ∥kψ∥0 = |k|∥ψ∥0 for ψ1, ψ2, ψ ∈
+c (R) and k ∈ C by the obvious linearity of (cid:99)PD. Therefore, the proof is completed if
+C∞
+it is shown that ∥ψ∥0 = 0 implies ψ = 0. If ∥ψ∥0 = 0, the image (cid:100)PDψ(z) is identically
+zero. The latter means that (cid:98)ψ(γ) = 0 for all γ ∈ Γ, because, if not, there must exist a
+sequence (cγ)γ∈Γ such that (cid:80)
+γ∈Γ cγ(z − γ)−1 is identically zero on C by (3.5) and (3.8),
+but it is impossible. If (cid:98)ψ(γ) = 0 for all γ ∈ Γ, it implies that ψ is identically zero by
+□
+[14, Lemma 2.1].
+
+By Lemma 3.2, we can complete the space C∞
+
+c (R) with respect to ∥ ∥0. We denote the
+c (R))
+completion by H0. On the other hand, we denote the L2-closure of the image (cid:99)PD(C∞
+in L2(R) by K0. Then, two Hilbert spaces H0 and K0 are isometrically isomorphic up
+c (R)) ⊂ L2(R) extends to
+to a constant multiple. The map (cid:99)PD from C∞
+the map from H0 to K0 by (3.9). As proved in Theorem 5.6 below, H0 = HW and
+K0 = K(Θ) under the RH.
+
+c (R) to (cid:99)PD(C∞
+
+4. A screw line of the Riemann zeta-function
+
+4.1. A special orthonormal basis. Assuming the RH is true, E = Eξ belongs to
+the Hermite–Biehler class [8, Theorem 1], and thus Θ = Θξ is a meromorphic inner
+function. Therefore, they define the de Branges space H(E) and the model space K(Θ),
+respectively. We need the following result for the later discussion.
+
+Proposition 4.1. Assume that the RH is true. Then, the family (3.5) forms an or-
+thonormal basis of the Hilbert space K(Θ). Furthermore,
+
+Θ′(γ)
+2
+
+= −
+
+i
+mγ
+
+(4.1)
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+11
+
+and
+
+Fγ(γ) =
+
+√
+
+1
+mγπ
+
+,
+
+Fγ(γ′) = 0
+
+for every γ ∈ Γ, γ′ ∈ Γ \ {γ}.
+
+(4.2)
+
+Proof. See [15, Proposition 3.2] and its proof.
+
+□
+
+4.2. Screw line of the Riemann zeta-function. We define the even real-valued
+function gξ(t) on the real line by
+
+gξ(t) := −4(et/2 + e−t/2 − 2) +
+
+(cid:88)
+
+Λ(n)
+√
+n
+
+(t − log n)
+
+−
+
+(cid:19)
+
+(cid:20) Γ′
+Γ
+
+(cid:18) 1
+4
+
+t
+2
+
+(cid:21)
+
+− log π
+
+n≤et
+(cid:16)
+1
+4
+
+−
+
+Φ(1, 2, 1/4) − e−t/2Φ(e−2t, 2, 1/4)
+
+(4.3)
+
+(cid:17)
+
+for nonnegative t. We easily obtain gξ(0) = 0. Then, gξ(t) is a screw function on R
+under the RH as stated in [14, Theorem 1.2]. One of the screw lines corresponding to
+gξ(t) can be constructed as follows.
+
+Let τξ be the nonnegative measure representing gξ(t) as in (2.3) under the RH. Then
+the Hilbert space H = L2(τξ) and the mapping t (cid:55)→ x(t) := (eitγ − 1)/γ provide a screw
+line satisfying ∥x(t) − x(0)∥2
+H = −2gξ(t) [7, Section 12]. This spectral construction of
+the screw line is important and useful in analysis, but it is of limited use for studying
+the nontrivial zeros of ζ(s) without assuming the RH. In the following, we show that St
+gives a screw line of gξ(t). In contrast to the spectral screw line above, this screw line
+can be used to study HW , as will be done later.
+
+Theorem 4.2. Assume the RH is true and let g(t) = gξ(t). Then, the mapping t (cid:55)→
+π−1/2St(z) from R to L2(R) is a screw line of g(t). That is,
+1
+π
+
+⟨St, Su⟩L2(R) = Gg(t, u)
+
+(4.4)
+
+holds for t, u ∈ R.
+
+Proof. The sum of coefficients on the right-hand side of (3.6) is convergent in L2-sense:
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+mγ
+|γ|2 < ∞.
+
+e−iγt − 1
+γ
+
+πmγ
+
+≤ π
+
+(cid:88)
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+√
+
+2
+
+γ∈Γ
+
+γ∈Γ
+
+Therefore, applying Proposition 4.1 to St(z) via formula (3.6), we find that it belongs
+to the subspace K(Θ) of L2(R) and
+
+1
+π
+
+⟨St+v − Sv, Su+v − Sv⟩L2(R) =
+
+(cid:88)
+
+γ∈Γ
+
+mγ
+
+e−iγt − 1
+γ
+
+·
+
+eiγu − 1
+γ
+
+holds. The right-hand side is equal to Gg(t, u) by the formula
+(eiγt − 1)(e−iγu − 1)
+γ2
+
+Gg(t, u) =
+
+(cid:88)
+
+mγ
+
+γ∈Γ
+
+(4.5)
+
+(4.6)
+
+given in [14, (1.9)] and the symmetry γ (cid:55)→ −γ of Γ with mγ = m−γ. Hence, π−1/2St :
+R → L2(R) is a screw line of g(t) under the RH.
+
+We find that S0(z) is identically zero by (1.5) and (1.6), since
+Γ′
+Γ
+
+4 ) − Φ(e−2t, 1, 1
+
+2 − iz))(cid:1) = −
+
+(cid:0)Φ(e−2t, 1, 1
+
+(cid:18) 1
+4
+
+lim
+t→0
+
+Γ′
+Γ
+
+2 ( 1
+
++
+
+(cid:19)
+
+(cid:18) 1
+2
+
+(cid:18) 1
+2
+
+(cid:19)(cid:19)
+
+− iz
+
+by (2.8). Therefore, by taking v = 0 in (4.5), we obtain (4.4).
+
+□
+
+The following immediately follows from Theorem 4.2.
+
+12
+
+M. SUZUKI
+
+Corollary 4.3. The RH is true if and only if the equality
+
+1
+2π
+holds for all t ≥ t0 for some t0 ≥ 0.
+
+∥St∥2
+
+L2(R) = −g(t)
+
+(4.7)
+
+Proof. Assuming the RH, we obtain (4.7) by taking u = t in (4.4), since Gg(t, t) = −2g(t)
+by (2.1) and g(0) = 0. Conversely, we suppose that equality (4.7) holds for all t ≥ t0.
+Then −g(t) is nonnegative on [t0, ∞), which implies that the RH is true by [14, Theorems
+□
+1.7 and 11.1].
+
+4.3. Proof of Theorem 1.4. Theorem 1.4 is a corollary of the following result.
+
+Theorem 4.4. Let g(t) = gξ(t). The RH is true if and only if the equality
+
+∥ (cid:99)Pϕ∥2
+
+L2(R) = π⟨ϕ, ϕ⟩Gg
+
+(4.8)
+
+holds for all ϕ ∈ C∞
+all ϕ ∈ C∞
+
+c (R).
+
+c (R) satisfying (cid:98)ϕ(0) = 0. If the RH is true, equality (4.8) holds for
+
+Proof. First, we prove (4.8) assuming the RH holds. We have
+
+∥ (cid:99)Pϕ∥2
+
+L2(R) = π
+
+(cid:88)
+
+γ∈Γ
+
+mγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:98)ϕ(γ) − (cid:98)ϕ(0)
+γ
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(4.9)
+
+by (3.7) and Proposition 4.1. Applying (4.6) to (2.2) and noting the symmetry γ (cid:55)→ −γ
+of Γ with mγ = m−γ, we find that the right-hand side of (4.9) equals π⟨ϕ, ϕ⟩Gg .
+
+Conversely, we prove that the RH is true assuming equality (4.8). We show that a
+contradiction arises if the RH is false. We take a nonreal γ0 ∈ Γ. For any ϵ > 0, there
+c (R) such that (cid:99)ψ1(−γ0) = i, (cid:99)ψ2(−γ0) = −i, |(cid:99)ψ1(−γ)| ≤ ϵ|γ0 − γ|−1−δ
+exists ψ1, ψ2 ∈ C∞
+for every γ ∈ Γ\{γ0}, and |(cid:99)ψ2(−γ)| ≤ ϵ|γ0 −γ|−1−δ for every γ ∈ Γ\{γ0} by [19, Lemma
+1]. We define ψ := ψ1 + ψ2 (̸= 0) and set ϕ := Dψ. Then, (cid:98)ϕ(0) = 0 by definition, and
+⟨ϕ, ϕ⟩Gg = ⟨ψ, ψ⟩W holds by the relation
+
+⟨Dψ1, Dψ2⟩Gg = ⟨ψ1, ψ2⟩W
+
+(4.10)
+
+in [14, Proposition 3.1]. The right-hand side equals (cid:80)
+O(ϵ), since (cid:80)
+ϵ > 0, but it contradicts the nonnegativity that follows from (4.8).
+
+γ∈Γ mγ (cid:98)ψ(−γ)( (cid:98)ψ)♯(−γ) = −mγ0 +
+γ∈Γ mγ|γ|−1−δ < ∞. Therefore, ⟨ϕ, ϕ⟩Gg is negative for a sufficiently small
+□
+
+Proof of Theorem 1.4. The conclusion follows from Theorem 4.4 and the relation (4.10)
+of hermitian forms, since the differential operator D in (1.8) gives a bijection from
+□
+C∞
+
+c (R) consisting of functions ϕ with (cid:98)ϕ(0) = 0.
+
+c (R) to the subspace C∞
+
+0 (R) ⊂ C∞
+
+√
+
+γ∈Γ
+
+Let ψ ∈ V ◦(0). Then (cid:98)ψ(z) = (cid:91)PDψ0(z) for some ψ0 ∈ C∞
+
+Proof of Corollary 1.5. The RH is true if (1.10) holds by the same argument as the
+second half of the proof of Theorem 4.4. Therefore, we prove (1.10) assuming the RH.
+c (R) by definition. Therefore,
+(cid:98)ψ(z) = (cid:80)
+πmγ (cid:99)ψ0(γ)Fγ(z) by (3.8). The equality shows that (cid:98)ψ(z) is a continuous
+function of z ∈ R by the uniform convergence of the right-hand side on a compact
+set of z. Taking z = γ in this equality, we have (cid:98)ψ(γ) = (cid:99)ψ0(γ) by (4.2). Therefore,
+⟨ψ, ψ⟩W is defined and satisfies ⟨ψ, ψ⟩W = ⟨ψ0, ψ0⟩W . The right-hand side is equal to
+∥(cid:99)ψ0∥2
+L2(R) = 2π∥ψ0∥2
+L2(R) by (1.9) and Plancherel’s identity. The same argument works
+□
+if we start with ψ0 ∈ C∞
+
+c (R). Hence, we obtain (1.10).
+
+Using (3.9), Theorem 1.4 is stated as follows.
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+13
+
+Theorem 4.5. The RH is true if and only if the equality
+
+∥ψ∥2
+
+0 = ⟨ψ, ψ⟩W
+
+(4.11)
+
+holds for all ψ ∈ C∞
+
+c (R).
+Equality (4.11) leads to Theorem 5.6 below.
+
+For n ∈ Z>0, we define
+(cid:18)n
+j
+
+gn(x) := e−x/2
+
+n
+(cid:88)
+
+j=1
+
+(cid:19) (−x)j−1
+(j − 1)!
+
+(x > 0),
+
+gn(0) :=
+
+n
+2
+
+,
+
+gn(x) := 0
+
+(x < 0).
+
+Then, the RH holds if ⟨gn, gn⟩W ≥ 0 for all n ∈ Z>0 by Bombieri and Lagarias [2,
+Section 4]. Therefore, we obtain the following.
+Corollary 4.6. The RH holds if (4.11) holds for all gn (n ∈ Z>0).
+
+5. Proof of Theorem 1.1 and its refinement
+
+Throughout this section, we assume that the RH is true and denote E = Eξ, Θ =
+Θξ = E♯
+ξ/Eξ as before, and denote g = gξ. Therefore, E belongs to the Hermite–Biehler
+class, Θ is a meromorphic inner function in C+, and g belongs to the class of screw
+functions G∞.
+
+For use in the proof of Theorem 1.1 and its refinement, we introduce the operator K
+
+acting on L2(R) by
+
+K := F−1MΘJF
+
+(5.1)
+
+with
+
+(MΘF )(z) := Θ(z)F (z)
+
+and (JF )(z) := F ♯(z).
+
+The Fourier transform F, the multiplication operator MΘ, and the involution J are
+defined for functions of a complex variable, and the latter two are isometries on L2(R).
+The Fourier transform F is an isometry up to a constant factor. Therefore, K is isometric
+on L2(R). Further, K is invertible by K2 = id. By definition, K is not C-linear but R-
+linear and conjugate linear. Using the isometric involution K, we define
+
+V (t) := L2(t, ∞) ∩ KL2(t, ∞)
+
+(5.2)
+
+and
+
+HW (t) := { [ψ] | ψ ∈ V (t) }
+for t ≥ 0. The set of subspaces V (t) of L2(R) are clearly totally ordered by the set-
+theoretical inclusion.
+
+First, Theorem 1.1 is shown using V (t) for t = 0, and it is refined using general t ≥ 0.
+
+Lemma 5.1. Let V (0) = L2(0, ∞) ∩ KL2(0, ∞). Then, we have K(Θ) = F(V (0)), and
+hence H(E) = EF(V (0)) = {E(z) (cid:98)ψ(z) | ψ ∈ V (0)}.
+
+Proof. It is sufficient to prove that K(Θ) = F(V (0)), since H(E) = EK(Θ). The proof
+below is essentially the same as the proof in [13, Lemma 4.1].
+
+If ψ ∈ V (0), both Fψ and FKψ belong to the Hardy space H 2 by definition (5.1) and
+H 2 = F(L2(0, ∞)). On the other hand, we have (FKψ)(z) = Θ(z)(Fψ)♯(z) by definition
+(5.1) again. This implies (Fψ)(z) = Θ(z)(FKψ)♯(z), since Θ(z)Θ♯(z) = 1 by definition
+(1.4). Therefore, Fψ belongs to K(Θ) by (2.7).
+
+Conversely, if F ∈ K(Θ), there exists f ∈ L2(0, ∞) and g ∈ L2(−∞, 0) such that
+
+F (z) = (Ff )(z) = Θ(z)(Fg)(z).
+We have (Fg)♯(z) = Θ(z)(Ff )♯(z) by using Θ(z)Θ♯(z) = 1 again. Here (Fg)♯(z) = (F˜g)(z)
+for ˜g(x) = g(−x) ∈ L2(0, ∞), and Θ(z)(Ff )♯(z) = (FKf )(z) as above. Hence Kf belongs
+□
+to L2(0, ∞), and thus f ∈ V (0).
+
+14
+
+M. SUZUKI
+
+Remark 5.2. By Lemma 5.1, it follows that the RH would be false if V (0) = 0, since
+A(z)/(z − γ) = ξ(1/2 − iz)/(z − γ) belongs to H(E) for all γ ∈ Γ under the assumption
+of the RH. Therefore, it is an interesting problem to prove or disprove V (0) ̸= 0 un-
+conditionally. Since V (0) is K-invariant, if V (0) ̸= 0, then for any nonzero f ∈ V (0),
+the functions (1 ± K)f are eigenfunctions of K with eigenvalues ±1. Hence, the problem
+reduces to determining whether the isometric involution K admits an eigenfunction in
+L2(0, ∞), which appears to be extremely difficult. We therefore do not pursue this issue
+further in the present article.
+
+Let τ = τξ be the measure on R determined from the screw function g = gξ by (2.3).
+
+Then, we have g(0) = 0, b = 0, and
+
+dτ (λ) =
+
+(cid:88)
+
+γ∈Γ
+
+mγδ(λ − γ) dλ, λ ∈ R,
+
+(5.3)
+
+since
+
+g(t) =
+
+(cid:88)
+
+γ∈Γ
+
+mγ
+
+eiγt − 1
+γ2
+
+by [14, Theorem 1.1 (2)], where δ is the Dirac mass at λ = 0, We understand that the
+Hilbert space L2(τ ) is the space of sequences S = (S(γ))γ∈Γ with
+∥S∥2
+
+mγ |S(γ)|2.
+
+(5.4)
+
+(cid:88)
+
+L2(τ ) =
+
+Then, we prove two isomorphisms for L2(τ ) necessary for the proof of Theorem 1.1.
+
+Lemma 5.3. Hilbert spaces V (0) and L2(τ ) are isomorphic by the linear map
+
+γ∈Γ
+
+V (0) ∋ ψ (cid:55)→ Sψ :=
+
+(cid:16)
+
+(cid:98)ψ(γ)
+
+(cid:17)
+
+γ∈Γ
+
+∈ L2(τ )
+
+with
+
+L2(τ ).
+
+2∥ψ∥2
+
+L2(R) = ∥Sψ∥2
+Proof. Let µΘ be the measure on R determined from Θ = Θξ by (2.8). Then, the linear
+map K(Θ) → L2(µΘ) given by (cid:98)ψ (cid:55)→ Sψ is an isometric isomorphism as reviewed in
+Section 2.4. On the other hand, L2(µΘ) = L2(τ ) with ∥S∥2
+L2(τ ) by (2.8),
+(4.1), and (5.3). Therefore, by composing the maps V (0) → K(Θ) = F(V (0)) and
+K(Θ) → L2(µΘ), we obtain the conclusion of the lemma, since 2π∥ψ∥2
+L2(R).
+□
+
+L2(µΘ) = π∥S∥2
+
+L2(R) = ∥ (cid:98)ψ∥2
+
+(5.5)
+
+Lemma 5.4. For ψ = lim
+n→∞
+
+ψn ∈ HW with {ψn}n≥1 ⊂ C∞
+(cid:17)
+
+(cid:16)
+
+Sψ := lim
+n→∞
+
+(cid:99)ψn(γ)
+
+γ∈Γ
+
+in L2(τ ).
+
+c (R), we define Sψ ∈ L2(τ ) by
+
+Then, it is well-defined and provides an isomorphism between HW and L2(τ ) through
+the mapping
+
+HW ∋ ψ (cid:55)→ Sψ ∈ L2(τ )
+
+with
+
+⟨ψ, ψ⟩W = ∥Sψ∥2
+
+L2(τ ).
+
+(5.6)
+
+0 (R) = {ϕ ∈ C∞
+
+c (R) | (cid:98)ϕ(0) = 0}, since we obtain the same com-
+Proof. We consider C∞
+pletion H(Gg) even if we start from this space instead of C0(R). Then differentiation
+ψ (cid:55)→ ψ′ gives a bijection from C∞
+−∞ ϕ(y) dy.
+The Weil hermitian form and the hermitian form ⟨·, ·⟩Gg defined by (2.2) for the screw
+function g are related as in (4.10), which is written as
+
+0 (R). The inverse map is ϕ (cid:55)→ (cid:82) x
+
+c (R) to C∞
+
+⟨ϕ, ϕ⟩Gg = ⟨ψ, ψ⟩W , ψ(x) =
+
+(cid:90) x
+
+−∞
+
+ϕ(y) dy, ψ ∈ C∞
+
+c (R).
+
+(5.7)
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+15
+
+0 (R) and C∞
+
+(Although not necessary for the proof, ⟨ϕ, ϕ⟩Gg and ⟨ψ, ψ⟩W are positive definite on
+c (R), respectively, by [14, Lemma 2.1].) Relation (5.7) extends to the com-
+C∞
+pleted Hilbert spaces. Therefore, HW is isometrically isomorphic to the Hilbert space
+H(Gg) by H(Gg) → HW : [ϕ] (cid:55)→ [ψ] with ψ = limn→∞ ψn and ψn(x) = (cid:82) x
+−∞ ϕn(y) dy
+for ϕ = limn→∞ ϕn (ϕn ∈ C∞
+
+We define H(Gg) → L2(τ ) as follows. For [ϕ] ∈ H(Gg), we define Sϕ = (Sϕ(γ))γ∈Γ
+
+c (R)).
+
+∈ L2(τ ) by
+
+(cid:16)
+
+(cid:17)
+
+in L2(τ )
+
+γ∈Γ
+
+(cid:99)ϕn(γ)/γ
+
+lim
+n→∞
+0 (R) satisfying ϕ = limn→∞ ϕn. Then, the map is well-
+using a sequence (ϕn)n in C∞
+defined and ⟨[ϕ], [ϕ]⟩Gg = ⟨ϕ, ϕ⟩Gg = ∥Sϕ∥L2(τ ) by (2.2), (4.6), and (5.4). Therefore,
+it establishes the isomorphic isomorphism H(Gg) → L2(τ ) : [ϕ] (cid:55)→ Sϕ [7, Sections 5.3
+0 (R), we define
+and 12.5]. Using H(Gg) → HW and noting (cid:98)ϕ(λ)/λ = i (cid:98)ψ(λ) for ϕ ∈ C∞
+HW → L2(τ ) by [ψ] (cid:55)→ Sψ with
+(cid:16)
+
+(cid:17)
+
+(cid:16)
+
+(cid:17)
+
+Sψ = (Sψ(γ))γ∈Γ = lim
+n→∞
+
+(cid:99)ψn(γ)
+
+= lim
+n→∞
+
+γ∈Γ
+
+−i(cid:99)ϕn(γ)/γ
+
+γ∈Γ
+
+in L2(τ ),
+
+where (ϕn)n is a sequence in C∞
+the map is well-defined and
+
+0 (R) such that ψ = limn→∞ ψn with ϕn = ψ′
+
+n. Then,
+
+⟨[ψ], [ψ]⟩W = ⟨ψ, ψ⟩W = ∥Sψ∥L2(τ ) = ∥Sϕ∥L2(τ ) = ⟨ϕ, ϕ⟩Gg = ⟨[ϕ], [ϕ]⟩Gg
+holds, where ϕ = limn→∞ ϕn and the second equality follows from (1.2) and (5.4). Hence,
+it establishes an isometric isomorphism HW → L2(τ ) by [ψ] (cid:55)→ Sψ. As a result, the
+mapping HW → L2(τ ) is directly defined by Sψ = limn→∞
+and [ψ] (cid:55)→ Sψ
+□
+for ψ = limn→∞ ψn with the desired equality for norms.
+
+(cid:99)ψn(γ)
+
+γ∈Γ
+
+(cid:17)
+
+(cid:16)
+
+Theorem 5.5. Assume that the RH is true. Let HW , H(E), and K(Θ) be as above.
+Let V (t) be the spaces defined in (5.2). Then the following hold:
+L2(R) = 2π∥ψ∥2
+
+(1) ∥E (cid:98)ψ∥2
+(2) The map from K(Θ) to HW obtained by the composition of the inverse of
+
+L2(R) = π⟨ψ, ψ⟩W for ψ ∈ V (0).
+
+H(E) = ∥ (cid:98)ψ∥2
+
+V (0) → K(Θ) : ψ (cid:55)→ (cid:98)ψ(z),
+
+and
+
+2π∥ψ∥2
+
+L2(R) = ∥ (cid:98)ψ∥2
+
+L2(R)
+
+V (0) → HW : ψ (cid:55)→ [ψ],
+
+2∥ψ∥2
+
+L2(R) = ⟨[ψ], [ψ]⟩W = ⟨ψ, ψ⟩W
+
+(5.8)
+
+(5.9)
+
+agrees with the isomorphism F (cid:55)→ ψF in Theorem 1.1. In particular, (5.9) is an
+isometric isomorphism up to a constant multiple.
+
+Proof. (1) It suffices to show that the equality
+1
+2
+
+L2(R) =
+
+∥ψ∥2
+
+⟨ψ, ψ⟩W
+
+(5.10)
+
+holds, since ∥E (cid:98)ψ∥H(E) = ∥ (cid:98)ψ∥L2(R) by (2.4) and ∥ (cid:98)ψ∥2
+each γ ∈ Γ, we define ψγ ∈ L2(R) by
+
+L2(R) = 2π∥ψ∥2
+
+L2(R) by (1.1). For
+
+Then each ψγ belongs to V (0), and {ψγ}γ∈Γ forms an orthogonal basis satisfying
+
+Fγ = (cid:99)ψγ.
+
+(5.11)
+
+2π∥ψγ∥2
+
+L2(R) = ∥(cid:99)ψγ∥2
+
+K(Θ) = ∥Fγ∥2
+
+K(Θ) = 1
+
+by Proposition 4.1 and Lemma 5.1, since the orthogonality of Fγ’s is preserved under
+the Fourier transform. For ψ = (cid:80)
+
+γ cγψγ ∈ V (0), we have
+1
+2π
+
+L2(R) =
+
+|cγ|2
+
+(cid:88)
+
+∥ψ∥2
+
+γ∈Γ
+
+16
+
+M. SUZUKI
+
+by the orthogonality and
+
+(cid:98)ψ(γ) =
+
+√
+
+1
+mγπ
+
+cγ
+
+γ cγFγ. From these two and (1.2), we get (5.10).
+
+by applying (4.2) to (cid:98)ψ = (cid:80)
+(2) It is clear that the composition of the inverse of (5.8) and (5.9) agrees with the map
+F (cid:55)→ ψF of Theorem 1.1 including the equality for norms, and we observed in the proof
+of Lemma 5.3 that the map (5.8) is an isometric isomorphism up to the multiple
+2π.
+Therefore, it suffices to show that the map (5.9) gives an isometric isomorphism up to
+the multiple
+
+√
+
+√
+
+2.
+
+For ψ ∈ V (0), the function Sψ ∈ L2(τ ) is defined and satisfies 2∥ψ∥2
+
+by Lemma 5.3. Then there exists a sequence (ψ∗
+respect to ⟨·, ·⟩W and Sψ = Sψ∗ by Lemma 5.4. The later implies ⟨ψ − ψ∗
+⟨ψ∗ − ψ∗
+directly defined by ψ (cid:55)→ [ψ]. Furthermore, we obtain 2∥ψ∥2
+and (5.6). Hence, this map is precisely the one given in (5.9).
+
+L2(τ )
+c (R) that converges to ψ∗ with
+n⟩W =
+n⟩W → 0 (n → ∞). Therefore, ψ = ψ∗, and hence V (0) → HW is
+L2(R) = ⟨ψ, ψ⟩W from (5.5)
+□
+
+L2(R) = ∥Sψ∥2
+
+n, ψ∗ − ψ∗
+
+n)n ⊂ C∞
+
+n, ψ − ψ∗
+
+The equality ∥ψ∥2
+
+L2(R) = 2−1⟨ψ, ψ⟩W in Theorem 5.5 (1) shows that the L2-structure
+induced from L2(R) and “arithmetic structure” (or “local structure”) arising from the
+geometric side of the Weil explicit formula (3.3) coincide on a dense subspace of V (0)
+consisting of functions for which the Weil explicit formula holds.
+
+Theorem 5.6. Let H0 and K0 are Hilbert spaces defined unconditionally in Section 3.3.
+Assume that the RH is true. Then, H0 = HW and K0 = K(Θ), and the extended map
+(cid:99)PD : HW → K(Θ) provides the inverse of the map in Theorem 5.5 (2). In particular,
+V (0) is the L2-closure of V ◦(0) in Corollary 1.5.
+c (R), we have
+∥ (cid:100)PDψ∥2
+
+mγ| (cid:98)ψ(γ)|2 = π⟨ψ, ψ⟩W
+
+Proof. For ψ ∈ C∞
+
+(cid:88)
+
+L2(R) = π
+
+γ∈Γ
+
+by (1.2), (3.8), and Proposition 4.1. Hence, H0 coincides with HW by definition (3.9).
+Formula (3.8) shows that the image (cid:100)PDψ is defined independent of the representatives
+of [ψ] in HW . On the other hand, K0 is a subspace of K(Θ) by Proposition 4.1 again.
+We denote F = (cid:100)PDψ for [ψ] ∈ HW and set ψF = F−1(F ) as in Theorem 1.1. Then,
+F (γ) = (cid:98)ψ(γ) by (3.8) and (4.2). Therefore, (cid:99)ψF (γ) = ψ(γ) for all γ ∈ Γ, and hence
+[ψ] = [ψF ] in HW . On the other hand, (cid:92)PDψF (z) = F by (3.8), since (cid:99)ψF = F by
+□
+definition and F (γ) = (cid:98)ψ(γ). Hence, we obtain the desired conclusion.
+
+The totally ordered structure of the subspaces of the de Branges space H(E) is de-
+
+scribed by V (t) as follows.
+
+Theorem 5.7. Assume that the RH is true. Then, E F(V (t)) is a de Branges subspace
+of H(E) for every t ≥ 0 and is isometrically isomorphic to HW (t) up to a constant
+multiple by the map of Theorem 1.1.
+
+Proof. It is sufficient to prove the first half of the theorem, since the second half follows
+from Theorem 5.5 (2). We prove the claim for positive t such that V (t) ̸= {0}, since
+the case of t = 0 was proved in Lemma 5.1 and the claim is trivial if V (t) = {0}. The
+following is essentially the same as the proof of [13, Lemma 4.3].
+
+We show that H := E(z)F(V (t)) is a Hilbert space consisting of entire functions and
+
+satisfies the axiom of the de Branges spaces:
+(dB1) For each z ∈ C\R the point evaluation Φ (cid:55)→ Φ(z) is a continuous linear functional
+
+on H.
+
+(dB2) If Φ ∈ H, Φ♯ belongs to H and ∥Φ∥H = ∥Φ♯∥H.
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+17
+
+(dB3) If w ∈ C \ R, Φ ∈ H and Φ(w) = 0,
+
+z − ¯w
+z − w
+
+Φ(z) ∈ H and
+
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+
+z − ¯w
+z − w
+
+Φ(z)
+
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)H
+
+= ∥Φ∥H,
+
+where the Hilbert space structure is the one induced from V (t) that is equivalent to
+⟨F, G⟩H = (cid:82)
+
+R F (z)G(z)|E(z)|−2dz for F, G ∈ H.
+
+Let Φ(z) = E(z)(Ff )(z) ∈ H with f ∈ V (t). First, we prove that H consists of
+entire functions. We see that Φ(z) is holomorphic in C+ by f ∈ L2(t, ∞). If we write
+(J♯f )(x) := f (−x), the commutative relation JF = FJ♯ holds. Therefore, using (5.1)
+and K2 = 1, we have Φ(z) = E(z)(Ff )(z) = E♯(z)(FJ♯Kf )(z). This shows that Φ(z)
+is also holomorphic in C−. Furthermore, J♯Kf ∈ L2(−∞, −t), because the tempered
+distribution kernel k := F−1Θ of K has support in [0, ∞) by [10, Theorems 1.1 and 1.2].
+On the real line, limz→x(Ff )(z) = (Ff )(x) and limz→x(FJ♯Kf )(z) = limz→x(FKf )♯(z) =
+Θ♯(x)(Ff )(x) for almost all x ∈ R, where z is allowed to tend to x nontangentially from
+C+ and C−, respectively. Hence, Φ(z) is also holomorphic in a neighborhood of each
+point of R. By the above, Φ(z) is an entire function.
+
+We confirm (dB1). For z ∈ C+, Φ (cid:55)→ Φ(z) = E(z) (cid:82) ∞
+
+linear form. On the other hand, for z ∈ C−, Φ (cid:55)→ Φ(z) = E♯(z) (cid:82) −t
+a continuous linear functional.
+
+t f (x)eizxdx is a continuous
+−∞ (Kf )(−x)eizx dx is
+
+We confirm (dB2). We have Φ♯(z) = E(z)(FKf )(z). Since Kf ∈ V (t), the function
+
+Φ♯ belongs to H. Since K is isometric, the equality of norms in (dB2) holds.
+
+We confirm (dB3). The equality of norms in (dB3) is trivial by the definition of the
+norm of H. From (dB2), it is sufficient to show only the case of w ∈ C+. Suppose that
+Φ(w) = 0 for some w ∈ C+. Then (Ff )(w) = 0, since E(z) has no zeros on C+. We put
+fw(x) := f (x) − i(w − ¯w) (cid:82) x−t
+f (x − y)e−iwydy. Then we easily find that fw ∈ L2(t, ∞)
+and (Ffw)(z) = ((z − ¯w)/(z − w))(Ff )(z) for z ∈ C+. Hence we complete the proof if it
+is shown that Kfw has support in [t, ∞), since Kfw ∈ L2(R) by fw ∈ L2(t, ∞). We put
+gw(x) := (Kf )(x) − i( ¯w − w) (cid:82) x−t
+(Kf )(x − y)e−i ¯wydy. Then gw has support in [t, ∞)
+by Kf ∈ L2(t, ∞) and (Fgw)(z) = ((z − w)/(z − ¯w))(FKf )(z) = (FKfw)(z) for z ∈ C+.
+□
+Hence gw = Kfw and the proof is completed.
+
+0
+
+0
+
+We expect that V (t) ̸= 0 for some t > 0, or rather that V (t) ̸= 0 holds for all t ≥ 0,
+but we do not discuss this in the present article, since it seems to be a nontrivial problem
+related to the eigenfunctions of K, as mentioned in Remark 5.2.
+
+5.1. A weaker variant of Corollary 1.5. Since the space V (0) can be constructed
+unconditionally as well as V ◦(0) in Corollary 1.5, it can be used to state an equivalence
+condition for the RH. However, since the construction of V (0) is simpler than that of
+V ◦(0), more conditions are required for the equivalence condition.
+
+Proposition 5.8. Let V (0) = L2(0, ∞) ∩ KL2(0, ∞) be as in (5.2). Then the RH is
+true if and only if the following two conditions hold:
+L2(R) = 2−1⟨ψ, ψ⟩W for every ψ ∈ V (0).
+
+(1) ∥ψ∥2
+(2) For a given γ ∈ Γ and any ϵ > 0, there exists ψ ∈ V (0) such that
+
+(cid:98)ψ(−γ) = 1,
+
+ϵ
+|γ − γ′|1+δ
+for some δ > 0 independent of γ, ϵ, and ψ.
+
+| (cid:98)ψ(−γ′)| ≤
+
+for every γ′ ∈ Γ \ {γ}
+
+Proof. Assuming the RH, (1) follows from Theorem 5.5 (1). Also, (2) holds, since ψγ =
+F−1(Fγ) in V (0) satisfies (cid:99)ψγ(γ) ̸= 0 and (cid:99)ψγ(γ′) = 0 for γ′ ∈ Γ \ {γ}.
+
+Conversely, we assume that (1) and (2) are satisfied. Then, we show that a contra-
+diction arises if the RH is false. We take a nonreal γ0 ∈ Γ. For any ϵ > 0, there exists
+ψ1, ψ2 ∈ V (0) such that (cid:99)ψ1(−γ0) = i, (cid:99)ψ2(−γ0) = −i, |(cid:99)ψ1(−γ)| ≤ ϵ|γ0 − γ|−1−δ for every
+
+18
+
+M. SUZUKI
+
+γ ∈ Γ \ {γ0}, and |(cid:99)ψ2(−γ)| ≤ ϵ|γ0 − γ|−1−δ for every γ ∈ Γ \ {γ0} by (2). Then, for
+ψ := ψ1 + ψ2 (̸= 0), we have ⟨ψ, ψ⟩W = (cid:80)
+γ∈Γ mγ (cid:98)ψ(−γ)( (cid:98)ψ)♯(−γ) = −mγ0 + O(ϵ), since
+(cid:80)
+γ∈Γ mγ|γ|−1−δ < ∞. Therefore, ⟨ψ, ψ⟩W is negative for a sufficiently small ϵ > 0, but
+□
+
+it contradicts (1). Hence the RH holds.
+
+6. Hilbert–P´olya space
+
+One of attractive strategies for proving the RH is the construction of a Hilbert–P´olya
+space, which is a pair of a Hilbert space and a self-adjoint operator acting on it such
+that all nontrivial zeros of the Riemann zeta-function are eigenvalues of the self-adjoint
+operator. In this section, we state that HW is one of Hilbert–P´olya spaces under the
+RH. Note that HW is unconditionally defined as H0 by Theorem 5.6.
+
+We assume the RH and denote E = Eξ as in Section 5. In this case, the domain D(M)
+of the multiplication operator M on H(E) is dense in H(E), because Sθ(z) does not
+belongs to H(E) for all θ ∈ [0, π) by the estimate |Sθ(iy)/E(iy)| ≫ (log y)−1 (y → +∞)
+obtained by the Stirling formula for the gamma-function and [11, Proposition 2.1]. Using
+M, we define the operator A := F−1MF on V (0) with the domain D(A) = F−1(D(M)).
+If ψ ∈ V (0) is differentiable and ψ′ also belongs to V (0), then A ψ = iψ′. Further, we
+define the operator AW on HW as follows.
+
+By Theorem 5.6, the inverse of (5.9) from HW to V (0) is given by [ψ] (cid:55)→ F−1 (cid:100)PDψ.
+Further, if we choose the representative of ψ from V (0), it is possible and uniquely de-
+termined by Theorem 5.5 (2), and therefore ψ = F−1 (cid:100)PDψ. By choosing representatives
+in this way, we define AW on HW by AW [ψ] = [Aψ]. By the same procedure as above,
+the family of self-adjoint extensions Mθ of M determines the corresponding families of
+self-adjoint extensions of A and AW (see (2.5) and (2.6)). By this correspondence, the
+orthogonal basis {[ψγ]}γ∈Γ of HW consists of eigenvectors [ψγ] of AW,π/2 with eigenvalues
+γ ∈ Γ, since {EFγ}γ∈Γ with (3.5) is an orthogonal basis of H(E) consists of eigenfunc-
+tions of Mπ/2 with eigenvalues Γ (see Seciton 2.3). Therefore, the pair (HW , AW,π/2) is
+a Hilbert–P´olya space.
+
+It is important to note that the multiplicity of γ ∈ Γ as an eigenvalue of AW,π/2 (and
+Mπ/2) is one. In other words, the multiplicity of γ ∈ Γ as a zero of ξ(1/2 − iz) is not
+reflected in the multiplicity of AW,π/2 (and Mπ/2). In particular, it shows the explicit
+difference between the de Branges space H(Eξ) and the de Branges space BS
+λ in [4,
+Section 4.8].
+
+In the above discussion, we assumed the RH, but (2.5) and (2.6) allow us to define the
+
+operator Mθ without the RH. However, its properties as an operator become unclear.
+
+7. Special values of the screw line St(z)
+
+The screw line St(z) has the following unconditional relations with the screw function
+g(t). It is interesting that they are not a special case of equations obtained from the
+general theory of screw functions.
+
+Theorem 7.1. Let gξ(t) and Pt(z) be functions of (4.3) and (1.6), respectively. Then
+the following equations hold independently of the truth of the RH:
+
+Pt(0) = −gξ(t),
+
+(cid:20)
+
+lim
+y→+∞
+
+y Bt(−iy) −
+
+1
+2
+
+Γ′
+Γ
+
+(cid:18) 1
+4
+
++
+
+(cid:19)
+
+y
+2
+
++
+
+1
+2
+
+(cid:21)
+
+log π
+
+= −g′
+
+ξ(t),
+
+(7.1)
+
+(7.2)
+
+where we assume t ̸= log n for any n ∈ N in (7.2).
+
+ON THE HILBERT SPACE DERIVED FROM THE WEIL DISTRIBUTION
+
+19
+
+Proof. Equality (7.1) follows from (3.2), Proposition 3.1, and [14, Theorem 1.1 (2)], but
+it follows directly from (4.3) and (1.6) as follows. By Φ(z, s, a) = (cid:80)∞
+n=0 zn(n + a)−s and
+(2.8),
+
+lim
+z→0
+
+(cid:104)
+
+1
+iz
+
+Φ(e−2t, 1, 1
+
+2 ( 1
+(cid:20) Γ′
+Γ
+
+2 − iz)) − Φ(e−2t, 1, 1/4)
+(cid:19)(cid:21)
+(cid:18) 1
+4
+
+(cid:18) 1
+4
+
+Γ′
+Γ
+
+iz
+2
+
+−
+
+−
+
+(cid:19)
+
+=
+
+(cid:105)
+
+= −
+
+1
+2
+
+ψ1
+
+1
+Φ(e−2t, 2, 1/4),
+2
+(cid:18) 1
+4
+
+(cid:19)
+
+,
+
+lim
+z→0
+
+1
+iz
+
+where ψ1(z) is the polygamma function of order one. The expansion ψ1(w) = (cid:80)∞
+n=0(w +
+n)−2 gives ψ1(1/4) = Φ(1, 2, 1/4). Taking s = 1/2 in the logarithmic derivative of
+ξ(s) = ξ(1 − s) and using
+
+(cid:19)
+
+Γ′
+Γ
+
+(cid:18) 1
+4
+
+= −γ0 − 3 log 2 −
+
+π
+2
+
+,
+
+we have
+
+1
+2
+Hence, by taking the limit z → 0 in (1.6), we obtain the minus of (4.3).
+
+γ0 + 3 log 2 + log π +
+
+π
+2
+
+=
+
+.
+
+(cid:17)
+
+(cid:16)
+
+(cid:19)
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+To show (7.2), we multiply (1.6) by y and substitute −iy for z:
+
+y Pt(−iy) :=
+
+4y(et/2 − 1)
+1 + 2y
+
++
+
++ (e−yt − 1)
+
+ζ ′
+ζ
+
+(cid:18) 1
+2
+
+4y(e−t/2 − 1)
+1 − 2y
+(cid:19)
+
+− y
+
++
+
+(cid:88)
+
+Λ(n)
+√
+n
+
+(e−y(t−log n) − 1)
+
+(cid:19)
+
+−
+
+(cid:18) 1
+4
+
+(cid:20) Γ′
+Γ
+
+(cid:18) 1
+4
+e−t/2 (cid:2)Φ(e−2t, 1, 1/4) − Φ(e−2t, 1, 1
+
+Γ′
+Γ
+
+−
+
+n≤et
+(cid:19)(cid:21)
+y
+2
+
++
+
++
+
+1
+2
+1
+2
+
+2 ( 1
+
+2 − y))(cid:3)
+
+Therefore, for positive t > 0,
+
+(cid:20)
+y Bt(−iy) −
+
+lim
+y→+∞
+
+= 2(et/2 − e−t/2) −
+
+1
+2
+
+Γ′
+Γ
+
+(cid:88)
+
+n≤et
+
+(cid:21)
+
+log π
+
++
+
+(cid:18) 1
+4
+Λ(n)
+√
+n
+
+(cid:19)
+
+y
+2
+
++
+
+1
+2
+
++
+
+1
+2
+(cid:18) 1
+(cid:20) Γ′
+4
+Γ
+
+(cid:19)
+
+(cid:21)
+
+− log π
+
++
+
+1
+2
+
+e−t/2Φ(e−2t, 1, 1/4)
+
+by using the logarithmic derivative of ξ(s) = ξ(1−s) at s = 1/2−y. The right-hand side
+equals −g′
+follows from Φ(z, s, a) = (cid:80)∞
+
+ξ(t) if t ̸= log n by (4.3), and (d/dt)(e−t/2Φ(e−2t, 2, 1/4)) = −2e−t/2Φ(e−2t, 2, 1/4)
+
+□
+
+n=0 zn(n + a)−s.
+
+Acknowledgment
+
+This work was supported by JSPS KAKENHI Grant Number JP23K03050. This work
+was also supported by the Research Institute for Mathematical Sciences, an International
+Joint Usage/Research Center located in Kyoto University.
+
+References
+
+[1] N. A. Baas, C. F. Skau, The lord of the numbers, Atle Selberg. On his life and mathematics, Bull.
+
+Amer. Math. Soc. (N.S.) 45 (2008), no. 4, 617–649.
+
+[2] E. Bombieri, J. C. Lagarias, Complements to Li’s criterion for the Riemann hypothesis, J. Number
+
+Theory 77 (1999), no. 2, 274–287.
+
+[3] E. Bombieri, Remarks on Weil’s quadratic functional in the theory of prime numbers. I, Atti Accad.
+Naz. Lincei Cl. Sci. Fis. Mat. Natur. Rend. Lincei (9) Mat. Appl. 11 (2000), no. 3, 183–233 (2001).
+[4] A. Connes, C. Consani, H. Moscovici, Zeta zeros and prolate wave operators, Annals of Functional
+
+Analysis 15 (2024), article number 87.
+
+[5] L. de Branges, Hilbert spaces of entire functions, Prentice-Hall, Inc., Englewood Cliffs, N.J. 1968.
+
+20
+
+M. SUZUKI
+
+[6] M. Kaltenb¨ack, H. Woracek, Pontryagin spaces of entire functions. I, Integral Equations Operator
+
+Theory 33 (1999), no. 1, 34–97.
+
+[7] M. G. Kre˘ın, H. Langer, Continuation of hermitian positive definite functions and related questions,
+
+Integral Equations Operator Theory 78 (2014), no. 1, 1–69.
+
+[8] J. C. Lagarias, Hilbert spaces of entire functions and Dirichlet L-functions, Frontiers in number
+
+theory, physics, and geometry. I, 365–377, Springer, Berlin, 2006.
+
+[9] N. Makarov, A. Poltoratski, Meromorphic inner functions, Toeplitz kernels and the uncertainty
+
+principle, Perspectives in analysis, 185–252, Math. Phys. Stud., 27, Springer, Berlin, 2005.
+
+[10] T. Qian, Y. Xu, D. Yan, L. Yan, B. Yu, Fourier spectrum characterization of Hardy spaces and
+
+applications, Proc. Amer. Math. Soc. 137 (2009), no. 3, 971–980.
+
+[11] C. Remling, Schr¨odinger operators and de Branges spaces, J. Funct. Anal. 196 (2002), no. 2,
+
+323–394.
+
+[12] L. O. Silva, J. H. Toloza, de Branges spaces and Kre˘ın’s theory of entire operators, Operator Theory,
+
+D. Alpay (eds.), Springer, Basel, 2015, pp. 549–580.
+
+[13] M. Suzuki, An inverse problem for a class of canonical systems having Hamiltonians of determinant
+
+one, J. Funct. Anal., 279 (2020), no. 12, 108699.
+
+[14] M. Suzuki, Aspects of the screw function corresponding to the Riemann zeta function, J. Lond.
+
+Math. Soc. 108 (2023), no.4, 1448-1487.
+
+[15] M. Suzuki, Li coefficients as norms of functions in a model space, J. Number Theory 252 (2023),
+
+177–194.
+
+[16] E. C. Titchmarsh, The theory of the Riemann zeta-function, Second edition, Edited and with a
+
+preface by D. R. Heath-Brown , The Clarendon Press, Oxford University Press, New York, 1986.
+
+[17] A. Weil, Sur les “formules explicites” de la th´eorie des nombres premiers, Comm. S´em. Math. Univ.
+
+Lund [Medd. Lunds Univ. Mat. Sem.], 1952 (1952), Tome Suppl´ementaire, 252–265.
+
+[18] H. Woracek, De Branges spaces and growth aspects, Operator Theory, D. Alpay (eds.), Springer,
+
+Basel, 2015, pp. 489–523.
+
+[19] H. Yoshida, On Hermitian forms attached to zeta functions, Zeta functions in geometry (Tokyo,
+
+1990), 281–325, Adv. Stud. Pure Math., 21, Kinokuniya, Tokyo, 1992.
+
+Masatoshi Suzuki,
+
+Department of Mathematics,
+School of Science,
+Institute of Science Tokyo
+2-12-1 Ookayama, Meguro-ku,
+Tokyo 152-8551, Japan
+Email: msuzuki@math.sci.isct.ac.jp
+
+

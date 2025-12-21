@@ -1,0 +1,4272 @@
+5
+2
+0
+2
+
+v
+o
+N
+8
+2
+
+]
+
+A
+O
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+7
+5
+2
+3
+2
+.
+1
+1
+5
+2
+:
+v
+i
+X
+r
+a
+
+QUADRATIC FORMS, REAL ZEROS
+
+AND ECHOES OF THE SPECTRAL ACTION
+
+ALAIN CONNES AND WALTER D. VAN SUIJLEKOM
+
+Dedicated to Huzihiro Araki
+
+with gratitude and admiration
+
+2 , L
+
+ABSTRACT. For a real distribution D on the interval [0, L] with (cid:101)D the associated even distribution on the interval
+[−L, L], we prove that if the associated quadratic form with Schwartz kernel (cid:101)D(x − y) defines a lower-bounded
+selfadjoint operator on L2([− L
+2 ]), whose lowest spectral value λ is a simple, isolated eigenvalue with even
+eigenfunction ξ, then all the zeros of the entire function (cid:98)ξ(z), the Fourier transform of ξ, lie on the real line.
+
+The proof proceeds in five steps. (1) We give a C∗-algebraic proof of a corollary of Carathéodory–Fejér’s 1911
+structure theorem for Toeplitz matrices: if T ∈ Mn(C) is a Hermitian, positive semidefinite Toeplitz matrix of rank
+n − 1, and ξ ∈ ker T, then the polynomial P(z) = ∑ ξ j z j has all its zeros on the unit circle. (2) We formulate and
+prove a continuous analogue of this result, replacing the Toeplitz matrix with a convolution operator with contin-
+uous kernel h(x − y), and the polynomial P(z) with the Fourier transform of the eigenfunction corresponding to
+the largest eigenvalue. (3) We analyze finite-dimensional truncations of the quadratic forms defined by real, even
+distributions D on [−L, L], and observe that the resulting matrices exhibit a structure previously encountered in
+perturbative expansions of the spectral action. (4) We establish an analogue of Carathéodory–Fejér’s corollary for
+matrices of this specific structure, thereby extending the zero localization result beyond the classical Toeplitz set-
+ting. (5) Finally, we apply a classical theorem of Hurwitz concerning the zeros of uniform limits of holomorphic
+functions to deduce the general result stated above.
+
+CONTENTS
+
+Introduction
+1.
+Acknowledgements
+Conflict of interest statement
+Data availability statement
+2. Toeplitz case
+3. The continuous kernel case
+4. Quadratic form Q associated to a distribution
+4.1. Matrix of the quadratic form Q
+4.2. The diagonal values
+4.3. Relation to the spectral action
+5. Finite dimensional even case
+5.1. General finite dimensional operator D
+6.
+7. Spectral action and divided differences
+Appendix A. An instance of truncation matrices
+Appendix B. Explicit checks for N = 1, 2
+B.1. Case N = 1
+B.2. Convexity proof of Proposition B.1
+B.3. The case N = 2
+References
+
+Infinite dimensional case
+
+1
+
+2
+3
+3
+3
+3
+4
+6
+7
+8
+9
+9
+12
+13
+14
+15
+18
+19
+20
+21
+26
+
+ 
+ 
+ 
+ 
+ 
+ 
+The Carathéodory-Fejér theorem from 1911 [5] (see also [4, Theorem 1.3.6]) describes the structure of Her-
+mitian, positive semidefinite Toeplitz matrices as follows. Let
+
+1. INTRODUCTION
+
+
+
+
+
+c2
+c1
+c0
+...
+cn−2
+Then, if T is positive semidefinite of rank r, there exist distinct points z1, . . . , zr ∈ T ⊂ C (the unit circle),
+and positive weights α1, . . . , αr > 0, such that
+
+cn
+cn−1
+cn−2
+...
+c0
+
+c1
+c0
+c1
+...
+cn−1
+
+c0
+c1
+c2
+...
+cn
+
+· · ·
+· · ·
+· · ·
+. . .
+· · ·
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+T =
+
+.
+
+T = VDV∗,
+
+where V ∈ C(n+1)×r is the Vandermonde matrix
+
+1
+z1
+z2
+1
+...
+zn
+1
+
+
+
+
+
+
+
+
+V =
+
+1
+z2
+z2
+2
+...
+zn
+2
+
+· · ·
+· · ·
+· · ·
+. . .
+· · ·
+
+
+
+
+
+
+
+
+
+
+1
+zr
+z2
+r
+...
+zn
+r
+
+,
+
+and D = diag(α1, . . . , αr) is a diagonal matrix with positive real entries.
+In our work on operator systems [10], we showed how the above theorem can be derived from the dual-
+ity theory of operator systems. This factorization also plays a central role in the proof of truncated Weil
+positivity in [7].
+A direct corollary of the Carathéodory-Fejér theorem is the following:
+Corollary 1.1. Let T ∈ Mn+1(C) be a Hermitian, positive semidefinite Toeplitz matrix of rank n, and let ξ ∈ ker T.
+Then all the zeros of the polynomial
+
+P(z) :=
+
+n
+∑
+j=0
+
+ξ jz j
+
+lie on the unit circle.
+
+This corollary exhibits a striking number-theoretic flavor, resonating with the analogue of the Riemann Hy-
+pothesis for function fields; see [12] for a further discussion of this connection. In number theory, Toeplitz
+matrices of this kind naturally arise, and Corollary 1.1 applies to show that the zeros of the polynomial
+P(z), associated to an eigenvector for the smallest eigenvalue of such a matrix, all lie on the unit circle.
+The key difficulty in this context, then, becomes the verification that zero is indeed the (simple) minimal
+eigenvalue of T.
+In the present paper, we investigate a distributional analogue of Corollary 1.1, motivated by its potential
+relevance to the Riemann Hypothesis itself. Our approach proceeds through several stages:
+
+(1) We give a C∗-algebraic proof of Corollary 1.1.
+(2) We formulate and prove a continuous analogue of Corollary 1.1, in which the Toeplitz matrix is
+replaced by a convolution operator with continuous kernel h(x − y), and the polynomial P(z) by
+the Fourier transform of the eigenfunction corresponding to the largest eigenvalue.
+
+(3) We analyze the finite truncations of quadratic forms defined by real even distributions D supported
+on [−L, L], and observe that the resulting matrices exhibit a structure previously encountered in
+perturbative expansions of the spectral action.
+
+(4) We prove an analogue of Corollary 1.1 for matrices of this special type.
+(5) Finally, using a classical result of Hurwitz on the zeros of uniform limits of holomorphic functions,
+
+we deduce the following general theorem:
+
+Theorem 1.2. Let L > 0, D be a real distribution on the interval [0, L] and (cid:101)D the associated even distri-
+bution on [−L, L]. Assume that the quadratic form with Schwartz kernel (cid:101)D(x − y) defines a lower-bounded
+
+2
+
+selfadjoint operator A on L2([− L
+2 ]), and that the minimum of its spectrum is a simple, isolated eigenvalue
+λ, with even eigenfunction ξ. Then all the zeros of the entire function (cid:98)ξ(z), z ∈ C, Fourier transform of ξ lie
+on the real line.
+
+2 , L
+
+We refer to Theorem 6.1 for the precise formulation, the above formulation is slightly unprecise as shown
+in Remark 4.3. In the course of the proof, we encounter a number of illustrative examples and special cases.
+A detailed matrix-based verification of the theorem is given in an appendix.
+
+Acknowledgements. WvS thanks Teun van Nuland for useful discussions. The authors are indebted to an
+anonymous referee for numerous suggestions and comments.
+
+Conflict of interest statement. The authors declare that there is no conflict of interest.
+
+Data availability statement. Not applicable: no data has been created or analysed in this study.
+
+2. TOEPLITZ CASE
+Recall the operator system C∗(Z)(n+1) ⊆ C∗(Z) given by Fourier truncations on the interval [−n, n] ⊂ Z
+from [10] It is the dual operator system of the operator system of Toeplitz matrices, which in particular
+allows to associate a positive linear form LT to any positive Toeplitz matrix T:
+
+Note that a positive real Toeplitz matrix T of size n + 1 can be written in the following form:
+
+LT : C∗(Z)(n+1) → C;
+
+f (cid:55)→
+
+n
+∑
+k=−n
+
+fkck.
+
+
+
+c0
+
+c1
+
+
+
+
+
+
+
+. . .
+. . .
+. . .
+c1
+
+
+
+
+
+
+
+
+
+cn
+...
+c1
+c0
+
+T =
+
+c0
+. . .
+. . .
+The starting point for our proof of Corollary 1.1 is the following purely ∗-algebraic result:
+Proposition 2.1. Let T = (ck) be a positive (n + 1)-dimensional real Toeplitz matrix of rank n and let (a j)n
+real vector in ker T.
+
+(ck ∈ R).
+
+c1
+...
+cn
+
+;
+
+j=0 be a
+
+(1) The ideal J of A = C[X, X−1] generated by P = ∑n
+
+0 a jX j is stable under the canonical involution, (aXn)∗ :=
+
+aX−n, of C[X, X−1].
+
+(2) The monomials X j ( j = 0, . . . , n − 1) form a basis of A/J.
+(3) There exists a unique linear form φ on the quotient A/J such that
+φ(X j) = c j, ∀ j ∈ {0, . . . , n − 1}
+
+(1)
+
+(4) The linear form φ is positive on the ∗-algebra A/J.
+
+Proof. (1) We have that J∗ = J since P(X) is either palendromic, or anti-palendromic, i.e. an− j = ±a j for
+all j = 0, . . . , n. Indeed, because of the structure of T as a Toeplitz matrix, it follows that if (a j) j is in the
+kernel of T, so is (an− j) j. Since furthermore this kernel is one-dimensional, it follows that an− j = λa j, hence
+a j = λ2a j, which implies λ = ±1. But then
+
+P∗(X) =
+
+n
+∑
+j=0
+
+a jX− j = ±X−nP(X)
+
+as claimed.
+(2) Since T is of rank n one has a0 ̸= 0 (see [12, Lemma 33] or show directly that if a0 = 0 then (a j+1)n
+j=0
+with an+1 ≡ 0 is also in ker T). Thus X is invertible in C[X]/J′ where J′ = PC[X] since modulo P one has
+a0 + XQ = 0 for Q = (P − a0)/X. The ring A = C[X, X−1] is the localisation of C[X] at X and localisation
+commutes with quotients [2, Proposition 3.3 and Corollary 3.4], since X is not a zero divisor modulo J′.
+Since X is invertible in C[X]/J′ localization at X does not change C[X]/J′ and one thus gets the equality
+A/J = C[X]/J′ and the claim follows.
+
+3
+
+(3) Follows from (2).
+(4) Let φ : A → C be the unique linear form which vanishes on the ideal J and fulfills (1). In order to show
+that φ is positive, we first show that φ(X− j) = c j for all j = 1, . . . , n − 1. We have
+
+φ(X−1P) = 0 =⇒ a0φ(X−1) +
+
+n
+∑
+j=1
+
+a jφ(X j−1) = 0 =⇒ a0φ(X−1) +
+
+n
+∑
+j=1
+
+a jc j−1 = 0.
+
+Since (a j) ∈ ker T we have in terms of the second row of T that
+
+n
+∑
+j=0
+
+c j−1a j = 0
+
+and hence φ(X−1) = c−1 = c1. This argument can be repeated by considering subsequent rows in T
+to obtain by induction that φ(X−k) = c−k = ck. Note that from the first row of T it also follows that
+φ(Xn) = cn. We conclude that φ(X j) = c| j| for all j = −n, . . . , n.
+To show that φ is positive, i.e. that φ( f ∗ ∗ f ) ≥ 0 for all f ∈ A, note that the value of φ( f ∗ ∗ g) only depends
+on the classes of f and g in A/J. Thus one can take f = ∑n−1
+
+f jX j, one then gets
+
+0
+
+φ( f ∗ ∗ f ) = ∑ f j fkφ(X j−k) = ∑ f j fkc| j−k| = ⟨ f | T f ⟩ ≥ 0
+
+which shows (4).
+
+□
+
+Proposition 2.2. Let T = (ck) be a positive (n + 1)-dimensional Toeplitz matrix of rank n. If (a j)n
+ker T then the polynomial P(z) = ∑ j a jz j has all zeros on unit circle in C.
+Proof. The positive linear form φ on A vanishing on J defines a positive linear form on the envelopping
+C∗-algebra C∗(Z) of the involutive algebra A, i.e. a positive measure on the Pontrjagin dual U(1) of Z. This
+measure is supported by the n eigenvalues of the unitary π(X) associated to X in the GNS representation
+π of (A, φ) which is of dimension n by construction. Since P ∈ J ⊂ ker π, these eigenvalues correspond to
+□
+the roots of the generator P of J which are hence all of modulus one.
+
+j=0 is a vector in
+
+Remark 2.3. In general, when the kernel of T is more than one-dimensional —in other words, when the extreme
+eigenvalue is not simple— it follows from the Carathéodory-Fejér decomposition that there is an equivalence between
+being in the kernel and the vanishing of the corresponding polynomial on the complex numbers of modulus one that
+appear in this decomposition. So if it happens that the number of these complex numbers is strictly less than n, then
+this condition will be fulfilled by polynomials which will have these particular complex numbers as zeros, but which
+otherwise can have arbitrary other zeros. This means that it is not true in general if the eigenvalue is not simple, that
+the theorem holds. The correct formulation of the theorem is that if you take the intersection of the zeros of the various
+eigenfunctions, then they are all on the unit circle. This is reminiscent to the notion of the radical of a quadratic form.
+
+In this section we shall extend the Toeplitz case to the continuous case.
+
+3. THE CONTINUOUS KERNEL CASE
+
+Theorem 3.1. Let h ∈ C([−L, L]) be an even real continuous function. Let K be the operator on L2([0, L]) given by
+
+(2)
+
+(cid:90)
+
+(K f )(x) =
+
+h(x − y) f (y)dy.
+
+Then K is a compact selfadjoint operator. Assume that its eigenvalue of largest modulus is simple and let ξ ∈
+L2([0, L]) be its eigenvector. If we extend ξ to an element of L2(R) to be zero outside [0, L] then all the zeros of the
+entire function (cid:98)ξ belong to R ⊂ C.
+
+Proof. The operator K of (2) is of Hilbert-Schmidt class since h(x − y) is square integrable. We first approx-
+imate K by finite rank operators as follows. Since the function h is real continuous and even on [−L, L] we
+can find, given ϵ > 0 an α > 0 and scalars h j ∈ R for j = 0, . . . , L/α = N ∈ N, such that, with j(x) denoting
+the integer part of x/α, one has
+
+|h(x − y) − h| j(x)− j(y)|| ≤ ϵ,
+
+∀x, y ∈ [0, L].
+
+4
+
+FIGURE 1. The approximation of h(|x − y|) and the reflected Toeplitz matrix (by symmetry
+with respect to the x axis).
+
+FIGURE 2. The contour of integration for the definition of the projection P in Equation (3).
+
+This follows provided one chooses α > 0 and the scalars h j ∈ R such that ∀x ∈ [0, L]
+|h(x) − h j| ≤ ϵ,
+
+∀ j | | j − j(x)| ≤ 1,
+
+as one gets by comparing j(|x − y|) with | j(x) − j(y)|. Let then χ j be the characteristic function of the
+interval Ij := {x | j(x) = j} and T the Toeplitz matrix Tn,m := h|n−m|, one thus obtains the inequality
+
+|h(x − y) − ∑ Tn,mχn(x)χm(y)| ≤ ϵ,
+
+∀x, y ∈ [0, L].
+
+It follows from the Hilbert-Schmidt control of the norm that one obtains in this manner a sequence Rn of
+finite rank operators converging in norm to K, each of the form, with T a real symmetric Toeplitz matrix
+and χ j characteristic functions of intervals,
+
+Rn = ∑ Ti, j|χi⟩⟨χ j|, ∥K − Rn∥ → 0.
+Let then ξ be an eigenvector of norm 1 for the eigenvalue λ of K of largest modulus; without loss of gener-
+ality we assume that λ > 0. The spectral projection P obtained as a Cauchy integral of the resolvent of K
+along the contour C (see Figure 2), isolating λ from the rest of SpecK,
+
+P =
+
+(cid:90)
+
+1
+2πi
+
+(z − K)−1dz
+
+(3)
+
+C
+is of rank one and fulfills Pξ = ξ. Let Pn be defined by the same formula using Rn in place of K. This makes
+sense for n large enough since ∥K − Rn∥ → 0 when n → ∞. One has Pn → P in norm and thus Pn is of
+rank one for n large enough. Let ξn = Pnξ. One has ξn → ξ in norm. Let us show that for n large enough,
+ξn is an eigenvector of Rn for the largest eigenvalue. By construction, for n large enough, it is a non-zero
+eigenvector of Rn and is the only one for the interval between the lower part of C and its highest part.
+Since we have chosen this highest part to be ∥K∥ + 1, it follows that, for n large enough, it is the highest
+eigenvalue of Rn. We can thus assert that ξ is the norm limit of the sequence ξn where, for each n, ξn is of
+the form,
+
+ξn = ∑ a jχ j, ∑ a jz j = 0 ⇒ |z| = 1
+
+5
+
+λK+1and where the χ j are the characteristic functions of N = L/α intervals Ij = I0 + j α, 0 ≤ j < N forming a
+partition of [0, L). We now compute the Fourier transform of ξn. The Fourier transform of χ0 is
+
+(cid:98)χ0(s) =
+
+(cid:90) α
+
+0
+
+exp(−isx) dx =
+
+i (cid:0)−1 + e−iαs(cid:1)
+s
+
+.
+
+One has χ j(x) = χ0(x − j α), and this gives (cid:98)χ j(s) = exp(−isα j)(cid:98)χ0(s) so that we obtain
+
+(cid:98)ξn(s) = P(exp(−isα))(cid:98)χ0(s), P(z) := ∑ a jz j
+
+Thus the zeros of (cid:98)ξn are the union of the set { 2nπ
+α | n ∈ Z, n ̸= 0} of zeros of (cid:98)χ0 with the set of complex
+numbers s such that exp(−isα) is one of the roots of P(z). But we know (from the Toeplitz case, Proposition
+2.2) that all these roots are of modulus 1. For each root zk of P(z) = 0, let sk ∈ R be such that exp(−iskα) =
+zk, the set Z of zeros of (cid:98)ξn is then
+
+Z = {
+
+2nπ
+α
+
+| n ∈ Z, n ̸= 0} ∪k {sk +
+
+2nπ
+α
+
+| n ∈ Z} ⊂ R.
+
+Now since the sequence ξn converges to ξ in L2[0, L], we find for the entire functions (cid:98)ξn(s) and (cid:98)ξ(s) that
+
+|(cid:98)ξ(s) − (cid:98)ξn(s)| ≤ ∥ξ − ξn∥L2
+
+(cid:90) L
+
+0
+
+e2ℑ(s)x.
+
+We conclude from this that the sequence (cid:98)ξn(s) converges uniformly to (cid:98)ξ(s) on compact subsets of C. Thus
+□
+the Hurwitz’s theorem shows that all the zeros of (cid:98)ξ(s) are real.
+
+4. QUADRATIC FORM Q ASSOCIATED TO A DISTRIBUTION
+
+Let L > 0. We start with a distribution D on the interval [0, L], i.e. a continuous linear form on C
+written formally as
+
+∞([0, L])
+
+D( f ) =
+
+(cid:90) L
+
+0
+
+f (x)D(x), ∀ f ∈ C
+
+∞([0, L])
+
+and we use it to define an even distribution (cid:101)D on [−L, L] by symmetrization,
+
+(4)
+
+(cid:101)D( f ) := D( f ) + D( (cid:101)f ), (cid:101)f (x) := f (−x), ∀x ∈ [−L, L].
+
+Note that (cid:101)D( f ) continues to make sense when f is smooth when restricted to both [0, L] and [−L, 0] but not
+necessarily smooth at 0. We consider the Hilbert space H := L2([0, L], dx) with orthonormal basis
+
+(5)
+These functions are extended to x ∈ R so that they vanish for x /∈ [0, L]. One then uses the involution
+f ∗(x) := f (−x) and the convolution
+
+2 exp(2πinx/L), ∀x ∈ [0, L], n ∈ Z.
+
+Un(x) := L− 1
+
+( f ∗ g)(y) :=
+
+(cid:90)
+
+f (x)g(y − x)dx.
+
+We then use D to get a densely defined hermitian form Q on trigonometric polynomials by
+
+(6)
+
+⟨ f |g⟩Q := (cid:101)D( f ∗ ∗ g) =
+
+(cid:90) L
+
+0
+
+(( f ∗ ∗ g)(x) + ( f ∗ ∗ g)(−x)) D(x),
+
+whose matrix in the orthonormal basis Un is given by
+
+(7)
+
+⟨Um|Un⟩Q :=
+
+(cid:90) L
+
+0
+
+((U∗
+
+m ∗ Un)(y) + (U∗
+
+m ∗ Un)(−y)) D(y)dy.
+
+We assume that this defines a lower-bounded self-adjoint quadratic form with spectrum having an isolated
+eigenvalue at its minimum and are interested in the eigenvector η for this lowest eigenvalue (assumed
+simple).
+For D = δ0 the Dirac mass at y = 0, one has
+
+(cid:90) L
+
+0
+
+((U∗
+
+m ∗ Un)(y) + (U∗
+
+m ∗ Un)(−y)) D(y)dy = 2(U∗
+
+m ∗ Un)(0) = 2
+
+(cid:90) L
+
+0
+
+Un(x)Um(x)dx = 2⟨Um|Un⟩
+
+6
+
+which shows that by adding to D a multiple of δ0 one can assume that the quadratic form Q is positive and
+the eigenvector η is in the radical of the quadratic form, i.e. that one has
+
+⟨Un|η⟩Q = 0, ∀n ∈ Z.
+By analogy with the Toeplitz case, one would like to obtain a positive linear form on the quotient of the
+convolution algebra of functions on R by the ideal generated by η allowing one to extend the quadratic
+form Q. This would then yield an analogue of Corollary 1.1 by showing that the zeros of the entire function
+(cid:98)η are all real.
+Instead of working directly with this infinite dimensional situation, our strategy is to first compute the
+matrix (7), observe that it is of a particular form already met in perturbation theory of the spectral action,
+and prove a matrix form of the reality of zeros of Fourier transforms of lowest eigenvectors. The infinite
+dimensional result will then follow by approximation using Hurwitz theorem as in the proof of Theorem
+3.1.
+
+4.1. Matrix of the quadratic form Q. For y ∈ [0, L] one has, for n ̸= m, using Um(t) = 0 for t < 0 and
+Un(x) = 0 for x > L,
+
+(U∗
+
+m ∗ Un)(y) =
+
+(cid:90)
+
+U∗
+
+m(y − x)Un(x)dx =
+
+(cid:90)
+
+Um(x − y)Un(x)dx =
+
+exp(2πimy/L)
+L
+
+(cid:90) L
+
+y
+
+exp(2πi(n − m)x/L)dx =
+
+Moreover and still with y ∈ [0, L] one has
+
+=
+
+exp(2πimy/L) − exp(2πiny/L)
+2πi(n − m)
+
+.
+
+(cid:90) L
+
+1
+L
+
+y
+exp(2πimy/L)
+2πi(n − m)
+
+exp(2πim(y − x)/L + 2πinx/L)dx =
+
+(exp(2πi(n − m)x/L))L
+
+y =
+
+Thus since the formula exp(2πimy/L)−exp(2πiny/L)
+(8)
+(U∗
+
+m ∗ Un)(−y) = 2 ℜ
+
+m ∗ Un)(y) + (U∗
+
+2πi(n−m)
+
+(U∗
+
+m ∗ Un)(−y) = (U∗
+
+m ∗ Un)∗(y) = (U∗
+is symmetric in n, m, one obtains for n ̸= m and y ∈ [0, L],
+
+n ∗ Um)(y).
+
+(cid:18) exp(2πimy/L) − exp(2πiny/L)
+2πi(n − m)
+
+(cid:19)
+
+=
+
+sin(2πmy/L) − sin(2πny/L)
+π(n − m)
+
+.
+
+For m = n the same computation gives
+
+(U∗
+
+n ∗ Un)(y) =
+
+1
+L
+
+(cid:90) L
+
+y
+
+exp(2πin(y − x)/L + 2πinx/L)dx = (1 − y/L) exp(2πiny/L)
+
+and
+
+(9)
+
+(U∗
+
+n ∗ Un)(y) + (U∗
+
+n ∗ Un)(−y) = 2 ℜ ((1 − y/L) exp(2πiny/L)) = 2(1 − y/L)cos(2πny/L).
+
+We can summarize the above computation as follows
+
+Proposition 4.1. Let D be as above and Q be the quadratic form Q of (7). Let ψ(x) := 1
+π
+y/L))D(y)dy. The matrix elements qm,n of Q are given as follows
+
+(cid:82) L
+0 sin(2π x(1 −
+
+(10)
+
+qm,n =
+
+(cid:40) ψ(m)−ψ(n)
+m−n
+ψ′(n),
+
+if n ̸= m,
+if n = m.
+
+Proof. One has, for n ̸= m, using (7), (8) and the equality sin(2π x(1 − y/L) = −sin(2π xy/L) for x ∈ Z,
+
+⟨Um|Un⟩Q =
+
+(cid:90) L
+
+0
+
+((U∗
+
+m ∗ Un)(y) + (U∗
+
+m ∗ Un)(−y)) D(y)dy =
+
+(cid:90) L
+
+0
+
+sin(2πmy/L) − sin(2π ny/L)
+π(n − m)
+
+D(y)dy =
+
+ψ(n) − ψ(m)
+n − m
+
+.
+
+For n = m, one has using (7), (9)
+
+⟨Un|Un⟩Q = 2
+
+(cid:90) L
+
+0
+
+(1 − y/L)cos(2πny/L)D(y)dy = ∂xψ(x)|x=n
+
+7
+
+which gives the required equality.
+
+□
+
+4.2. The diagonal values. Proposition 4.1 gives the diagonal values of the matrix of the quadratic form Q,
+but unlike the off-diagonal values which only depend upon the first Fourier components of the distribution
+D, the diagonal values involve all the Fourier components of D. This follows from the equalities
+
+2
+
+2
+
+(cid:90) 1
+
+0
+(cid:90) 1
+
+0
+
+(1 − x) exp(2πi kx)cos(2πnx) dx =
+
+(1 − x) exp(2πinx)cos(2πnx) dx =
+
+ik
+πk2 − πn2 ,
+i
+1
+4πn
+2
+
++
+
+,
+
+∀k ̸= ±n;
+
+∀n ̸= 0.
+
+Indeed these equalities show that the Fourier coefficient ak of D(x) appears in the diagonal term qn,n as, for
+n ̸= 0,
+
+qn,n = ∑
+k̸=±n
+
+ak
+
+ik
+πk2 − πn2
+
++
+
+1
+2
+
+(an + a−n) +
+
+1
+4π
+
+(
+
+i
+n
+
+an −
+
+i
+n
+
+a−n).
+
+Since the distribution D(x) is real valued, one has a−k = ak so that the terms ikak and i(−k)a−k = ikak add
+up to a real contribution for k ̸= ±n. With ak = xk + iyk for k > 0, one gets for k ̸= n,
+
+which gives the first contribution to qn,n as
+
+ikak + i(−k)a−k = −2kyk
+
+∑
+k>0,k̸=n
+
+yk
+
+2k
+πn2 − πk2 .
+
+For k = n one gets the two terms
+
+For n = 0
+
+1
+2
+
+(an + a−n) +
+
+1
+4π
+
+(
+
+i
+n
+
+an −
+
+i
+n
+
+a−n) = xn − yn
+
+1
+2πn
+
+.
+
+q0,0 = ∑
+k̸=0
+
+ak
+
+ik
+πk2
+
++ a0 = x0 − ∑
+k>0
+
+yk
+
+2
+πk
+
+.
+
+Proposition 4.2. Let N ∈ N. The matrices (qi, j), i, j ∈ {−N, . . . , N} obtained from distributions D by Proposition
+4.1, are all matrices of the following form, where ai and b j are real numbers with a−i = ai and b−i = −bi, ∀i ∈
+{−N, . . . , N}
+
+(11)
+
+qi,i = ai,
+
+∀i,
+
+qi, j =
+
+bi − b j
+i − j
+
+,
+
+∀ j ̸= i;
+
+i, j ∈ {−N, . . . , N}.
+
+Moreover given a matrix Q = (qi, j), i, j ∈ {−N, . . . , N} of the above form there exists a unique real distribution
+D(x) all of whose Fourier components an = 0 for n /∈ {−N, . . . , N} and whose associated matrix is Q.
+
+Proof. Proposition 4.1 shows that the matrices (qi, j), i, j ∈ {−N, . . . , N} obtained from distributions D by
+Proposition 4.1 are of the form given by (11). Let us show that conversely any matrix of the form (11) ap-
+pears.
+The equality ψ(x) = 1
+π
+ficients ak = xk + iyk of D(x), for n ∈ Z, taking L = 1 for simplicity,
+1
+π
+
+(cid:82) L
+0 sin(2π x(1 − y/L))D(y)dy of Proposition 4.1, gives, in terms of the Fourier coef-
+
+sin(2πny)D(y)dy =
+
+ψ(n) = −
+
+a−n =
+
+an −
+
+1
+π
+
+yn.
+
+(cid:90) 1
+
+1
+2πi
+
+1
+2πi
+
+0
+
+Thus the matrix entries qi, j for i ̸= j determine the real numbers y j which are the imaginary parts of the
+Fourier coefficients ak of D. These imaginary parts then give the following contributions to the diagonal
+value, for n ̸= 0,
+
+(12)
+
+qn,n = xn − yn
+
+1
+2πn
+
++ ∑
+
+k>0,k̸=n
+
+yk
+
+2k
+πn2 − πk2
+
+and we can choose the real part xn of the Fourier coefficients an of D to obtain arbitrary diagonal values
+ai as required. Moreover the off-diagonal values determine uniquely the imaginary parts yn of the Fourier
+8
+
+coefficients of D(x) for n ∈ {−N, . . . , N} and the diagonal values then determine uniquely the real parts
+□
+xn of the Fourier coefficients of D(x) for n ∈ {−N, . . . , N}.
+
+Remark 4.3. It is important to take as a starting point a distribution D on [0, L] and then define the associated
+quadratic form using (6), rather than starting from an even distribution on [−L, L]. For instance the derivative δ′
+0
+of the Dirac distribution at 0 ∈ [0, L] gives rise to a non-zero quadratic form while the associated even distribution
+obtained by symmetrisation is equal to 0.
+
+4.3. Relation to the spectral action. There is a close analogy between the quadratic form in (11) and the
+second derivative with respect to perturbations in the spectral action [6], as we will now explain. Suppose
+we are given a linear self-adjoint operator D in a finite-dimensional Hilbert space, which is assumed to
+have simple spectrum labeled by {λ j}N
+j=−N, with corresponding eigenvectors {e j}. Suppose that we have
+a real symmetric positive matrix Q = (qi j), i, j ∈ {−N, . . . , N} defined as
+
+(13)
+
+qi j =
+
+(cid:40) bi−b j
+λi−λ j
+ai
+
+i ̸= j
+i = j
+
+for some ai, bi ∈ R. The quadratic form Q is given in terms of the Hilbert space inner product as
+Q( f , g) = ⟨Q f | g⟩ = ⟨ f | Qg⟩.
+(14)
+Consider now an even smooth function f : R → R. Under perturbations D (cid:55)→ D + A it can be computed
+that the quadratic form given by the second Gâteaux derivative of the spectral action is of the form [13, 15,
+16, 19, 20]
+
+1
+2
+
+d2
+dt2
+
+(tr f (D + tA)) |t=0 = ∑
+i, j
+
+Ai j A jiqi j
+
+where qi j is exactly as in (11) for bi = f ′(λi), ai = f ′′(λi) and λi = i, the spectrum of the Dirac operator
+D = DS1 on the circle.
+
+5. FINITE DIMENSIONAL EVEN CASE
+
+In this section we deal with the general finite dimensional even case. We are given a real symmetric positive
+matrix Q = (qi, j), i, j ∈ {−N, . . . , N} of the form (11), i.e.
+
+qi,i = ai,
+
+∀i,
+
+qi, j =
+
+bi − b j
+i − j
+
+,
+
+∀ j ̸= i;
+
+i, j ∈ {−N, . . . , N}
+
+where the scalars ai fulfill a− j = a j and b− j = −b j for all j ∈ {−N, . . . , N}.
+We let e j, j ∈ {−N, . . . , N}, be the canonical orthonormal basis given by the vectors (δ(k, j)) whose all
+components are 0 except one. Using the canonical inner product ⟨α | β⟩, the quadratic form Q is given by
+Q( f , g) = ⟨Q f | g⟩ = ⟨ f | Qg⟩.
+
+(15)
+
+Lemma 5.1. (i) Let γ be such that γ(e j) := e− j for all j ∈ {−N, . . . , N}. One has γ2 = Id and Qγ = γQ.
+(ii) Let D be defined by D(e j) := j e j for all j ∈ {−N, . . . , N}. One has Dγ = −γD and
+
+(16)
+
+D Q − Q D = |β⟩⟨η| − |η⟩⟨β|, β = ∑ b j e j, η = ∑ e j.
+
+Proof. (i) One has q−i,− j = qi, j for all i, j ∈ {−N, . . . , N}.
+(ii) The diagonal elements of the diagonal matrix D are antisymmetric which gives Dγ = −γD. Let
+us prove (16). One has (DQ)i, j = iqi, j, (QD)i, j = jqi, j so that (D Q − Q D)i, j = bi − b j for all i, j ∈
+{−N, . . . , N}. Similarly one has
+
+which gives the required equality.
+
+□
+
+(|β⟩⟨η|)i, j = |β⟩i⟨η| j = bi, (|η⟩⟨β|)i, j = |η⟩i⟨β| j = b j
+
+Lemma 5.2. Assume Q ≥ 0 and Qξ = 0 where γξ = ξ and ⟨ξ | η⟩ = 1.
+(i) One has Q D ξ = −β.
+(ii) The operator D′ := D − |D ξ⟩⟨η| is selfadjoint with respect to the inner product defined by Q.
+
+9
+
+Proof. (i) We apply (16) and get, using Qξ = 0 and ⟨β|ξ⟩ = 0 since the two eigenspaces of γ are orthogonal,
+
+−Q D ξ = (D Q − Q D)ξ = |β⟩⟨η|ξ⟩ − |η⟩⟨β|ξ⟩ = β.
+
+(ii) The inner product defined by Q is given by (15), i.e.
+
+⟨ f | g⟩Q = ⟨Q f | g⟩.
+
+Thus we want to show that ⟨D′ f | g⟩Q = ⟨ f | D′g⟩Q for all f , g. One has, with R = −|D ξ⟩⟨η|
+
+⟨D′ f | g⟩Q = ⟨QD′ f | g⟩ = ⟨QD f | g⟩ + ⟨QR f | g⟩.
+By (i), one has QR = −|QDξ⟩⟨η| = |β⟩⟨η|. Moreover by (16), one has QD − DQ = −|β⟩⟨η| + |η⟩⟨β|. Thus
+⟨D′ f | g⟩Q = ⟨DQ f | g⟩ + ⟨R′ f | g⟩, R′ = |η⟩⟨β|.
+
+Moreover, using that both Q and D are selfadjoint,
+
+⟨ f | D′g⟩Q = ⟨Q f | Dg⟩ + ⟨Q f | Rg⟩ = ⟨DQ f | g⟩ + ⟨ f | QRg⟩
+
+and the required equality follows from
+
+⟨ f | QRg⟩ = ⟨ f | β⟩⟨η|g⟩ = ⟨R′ f | g⟩.
+
+□
+
+Lemma 5.3. Let Q, D, ξ, η and D′ be as in Lemma 5.2. Then
+(i) Let s /∈ {−N, . . . , N}. Then
+
+(17)
+
+Det(D′ − s) = 0 ⇐⇒
+
+N
+∑
+j=−N
+
+ξ j
+s − j
+
+= 0.
+
+(ii) One has Det(D′) = 0, and for j ∈ {−N, . . . , N}, j ̸= 0, Det(D′ − j) = 0 ⇐⇒ ξ j = 0.
+
+Proof. (i) We start by writing, in terms of R = −⟨Dξ⟩⟨η|:
+
+D′ − s = D + R − s = (D − s)
+
+(cid:16)
+
+Id + (D − s)−1R
+
+(cid:17)
+
+Consequently
+
+To compute the second determinant we use the identity
+
+Det(D′ − s) = Det(D − s)Det(Id + (D − s)−1R).
+
+Det(Id + A) =
+
+(cid:16)
+
+tr
+
+∧k A
+
+(cid:17)
+
+∞
+∑
+k=0
+
+applied to the rank one operator A = (D − s)−1R. The higher exterior powers ∧k A vanish for k > 1 thus
+
+Det(Id + (D − s)−1R) = 1 − tr
+
+(cid:16)
+
+|(D − s)−1Dξ⟩⟨η|
+
+(cid:17)
+
+= −s⟨η|(D − s)−1ξ⟩,
+
+using (D − s)−1Dξ = ξ + s(D − s)−1ξ and ⟨η|ξ⟩ = 1. Hence,
+
+(18)
+
+Det(D′ − s) = −sDet(D − s)⟨η|(D − s)−1ξ⟩ = −s
+
+N
+∏
+i=−N
+
+(i − s)
+
+N
+∑
+j=−N
+
+( j − s)−1ξ j.
+
+We conclude that if s ̸= j for j = −N, . . . , N then Det(D′ − s) = 0 iff ∑N
+For (ii) we have that D′ξ = 0 so Det(D′) = 0. For s = j ̸= 0 we find that the only non-vanishing term on
+□
+the right-hand side of (18) is j ∏i̸= j(i − j)ξ j which is zero iff ξ j = 0.
+Remark 5.4. The expression (18) for Det(D′ − s) is related to the ordinary Lagrange interpolation polynomial for
+the function f (λ) at the points λ0, λ1, . . . , λn :
+
+j=−N( j − s)−1ξ j = 0.
+
+P(x) =
+
+n
+∑
+k=0
+
+f (λk) ·
+
+x − λ j
+λk − λ j
+
+.
+
+n
+∏
+j=0
+j̸=k
+
+10
+
+We now compute the Fourier transform of functions on [0, L] translated to [− L
+full line R. The Fourier transform is defined by
+
+2 , L
+
+2 ] and extended by 0 to the
+
+The next Proposition is a reformulation of the Shannon sampling theorem ( [18]).
+
+F( f )(s) :=
+
+(cid:90)
+
+R
+
+f (x) exp(−isx)dx.
+
+Proposition 5.5. Let f ∈ L2([0, L]) and f σ (x) := f (x + L
+(i) The restriction of the Fourier transform of f σ to 2π
+L
+follows
+
+2 ) for |x| ≤ L
+
+2 be extended by 0 on R.
+Z is given by the Fourier transform (cid:98)f of f ∈ L2(R/LZ) as
+
+(19)
+
+F( f σ )(
+
+2π
+L
+
+n) = (−1)n (cid:98)f (n),
+
+∀n ∈ Z.
+
+(ii) The Fourier transform of f σ is given by
+
+(20)
+
+F( f σ )(s) = sin(Ls/2) ∑
+
+Z
+
+(cid:98)f (n)
+
+1
+Ls/2 − n π
+
+.
+
+Proof. (i) Let n ∈ Z. One has by definition (cid:98)f (n) = (cid:82) L
+
+0 f (x) exp(−2πinx/L)dx and
+
+F( f σ )(
+
+2π
+L
+
+n) =
+
+(cid:90)
+
+R
+
+f σ (x) exp(−2πinx/L)dx =
+
+(cid:90) L
+2
+
+− L
+2
+
+f (x +
+
+L
+2
+
+) exp(−2πinx/L)dx =
+
+(−1)n
+
+(cid:90) L
+
+0
+
+f (x) exp(−2πinx/L)dx = (−1)n (cid:98)f (n).
+
+(ii) One has f (x) = 1
+
+L ∑Z (cid:98)f (n) exp(2πinx/L), thus it is enough to treat the case f (x) = exp(2πinx/L). Then
+
+F( f σ )(s) =
+
+(cid:90)
+
+R
+
+f σ (x) exp(−isx)dx =
+
+(cid:90) L
+2
+
+− L
+2
+
+exp(2πin(x +
+
+L
+2
+
+)/L) exp(−isx)dx =
+
+= (−1)n
+
+(cid:90) L
+2
+
+− L
+2
+
+exp(i(
+
+2π
+L
+
+which gives (20) using f (x) = 1
+
+n − s)x)dx = (−1)n
+
+i( 2π
+L ∑Z (cid:98)f (n) exp(2πinx/L).
+
+1
+L n − s)
+
+(exp(i(
+
+2π
+L
+
+n − s)x))
+
+L
+2
+− L
+2
+
+= 2L
+
+sin(Ls/2)
+Ls − 2πn
+
+□
+
+After these preliminaries we obtain
+
+Theorem 5.6. Let Q be a real symmetric positive matrix of the form (11) with one dimensional kernel which is even
+with respect to γ. Let ξ ∈ ker Q.
+(i) All the roots of the following polynomial are real:
+
+(21)
+
+
+
+
+
+P(s) =
+
+∑
+k∈{−N,...,N}
+
+ξk ×
+
+
+
+∏
+j∈{−N,...,N}, j̸=k
+
+( j − s)
+
+ .
+
+(ii) The Fourier transform (cid:98)ξ(z) of the function
+
+is entire and has all its zeros on the real line.
+
+ξ(x) := ∑ ξk exp(2πikx), ∀x ∈ [0, 1], ξ(x) = 0, ∀x /∈ [0, 1]
+
+Proof. (i) Recall D, γ from Lemma 5.1 and note that D has one-dimensional kernel. If e0 ∈ ker Q one checks
+(i) and (ii) directly. Thus we assume that e0 /∈ ker Q. Let ξ ∈ ker Q, ξ ̸= 0. The real symmetric positive
+matrix Q defines an inner product on R2N+1 and its radical consists of the one dimensional subspace gen-
+erated by ξ. One has Dξ ̸= 0 since otherwise e0 ∈ ker Q. One has QDξ ̸= 0 since Dξ is odd and therefore
+linearly independent of ξ while ker Q is one-dimensional. By (16) one has
+
+0 ̸= (D Q − Q D)(ξ) = |β⟩⟨η|ξ⟩ − |η⟩⟨β|ξ⟩ = |β⟩⟨η|ξ⟩.
+
+Thus one can normalize ξ so that ⟨η|ξ⟩ = 1. Let then D′
+:= D − |D ξ⟩⟨η| as in Lemma 5.2. One has
+D′(ξ) = 0 and thus D′ induces an operator D” on the Euclidean space E obtained as the separated quotient
+of (R2N+1, Q). By Lemma 5.2, (ii), the operator D” is selfadjoint in E. Thus the real spectral theorem (see [3],
+11
+
+Theorem 7.29) applies and shows that the characteristic polynomial of D” has all its roots in R. Let v j be
+an orthonormal basis of E of eigenvectors for D” with eigenvalues λ j. Let w j ∈ R2N+1 be lifts of the v j.
+One has D”(v j) = λ jv j and hence D′(w j) = λ jw j + s jξ for some real scalars s j. Thus in the basis of R2N+1
+formed by ξ and the w j, the matrix of D′ is triangular, with 0 and the λ j on the diagonal. Thus one gets
+
+Comparing this formula with (18) one obtains that the polynomial P(s) of (21) has all its zeros in R.
+(ii) The Fourier transform of the function with support in [0, 1] given there by exp(2πikx) is
+
+Det(D′ − s) = −s ∏(λ j − s).
+
+(cid:90) 1
+
+0
+
+exp(2πikx) exp(−isx) dx =
+
+2e− is
+
+2 sin (cid:0) s
+2
+s − 2πk
+
+(cid:1)
+
+.
+
+Thus the Fourier transform of ξ(x) is
+
+(cid:98)ξ(z) = 2e− iz
+
+2 sin
+
+(cid:17)
+
+(cid:16) z
+2
+
+
+ ∑
+
+{−N,...,N}
+
+
+
+ .
+
+ξ j
+z − 2π j
+
+(cid:1) cancel the pole at 2π j which occurs when ξ j ̸= 0 and remain as zeros of (cid:98)ξ(z)
+The zeros z ∈ 2πZ of sin (cid:0) z
+2
+otherwise. The other zeros are given by the roots of P(z/2π) = 0 where P(z) is defined in (21). Thus by (i),
+□
+all these zeros are real.
+
+5.1. General finite dimensional operator D. Consider as before the more general situation of a linear self-
+adjoint operator D in a finite-dimensional Hilbert space, which is assumed to have simple spectrum labeled
+by {λ j}N
+j=−N, with corresponding eigenvectors {e j}. We then consider the real symmetric positive matrix
+Q = (qi j), i, j ∈ {−N, . . . , N} defined in (13).
+The following Lemma’s are the analogues of Lemmas 5.1, 5.2 and 5.3, whose proofs follow mutatis mutandis.
+
+Lemma 5.7. Suppose that λ−i = −λi and b−i = −bi for all i ∈ {−N, . . . , N}.
+(i) Let γ be such that γ(ei) := e−i for all i ∈ {−N, . . . , N}. One has γ2 = Id and Qγ = γQ.
+(ii) One has Dγ = −γD and
+
+(22)
+so that β is odd and and η is even with respect to the Z
+
+D Q − Q D = |β⟩⟨η| − |η⟩⟨β|, β = ∑ bi ei, η = ∑ ei,
+
+2-grading given by γ.
+
+Lemma 5.8. Let D, Q, γ be as in Lemma 5.7, assume Q ≥ 0 and Qξ = 0 where γξ = ξ and ⟨ξ | η⟩ = 1.
+(i) One has Q D ξ = −β.
+(ii) The operator D′ := D − |D ξ⟩⟨η| is self-adjoint with respect to the inner product defined by Q.
+Lemma 5.9. Let Q, D, ξ, η and D′ be as in Lemmas 5.7 and 5.8, and assume that D has simple spectrum. Then
+
+(i) Let s ∈ C \ {−λN, . . . , λN} and s ̸= 0. Then
+
+(23)
+
+Det(D′ − s) = 0 ⇐⇒
+
+N
+∑
+j=−N
+
+ξ j
+s − λ j
+
+= 0.
+
+(ii) One has Det(D′) = 0, and if λ j ̸= 0 we have Det(D′ − λ j) = 0 ⇐⇒ ξ j = 0.
+
+As a result, we also have the following analogue of Theorem 5.6(i):
+
+Proposition 5.10. Let D have simple spectrum and let Q be a real symmetric positive matrix of the form (13) with
+one dimensional even kernel. Let ξ ∈ ker Q. Then all the roots of the following polynomial are real:
+
+(24)
+
+
+
+
+
+P(s) =
+
+∑
+k∈{−N,...,N}
+
+ξk ×
+
+
+
+∏
+j∈{−N,...,N}, j̸=k
+
+(λ j − s)
+
+ .
+
+We then obtain Theorem 5.6(ii) as a corollary to this result, when it is applied to the case D = DS1 so that
+λ j = j.
+
+12
+
+In this section we prove the result announced in the Introduction,
+
+6. INFINITE DIMENSIONAL CASE
+
+Theorem 6.1. Let L > 0, and let D be a real distribution on the interval [0, L]. Let Q be the quadratic form defined
+on trigonometric polynomials by (6). Assume that Q defines a lower-bounded essentially selfadjoint operator and that
+the minimum of its spectrum is a simple, isolated eigenvalue λ, with even eigenfunction1 ξ. Then all the zeros of the
+entire function (cid:98)ξ(z), z ∈ C, the Fourier transform of ξ lie on the real line.
+
+Proof. By hypothesis the trigonometric polynomials form a core for the operator A which is defined by
+
+⟨α | Aβ⟩ = ⟨α | β⟩Q.
+
+We normalize the eigenvector ξ by ∥ξ∥ = 1. Given ϵ > 0 there exists an even trigonometric polynomial ηϵ
+with
+
+(25)
+
+∥ηϵ∥ = 1, ∥ξ − ηϵ∥ < ϵ, ⟨ηϵ | ηϵ⟩Q < λ + ϵ.
+
+Let N be a finite integer such that the support of ηϵ is contained in {−N, . . . , N}. By Proposition 4.1 the
+matrix of the restriction QN of the quadratic form Q to the space EN of trigonometric polynomials with
+support in {−N, . . . , N} is of the form (11). Since QN is a restriction of Q to a subspace, its minimum is
+≥ λ and the above inequalities show that it is between λ and λ + ϵ. By hypothesis the spectrum of the
+operator A is contained, except for the simple eigenvalue λ in the interval [λ + δ, ∞) for some δ > 0. Thus
+the restriction of Q to the orthogonal complement of ξ fulfills
+
+⟨α | α⟩Q ≥ (λ + δ)∥α∥2, ∀α | ⟨α | ξ⟩ = 0.
+
+This holds in particular in the codimension one subspace FN of EN defined by ⟨α | ξ⟩ = 0 (note that
+FN cannot be all of EN since then we also would have had ξ ⊥ ηϵ which contradicts (25)). The smallest
+eigenvalue of QN fulfills λ ≤ λN ≤ λ + ϵ. By the min-max theorem, the next eigenvalue µN ≥ λN of QN is
+given by
+
+µN = max
+M⊂EN
+codim(M)=1
+
+min
+x∈M,∥x∥=1
+
+QN(x)
+
+so that, using M = FN one gets µN ≥ λ + δ. This shows that for ϵ < δ/2 the eigenvalue λN of QN is simple
+and the only one in the interval [λ, λ + δ]. Let then P be the spectral projection of QN for the eigenspace
+associated to the minimal eigenvalue λN. Decomposing
+
+ηϵ = Pηϵ + (1 − P)ηϵ = α + β ⇒ Q(ηϵ) = λN∥α∥2 + Q(β)
+
+where Q(β) ≥ (λ + δ)∥β∥2. Thus by (25), one gets that the convex combination with weights ∥α∥2 and
+∥β∥2 of λ and Q(β)/∥β∥2 ≥ (λ + δ) is less than λ + ϵ. It follows that ∥β∥2 = 1 − ∥α∥2 ≤ ϵ/δ. Let then ξN
+be the eigenvector of QN for the eigenvalue λN given by Pηϵ. One controls
+
+∥ηϵ − Pηϵ∥ ≤
+
+(cid:113)
+
+ϵ/δ, ∥ξ − ηϵ∥ < ϵ ⇒ ∥ξ − ξN∥ ≤ ϵ +
+
+(cid:113)
+
+ϵ/δ.
+
+Since the even functions form a closed subspace in L2[0, L], and ξ is even, for ϵ small enough the vector ξN
+is even as well. Thus, it follows from Theorem 5.6 that all the zeros of the Fourier transform (cid:98)ξN are real.
+Moreover when ϵ → 0 the vectors ξN converge in norm to ξ so that the sequence (cid:98)ξN(z) converges to (cid:98)ξ(z)
+uniformly on compact subsets in C (as in the proof of Theorem 3.1). But then the Hurwitz theorem applies,
+□
+allowing us to conclude that all zeros of (cid:98)ξ(z) are real.
+
+1i.e. invariant under the symmetry x (cid:55)→ L − x of [0, L]
+
+13
+
+7. SPECTRAL ACTION AND DIVIDED DIFFERENCES
+
+As already observed there is a close relation of the quadratic form in (15) and the spectral action tr f (D)
+introduced in [6]. We will now analyze this in more detail for perturbations of the type D (cid:55)→ D + R with
+R = −|Dξ⟩⟨η| as in Lemma 5.2, extending the Taylor expansions derived in [13, 15, 16, 19, 20] to this case.
+First, in order to make sense of the spectral action for (not necessarily self-adjoint or normal) bounded
+perturbations of a self-adjoint operator we write f (x) as a Fourier transform, and then invoke Araki’s
+expansionals [1] —or Dyson series— to give meaning to ei(H0+V) for bounded perturbation V of a self-
+adjoint operator H0 (to be precise, this is [1, Eq. 5.16]):
+
+(26)
+
+ei(H0+V) := Expr
+
+(cid:18)(cid:90) 1
+
+0
+
+; ieisH0 Ve−isH0 ds
+
+(cid:19)
+
+eiH0 := ∑
+n≥0
+
+in
+
+(cid:90)
+
+∆n
+
+eis0 H0 Veis1 H0 · · · Veisn H0 dns.
+
+where the n-simplex ∆n is parametrized by tuples (s0, . . . , sn) ∈ Rn+1
+interest, these expansionals are given by series of the following form:
+eiξ(D+tR) := ∑
+n≥0
+
+(itξ)n
+
+(27)
+
+∆n
+
+(cid:90)
+
+eis0ξ DReis1ξ D · · · Reisnξ Ddns.
+
+≥0 satisfying ∑k sk = 1. In our case of
+
+Note that since |∆n| = 1/n! the n’th summand in the expansional is norm bounded by tn|ξ|n∥R∥n/n! so
+that the series expansion is norm convergent. This suggest to define for suitable functions f :
+
+(28)
+
+More precisely, we have
+
+f (D + tR) :=
+
+(cid:90)
+
+R
+
+(cid:98)f (ξ)eiξ(D+tR)dξ.
+
+Lemma 7.1. Let D be a self-adjoint operator on H, R bounded operator on H and let f be such that ∥(cid:100)f (n)∥1 ≤
+Cn+1n! for all n ≥ 0 and some C ≥ 1. Then for sufficiently small t the expression in (28) is a bounded operator on
+H.
+
+Proof. We estimate:
+
+∥ f (D + tR)∥ ≤ ∑
+n≥0
+
+tn∥R∥n
+n!
+
+(cid:90)
+
+R
+
+| (cid:98)f (ξ)ξ n|dξ ≤
+
+C
+1 − tC∥R∥
+
+which is bounded for t < 1/(C∥R∥).
+
+□
+
+In order to define the spectral action as the trace of this operator, we need a more restrictive class of func-
+tions. Namely, as in [16] we define
+
+E s :=
+
+(cid:26)
+
+∞
+
+f ∈ C
+
+: there exists C ≥ 1 s.t. ∥
+
+(cid:92)
+
+( f um)(n)∥1 ≤ Cn+1n! for all m ≤ s and n ≥ 0
+
+(cid:27)
+
+,
+
+where u(x) = x − i.
+Lemma 7.2. If D is s-summable, i.e. (D − i)−s is trace-class for some s ≥ 0, and f ∈ E s then f (D + tR) is
+trace-class for sufficiently small t.
+
+Proof. The proof of the required estimates follows line-by-line the proof of [16, Theorem 6] after having
+given the meaning (27) to the exponentials appearing in the multiple operator integrals (i.e. Definition 2 in
+□
+loc. cit.).
+We recall the definition of divided differences. Let f : R → R and let x0, x1, . . . xn be distinct points in R.
+The divided difference of order n is defined by the recursive relations
+
+f [x0] = f (x0),
+
+f [x0, x1, . . . xn] =
+
+f [x1, . . . xn] − f [x0, x1, . . . xn−1]
+xn − x0
+
+.
+
+Also note the following useful representation, due to Hermite [14]: for any x0, . . . , xn ∈ R,
+(cid:90)
+
+f [x0, x1, . . . , xn] =
+
+f (n) (s0x0 + s1x1 + · · · + snxn) dns.
+
+∆n
+
+14
+
+This also allows to extend the definition of divided difference to coinciding points.
+Lemma 7.3. Let D be a self-adjoint operator in H such that (D − i)−s is trace class for some s ≥ 0, R is a bounded
+operator in H and f ∈ E s. Then t (cid:55)→ tr f (D + tR) is smooth in a neighborhood of 0 with n’th derivative
+
+dn
+dtn tr f (D + tR)|t=0 = n! ∑ Ri1i2
+
+· · · Rini1 f ′[λi1 , . . . , λin ].
+
+in terms of the eigenvalues λi of D.
+
+Proof. Since f (D + tR) is defined in terms of Araki’s expansional formula, we have
+
+dn
+dtn tr f (D + tR)|t=0 =
+
+(cid:90) dn
+
+dtn tr( (cid:98)f (ξ)eiξ(D+tR))|t=0dξ
+· · · Rini1
+
+Ri1i2
+
+(cid:90)
+
+= n! ∑
+
+i1,i2,...,in
+
+(iξ)n exp[iξλi1 , . . . , iξλin , iξλi1
+
+= n! ∑
+
+i1,i2,...,in
+
+Ri1i2
+
+· · · Rini1 f [λi1 , . . . , λin , λi1
+
+].
+
+] (cid:98)f (ξ)dξ
+
+□
+
+Remark 7.4. It would be interesting to extend the above definition of the spectral action for not necessarily self-
+adjoint perturbations to the case where also the assumption on self-adjointness on the operator D is relaxed. This has
+potential applications to Lorentzian spectral triples,
+Let us now take a function f such that f ′′(λ j) = a j and f ′(λ j) = b j, where a j, b j are the coefficients of the
+quadratic form as in 13. We then have
+
+d
+dt
+
+tr f (D + tR)|t=0 = ∑ R j jb j;
+
+d2
+dt2 tr f (D + tR)|t=0 = ∑ Ri jR jiqi j.
+
+Proposition 7.5. Let H be finite-dimensional. In the notation of Lemma 5.7, assume Q = (qi j) ≥ 0 and Qξ = 0
+where γξ = ξ and ⟨ξ|η⟩ = 1. Let R = −|Dξ⟩⟨η| so that Ri j = −(Dξ)i. Then we have
+
+d
+dt
+
+tr f (D + tR)|t=0 = ⟨Dξ, Dξ⟩Q;
+
+d2
+dt2 tr f (D + tR)|t=0 = ⟨Dξ, Dξ⟩Q.
+
+Proof. The second derivative is reduced to the first derivative because QDξ = −β (cf. Lemma 5.8(i)).
+Indeed, this yields:
+
+∑
+j
+
+R ji f ′[λi, λ j] = − ∑
+
+j
+
+f ′[λi, λ j](Dξ) j = −(QDξ)i = bi = f ′(λi).
+
+From this it follows that
+
+∑ Ri jR ji f ′[λi, λ j] = ∑
+
+i
+
+Rii f ′(λi) = − ∑
+
+i
+
+(Dξ)i f ′(λi) = ∑
+
+i
+
+(Dξ)i(QDξ)i = ⟨Dξ, Dξ⟩Q.
+
+□
+
+APPENDIX A. AN INSTANCE OF TRUNCATION MATRICES
+
+In this appendix we describe an example where the truncation matrices admit simple maximal and minimal
+eigenvalues but this property fails in the limit where the maximal and minimal eigenvalues have multiplic-
+ity 2. We let L = 1 and take the distribution D of the form
+
+(29)
+
+We then compute ψ(x) := 1
+π
+(cid:90) 1
+
+ψ(x) =
+
+sin(2π x) + 2b
+
+1
+π
+
+0
+
+D(x) = δ0(x) + 2π b sin(2π x).
+
+(cid:82) 1
+0 sin(2π x(1 − y))D(y)dy as
+
+sin(2π y)sin(2π x(1 − y)) dy =
+
+1
+π
+
+sin(2π x) + b
+
+sin(2π x)
+π − π x2
+
+=
+
+sin(2π x)
+π
+
+(cid:18)
+
+1 +
+
+(cid:19)
+
+.
+
+b
+1 − x2
+
+Thus one has ψ(n) = 0 for all n ∈ Z, except for n = ±1. Moreover one gets ψ(−1) = b and ψ(1) = −b.
+The derivative is
+
+ψ′(x) =
+
+2b x sin(2π x)
+π (1 − x2)2
+
++
+
+2b cos(2π x)
+1 − x2
+
++ 2 cos(2π x).
+
+15
+
+One finds that for n ∈ Z, not equal to ±1, one has
+
+ψ′(n) = 2 +
+
+2b
+1 − n2
+
+while for n = ±1 one has ψ′(n) = b
+
+2 + 2.
+
+Lemma A.1. Let L = 1 and D be given by (29), Q be the quadratic form Q of (10). The matrix elements qn,m of
+Q are given by qn,m = 2δn,m + b µn,m, where the matrix µ is independent of b and given by µn,m = 0, ∀n, m /∈
+{−1, 0, 1}, n ̸= m and
+
+
+
+(µn,m)n,m∈{−1,0,1} =
+
+
+
+1
+2 −1 −1
+−1
+2 −1
+1
+−1 −1
+2
+
+
+ , µn,n =
+
+2
+
+1 − n2 , ∀n /∈ {−1, 0, 1},
+
+µn,−1 = µ−1,n =
+
+1
+−1 − n
+
+, ∀n /∈ {−1, 0, 1}, µn,1 = µ1,n =
+
+1
+−1 + n
+
+, ∀n /∈ {−1, 0, 1}.
+
+Proof. This follows from Proposition 4.1 and the above determination of ψ(n) and ψ′(n).
+
+□
+
+The matrix elements µn,m of µ, for |n| ≤ 4 and |m| ≤ 4 are the following
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+− 2
+0 − 1
+1
+0
+0
+0
+0
+0
+15
+5
+3
+− 1
+0 − 1
+1
+0
+0
+0
+0
+0
+4
+4
+2
+0 − 1
+0 − 2
+0
+0
+1
+0
+0
+3
+3
+1
+4 − 1
+3 − 1
+2 −1 −1 − 1
+1
+1
+1
+2
+3
+5
+0 −1
+2 −1
+0
+0
+0
+0
+0
+1
+1
+1
+4 − 1
+5 − 1
+− 1
+3 −1 −1
+1
+3
+2
+2
+0 − 1
+1 − 2
+0
+0
+0
+0
+0
+3
+3
+0 − 1
+0 − 1
+1
+0
+0
+0
+0
+4
+2
+4
+0 − 2
+1
+0 − 1
+0
+0
+0
+0
+15
+3
+5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.
+
+Let then ξ be the vector with coordinates ξ(n) = 1
+for n ̸= 1, while η(1) = 0. Also let the Un form the canonical orthonormal basis. Thus one has
+
+1+n for n ̸= −1 while ξ(−1) = 0, and η with η(n) = 1
+
+−1+n
+
+ξ = ∑
+n̸=−1
+
+1
+1 + n
+
+Un, η = ∑
+n̸=1
+
+1
+−1 + n
+
+Un.
+
+The functions corresponding to these vectors are
+
+ξ(x) = −2πi
+
+(cid:18)
+
+x −
+
+(cid:19)
+
+1
+2
+
+exp(−2πix), η(x) = −2πi
+
+(cid:18)
+
+x −
+
+(cid:19)
+
+1
+2
+
+exp(2πix).
+
+One has ξ(x) = −η(x)
+
+k
+∑
+−k
+
+ξ(n)η(n) =
+
+k2 − 3k − 2
+2k(k + 1)
+
+, ⟨ξ | η⟩ =
+
+1
+2
+
+.
+
+We consider the rank 4 matrix given by
+
+Its matrix elements Rn,m fulfill Rn,m = 0, ∀n, m /∈ {−1, 1}, while
+
+R := |η⟩⟨U1| + |U1⟩⟨η| − |ξ⟩⟨U−1| − |U−1⟩⟨ξ|.
+
+Rn,1 = R1,n = η(n), Rn,−1 = R−1,n = −ξ(n), ∀n /∈ {−1, 1}.
+
+The corresponding Schwartz kernel r(x, y) is given by
+
+r(x, y) = η(x) exp(−2πiy) − exp(2πix)ξ(y) − ξ(x) exp(2πiy) + exp(−2πix)η(y).
+16
+
+Lemma A.2. (i) Let D be the diagonal matrix with diagonal elements dn = 2
+One then has µ = D + R.
+(ii) The operator D is given by the convolution among periodic functions with period 1 by the function
+
+1−n2 for n2 ̸= 1 and dn = 1
+
+2 for n2 = 1.
+
+α(x) := −4π(x −
+
+1
+2
+
+)sin(2π x), ∀x ∈ [0, 1).
+
+Proof. (i) This follows from Lemma A.1.
+(ii) One has, for n ∈ Z, n ̸= ±1,
+
+while the value of this integral is − 1
+
+2π
+
+(cid:90) 1
+
+0
+
+(cid:18)
+
+(cid:19)
+
+x −
+
+1
+2
+4 for n = ±1.
+
+sin(2π x)cos(2π nx) dx =
+
+1
+n2 − 1
+
+.
+
+□
+
+Note that the function α(x) needs to be viewed as a periodic function of period 1 and this requires rein-
+2 where E(x) is the integer part of x ∈ R. This plays a role in the
+terpreting the term x − 1
+formula for the convolution, which is
+
+2 as x − E(x) − 1
+
+D( f )(x) =
+
+(cid:90) 1
+
+0
+
+α(x − y) f (y)dy.
+
+One has
+
+so that
+
+sin(2π(x − y)) = −cos(2π x)sin(2π y) + sin(2π x)cos(2π y)
+
+α(x − y) = −4π(x − y − E(x − y) −
+
+1
+2
+
+) (−cos(2π x)sin(2π y) + sin(2π x)cos(2π y))
+
+and the only term which does not separate as a product of functions of x by a function of y is the term
+involving E(x − y) which is equal to 0 if y ≤ x and to −1 if y > x. In fact it is more symmetric to add the
+2 to E(x − y) which coincides with 1
+1
+2 Sign(x − y). The other contributions are given by the 4 terms which
+are, up to the overall factor −2π,
+
+(−i)xe−2iπ(y−x) + ixe2iπ(y−x) − iye2iπ(y−x) + iye−2iπ(y−x)
+
+which, taking into account the factor −2π can be rewritten as
+
+−η(x) exp(−2iπ y) + ξ(x) exp(2iπ y) − exp(−2iπ x)η(y) + exp(2iπ x)ξ(y)
+
+We thus see that these terms cancell the rank 4 additional contribution R and thus we get the following
+simple formula for the Schwartz kernel µ(x, y) of the operator µ,
+Proposition A.3. (i) The operator µ is given by the formula
+
+µ( f )(x) = 2π
+
+(cid:90) 1
+
+0
+
+Sign(x − y)sin(2π(x − y)) f (y)dy.
+
+(ii) In general the Schwartz kernel of the operator associated to the distribution D is equal to the restriction to
+x, y ∈ [0, L] of D(|x − y|).
+Proof. (i) Follows from the above computation.
+(ii) By (7) one has for smooth f , g with support in [0, L],
+
+Q( f , g) =
+
+(cid:90) L
+
+0
+
+((g∗ ∗ f )(y) + (g∗ ∗ f )(−y)) D(y)dy =
+
+(cid:90) L
+
+−L
+
+(g∗ ∗ f )(y)D(|y|)dy
+
+where one needs to be careful in doubling the coefficient of δ0 in D(|y|). This formula does not change if one
+2 , L
+replaces f (x) by f (x + 1
+2 ].
+Then Q( f , g) = 0 when f and g have opposite parity. One then uses the formula for three functions f , g, h,
+h even
+
+2 ), shifting their supports to the symmetric interval [− L
+
+2 ) and g(x) by g(x + 1
+
+(cid:90) L
+
+−L
+
+(cid:90)
+
+(g∗ ∗ f )(y)h(−y)dy =
+
+(cid:90)
+
+=
+
+(cid:90)
+
+g(x)
+
+g∗(x) f (y)h(z)ω =
+
+x+y+z=0
+
+g(x) f (y)h(z)dxdy
+
+x=y+z
+
+(cid:90)
+
+k(x, y) f (y)dydx,
+
+k(x, y) = h(x − y)
+
+where ω is the measure on the plane x + y + z = 0 given by |dx ∧ dz| = |dx ∧ dy|.
+
+□
+
+17
+
+One can then investigate numerically the zeros of the polynomials P±
+n (s) associated by (21) to the eigenvec-
+tors for the largest and smallest eigenvalues of the matrix µ(n) of size 2n + 1, which is the compression of
+the matrix µ,
+
+For n = 1, this matrix is simply
+
+Its three eigenvalues are
+
+µ(n)i, j := µi, j, ∀i, j ∈ {−n, . . . , n}.
+
+µ(1) =
+
+
+
+
+
+1
+2 −1 −1
+−1
+2 −1
+1
+−1 −1
+2
+
+
+
+ .
+
+(cid:16)√
+
+(cid:26) 1
+4
+
+57 + 3
+
+(cid:17)
+
+,
+
+3
+2
+
+,
+
+1
+4
+
+√
+
+(cid:16)
+
+3 −
+
+57
+
+(cid:17)(cid:27)
+
+and the corresponding eigenvectors are
+
+
+
+
+
+
+
+√
+
+− 3−
+57
+√
+1
+57−9
+−1
+0
+√
+1 − −
+57−3
+√
+57+9
+
+
+
+
+
+
+
+.
+
+1
+1
+1
+
+The polynomials P±
+
+1 (s) are given by
+(cid:16)√
+(cid:17)
+
+57 − 7
+
+P+
+1 (s) = 3
+
+√
+
+s2 −
+
+57 + 3,
+
+P−
+1 (s) = 3
+
+(cid:16)√
+
+57 + 7
+
+√
+
+(cid:17)
+
+s2 −
+
+57 − 3
+
+and their roots are real and are algebraic numbers.
+
+The numerical study of the eigenvalues and eigenvectors of µ(n) indicates that the largest and smallest
+eigenvalues are simple for finite n, and that in the limit when n → ∞ the following occurs:
+
+Fact A.4. (i) The functions realizing the maximum of the matrix µ are
+
+f +(x) = sin(π x),
+
+f −(x) = cos(π x), ∀x ∈ [0, 1].
+
+(ii) The functions realizing the minimum of the matrix µ are
+
+g+(x) = sin(3π x), g−(x) = cos(3π x), ∀x ∈ [0, 1].
+
+One can then deduce the relevant properties of the Fourier transforms as follows.
+
+Proposition A.5. (i) The Fourier transforms h± of the functions f ±(x + 1
+
+2 ) are given by
+
+h+(s) =
+
+(cid:1)
+
+2π cos (cid:0) s
+2
+π 2 − s2
+
+, h−(s) =
+
+2 i s cos (cid:0) s
+2
+π 2 − s2
+
+(cid:1)
+
+.
+
+(ii) The Fourier transforms k± of the functions g±(x + 1
+
+2 ) are given by
+
+6πcos (cid:0) y
+9π 2 − y2 , k−(y) = −
+2
+(iii) The functions h±, k± are entire functions all of whose zeros are real, and given by all odd multiples of π except
+±π for h+, ±3π for k+ and including 0 for h− and k−.
+(iv) The maximal and minimal eigenvalues of the matrix µ are 8
+
+2 i y cos (cid:0) y
+2
+y2 − 9π 2
+
+k+(y) =
+
+(cid:1)
+
+(cid:1)
+
+.
+
+3 and − 8
+5 .
+
+APPENDIX B. EXPLICIT CHECKS FOR N = 1, 2
+
+We give concrete proofs of Theorem 5.6 in the simplest cases N = 1, 2.
+
+18
+
+B.1. Case N = 1. For N = 1 it is enough to treat the following matrix M(c) for c ∈ R,
+
+(30)
+
+The three eigenvalues are
+(cid:26)
+
+1,
+
+M(c) =
+
+
+
+
+
+0 −1 −1
+c −1
+−1
+−1 −1
+0
+
+
+
+ .
+
+(cid:112)
+
+(cid:16)
+
+−
+
+1
+2
+
+c2 + 2c + 9 + c − 1
+
+(cid:16)(cid:112)
+
+(cid:17)
+
+,
+
+1
+2
+
+c2 + 2c + 9 + c − 1
+
+(cid:17)(cid:27)
+
+and their dependence on c is as follows:
+
+The corresponding eigenvectors are
+
+
+
+1
+1
+1
+and the dependence of X(c), Y(c) on c is as follows:
+
+0
+X(c)
+Y(c)
+
+
+ , X(c) = −
+
+−1
+1
+1
+
+√
+−
+√
+
+
+
+c2 + 2c + 9 + c − 3
+c2 + 2c + 9 + c + 3
+
+, Y(c) = −
+
+√
+−
+√
+
+c2 + 2c + 9 − c + 3
+c2 + 2c + 9 − c − 3
+
+The Fourier transform of the vector (1, x, 1) is given by the function of s equal to s2(−x) − 2s2 + 4π 2x, and
+thus its roots are real exactly when x(x + 2) ≥ 0. This fails when −2 < x < 0, and this is realized by Y(c)
+for c < 0. But the corresponding eigenvalue y(c) fulfills for c < 0
+
+(cid:112)
+
+(cid:16)
+
+−
+
+1
+2
+
+c2 + 2c + 9 + c − 1
+
+(cid:17)
+
+= x(c) < y(c) =
+
+(cid:16)(cid:112)
+
+1
+2
+
+c2 + 2c + 9 + c − 1
+
+(cid:17)
+
+< 1
+
+as shown by the graphs for c < 0, where x(c) appears in blue, and y(c) remains between x(c) and 1.
+
+19
+
+-4-224-6-4-224-4-224-6-4-224-5-4-3-2-1-5-4-3-2-11We thus get
+
+Proposition B.1. For any distribution D the 3 × 3 matrix qn,m where n, m ∈ {−1, 0, 1} has the property that the
+zeros of the Fourier transforms of the eigenvectors corresponding to the extremal eigenvalues are real.
+
+Proof. Note first that it is enough to prove the result for the specific matrix M(c) of (30). Indeed in general
+the 3 × 3 matrix R = qn,m where n, m ∈ {−1, 0, 1} has all its off-diagonal entries given by Proposition 4.1,
+and they only depend upon ψ(1) =: a since ψ(0) = 0 and ψ(−1) = −ψ(1) = −a. This shows
+
+ψ(n) − ψ(m)
+n − m
+
+= a, ∀n, m ∈ {−1, 0, 1}, | n ̸= m.
+
+If a = 0 the eigenvectors corresponding to the extremal eigenvalues of R are elements of the basis, and their
+Fourier transform is, by (20) a multiple of
+
+sin(s/2)
+s/2 − n π
+
+, n ∈ {−1, 0, 1}
+
+whose zeros are all real. We can thus assume that a = −1. The diagonal values of R are an even function of
+n ∈ {−1, 0, 1} and thus by adding a scalar multiple of the identity matrix one can assume that they are of
+the form {0, c, 0} for some c ∈ R. Let us now prove the result for the specific matrix M(c) of (30). The value
+of X(c) is always positive and thus the Fourier transform of the vector (1, X(c), 1) has all its roots real for
+any value of c. The value of Y(c) belongs to the forbidden interval (−2, 0) exactly when c < 0, but in this
+case the corresponding eigenvalue y(c) fails to be extremal since it is strictly between the two others x(c)
+□
+and 1.
+
+B.2. Convexity proof of Proposition B.1. We consider the positive cone C+ in the linear space C of matrices
+of the form
+
+µ(a, b, c) =
+
+
+
+
+
+
+
+ .
+
+a
+c
+c
+
+c
+b
+c
+
+c
+c
+a
+
+We first rewrite this matrix in terms of the two orthogonal projections
+
+P =
+
+
+
+
+
+0
+0
+0
+
+0
+1
+0
+
+0
+0
+0
+
+
+ , Q =
+
+
+
+
+
+1
+3
+1
+3
+1
+3
+
+1
+3
+1
+3
+1
+3
+
+
+
+
+
+1
+3
+1
+3
+1
+3
+
+and the identity matrix 13. One gets
+
+(b − a)P + 3cQ + (a − c)13 = µ(a, b, c)
+
+The ranges of the projections P, Q generate the two dimensional subspace S which is the orthogonal of the
+vector v = (1, 0, −1) which belongs to the kernel of P and Q. The angle of the two projections P, Q is
+determined by its sine square,
+
+(P − Q)2 =
+
+
+
+
+
+1
+3
+0
+1
+3
+
+0
+2
+3
+0
+
+1
+3
+0
+1
+3
+
+
+ =
+
+2
+3
+
+E,
+
+
+
+
+
+E =
+
+1
+2
+0
+1
+2
+
+0
+1
+0
+
+
+
+ ,
+
+1
+2
+0
+1
+2
+
+where we denote by E the orthogonal projection on E. By construction E commutes with µ(a, b, c). We
+take the orthonormal basis of E given by the vectors v1 = (0, 1, 0) and v2 = ( 1√
+). In this basis the
+2
+projections P, Q are given by the matrices
+
+, 0, 1√
+2
+
+p =
+
+(cid:18) 1
+0
+
+(cid:19)
+
+0
+0
+
+, q =
+
+(cid:32) 1
+√
+3
+2
+3
+
+(cid:33)
+
+.
+
+√
+
+2
+3
+2
+3
+
+Any real symmetric 2 × 2 matrix can be written as
+(cid:18) x
+y
+
+2x +
+
+y
+z
+
+√
+
+=
+
+(cid:19)
+
+(cid:16)
+
+1
+2
+
+2y − 2z
+
+(cid:17)
+
+p +
+
+3y
+√
+
+2
+
+q + (z −
+
+√
+
+2y)12.
+
+20
+
+Lemma B.2. (i) The map ρ : C → End(E) given by ρ(T) := ETE is an isomorphism of C with the linear space
+S(E) of selfadjoint real matrices in E.
+(ii) The image ρ(C+) is the intersection of the cone S(E)+ of positive elements of S(E), with the half space H,
+
+H := {
+
+(cid:18) x
+y
+
+y
+z
+
+(cid:19)
+
+√
+
+2y}.
+
+| z ≥
+
+(iii) The extreme rays of C+ are transformed by the isomorphism ρ into those extreme rays of S(E)+ which are
+included in H.
+
+Proposition B.3. The elements T = µ(a, b, c) ∈ C+ which have a non-zero kernel are of three kinds:
+
+(1) If a > 0, then T is on an extreme ray of C+, its restriction to E is a positive multiple of a rank one projection
+
+whose kernel coincides with the kernel of T.
+
+(2) If a = 0 and T is not on an extreme ray of C+, the kernel of T is one dimensional, equal to Rv, v = (1, 0, −1).
+(3) If a = 0 and T is on an extreme ray of C+, the kernel of T is 2-dimensional,
+
+Using this proposition one obtains another proof of Proposition B.1.
+
+B.3. The case N = 2. We are considering the linear space C of real symmetric matrices of the form
+
+µ(a, b, y, z, t) =
+
+
+
+
+
+
+
+
+
+
+t + z
+b − a
+b
+2
+a+b
+3
+b
+2
+
+b − a
+t + y
+a
+a
+a+b
+3
+
+b
+2
+a
+t
+a
+b
+2
+
+a+b
+3
+a
+a
+t + y
+b − a
+
+
+
+
+
+
+
+
+
+
+.
+
+b
+2
+a+b
+3
+b
+2
+b − a
+t + z
+
+The block decomposition using the subspace E for N = 1 works in general and corresponds to the restric-
+tion to even and odd vectors, coming from the commutativity of µ(a, b, y, z, t) with the symmetry
+
+J =
+
+
+
+
+
+
+
+
+
+0
+0
+0
+0
+1
+
+0
+0
+0
+1
+0
+
+0
+0
+1
+0
+0
+
+0
+1
+0
+0
+0
+
+
+
+
+
+
+
+
+
+,
+
+1
+0
+0
+0
+0
+
+J2 = Id.
+
+We take the orthonormal basis of even vectors, i.e. E := {ξ | Jξ = ξ} given by
+
+e1 = (0, 0, 1, 0, 0), e2 = (0,
+
+1
+√
+
+2
+
+, 0,
+
+21
+
+1
+√
+
+2
+
+, 0), e3 = (
+
+1
+√
+
+2
+
+, 0, 0, 0,
+
+1
+√
+
+2
+
+)
+
+(C+)o∂Hand obtain the following matrix for the restriction of µ(a, b, y, z, t) to E,
+
+σ(a, b, y, z, t) =
+
+
+
+
+
+
+t
+√
+
+2 a
+b√
+2
+
+√
+
+2 a
+
+b√
+2
+a + y + t − 2
+3 (a − 2b)
+b
+2 + z + t
+3 (a − 2b)
+
+− 2
+
+
+
+
+ .
+
+For the odd vectors we take the orthonormal basis given by
+
+n1 = (
+
+1
+√
+
+2
+
+, 0, 0, 0, −
+
+1
+√
+
+2
+
+), n2 = (0,
+
+1
+√
+
+2
+
+, 0, −
+
+1
+√
+
+2
+
+, 0)
+
+and obtain the following matrix for the restriction of µ(a, b, y, z, t)
+
+α(a, b, y, z, t) =
+
+(cid:18) 1
+
+2 (2z − b) + t − 2
+− 2
+
+3 (2a − b)
+3 (2a − b) −a + t + y
+
+(cid:19)
+
+.
+
+We now investigate positive matrices µ(a, b, y, z, t) whose kernel contains the vector ξ = ue1 + ve2 + we3 ∈
+E. This condition specifies a 2-dimensional subspace K(u, v, w) of C of the form
+
+K = {η = (a, b, y, z, t) | y →
+
+√
+
+(cid:16)
+
+3
+
+bw
+
+(cid:17)
+
+2v − 8u
+
+6uv
+
+√
+
+(cid:16)
+
+3
+
+a
+
+−
+
+2u2 + 3uv − 2uw − 3
+
+√
+
+2v2(cid:17)
+
+,
+
+(cid:16)
+
+av
+
+2u + 3
+
+√
+
+(cid:17)
+
+2w
+
+√
+
+(cid:16)
+
+3
+
+b
+
+2u2 + 8uv + 3uw − 3
+
+√
+
+2w2(cid:17)
+
+z →
+
+−
+
+3uv
+
+√
+
+, t → −
+
+bw
+√
+
+−
+
+}
+
+2av
+u
+
+3uw
+
+6uw
+and one needs to decide if this subspace contains a positive element of C. A 2 × 2 hermitian matrix is
+positive if and only if its two real eigenvalues are positive, and this is equivalent to the positivity of its trace
+and of its determinant. One applies this to the matrix α(η) and to the restriction of σ(η) to the orthogonal
+of the vector ξ. One obtains in this manner the following 4 "positivity conditions":
+
+2u
+
+(1) Trace of α ≥ 0
+
+3
+
+−
+
+.
+
+(2) Det of α ≥ 0.
+
+√
+
+2au + 6av − 2aw + 4bw
+
+3v
+
+√
+
+−4av + 3
+
+−
+
+2bu + 8bv + 6bw
+6w
+
+≥ 0
+
+(cid:16)√
+
+−2a2v
+
+2u + 2(v + w)
+
+(cid:17)
+
++ ab
+
+(cid:16)
+
+3u2 +
+
+√
+
+2u(7v + 2w) + 8v2 + 6vw − 2w2(cid:17)
+
++ 2b2w
+
+(cid:16)√
+
+2u + 2(v + w)
+
+(cid:17)
+
+3vw
+
+≥ 0
+
+(3) Trace of σ ≥ 0
+
+(cid:16)
+
+2a
+
+−3u2w +
+
+√
+
+2u (cid:0)v2 + w2(cid:1) − 3v2w
+√
+
+3
+
+2uvw
+
+(cid:17)
+
+(cid:16)
+
+− b
+
+3u2v + 4
+
+√
+
+2u (cid:0)v2 + w2(cid:1) + 3vw2(cid:17)
+
+≥ 0
+
+.
+
+(4) Det of σ ≥ 0.
+
+−
+
+.
+
+(cid:0)u2 + v2 + w2(cid:1) (cid:16)
+
+2
+
+√
+
+2a2v + ab
+
+(cid:16)√
+
+2(w − 4v) − 3u
+
+(cid:17)
+
+√
+
+(cid:17)
+
+2b2w
+
+− 2
+
+3uvw
+
+≥ 0
+
+On the other hand the polynomial associated to ξ = ue1 + ve2 + we3 ∈ E is
+√
+√
+
+√
+
+√
+
+P(s) = s4u +
+
+2s4v +
+
+2s4w − 20π 2s2u − 16
+
+2π 2s2v − 4
+
+2π 2s2w + 64π 4u
+
+which depends only on s2 and has real roots when the degree 2 polynomial
+
+ux2 − 20π 2ux + 64π 4u +
+
+√
+
+2vx2 − 16
+
+√
+
+2π 2vx +
+
+√
+
+2wx2 − 4
+
+√
+
+2π 2wx
+
+22
+
+has positive roots, i.e. equivalently that the sum and product of the roots are positive, which gives the two
+conditions2
+
+(31)
+
+√
+
+5u +
+
+2(4v + w)
+u
+
+> 0,
+
+√
+
+u +
+
+√
+
+2w
+
+2v +
+u
+
+> 0.
+
+In fact we can assume that w ̸= 0 since otherwise one is reduced to the case n = 1. Thus we take w = 1,
+and (31) is reduced to the following cases :
+
+(cid:32)
+
+(32)
+
+u < 0 ∧ v <
+
+√
+
+−u −
+√
+2
+
+2
+
+(cid:33)
+
+(cid:32)
+
+∨
+
+0 < u < 3
+
+√
+
+2 ∧ v >
+
+√
+
+−5u −
+√
+2
+4
+
+2
+
+(cid:33)
+
+(cid:32)
+
+∨
+
+u ≥ 3
+
+√
+
+2 ∧ v >
+
+√
+
+−u −
+√
+2
+
+(cid:33)
+
+2
+
+.
+
+This shows the region of the (u, v) plane near the origin which ensures that the zeros of the associated
+polynomial P are real.
+We now reduce the above 4 positivity conditions, and compare them with (32).
+
+√
+
+u ≤ −
+
+2. In this case the reduction of the above 4 positivity conditions gives
+
+(cid:18)
+
+v < 0 ∨ 0 < v <
+
+(cid:16)√
+
+1
+2
+
+2(−u) − 2
+
+(cid:17)(cid:19) (cid:13)
+(cid:13)
+(cid:13)u = −
+
+√
+
+2 ∧ v < 0
+
+which implies (32).
+
+√
+
+−
+
+2 < u < 0. In this case the reduction of the above 4 positivity conditions gives
+
+√
+
+−
+
+2 < u < 0 ∧ v <
+
+(cid:16)√
+
+1
+2
+
+2(−u) − 2
+
+(cid:17)
+
+which implies (32).
+
+2We use the reciprocal polynomial
+
+23
+
+v=-1-u/2(-2,0)v=-14-5u42(32,-4)u≤0u≥0v=-1-u/2-4-202468-8-6-4-2024√
+
+0 < u < 3
+(cid:32)
+
+√
+
+2
+3
+(cid:32) √
+
+0 < u <
+
+∨
+
+2. In this case the reduction of the above 4 positivity conditions gives
+
+(cid:32)
+
+∧
+
+1
+8
+
+√
+
+(cid:16)
+
+−3
+
+2u − 2
+
+(cid:17)
+
++
+
+√
+
+√
+3
+√
+2 4
+
+2
+
+u
+
+(cid:33)(cid:33)
+
+(cid:32)
+
+< v < 0 ∨ v > 0
+
+∨
+
+u =
+
+< u ≤ 3
+
+(cid:32)
+
+√
+
+2 ∧
+
+1
+8
+
+√
+
+(cid:16)
+
+−3
+
+2u − 2
+
+(cid:17)
+
++
+
+√
+
+√
+3
+√
+2 4
+
+2
+
+u
+
+2
+3
+
+< v < 0 ∨ v > 0
+
+√
+
+2
+3
+
+(cid:33)
+
+∧ v > 0
+
+(cid:33)(cid:33)
+
+and the solutions form the upper graph of the function
+
+f (u) =
+
+1
+8
+
+√
+
+(cid:16)
+
+−3
+
+2u − 2
+
+(cid:17)
+
++
+
+√
+
+√
+3
+√
+2 4
+
+2
+
+u
+
+.
+
+Thus to compare with (32) we need to see if the graph of f in the interval [0, 3
+function v = − 5u
+√
+4 . This is shown by the following
+2
+
+− 1
+
+4
+
+√
+
+2] is above the graph of the
+
+√
+
+√
+3
+√
+2 4
+
+2
+
+u
+
+(cid:33)
+
+< v < 0 ∨ v > 0
+
+.
+
+√
+
+u > 3
+(cid:32)
+
+1
+2
+
+2. In this case the reduction of the above 4 positivity conditions gives
+(cid:16)√
+
+√
+
+√
+
+√
+
+(cid:16)
+
+(cid:17)
+
+(cid:17)
+
+(cid:16)
+
+(cid:17)
+
+2(−u) − 2
+
+< v <
+
+−3
+
+2u − 2
+
+−
+
+−3
+
+2u − 2
+
++
+
+u
+
+√
+3
+√
+2 4
+
+2
+
+∨
+
+1
+8
+
+1
+8
+
+√
+
+In the first part, the condition −1 − u/
+the graph of the function f (u). Thus we need to show that for u > 3
+of −1 − u/
+
+2. This follows from the inequality of the slopes
+√
+
+√
+
+√
+
+2 < v implies (32). The second condition means that one is above
+2 the graph of f is above the graph
+
+√
+
+−3
+
+2/8 > −1/
+
+2
+
+and the following
+
+We can thus conclude that if an even vector ξ = ue1 + ve2 + we3 ∈ E is in the kernel of a positive matrix
+µ(a, b, y, z, t) then the zeros of the associated polynomial are real. But we need to look at the possibility of
+a non trivial odd vector in the kernel of a positive matrix µ(a, b, y, z, t).
+We now consider the case where an odd vector η = un1 + vn2 is in the kernel of a positive matrix µ(a, b, y, z, t).
+24
+
+v=-14-5u42v=f(u)1234-4-3-2-1v=-1-u2v=f(u)5678910-8-7-6-5-4-3-2-1In this case the restriction to the odd part will be a multiple of a one dimensional projection P1 and we thus
+need to first solve the equation
+
+α(a, b, y, z, t) =
+
+(cid:18)
+
+cos2(β)
+sin(β)cos(β)
+
+sin(β)cos(β)
+sin2(β)
+
+(cid:19)
+
+The solution is given by
+
+(cid:26)
+
+b → 2a +
+
+3
+2
+
+sin(β)cos(β), z →
+
+(cid:16)
+
+1
+4
+
+−4sin2(β) + 4cos2(β) + 3sin(β)cos(β)
+
+(cid:17)
+
++ y, t → a + sin2(β) − y
+
+(cid:27)
+
+We then consider the restriction of the solution matrix to the even part
+
+
+
+
+
+
+
+a + sin2(β) − y
+√
+2a
+4 sin(2β)
+√
+2
+
+2a+ 3
+
+√
+
+2a
+2a + sin2(β)
+2a + sin(2β)
+
+2a+ 3
+
+4 sin(2β)
+√
+2
+2a + sin(2β)
+4 sin(2β) + cos2(β)
+
+2a + 3
+
+
+
+
+
+
+
+and compute its characteristic polynomial. We then apply the following
+
+Fact B.4. Let P(x) = xn + ∑ a jxn− j be a monic polynomial whose all roots are real. Then all the roots are ≥ 0 if and
+only if (−1) ja j ≥ 0 for all j ∈ {1, . . . , n}.
+
+One obtains in this manner the following 3 "positivity conditions":
+
+(1) −a3 ≥ 0
+
+4asin(β) + cos(β)
+
+(cid:16)
+
+3sin2(β) − 2a
+
+(cid:17)(cid:17) (cid:16)
+
+4sin3(β) − 4ysin(β) + cos(β)
+
+(cid:16)
+
+8y − 11sin2(β)
+
+(cid:17)(cid:17)
+
+≥ 0
+
+(cid:16)
+
+1
+8
+
+,
+(2) a2 ≥ 0
+
+−
+
+13
+4
+
+asin(2β) −
+
+(cid:18)
+
+2a +
+
+(cid:19)
+
+1
+2
+
+cos(2β) − 4ay + 5a +
+
+3
+4
+
+sin(2β) −
+
+3
+8
+
+sin(4β) +
+
+33
+64
+
+cos(4β) −
+
+3
+4
+
+ysin(2β) − y −
+
+1
+64
+
+≥ 0
+
+,
+
+(3) −a1 ≥ 0
+
+.
+
+5a + 2sin2(β) + cos2(β) +
+
+3
+2
+
+sin(β)cos(β) − y ≥ 0
+
+The solution of the existence of (a, y) fulfilling these inequalities for a given β is given by the following three
+cases. In each of them we plot the value of − cot(β) which gives the component v of the vector n1 + vn2 in
+the kernel of the positive matrix µ(a, b, y, z, t). We find that all values of v arise except those in the interval
+(−2, − 1
+
+2 ). The associated polynomial to the vector un1 + vn2 is
+
+Q(s) = 2
+
+√
+
+(cid:16)
+
+2
+
+−2πs2u − π s2v + 8π 3u + 16π 3v
+
+(cid:17)
+
+and its roots are real if and only if
+
+8π 2(u + 2v)
+2u + v
+
+≥ 0
+
+which for u = 1 is realized if and only if v /∈ (−2, − 1
+Finally the case by case discussion of the allowed values of β is given below.
+
+2 ) as shown by the graph of the function 2v+1
+v+2 .
+
+25
+
+−π < β < −2 ArcTan
+
+(cid:16)√
+
+(cid:17)
+
+5 + 2
+
+√
+
+(cid:32)
+
+−
+
+2 ArcTan
+
+< −2 ArcTan
+
+5 − 1
+2
+(cid:16)
+
+2 −
+
+(cid:33)
+
+< β
+
+√
+
+(cid:17)
+
+5
+
+2 ArcTan
+
+(cid:32) √
+
+(cid:33)
+
+5 − 1
+2
+
+< β ≤ π
+
+FIGURE 3. Three conditions on β illustrated with corresponding graphs.
+
+REFERENCES
+
+[1] H. Araki. Expansional in banach algebras. Annales scientifiques de l’École Normale Supérieure, Serie 4, Volume 6 (1973) 67–84.
+[2] M. F. Atiyah, I. G. MacDonald - Introduction to Commutative Algebra Addison-Wesley (1969).
+[3] S. Axler, Linear Algebra Done Right. Fourth edition. Undergraduate Texts in Mathematics. Springer, Cham, 2024.
+[4] M. Bakonyi, H. Woerdeman, Matrix Completions, Moments, and Sums of Hermitian Squares. Princeton University Press, Princeton
+
+(2011)
+
+[5] C. Carathéodory und L. Fejér, über den Zusammenhang der Extreme von Harmonischen Funktionen mit ihren Koeffizienten und über den
+
+Picard-Landauschen Satz. Rend. Circ. Mat. Palermo 32 (1911)218-239.
+
+[6] A. H. Chamseddine and A. Connes. Universal formula for noncommutative geometry actions: Unifications of gravity and the
+
+Standard Model. Phys. Rev. Lett. 77 (1996) 4868–4871.
+
+[7] A. Connes, C. Consani, Weil positivity and trace formula, the archimedean place. Selecta Math. (N.S.) 27 (2021), no. 4, Paper No. 77.
+[8] A. Connes, C. Consani, Spectral triples and ζ-cycles. Enseign. Math. 69 (2023), no. 1-2, 93-148.
+[9] A. Connes, C. Consani and H. Moscovici, Zeta zeros and prolate wave operators: semilocal adelic operators, Ann. Funct. Anal.
+
+15 (2024), no. 4, Paper No. 87.
+
+[10] A. Connes and W.D. van Suijlekom, Spectral truncations in noncommutative geometry and operator systems. Comm. Math. Phys. 383
+
+(2021), no. 3, 2021-2067.
+
+[11] W. F. Donoghue, Jr. Monotone matrix functions and analytic continuation. Springer-Verlag, New York, 1974. Die Grundlehren der
+
+mathematischen Wissenschaften, Band 207.
+
+[12] E. Hallouin, M. Perret, A unified viewpoint for upper bounds for the number of points of curves over finite fields via Euclidean geometry
+
+and semi-definite symmetric Toeplitz matrices. Trans. Amer. Math. Soc. 372 (2019), no. 8, 5409–5451.
+
+[13] F. Hansen. Trace functions as Laplace transforms. J. Math. Phys. 47 (2006) 043504, 11.
+[14] C. Hermite. Sur la formule d’interpolation de lagrange. J. Reine Angew. Math. 84 (1878) 70–79.
+[15] T. D. H. van Nuland and A. Skripka. Spectral shift for relative Schatten class perturbations. J. Spectr. Theory 12 (2022) 1347–1382.
+[16] T. D. H. van Nuland and W. D. van Suijlekom. Cyclic cocycles in the spectral action. J. Noncommut. Geom. (online 22 December
+
+2021), (arXiv:2104.09899).
+
+[17] K. Schmudgen, Unbounded self-adjoint operators on Hilbert space. Grad. Texts in Math. 265, Springer, Dordrecht, 2012.
+[18] C. E. Shannon, Communication in the presence of noise, Proc. IRE 37, (1949), 10-21.
+[19] A. Skripka. Asymptotic expansions for trace functionals. J. Funct. Anal. 266 (2014) 2845–2866.
+[20] W. D. van Suijlekom. Perturbations and operator trace functions. J. Funct. Anal. 260 (2011) 2483–2496.
+
+COLLEGE DE FRANCE, 3 RUE ULM, F75005, PARIS, FRANCE, I.H.E.S. F-91440 BURES-SUR-YVETTE, FRANCE
+Email address: alain@connes.org
+
+INSTITUTE FOR MATHEMATICS, ASTROPHYSICS AND PARTICLE PHYSICS, RADBOUD UNIVERSITY NIJMEGEN, HEYENDAALSEWEG
+135, 6525 AJ NIJMEGEN, THE NETHERLANDS.
+Email address: waltervs@math.ru.nl
+
+26
+
+-3.1-3.0-2.9-2.8-2.7-25-20-15-10-5-2.0-1.5-1.0-0.50.5-551.52.02.53.0246

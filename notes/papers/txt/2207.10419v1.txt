@@ -1,0 +1,8648 @@
+2
+2
+0
+2
+
+l
+u
+J
+
+1
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+9
+1
+4
+0
+1
+.
+7
+0
+2
+2
+:
+v
+i
+X
+r
+a
+
+Hochschild homology, trace map and ζ-cycles
+
+Alain Connes and Caterina Consani
+
+Abstract. In this paper we consider two spectral realizations of the zeros of
+the Riemann zeta function. The ﬁrst one involves all non-trivial (i.e. non-real)
+zeros and is expressed in terms of a Laplacian intimately related to the prolate
+wave operator. The second spectral realization aﬀects only the critical zeros
+and it is cast in terms of sheaf cohomology. The novelty is that the base space
+is the Scaling Site playing the role of the parameter space for the ζ-cycles and
+encoding their stability by coverings.
+
+1. Introduction
+
+In this paper we give a Hochschild homological interpretation of the zeros of
+the Riemann zeta function. The root of this result is in the recognition that the
+map
+
+Ef
+p
+
+u
+
+qp
+
+q “
+
+u1{2
+
+f
+
+nu
+p
+
+q
+
+ną0
+ÿ
+
+z
+
+Ñ
+
+Qˆ
+
+which is deﬁned on a suitable subspace of the linear space of complex-valued even
+Schwartz functions on the real line, is a trace in Hochschild homology, if one brings
+AQ from the rational ad`eles to
+in the construction the projection π : AQ
+the ad`ele classes (see Section 3).
+In this paper, we shall consider two spectral
+realizations of the zeros of the Riemann zeta function. The ﬁrst one involves all
+non-trivial (i.e. non-real) zeros and is expressed in terms of a Laplacian intimately
+related to the prolate wave operator (see Section 4). The second spectral realization
+is sharper inasmuch as it aﬀects only the critical zeros. The main players are
+here the ζ-cycles introduced in [7], and the Scaling Site [6] as their parameter
+space, which encodes their stability by coverings. The ζ-cycles give the theoretical
+geometric explanation for the striking coincidence between the low lying spectrum
+of a perturbed spectral triple therein introduced (see [7]), and the low lying (critical)
+zeros of the Riemann zeta function. The deﬁnition of a ζ-cycle derives, as a by-
+product, from scale-invariant Riemann sums for complex-valued functions on the
+Rą1, one implements the
+real half-line
+
+with vanishing integral. For any µ
+
+0,
+
+r
+
+8q
+
+P
+
+2020 Mathematics Subject Classiﬁcation. Primary 11M55, 11M06, 16E40; Secondary 11F72,
+
+58B34.
+
+Key words and phrases. Riemann zeta function, spectral realization, zeta cycle, Hochschild
+
+homology, ad`ele class space, Scaling Site.
+
+The second author is partially supported by the Simons Foundation collaboration grant n.
+
+691493.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+ALAIN CONNES AND CATERINA CONSANI
+
+linear (composite) map
+
+0, and vanishing integral, to the Hilbert space L2
+
+0 of real valued even functions f on the real line, with
+of square integrable
+
+from the Schwartz space Sev
+f
+functions on the circle Cµ
+
+0
+p
+
+q “
+
+Cµ
+q
+p
+log µ, where
+
+ΣµE : Sev
+
+0 Ñ
+
+L2
+
+Cµ
+p
+
+q
+
+“
+
+R˚
+`{
+Σµg
+p
+
+µZ of length L
+
+“
+µku
+p
+
+.
+q
+
+g
+
+u
+
+qp
+
+:
+
+“
+
+q
+
+kPZ
+ÿ
+
+λ´1x
+The map Σµ commutes with the scaling action R˚
+f
+on functions,
+q
+p
+while E is invariant under a normalized scaling action on Sev
+0 . In this set-up one
+has
+
+` Q
+
+ÞÑ
+
+λ
+
+L2
+
+Definition. A ζ-cycle is a circle C of length L
+C
+p
+
+q
+Next result is known (see [7] Theorem 6.4)
+
+as a non dense subspace.
+
+contains ΣµE
+
+Sev
+0 q
+p
+
+Theorem 1.1. The following facts hold
+
+log µ whose Hilbert space
+
+“
+
+:
+
+q
+
+P
+
+ą
+
+q “
+
+z
+p
+
+q “
+
+“ p
+
+L
+p
+
+L
+p
+
+ΣµE
+
+Cµ
+p
+
+in L2
+
+ΣµE
+p
+
+(ii) Let s
+
+Sev
+0 q
+p
+
+(i) The spectrum of the scaling action of R˚
+
+ΣµE
+q
+the zeros of the Riemann zeta function ζ
+0 be a real number such that ζ
+
+z
+p
+q
+1
+2 `
+p
+whose length is an integral multiple of 2π
+s
+K contains s.
+of the action of R˚
+` on
+
+` on the orthogonal space to
+is contained in the set of the imaginary parts of
+1
+2 .
+0. Then any circle C
+is a ζ-cycle, and the spectrum
+
+on the critical line ℜ
+is
+
+Sev
+0 qq
+p
+Theorem 1.1 states that for a countable and dense set of values of L
+
+Rą0, the
+Sev
+K are non-trivial and, more importantly, that
+Hilbert spaces H
+0 qq
+p
+as L varies in that set, the spectrum of the scaling action of R˚
+` on the family of
+the H
+’s is the set Z of imaginary parts of critical zeros of the Riemann zeta
+q
+function. In fact, in view of the proven stability of ζ-cycles under coverings, the
+same element of Z occurs inﬁnitely many times in the family of the H
+L
+’s. This
+q
+p
+stability under coverings displays the Scaling Site S
+Nˆ as the natural
+“ r
+parameter space for the ζ-cycles. In this paper, we show (see Section 5) that after
+as a sheaf over S and using sheaf cohomology, one
+organizing the family H
+obtains a spectral realization of critical zeros of the Riemann zeta function. The
+key operation in the construction of the relevant arithmetic sheaf is given by the
+action of the multiplicative monoid Nˆ on the sheaf of smooth sections of the bundle
+L2 determined by the family of Hilbert spaces L2
+exp L, as L varies in
+Cµ, where the
+0,
+p
+action of n corresponds to the operation of sum on the preimage of a point in Cµ
+under the covering. This action turns the (sub)sheaf of smooth sections vanishing
+at L
+Cµ
+q
+p
+L2 and one then considers the cohomology of the
+generates a closed subsheaf ΣE
+related quotient sheaf L2
+`-equivariance under
+scaling, this construction determines a spectral realization of critical zeros of the
+Riemann zeta function, also taking care of eventual multiplicities. Our main result
+is the following
+
+0 into a sheaf L2 over S . The family of subspaces ΣµE
+
+Nˆ there is a canonical covering map Cµn
+
+ΣE. In view of the property of R˚
+
+Sev
+0 q Ă
+p
+
+. For each n
+
+, µ
+q
+
+Cµ
+p
+
+8q ¸
+
+L
+p
+
+8q
+
+L2
+
+Ñ
+
+0,
+
+“
+
+Ă
+
+“
+
+P
+
+{
+
+q
+
+Theorem 1.2. The cohomology H 0
+
+ical action of R˚
+Riemann zeta function, given by the action of R˚
+
+ΣE
+endowed with the induced canon-
+q
+` is isomorphic to the spectral realization of critical zeros of the
+`, via multiplication with λis, on
+
+S , L2
+p
+
+{
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+3
+
+the quotient of the Schwartz space S
+multiples of ζ
+
+is
+
+.
+
+1
+2 `
+
+R
+p
+
+q
+
+by the closure of the ideal generated by
+
+˘
+
+`
+
+This paper is organized as follows. Section 2 recalls the main role played by
+the (image of the) map E in the study of the spectral realization of the critical
+zeros of the Riemann zeta function. In Section 3 we show the identiﬁcation of the
+Hochschild homology HH0 of the noncommutative space Qˆ
+AQ with the coinvari-
+ants for the action of Qˆ on the Schwartz algebra, using the (so-called) “wrong
+way” functoriality map π! associated to the projection π : AQ
+AQ. We also
+stress the relevant fact that the Fourier transform on ad`eles becomes canonical after
+passing to HH0 of the ad`ele class space of the rationals. The key Proposition 3.3
+describes the invariant part of such HH0 as the space of even Schwartz functions
+on the real line and identiﬁes the trace map with the map E. Section 4 takes care
+of the two vanishing conditions implemented in the deﬁnition of E and introduces
+(H being the generator of the scaling action of R˚
+the operator ∆
+`
+ev) playing the role of the Laplacian and intimately related to the prolate
+on S
+q
+operator. Finally, Section 5 is the main technical section of this paper since it
+contains the proof of Theorem 1.2.
+
+R
+p
+
+1
+p
+
+Qˆ
+
+Ñ
+
+H
+
+H
+
+“
+
+`
+
+z
+
+z
+
+q
+
+2. The map E and the zeros of the zeta function
+
+The ad`ele class space of the rationals Qˆ
+
+AQ is the natural geometric framework
+to understand the Riemann-Weil explicit formulas for L-functions as a trace formula
+[3]. The essence of this result lies mainly in the delicate computation of the principal
+values involved in the distributions appearing in the geometric (right-hand) side of
+the semi-local trace formula of op.cit. (see Theorem 4 for the notations)
+
+z
+
+RΛU
+Trace
+p
+
+h
+p
+
+qq “
+
+h
+
+1
+p
+
+q
+
+λPCS
+|λ|PrΛ´1,Λs
+
+ż
+
+d˚λ
+
+1
+
+`
+
+Q˚
+ν
+
+νPS ż
+ÿ
+
+u´1
+h
+q
+p
+u
+1
+|
+|
+
+´
+
+d˚u
+
+o
+1
+p
+
+q
+
+`
+
+for Λ
+
+Ñ 8
+
+(later recast in the softer context of [13]). There is a rather simple analogy related
+to the spectral (left-hand) side of the explicit formulas for a global ﬁeld K (see [4]
+Section 2 for the notations)
+
+ˆh
+
+0
+p
+
+q `
+
+ˆh
+1
+p
+
+q ´
+
+ÿχP
+
+ρPZ ˜χ
+CK,1 ÿ
+{
+
+ˆh
+
+˜χ, ρ
+p
+
+q “
+
+1
+
+K ˚
+v
+
+ν ż
+ÿ
+
+u´1
+h
+q
+p
+u
+1
+|
+|
+
+´
+
+d˚u
+
+r
+
+x
+
+C
+
+q P
+
+x
+s
+
+x
+p
+
+which may help one to realize how the sum over the zeros of the zeta function ap-
+pears. Here this relation is simply explained. Given a complex valued polynomial
+P
+, one may identify the set of its zeros as the spectrum of the endo-
+morphism T of multiplication by the variable x computed in the quotient algebra
+C
+. It is well known that the matrix of T , in the basis of powers of x,
+is the companion matrix of P
+x
+. Furthermore, the trace of its powers, readily
+q
+p
+computed from the diagonal terms of powers of the companion matrix in terms of
+, gives the Newton-Girard formulae.1 If one transposes this
+x
+the coeﬃcients of P
+q
+p
+result to the case of the Riemann zeta function ζ
+, one sees that the multiplication
+q
+
+x
+p
+
+s
+p
+
+s{p
+
+qq
+
+P
+
+r
+
+1This is an eﬃcient way to ﬁnd the power sum of roots of P pxq without actually ﬁnding the
+roots explicitly. Newton’s identities supply the calculation via a recurrence relation with known
+coeﬃcients.
+
+4
+
+ALAIN CONNES AND CATERINA CONSANI
+
+by P
+
+x
+q
+p
+
+(2.1)
+
+is replaced here with the map
+
+8
+
+E
+
+f
+p
+
+u
+
+qp
+
+:
+
+“
+
+q
+
+u1{2
+
+f
+
+nu
+p
+
+,
+q
+
+n“1
+ÿ
+
+B
+
+while the role of T (the multiplication by the variable) is played by the scal-
+ing operator u
+u. These statements may become more evident if one brings in
+ev be an even Schwartz function
+the Fourier transform.
+q
+u1{2f
+be the unitary identiﬁcation of f with a function
+u
+and let w
+f
+u
+p
+qp
+q
+p
+q “
+in L2
+, where d˚u :
+`, d˚u
+R˚
+u denotes the Haar measure. Then, by com-
+“
+q
+p
+posing w with the (multiplicative) Fourier transform F : L2
+,
+q
+F
+
+`, d˚u
+
+Indeed,
+
+R˚
+p
+
+let f
+
+R
+p
+
+R
+p
+
+q Ñ
+
+L2
+
+du
+
+S
+
+P
+
+{
+
+h
+p
+
+s
+qp
+
+q “
+
+R˚
+`
+
+h
+
+u
+p
+
+u´isd˚u one obtains
+q
+
+ş
+
+F
+
+w
+p
+
+f
+p
+
+qq “
+
+ψ,
+
+ψ
+
+z
+p
+
+q “
+
+f
+
+u
+p
+
+u
+q
+
+żR˚
+
+`
+
+1
+
+2 ´izd˚u.
+
+The function ψ
+u
+since f
+p
+
+1
+2 u
+
+is holomorphic in the complex half-plane H
+z
+q
+p
+O
+q “
+
+. Moreover, for n
+
+z
+“ t
+N, one has
+
+for u
+
+Ñ 8
+
+´
+
+q
+
+C
+
+ℑ
+
+z
+p
+
+|
+
+P
+
+q ą
+
+u´N
+p
+u1{2f
+
+nu
+p
+
+u´izd˚u
+q
+
+“
+
+n´1{2`iz
+
+żR˚
+
+`
+
+P
+v1{2f
+
+v
+p
+
+v´iz d˚v.
+q
+
+1
+2 one derives, by applying Fubini theorem, the following
+
+żR˚
+In the region ℑ
+z
+p
+equality
+
+`
+
+q ą
+
+8
+
+u1{2f
+
+nu
+p
+
+u´izd˚u
+q
+
+8
+
+n´1{2`iz
+
+“ ˜
+
+n“1
+ÿ
+
+1
+2 one obtains
+
+żR˚
+
+`
+
+n“1
+ÿ
+
+Thus, for all z
+
+(2.2)
+
+q ą
+
+P
+
+C with ℑ
+
+z
+p
+E
+
+żR˚
+
+`
+
+f
+p
+
+u
+
+qp
+
+u´izd˚u
+q
+
+“
+
+1
+2 ´
+
+ζ
+
+p
+
+iz
+
+ψ
+q
+
+z
+p
+
+.
+q
+
+v1{2f
+
+v
+p
+
+v´izd˚v.
+q
+
+¸ żR˚
+
+`
+
+i
+dx
+x
+R f
+If one assumes now that the Schwartz function f fulﬁlls
+2 q “
+p
+q
+0. Both sides of (2.2) are holomorphic functions in H:
+for the integral on the
+left-hand side, this can be seen by using the estimate E
+O
+f
+that
+p
+follows from the Poisson formula. This proves that (2.2) continues to hold also in
+the complex half-plane H. Thus one sees that the zeros of ζ
+in the strip
+ℑ
+|
+
+1
+2 are the common zeros of all functions
+
+qp
+1
+2 ´
+
+0, then ψ
+
+u1{2
+p
+
+q| ă
+
+q “
+
+z
+p
+
+iz
+
+“
+
+u
+
+ş
+
+p
+
+p
+
+q
+
+q
+
+F
+
+E
+p
+
+f
+p
+
+z
+qqp
+
+,
+q
+
+f
+
+S
+
+R
+p
+
+ev
+1 :
+q
+
+P
+
+“ t
+
+f
+
+S
+
+R
+p
+
+ev
+q
+
+|
+
+P
+
+One may eventually select the even Schwartz function f
+E
+produce a speciﬁc instance where the zeros of F
+f
+p
+p
+4 π´ 1
+4 ` iz
+zeros of ζ
+2
+
+, since in this case ψ
+q
+
+1
+2 ´
+
+qq
+p´
+
+z
+p
+
+iz
+
+p
+
+1
+
+q “
+3. Geometric interpretation
+
+f
+
+0
+
+.
+
+u
+
+dx
+x
+q
+“
+p
+e´πx2
+
+żR
+x
+to
+p
+are exactly the non-trivial
+`
+1
+1
+4 ´
+
+2πx2
+
+Γ
+q
+
+q “
+
+2iz
+
+iz
+2
+
+´
+
+´
+
+1
+
+˘
+
+.
+
+`
+
+˘
+
+In this section we continue the study of the map E with the goal to achieve a
+geometric understanding of it. This is obtained by bringing in the construction the
+ad`ele class space of the rationals, whose role is that to grant for the replacement,
+in (2.1), of the summation over the monoid Nˆ with the summation over the group
+Qˆ. Then, up to the factor u1{2, E is understood as the composite ι˚
+π!, where the
+
+˝
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+5
+
+ˆZˆ
+
+map ι : Qˆ
+and π : AQ
+discuss the following diagram
+
+A˚
+Q{
+z
+ˆZˆ
+Ñ
+{
+
+Ñ
+Qˆ
+z
+
+Qˆ
+AQ
+
+{
+
+AQ
+z
+ˆZˆ is induced by the projection AQ
+
+ˆZˆ is the inclusion of id`ele classes in ad`ele classes
+AQ. We shall
+
+Qˆ
+
+{
+
+Ñ
+
+z
+
+Y
+
+AQ
+
+{
+
+“
+
+ˆZˆ
+
+π
+
+X
+
+Qˆ
+
+AQ
+
+z
+
+{
+
+“
+
+ˆZˆ
+
+ι
+
+Qˆ
+
+ˆZˆ
+
+Aˆ
+Q {
+
+z
+
+“
+
+R˚
+`
+
+The conceptual understanding of the map π! uses Hochschild homology of noncom-
+mutative algebras.
+
+We recall that the space of ad`ele classes i.e. the quotient Qˆ
+
+algebraically by the cross-product algebra
+
+AQ is encoded
+
+z
+
+A :
+
+S
+
+AQ
+p
+
+“
+
+q ¸
+
+Qˆ.
+
+is acted upon by (automorphisms of) Qˆ correspond-
+The Schwartz space S
+ing to the scaling action of Qˆ on rational ad`eles. An element of A is written
+symbolically as a ﬁnite sum
+
+AQ
+p
+
+q
+
+q
+p
+From the inclusion of algebras S
+q Ă
+ing morphism of Hochschild homologies
+
+q
+p
+AQ
+p
+
+U
+q
+
+,
+q
+
+ÿ
+
+a
+
+S
+
+a
+
+q
+p
+AQ
+p
+
+q P
+
+S
+
+AQ
+p
+Qˆ
+
+.
+q
+A one derives a correspond-
+
+q ¸
+
+“
+
+S
+π! : HH
+p
+
+AQ
+p
+
+HH
+
+A
+.
+p
+q
+A, A
+q
+p
+
+qq ÝÑ
+A
+Here, we use the shorthand notation HH
+for the Hochschild homol-
+:
+q
+p
+ogy of an algebra A with coeﬃcients in the bimodule A. In noncommutative geom-
+etry, the vector space of diﬀerential forms of degree k is replaced by the Hochschild
+A, so
+. If the algebra A is commutative and for k
+A
+homology HHk
+q
+p
+that 0-forms are identiﬁed with functions. Indeed, the Hochschild boundary map
+
+0, HH0
+
+A
+p
+
+HH
+
+q “
+
+“
+
+“
+
+b : Ab 2
+
+x
+p
+is identically zero when the algebra A is commutative. This result does not hold
+Qˆ is no longer commutative. It is therefore
+A, since A
+when A
+q ¸
+meaningful to bring in the following
+
+AQ
+p
+
+q “
+
+yx
+
+xy
+
+A,
+
+Ñ
+
+´
+
+b
+
+“
+
+“
+
+S
+
+y
+
+b
+
+S
+Proposition 3.1. The kernel of π! : HH0
+p
+, q
+q
+
+fq, with f
+
+AQ
+p
+
+HH0
+
+A
+AQ
+q
+p
+p
+Qˆ, and where we set fq
+P
+
+qq Ñ
+
+´
+
+S
+
+P
+
+is the C-linear
+
+x
+q
+p
+
+:
+
+“
+
+span E of functions f
+f
+
+qx
+.
+q
+p
+Proof. For any f, g
+
+P
+U
+
+S
+
+AQ
+q
+p
+f gU
+q
+
+and q
+q´1
+p
+
+P
+xy
+
+Qˆ one has
+
+“
+
+q
+q
+
+f g
+
+f g
+
+x :
+
+f U
+
+´ p
+
+yx,
+
+q “
+
+q
+p
+
+R
+p
+
+(3.1) f g
+
+. Moreover, an element of the Bruhat-Schwartz space S
+q
+
+´
+´
+One knows ([14] Lemma 1) that any function f
+of S
+combination of functions of the form e
+written as a ﬁnite sum of products of two elements of S
+f
+fq
+P
+´
+xi, yi
+P
+coeﬃcient a
+
+, y :
+q
+is a product of two elements
+AQ
+is a ﬁnite linear
+q
+p
+AQ
+e. Thus any f
+can be
+p
+AQ
+, so that (3.1) entails
+q
+p
+ker π!. Then there exists a ﬁnite number of pairs
+. Let P : A
+be the projection on the
+
+ker π!. Conversely, let f
+A such that f
+1
+p
+
+P
+f , with e2
+
+P
+xi, yi
+s
+
+r
+1 i.e.
+ř
+
+“
+q “
+
+AQ
+p
+
+g.
+q
+
+R
+p
+
+of U
+
+1
+p
+
+q
+p
+
+Ñ
+
+“
+
+“
+
+b
+
+“
+
+U
+
+S
+
+S
+
+S
+
+P
+
+q
+
+q
+
+q
+
+q
+
+q´1
+p
+
+P
+
+a
+
+q
+p
+
+U
+q
+
+q
+p
+
+q
+¯
+
+:
+
+“
+
+a
+
+1
+p
+
+.
+q
+
+´ÿ
+
+(cid:15)
+(cid:15)
+o
+o
+6
+
+ALAIN CONNES AND CATERINA CONSANI
+
+implies f
+x, y
+
+P
+sq
+E. Indeed, one has
+
+xi, yi
+
+“
+
+pr
+
+r
+
+“
+
+xi, yi
+A one has P
+ř
+q
+p
+
+s
+pr
+, y
+q
+
+U
+q
+
+q
+p
+
+a
+
+Then f
+x, y
+
+P
+
+x
+
+“
+so that
+
+ÿ
+
+ř
+q1
+p
+
+q1
+p
+
+U
+q
+
+sq P
+b
+
+ÿ
+
+“
+
+x, y
+
+,
+q
+
+r
+
+s “
+
+a
+p
+ÿ
+
+q
+p
+
+b
+q
+
+q1
+p
+
+q
+q
+
+b
+
+q1
+p
+
+a
+q
+
+q
+p
+
+q1
+q
+
+U
+q
+
+qq1
+p
+
+q
+
+´
+
+. We shall prove that for any pair
+
+This projection belongs to E in view of the fact that
+
+P
+
+x, y
+
+pr
+
+sq “
+
+q
+p
+
+b
+q
+
+q´1
+p
+
+q
+q
+
+b
+
+q´1
+p
+
+a
+q
+
+q
+p
+
+qq´1
+
+.
+q
+
+´
+
+a
+p
+ÿ
+
+a
+
+q
+p
+This completes the proof.
+
+q´1
+p
+
+b
+q
+
+q
+q
+
+´
+
+b
+
+q´1
+p
+
+a
+q
+
+q
+p
+
+qq´1
+
+“
+
+hq
+
+´
+
+h,
+
+h
+
+b
+
+q´1
+p
+
+a
+q
+
+q
+p
+
+qq´1 .
+
+“
+
+(cid:3)
+
+Proposition 3.1 shows that the image of π! : HH0
+
+space of coinvariants for the action of Qˆ on S
+the subspace E.
+An important point now to remember is that the Fourier transform becomes canon-
+ically deﬁned on the above quotient. Indeed, the deﬁnition of the Fourier transform
+on ad`eles depends on the choice of a non-trivial character α on the additive, locally
+AQ. It is deﬁned as follows
+compact group AQ, which is trivial on the subgroup Q
+
+AQ
+p
+
+q
+
+S
+p
+
+AQ
+p
+
+A
+q
+qq Ñ
+p
+, i.e. the quotient of S
+AQ
+p
+q
+
+HH0
+
+is the
+by
+
+Ă
+
+Fα
+
+f
+p
+
+y
+qp
+
+q
+
+:
+
+“
+
+f
+
+xy
+α
+x
+p
+q
+p
+
+dx.
+q
+
+żR
+
+The space of characters of the compact group G
+vector space, thus any non-trivial character α as above is of the form β
+so that
+
+Q is one dimensional as a Q-
+qx
+α
+,
+q
+p
+
+x
+p
+
+q “
+
+AQ
+
+“
+
+{
+
+Fβ
+
+y
+qp
+Therefore, the diﬀerence Fβ
+latter space is preserved by Fα since Fα
+
+qxy
+α
+x
+p
+q
+p
+
+.
+dx
+q
+q
+“
+Fα vanishes on the quotient of S
+
+y
+p
+
+f
+p
+
+f
+p
+
+żR
+
+q
+q
+
+´
+
+“
+
+f
+
+q
+
+:
+
+Fα
+
+fq
+p
+
+q “
+
+Fα
+
+f
+p
+
+qq´1 .
+
+AQ
+p
+
+q
+
+by E and this
+
+3.1. HH, Morita invariance and the trace map. Let us recall that given
+
+an algebra A, the trace map
+
+Tr : Mn
+
+A
+p
+
+q Ñ
+
+A,
+
+Tr
+
+aij
+
+pp
+
+:
+
+“
+
+q
+
+ajj
+
+induces an isomorphism in degree zero Hochschild homology which extends to
+If A is a convolution algebra of the ´etale groupoid of an equiv-
+higher degrees.
+alence relation R with countable orbits on a space Y , and π : Y
+R is the
+quotient map, the trace map takes the following form
+
+Ñ
+
+Y
+
+{
+
+ÿ
+
+(3.2)
+
+f
+Tr
+p
+
+x
+q
+
+qp
+
+:
+
+“
+
+f
+
+j, j
+p
+
+.
+q
+
+πpjq“x
+ÿ
+
+The trace induces a map on HH0 of the function algebras, provided one takes care
+of the convergence issue when the size of equivalence classes is inﬁnite.
+If the
+relation R is associated with the orbits of the free action of a discrete group Γ
+on a locally compact space Y , the convolution algebra is the cross product of the
+algebra of functions on Y by the discrete group Γ. In this case, the ´etale groupoid
+y and
+is Y
+q “
+y, g
+y, g
+r
+on
+p
+p
+Y
+Γ such that
+
+¸
+q “
+Γ. The diagonal terms in (3.2) correspond to the elements of Y
+
+gy. The elements of the convolution algebra are functions f
+
+Γ, where the source and range maps are given resp. by s
+
+y, g
+p
+
+q
+
+¸
+
+¸
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+7
+
+s
+, meaning that g
+y, g
+q
+p
+of Γ is assumed to be free. Then, the trace map is
+
+y, g
+p
+
+q “
+
+“
+
+r
+
+1 is the neutral element of Γ, since the action
+
+Tr
+
+f
+pp
+
+x
+
+qp
+
+q “
+
+f
+
+y, 1
+p
+
+.
+q
+
+πpyq“x
+ÿ
+
+This sum is meaningful on the space of the proper orbits of Γ. For a lift ρ
+with π
+
+x the trace reads as
+
+ρ
+p
+
+x
+p
+
+qq “
+
+x
+p
+
+q P
+
+Y ,
+
+(3.3)
+
+Tr
+
+f
+p
+
+x
+
+qp
+
+q “
+
+f
+
+gρ
+p
+
+, 1
+x
+q
+p
+
+.
+q
+
+gPΓ
+ÿ
+
+Qˆ, the proper orbits are parameterized
+In the case of Y
+“
+by the id`ele classes and this space embeds in the ad`ele classes by means of the
+inclusion
+
+AQ acted upon by Γ
+
+“
+
+We identify the id`ele class group CQ
+“
+exact sequence aﬀected by the modulus
+
+ι : Qˆ
+
+z
+
+Aˆ
+
+Q Ñ
+Qˆ
+
+Qˆ
+AQ.
+Q with ˆZˆ
+
+Aˆ
+
+z
+
+R˚
+
+`, using the canonical
+
+ˆ
+
+z
+
+Ñ
+There is a natural section ρ : CQ
+inclusion
+
+1
+
+ˆZˆ
+
+Ñ
+
+Ñ
+Aˆ
+
+CQ
+
+Mod
+ÝÑ
+
+R˚
+
+` Ñ
+
+1.
+
+Q of the quotient map, given by the canonical
+
+Q ˆ
+Next, we focus on the ˆZˆ-invariant part of S
+Proposition 3.1 we have
+
+` Ă
+
+ˆ
+
+ˆZˆ
+
+R˚
+
+Af
+
+R
+
+AQ.
+
+. Then, with the notations of
+q
+
+“
+AQ
+p
+
+Lemma 3.2. The following facts hold
+
+(i) Let h
+(ii) Let f
+
+S
+S
+
+P
+P
+
+(3.4)
+
+AQ
+p
+R
+p
+
+ˆZˆ
+q
+ev and ˜f
+q
+
+, then there exists f
+1
+1ˆZ b
+p
+“ p
+nu
+2
+p
+
+U
+q
+f
+
+q “
+
+u
+
+f
+
+q
+
+˜f
+Tr
+qp
+p
+
+S
+
+ev with h
+R
+p
+q
+ˆZˆ
+AQ
+S
+q
+p
+
+P
+q P
+
+¸
+R˚
+`.
+
+u
+
+@
+
+P
+
+E ˆZˆ
+f
+Qˆ, then one has
+
+1ˆZ b
+
+´
+
+P
+
+.
+
+(iii) Let f
+
+S
+
+R
+p
+
+ev, then 1ˆZ b
+q
+
+P
+
+ðñ
+
+0.
+
+f
+
+“
+
+nPNˆ
+ÿ
+f
+
+P
+
+E ˆZˆ
+
+Proof. (i) By deﬁnition, the elements of the Bruhat-Schwartz space S
+
+are ﬁnite linear combinations of functions on AQ of the form (S
+of places)
+
+Q 8
+
+AQ
+q
+p
+is a ﬁnite set
+
+v
+1Zv @
+
+S,
+
+f8 P
+
+S
+
+R
+p
+
+,
+q
+
+fp
+
+S
+
+Qp
+p
+
+P
+
+p
+
+q @
+
+S
+
+,
+
+z8
+
+P
+
+denotes the space of locally constant functions with compact support.
+p -invariant is a ﬁnite linear combination of charac-
+is a ﬁnite
+1Zpp
+
+pnx
+. Thus an element h
+q
+
+AQ
+p
+
+ˆZˆ
+q
+
+pn
+
+S
+
+P
+
+:
+
+f
+
+fv,
+
+fv
+
+q
+
+R
+
+“
+
+which is Z˚
+x
+q
+p
+
+“ b
+where S
+Qp
+p
+An element of S
+Qp
+p
+q
+teristic functions
+1Zp q
+p
+linear combination of functions of the form
+f8 P
+x
+f
+With q
+:
+“
+q
+p
+replacement of g with its even part 1
+x
+g
+2 p
+ś
+p
+modulo E ˆZˆ
+.
+
+R
+p´np one has with ℓ
+
+v
+1Zv @
+
+“ b
+
+fv,
+
+fv
+
+S,
+
+“
+
+“
+
+“
+
+f
+
+S
+
+R
+,
+q
+p
+, ℓ
+qx
+q
+p
+x
+g
+p´
+q `
+
+“
+qq
+
+fp
+
+pnp
+
+p
+
+S
+
+1Zp q
+g, ℓ
+
+z8
+“ p
+and the
+1ˆZ b
+P
+does not change the class of f
+
+@
+P
+E ˆZˆ
+
+´
+
+f
+
+8
+
+ALAIN CONNES AND CATERINA CONSANI
+
+u
+p
+
+(ii) Let f
+S
+ρ
+
+P
+AQ
+p
+q P
+˜f
+(3.5) Tr
+qp
+p
+
+S
+
+q
+u
+
+R
+p
+is
+
+ev and ˜f
+q
+ˆZˆ
+1, u
+p
+
+q P
+˜f
+qρ
+p
+
+q “
+
+1ˆZ b
+R˚
+` Ă
+
+“ p
+ˆ
+, 1
+x
+q
+p
+
+q “
+
+f
+U
+1
+q P
+p
+q
+Af
+R
+Q ˆ
+“
+1ˆZ b
+
+qPQˆp
+ÿ
+E ˆZˆ
+
+ˆZˆ
+q
+
+Qˆ. For u
+AQ
+S
+p
+AQ, and by applying (3.3) one has
+
+` the lift
+
+R˚
+
+¸
+
+P
+
+f
+
+q, qu
+
+qp
+
+2
+
+q “
+
+f
+
+nu
+p
+
+u
+
+q @
+
+P
+
+R˚
+`.
+
+nPNˆ
+ÿ
+U
+q
+
+f
+
+S
+
+q P
+
+ˆZˆ
+AQ
+1ˆZ b
+1
+¸
+q
+p
+p
+˜f
+of ˜f is zero, thus Tr
+q “
+p
+
+Qˆ.
+“ p
+A
+0.
+p
+q
+R˚
+`. Then (2.2) implies that the
+1
+2 where
+(cid:3)
+
+z
+p
+
+q ą
+
+2 ´izd˚u is well deﬁned in the half-plane ℑ
+
+0. The converse of the statement is obvious.
+
+P
+
+S
+
+R
+p
+
+qPQˆ
+ÿ
+. Let ˜f
+ev such that 1ˆZ b
+(iii) Let f
+q
+By Proposition 3.1 the Hochschild class in HH0
+It follows from (3.4) that E
+u
+function ψ
+q “
+it vanishes identically, thus f
+
+q “
+
+u
+q
+
+u
+p
+
+f
+p
+
+z
+p
+
+R˚
+`
+
+qp
+
+u
+
+@
+
+P
+
+P
+
+0
+
+f
+
+f
+
+1
+
+ş
+
+“
+
+The next statement complements Proposition 3.1, with a description of the
+
+range of π! : HH0
+8
+u1{2
+nu
+n“1 f
+p
+the notations of Lemma 3.2
+
+q
+
+AQ
+p
+
+S
+p
+coincides, up to the factor u1{2
+
+ˆZˆ
+A
+q
+p
+
+ˆZˆ
+q
+
+HH0
+
+q Ñ
+
+ř
+Proposition 3.3. The map S
+
+isomorphism, this means that π!
+´
+the elements of the subalgebra 1ˆZ b
+identity
+
+; it also shows that the map E
+
+q “
+2 , with the trace map (3.5). We keep
+
+qp
+
+f
+p
+
+u
+
+R
+p
+HH0
+
+ev
+q
+S
+p
+R
+p
+
+Ñ
+AQ
+p
+ev
+q
+
+Ă
+
+π!
+ˆZˆ
+q
+
+S
+
+´
+q
+¯
+AQ
+p
+
+S
+
+HH0
+
+S
+p
+
+AQ
+p
+
+ˆZˆ
+q
+
+, f
+
+ÞÑ
+
+˜f is an
+
+is determined by the images of
+ˆZˆ
+q
+
+. Furthermore, one has the
+
+q
+¯
+
+E
+
+f
+p
+
+u
+
+qp
+
+q “
+
+u1{2
+2
+
+Tr
+
+˜f
+qp
+p
+
+u
+
+q
+
+f
+
+S
+
+R
+p
+
+ev,
+q
+
+P
+
+u
+
+@
+
+P
+
+R˚
+`.
+
+Proof. The ﬁrst statement follows from Lemma 3.2 (i) and (iii). The second
+(cid:3)
+
+statement from (ii) of the same lemma.
+
+4. The Laplacian ∆
+
+H
+
+1
+p
+
+`
+
+H
+
+q
+
+“
+
+This section describes the spectral interpretation of the squares of non-trivial
+zeros of the Riemann zeta function in terms of a suitable Laplacian. It also shows
+the relation between this Laplacian and the prolate wave operator.
+
+4.1. The vanishing conditions. One starts with the exact sequence
+
+S
+
+0
+
+AQ
+p
+associated to the kernel of the Qˆ-invariant linear functional ǫ
+C
+obtains the exact sequence
+
+f
+p
+. By implementing in the above sequence the evaluation δ0
+q
+
+AQ
+p
+
+q Ñ
+
+1
+p
+
+1
+p
+
+1
+q
+
+Ñ
+
+Ñ
+
+C
+
+0
+
+q
+
+S
+
+ǫ
+Ñ
+
+q “
+f
+q
+p
+
+AQ
+
+:
+ş
+“
+
+f
+f
+
+dx
+x
+q
+p
+P
+, one
+0
+q
+p
+
+0
+
+S
+
+pδ0,ǫq
+AQ
+0
+q
+p
+ÝÑ
+p
+The next lemma shows that both S
+0 and S
+AQ
+1 have a description in terms
+q
+q
+p
+of the ranges of two related diﬀerential operators. For simplicity of exposition, we
+restrict our discussion to the ˆZˆ-invariant parts of these function spaces.
+
+q ‘
+AQ
+p
+
+AQ
+p
+
+q Ñ
+
+1
+p
+
+0
+q
+
+Ñ
+
+Ñ
+
+0.
+
+C
+
+C
+
+S
+
+action of 1
+
+ˆ
+
+q Ñ
+
+GL1
+
+` Ă
+
+Lemma 4.1. Let H : S
+R˚
+
+S
+AQ
+p
+. Then one has
+q
+
+AQ
+p
+AQ
+p
+(i) H commutes with the action of GL1
+induces an isomorphism S
+1
+(ii)
+p
+(iii) H
+
+AQ
+q
+p
+ev
+R
+q
+p
+induces an isomorphism S
+R
+p
+
+, H :
+q
+
+`
+1
+p
+
+q
+H
+
+H
+
+`
+
+q
+
+S
+
+and restricts to S
+ev
+1 .
+q
+ev
+R
+0 .
+q
+p
+
+R
+p
+S
+
+Ñ
+
+Ñ
+ev
+q
+
+AQ
+p
+
+ˆZˆ
+q
+
+.
+
+x
+B
+
+“
+
+x be the generator of the scaling
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+9
+
+Proof. (i) follows since GL1
+
+AQ
+p
+
+q
+
+is abelian, thus H commutes with the action
+
+AQ
+.
+of GL1
+q
+p
+(ii) The functional f
+
+ǫ
+
+f
+p
+
+ÞÑ
+
+q “
+
+AQ
+
+f
+
+dx vanishes on the range of 1
+x
+q
+p
+
+`
+
+H since
+
+ǫ
+
+1
+pp
+
+ş
+H
+`
+
+f
+q
+
+q “
+
+is contained in S
+
+H
+
+q
+
+1
+p
+
+thus the range of
+that xf
+x
+q
+p
+is injective. Let now f
+and
+q “
+while the function
+
+`
+is constant, hence f
+ev
+1 and let
+q
+f
+x
+0. The function g
+:
+q
+p
+
+R
+p
+
+0
+p
+
+“
+
+“
+
+S
+
+P
+
+f
+
+0, for f
+
+p
+
+h
+
+x
+q
+p
+
+p
+:
+“
+
+g
+
+y
+p
+
+dy
+q
+
+´8
+
+ż
+
+xf
+
+dx
+q
+
+0,
+
+“
+
+żAQ Bp
+ev
+R
+1 . The equation Hf
+q
+p
+: S
+S
+R
+1
+p
+p
+P
+
+f
+ev
+q
+f be its Fourier transform. Then
+0 is smooth, and g
+x
+q{
+p
+p
+x
+
+. Thus
+q
+
+`
+R
+p
+
+x, g
+
+0
+p
+
+H
+
+“
+
+`
+
+q
+
+q
+
+:
+
+“
+
+0 implies
+ev
+S
+R
+1
+q
+p
+ev
+S
+R
+q
+p
+odd,
+R
+q
+p
+
+Ñ
+f
+P
+S
+
+P
+p
+
+q
+
+q
+
+ş
+
+f
+
+f
+
+1
+
+`
+
+`
+
+`
+
+´
+
+“
+
+“
+
+H
+
+H
+
+ÞÑ
+
+p´
+
+`
+H
+
+0
+p
+
+h
+q
+
+“
+: S
+
+B
+Ñ
+
+P
+P
+0
+p
+
+f , thus
+
+S
+P
+H
+`
+
+f . This shows
+
+f
+AQ
+is contained in S
+
+g. One has Hh
+ev
+1 is also surjective.
+q
+p
+ÞÑ
+
+R
+H. Thus the range of H
+1
+p
+p
+0 implies that the function f is constant and hence f
+
+ev and
+R
+xh
+fulﬁlls h
+“
+p
+q
+ev
+S
+: S
+R
+R
+that
+1
+p
+q
+p
+q
+p
+(iii) Since the evaluation f
+range of H. Similarly, one sees that the functional f
+the range of 1
+equation Hf
+“
+S
+R
+0 implies that xf
+. Similarly Hf
+f
+q
+p
+S
+S
+R
+R
+R
+f
+. Thus H
+0 is injective. Let now f
+1
+q Ñ
+q
+p
+p
+p
+p
+q
+x
+x
+0. Then the function g
+f
+f
+:
+q
+p
+p
+q “
+ev such that
+S
+R
+and there exists a unique h
+q
+p
+P
+f
+h
+0
+0 one has
+0
+q “
+p
+p
+“
+h and H
+k
+H
+h. Then
+1
+´p
+q
+`
+“
+ev
+ev
+S
+: S
+p
+p
+p
+p
+R
+R
+0 is surjective and an isomorphism.
+`
+q
+p
+q
+p
+q
+p
+4.2. The Laplacian ∆
+
+is invariant under scaling, it vanishes on the
+p
+dx vanishes on
+x
+q
+p
+0. The
+q
+0, for
+“
+is constant and hence f
+0 for
+“
+ev with
+S
+R
+p
+q
+odd
+S
+R
+0, is smooth, g
+P
+q
+p
+“
+f so that
+g. One has Hh
+“
+“
+ev
+R
+0 and there exists k
+q
+p
+H
+
+and its spectrum. This section is based
+q
+on the following heuristic dictionary suggesting a parallel between some classical
+notions in Hodge theory on the left-hand side, and their counterparts in noncom-
+mutative geometry, for the ad`ele class space of the rationals. The notations are
+inclusive of those of Section 3
+
+f . This shows that
+(cid:3)
+
+H
+1
+p´
+´
+with Hk
+H
+H
+1
+p
+
+0
+p
+q
+xh
+B
+q “
+1
+`
+p
+
+f . Thus if
+
+x
+q
+p
+
+p
+H
+
+“ ´
+
+x, g
+
+h
+q
+
+k
+q
+
+1
+p
+
+Ñ
+
+H
+
+q{
+
+“
+
+“
+
+“
+
+`
+
+S
+
+p
+
+P
+
+P
+
+q
+
+:
+
+Algebra of functions Cross-product by Qˆ
+Hochschild homology
+Diﬀerential forms
+F
+ι
+Star operator
+Operator H
+Diﬀerential d
+δ :
+d
+Operator 1
+‹
+“ ‹
+H
+Laplacian
+∆ :
+
+`
+H
+
+H
+
+ˆ
+
+‹
+
+1
+p
+
+`
+
+q
+
+“
+
+Next Proposition is a variant of the spectral realization in [8, 9].
+
+Proposition 4.2. The following facts hold
+(i) The trace map Tr commutes with ∆
+
+1
+p
+is contained in the strong Schwartz space S
+µ denoting the Modulus.
+
+H
+
+“
+
+H
+q
+`
+R˚
+`q
+p
+
+and the range of Tr
+βPR µβS
+:
+
+∆
+˝
+, with
+
+R˚
+`q
+p
+
+“ X
+
+10
+
+ALAIN CONNES AND CATERINA CONSANI
+
+(ii) The spectrum of ∆ on the quotient of S
+
+by the closure of the range
+
+R˚
+`q
+p
+
+of Tr
+
+˝
+
+∆ is the set (counted with possible multiplicities)
+
+1
+2
+
+´
+
+2
+
+1
+4 |
+
+´
+
+z
+
+C
+
+z
+
+P
+
+R, ζ
+
+z
+p
+
+q “
+
+0
+
+.
+
+*
+
+¯
+
+z
+"´
+
+Proof. (i) The trace map of (3.5) commutes with ∆. By Lemma 4.1 (iii) the
+(see
+
+is contained in S
+
+H
+
+H
+
+ev
+0 thus the range of E
+q
+
+˝ p
+
+1
+p
+
+`
+
+R˚
+`q
+p
+
+qq
+
+is the intersection, indexed by compact intervals J
+. The Fourier transform
+
+R,
+
+Ă
+
+range of ∆ is S
+R
+p
+[9], Lemma 2.51).
+R˚
+(ii) By construction, S
+`q
+p
+βPJ µβS
+R˚
+of the spaces
+`q
+p
+
+X
+
+F
+
+f
+p
+
+z
+qp
+
+q
+
+:
+
+“
+
+żR˚
+
+`
+
+f
+
+u
+p
+
+uzd˚u
+q
+
+deﬁnes an isomorphism of these function spaces with the Schwartz spaces S
+ℜ
+C
+z
+labeled by vertical strips I :
+N where
+with pk,m
+m
+
+,
+q
+, of holomorphic functions f in I
+
+for all k, m
+
+“ t
+P
+
+q ă 8
+
+f
+p
+
+z
+p
+
+I
+p
+
+q P
+
+J
+
+P
+
+u
+
+|
+
+pk,m
+
+f
+p
+
+q “
+
+1
+sup
+I p
+
+z
+` |
+
+k
+|q
+
+nf
+
+.
+
+z
+p
+
+q|
+
+¨ |B
+
+1
+n!
+
+n“0
+ÿ
+
+q
+
+.
+q
+
+I
+p
+
+I
+p
+
+by the closure of the range of Tr
+
+These norms deﬁne the Fr´echet topology on S
+It then follows from Lemma 4.125 of [9] that, for I suﬃciently large, the quotient
+of S
+∆ decomposes into a direct sum of
+Z which fulﬁll
+, N
+N
+ﬁnite-dimensional spaces associated to the projections Π
+q
+p
+the following properties
+N
+is an idempotent.
+(1) Each Π
+p
+N
+(2) The sequence of Π
+’s is of tempered growth.
+p
+q
+is O
+N
+(3) The rank of Π
+p
+S
+I
+(4) For any f
+p
+
+N
+for
+log
+|
+q
+p
+N
+the sequence f Π
+p
+
+| Ñ 8
+is of rapid decay and
+
+N
+|
+
+|q
+
+P
+
+P
+
+˝
+
+q
+
+q
+
+.
+
+N
+f Π
+p
+
+q “
+
+f
+
+N PZ
+ÿ
+
+q
+f
+@
+
+S
+
+.
+
+I
+p
+
+q
+
+P
+
+N
+This direct sum decomposition commutes with ∆ since both Π
+and the conju-
+p
+gate of ∆ by the Fourier transform F are given by multiplication operators. The
+conjugate of H by F is the multiplication by
+z, so that the conjugate of ∆ is the
+. The spectrum of ∆ is the union of the spectra of the
+1
+multiplication by
+q
+p
+. By [9], Corollary 4.118,
+ﬁnite-dimensional operators ∆N :
+q
+N
+and the proof of Theorem 4.116, the ﬁnite-dimensional range of Π
+is described
+p
+S
+by the evaluation of f
+N
+Z
+of the Riemann zeta function
+p
+P
+which are inside the contour γN , i.e. by the map
+
+on the zeros ρ
+
+N
+∆Π
+p
+
+N
+Π
+p
+
+∆
+q
+
+I
+p
+
+“
+
+“
+
+´
+
+´
+
+´
+
+P
+
+z
+
+z
+
+q
+
+q
+
+q
+
+q
+
+S
+
+I
+p
+
+f
+
+f
+
+q Q
+
+ÞÑ
+
+|ZpN q “ p
+
+f pnρq
+
+ρ
+p
+
+qqρPZpN q P
+
+Cpnρq
+
+where Cpnρq denotes the space of dimension nρ of jets of order equal to the order
+nρ of the zero ρ of the zeta function. Moreover, the action of ∆N is given by the
+matrix associated with the multiplication of f
+: this gives a
+q
+´
+triangular matrix whose diagonal is given by nρ terms all equal to
+ρ
+. Thus
+1
+q
+p
+the spectrum of ∆ on the quotient of S
+∆
+is the set (counted with multiplicities)
+
+by the closure of the range of Tr
+
+R˚
+`q
+p
+
+1
+p
+
+I
+p
+
+by
+
+´
+
+´
+
+´
+
+S
+
+P
+
+ρ
+
+˝
+
+z
+
+z
+
+q
+
+1
+2
+
+ρ
+
+´
+
+¯
+
+"´
+
+2
+
+1
+4 |
+
+´
+
+ρ
+
+C
+
+z
+
+P
+
+R, ζ
+
+ρ
+p
+
+q “
+
+0
+
+.
+
+*
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+11
+
+(cid:3)
+
+Corollary 4.3. The spectrum of ∆ on the quotient of the strong Schwartz
+∆ is negative if and only if the
+
+by the closure of the range of Tr
+
+space S
+Riemann Hypothesis holds.
+
+R˚
+`q
+p
+
+˝
+
+Proof. This follows from Proposition 4.2 and the fact that for ρ
+
+1
+2
+
+ρ
+
+´
+
+2
+
+¯
+
+´
+
+1
+4 ď
+
+0
+
+´
+
+ðñ
+
+0, 1
+
+ρ
+
+P r
+
+s Y
+
+1
+2 `
+
+iR.
+
+C
+
+P
+
+(cid:3)
+
+Remark 4.4. The main interest of the above reformulation of the spectral
+realization of [8, 9] in terms of the Laplacian ∆ is that the latter is intimately
+related to the prolate wave operator Wλ that is shown in [10] to be self-adjoint
+?2 the same UV spectrum as the Riemann zeta function. The
+and have, for λ
+relation between ∆ and Wλ is that the latter is a perturbation of ∆ by a multiple
+of the Harmonic oscillator.
+
+“
+
+5. Sheaves on the Scaling Site and H 0
+
+Let µ
+
+Rą1 and Σµ be the linear map on functions g : R˚
+
+C of suﬃciently
+
+S , L2
+p
+
+ΣE
+
+q
+
+{
+` Ñ
+
+P
+rapid decay at 0 and
+
+deﬁned by
+
+8
+
+Σµg
+p
+
+u
+
+qp
+
+q “
+
+We shall denote with Sev
+0
+fulﬁlling the two conditions f
+f
+
+S
+
+the linear space of real-valued, even Schwartz functions
+dx. The map
+x
+q
+p
+
+“
+
+0
+
+R
+p
+
+q
+
+g
+
+µku
+p
+
+.
+q
+
+kPZ
+ÿ
+
+0
+p
+Ef
+p
+
+q “
+u
+
+qp
+
+q “
+
+R f
+u1{2
+ş
+
+f
+
+nu
+p
+
+q
+
+ną0
+ÿ
+
+(5.1)
+
+P
+(5.2)
+
+E : Sev
+
+0 Ñ
+
+R,
+
+is proportional to a Riemann sum for the integral of f . The following lemma on
+scale invariant Riemann sums justiﬁes the pointwise “well-behavior” of (5.2) (see
+[7] Lemma 6.1)
+
+Lemma 5.1.
+
+Let f be a complex-valued function of bounded variation on
+0, and
+
+when u
+
+, O
+
+u2
+p
+
+q
+
+Ñ
+
+0,
+p
+that
+
+8q
+
+. Assume that f is of rapid decay for u
+8
+0 f
+(i) The function
+
+Ñ 8
+0. Then the following properties hold
+
+dt
+q
+
+t
+p
+
+“
+
+u
+
+Ef
+p
+
+qp
+0, and of rapid decay for u
+
+q
+
+.
+
+Ñ 8
+
+ş
+
+u
+Ñ
+(ii) Let g
+
+in (5.2) is well-deﬁned pointwise, is O
+
+u1{2
+p
+
+q
+
+when
+
+E
+
+f
+p
+
+“
+
+, then the series (5.1) is geometrically convergent, and deﬁnes
+q
+
+a bounded and measurable function on R˚
+`{
+
+µZ.
+
+r
+
+8q
+
+We recall that a sheaf over the Scaling Site S
+0,
+
+Nˆ is a sheaf of sets
+on
+(endowed with the euclidean topology) which is equivariant for the action
+of the multiplicative monoid Nˆ [6]. Since we work in characteristic zero we select
+as structure sheaf of S the Nˆ-equivariant sheaf O whose sections on an open set
+U
+deﬁne the space of smooth, complex-valued functions on U . The next
+proposition introduces two relevant sheaves of O-modules.
+
+8q ¸
+
+Ă r
+
+“ r
+
+8q
+
+0,
+
+0,
+
+Proposition 5.2. Let L
+
+facts hold
+
+0,
+
+P p
+
+, µ
+
+8q
+
+“
+
+exp L, and Cµ
+
+R˚
+`{
+
+“
+
+µZ. The following
+
+12
+
+ALAIN CONNES AND CATERINA CONSANI
+
+(i) As L varies in
+
+0,
+p
+
+, the pointwise multiplicative Fourier transform
+
+(5.3)
+
+F : L2
+
+Cµ
+p
+
+F
+
+ξ
+p
+
+n
+
+L´ 1
+
+2
+
+ξ
+
+u´ 2πin
+q
+
+u
+p
+
+L d˚u
+
+q Ñ
+
+qp
+deﬁnes an isomorphism between the family of Hilbert spaces L2
+the restriction to
+
+of the trivial vector bundle L2
+
+żCµ
+
+q “
+
+0,
+
+Cµ
+and
+q
+p
+ℓ2
+Z
+.
+q
+p
+8q ˆ
+“ r
+0 of the vector bundle L2 together
+
+(ii) The smooth sections vanishing at L
+
+0,
+p
+
+8q
+
+8q
+Z
+,
+q
+p
+
+ℓ2
+
+with the linear maps
+
+“
+
+(5.4)
+
+σn : L2
+
+Cµn
+p
+
+q Ñ
+
+L2
+
+Cµ
+p
+
+,
+q
+
+σn
+
+ξ
+p
+
+u
+
+qp
+
+q “
+
+n
+
+j“1
+ÿ
+
+ξ
+
+µj u
+p
+
+q
+
+(iii) For f
+
+deﬁne a sheaf L2 of O-modules on S .
+Sev
+0 , the maps ΣE
+(global) sections ΣE
+(iv) For any open set U
+
+f
+p
+of L2.
+0,
+
+“
+
+P
+
+:
+
+f
+q
+p
+Ă r
+
+8q
+
+q
+
+L
+
+ΣµE
+
+f
+qp
+p
+q
+, the submodules closure of C8
+0 p
+Ă
+
+are Nˆ-equivariant and deﬁne a subsheaf ΣE
+
+U, L2
+in C8
+0 p
+O-modules on S .
+
+q
+
+Sev
+U, ΣE
+0 qq
+p
+L2 of closed
+
+as in (5.1) deﬁne smooth
+
+0,
+Ă r
+U, ΣE
+
+(v) For U
+8q
+ule C8
+0 p
+q
+belongs to the closure in C8
+0 p
+1
+tiples of the function ζ
+2 ´
+
+open, a section ξ
+
+P
+if and only if each Fourier component F
+
+q
+
+U, L2
+
+C8
+0 p
+
+belongs to the submod-
+as in (5.3)
+of the submodule generated by the mul-
+(ζ
+
+is the Riemann zeta function).
+
+ξ
+p
+
+qp
+
+n
+
+q
+
+q
+
+U, C
+2πin
+L
+Proof. (i) holds since the Fourier transform is a unitary isomorphism.
+(ii) The sheaf L2 on
+C8
+U
+0 p
+p
+
+is deﬁned by associating to an open subset U
+of smooth sections vanishing at L
+
+0,
+8q
+r
+U, L2
+the space F
+q
+bundle L2. The action of Nˆ on L2 is given, for n
+U and U 1 of
+F
+
+Ă r
+8q
+0 of the vector
+Nˆ and for any pair of opens
+
+z
+p
+
+q “
+
+8q
+
+0,
+
+0,
+
+“
+
+F
+
+P
+
+˘
+
+`
+
+q
+
+U, L2
+
+(5.5)
+
+x
+
+σn
+
+and σn
+. By
+q
+σnm, thus the above action of Nˆ turns L2 into a
+
+Cµn
+p
+
+qq P
+
+q P
+
+q
+
+U, n
+p
+
+ξ
+qp
+
+qp
+ξ
+p
+
+q “
+nx
+p
+
+ξ
+nx
+p
+p
+L2
+
+.
+qq
+Cµ
+p
+
+,
+q
+L2
+
+r
+U, n
+p
+
+, with nU
+Ă
+U 1, L2
+: C8
+0 p
+exp x one has ξ
+
+U 1, by
+C8
+0 p
+nx
+p
+
+q Ñ
+
+“
+
+q
+Note that with µ
+construction one has: σnσm
+sheaf on S
+Nˆ.
+“ r
+(iii) By Lemma 5.1 (i), E
+f
+p
+qp
+and of rapid decay for u
+Ñ 8
+Σµ
+
+L´ 1
+
+8q ¸
+
+0,
+
+“
+
+F
+
+n
+
+2
+
+qqqp
+
+q “
+
+żCµ
+It then follows from [7] (see
+
+Σµ
+p
+
+E
+p
+
+f
+p
+
+(5.6)
+
+F
+
+Σµ
+p
+
+E
+p
+
+f
+p
+
+n
+
+qqqp
+
+q “
+
+6.4
+p
+
+q
+L´ 1
+2 ζ
+
+u1{2
+u
+is pointwise well-deﬁned, it is O
+p
+. By (ii) of the same lemma one has
+
+q
+
+for u
+
+0,
+
+Ñ
+
+q
+
+E
+p
+
+f
+p
+
+u
+
+qqp
+
+u´ 2πin
+q
+
+L d˚u
+
+“
+
+L´ 1
+
+2
+
+E
+
+f
+p
+
+u
+
+qp
+
+u´ 2πin
+q
+
+L d˚u.
+
+żR˚
+
+`
+
+which is valid for z
+
+R) that
+
+“
+1
+2 f
+
+u
+
+2πn
+L P
+u
+p
+
+u´ 2πin
+q
+
+L d˚u.
+
+1
+2 ´
+
+2πin
+L
+
+˙ żR˚
+
+`
+
+ˆ
+u1{2f
+
+:
+
+q
+
+u
+p
+
+P
+qq “
+
+0 , with w
+z
+p
+
+f
+p
+R˚
+“
+`
+2 [7]. Moreover, by construction Sev
+5
+ş
+0
+{
+1
+2 f , hence w
+u
+z
+p
+
+Sev
+u
+Since f
+:
+, the multiplicative Fourier transform
+“
+q
+qp
+q
+1
+2 ´izd˚u is holomorphic in the complex half-plane
+F
+u
+u
+f
+ψ, ψ
+w
+f
+q
+p
+p
+p
+deﬁned by ℑ
+z
+is stable under the
+q ą ´
+p
+uf
+u
+operation f
+uf . This operation
+ÞÑ
+`
+B
+multiplies F
+w
+by iz. This argument shows that for any integer
+z
+f
+qqp
+p
+q “
+p
+0, zmψ
+m
+z
+is bounded in a strip around the real axis and hence that the
+q
+p
+derivative ψpkq
+is O
+s
+0. By applying classical estimates
+p
+1
+α
+due to Lindelof [11], (see [1] inequality (56)), the derivatives ζpmq
+2 `
+|
+
+is stable under f
+
+on R, for any k
+
+Sev
+0 q
+p
+
+´m
+|
+
+are O
+
+s
+p|
+
+z
+p|
+
+ÞÑ
+
+iz
+
+ě
+
+ą
+
+ψ
+
+B
+
+q
+
+q
+
+q
+
+q
+
+q
+
+p
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+13
+
+4. Thus all derivatives
+1
+ą
+{
+L´ 1
+2πin
+2 ζ
+L
+Z. It follows that ΣE
+
+for any α
+L, n
+h
+:
+p
+n
+P
+over
+and the same holds for all derivatives
+
+m
+L of the function (5.6), now re-written as
+ψ
+, are sequences of rapid decay as functions of
+p
+is a smooth (global) section of the vector bundle L2
+0
+0, one has
+
+. Moreover, when n
+
+tends to 0 when L
+
+0 the function h
+
+L, n
+p
+
+2πn
+L q
+
+1
+2 ´
+
+f
+˘
+q
+p
+
+0,
+p
+
+8q
+
+Ñ
+
+‰
+
+“
+
+B
+
+`
+
+q
+
+q
+
+. In fact, for any m, k
+q
+
+ě
+
+m
+L h
+
+B
+
+L, n
+p
+Lk
+p
+
+q
+
+m
+L h
+
+L, n
+p
+
+2
+q|
+
+“
+
+O
+
+n‰0 |B
+ÿ
+
+when L
+
+0.
+
+Ñ
+
+This result is a consequence of the rapid decay at
+function ψ, and the above estimate of ζ
+L´ 1
+h
+ψ
+2 ζ
+the vector space C8
+(iv) For any open subset U
+0 p
+Ă r
+Frechet topology with generating seminorms of the form (K
+
+L, 0
+p
+
+1
+2 q
+
+0
+p
+
+z
+p
+
+q “
+
+8q
+
+.
+q
+
+8
+
+0,
+
+p
+
+q
+
+and its derivatives. For n
+
+of the derivatives of the
+0 one has
+
+“
+
+U, L2
+
+Ă
+
+admits a natural
+q
+U compact subset)
+
+(5.7)
+
+ppn,mq
+K
+
+:
+
+ξ
+p
+
+q
+
+“
+
+max
+K
+
+L´n
+
+m
+L ξ
+
+L
+p
+
+}B
+
+U, L2
+
+q}L2.
+C8
+0 p
+q
+. The map σn : L2
+q
+Σµn
+˝
+
+q
+
+P
+
+Ă
+
+ř
+
+H 0
+
+Sev
+
+fj
+p
+
+hjΣE
+
+U, n
+p
+
+U, ΣE
+p
+
+U 1, ΣE
+p
+
+, with fj
+q
+
+U, ΣE
+C8
+0 p
+
+deﬁned as sums of
+
+are mapped by F
+
+C8
+inside C8
+
+L2 of O-modules over S .
+
+. By hypothesis, ξ is in the closure of C8
+0 p
+q
+
+Cµn
+q Ñ
+p
+Σµ it follows (here
+U 1, L2
+C1
+qq
+p
+p
+Sev
+U, ΣE
+.
+0 qq
+p
+p
+
+One obtains a space of smooth sections C8
+0 p
+q Ă
+U, L2
+0 and hj
+products
+P
+P
+L2
+in (ii) is continuous, and from the equality σn
+Cµ
+“
+p
+we use the notations as in the proof of (ii)) that the sections ξ
+Sev
+which belong to C8
+0 qq
+p
+In this way one obtains a sheaf ΣE
+Sev
+(v) Let ξ
+0 qq Ă
+p
+P
+U, L2
+C8
+for the Frechet topology. The Fourier components of ξ deﬁne continuous
+0 p
+q
+maps in the Frechet topology, thus it follows from (5.6) that the functions fn
+“
+, of C8
+are in the closure, for the Frechet topology on C8
+U, C
+F
+gn,
+0 p
+0 p
+q
+q
+qp
+is a multiplier of C8
+where gn
+. This conclusion holds
+0 p
+q
+thanks to the moderate growth of the Riemann zeta function and its derivatives
+`
+U, L2
+C8
+on the critical line. Conversely, let ξ
+be such that each of its Fourier
+0 p
+belongs to the closure for the Frechet topology of C8
+components F
+n
+ξ
+, of
+0 p
+q
+qp
+p
+C8
+C8
+U, C
+0, 1
+gn. Let ρ
+0 p
+c pr
+s
+q
+and with support inside
+1) fulﬁll the
+r
+following three properties
+
+,
+8q
+sq
+. The functions αk
+s
+
+deﬁned to be identically equal to 1 on
+
+´1
+kx
+q
+
+0,
+0, 2
+
+1
+2 ´
+
+U, ΣE
+
+2πin
+L
+
+x
+q
+p
+
+U, C
+
+U, C
+
+U, C
+
+L
+p
+
+0, 1
+
+q
+P
+
+ξ
+p
+
+(k
+
+“
+
+ą
+
+“
+
+pp
+
+n
+
+P
+
+ρ
+
+˘
+
+ζ
+
+q
+
+q
+
+q
+
+q
+
+q
+
+r
+
+r
+
+:
+
+:
+
+αk
+
+x
+p
+
+q “
+
+1,
+
+x
+
+@
+
+ą
+
+k´1.
+
+0,
+
+x
+(1) αk
+q “
+p
+C8
+(2) αk
+0 pr
+P
+(3) For all m
+0, 1
+x
+
+0,
+
+ą
+, k
+
+x
+
+2k
+
+´1,
+q
+
+@
+ă p
+.
+8qq
+0 there exists Cm
+
+such that
+
+x2m
+|
+
+B
+
+m
+x αk
+
+x
+p
+
+q| ď
+
+Cmk´1
+
+ă 8
+
+s
+
+B
+
+@
+
+ą
+
+xf
+
+1.
+P r
+´1
+To justify (3), note that x2
+kx
+q
+pp
+x2
+of ρ are bounded. Thus one has
+B
+P r
+which implies (3) by induction on m.
+ξ in the Frechet topology of C8
+Thus, when k
+0 p
+is clear if 0
+´1. Assume now that 0
+equal to 1 for k
+q
+With the notation of (5.7) let us show that ppn,mq
+Since αk
+
+q Ñ
+k´1 one has, using the ﬁniteness of ppn`1,mq
+
+Ñ 8
+Ñ
+U since then, on any compact subset K
+
+Ă
+U and let K
+ξ
+q
+K
+
+k´1f 1
+x
+p
+
+q
+}8k´m
+
+q “ ´
+mαk
+x
+q
+
+´1
+kx
+q
+ρpmq
+
+one has αkξ
+
+pp
+q| ď }
+
+min K
+
+P
+αk
+
+ą p
+
+1,
+
+´
+
+pp
+
+|p
+
+x
+
+x
+
+@
+
+R
+
+1
+
+K
+
+. This
+q
+U , all αk are identically
+U .
+.
+
+0, ǫ
+“ r
+0 when k
+
+s Ă
+Ñ 8
+
+and that the derivatives
+0,
+1
+
+, k
+
+8q
+U, L2
+
+ą
+
+x
+p
+
+q “
+
+max
+K
+
+@
+L´n
+
+}pp
+
+ą
+αk
+
+1
+
+qB
+
+´
+
+m
+L ξ
+
+L
+
+qp
+
+q}L2
+
+ď
+
+max
+p0,1{ks
+
+L´n
+
+m
+L ξ
+
+L
+
+qp
+
+q}L2
+
+}pB
+
+ξ
+p
+q
+kÑ8
+Ñ
+
+0.
+
+14
+
+ALAIN CONNES AND CATERINA CONSANI
+
+Then one obtains
+
+L´n
+
+m
+L pp
+
+αk
+
+B
+
+1
+
+ξ
+q
+
+´
+
+L
+
+qp
+
+q “
+
+L´n
+
+αk
+
+pp
+
+m
+L ξ
+
+1
+
+qB
+
+´
+
+L
+
+qp
+
+q `
+
+m
+
+1
+ÿ
+
+L´n
+
+m
+j
+
+ˆ
+
+pB
+
+˙
+
+j
+Lαk
+
+L
+
+qp
+
+qpB
+
+m´j
+L
+
+ξ
+
+L
+
+qp
+
+.
+q
+
+´
+
+αk
+
+Thus using (3) above and the ﬁniteness of the norms ppn`2j,m´jq
+one derives:
+ppn,mq
+. It remains to show that αkξ belongs to the
+0 when k
+ξ
+1
+K
+q
+q Ñ
+pp
+submodule C8
+U, ΣE
+0,
+. It is enough to show that for K
+a compact subset
+0 p
+q
+0, one can approximate ξ by elements of C8
+with min K
+for the norm
+0 p
+ą
+pp0,mq
+K . Let PN be the orthogonal projection in L2
+on the ﬁnite-dimensional
+subspace determined by the vanishing of all Fourier components F
+ξ
+for any
+p
+ℓ,
+such that
+
+0 there exists N
+
+N . Given L
+
+8q
+U, ΣE
+
+K and ǫ
+
+Cµ
+p
+
+Ñ 8
+
+ℓ
+qp
+
+ξ
+p
+
+Ă p
+
+K
+
+q
+
+q
+
+q
+
+q
+
+| ą
+
+ℓ
+|
+(5.8)
+
+P
+1
+}p
+
+PN
+
+ą
+j
+Lξ
+
+L
+p
+
+ǫ
+
+j
+@
+
+L, ǫ
+p
+m, N
+
+q ă 8
+N
+
+L, ǫ
+p
+
+.
+q
+
+´
+
+q} ă
+The smoothness of ξ implies that there exists an open neighborhood V
+such that (5.8) holds in V
+a ﬁnite NK such that
+
+of L
+. The compactness of K then shows that there exists
+q
+
+L, ǫ
+p
+
+L, ǫ
+p
+
+qB
+
+ď
+
+ě
+
+q
+
+1
+}p
+
+´
+
+PN
+
+j
+Lξ
+
+L
+p
+
+qB
+
+q} ă
+
+ǫ
+
+j
+@
+
+ď
+
+m, L
+
+P
+
+K, N
+
+NK.
+
+ě
+
+It now suﬃces to show that one can approximate PN ξ, for the norm pp0,mq
+K
+C8
+elements of C8
+. To achieve this result, we let L0
+c p
+0 p
+q
+j
+|
+
+N be such that
+
+K and δj
+
+U, ΣE
+
+| ď
+
+P
+
+P
+
+, by
+R˚
+,
+`q
+
+F
+
+δj
+p
+
+q
+
+2πj1
+L0 ˙
+
+ˆ
+
+1 j
+0 j
+
+j1
+j1
+
+“
+‰
+
+“ #
+
+j1,
+@
+
+j1
+|
+
+| ď
+
+N,
+
+żR˚
+
+`
+
+u1{2δj
+
+u
+p
+
+d˚u
+q
+
+“
+
+0
+
+j,
+
+@
+
+j
+|
+
+| ď
+
+N.
+
+One construct δj starting with a function h
+‰
+0 and acting on h by a diﬀerential polynomial whose eﬀect is to multiply F
+h
+¯
+q
+p
+by a polynomial vanishing on all 2πj1
+L0 , j1
+j and at i
+2. By hypothesis each
+{
+belongs to the closure in C8
+U, C
+Fourier component F
+of the multiples of
+0 p
+C8
+0 one has functions fn
+the function ζ
+,
+0 p
+q
+n
+|
+
+n
+q
+. Thus, given ǫ
+
+N such that
+
+ξ
+p
+qp
+2πin
+L
+
+such that F
+
+1
+2 ´
+
+U, C
+
+h
+p
+
+| ď
+
+C8
+c p
+
+R˚
+`q
+
+ą
+
+‰
+
+´
+
+P
+
+P
+
+˘
+
+`
+
+q
+
+q
+
+2πj
+L0
+
+max
+
+K |B
+
+j
+L
+
+ξ
+p
+
+n
+
+qp
+
+q ´
+
+ζ
+
+F
+
+ˆ
+
+ˆ
+
+1
+2 ´
+
+2πin
+L
+
+fn
+
+L
+p
+
+˙
+
+| ď
+
+q
+˙
+
+ǫ
+
+j
+@
+
+ď
+
+m,
+
+n
+|
+
+| ď
+
+N.
+
+We now can ﬁnd a small open neighborhood V of L0 and functions φj
+j
+|
+
+N such that
+
+| ď
+
+C8
+
+V
+p
+
+,
+q
+
+P
+
+(5.9)
+
+φj
+
+L
+p
+
+F
+q
+
+δj
+p
+
+q
+
+2πn
+L
+
+ˆ
+
+“
+
+˙
+
+1
+
+2 fn
+
+L
+
+L
+p
+
+L
+
+q @
+
+V.
+
+P
+
+ÿ
+
+This is possible because the determinant of the matrix Mn,j
+non-zero in a neighborhood of L0 where Mn,j
+functions dj
+dx
+x
+R dj
+q
+p
+
+L0
+p
+on R, which agree with u´1{2δj
+
+q
+u
+q
+p
+0. One then has
+
+u
+p
+q
+2
+“
+
+d˚u
+q
+
+u1{2δj
+
+for u
+
+u
+p
+
+R˚
+`
+
+“
+
+ą
+
+L
+p
+
+is
+q “
+is the identity matrix. The even
+˘
+since
+
+`
+0, are all in Sev
+0
+
+δj
+p
+
+q
+
+F
+
+2πn
+L
+
+ş
+
+ş
+F
+
+Σµ
+p
+
+E
+p
+
+dj
+p
+
+n
+
+qqqp
+
+q “
+
+L´ 1
+2 ζ
+
+1
+2 ´
+
+2πin
+L
+
+Fµ
+
+δj
+p
+
+q
+
+˙
+
+2πn
+L
+
+ˆ
+
+˙
+
+ˆ
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+15
+
+by (5.6), and by (5.9) one gets
+
+φj
+
+L
+p
+
+F
+q
+
+Σµ
+p
+
+E
+p
+
+dj
+p
+
+n
+
+ζ
+
+qqqp
+
+q “
+
+1
+2 ´
+
+2πin
+L
+
+fn
+
+L
+p
+
+L
+
+V.
+
+q @
+
+P
+
+ÿ
+
+ˆ
+One ﬁnally covers K by ﬁnitely many such open sets V and use a partition of
+unity subordinated to this covering to obtain smooth functions ϕℓ
+,
+8q
+Sev
+gℓ
+gℓ
+N , of
+n
+0
+q
+p
+|
+on K. This shows that ξ belongs to the closure of
+is equal to ζ
+(cid:3)
+C8
+U, ΣE
+0 p
+
+such that the Fourier component of index n,
+
+2πin
+L
+fn
+L
+p
+U, L2
+C8
+0 p
+˘
+
+1
+2 ´
+Sev
+0 qq Ă
+`
+p
+
+C8
+0,
+c p
+ϕℓΣE
+
+| ď
+
+q
+.
+q
+
+ř
+
+˙
+
+P
+
+P
+
+We recall that the space of global sections H 0
+Grothendieck topos T is deﬁned to be the set HomT
+terminal object of T . For T
+open set U
+8q
+we understand an element of HomS
+viewed as a sheaf on
+
+of a sheaf of sets F in a
+q
+1, F
+, where 1 denotes the
+q
+p
+S and F a sheaf of sets on
+0,
+, 1 assigns to an
+r
+, on which Nˆ acts as the identity. Thus,
+as a global section ξ of F , where F is
+
+invariant under the action of Nˆ.
+
+“
+the single element
+
+˚
+1, F
+p
+
+T , F
+p
+
+Ă r
+
+8q
+
+0,
+
+0,
+
+q
+
+With the notations of Proposition 5.2 and for ξ
+
+, we write
+q
+for the (multiplicative) Fourier components of ξ. Then we have
+
+HomS
+
+P
+
+1, L2
+p
+
+ξ
+
+L, n
+p
+
+q
+
+:
+
+“
+
+F
+
+ξ
+p
+
+n
+
+qp
+
+q
+
+r
+
+8q
+
+p
+
+Lemma 5.3. The following facts hold
+
+(i) The map
+
+(5.10)
+
+γ : H 0
+
+S , L2
+p
+
+q Ñ
+
+C8
+
+0 pr
+
+0,
+
+, C
+
+8q
+
+C8
+
+0 pr
+
+0,
+
+q ˆ
+
+, C
+
+8q
+
+q
+
+γ
+
+ξ
+p
+
+q “
+
+ξ
+
+1
+
+q
+
+p˘
+
+is an isomorphism of C-vector spaces.
+S , ΣE
+H 0
+is the closed ideal (for the Frechet topol-
+p
+p
+, C
+), generated by the multiplication with the functions
+q
+8q
+
+0,
+
+qq
+
+p
+
+(ii) The subspace γ
+ogy on C8
+0 pr
+2πi
+ζ
+.
+L
+
+1
+2 ¯
+Proof. (i) Let ξ
+
+qq “
+L´ 1
+
+2
+
+‰
+ą
+L d˚u
+
+˘
+
+`
+
+P
+
+HomS
+invariant under the action of Nˆ, i.e. such that σn
+L, n
+. The Fourier components
+q
+p
+of L
+P r
+equality σn
+
+, L2
+0 pr
+q
+8q
+for all pairs
+qq “
+of any such section are smooth functions
+0, as well as all their derivatives. The
+0,
+
+: this is a global section ξ
+q
+
+L, n
+ξ
+q
+p
+0, for n
+entails, for n
+p
+
+C8
+P
+L
+ξ
+p
+
+1, L2
+p
+
+nL
+p
+
+ξ
+p
+
+0,
+
+0,
+
+“
+
+n
+
+q
+
+vanishing at L
+ξ
+L
+p
+
+L
+p
+
+{
+
+q
+
+8q
+ξ
+p
+
+ξ
+
+L, n
+p
+
+q “
+
+ξ
+
+L
+p
+
+qp
+
+u
+
+u´ 2πin
+q
+
+L´ 1
+
+2
+
+“
+
+n
+
+ξ
+
+L
+p
+
+{
+
+qp
+
+u
+
+u´ 2πi
+q
+
+L d˚u
+
+“
+
+1{n
+µ
+
+2
+
+q
+
+p
+
+“
+
+żC
+
+n, 1
+
+n´ 1
+
+q
+q “
+
+and, for n
+n´ 1
+n
+2 g
+
+.
+{
+q
+L, n
+ξ
+p
+0, by the function
+p
+for all n
+
+żCµ
+L
+ξ
+p
+are uniquely determined, for n
+0 by the function
+This shows that the
+p
+L, 0
+L
+L,
+L, 1
+ξ
+ξ
+one has:
+1
+p
+p
+p
+´
+p
+` is dense in R˚
+0. This implies, since Q˚
+L
+g
+` and
+p
+g is assumed to be smooth, that g is proportional to L´ 1
+p
+p
+2 and hence identically
+. This argument
+0, since it corresponds to a global section smooth at 0
+8q
+proves that γ is injective. Let us show that γ is also surjective. Given a pair of
+H 0
+functions f˘ P
+such that
+γ
+f`, f´q
+ξ
+by by means of its Fourier components
+q “ p
+p
+L, 0
+ξ
+set to be
+q
+p
+
+C8
+0 pr
+8q
+. One deﬁnes ξ
+
+we construct a global section ξ
+
+L
+p
+0, and for n
+
+L2
+Cµ
+p
+0 by
+
+. With g
+q
+
+S , L2
+p
+
+ą
+q “
+
+q P
+‰
+
+ă
+q
+
+L
+p
+
+P r
+
+, C
+
+0,
+
+0,
+
+ą
+
+“
+
+p
+
+P
+
+ξ
+
+{
+
+q
+
+q
+
+q
+
+q
+
+:
+
+p
+
+ξ
+
+L, n
+p
+
+q
+
+:
+
+n
+
+“ |
+
+p
+
+´ 1
+L
+2 fsignpnqp
+|
+
+n
+
+.
+q
+
+{
+
+16
+
+ALAIN CONNES AND CATERINA CONSANI
+
+L2
+
+2
+q|
+
+q
+
+n
+
+0,
+
+ř
+
+}B
+
+ξ
+|
+
+ξ
+p
+
+H 0
+
+qq “
+
+L
+p
+
+L
+p
+
+L
+p
+
+Cµ
+p
+
+L, n
+p
+
+are of rapid decay for x
+
+, thus ξ
+.
+q
+q P
+0, thus all derivatives
+are of rapid decay
+S , L2
+with
+p
+
+x
+Since f˘p
+q
+Ñ
+ă 8
+All derivatives of f˘p
+x
+are also of rapid decay for x
+q
+Ñ
+belong to L2
+and that the L2-norms
+k
+k
+Cµ
+L
+ξ
+L
+ξ
+p
+Lp
+Lp
+qq
+B
+p
+p
+qq}
+p
+for L
+0. By construction σn
+, which entails ξ
+ξ
+Ñ
+{
+q
+γ
+f`, f´q
+ξ
+.
+q “ p
+p
+S , ΣE
+H 0
+. By Proposition 5.2 (v), the functions f˘ “
+(ii) Let ξ
+q
+p
+P
+in the closure, for the Frechet topology on C8
+0 pr
+. Conversely, let ξ
+by the functions ζ
+γ
+˘
+´ 1
+Nˆ-invariance of ξ implies
+ξ
+n
+2
+|
+belong to the closure in C8
+L, n
+Fourier components
+0 p
+p
+2πin
+1
+p
+, then Proposition 5.2 (v) again implies ξ
+function ζ
+2 ´
+L
+p
+` on the sheaf L2 is given by the action ϑ on the Fourier
+The action of R˚
+˘
+0,
+`, this
+
+ξ
+are
+, of the ideal generated
+q
+S , L2
+and assume that
+p
+p
+1
+2πi
+is in the closed submodule generated by multiplication with ζ
+. The
+2 ¯
+L
+for n
+0. Thus the
+˘
+of the multiples of the
+. (cid:3)
+S , ΣE
+p
+q
+
+n
+, sign
+qq
+p
+|
+U, C
+q
+
+N˚ and λ
+
+exp L, L
+
+L, n
+p
+
+1
+2 ¯
+
+8q
+H 0
+
+L,
+p
+
+q “ |
+
+L
+p
+
+2πi
+L
+
+H 0
+
+ξ
+p
+
+R˚
+
+, n
+
+, C
+
+`
+‰
+
+0,
+
+˘
+
+{|
+
+n
+
+p
+
+P
+
+P
+
+P
+
+1
+
+`
+
+`
+
+ξ
+
+ξ
+
+q
+
+q
+
+q
+
+q
+
+q
+
+P p
+
+8q
+
+P
+
+P
+
+components of its sections ξ. With µ
+is
+(5.11)
+
+“
+
+ξ
+λ
+ϑ
+q
+p
+
+L, n
+p
+
+q “
+
+L´ 1
+
+2
+
+ξ
+
+λ´1u
+p
+
+u´ 2πin
+q
+
+L d˚u
+
+“
+
+λ´ 2πin
+
+L L´ 1
+
+2
+
+ξ
+
+v
+p
+
+v´ 2πin
+q
+
+L d˚v
+
+“
+
+żCµ
+
+{
+
+żCµ
+ξ
+
+λ´ 2πin
+
+L
+
+“
+
+L, n
+p
+
+q
+
+p
+
+The following result explains in particular how the quotient sheaf L2
+
+handles eventual multiplicities of critical zeros of the zeta function.
+
+ΣE on S
+
+{
+
+Theorem 5.4. The induced action of R˚
+is canonically isomorphic to the action of R˚
+quotient of the Schwartz space S
+of ζ
+
+R
+p
+
+is
+
+q
+
+.
+
+` on the global sections H 0
+ΣE
+q
+`, via multiplication with λis, on the
+by the closure of the ideal generated by multiples
+
+S , L2
+p
+
+{
+
+1
+2 `
+
+H 0
+
+S , L2
+p
+ΣE on
+{
+and a section η
+
+S , L2
+ΣE
+qq
+p
+, there exists
+V, L2
+such
+is the restriction of ξ to V . The Fourier com-
+Nˆ
+(see (5.4)) is equal
+
+V . Since ξ is Nˆ-invariant, for any n
+
+8q
+C8
+0 p
+
+q Ñ
+0,
+r
+
+P
+
+P
+
+{
+
+q
+
+˘
+
+η
+
+P
+
+0,
+
+P r
+
+8q
+
+ΣE
+
+Proof. We ﬁrst show that the canonical map q : H 0
+`
+: as a section of L2
+
+q
+ΣE
+
+{
+0, ǫ
+
+qq
+of 0
+
+“ r
+V, L2
+
+q
+are meaningful for L
+V
+p
+
+S , L2
+H 0
+is surjective. Let ξ
+p
+an open neighborhood V
+that the class of η in C8
+0 p
+L, n
+ponents
+p
+P
+the class of F
+n, n
+n, n
+L
+η
+q
+qp
+qp
+{
+n, L2
+to the class of the restriction of η in C8
+V
+0 p
+{
+{
+C8
+V
+0 p
+V
+{
+p
+nL, nk
+p
+
+η
+qp
+Furthermore, the Fourier components of α
+
+, with F
+q
+
+L, k
+α
+p
+
+η
+qp
+
+q
+V
+p
+
+“
+η
+
+L
+p
+
+V
+p
+
+n, n
+
+{
+n, n
+
+“
+ΣE
+
+q “
+
+q ´
+
+q P
+
+.
+q
+
+σn
+
+F
+
+F
+
+n
+
+p
+
+η
+
+{
+
+{
+
+{
+
+1
+2
+
+:
+
+Thus, the functions
+
+η
+p
+
+nL
+p
+
+qq
+. We thus obtain
+q
+n, ΣE
+
+q
+are given by
+
+η
+qp
+
+q
+
+p
+α
+
+p
+L, k
+p
+
+1
+2
+
+η
+
+η
+
+η
+
+n
+
+q ´
+
+q “
+
+L, k
+p
+
+L, k
+p
+
+nL, nk
+p
+are the Fourier components of an element in C8
+n, ΣE
+V
+0 p
+{
+p
+p
+(v), these components are in the closure in C8
+n, C
+V
+0 p
+{
+2πik
+1
+n
+L, 1
+. For k
+function ζ
+2 ´
+L
+q ´
+p
+1
+in C8
+n, C
+of the multiples of the function ζ
+V
+0 p
+2 ´
+`
+q
+{
+n´ 1
+is in the closure in C8
+V, C
+L
+η
+L, n
+η
+p
+0 p
+p
+q ´
+p
+
+q
+. By Proposition 5.2
+q
+of the multiples of the
+q
+1
+η
+nL, n
+is in the closure
+2
+p
+2πi
+. This implies that
+L
+of the multiples of the function
+p
+`
+
+1 the function
+
+˘
+n, 1
+
+q ´
+
+“
+
+p
+
+p
+
+η
+
+˘
+
+{
+
+q
+
+q
+
+q
+
+2
+
+p
+
+p
+
+HOCHSCHILD HOMOLOGY, TRACE MAP AND ζ-CYCLES
+
+17
+
+C8
+0 p
+
+2πin
+1
+ζ
+2 ´
+L
+, n
+L, n
+η
+˘
+`
+ă
+q
+p
+V, L2
+in C8
+0 p
+{
+p
+
+. For k
+1 one obtains a similar result for the Fourier components
+0. Thus, again by Proposition 5.2 (v), one knows that the class of η
+ΣE
+
+s not altered if one replaces η with η1
+
+V, L2
+
+“ ´
+
+:
+
+q
+
+q
+
+q
+
+q
+
+1
+
+p
+
+β
+
+n
+
+n
+
+qq
+
+qq
+
+0,
+
+0,
+
+η1
+
+2 η
+
+, C
+
+, C
+
+8q
+
+8q
+
+q P
+
+“ |
+
+C8
+
+{|
+1
+
+L
+p
+
+U, C
+
+0 pr
+
+q ´
+2πi
+L
+
+L, n
+p
+
+˘
+1
+2 ¯
+
+L,
+p
+˘
+U, L2
+
+0 pr
+and a section β
+
+to f˘ P
+q
+0,
+8q
+Ă r
+
+p
+, with the class of β in C8
+0 p
+q
+
+ΣE
+{
+belong to the closure in C8
+0 p
+
+P
+´ 1
+, sign
+.
+n
+p
+qq
+|
+|
+C8
+V, C
+Next step is to extend the functions η
+0 p
+q
+fulﬁlling the following property. For any open set U
+P
+U, L2
+C8
+being the restriction of ξ to U ,
+0 p
+L
+f˘p
+L,
+of the multiples
+the functions
+p
+. To construct f˘ one considers the sheaf G˘ which
+of the function ζ
+is the quotient of the sheaf of C8
+functions by the closure of the ideal
+`
+˘
+subsheaf generated by the multiples of the function ζ
+. Since the latter is
+a module over the sheaf of C8 functions, it is a ﬁne sheaf, thus a global section
+of G˘ can be lifted to a function. By Proposition 5.2 (v), the Fourier components
+of local sections ξj of L2 representing ξ deﬁne a global section of G˘. The
+ξj
+q
+functions f˘ are obtained by lifting these sections. By appealing to Lemma 5.3, we
+H 0
+let φ
+f`, f´q
+. Then
+p
+0, ǫ
+we show that q
+ξ. We have already proven that the restrictions to V
+q
+“ r
+U, L2
+C8
+are the same. Thus it is enough to show that given L0
+0 p
+q
+of ξ in a small open interval U containing L0, the diﬀerence δ
+ξ0 is a section of
+ΣE. Again by Proposition 5.2 (v), it suﬃces to show that the Fourier components
+L, n
+δ
+. The
+p
+Nˆ-invariance of ξ shows that F
+n. Thus
+by the deﬁning properties of the functions f˘ one has
+p
+
+2πin
+L
+(see (5.5)) is a lift of ξ in U
+
+are in the closure of the ideal generated by multiples of ζ
+
+to be the unique global section such that γ
+
+S , L2
+q
+p
+φ
+q “
+p
+
+0 and a lift ξ0
+φ
+
+1
+2 ´
+
+1
+2 ¯
+
+L,
+p
+
+q “ p
+
+U
+p
+
+φ
+p
+
+2πi
+L
+
+n, n
+
+ξ0
+
+“
+
+´
+
+ą
+
+˘
+
+qp
+
+P
+
+P
+
+1
+
+`
+
+˘
+
+˘
+
+`
+
+{
+
+{
+
+q
+
+q
+
+q
+
+{
+
+ζ
+
+δ
+
+1
+
+F
+
+qp
+
+ξ0
+
+for
+
+q ´
+
+q “
+
+C8
+
+qp˘
+
+n, n
+
+n
+p
+
+U
+p
+
+{
+
+1
+2 ´
+
+ζ˘,
+q
+
+f˘ P
+
+L
+ζ˘p
+
+1
+2 ¯
+
+,
+q
+is in the closure of the ideal generated by the multiples of
+
+2πi
+U, C
+L
+p
+With a similar argument and using the invariance of φ under the action of F
+one obtains that
+2πin
+ζ
+L
+We have thus proved that q : H 0
+obtains the exact sequence
+S , ΣE
+p
+
+S , L2
+ΣE
+(5.12)
+{
+p
+qq Ñ
+` on the bundle L2. For
+This sequence is equivariant for the action (5.11) of ϑ of R˚
+h
+
+is surjective. One then
+
+S , L2
+p
+
+S , L2
+p
+
+S , L2
+p
+
+˙
+U
+p
+
+one has
+
+qq Ñ
+
+q Ñ
+
+q Ñ
+
+n, n
+
+H 0
+
+H 0
+
+H 0
+
+H 0
+
+ΣE
+
+L1
+
+Ñ
+
+0.
+
+qq
+
+ˆ
+
+p
+
+0
+
+˘
+
+`
+
+{
+
+{
+
+q
+
+.
+
+.
+
+`, d˚u
+
+R˚
+p
+
+q
+
+P
+
+2πn
+L
+
+F
+
+q
+
+ξ
+
+˙
+
+ˆ
+
+qp
+
+0,
+
+.
+q
+
+q “
+
+ξ
+q
+
+L, n
+
+0 pr
+
+{
+
+(5.13)
+
+h
+ϑ
+p
+p
+
+L, n
+p
+
+h
+p
+To obtain the required isomorphism between the two spectral realizations, one uses
+the isomorphism (5.10) of Lemma 5.3. Denote for short
+C8
+. One maps the Schwartz space S
+
+R
+q
+p
+f
+Φ˘p
+f
+Φ is well deﬁned since all derivatives of Φ˘p
+function f
+sequence (5.12), together with Lemma 5.3, then gives an induced isomorphism
+
+0 (any
+q
+is of rapid decay as well as all its derivatives). The exact
+
+q
+˘
+tend to 0 when L
+
+C8
+0 q
+p
+f
+L
+
+2
+C8
+0 q
+p
+2 by
+
+f
+, Φ´p
+q
+
+f
+Φ`p
+
+8qq ˆ
+
+2π
+L
+
+qp
+L
+
+q “ p
+
+R
+p
+
+0 pr
+
+,
+qq
+
+8qq
+
+C8
+
+f
+p
+
+Ñ
+
+to
+
+0,
+
+“
+
+“
+
+qp
+
+ˆ
+
+˙
+
+Φ
+
+S
+
+p
+
+P
+
+q
+
+.
+
+:
+
+γ : H 0
+
+S , L2
+p
+
+{
+
+ΣE
+
+2
+C8
+0 q
+
+qq » p
+
+C8
+0 ζ` ˆ
+
+{
+
+C8
+
+0 ζ´
+
+.
+
+`
+
+˘
+
+18
+
+ALAIN CONNES AND CATERINA CONSANI
+
+In turn, the map Φ induces a morphism
+˜Φ : S
+
+S
+
+2
+C8
+0 q
+
+q{p
+
+ζ
+q
+
+R
+p
+
+R
+0 ζ´
+p
+By (5.13) this morphism is equivariant for the action of R˚
+˘
+an isomorphism since elements of its range have ﬁnite limits at
+injective and its range contains all elements of
+L
+Since ζ˘p
+isomorphism.
+
+C8
+0 q
+p
+tends to a ﬁnite non-zero limit when L
+
+`. The map Φ is not
+. However it is
+8
+2 which have compact support.
+0, ˜Φ is an
+(cid:3)
+
+C8
+0 ζ` ˆ
+
+1
+2 ¯
+
+q Ñ p
+
+2πi
+L
+
+C8
+
+q “
+
+Ñ
+
+`
+
+ζ
+
+{
+
+.
+
+`
+
+˘
+
+Remark 5.5. By a Theorem of Whitney (see [12], Corollary 1.7), the closure
+R
+q
+p
+Z. Thus if any such
+` on the global
+ą
+ΣE admits a non-trivial Jordan decomposition of
+{
+
+of the ideal of multiples of ζ
+which vanish of the same order as ζ at every (critical) zero s
+`
+zero is a multiple zero of order m
+sections of the quotient sheaf L2
+the form
+
+˘
+1, one ﬁnds that the action of R˚
+
+is the subspace of those f
+
+1
+2 `
+
+in S
+
+R
+p
+
+is
+
+S
+
+P
+
+P
+
+q
+
+with N
+
+m
+λ
+q
+p
+
+“
+
+0 and
+
+N
+
+1
+p
+
+`
+
+ξ
+ϑ
+λ
+q
+p
+u
+1
+qqp
+p
+
+λis
+N
+
+ξ
+p
+v
+p
+
+`
+qq “
+
+“
+`
+References
+
+ξ
+N
+,
+λ
+q
+q
+p
+N
+1
+`
+
+uv
+p
+
+for all u, v
+
+q
+
+R˚
+`.
+
+P
+
+[1] R. J. Backlund, ¨Uber die Nullstellen der Riemannschen Zetafunktion. Acta Math., 41, 345–
+
+375.
+
+[2] A. Connes, Noncommutative geometry, Academic Press (1994).
+[3] A. Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta
+
+function. Selecta Math. (N.S.) 5 (1999), no. 1, 29–106.
+
+[4] A. Connes, An essay on the Riemann Hypothesis. Open problems in mathematics, 225–257,
+
+Springer, [Cham], 2016.
+
+[5] A. Connes, C. Consani, Geometry of the Arithmetic Site. Adv. Math. 291 (2016), 274–329.
+[6] A. Connes, C. Consani, Geometry of the Scaling Site. Selecta Math. (N.S.) 23 (2017), no. 3,
+
+1803–1850.
+
+[7] A. Connes, C. Consani, Spectral
+
+triples and ζ-cycles. Preprint (2021). Available at
+
+https://arxiv.org/pdf/2106.01715.pdf
+
+[8] A. Connes, C. Consani, M. Marcolli, Weil’s proof and the geometry of the adeles class space.
+Algebra, arithmetic, and geometry: in honor of Yu. I. Manin. Vol. I, 339–405, Progr. Math.,
+269, Birkhauser Boston, Boston, MA, 2009.
+
+[9] A. Connes, M. Marcolli, Noncommutative Geometry, Quantum Fields, and Motives, Collo-
+
+quium Publications, Vol.55, American Mathematical Society, 2008.
+
+[10] A. Connes, H. Moscovici, The UV prolate spectrum matches the zeros of zeta. Proc. Natl.
+
+Acad. Sci. U.S.A. 119, e2123174119 (2022).
+
+[11] E. L. Lindel¨of, Quelques remarques sur la croissance de la fonction ζpsq, Bulletin des Sciences
+
+Math´ematiques, Tome 32, (1908).
+
+[12] B. Malgrange, Ideals of diﬀerentiable functions. Tata Institute of Fundamental Research
+Studies in Mathematics, No. 3 Tata Institute of Fundamental Research, Bombay; Oxford
+University Press, London 1967 vii+106 pp.
+
+[13] R. Meyer, On a representation of the idele class group related to primes and zeros of L-
+
+functions. Duke Math. J. Vol.127 (2005), N.3, 519–595.
+
+[14] K. Miyazaki, Distinguished elements in a space of distributions. J. Sci. Hiroshima Univ. Ser.
+
+A 24 (1960), 527–533.
+
+Coll`ege de France and IHES, France
+Email address: alain@connes.org
+
+Department of Mathematics, Johns Hopkins University, Baltimore MD 21218, USA
+Email address: cconsan1@jhu.edu
+
+

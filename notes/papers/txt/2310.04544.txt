@@ -1,0 +1,2051 @@
+3
+2
+0
+2
+
+p
+e
+S
+0
+3
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+4
+4
+5
+4
+0
+.
+0
+1
+3
+2
+:
+v
+i
+X
+r
+a
+
+A remark on density theorems for Riemann’s
+zeta-function
+
+by
+J´anos Pintz∗
+
+Dedicated to the memory of Jingrun Chen on the occasion of
+the 50th anniversary of the publication of his celebrated (1 + 2)
+theorem on Goldbach’s conjecture
+
+1
+
+The plausibility of the Riemann Hypothesis (RH) is supported (among oth-
+ers) by results of type
+(1.1)
+
+N(σ, T ) :=
+
+= o(N(T )) with N(T ) :=
+
+Xζ(β+iγ)=0
+β≥σ, 0≤γ≤T
+
+T
+2π
+
+1
+
+∼
+
+log T
+
+Xζ(β+iγ)=0
+0≤γ≤T
+
+valid for all σ > 1/2 as T
+in 1914 ([BL1914]). The ﬁrst estimate of type
+
+→ ∞
+
+. (1.1) was ﬁrst shown by Bohr and Landau
+
+(1.2)
+
+N(σ, T )
+
+≪ε T A(σ)(1−σ)+ε
+was shown few years later by Carlson [Car1920] with
+
+for any ε > 0 and σ
+
+1/2
+
+≥
+
+(1.3)
+
+A(σ)
+
+4σ.
+
+≤
+∗Supported by the National Research Development and Innovation Oﬃce, NKFIH,
+
+KKP 133819.
+
+Keywords and phrases: Riemann’s zeta function, density hypothesis, density theorems.
+2020 Mathematics Subject Classiﬁcation: Primary 11M26, Secondary 11M06.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+It was Hoheisel [Hoh1930] who ﬁrst observed that such estimates lead
+to arithmetic consequences about the diﬀerence of consecutive primes. He
+proved the ﬁrst approximation towards the famous conjecture that there ex-
+ists always a prime between two consecutive squares. This conjecture was
+characterised by Landau [Lan1913] in his plenary talk at ICM1912 in Cam-
+bridge as one of the four main problems of the distribution of primes, besides
+the Riemann Hypothesis. Hoheisel [Hoh1930] could show (pn denotes the nth
+prime)
+
+(1.4)
+
+pn+1 −
+
+pn ≪
+
+pθ
+n with θ = 1
+
+1
+33 000
+
+.
+
+−
+
+In the proof important role was played by Carlson’s density theorem (1.2)–
+(1.3).
+
+Later it was realized that a uniform estimate of the form
+
+(1.5)
+
+A(σ)
+
+≤
+
+A for all σ
+
+1
+2
+
+≥
+
+yields (combined with a slightly better zero-free region than the classical one
+of de la Vall´ee Poussin)
+
+(1.6)
+
+pn+1 −
+
+pn ≪ε p1−1/A+ε
+
+n
+
+for any ε > 0.
+
+In particular, the best possible estimate A = 2 would almost imply Lan-
+dau’s conjecture. This is especially remarkable in light of the fact that even
+assuming the Riemann Hypothesis the best estimate we know is
+
+(1.7)
+
+pn+1 −
+
+pn ≪
+
+n logC pn
+p1/2
+
+(with C = 2 easily by the Riemann–Von Mangoldt explicit formula, with
+C = 1 by a deeper argument of Cram´er [Cra1921]).
+
+This explains the signiﬁcance of the Density Hypothesis (DH) which
+
+states
+
+(1.8)
+
+N(σ, T )
+
+≪
+
+T 2(1−σ) logC T with some C > 0 for all σ
+
+1
+2
+
+,
+
+≥
+
+or, in a slightly weaker form, using the notation (1.2),
+
+(1.9)
+
+A(σ)
+
+≤
+
+2 for all σ
+
+1/2
+
+≥
+
+N(σ, T )
+
+≪ε T 2(1−σ)+ε
+
+.
+
+⇐⇒
+
+(cid:0)
+
+2
+
+(cid:1)
+
+The Riemann Hypothesis clearly implies the Density Hypothesis. How-
+
+ever, Ingham [Ing1937] showed that also the Lindel¨of Hypothesis (LH)
+(1.10)
+1
+2
+
+= 0, where µ(α) = inf
+
+T µ for σ
+
+ζ(σ + it)
+
+α, 1 <
+
+µ;
+
+| ≤
+
+≥
+
+µ
+
+{
+
+|
+
+|
+
+t
+| ≤
+
+(cid:18)
+
+(cid:19)
+implies DH.
+
+T
+
+}
+
+In 1954 Tur´an [Tur1954] used his celebrated power-sum method [Tur1953],
+[Tur1984] to give a diﬀerent proof of Ingham’s result that LH implies DH. In
+the same work he came very close to breaking the DH in the vicinity of the
+boundary line σ = 1. In the following we will use the notation:
+
+(1.11)
+
+s = σ + it, σ = 1
+
+η, A(1
+
+−
+
+−
+
+η) = B(η).
+
+His result was with a small constant c1 [Tur1954]
+
+(1.12)
+
+N(1
+
+−
+
+η, T )
+
+≪
+
+or with our new notation
+
+T 2η+η1.14
+
+log6 T for η < c1,
+
+(1.13)
+
+B(η)
+
+≤
+
+2 + η0.14 for η < c1.
+
+It was 16 years later when G. Hal´asz and Tur´an succeeded to break the
+DH [HT1969], that is, to prove (in the reﬁned form appearing as Theorem
+38.2 of Tur´an’s book [Tur1984]) with the notation (1.1)–(1.2), (1.11)
+
+(1.14) B(η)
+
+1.2
+
+≤
+The proof was based on
+
+·
+
+105η1/2, more precisely N(σ, T ) < T 1.2·105η3/2
+
+logC T.
+
+(i) Vinogradov’s estimate µ(1
+
+−
+(ii) Tur´an’s power-sum method;
+
+η3/2;
+
+η)
+
+≪
+
+(iii) a simple but ingenious idea of Hal´asz [Hal1968].
+
+Soon after this Bombieri [Bom1971] gave a diﬀerent proof using ideas
+from the large sieve coupled with (i) and (iii). Further, Montgomery has
+shown the DH for σ
+1/10 ([Mon1969], [Mon1971]). Using
+≤
+another simple but ingenious idea Huxley [Hux1972] (with a reﬁnement of
+Montgomery) reached the DH for η
+
+1/6 and proved that
+
+9/10, i.e. η
+
+≥
+
+≤
+
+(1.15)
+
+A(σ)
+
+≤
+
+12/5 for σ > 1/2.
+
+3
+
+The DH was shown for larger and larger ranges, until improving the result
+
+σ > 11/14 of Jutila [Jut1977] Bourgain proved its validity [Bou2000] for
+
+(1.16)
+
+σ
+
+≥
+
+25/32
+
+η
+
+≤
+
+⇐⇒
+
+7/32.
+
+Another direction of the research was to give strong density estimates
+for small values of η (often especially for η
+0). In this direction the most
+important results were reached (in alphabetical order) by Bourgain, Ford,
+Heath-Brown, Huxley, Ivic, Jutila and Montgomery.
+
+→
+
+All these results use the large sieve and in some form the mentioned idea
+of Hal´asz, which needs η
+1/4. This is also the reason that they cannot
+give improvements of the classical zero-density theorem of Ingham [Ing1940],
+A(σ)
+
+σ), which is still the best today in the whole range
+
+3/(2
+
+≤
+
+≤
+
+−
+
+(1.17)
+
+1
+2
+
+,
+
+3
+4
+
+σ
+
+∈
+
+(cid:20)
+
+⇐⇒
+
+(cid:21)
+
+η
+
+1
+4
+
+,
+
+1
+2
+
+.
+
+(cid:21)
+
+∈
+
+(cid:20)
+
+Recently I gave two alternative variants for proving the DH for small
+values of η. In [Pin2022] the goal was to reach a possibly simple proof while
+in [Pin2023] to show the strongest possible result both in speciﬁc ranges of
+η < 1/12 and for η
+0. Both proofs were based on Vinogradov’s method
+and Hal´asz’s idea. However, in the second [Pin2023] it was important to use
+recent deep results of Heath-Brown [Hea2017], further of Bourgain, Demeter
+and Guth [BGD2016].
+
+→
+
+2
+
+The goal of the present work is
+
+(i) to give a possibly simple proof for all values of σ > 3/4, i.e. η < 1/4,
+
+which
+
+(ii) breaks the DH for the non-negligible range σ
+
+further gives
+
+7/8, i.e. η
+
+1/8,
+
+≤
+
+≥
+
+(iii) explicit density theorems for diﬀerent ranges of all η < 1/4 with B(η)
+
+0 as η
+
+0 and
+
+→
+
+→
+
+(iv) besides the (possibly indispensable) simple idea of Hal´asz uses only
+classical knowledge of the theory of Riemann’s zeta-function (classical
+in the sense that known since at least hundred years).
+
+4
+
+This means that we avoid the use of Tur´an’s method, the large sieve,
+Vinogradov’s method, further mean and large value theorems. However, to
+break the DH we need the estimate reached by the Weyl–Hardy–Littlewood
+method [Lit1922] (see also (5.15.1) of the book of Titchmarsh [Tit1951], 2nd
+edition, or the paper of Landau [Lan1924]):
+
+(2.1)
+
+µ
+
+1
+(cid:18)
+
+−
+
+1
+2ℓ
+
+≤
+
+(cid:19)
+
+1
+(ℓ + 2)2ℓ ,
+
+0
+
+ℓ
+
+≥
+
+which is proved by Hardy and Littlewood in [Lit1922] for ℓ
+true for ℓ = 0 (µ(0) = 1/2) by the functional equation and µ(1) = 0.
+
+≥
+
+1, but it is also
+
+Alternatively, the method of Van der Corput would yield results of similar
+type [Cor1921], [Cor1922]. However, the use of (2.1) seems to be simpler,
+although Van der Corput’s result
+
+(2.2)
+
+1
+(cid:18)
+−
+may yield even stronger estimates for N(1
+
+2ℓ
+
+2ℓ
+
+−
+
+≤
+
+−
+
+(cid:19)
+
+µ
+
+2
+
+ℓ
+
+1
+
+2
+
+(ℓ
+
+≥
+
+2)
+
+η, T ) in many ranges of η.
+In order to formulate our results we need some more notation. For ℓ
+
+−
+
+let
+
+(2.3)
+
+(2.4)
+
+(2.5)
+
+αℓ := 1
+
+1
+2ℓ ,
+uℓ := uℓ(η) :=
+
+−
+
+1
+2ℓ ,
+
+η <
+
+σ > αℓ ⇐⇒
+µ(αℓ)
+=
+2−ℓ
+η
+−
+µ(αℓ−1)
+
+,
+
+µ(αℓ)
+αℓ
+σ
+
+−
+
+.
+
+2(2−ℓ
+
+η)
+
+−
+
+vℓ := vℓ(η) := uℓ−1(2η) =
+
+1
+
+≥
+
+By the estimate (2.1) of Hardy and Littlewood we have for η < 1/2ℓ
+
+(2.6)
+
+uℓ ≤
+
+1
+(ℓ + 2)(1
+
+,
+
+2ℓη)
+
+−
+
+vℓ ≤
+
+1
+(ℓ + 1)(1
+
+for ℓ
+
+1.
+
+≥
+
+2ℓη)
+
+−
+
+Theorem 1. For ℓ
+
+≥
+
+(2.7)
+
+1, η < max(1/3, 2−ℓ) we have
+
+B(η)
+
+≤
+
+max
+
+4uℓ(η), 3vℓ(η)
+
+.
+
+This implies a series of explicit density theorems for small values of η and
+the conditional result of Hal´asz and Tur´an [HT1969] that assuming (LH) we
+T ε for σ > 3/4, which is for σ > 3/4 a strong improvement
+have N(σ, T )
+of the theorem of Ingham [Ing1937] stating A(σ) = 2 for σ > 1/2 on LH.
+
+≪
+
+(cid:0)
+
+(cid:1)
+
+5
+
+Corollary 1. The Lindel¨of Hypothesis implies
+
+(2.8)
+
+N(σ, T )
+
+≪ε T ε
+
+for σ > 3/4.
+
+Proof. Choosing ℓ = 2, LH and the deﬁnition (2.4)–(2.5) yield uℓ(η) =
+vℓ(η) = 0 for η < 1/4.
+
+Corollary 2. For ℓ
+
+2, η < 1
+
+2ℓ we have
+
+≥
+
+(2.9)
+
+Proof. 4/(ℓ + 2)
+
+B(η)
+
+4
+(ℓ + 2)(1
+
+≤
+
+.
+
+2ℓη)
+
+−
+
+3/(ℓ + 1) for ℓ
+
+2 with equality for ℓ = 2.
+
+≥
+
+≥
+
+Denoting by log2 x the logarithm of base 2 and choosing C large (C =
+
+C(η)
+→ ∞
+1/2ℓ(1+o(1)), 1/2ℓ+C
+
+as η
+
+→
+
+from (2.7).
+
+0, but with C(η) = o(log 1/η)), we obtain for η
+
+∈
+
+(cid:2)
+(cid:3)
+Corollary 3. B(η)
+
+≤
+
+4
+(ℓ + 2)(1
+
+4(1 + o(1))
+log2(1/η)
+
+=
+
+4 log 2(1 + o(1))
+log(1/η)
+
+.
+
+2−C) ≤
+
+−
+
+This is naturally weaker than a result obtainable by Vinogradov’s method
+0 beyond
+
+(see [Pin2023] and [Hea2017]) but shows still B(η)
+breaking DH in some interval for σ = 1
+
+η close to the point s = 1.
+
+−
+However, Corollary 2 yields also interesting (although already known)
+consequences form small values of ℓ (ℓ = 2, 3, for example), i.e., for relatively
+large ranges of η. On the other hand, they are often stronger than earlier
+results proved in a more complicated way (as 11.30 of Ivic [Ivi1985], for
+example).
+
+0 as η
+
+→
+
+→
+
+Corollary 4. B(η)
+
+Corollary 5. B(η)
+
+1
+
+−
+
+4η
+
+≤
+
+1
+
+for η < 1/4.
+
+≤
+
+5(1
+
+4
+
+−
+
+8η)
+
+for η < 1/8.
+
+Corollary 4 breaks the DH for η
+
+7/8, while Corollary 5
+1/8, i.e. σ
+3/40. But Corollary 5 is sharper than Corollary 4 for η < 1/24.
+
+≥
+
+≤
+
+only for η
+Even the case ℓ = 1 of Theorem 1 yields
+
+≤
+
+Corollary 6. B(η)
+
+≤
+
+2(1
+
+3
+
+−
+
+2η)
+
+for η < 1/2.
+
+6
+
+This breaks the DH also for η
+
+1/8, that is, for σ
+
+than Corollary 4 for η < 1/8 (sharper for η > 1/8).
+
+≤
+
+7/8, but it is weaker
+
+≥
+
+Remark 1. Corollary 6 is trivial for η
+
+2/7, i.e. σ
+
+5/7.
+
+≥
+Remark 2. It is an interesting feature of Corollary 6 that it gives a non-trivial
+result even in the range η
+[1/4, 2/7] in contrary to most applications of
+Hal´asz’s method, although it is weaker there than the classical theorem of
+Carlson [Car1920] or the one of Ingham [Ing1940].
+
+≤
+
+∈
+
+Remark 3. It is also interesting to note that the case ℓ = 1 would yield the
+inequality of Corollary 6 with any estimate µ(1/2)
+3/16 and any estimate
+c2 (c2 > 0) would break the DH for η < c3(c2) with
+of type µ(1/2)
+c3(c2) > 0.
+
+1/4
+
+≤
+
+≤
+
+−
+
+Finally, similarly to Theorem 1 we can give an alternative proof of the
+
+case (12.10) of Theorem 12.1 of Montgomery [Mon1971] which states
+
+Theorem 2. B(η)
+
+2
+
+−
+
+.
+
+η
+
+≤
+
+1
+
+Remark 4. This represents a slight improvement of the Theorem of Tur´an
+(cf. (1.12)–(1.13)) since
+
+(2.10)
+
+2
+
+−
+
+η
+
+1
+
+= 2 + 2η + O(η2) as η
+
+0.
+
+→
+
+Remark 5. The proof of Theorem 2 does not need for any ℓ the estimate (2.1)
+of Hardy and Littlewood or the estimate of Van der Corput (apart from the
+“trivial” case µ(0) = 1/2 following from the functional equation).
+
+3 Proof of Theorem 1
+
+γν −
+
+We will consider a maximal number K of zeros ̺j = βj + iγj = 1
+ηj + iγj
+ηj ≥
+= j (j, ν
+[T /2, T ],
+with γj ∈
+σ := 1
+η. Let ε be suﬃciently small positive, not necessarily the same
+−
+at diﬀerent occurrences, ε < ε0(η, ℓ, T ). Analogously let C be a constant,
+diﬀerent at diﬀerent occurrences with C
+C(η, ℓ). Further, let µ be the
+M¨obius function and with uℓ in (2.4) let
+
+−
+[1, K]) and βj := 1
+
+γj| ≥
+
+1 for ν
+
+−
+
+≤
+
+∈
+
+|
+
+(3.1)
+
+η < min(1/3, 1/2ℓ), X = T ε2
+
+, Y = T uℓ+ε, Y1 = e3Y, λ = log Y,
+
+7
+
+6
+= max(λ, log T )
+
+MX (s) =
+
+µ(n)n−s,
+
+an =
+
+µ(d).
+
+Xn≤X
+In the proof we will use Perron’s formula [Per1908] in the following special
+
+Xd|n,d≤X
+
+L
+
+form.
+
+Lemma 1. Let s = σ0 + t, 1
+1
+
+T , [N1, N2] = I(N)
+
+N
+
+t
+| ≤
+
+≤ |
+[N, 2N]
+
+≤
+
+≤
+
+T , max(1/3, 1
+
+2η)
+
+σ0 ≤
+
+≤
+
+1,
+
+−
+
+(3.2)
+
+S :=
+
+′n−s =
+
+Xn∈I(N )
+
+⊆
+1
+2πi
+
+ζ(s + w)
+
+N w
+
+2 −
+w
+
+N w
+1
+
+dw
+
+Z
+(1−σ0+1/L)
+
+where the dash means that the term n−s is counted by a factor 1/2 if n = N1
+or N2.
+
+Deforming the way of integration along the horizontal lines Im w =
+
+from the segment of Re w = 1
+σ0 Im w = [
+αℓ−1 −
+s, cutting the third term into two parts according to κ
+w = 1
+−
+we obtain
+
+2T
+to the vertical line segment Re w =
+2T, 2T ] and counting the contribution of the pole at
+0
+
+σ0 + 1/
+
+0, or κ
+
+≥
+
+−
+
+−
+
+±
+
+≤
+
+L
+
+(3.3)
+
+S
+
+≪
+
+N 1−σ0
+t
+|
+|
+N 1−σ0
+t
+|
+|
+by σ0 + κ
+if
+
+≪
+
+≥
+
++
+
+L
+
+N −(σ0−αℓ−1)T µ(αℓ−1)+o(1) +
+
+max
+αℓ−1−σ0≤κ≤1−σ0+1/L
+
+N κT µ(σ0+κ)−1+o(1)
+
++ T −ε + T µ(αℓ−1)−1+o(1) + T 1−σ0+µ(σ0)−1+o(1)
+
+≪
+
+αℓ−1, N
+
+≤
+
+T , µ(σ0)
+
+σ0 −
+
+ε, σ0 −
+
+αℓ−1 ≥
+
+≤
+
+1
+2ℓ−1 −
+
++ T −ε,
+
+N 1−σ0
+t
+|
+
+|
+2η = 2(2−ℓ
+
+η)
+
+−
+
+(3.4)
+
+N
+
+≫
+
+T vℓ+ε = T uℓ−1(2η)+ε
+
+N 1/2ℓ−1
+
+2η
+
+−
+
+≫
+
+⇐⇒
+
+T µ(αℓ−1)+ε.
+
+Finally we will use for any ﬁxed k the well known property of the gener-
+
+alized divisor function:
+
+(3.5)
+
+τk(n) =
+
+no(1)
+
+for n
+
+1
+
+≪
+
+.
+
+→ ∞
+
+n1n2...nk=n
+X
+
+Remark. If N
+≥
+simple partial summation) yields
+
+T then the simple Theorem 4.11 of [Tit1951] (provable by
+
+(3.6)
+
+N 1−σ0
+
+S
+
+≪
+
+t
+|
+
+|
+
++ O(N −σ0).
+
+(cid:14)
+
+8
+
+Similarly to (4.2) of [Pin2023] we start with
+
+1
+2πi
+
+1
+2πi
+
+(3.7)
+
+Ij : =
+
+=
+
+≪
+
+≪ L
+
+∞
+
+Z(3)
+
+n=1
+X
+
+an
+ns+̺j
+
+es2/L+λs
+s
+
+ds =
+
+1
+2πi
+
+Z(3)
+
+MX(s + ̺j)ζ(s + ̺j)
+
+es2/L+λs
+s
+
+ds
+
+MX(s + ̺j)
+
+ζ(s + ̺j)
+s
+
+es2/L+λsds + O
+
+Y ηj
+L
+γj|
+|
+
+(cid:18)
+
+e−γ2
+
+j /L
+
+(cid:19)
+
+Z(αℓ−βj)
+∞
+
+X
+
+|
+
+γj + t
+|
+1 +
+
+µ(αℓ)+o(1)
+
+Z−∞
+|
+T µ(αℓ)+o(1)Y −(1/2ℓ−η) + O
+
+t
+|
+
+e−|γj +t|2/LY −(1/2ℓ−η)dt + O
+
+e−T 2/5L
+(cid:16)
+
+(cid:17)
+
+e−T 2/5L
+
+= o(1),
+
+(cid:16)
+
+(cid:17)
+
+−
+
+iγj and we used the trivial estimates
+
+where the error term represented the contribution of the pole of ζ at s =
+̺j = ηj −
+.
+1
+≪ L
+On the other hand, we can evaluate the LHS of (3.7) according to the
+X and for n = 1 we can
+4. The pole at s = 0 contributes 1 and
+Y −4) = o(1). Further, we can shift the line of integration
+,
+
+value of n. First we note that an = 0 for 1 < n
+shift the line of integration to Re s =
+the integral is O(
+to Re s =
+n−u
+
+for n > Y1 = Y e3, obtaining by
+
+L
+M −(u−1) the relation
+
+X, MX (1)
+
+an| ≤
+
+MX (s)
+
+2√n
+
+τ (n)
+
+≪ |
+
+n̺j
+
+| ≤
+
+≤
+
+−
+
+≤
+
+L
+
+|
+
+|
+
+|
+
+≪
+
+n>M
+P
+
+(3.8)
+
+an
+ns+̺j
+
+es2/L+λsds
+
+≪
+
+Z(L) Xn≥eλ+3
+
+∞
+
+e−(λ+3)(L−1)+λL
+
+e(L2−t2)/Ldt = o(1).
+
+Z−∞
+
+an
+n̺j
+
+f (n) = 1 + o(1),
+
+Summarizing the above we get
+
+(3.9)
+
+where by λ
+
+≪ L
+
+(3.10)
+
+f (n) : =
+
+1
+2πi
+
+Z(3)
+
+x<n<Y1
+X
+we have for every n
+
+1
+
+≥
+es2/L+(λ−log n)s
+s
+
+ds =
+
+1
+2πi
+
+Z(1/L)
+
+es2/L+(λ−log n)s
+s
+
+ds
+
+9
+
+∞
+
+≪
+
+Z−∞
+
+|
+
+e−t2/L
++ it
+1/
+|
+
+L
+
+dt
+
+≪ L
+
+log
+
+.
+
+L
+
+From this we obtain by a dyadic subdivision of (X, Y1) for some U
+
+∈
+
+(X, Y1) and I(U)
+
+⊆
+K
+
+[U, 2U]
+
+(3.11)
+
+nn−̺j
+a∗
+
+j=1(cid:12)
+Xn∈I(U )
+X
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+K
+
+L
+
+≫
+
+with a∗
+
+n = anf (n).
+
+nn−s with n
+a∗
+I(U)
+Our strategy is to raise the Dirichlet polynomial
+∈
+Cε−2, to reach
+to a suitable integral power h bounded by log Y1/ log X
+where h, i.e., U h is minimal with the
+a polynomial with n
+condition U h > T vℓ+ε in order to satisfy (3.4) with U = N. The resulting
+polynomial will have coeﬃcients b∗
+an| ≤
+τ (n).
+[U h, (2U)h], (3.11) can be substi-
+
+Further, with a suitable value of M
+
+h by (3.10) and
+
+U h, (2U)h
+
+τh(n)(log
+
+(cid:3)
+h ≪
+
+P
+
+)h
+
+≤
+
+L
+
+L
+
+∈
+
+(cid:2)
+
+|
+
+tuted by
+
+(3.12)
+
+∈
+
+K
+
+b∗
+nn−̺j
+
+K
+h ,
+
+L
+
+≫
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+T vℓ+ε, T 3(vℓ+ε)/2
+
+(cid:16)
+(3.13)
+
+(cid:17)
+
+j=1 (cid:12)
+Xn∈I(M )
+X
+(cid:12)
+(cid:12)
+using H¨older’s inequality. If U
+(cid:12)
+while for X
+
+≥
+
+T vℓ+ε)/2 = T (uℓ−1(2η)+ε)/2 we take h = 2,
+
+T (vℓ+ε)/2 we can ﬁnd an h
+
+U
+∈
+. Let us deﬁne now the numbers ϕj with
+
+≤
+
+Z+ with U h
+ϕj|
+
+∈
+= 1 so that
+
+|
+
+nn−̺j
+b∗
+
+= ϕj
+
+nn−̺j
+b∗
+
+(j = 1, 2, . . . , K)
+
+(cid:12)
+Xn∈I(M )
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xn∈I(M )
+should hold. Hal´asz’s idea is to square the LHS of (3.13), interchange the
+order of summation over j and n and use the Cauchy–Schwarz inequality for
+the sum when n runs through elements of I(M) with
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(3.14)
+
+b∗
+nn−̺j = b∗
+
+nn−1/2
+
+·
+
+n−1/2+ηj −iγj
+
+(n
+
+I(M)).
+
+∈
+
+This gives from (3.2)–(3.5) and (3.12)–(3.13) separating in the second
+
+term the diagonal terms (those with ν = j).
+
+(3.15)
+K 2
+2h ≪  
+
+L
+
+K
+
+ϕj
+
+nn−̺j
+b∗
+
+2
+
+=
+
+K
+
+nn−1/2
+b∗
+
+ϕjn−1/2+ηj −iγj
+
+j=1
+X
+
+Xn∈I(M )
+
+(cid:19)
+
+(cid:18) Xn∈I(M )
+
+j=1
+X
+
+2
+
+(cid:19)
+
+10
+
+2
+
+b∗
+n|
+n
+
+|
+
+K
+
+K
+
+ϕjϕν
+
+(cid:19)(cid:18)
+
+j=1
+X
+
+ν=1
+X
+
+Xn∈I(M )
+K
+K
+
+K(K
+
+1)T −ε + M 2η
+
+−
+
+j=1
+X
+
+ν=1
+X
+
+|
+
+1
+n1−ηj −ην +i(γj −γν )
+
+(cid:19)
+
+1
+γj −
+
+γν|
+
++ KM 2η
+
+(cid:19)
+
+K 2T −ε/2 + KM 2ηT o(1),
+
+(cid:18) Xn∈I(M )
+T o(1)
+
+(cid:18)
+
+≪
+
+≪
+
+≪
+
+leading by M
+
+U 2
+
+h ≤
+
+≍
+
+max
+
+1 , T 3vℓ/2+ε
+Y 2
+
+to the ﬁnal estimate
+
+(3.16)
+
+(cid:0)
+M 2ηT o(1)
+
+K
+
+≪
+
+≪
+
+(cid:1)
+T η max(4uℓ,3vℓ)+ε.
+
+(cid:3)
+
+The proof of Theorem 2 is essentially the same as that of Theorem 1. The
+
+change is that in place of (2.5) we choose now
+
+(3.17)
+
+vℓ = vℓ(η) =: uℓ(2η) and ℓ = 0.
+
+We remark that we can suppose η < 1/3 since otherwise 2/(1
+From (3.17) we obtain similarly to (3.16) by α0 = 0, µ(0) = 1/2
+
+−
+
+η)
+
+≥
+
+1/η.
+
+(3.18)
+
+i.e.,
+
+(3.19)
+
+B(η)
+
+≤
+
+max(4u0(η), 3u0(2η)) = max
+
+2
+
+1
+
+(cid:18)
+
+−
+
+,
+
+η
+
+2(1
+
+3
+
+−
+
+,
+
+2η)
+
+(cid:19)
+
+B(η)
+
+2
+1−η
+3
+2(1−2η)
+
+≤ (
+
+for η
+for η
+
+1/5,
+1/5.
+
+≤
+≥
+
+We note that together with Ingham’s estimate (cf. (12.9) of Theorem 12.1 of
+[Mon1971]) this yields
+
+(3.20)
+
+A(σ)
+
+5/2,
+
+≤
+and so (with the special treatment of the immediate neighbourhood of σ = 1)
+we obtain by (1.5)–(1.6) the result of Montgomery,
+
+(3.21)
+
+pn+1 −
+
+pn ≪ε p3/5+ε
+
+n
+
+.
+
+11
+
+References
+
+[BL1914] Bohr, H., Landau, E., Sur les zeros de la fonction ζ(s) de Riemann,
+
+Comptes Rendus de l’Acad. des Sciences (Paris) 158 (1914), 106–110.
+
+[Bom1971] Bombieri, Enrico, Density theorems for the zeta function, Number The-
+ory Institute (Proc. Sympos. Pure Math., Vol. XX, State Univ. New York,
+Stony Brook, N.Y., 1969), pp. 352–358. Amer. Math. Soc., Providence,
+R.I., 1971.
+
+[Bou1] J. Bourgain, Remarks on Hal´asz–Montgomery type inequalities, in: Ge-
+ometric aspects of functional analysis (Israel, 1992–1994), Oper. Theory
+Adv. Appl. 77, Birkh¨auser, Basel, 1995, 25–39.
+
+[Bou2000] Bourgain, J., On large values estimates for Dirichlet polynomials and
+the density hypothesis for the Riemann zeta function, Internat. Math. Res.
+Notices (2000), no. 3, 133–146.
+
+[BGD2016] Bourgain, J., Demeter, C., Guth, L., Proof of the main conjecture in
+Vinogradov’s mean value theorem for degrees higher than three, Ann. of
+Math. (2) 184 (2016), no. 2, 633-–682.
+
+[Car1920] Carlson, F., ¨Uber die Nullstellen der Dirichletschen Reihen und der
+Riemannschen ζ-Funktion, Arkiv f¨ur Math. Astron. Fys. 15 (20) (1920),
+1–18.
+
+[Cor1921] van der Corput, J. G., Zahlentheoretische Absch¨atzungen, Math. Ann.
+
+84 (1921), 53–79.
+
+[Cor1922] van der Corput, J. G., Versch¨arfung der Absch¨atzungen beim Teiler-
+
+problem, Math. Ann. 87 (1922), 39–65.
+
+[Cra1921] Cram´er, H., Some theorems concerning prime numbers, Ark. Mat. As-
+
+tron. Fys. 15(5) (1921), 1–33.
+
+[Hal1968] Hal´asz, G., ¨Uber die Mittelwerte multiplikativer zahlentheoretischer
+
+Funktionen, Acta Math. Hungar. 19 (1968), No. 3-4, 365–404.
+
+[HT1969] Hal´asz, G. and P. Tur´an, P., On the distribution of roots of Riemann
+zeta and allied functions, I, Journal of Number Theory 1 (1969), 121–137.
+
+[Hea2017] Heath-Brown, D. R., A new kth derivative estimate for a trigonometric
+sum via Vinogradov’s integral (in Russian). English version published in
+Proc. Steklov Inst. Math. 296 (2017), 88–103.
+
+[Hoh1930] Hoheisel, G., Primzahlprobleme in der Analysis, S.-B. Preuss. Akad.
+
+Wiss. Phys.-Math. Kl. (1930), 580–588.
+
+12
+
+[Hux1972] Huxley, M. N., On the diﬀerence between consecutive primes, Invent.
+
+Math. 15 (1972), 164–170.
+
+[Ing1937] Ingham, A. E., On the diﬀerence between consecutive primes, Quart. J.
+
+Math. Oxford Ser. 8 (1937), 255–266.
+
+[Ing1940] Ingham, A. E., On the estimation of N (σ, T ), Quart. J. Math. Oxford
+
+Ser. 11 (1940), 291–292.
+
+[Ivi1985] Ivic, A., The Riemann Zeta-function, Wiley, 1985.
+
+[Jut1977] Jutila, Matti, Zero-density estimates for L-functions, Acta Arithmetica
+
+32 (1977), no. 1, 55–62.
+
+[Lan1913] Landau, E., Gel¨oste und ungel¨oste Probleme aus der Theorie der
+Primzahlverteilung und der Riemannschen Zetafunktion. In: Proc. 5th In-
+ternat. Congress of Math., Vol. 1, 93–108. Cambridge University Press,
+Cambridge 1913.
+
+[Lan1924] Landau, E., ¨Uber die ζ-Funktion und die L-funktionen, Math. Z. 20
+
+(1924), 98–104.
+
+[Lit1922] Littlewood, J. E., Researches in the theory of the Riemann ζ-function,
+
+Proc. London Math. Soc. (2) 20 (1922), Records xxii–xxviii.
+
+[Mon1969] Montgomery, H. L., Zeros of L-functions, Invent. Math. 8 (1969), 346–
+
+354.
+
+[Mon1971] Montgomery, Hugh L., Topics in multiplicative number theory, Lecture
+Notes in Mathematics, Vol. 227, Springer-Verlag, Berlin–New York, 1971.
+ix+178 pp.
+
+[Per1908] Perron, O., Zur Theorie der Dirichletschen
+
+Math. 134 (1908), 95–143.
+
+-Reihen, J. Reine Angew.
+
+L
+
+[Pin2022] Pintz, J., On the density theorem of Hal´asz and Tur´an, Acta Math.
+
+Hungar. 166 (2022), no. 1, 48–56.
+
+[Pin2023] Pintz, J., Density theorems for Riemann’s zeta-function near the
+line Re s = 1, Acta Arithmetica, to appear (online ﬁrst version DOI:
+10.4064/aa210824-10-5).
+
+[Tit1951] Titchmarsh, E. C., The theory of the Riemann zeta-function, Oxford,
+
+Clarendon Press (2nd edition), 1951.
+
+[Tur1953] Tur´an P´al, Az anal´ızis egy ´uj m´odszer´er˝ol ´es annak egyes alka-
+lmaz´asair´ol (in Hungarian) [On a new method in analysis and on some
+of its applications], Akad´emiai Kiad´o, Budapest, 1953. 197 pp.
+
+13
+
+[Tur1954] Tur´an P´al, On the roots of the Riemann zeta function (in Hungarian),
+
+Magyar Tud. Akad. Mat. Fiz. Oszt. K¨ozl. 4 (1954), 357–368.
+
+[Tur1984] P. Tur´an, On a new method of analysis and its applications, John Wiley
+
+& Sons, Inc., New York, 1984. xvi+584 pp.
+
+J´anos Pintz
+ELKH Alfr´ed R´enyi Mathematical Institute
+H-1053 Budapest
+Re´altanoda u. 13–15.
+Hungary
+e-mail: pintz@renyi.hu
+
+14
+
+

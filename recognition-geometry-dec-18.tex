@@ -2732,11 +2732,59 @@ The Cauchy--Riemann identity \(\partial_x v=-\partial_y u\) in $\Omega$ then yie
         In the driver, the current “boxed wall” is upgraded to this holistic outer/log-branch package (since it implies the Poisson pairing hook and matches the intended analytic meaning).
     \end{itemize}
 
-    \item \textbf{B2 (Oscillation certificate for \(\log|\zeta|\)).}
-    The RG theorem also assumes an explicit oscillation/BMO certificate
-    \(\exists M,\ \mathrm{InBMOWithBound}(\log|\zeta|)\,M \wedge M\le C_{\mathrm{tail}}\)
-    (the \texttt{OscillationTarget} in \texttt{RiemannRecognitionGeometry/Assumptions.lean}).
-    \emph{Remark.} This must be phrased for \(\log|\zeta|\) (or an explicitly gamma-renormalized avatar), not for the completed \(\xi/\Lambda\)-channel: the archimedean \(\Gamma_{\mathbb R}\)-factor contributes a linear-in-\(|t|\) drift term in \(\log|\Lambda(\tfrac12+it)|\), which violates global BMO.
+    \item \textbf{B2$'$ (Renormalized/local tail certificate; replaces the global BMO placeholder).}
+    A \emph{global} small-\(\mathrm{BMO}\) bound for \(\log|\zeta(\tfrac12+it)|\) with a tiny constant (e.g.\ \(0.20\)) cannot hold, because critical-line zeros force a universal local mean-oscillation floor unless their logarithmic singularities are explicitly renormalized out (cf.\ \texttt{renormalized\_tail\_bound.md}).
+    The correct “core-math” oscillation target is therefore a \emph{localized renormalized tail} statement.
+
+    Fix an integer \(K\ge 0\). For a Whitney interval \(I=(t_0,L)\) with base segment \(I_R=[t_0-L,t_0+L]\), let \(\mathcal Z(I,\rho;K)\) denote the \emph{finite multiset} of zeros \(\rho'=\beta'+i\gamma'\) of \(\zeta\) (counted with multiplicity) satisfying the enlarged Carleson-window cutoff
+    \[
+      |\gamma'-t_0|\le 2^{K+1}L,\qquad 0\le \beta'-\tfrac12 \le 2^{K+3}L,
+    \]
+    \emph{excluding} the distinguished off-critical zero \(\rho\) under consideration (so \(\rho\notin \mathcal Z(I,\rho;K)\)).
+    Define the corresponding (finite) logarithmic potential
+    \[
+      \Phi_{I,\rho;K}(t)\ :=\ \frac12\sum_{\rho'\in \mathcal Z(I,\rho;K)} \log\!\bigl((t-\gamma')^2+(\beta'-\tfrac12)^2\bigr),
+    \]
+    and the \emph{renormalized tail on \(I\)} by
+    \[
+      f_{\mathrm{tail}}^{I,\rho;K}(t)\ :=\ \log\!\bigl|\zeta(\tfrac12+it)\bigr|\ -\ \Phi_{I,\rho;K}(t),
+      \qquad (t\in I_R).
+    \]
+    The renormalized/local oscillation certificate is the existence of a uniform bound
+    \[
+      \sup_{J\subseteq I_R}\ \frac{1}{|J|}\int_J\Bigl|f_{\mathrm{tail}}^{I,\rho;K}(t)-\mathrm{avg}_J f_{\mathrm{tail}}^{I,\rho;K}\Bigr|\,dt\ \le\ C_{\mathrm{tail}},
+    \]
+    where the supremum runs over subintervals \(J=[a,b]\subseteq I_R\).
+
+    \emph{Driver-level replacement for \texttt{OscillationTarget}.}
+    In Lean this should replace the global placeholder
+    \(\exists M,\ \mathrm{InBMOWithBound}(\log|\zeta|)\,M\wedge M\le C_{\mathrm{tail}}\)
+    by a “local tail” interface (call it \texttt{OscillationTargetTail}): there exists \(K\) such that for every putative off-critical zero \(\rho\) and its associated centered Whitney base interval \(I\), the corresponding \(f_{\mathrm{tail}}^{I,\rho;K}\) has localized BMO norm \(\le C_{\mathrm{tail}}\) on \(I_R\).
+    (This is the smallest form that avoids the critical-line BMO obstruction while still leaving the \(\rho\)-trigger intact.)
+    \emph{Planning note.} A long-term two-route attack plan for discharging B2$'$ (via either a \(\mu\)-Carleson packing theorem or the Route~3 reflection-positivity bridge) is maintained as \texttt{B2\_LONG\_TERM\_STRATEGY.md}.
+
+    \emph{Reduction (auditable core number theory).}
+    A useful way to “box” the arithmetic content of B2$'$ is to reduce it to a single local packing statement for off-critical zeros.
+    Define the \(\sigma\)-weighted off-line zero measure
+    \[
+      \mu\ :=\ \sum_{\Re\rho>1/2}\bigl(\Re\rho-\tfrac12\bigr)\,\delta_{(\Im\rho,\ \Re\rho-\tfrac12)}.
+    \]
+    If \(\mu\) satisfies a Carleson packing bound \(\mu(Q(I))\le C_\mu |I|\) for every Carleson box \(Q(I)\) above \(I_R\), then the far-field contribution to the Poisson/Dirichlet energy of the tail decays geometrically in the dyadic cutoff \(K\), yielding the localized BMO bound in B2$'$ after choosing \(K\) large enough.
+    (A precise statement and proof skeleton are recorded as the boxed lemma “\(\mu\)-Carleson \(\Rightarrow\) small tail oscillation” in \texttt{B2\_LONG\_TERM\_STRATEGY.md}.)
+
+    \begin{lemma}[\(\mu\)-Carleson \(\Rightarrow\) B2$'$ (quantitative tail decay)]\label{lem:mu_carleson_implies_B2prime}
+    Assume \(\mu\) is Carleson with constant \(C_\mu\), i.e.\ \(\mu(Q(I))\le C_\mu |I|\) uniformly for all base intervals \(I\).
+    Then there exist absolute constants \(A_0,A_1>0\) (depending only on the fixed Carleson aperture/normalizations) such that for the renormalized tail \(f_{\mathrm{tail}}^{I,\rho;K}\) defined above one has
+    \[
+      \|f_{\mathrm{tail}}^{I,\rho;K}\|_{\mathrm{BMO}(I_R)}
+      \ \le\ A_0\,\sqrt{C_\mu}\,2^{-K/2}\ +\ A_1\,2^{-K/2}.
+    \]
+    In particular, choosing
+    \[
+      K\ \ge\ \left\lceil 2\log_2\!\left(\frac{A_0\sqrt{C_\mu}+A_1}{C_{\mathrm{tail}}}\right)\right\rceil
+    \]
+    yields \(\|f_{\mathrm{tail}}^{I,\rho;K}\|_{\mathrm{BMO}(I_R)}\le C_{\mathrm{tail}}\), i.e.\ B2$'$.
+    \end{lemma}
 
     \item \textbf{B3 (Classical-analysis axioms still present in compiled modules).}
     Some infrastructure theorems are currently carried as explicit axioms in the Lean library, but for an unconditional \emph{written} proof these are standard results that can be cited:
@@ -2750,7 +2798,7 @@ The Cauchy--Riemann identity \(\partial_x v=-\partial_y u\) in $\Omega$ then yie
 \end{itemize}
 
 \begin{theorem}[RG chain (conditional): zero-free to the right of the critical line]\label{thm:rg_chain_conditional}
-Assume the two RG bottlenecks B1 and B2 (as stated above), together with the standard external analytic inputs listed in B3. Then there are no zeros \(\rho\) of the completed zeta function \(\xi/\Lambda\) in the half-strip \(1/2<\Re\rho<1\).
+Assume the two RG bottlenecks B1 and B2$'$ (as stated above), together with the standard external analytic inputs listed in B3. Then there are no zeros \(\rho\) of the completed zeta function \(\xi/\Lambda\) in the half-strip \(1/2<\Re\rho<1\).
 
 Equivalently (since \(\Gamma_{\mathbb R}(s)\neq 0\) for \(\Re(s)>0\)), there are no zeta zeros in \(1/2<\Re\rho<1\). In particular, under the same assumptions, every nontrivial zero satisfies \(\Re\rho=1/2\) (the Riemann Hypothesis).
 \end{theorem}
@@ -2760,28 +2808,40 @@ We run the Recognition Geometry contradiction on the boundary line \(\Re(s)=1/2\
 
 Fix a putative zero \(\rho\) with \(1/2<\Re\rho<1\). Since \(\Gamma_{\mathbb R}(\rho)\neq 0\) for \(\Re(\rho)>0\), the identity \(\Lambda(s)=\Gamma_{\mathbb R}(s)\zeta(s)\) implies \(\zeta(\rho)=0\) as well. Thus it is enough to rule out zeros of \(\zeta\) in the half-strip.
 
-Let \(d:=\Re\rho-\tfrac12>0\), and let \(I\) be the centered Whitney interval with base point \(t_0=\Im\rho\) and half-length \(2d\). Consider the total phase signal \(R(I)\), defined as the norm of the phase change of \(\zeta(\tfrac12+it)\) across the endpoints of \(I\) in \(\mathbb{R}/2\pi\mathbb{Z}\) (this is \texttt{totalPhaseSignal} in \texttt{RiemannRecognitionGeometry/Axioms.lean}).
+Let \(d:=\Re\rho-\tfrac12>0\), and let \(I\) be the centered Whitney interval with base point \(t_0=\Im\rho\) and half-length \(2d\).
+For the renormalized B2$'$ setup, we instead work with the \emph{tail/cofactor phase signal}
+\[
+  R_{\mathrm{tail}}(I,\rho;K)\ :=\ \Bigl\|\arg \mathcal G_{I,\rho;K}\bigl(\tfrac12+i(t_0+2d)\bigr)\ -\ \arg \mathcal G_{I,\rho;K}\bigl(\tfrac12+i(t_0-2d)\bigr)\Bigr\|,
+\]
+computed modulo \(2\pi\) and then normed in \([0,\pi]\).
+Here \(\mathcal G_{I,\rho;K}\) is the zero-free renormalized cofactor whose boundary log-modulus is \(f_{\mathrm{tail}}^{I,\rho;K}\) (cf.\ the discussion after B2$'$), i.e.\ \(\log|\mathcal G_{I,\rho;K}(\tfrac12+it)|=f_{\mathrm{tail}}^{I,\rho;K}(t)\) on \(I_R\).
+This is the phase quantity squeezed in the Lean refactor \texttt{RiemannRecognitionGeometry/Port/ZeroFreeWithIntervalTail.lean} (via \texttt{tailPhaseSignal}).
 
 \noindent\textbf{(Lower bound: Blaschke trigger).}
 By the Poisson--Jensen/Blaschke computation (Track~2 in \texttt{RiemannRecognitionGeometry/PoissonJensen.lean} and the derived lemmas in \texttt{Axioms.lean}), the presence of a zero \(\rho\) forces a Blaschke contribution at scale \(I\) of size at least \(L_{\mathrm{rec}}\) (numerically \(L_{\mathrm{rec}}=2.2\) in the Lean development).
 
-\noindent\textbf{(Upper bound: Carleson/energy bound from oscillation).}
-By B2, there exists \(M\) such that \(\mathrm{InBMOWithBound}(\log|\zeta(\tfrac12+it)|)\,M\) and \(M\le C_{\mathrm{tail}}\).
-Fefferman--Stein (B3) implies the Carleson/Dirichlet energy bound \(E(I)\le K_{\mathrm{tail}}(M)\,|I|\), with \(K_{\mathrm{tail}}(M)=C_{\mathrm{FS}}\,M^2\) (this is the scale-correct `BMO \(\to\) energy' step in the code).
-Then B1 (the outer/log-branch package) provides the CR/Green conversion from energy to a cofactor phase-change bound. In the driver this yields a uniform tail phase bound of the form
+\noindent\textbf{(Upper bound: Carleson/energy bound from the renormalized tail).}
+By B2$'$, fix \(K\) and form the renormalized tail \(f_{\mathrm{tail}}^{I,\rho;K}\) on \(I_R\), with localized BMO norm \(\le C_{\mathrm{tail}}\).
+By Fefferman--Stein (B3), this localized BMO control yields a Carleson/Dirichlet energy bound for the Poisson model field attached to \(f_{\mathrm{tail}}^{I,\rho;K}\) on the Whitney box over \(I\),
 \[
-  |R(I)| \le U_{\mathrm{tail}}(M),
+  E(I)\ \le\ K_{\mathrm{tail}}(C_{\mathrm{tail}})\,|I|.
 \]
-where \(U_{\mathrm{tail}}(M)=C_{\mathrm{geom}}\sqrt{K_{\mathrm{tail}}(M)}\) (see \texttt{U\_tail} in \texttt{RiemannRecognitionGeometry/Basic.lean} and \texttt{totalPhaseSignal\_bound} in \texttt{Axioms.lean} / \texttt{Port/TotalPhaseSignalBound.lean}).
+Then B1 (the outer/log-branch package) supplies the CR/Green conversion from that energy bound to a tail/cofactor phase-change bound across \(I\), yielding a uniform tail phase bound of the form
+\[
+  \text{(tail phase across \(I\))}\ \le\ U_{\mathrm{tail}}(C_{\mathrm{tail}}),
+\]
+where \(U_{\mathrm{tail}}(M)=C_{\mathrm{geom}}\sqrt{K_{\mathrm{tail}}(M)}\) (cf.\ \texttt{U\_tail} in \texttt{RiemannRecognitionGeometry/Basic.lean}).
 
 \noindent\textbf{(Dominance and numeric closure).}
-Combining the Blaschke decomposition with the tail bound gives
+Combining the (centered) Blaschke trigger with the tail bound gives the dominance-style squeeze
 \[
-  R(I)\ \ge\ L_{\mathrm{rec}} - U_{\mathrm{tail}}(M)
-  \qquad\text{and}\qquad
-  R(I)\ \le\ U_{\mathrm{tail}}(M).
+  R_{\mathrm{tail}}(I,\rho;K)\ \ge\ L_{\mathrm{rec}}-U_{\mathrm{tail}}(C_{\mathrm{tail}})
 \]
-If \(M\le C_{\mathrm{tail}}\), monotonicity of \(U_{\mathrm{tail}}\) gives \(U_{\mathrm{tail}}(M)\le U_{\mathrm{tail}}(C_{\mathrm{tail}})\). The Lean development proves the explicit numeric inequality \(U_{\mathrm{tail}}(C_{\mathrm{tail}})<L_{\mathrm{rec}}/2\) (equivalently \(L_{\mathrm{rec}}>2\,U_{\mathrm{tail}}(C_{\mathrm{tail}})\)), so we get \(L_{\mathrm{rec}}>2\,U_{\mathrm{tail}}(M)\). Hence the two inequalities for \(R(I)\) are incompatible, a contradiction.
+and the upper bound
+\[
+  R_{\mathrm{tail}}(I,\rho;K)\ \le\ U_{\mathrm{tail}}(C_{\mathrm{tail}}).
+\]
+Together these imply \(L_{\mathrm{rec}}\le 2\,U_{\mathrm{tail}}(C_{\mathrm{tail}})\), which contradicts the Lean-verified numeric inequality \(2\,U_{\mathrm{tail}}(C_{\mathrm{tail}})<L_{\mathrm{rec}}\). Hence the two bounds are incompatible, a contradiction.
 
 Therefore there is no zero \(\rho\) with \(1/2<\Re\rho<1\).
 

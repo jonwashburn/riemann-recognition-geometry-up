@@ -1,0 +1,2583 @@
+4
+2
+0
+2
+
+r
+a
+
+M
+9
+1
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+7
+5
+1
+3
+1
+.
+3
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+A NOTE ON ZERO DENSITY RESULTS IMPLYING LARGE VALUE
+ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+KAISA MATOM ¨AKI AND JONI TER ¨AV ¨AINEN
+
+Abstract. In this note we investigate connections between zero density estimates for
+the Riemann zeta function and large value estimates for Dirichlet polynomials. It is well
+known that estimates of the latter type imply estimates of the former type. Our goal is to
+show that there is an implication to the other direction as well, i.e. zero density estimates
+for the Riemann zeta function imply large value estimates for Dirichlet polynomials.
+
+1
+
+Introduction
+
+In this note we investigate connections between zero density estimates for the Riemann
+zeta function and large value estimates for Dirichlet polynomials. It is well known that
+estimates of the latter type imply estimates of the former type. Our goal is to show that
+there is an implication to the other direction as well, i.e. zero density estimates for the
+Riemann zeta function imply large value estimates for Dirichlet polynomials.
+
+To discuss this in more detail, we need to introduce some notation. For σ ∈ [1/2, 1] and
+
+T ≥ 0, let
+
+N (σ, T ) := #{ρ = β + iγ : ζ(ρ) = 0, β ≥ σ, |γ| ≤ T },
+
+where the zeta zeros are counted with multiplicities. As usual, by zero density estimates,
+we mean upper bounds for N (σ, T ). While the Riemann hypothesis states that N (σ, T ) = 0
+for every σ > 1/2, in many applications of the theory of the zeros of the zeta function
+(such as study of primes in short intervals) also weaker bounds for N (σ, T ) are useful.
+
+The usual way to obtain results concerning N (σ, T ) is to use zero-detecting polynomials,
+i.e. to show that if there are several zeros of the Riemann zeta function, then there exists
+a Dirichlet polynomial that takes several large values. After this reduction one can utilize
+known large value results for Dirichlet polynomials. In Section 10 we show the following
+reduction from zeroes to large values of Dirichlet polynomials.
+
+Proposition 1.1. Let ε > 0, ν ∈ (0, 1/2], and T ≥ 3. Let
+
+T := {ρ = β + iγ : ζ(ρ) = 0, β ≥ 1 − ν, |γ| ≤ T }.
+
+Then we can partition T = T1 ∪ T2 in such a way that #T1 ≪ε T 2ν+2ε and, for each zeta
+zero ρ = β + iγ ∈ T2, there exists M ∈ [T ε, T 1/2/2] and M ′ ∈ (M, 2M ] such that
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤M ′
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+m1+iγ
+
+1
+
+≥ M −ν−ε.
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+Proposition 1.1 implies that N (1 − ν, T ) is bounded by O(T 2ν+2ε) plus the number of
+
+one-spaced1 t ∈ [−T, T ] such that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+M <m≤M ′
+
+1
+m1+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ M −ν−ε
+
+for some M ∈ [T ε, T 1/2] and M ′ ∈ (M, 2M ].
+
+The main aim of this note is to show a converse result.
+
+Theorem 1.2 (Zero density results imply large value estimates). Let ε > 0, ν ∈ [0, 1/2],
+and T ≥ 1. There exists a constant C = C(ε) such that
+
+(1.1)
+(cid:12)
+
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+
+(cid:88)
+
+t ∈ [−T, T ] :
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤M ′
+≪ε T ε max
+
+T
+
+1−ν−ε≤α≤1
+
+1
+m1+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ M −ν for some M ∈ [T ε, T 1/2/2] and M ′ ∈ (M, 2M ]
+
+(cid:12)
+
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+
+α−(1−ν)
+
+2 N (α, C · T ) + T
+
+ν
+
+2 +ε.
+
+ν
+
+2 +ε e.g.
+Remark 1.3. Note that we can get a similar result with T 2ν+2ε in place of T
+for the M¨obius and prime polynomials using Heath-Brown’s identity.
+Indeed applying
+Heath-Brown’s identity (see e.g. [5, Proposition 13.3 and Exercise 1 following it] with
+K = ⌊100/ε⌋), and denoting by F (s) either of the polynomials (cid:80)
+M <m≤M ′ µ(m)/ms or
+(cid:80)
+M <m≤M ′ Λ(m)/ms, then F (s) can be morally decomposed into products of polynomials
+of the type (cid:80)
+L<ℓ≤L′ 1/ℓs with L′ ∈ [L, 2L], L ∈ [T ε, T 1/2] and polynomials of length ≤ T ε.
+Now if |F (s)| is large, then either one of | (cid:80)
+L<ℓ≤L′ 1/ℓs| with L ∈ [T ε, T 1/2] is large or
+there is a short polynomial of length ∈ [T ε2/100, T ε] with large value. In the latter case the
+number of large values can be seen to be ≪ T 2ν+2ε using the discrete mean value theorem
+for Dirichlet polynomials to a suitable power of the polynomial similarly to (10.2) below.
+Typically estimates N ′(σ, T ) for N (σ, T ) weaken with slope > 1 when σ decreases and
+in such case the maximum in (1.1) is attained at α = 1 − ν − ε, and hence typically
+Theorem 1.2 gives an estimate of the form
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+M <m≤M ′
+≪ε T εN ′(1 − ν − ε, C · T ) + T
+which corresponds to the aforementioned consequence of Proposition 1.1.
+
+≥ M −ν for some M ∈ [T ε, T 1/2/2] and M ′ ∈ (M, 2M ]
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+ν
+2 +ε
+
+1
+m1+it
+
+t ∈ [−T, T ] :
+
+(cid:88)
+
+Considering the case M = T 1/2 and |t| ≤ M ν/1000, we see that the second term on the
+
+right-hand side is needed apart from ε in the exponent.
+
+Thanks to Theorem 1.2 we see that if one was somehow able to prove new zero density
+results without appealing to large value theorems, one would still obtain new information
+about large values as well.
+
+The density hypothesis (which would imply quite similar consequences as the Riemann
+
+hypothesis) states that
+
+(1.2)
+
+N (σ, T ) ≪ε T 2(1−σ)+ε
+
+for every
+
+ε > 0, σ ∈ [1/2, 1]
+
+1We say that a set is one-spaced if any two elements are at least distance 1 apart.
+
+(cid:12)
+
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+
+Zero density and large values of Dirichlet polynomials
+
+3
+
+(sometimes the factor T ε is replaced by log T ). In particular, if one assumes the density
+hypothesis (1.2), Theorem 1.2 implies that, for any ε > 0 and ν ∈ [0, 1/2],
+
+|{t ∈ [−T, T ] : |M (1 + it)| ≥ M −ν}| ≪ε T 2ν+ε.
+For some applications, it would be important to slightly beat the density hypothesis. We
+write such a strengthening in the following conjecture.
+
+Conjecture 1.4 (Stronger density hypothesis). Let ε > 0 . There exists δ = δ(ε) ∈ (0, 1)
+such that, for any ν ∈ [0, 1/2 − ε) and T ≥ 1, one has
+
+(1.3)
+
+N (1 − ν, T ) ≪ε T (2−δ)ν.
+Note that by work of Bourgain [1] (refining Jutila’s work [6]), Conjecture 1.4 is known
+
+to hold for ε = 25/32.
+
+We have the following application of Theorem 1.2.
+
+Theorem 1.5. Assume that Conjecture 1.4 holds. Let ε > 0. Let X be large enough in
+terms of ε, and let h = (log X)2+ε. Then, for all but oX→∞(X) integers x ∈ [1, X], we
+have
+
+|{p1p2 ∈ (x, x + h] : (log X)1+ε/2 ≤ p1 ≤ (log X)1+ε}| ≫ε
+
+h
+log X
+
+.
+
+This proves conditionally on the stronger density hypothesis the existence of E2 numbers
+(products of exactly two primes) in almost all intervals of length (log X)2+ε around X.
+Previous work of Harman [3] implied this under the same Conjecture 1.4 for intervals of
+length (log X)3+ε around X. One can easily deduce Theorem 1.5 from Proposition 9.1
+below using our recent work [7] that works unconditionally for intervals of length (log X)2.1
+around X; we sketch this implication in Section 9. We also note that, under the stronger
+assumption of the Riemann hypothesis, it is known by work of Selberg [8] that almost all
+intervals of length (log X)2+ε around X contain primes (and thus also E2 numbers).
+
+For more information about known bounds for N (σ, T ) and related matters, see e.g. [5,
+
+Chapter 10].
+
+2 Outline of the proof of Theorem 1.2
+
+We outline the proof of Theorem 1.2 via stating lemmas whose proofs we postpone. We
+
+shall use the notation
+
+(2.1)
+
+Rσ,η(T ) :=
+
+
+
+
+t ∈ [−T, T ] :
+
+
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+A<n≤B
+
+1
+nσ+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ T η
+
+
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+
+.
+
+max
+1≤A≤B≤T 1/2
+B≤2A
+
+Note that trivially Rσ,η(T ) ≤ Rσ,η′(T ) for any η′ ≤ η. Our first step is to use partial
+summation to move the claim (1.1) to the line σ = 1 − ν − η:
+
+Lemma 2.1. Let ν ∈ [0, 1/2] and ε, η ∈ (0, 1). Let T ≥ 42/(εη). Then
+
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+≤ R1−ν−η,εη/2(T ).
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤M ′
+
+1
+m1+it
+
+t ∈ [−T, T ] :
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ M −ν for some M ∈ [T ε, T 1/2/2] and M ′ ∈ (M, 2M ]
+
+
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+
+Next we show that if there are many large values of Dirichlet polynomials (i.e. Rσ,η(T )
+
+is large) then there are many large values of the Riemann zeta function.
+
+4
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+Lemma 2.2. For every η0 ∈ (0, 1) there exists T0 = T0(η0) such that the following holds.
+For every σ ∈ [1/2, 1], η ∈ (η0, 1) and T ≥ T0 either Rσ,η(T ) ≤ 4T (1−σ)/2 or there exist
+β ≥ η − 3 log log T
+log T
+
+such that
+
+(cid:12)
+(cid:110)
+(cid:12)
+(cid:12)
+
+t ∈ [−2T, 2T ] :
+
+(cid:12)
+(cid:12)ζ(σ + 1
+(cid:12)
+
+(cid:12)
+(cid:12) ∈ (T β, 2T β]
+(cid:12)
+log T + it)
+
+(cid:111)
+
+\ [−10, 10]
+
+(cid:12)
+(cid:12)
+(cid:12) ≥
+
+Rσ,η(T )T η
+50T β(log T )2 .
+
+We will utilize this in two different ways. First, we show the counter-intuitive fact that
+
+if the Riemann zeta function is large at some point, it must have a zero nearby.
+
+Lemma 2.3 (Large value of ζ(s) implies the existence of a nearby zero). Let T ≥ T0 for
+a large enough constant T0. Let σ ∈ [1/2, 1].
+
+(i) Suppose that
+
+(2.2)
+
+|ζ(σ + it)| ≥ T 1/(log log T )100
+
+for some t ∈ R with |t| ∈ [(log T )2/2, T ]. Then there is a zero ρ of the Riemann zeta
+function in the rectangle
+
+Re(ρ) ≥ σ −
+
+1
+(log log T )1/2
+
+,
+
+|Im(ρ) − t| ≤ (log T )2/4.
+
+(ii) Let β > 0. If T ≥ ee1/β , then
+
+|{t ∈ [−T, T ] : |ζ(σ + it)| ≥ T β}| ≤
+
+(cid:18)
+
+(cid:18)
+
+N
+
+σ −
+
+1
+(log log T )1/2
+
+(cid:19)
+
+(cid:19)
+
+, 2T
+
++ 1
+
+· (log T )2.
+
+The previous lemma together with Lemma 2.2 will allow us at the end to relate the
+number of large values to the number of zeros. However, it is most useful when the
+parameter β we obtain from Lemma 2.2 is small as we lose a factor T β in the measure
+of the set we obtain from Lemma 2.2. For this reason we need to set up an inductive
+argument, where we also use that if there are many large values of the zeta function then
+there are many large values of Dirichlet polynomials.
+
+Lemma 2.4. Let β0, ε0 > 0. There exists T0 = T0(β0, ε0) such that the following holds.
+Let σ ∈ [1/2, 1], β > β0, and ε > ε0. Then
+
+|{t ∈ [−T, T ] : |ζ(σ + it)| ≥ T β} \ [−2π, 2π]| ≤ Rσ+(2−ε)β,εβ/3(2T ).
+
+Combining Lemmas 2.2, 2.3 and 2.4, we immediately obtain the following lemma.
+
+Lemma 2.5. Let η0, ε0 > 0. There exists T0 = T0(η0, ε0) such that the following holds.
+Let ε > ε0, η > η0, σ ∈ [1/2, 1], and T ≥ T0. Then there exists β ≥ η − 3 log log T / log T
+such that both of the following hold.
+
+(i) We have
+
+(2.3)
+
+Rσ,η(T ) ≤ 50T β−η(log T )2Rσ+(2−ε)β+1/ log T,εβ/4(4T ) + 4T
+
+1−σ
+2 .
+
+(ii) We have
+
+(2.4)
+
+Rσ,η(T ) ≤ 50T β−η(log T )4 (cid:16)
+
+N
+
+(cid:16)
+
+σ −
+
+1
+
+(log log T )1/2 , 4T
+
+(cid:17)
+
+(cid:17)
+
++ 1
+
++ 4T
+
+1−σ
+2 .
+
+Finally using Lemma 2.5 an inductive argument will yield
+
+Zero density and large values of Dirichlet polynomials
+
+5
+
+Lemma 2.6. Let ε, η > 0. There exists C = C(ε) such that the following holds. Let
+T ≥ 1. Then, for any σ ∈ [1/2, 1], we have
+
+(2.5)
+
+Rσ,η(T ) ≪ε,η T 2ε max
+
+σ−ε≤α≤1
+
+T (α−σ)/2N (α, C · T ) + T (1−σ)/2+2ε.
+
+Proof of Theorem 1.2 assuming Lemmas 2.1 and 2.6. By Lemma 2.1 with η = ε/2, we
+have
+
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+≤ R1−ν−ε/2,ε2/4(T ).
+
+≥ M −ν for some M ∈ [T ε, T 1/2/2] and M ′ ∈ (M, 2M ]
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤M ′
+
+1
+m1+it
+
+t ∈ [−T, T ] :
+
+(cid:12)
+
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+The claim now follows from Lemma 2.6 with ε/4 in place of ε.
+
+□
+
+3 Auxiliary results
+
+In this section we collect a few standard lemmas concerning the Riemann zeta function
+
+and its zeros. The first one contains two forms of the approximate functional equation.
+
+Lemma 3.1.
+
+(i) Let σ ∈ [0, 1], t ∈ R, and let x, y ≥ 1 be such that 2πxy = |t|. Then
+
+ζ(σ + it) =
+
+(cid:88)
+
+n≤x
+
+1
+
+nσ+it + χ(σ + it)
+
+(cid:88)
+
+n≤y
+
+1
+
+n1−σ−it + O
+
+(cid:18) log |t|
+
+xσ +
+
+(cid:19)
+
+,
+
+x1−σ
+|t|1/2
+
+where χ : C → C satisfies
+
+(3.1)
+
+|χ(σ + it)| ≤ 100(|t| + 1)1/2−σ.
+
+(ii) Let T ≥ 3, σ ≥ 1/2, and t ∈ [T, 2T ]. Then
+
+ζ(σ + it) =
+
+(cid:88)
+
+n≤T
+
+1
+nσ+it + O(T −σ).
+
+Proof. Note that in part (i) we have |t| ≥ 2π and in part (ii) we have |t| ≥ 3, so there are no
+issues with the pole of ζ(s) at s = 1. Part (i) follows e.g. from [9, Theorem 4.13, (4.12.3)
+and the formulas preceding (4.12.3)] (note that while [9] states the result for σ ∈ (0, 1),
+it actually holds uniformly in our wider range, see e.g. the original result of Hardy and
+□
+Littlewood [2, Theorem I]) whereas part (ii) follows e.g. from [9, Theorem 4.11].
+
+The second lemma gives a convexity bound for ζ(s).
+
+Lemma 3.2. Let σ ∈ [0, 1] and t ∈ R with |t| ≥ 2π.Then
+
+|ζ(σ + it)| ≪ |t|(1−σ)/2 log |t|.
+
+Proof. This follows from applying Lemma 3.1(i) with x = y = |t/(2π)|1/2 and estimating
+□
+all terms trivially.
+
+The third lemma gives an upper bound for the number of zeros in boxes of height 1.
+
+Lemma 3.3. Let U ∈ R. Then there are ≪ log(|U | + 2) zeros ρ of ζ (counted with
+multiplicities) in the region Re(ρ) ≥ 0, Im(ρ) ∈ [U, U + 1].
+
+Proof. See e.g. [9, Theorem 9.2].
+
+□
+
+6
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+4 Partial summation and proof of Lemma 2.1
+
+We shall frequently use the following simple partial summation lemma.
+
+Lemma 4.1 (Comparing zeta sums on different lines). Let σ, t, β ∈ R. Let M2 > M1 ≥ 1.
+If β ≥ 0, we have
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M1<m≤M2
+
+1
+mσ+it
+
+and if β < 0, we have
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M1<m≤M2
+
+1
+mσ+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ 4M β
+
+2 max
+
+M1<y≤M2
+
+≤ 4M β
+
+1 max
+
+M1<y≤M2
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M1<m≤y
+
+1
+mσ+β+it
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M1<m≤y
+
+1
+mσ+β+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+,
+
+.
+
+Proof. By partial summation, we have
+
+(cid:88)
+
+M1<m≤M2
+
+1
+
+mσ+it = M β
+
+2
+
+(cid:88)
+
+M1<m≤M2
+
+1
+
+mσ+β+it − β
+
+(cid:90) M2
+
+M1
+
+yβ−1 (cid:88)
+
+M1<m≤y
+
+1
+mσ+β+it dy,
+
+and hence by the triangle inequality we obtain
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+M1<m≤M2
+
+1
+mσ+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ 2(M β
+
+2 + M β
+
+1 ) · max
+
+M1<y≤M2
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M1<m≤y
+
+1
+mσ+β+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+Both claims of the lemma follow immediately from this.
+
+□
+
+Proof of Lemma 2.1. By Lemma 4.1, we have, for any M ∈ [T ε, T 1/2], M ′ ∈ (M, 2M ], and
+|t| ≤ T ,
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+M <m≤M ′
+
+1
+m1+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ 4M −ν−η max
+
+M ≤y≤M ′
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤y
+
+1
+m1−ν−η+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+Hence, whenever we have
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤M ′
+
+1
+m1+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+> M −ν,
+
+for some M ∈ [T ε, T 1/2] and M ′ ∈ (M, 2M ], we also have
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤M ′
+
+1
+m1−ν−η+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+> M η/4
+
+for some M ∈ [T ε, T 1/2] and M ′ ∈ (M, 2M ]. Recalling that M ≥ T ε and T ≥ 42/(εη), we
+□
+see that M η/4 ≥ T εη/2, so the claim follows.
+
+Zero density and large values of Dirichlet polynomials
+
+7
+
+5 From large Dirichlet polynomial values to large zeta values — proof
+
+We now prove Lemma 2.2 using Perron’s formula.
+
+of Lemma 2.2
+
+Proof of Lemma 2.2. Let 1 ≤ A ≤ B ≤ T 1/2 with B ≤ 2A. Consider first the case
+σ ∈ [1 − 2/ log T, 1]. In this case trivially
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+A<n≤B
+
+1
+nσ+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+≤
+
+n≤T 1/2
+
+1
+
+nσ ≤ T 1/ log T (cid:88)
+
+n≤T 1/2
+
+1
+n
+
+≤ e(log T + 1),
+
+and hence, once T0 is sufficiently large in terms of η0, we have Rσ,η(T ) = 0 and the claim
+follows immediately.
+
+Hence we can assume σ ∈ [1/2, 1 − 2/ log T ]. Let also t ∈ R. By Perron’s formula, we
+
+have
+
+(cid:88)
+
+A<n≤B
+
+1
+nσ+it =
+
+1
+2πi
+
+(cid:90) 1+iT
+
+1−iT
+
+ζ(s + σ + it)
+
+Bs − As
+s
+
+ds + O(1).
+
+By shifting the line of integration to Re(s) = 1/ log T , picking up the residue from the
+pole at s = 1 − σ − it and using the convexity bound (Lemma 3.2) to estimate the error
+from this shift, we see that
+
+(cid:88)
+
+A<n≤B
+
+1
+nσ+it =
+
+1
+2πi
+
+(cid:90) 1/ log T +iT
+
+1/ log T −iT
+
+ζ(s + σ + it)
+
+Bs − As
+s
+
+ds +
+
+B1−σ−it − A1−σ−it
+1 − σ − it
+
++ O(1).
+
+The second term on the right is also O(1), provided that |t| ≥ T (1−σ)/2.
+
+Hence, by the triangle inequality we conclude that if | (cid:80)
+
+T (1−σ)/2, and T0 is sufficiently large in terms of η0, then
+
+(cid:90) T
+
+−T
+
+|ζ(σ + 1/ log T + i(t + u))|
+
+du
+|u| + 1/ log T
+
+≥
+
+T η
+5
+
+.
+
+A<n≤B
+
+1
+
+nσ+it | ≥ T η, |t| ≥
+
+Since |t| ≥ T (1−σ)/2, the part with |t + u| ≤ 10 contributes to the left hand side by the
+convexity bound (Lemma 3.2) ≪ (log T )2. Hence once T0 is sufficiently large in terms of
+η0, we have
+
+(5.1)
+
+(cid:90) T
+
+−T
+
+1|t+u|>10|ζ(σ + 1/ log T + i(t + u))|
+
+du
+|u| + 1/ log T
+
+≥
+
+T η
+10
+
+.
+
+By the definition of Rσ,η(T ), we have (5.1) for a set of measure ≥ Rσ,η(T )/2 of t ∈
+
+[−T, T ] \ [−T (1−σ)/2, T (1−σ)/2] (unless Rσ,η(T ) ≤ 4T (1−σ)/2, in which case we are done).
+
+Let Rσ,η(T ) be the set of such t. Then, integrating (5.1) over t ∈ Rσ,η(T ) and applying
+
+Fubini’s theorem, we see that
+
+(cid:90) T
+
+(cid:90)
+
+−T
+
+Rσ,η(T )
+
+1|t+u|>10|ζ(σ + 1/ log T + i(t + u))|dt
+
+du
+|u| + 1/ log T
+
+≥
+
+T ηRσ,η(T )
+20
+
+.
+
+By the pigeonhole principle, this implies that
+
+(cid:90)
+
+Rσ,η(T )
+
+1|t+u0|>10|ζ(σ + 1/ log T + i(t + u0))|dt ≥
+
+T ηRσ,η(T )
+50 log T
+
+8
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+for some |u0| ≤ T . By dyadic decomposition, this implies that there is some β ≥ η −
+3 log log T
+log T
+
+such that
+
+|ζ(σ + 1/ log T + i(t + u0))| ∈ (T β, 2T β]
+
+for a set of measure
+
+≥
+
+Rσ,η(T )T −β+η
+50(log T )2
+
+of t ∈ [−T, T ] with |t + u0| ≥ 10. The claim follows since |u0| ≤ T .
+
+□
+
+6 From large zeta values to zeros of zeta — proof of Lemma 2.3
+
+The proof of Lemma 2.3 follows an idea of Ivi´c [4]. We will deduce Lemma 2.3 from the
+following lemma which shows a similar result for the logarithmic derivative of zeta. For
+convenience we write the following lemma in contrapositive form compared to Lemma 2.3.
+
+Lemma 6.1 (Large value of ζ′
+ζ (s) implies the existence of a nearby zero). Let T ≥ T0 for
+a sufficiently large constant T0. Let σ1 ∈ [−1, 2] and u ∈ R with |u| ∈ [2, 2T ] be such that
+there are no zeroes ρ of the Riemann zeta function in the rectangle
+
+Re(ρ) ≥ σ1 −
+
+1
+2(log log T )1/2
+
+,
+
+|Im(ρ) − u| ≤ 1.
+
+Then
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+ζ ′
+ζ
+
+(cid:12)
+(cid:12)
+(σ1 + iu)
+(cid:12)
+(cid:12)
+
+≤ C0(log log T )1/2 log T
+
+for some absolute constant C0 > 0.
+
+Proof. The partial fraction expansion of the logarithmic derivative of ζ (see e.g. [9, The-
+orem 9.6(A)]) gives
+
+(6.1)
+
+ζ ′
+ζ
+
+(σ1 + iu) =
+
+(cid:88)
+
+|Im(ρ)−u|≤1
+
+1
+σ1 + iu − ρ
+
++ O(log T )
+
+uniformly for such σ1 ∈ [−1, 2] and u ∈ R with |u| ∈ [2, 2T ]. Now the claim follows
+using Lemma 3.3 and the fact that |σ1 + iu − ρ| ≥ 1/(2(log log T ))1/2 for the summands
+□
+of (6.1).
+
+Proof of Lemma 2.3. We first show how part (ii) follows quickly from part (i). Indeed,
+assuming part (i) and denoting for brevity L = (log T )2/4 and σ0 = σ − 1/(log log T )1/2,
+
+Zero density and large values of Dirichlet polynomials
+
+9
+
+we have
+
+|{t ∈ [−T, T ] : |ζ(σ + it)| ≥ T β}|
+(cid:20)
+
+(cid:25)(cid:21)
+
+(cid:40)
+
+(cid:25)
+
+≤ L · #
+
+n ∈
+
+−
+
+(cid:24) T
+L
+
+(cid:24) T
+L
+
+,
+
+,
+
+(cid:40)
+
+(cid:20)
+
+≤ L · #
+
+n ∈
+
+−
+
+(cid:25)
+
+(cid:24) T
+L
+
+(cid:25)(cid:21)
+
+(cid:24) T
+L
+
+∩ Z : n ≥ 2 and ζ(σ′ + it′) = 0
+
+∩ Z : |ζ(σ + it)| ≥ T β for some t ∈ [nL, (n + 1)L]
+
+(cid:41)
+
+for some (σ′, t) ∈ [σ0, 1] × [(n − 1)L, (n + 2)L]
+
++ 3L
+
+(cid:41)
+
+(cid:18)
+
+≤ L · 3 · N
+
+σ −
+
+1
+(log log T )1/2
+
+(cid:19)
+
+, 2T
+
++ 3L,
+
+and (ii) follows.
+
+Now it suffices to prove part (i). Let σ ∈ [1/2, 1] and t ∈ R with |t| ∈ [(log T )2/2, T ] be
+
+such that
+
+(6.2)
+
+ζ(z) ̸= 0 for Re(z) ≥ σ − 1/(log log T )1/2,
+
+|Im(z) − t| ≤ (log T )2/4.
+
+Our goal is to show that then (2.2) cannot hold.
+
+Let s = b + it with b ∈ [σ, 2] and σ, t as above, and let Y := (log T )3/2. By the Mellin
+
+inversion formula, for any n ≥ 1, we have
+
+e−n/Y =
+
+1
+2πi
+
+(cid:90) 2+i∞
+
+2−i∞
+
+Γ(w)
+
+(cid:19)w
+
+(cid:18) Y
+n
+
+dw.
+
+Multiplying by Λ(n)n−s and summing over n (and using Fubini’s theorem) we obtain
+
+Λ(n)e−n/Y n−s = −
+
+(cid:88)
+
+n≥1
+
+1
+2πi
+
+(cid:90) 2+i∞
+
+2−i∞
+
+ζ ′
+ζ
+
+(s + w)Γ(w)Y wdw.
+
+We truncate the integral at height Y and use the standard bound (which follows from
+Stirling’s formula)
+
+(6.3)
+
+|Γ(w)| ≪
+
+1
+|w| exp(|Im(w)|)
+
+for Re(w) ∈ [−1/2, 3]
+
+to estimate the error from this. Using also | ζ′
+
+ζ (2)| ≪ 1 for Re(z) ≥ 2, we obtain
+
+Λ(n)e−n/Y n−s = −
+
+1
+2πi
+
+(cid:88)
+
+n≥1
+
+(s + w)Γ(w)Y wdw + O(1).
+
+ζ (z)| ≤ | ζ′
+ζ ′
+ζ
+
+(cid:90) 2+iY
+
+2−iY
+
+Then we move the integral to the line Re(w) = −1/(2(log log T )1/2). We pick up a
+residue from the pole at w = 0 and estimate the error term from this change of lines
+using (6.3) and Lemma 6.1. This yields
+
+Λ(n)e−n/Y n−s = −
+
+(cid:88)
+
+n≥1
+
+ζ ′
+ζ
+
+(s) −
+
+1
+2πi
+
+(cid:90) −1/(2(log log T )1/2)+iY
+
+−1/(2(log log T )1/2)−iY
+
+ζ ′
+ζ
+
+(s + w)Γ(w)Y wdw + O(1).
+
+10
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+Using again Lemma 6.1 and (6.3), we can bound the integral here to obtain
+
+(6.4)
+
+(cid:88)
+
+n≥1
+
+Λ(n)e−n/Y n−s = −
+
+ζ ′
+ζ
+
+(s) + O(Y −1/(2(log log T ))1/2
+
+(log T )(log log T )1/2).
+
+The error term here is certainly O((log T )/(log log T )200) by our choice of Y . Recall
+that (6.4) holds for s = b + it for any b ∈ [σ, 2]. Hence, taking s = b + it in (6.4) and
+integrating both sides from b = σ to b = 2, we obtain
+
+log ζ(σ + it) − log ζ(2 + it) =
+
+Λ(n)
+log n
+
+(cid:88)
+
+n≥2
+
+e−n/Y (n−σ−it − n−2−it) + O
+
+(cid:18)
+
+log T
+(log log T )200
+
+(cid:19)
+
+.
+
+We have log ζ(2 + it) ≍ 1, and we can crudely estimate the sum over n with absolute
+values to obtain
+
+log ζ(σ + it) = O
+
+(cid:18) Y 1−σ
+log Y
+
++
+
+log T
+(log log T )200
+
+(cid:19)
+
+.
+
+Recalling the choice of Y this means that |ζ(σ + it)| ≤ T 1/(log log T )100 if T ≥ T0 with T0
+□
+large enough. This completes the proof.
+
+7 From large zeta values to large Dirichlet polynomial values — proof
+
+of Lemma 2.4
+
+We now prove Lemma 2.4 using the approximate functional equation for the zeta func-
+
+tion (Lemma 3.1).
+
+Proof of Lemma 2.4. Writing
+
+T := {t ∈ [−T, T ] : |ζ(σ + it)| ≥ T β} \ [−2π, 2π],
+
+we need to show that
+
+(7.1)
+
+|T | ≤ Rσ+(2−ε)β,εβ/3(2T ).
+
+By the approximate functional equation for ζ(s) (Lemma 3.1 with x = y = |t/2π|1/2), we
+have
+
+ζ(σ + it) =
+
+(cid:88)
+
+n≤|t/(2π)|1/2
+
+1
+
+nσ+it + χ(σ + it)
+
+(cid:88)
+
+n≤|t/(2π)|1/2
+
+1
+
+n1−σ−it + O(1),
+
+From the definition of T and (3.1), we see that, once T0 is sufficiently large in terms of η0,
+for each t ∈ T ,
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+n≤|t/(2π)|1/2
+
+1
+nσ+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+1
+3
+
+T β or
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n≤|t/(2π)|1/2
+
+1
+n1−σ−it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+1
+300
+
+T β+σ−1/2.
+
+By Lemma 4.1 and dyadic decomposition, this in turn implies that for some 1 ≤ M ≤
+T 1/2/2 and some constant c > 0 we have (once T0 is sufficiently large in terms of β0 and
+
+Zero density and large values of Dirichlet polynomials
+
+11
+
+ε0)
+
+or
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤2M
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+M <m≤2M
+
+(cid:88)
+
+1
+nσ+(2−ε)β+it
+
+1
+nσ+(2−ε)β+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ c
+
+T βM −(2−ε)β
+log T
+
+≥ T βε/3
+
+≥ c
+
+T β+σ−1/2M 1−2σ−(2−ε)β
+log T
+
+≥ T βε/3.
+
+Since this holds for every t ∈ T , we deduce that (7.1) indeed holds.
+
+□
+
+8 The inductive argument — proof of Lemma 2.6
+
+We are now ready to prove Lemma 2.6.
+
+Proof of Lemma 2.6. Fix ε, η > 0. We can clearly assume that ε and η are small. We
+shall use induction on j ∈ {0, 1, . . . , J}, where J := ⌈ 1/2
+ε/100 ⌉. Write η0 = η(ε/20)J , and
+let T1 = T1(ε, η) be sufficiently small in terms of ε, η, in particular we take T1 ≥ T0(η0, ε)
+with T0 as in Lemma 2.5.
+
+Our induction claim is that
+
+(8.1) Rσ,η′(T ) ≤ 1000j(log(4jT ))4jT (1−σ)( 1
+
+2 +ε)+ε/2 max
+
+σ−ε/2≤α≤1
+
+T (α−1)( 1
+
+2 +ε)(N (α, 4jT ) + 1)
+
+whenever σ ≥ 1 − j/(2J) and η′ ≥ η0(ε/20)−j and T ≥ T1(η, ε). Note that this claim for
+j = J implies Lemma 2.6 (the restriction on T is not a problem since the implied constant
+in Lemma 2.5 is allowed to depend on η, ε).
+
+The base case j = 0 is trivial since for σ ≥ 1 and η′ ≥ η(ε/20)J we have Rσ,η′ = 0 once
+
+T1 is sufficiently large in terms of η and ε.
+
+Assume now that the induction claim holds for j − 1 for some j ∈ {1, 2, . . . , J}. We
+shall show that it holds for j. Let now σ ≥ 1 − j/(2J), η′ ≥ η0(ε/20)−j, and T ≥ T1(η, ε),
+and let β be as in Lemma 2.5 with η′ in place of η.
+
+If β ≤ ε/3, then by (2.4) we have2,
+
+Rσ,η′(T ) ≤ 50T β(log T )4(N (σ − 1/(log log T )1/2, 4T ) + 1) + 4T
+
+1−σ
+2
+
+≤ 50T ε/3(log T )4(N (σ − 1/(log log T )1/2, 4T ) + 1) + 4T
+
+1−σ
+2 ,
+
+which is sufficient once T1 is sufficiently large.
+
+On the other hand, if β > ε/3, then by (2.3),
+
+(8.2)
+
+Now
+
+and
+
+Rσ,η′(T ) ≤ 50T β(log T )2Rσ+(2−ε)β+1/ log T,εβ/4(2T ) + 4T
+
+1−σ
+2 .
+
+σ + (2 − ε)β +
+
+1
+log T
+
+≥ 1 −
+
+j
+2J
+
++ (2 − ε)
+
+ε
+3
+
+≥ 1 −
+
+j − 1
+2J
+
+εβ
+4
+
+≥
+
+εη′
+8
+
+≥
+
+ε
+8
+
+·
+
+(cid:16) ε
+20
+
+(cid:17)−j
+
+η0 ≥
+
+(cid:16) ε
+20
+
+(cid:17)−(j−1)
+
+η0.
+
+2We note that iterating (2.3) arbitrarily many times is not sufficient to reach the case j = J — at every
+step of the iteration the value of β might be ε/4 times the previous value, and (cid:80)
+j≥1 εj converges. Hence,
+we eventually need to apply (2.4) as well — as one would expect, since it is the part referring to zero
+density results.
+
+12
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+Hence, we can apply the induction hypothesis (8.1) for j −1 to the right-hand side of (8.2),
+obtaining
+
+Rσ,η′(T ) ≤ 50T β(log T )2 · 1000j−1(log(4jT ))4(j−1)(4T )(1−σ−(2−ε)β−1/ log T )(1/2+ε)+ε/2
+
+·
+
+max
+σ+(2−ε)β+1/ log T −ε/2≤α≤1
+
+(4T )(α−1)(1/2+ε)(N (α, 4j−1 · 2T ) + 1) + 4T
+
+1−σ
+2
+
+≤
+
+1000j
+4
+
+(log(4jT ))4(j−1)+2T β+(1−σ−(2−ε)β)(1/2+ε)+ε/2 max
+σ≤α≤1
+
+T (α−1)(1/2+ε)(N (α, 4jT ) + 1) + 4T
+
+1−σ
+2
+
+≤ 1000j(log(4jT ))4jT (1−σ)(1/2+ε)+ε/2 max
+σ≤α≤1
+
+T (α−1)(1/2+ε)(N (α, 4jT ) + 1)
+
+once T1 is sufficiently large. Thus (8.1) holds for j as claimed.
+
+□
+
+We need the following proposition in the proof of Theorem 1.5.
+
+9 Proof of Theorem 1.5
+
+Proposition 9.1. Assume Conjecture 1.4. Let ε > 0 and k ∈ N. Let T be sufficiently
+large in terms of ε. Let F (s) = (cid:81)k
+
+j=1 Mj(s), where
+
+Mj(s) =
+
+(cid:88)
+
+Mj <m≤2Mj
+
+1
+ms ,
+
+with Mj ≥ T ε such that M1 · · · Mk ≍ T 1+o(1).
+
+Let U ⊂ [−T, T ] be such that, for each t ∈ U, one has |Mj(1 + it)| ≥ M −1/2+20ε
+
+for
+
+j
+
+some 1 ≤ j ≤ k. Then
+
+(9.1)
+
+for some δ0 = δ0(ε).
+
+(cid:90)
+
+U
+
+|F (1 + it)|2dt ≪ε T −δ0
+
+Proof of Proposition 9.1. For given σj for j = 1, . . . , k, write
+
+T = {t ∈ [−T, T ] : |Mj(1 + it)| ∈ (M −σj
+
+j
+
+, 2M −σj
+j
+
+] for every j ∈ {1, . . . , k}}.
+
+It clearly suffices to show that, for some δ1 = δ1(ε) > 0,
+
+(9.2)
+
+|T | ≪ε T 2 minj σj −δ1
+
+for every choice of σ1, . . . , σk.
+
+Without loss of generality, we can assume that σ1 = minj σj. By assumption σ1 ≤
+1/2 − 20ε. On the other hand, by a pointwise estimate for zeta sums (see e.g. [5, Corollary
+8.26]) there exists an absolute constant β ∈ (0, 1) such that
+
+|Mj(1 + it)| ≪ exp(−β(log Mj)3/(log T )2)) ≪ M −βε2
+
+j
+
+.
+
+Hence, taking ε0 = βε2/2 we see that whenever σ1 < ε0 and T is sufficiently large in terms
+of ε, the set T is empty.
+
+Zero density and large values of Dirichlet polynomials
+
+13
+
+Hence we can assume that σ1 ∈ [ε0, 1/2 − 20ε]. Let δ(ε0) be as in Conjecture 1.4. We
+
+apply first Theorem 1.2 with ε = ε′ := ε0δ(ε0)/6, and then Conjecture 1.4, obtaining
+
+|T | ≪ T ε′
+
+max
+1−σ1−ε′≤α≤1
+
+T
+
+≪ T ε′
+
+max
+1−σ1−ε′≤α≤1
+
+T
+
+α−(1−σ1)
+
+2 N (α, C · T ) + T σ1/2+ε′
+
+α−(1−σ1)
+2
+
+T (2−δ(ε0))(1−α) + T σ1/2+ε′
+
+The maximum is attained for α = 1 − σ1 − ε′. Recalling that σ1 ≥ ε0, we obtain
+
+|T | ≪ T ε′
+
+T − ε′
+
+2 T (2−δ(ε0))(σ1+ε′) + T σ1/2+ε′
+
+≪ T 2σ1+3ε′−δ(ε0)ε0 + T 2σ1− 3ε0
+
+2 +ε′
+
+.
+
+Recalling the definition of ε′, the claim (9.2) follows with δ1 = δ(ε0)ε0/2.
+
+□
+
+We are now ready to sketch the proof of Theorem 1.5: The proof follows similarly to
+the same theorem under the Lindel¨of hypothesis in [7, Section 6] — there the Lindel¨of
+hypothesis was only used to deduce that a condition similar to |Mj(1 + it)| ≥ M −1/2+20ε
+never holds. Assuming Conjecture 1.4, we can instead use Proposition 9.1 to deal with
+the contribution of the case when this does hold for some j.
+
+j
+
+10 Proof of Proposition 1.1
+
+We now prove Proposition 1.1 by refining a standard zero-detecting polynomial.
+
+Proof of Proposition 1.1. By dyadic splitting, it suffices to show that, for any U ≤ T /2,
+we can partition
+
+U := {ρ = β + iγ : ζ(ρ) = 0, β ≥ 1 − ν, U ≤ |γ| ≤ 2U }
+
+into two sets, U = U1 ∪ U2 in such a way that #U1 ≪ T 2ν+3ε/2 and the zeroes in U2 satisfy
+the same condition as requested from the zeroes in T2 in the statement of the proposition.
+The case U ≤ T ε follows trivially by simply choosing U1 = U and applying Lemma 3.3.
+Similarly we can assume that T is sufficiently large in terms of ε.
+
+From now on we assume that U ∈ [T ε, T /2]. We use the same standard zero-detecting
+
+polynomial as in [5, Section 10.2] (with different length). We write R := T ε2/2 and
+
+R(s) :=
+
+(cid:88)
+
+r≤R
+
+µ(r)
+rs .
+
+Let ρ = β + iγ be a zeta zero with β ≥ 1 − ν and |γ| ∈ [U, 2U ]. From Lemma 3.1(ii) and
+the estimate R(β + iγ) ≪ R1−β log R we see that
+
+0 = ζ(β + iγ)R(β + iγ) =
+
+(cid:88)
+
+n≤U R
+
+an
+nβ+iγ + O(U −βR1−β log R),
+
+where
+
+an =
+
+(cid:88)
+
+µ(r).
+
+ℓr=n
+ℓ≤U, r≤R
+
+14
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+Now a1 = 1 and an = 0 for 1 < n ≤ R. Hence, once T is sufficiently large,
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+µ(r)
+(ℓr)β+iγ
+
+(cid:88)
+
+R<ℓr≤U R
+ℓ≤U, r≤R
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+1
+2
+
+.
+
+Splitting dyadically, we see that, for each zeta zero ρ, there exists Kρ = 2kρR ∈ [R, U R]
+such that
+
+(10.1)
+
+We choose
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+Kρ<ℓr≤2Kρ
+(cid:12)
+ℓ≤U, r≤R
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+µ(r)
+(ℓr)β+iγ
+
+≥
+
+1
+4 log T
+
+.
+
+U1 := {ρ ∈ U : Kρ ≤ RT ε or Kρ ≥ U T −ε}
+
+and U2 := U \ U1.
+
+Let us first show that #U1 ≪ T 2ν+3ε/2. By the pigeonhole principle, for some K′ ∈
+[R, RT ε] ∪ [U T −ε, U R] we have
+
+#U1 ≤ 2 log T · #
+
+
+
+
+
+ρ = β + iγ ∈ U1 :
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+K′<ℓr≤2K′
+(cid:12)
+ℓ≤U, r≤R
+
+µ(r)
+(ℓr)β+iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+1
+4 log T
+
+
+
+
+
+.
+
+By Lemma 3.3 we can find a one-spaced set V1 ⊆ U1 such that #V1 ≫ #U1/ log2 T and
+for each ρ = β + iγ ∈ V1, we have, with σ = β − (1 − ν) ≥ 0,
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+K′<ℓr≤2K′
+(cid:12)
+ℓ≤U, r≤R
+
+µ(r)(ℓr)−σ
+(ℓr)1−ν+iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+1
+4 log T
+
+.
+
+By the discrete mean value theorem applied to the 2kth moment of the Dirichlet polyno-
+mial on the left hand side (see e.g. [5, Proposition 9.11]), we obtain that
+(10.2)
+
+#V1 ≪ε (U + K′k)
+
+(cid:88)
+
+K′k<n≤(2K′)k
+
+d2k(n)2
+n2(1−ν)
+
+(log T )Ok(1) ≪k (U + K′k)K′2ν−1(log T )Oε,k(1)
+
+Choosing k = ⌊ log U
+#V1 ≪ε U 2ν+5ε/4, and thus #U1 ≪ε U 2ν+3ε/2.
+
+log K′ ⌋ if K′ ∈ [R, RT ε] and k = 1 if K′ ∈ [U T −ε, U R], we obtain that
+
+Consider then the set U2 = U \ U1. By (10.1) and the triangle inequality, for each
+
+ρ = β + iγ ∈ U2, there exists Kρ ∈ (RT ε, U T −ε] such that
+
+(cid:88)
+
+r≤R
+
+1
+rβ
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+Kρ/r<ℓ≤2Kρ/r
+
+1
+ℓβ+iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+1
+4 log T
+
+.
+
+By the pigeonhole principle there exists 1 ≤ rρ ≤ R such that
+
+(10.3)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+Kρ/rρ<ℓ≤2Kρ/rρ
+
+(cid:88)
+
+1
+ℓβ+iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+rβ−1
+ρ
+8 log2 T
+
+≥ 1600 · T −ε2/2
+
+Zero density and large values of Dirichlet polynomials
+
+15
+
+once T is sufficiently large in terms of ε.
+
+We split into two cases according to the size of Kρ/rρ.
+Case 1: Kρ/rρ ≤ T 1/2/2. Now (10.3) holds with some Kρ/rρ ∈ [T ε, T 1/2/2], so by
+
+Lemma 4.1 there exists y ∈ [T ε, T 1/2/2] and y′ ∈ (y, 2y] such that
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+y<ℓ≤y′
+
+1
+ℓ1+iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ 200 · T −ε2/2yβ−1.
+
+Since y ≥ T ε, this is ≥ y−ν−ε and the claim follows.
+
+Case 2: Kρ/rρ > T 1/2/2. Now (10.3) holds with Kρ/rρ ∈ [T 1/2/2, U T −ε]. In particular
+U ≥ T 1/2 in this case. Applying Lemma 3.1 with x = 2Kρ/rρ and x = Kρ/rρ implies that
+(cid:19)
+
+1
+
+n1−β−iγ + O
+
+(cid:18) log U
+(Kρ/rρ)β +
+
+(Kρ/rρ)1−β
+U 1/2
+
+.
+
+(cid:88)
+
+1
+
+ℓβ+iγ = χ(β + iγ)
+
+(cid:88)
+
+Kρ
+mρ
+
+<ℓ≤
+
+2Kρ
+mρ
+
+|γ|
+4πKρ/rρ
+
+<n≤ |γ|
+
+2πKρ/rρ
+
+Hence by (10.3) and (3.1) we can find y ∈ [T ε, U/(2T 1/2)] such that
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+y<n≤2y
+
+1
+n1−β−iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ 8 · U β−1/2T −ε2/2.
+
+By Lemma 4.1 this implies that there exists y ∈ [T ε, U/(2T 1/2)] and y′ ∈ (y, 2y] such that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+Since y ≤ U , we obtain a lower bound by applying the inequality β ≥ 1 − ν, and so
+
+U β−1/2T −ε2/2
+yβ
+
+1
+ℓ1+iγ
+
+y<ℓ≤y′
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+.
+
+(10.4)
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+y<ℓ≤y′
+
+1
+ℓ1+iγ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥
+
+U 1/2−νT −ε2/2
+y1−ν
+
+= y−νT −ε2/2
+
+(cid:19)1/2−ν
+
+.
+
+(cid:18) U
+y2
+
+Using also that y2 ≤ U 2/(4T ) ≤ U/4 and y ≥ T ε, we see that the right hand side of (10.4)
+□
+is ≥ y−ν−ε and the claim follows.
+
+Acknowledgements
+
+KM was partially supported by Academy of Finland grant no. 285894. JT was sup-
+ported by Academy of Finland grant no. 340098 and by funding from the European
+Union’s Horizon Europe research and innovation programme under Marie Sk(cid:32)lodowska-
+Curie grant agreement no. 101058904.
+
+Part of this material is based upon work supported by the Swedish Research Council
+under grant no. 2021-06594 while the authors were in residence at Institut Mittag-Leffler
+in Djursholm, Sweden, during Spring 2024.
+
+References
+
+[1] J. Bourgain. On large values estimates for Dirichlet polynomials and the density hypothesis for the
+
+Riemann zeta function. Internat. Math. Res. Notices, (3):133–146, 2000.
+
+[2] G. H. Hardy and J. E. Littlewood. The Approximate Functional Equations for ζ(s) and ζ 2(s). Proc.
+
+London Math. Soc. (2), 29(2):81–97, 1929.
+
+[3] G. Harman. Almost-primes in short intervals. Math. Ann., 258(1):107–112, 1981/82.
+
+16
+
+Kaisa Matom¨aki and Joni Ter¨av¨ainen
+
+[4] A. Ivi´c. Large values of some zeta-functions near the line σ = 1. Hardy-Ramanujan J., 11:13–29 (1989),
+
+1988.
+
+[5] H. Iwaniec and E. Kowalski. Analytic number theory, volume 53 of American Mathematical Society
+
+Colloquium Publications. American Mathematical Society, Providence, RI, 2004.
+[6] M. Jutila. Zero-density estimates for L-functions. Acta Arith., 32(1):55–62, 1977.
+[7] K. Matom¨aki and J. Ter¨av¨ainen. Almost primes in almost all short intervals II. Trans. Amer. Math.
+
+Soc., 376(8):5433–5459, 2023.
+
+[8] A. Selberg. On the normal density of primes in small intervals, and the difference between consecutive
+
+primes. Arch. Math. Naturvid., 47(6):87–105, 1943.
+
+[9] E. C. Titchmarsh. The theory of the Riemann zeta-function. The Clarendon Press, Oxford University
+
+Press, New York, second edition, 1986. Edited and with a preface by D. R. Heath-Brown.
+
+Department of Mathematics and Statistics, University of Turku, 20014 Turku, Finland
+Email address: ksmato@utu.fi
+
+Department of Mathematics and Statistics, University of Turku, 20014 Turku, Finland
+Email address: joni.p.teravainen@gmail.com
+
+

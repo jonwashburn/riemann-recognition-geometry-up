@@ -1,0 +1,11555 @@
+4
+2
+0
+2
+
+y
+a
+M
+1
+3
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+2
+5
+5
+0
+2
+.
+5
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET
+POLYNOMIALS
+
+LARRY GUTH AND JAMES MAYNARD
+
+Abstract. We prove new bounds for how often Dirichlet polynomials can
+take large values. This gives improved estimates for a Dirichlet polynomial
+of length N taking values of size close to N 3/4, which is the critical situation
+for several estimates in analytic number theory connected to prime numbers
+and the Riemann zeta function. As a consequence, we deduce a zero density
+estimate N (σ, T ) ≤ T 30(1−σ)/13+o(1) and asymptotics for primes in short
+intervals of length x17/30+o(1).
+
+1. Introduction
+
+In this paper we prove new bounds for the frequency of large values of Dirichlet
+polynomials. This gives improved estimates for a Dirichlet polynomial of length N
+taking values of size close to N 3/4. Our main result is the following.
+
+Theorem 1.1 (Large values estimate). Suppose (bn) is a sequence of complex
+1, and (tr)r≤R is a sequence of 1-separated points in [0, T ]
+numbers with
+such that
+
+bn| ≤
+
+|
+
+2N
+
+for all r
+
+≤
+
+R. Then we have
+
+bnnitr
+
+V
+
+≥
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xn=N
+(cid:12)
+(cid:12)
+(cid:12)
+
+R
+
+≤
+
+T o(1)
+
+N 2V −2 + N 18/5V −4 + T N 12/5V −4
+
+.
+
+(cid:16)
+
+(cid:17)
+
+The bound of Theorem 1.1 can be compared with the bound
+
+(1.1)
+
+R
+
+≤
+
+T o(1)
+
+N 2V −2 + T min(N V −2, N 4V −6)
+
+(cid:16)
+
+(cid:17)
+
+coming from combining the classical Mean Value Theorem for Dirichlet polynomials
+and the Montgomery-Halasz-Huxley large values estimate. Together these previous
+results give stronger bounds when V is smaller than N 7/10−ǫ or bigger than N 8/10+ǫ,
+but Theorem 1.1 gives a stronger bound when N 7/10+ǫ < V < N 8/10−ǫ and N
+≤
+T 5/6−ǫ. There are various improvements of the large values estimate which will
+supersede ours when V is a bit larger than N 3/4 (see [Iv, Chapter 11], for example),
+but Theorem 1.1 represents the ﬁrst substantive improvement on the bound (1.1)
+N 3/4 or on bounds when V is
+coming from the Mean Value Theorem when V
+close to N 3/4.
+
+≤
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+LARRY GUTH AND JAMES MAYNARD
+
+The key interest in this result is that for many applications in analytic number
+N 3/4 which is the critical limiting scenario. In this
+theory, it is the case when V
+situation the Mean Value Theorem and Large Values Estimate both give a bound
+of roughly N 1/2 + T N −1/2 whereas Theorem 1.1 gives roughly N 3/5 + T N −3/5.
+Therefore we obtain an improvement for N smaller than T 10/11, and correspond-
+ingly we expect Theorem 1.1 to lead to a quantitative improvement to any result
+where this covers the limiting situation.
+
+≈
+
+One well-studied situation where the limiting case is improved by Theorem 1.1 is
+zero-density estimates for the Riemann Zeta function ζ(s). Let N (σ, T ) be the
+number of zeroes of ζ(s) in the rectangle
+T . After early
+work by Carlson [Ca], Ingham [In] proved the bound
+
+σ and
+
+| ≤
+
+(s)
+
+(s)
+
+|ℑ
+
+≥
+
+ℜ
+
+(1.2)
+
+N (σ, T )
+
+T
+
+≤
+
+3(1
+2
+
+σ)
+
+−
+−
+
+σ +o(1),
+
+ultimately relying on the Mean Value Theorem for Dirichlet polynomials. Huxley
+[Hu], building on work of Montgomery [M3] and Halasz [Ha] and ultimately relying
+on the Montgomery-Halasz large values estimate, proved the bound
+
+(1.3)
+
+N (σ, T )
+
+T
+
+≤
+
+3(1
+3σ
+
+σ)
+
+−
+−
+
+1 +o(1).
+
+This improves on (1.2) for σ > 3/4 (corresponding to when the term N 4V −6 is
+smaller than N V −2 for V = N σ in min(N V −2, N 4V −6) in (1.1)).
+
+≈
+
+When σ
+3/4 the bounds (1.2) and (1.3) coincide, and the critical situation turns
+out to be related to values of size V = N 3/4 of Dirichlet polynomials of length
+N = T 4/5, where both estimates give R
+T 3/5+o(1). In this situation Theorem
+T 13/25+o(1). Incorporating Theorem 1.1 into
+1.1 gives an improved estimate of R
+the zero density machinery gives the following result.
+
+≤
+
+≤
+
+Theorem 1.2 (Zero density estimate). Let N (σ, T ) denote the number of zeros ρ
+of ζ(s) with
+
+T . Then we have
+
+σ and
+
+(ρ)
+
+(ρ)
+
+ℜ
+
+≥
+
+|ℑ
+
+| ≤
+
+N (σ, T )
+
+≪
+
+T 15(1−σ)/(3+5σ)+o(1).
+
+Combining this with Ingham’s estimate when σ
+
+7/10, we obtain
+
+≤
+
+(1.4)
+
+N (σ, T )
+
+≪
+
+T 30(1−σ)/13+o(1).
+
+The exponent 30/13 improves on the previous exponent of 12/5 due to Huxley [Hu].
+This has the following corollaries for the distribution of primes in short intervals.
+
+Corollary 1.3 (Count of primes in short intervals). Let y
+we have
+
+∈
+
+[x17/30+ǫ, x0.99]. Then
+
+π(x + y)
+
+π(x) =
+
+−
+
+y
+log x
+
++ Oǫ
+
+y exp(
+
+−
+
+(cid:16)
+
+4
+
+log x)
+
+.
+
+p
+
+(cid:17)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+3
+
+The exponent 17
+
+30 improves on the previous exponent 7
+Corollary 1.4 (Count of primes in ‘almost-all’ short intervals). Let y
+[X, 2X] we have
+Then for all but O(X exp(
+
+4√log x)) choices of x
+
+12 due to Huxley [Hu].
+
+[X 2/15+ǫ, X 0.99].
+
+∈
+
+−
+
+∈
+
+π(x + y)
+
+π(x) =
+
+−
+
+y
+log x
+
++ Oǫ
+
+(cid:16)
+
+y exp(
+
+4
+
+log x)
+
+.
+
+−
+
+The exponent 2
+
+15 improves on the previous exponent 1
+
+p
+
+(cid:17)
+6 due to Huxley [Hu].
+
+We expect there to be various further applications of Theorem 1.1 (and the under-
+lying ideas) to improving quantitative estimates related to the primes and similar
+objects.
+
+1.1. Background. Given an integer N
+let polynomial is a trigonometric sum of the form
+
+∈
+
+N and a sequence (bn)n∈[N,2N ], a Dirich-
+
+(1.5)
+
+2N
+
+D(t) =
+
+bneit log n.
+
+Xn=N
+We say such a polynomial has length N , and we study the question how often a
+Dirichlet polynomial can be large in the interval [0, T ]. The precise question can
+be formulated as follows.
+
+Main Question. Suppose that D(t) is a Dirichlet polynomial of the form (1.5)
+[0, T ] is a 1-separated set of points t
+with
+1 for all n. Suppose that W
+bn| ≤
+|
+> N σ. What is the largest possible cardinality of W , in terms of N ,
+where
+D(t)
+|
+|
+T , and σ?
+
+⊂
+
+& N 2−2σ. Montgomery’s large value conjec-
+There are many examples where
+ture [M2, page 142, Conjecture 2] predicts that under some natural conditions this
+lower bound is essentially tight.
+
+W
+
+|
+
+|
+
+Conjecture 1.5 (Montgomery’s large value conjecture). Let σ > 1/2 and D(t) =
+[0, T ] is a 1-separated set such that
+
+1. Suppose W
+
+2N
+n=N bneit log n with
+> N σ for t
+∈
+
+D(t)
+|
+|
+P
+
+bn| ≤
+W . Then
+
+|
+
+⊂
+
+W
+
+|
+
+| ≤
+
+C(σ)T o(1)N 2−2σ.
+
+Using a simple orthogonality argument, it has long been known that for any T
+
+N ,
+
+≥
+
+(1.6)
+
+. T N 1−2σ,
+
+W
+
+|
+
+|
+
+which corresponds to the term N V −2 in min(N V −2, N 4V −6) in (1.1).
+
+This basic estimate has been improved in several regimes. An integer power of a
+Dirichlet polynomial is a Dirichlet polynomial, and applying (1.6) to powers of D
+
+4
+
+LARRY GUTH AND JAMES MAYNARD
+
+gives improved bounds when N is fairly small compared with T . For σ
+3/4, the
+best previous bounds on our main question came from this approach. In particular,
+if σ
+
+[T 2/3, T ], then (1.6) represented the best known bound.
+
+3/4 and if N
+
+≤
+
+≤
+
+∈
+
+In the late 60s, Montgomery [M], building on ideas of Halasz [Ha] and Tur´an [HT],
+Indeed, (1.1) gives
+showed that Conjecture 1.5 is true if σ is suﬃciently large.
+Conjecture 1.5 when N σ > N 1/2T 1/4. The large value method gives very strong
+information for large σ, but it gives no information if σ
+3/4 as Montgomery
+explains in [M2, page 141]. For σ closer to 1, there have been several reﬁnements
+of the underlying ideas (see, for example, [Bo, HB3, Ju]).
+
+≤
+
+If one knows some more structure about the set of large values of a Dirichlet polyno-
+mial, then one can hope to have improved bounds. For example, another important
+result is Heath-Brown’s work about the behavior of Dirichlet polynomials on dif-
+ference sets:
+
+Theorem 1.6 (Heath-Brown, [HB]). Suppose that
+in an interval of length T . Let
+
+T
+/ 1 be a complex sequence. Then
+
+is a 1-separated set of points
+
+an|
+
+|
+
+2N
+
+anni(t1−t2)
+
+2
+
+/
+
+2N +
+
+N 2 +
+
+5/4T 1/2N.
+
+|T |
+
+|T |
+
+|T |
+
+Xn=N
+
+Xt1,t2∈T (cid:12)
+(cid:12)
+(cid:12)
+[T 2/3, T ], the last term can be ignored and the right-hand side is
+In the range N
+essentially sharp. Theorem 1.6 gives strong information about our main question
+if the set W has a lot of additive structure, such as arithmetic progressions.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+∈
+
+We will make this precise using the idea of additive energy, which we deﬁne as
+follows. For a ﬁnite set W , let
+
+(1.7)
+
+E(W ) := #
+{
+
+w1, w2, w3, w4 ∈
+
+W :
+
+w1 + w2 −
+
+|
+
+w3 −
+
+w4|
+
+< 1
+
+.
+
+}
+
+A simple consequence of Theorem 1.6 is the following (we give a proof, as well as
+reﬁned bounds, in Section 11).
+
+Lemma 1.7. Let N
+Suppose W
+
+[0, T ] is a 1-separated set such that
+
+[T 2/3, T ], σ > 1/2 and D(t) =
+> N σ for t
+D(t)
+|
+P
+
+⊂
+
+∈
+
+|
+
+2N
+n=N bnnit with
+
+∈
+
+bn| ≤
+|
+W . Then
+
+1.
+
+E(W )
+
+W
+
+|
+
+≤ |
+
+3N 1−2σ+o(1) +
+
+2N 2−2σ+o(1).
+
+W
+
+|
+
+|
+
+3T −o(1), then E(W ) is larger than the ﬁrst
+If E(W ) is very large, say E(W ) >
+term on the right hand side, so it must be bounded by the second term. This
+3. Thus we
+implies Conjecture 1.5 for Dirichlet polynomials DN with E(W ) '
+can obtain improved bounds for Dirichlet polynomials whose large value set has a
+lot of additive structure.
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+We introduce a new method that gives good bounds for Dirichlet polynomials on
+sets of small energy. We outline our method in the next section.
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+5
+
+1.2. Notations and conventions. We write A . B to mean that A
+CB for
+an absolute constant C, and A .z B to denote that the constant C may depend
+on the parameter z. We write A
+B to mean A . B and B . A both hold, and
+2B. Similarly, we write A / B to mean that for any
+A
+C(ǫ)T ǫB
+ǫ > 0, there is a constant C(ǫ) > 0 depending only on ǫ such that A
+for all large T , and A /z B to denote a dependency on a parameter z. Asymptotic
+quantities such as o(1) are interpreted as T
+
+B to mean B < A
+
+≤
+
+∼
+
+≍
+
+≤
+
+≤
+
+.
+→ ∞
+
+We use e(x) := e2πix to denote the complex exponential. Summations will run over
+integers unless speciﬁed otherwise.
+
+1.3. Acknowledgements. LG would like to thank Yuqiu Fu for many interesting
+discussions about this problem. LG is supported by a Simons Investigator Award.
+JM is supported by the European Research Council (ERC) under the European
+Union’s Horizon 2020 research and innovation programme (grant agreement No
+851318).
+
+2. Sketch outline
+
+For a heuristic description of our argument, let us consider a critical case of previous
+zero density estimates, where σ = 3/4 and we wish to improve upon the bound
+/ T N −1/2 for any set W of separated points in an interval of length T such
+W
+|
+|
+W . We focus on the situation when T = N 1+δ
+that
+DN (t)
+|
+for some small constant δ > 0 (a corresponding improvement for larger values of
+T then follows by subdivision), and suppress many technical details (such as the
+presence of smoothing in most summations) for exposition.
+
+> N 3/4 when t
+
+∈
+
+|
+
+Let M be the
+
+W
+
+|
+
+| ×
+
+N matrix with entries
+
+Mt,n = nit
+
+for t
+
+∈
+
+W and n
+
+∼
+
+N . We see that if b = (bn)n∼N then
+
+DN (t) =
+
+bnnit = (M b)t,
+
+n
+X
+
+and so we have (recalling
+
+bn| ≤
+
+|
+
+1)
+
+N 3/2
+
+W
+
+|
+
+|
+
+= N 2σ
+
+<
+
+W
+
+|
+
+|
+
+Xt∈W
+
+Db(t)
+|
+
+|
+
+2 =
+
+M b
+
+2
+2 ≤ k
+
+k
+
+M
+
+2
+
+k
+
+k
+
+b
+
+2
+2 ≤
+
+k
+
+N
+
+M
+
+k
+
+2,
+
+k
+
+k
+
+k
+
+where
+M
+the bound
+Values Estimate), and we might hope that
+
+is the matrix (operator) norm of M . Thus we wish to improve upon
+/ T 1/2 which follows from the Mean Value Theorem (or the Large
+M
+
+k
+k
+
+k
+
+M
+
+k
+
+N
+
+|
+
+k ≈ |
+
+1/2. We note that
+
+M
+
+k
+
+k
+
+= s1(M )
+
+6
+
+LARRY GUTH AND JAMES MAYNARD
+
+where s1(M ) is the largest singular value of M . This is also the square-root of the
+largest eigenvalue of M ∗M . A simple bound for s1(M ) is then given by the trace
+of powers of M ∗M ; for any r
+
+N
+
+∈
+
+s1(M )
+
+≤
+
+tr((M ∗M )r)1/2r.
+
+W
+
+≈ |
+
+N r, which would imply s1(M )
+
+We might hope tr((M ∗M )r)
+1/2r.
+Unfortunately it appears to be very diﬃcult to estimate these traces accurately for
+large r, and we would only improve upon the bound
+≤
+T N −1, which requires r to be large. Nevertheless, a variant of this bound for r = 3
+(which reduces the contribution from some of the trivial terms) allows one to show
+a bound similar to
+
+≤
+/ T N −1/2 if (T N −1/2)1/r
+
+N 1/2
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+s1(M )6 /
+
+ni(t1−t2)
+1
+
+ni(t2−t3)
+2
+
+ni(t3−t1)
+3
+
+.
+
+|tj−tk|>T ǫ ∀j,k Xn1,n2,n3∼N
+
+Xt1,t2,t3∈W
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+tj|
+/ T N −1/2 we wish to show the right hand side is a bit smaller than T 3.
+
+The right hand side would be tr((M ∗M )3) if we didn’t have the lower bounds on
+(and so we avoid the t1 = t2 = t3 terms). To improve upon the bound
+ti −
+W
+|
+
+|
+|
+The natural approach to estimating the right hand side would be to apply Poisson
+summation and stationary phase to each of the inner sums, which would yield a
+bound of roughly
+
+N 3
+T 3/2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xt1,t2,t3∈W Xm1,m2,m3∼T /N
+
+mi(t1−t2)
+
+1
+
+mi(t2−t3)
+
+2
+
+mi(t3−t1)
+
+3
+
+ct1−t2 ct2−t3 ct3−t1
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+for some coeﬃcients ct of size 1. Unfortunately the cti−tj coeﬃcients link the
+variables t1, t2 and t3, and this makes it diﬃcult to show any cancellation over
+these summations. Without any cancellation in the t1, t2, t3 sums we would be
+T 3 even if we obtained square-root cancellation
+limited to a bound of
+|
+in the sums over m1, m2, m3, and so this would fail to give the desired improvement
+on T 3 (but could potentially give results if σ > 3/4).
+
+3N 3/2
+
+W
+
+≈
+
+|
+
+A key observation is that it can be beneﬁcial to avoid the use of stationary phase.
+Applying Poisson summation without simplifying the Fourier integrals yields a
+bound of roughly
+
+N 3
+
+≤
+
+e−2πiN m·u
+
+u1
+u3
+
+Xt1,t2,t3∈W
+N 3
+
+X|m1|,|m2|,|m3|∼T /N Z[1,2]3
+u1
+u3
+
+e−2πiN m·u
+
+R
+
+Z[1,2]3
+
+(cid:16)
+
+u2
+u1
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+R
+
+(cid:17)
+u3
+u2
+
+(cid:17)
+
+(cid:16)
+
+X|m|∼T /N(cid:12)
+(cid:12)
+(cid:12)
+
+it2
+
+(cid:17)
+
+(cid:16)
+
+it3
+
+du
+
+u3
+u1
+
+(cid:17)
+
+it1
+
+u2
+u1
+
+(cid:16)
+
+du
+
+,
+
+(cid:17)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+7
+
+P
+
+x∈W xit. By not simplifying the integrals over u directly we have
+where R(x) :=
+given up a factor of T 3/2, but now the variables t1, t2, t3 are nicely separated from
+one another, and we can hope to show cancellation in these sums by showing the
+R function exhibits cancellation. However, even square-root cancellation in R(x)
+3/2 which is less than the T 3/2 factor we gave
+would only win back a factor of
+up by not applying stationary phase. Therefore we need to exploit simultaneous
+cancellation in the integral over u and the R functions.
+
+W
+
+|
+
+|
+
+The next important observation is that the arguments of the R functions only lie
+in a two dimensional subvariety z1z2z3 = 1. If we change variables to v1 = u1/u3
+and v2 = u2/u3 then the integral above is roughly
+
+e−2πiN (m1v1+m2v2+m3)u3 du3
+
+R(v1)R
+
+Z[1/2,2]2
+
+(cid:16)Z[1,2]
+
+(cid:17)
+
+v2
+v1
+
+(cid:16)
+
+R
+
+(cid:17)
+
+(cid:16)
+
+1
+v2
+
+(cid:17)
+
+dv1dv2.
+
+There is a large amount of cancellation in the inner integral unless m1v1 + m2v2 +
+0, and this allows us to win back a factor of T . We are then reduced to
+m3 ≈
+bounding expressions of the form
+
+(2.1)
+
+N 3
+T
+
+(v1,v2)∈[1/2,2]2
+m1v1+m2v2+m3=0
+
+R(v1)R
+
+v2
+v1
+
+1
+v2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+dv1
+
+.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+X|m|∼T /N(cid:12)
+Z
+(cid:12)
+(cid:12)
+
+If we had uniform square-root cancellation in the R functions, we would now get a
+bound of T 2
+| ≈
+T N −1/2, and so we would get a corresponding improvement to the large value
+estimates and zero density results.
+
+3/2, which comfortably beats the desired bound of T 3 when
+
+W
+
+W
+
+|
+
+|
+
+|
+
+Of course, we cannot expect to prove uniform square-root cancellation in the R
+function for arbitrary sets W . Nevertheless, one can show that R does exhibit
+4
+L4([1/2,2]) / E(W ),
+cancellation on average;
+where E(W ) from (1.7) counts approximate additive quadruples in W . Treating
+the m summation trivially, this would give a bound
+
+2
+L2([1/2,2]) /
+
+R(v)
+k
+
+R(v)
+k
+
+and
+
+W
+
+k
+
+k
+
+|
+
+|
+
+(2.2)
+
+T 2
+
+W
+
+|
+
+|
+
+1/2E(W )1/2,
+
+|
+
+≈
+
+3.
+
+W
+
+which would beat the target of T 3 if E(W ) is a bit smaller than T 2/
+W
+| ≈
+N 2
+3/T 2. Thus we obtain good bounds whenever E(W ) is small.
+In partic-
+|
+N 1+δ with δ small, this means that we can handle any set W
+ular, when T
+except those for which the additive energy is close to the maximal possible value of
+W
+
+|
+We would like to complement this with an argument for when E(W ) is large.
+As mentioned in the introduction, Heath-Brown’s result becomes useful in this
+situation. Lemma 1.7 can handle the case when E(W ) is larger than
+W
+|
+this lemma can handle the situation when E(W ) is larger than
+
+≈
+|
+3N/T , which isn’t quite strong enough to cover all ranges. A reﬁnement of
+3N 2/T 2 (at
+
+2N 1/2
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+8
+
+LARRY GUTH AND JAMES MAYNARD
+
+least when δ is small and
+improvement in all cases except when E(W )
+
+| ≈
+
+W
+
+|
+
+T N −1/2), which then allows us to get a small
+
+3N 2/T 2, we go back to (2.1),
+To overcome this ﬁnal obstacle when E(W )
+and exploit the averaging over m. After a change of variables we need to consider
+
+≈ |
+
+|
+
+W
+
+3N 2/T 2.
+
+≈ |
+
+|
+W
+
+N 3
+T
+
+X|m1|,|m2|,|m3|∼T /N Zv1∈[1/2,2]
+
+R(v1)R
+
+m1v1 + m3
+m2v1
+
+m1v1 + m3
+m2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+dv1.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+The only way the bound above could be tight is if there is a sparse set U on which
+R(u) is large, and such that for most u
+T /N we
+|
+U . We show that there cannot
+have (m1u + m3)/m2 ∈
+be a small set U which has this property of being approximately closed under such
+aﬃne transformations, and this ultimately leads to an improvement of (2.2) to
+roughly
+
+U and (m1u + m3)/(m2u)
+
+U and most
+
+m3| ∼
+
+m1|
+
+m2|
+
+∈
+
+∈
+
+,
+
+|
+
+,
+
+|
+
+T N
+
+W
+
+|
+
+|
+
+1/2E(W )1/2.
+
+W
+
+This now gives an improvement on the desired bound of T 3 whenever E(W ) is
+3, and so the bounds obtained on E(W ) stemming from Heath-
+smaller than
+Brown’s result above are now suﬃcient to give an improvement for any size of
+/ T N −1/2 for
+E(W ). Therefore we obtain an improvement on the bound
+arbitrary W .
+
+W
+
+|
+
+|
+
+|
+
+|
+
+3. Reduction to Main Proposition
+
+We ﬁx a smooth function w : R
+for all j
+
+Z≥0 and with w(t) = 1 for t
+
+→
+
+R≥0 supported on [1, 2] with
+
+w(j)
+
+k
+
+k∞ = Oj(1)
+
+[6/5, 9/5].
+
+∈
+
+∈
+
+Proposition 3.1. Let σ
+numbers with
+1 and
+bn| ≤
+T = N 6/5 such that
+
+|
+
+∈
+W
+
+[7/10, 8/10] and ǫ > 0. If bn is a sequence of complex
+is a set of T ǫ-separated points in an interval of length
+
+for all t
+
+∈ W
+
+. Then we have
+
+w
+
+n
+X
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+bnnit
+
+n
+N
+
+(cid:17)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+N σ
+
+≥
+
+T N (12−20σ)/5+oǫ(1).
+
+|W| ≤
+
+[4N 7/10, N 8/10], in which case N 2V −2
+
+Proof of Theorem 1.1 assuming Proposition 3.1. As mentioned in the introduction,
+N 8/10−o(1), so we may
+the result follows from (1.1) if V
+N 18/5V −2. By splitting DN
+assume V
+into 3 separate pieces (and using the triangle bound), we see that it suﬃces to
+show the result when bn = 0 unless n
+[6N/5, 9N/5]. Since the function w is 1 on
+[6/5, 9/5], we then have that bn = bnw(n/N ), so we may insert the weight w(n/N ).
+Finally, by now relaxing the vanishing of the coeﬃcients and letting V = N σ,
+
+N 7/10+o(1) or if V
+
+≥
+
+≤
+
+≤
+
+∈
+
+∈
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+9
+
+it suﬃces to show that whenever σ
+sequence and W is a set of 1-separated points such that
+
+∈
+
+[7/10, 8/10], (an) is a 1-bounded complex
+
+w
+
+n
+X
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+annit
+
+n
+M
+
+(cid:17)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+M σ
+
+≥
+
+for each t
+
+∈
+
+W , we have
+
+W
+
+|
+
+| ≤
+
+T o(1)(M 18/5−4σ + T M 12/5−4σ).
+
+|
+
+We now ﬁx ǫ > 0 and choose W ′
+| ≥
+/T ǫ (this can be achieved by picking the smallest element of W and then re-
+W
+|
+peatedly choosing the next smallest element which is at least T ǫ away from all picked
+N 6/5, then we apply Proposition 3.1 to bound W ′ directly, which
+elements). If T
+implies that
+
+W so that W ′ is T ǫ-separated and
+
+W ′
+
+≤
+
+⊂
+
+|
+
+W
+
+|
+
+| ≤
+
+W ′
+
+T ǫ
+
+|
+
+| ≤
+
+N (18−20σ)/5+2ǫ+oǫ(1).
+
+→
+
+0 suﬃciently slowly then gives the result in this case.
+T /N 6/5
+
+Letting ǫ
+T > N 6/5, then we divide W ′ into
+interval of length N 6/5, and we apply Proposition 3.1 to bound each W ′
+This gives
+
+If instead
+j each supported on an
+j separately.
+
+subsets W ′
+
+⌉
+
+⌈
+
+W
+
+|
+
+| ≤
+
+T ǫ
+
+Xj≤⌈T /N 6/5⌉
+
+W ′
+
+j | ≤
+
+|
+
+T 1+ǫN (12−20σ)/5+ǫ+oǫ(1).
+
+Letting ǫ
+
+→
+
+0 suﬃciently slowly then gives the result in this case too.
+
+(cid:3)
+
+4. The matrix MW and its singular values
+
+Now we begin to work on the proof of Proposition 3.1. Recall that DN is a Dirichlet
+polynomial of the form
+
+DN (t) =
+
+w
+
+n
+X
+
+(cid:16)
+
+n
+N
+
+bnnit,
+(cid:17)
+
+where w is a smooth bump supported on [1, 2], as deﬁned in Section 3.
+
+Given a set W
+
+⊆
+
+(4.1)
+
+R, let MW be the
+
+W
+
+N matrix with entries
+
+|
+
+| ×
+Mt,n = w(n/N )nit,
+
+where t
+
+∈
+
+W and n
+
+N .
+
+∼
+
+Lemma 4.1 (Large values of Dirichlet polynomials controlled by singular values).
+Let MW be the matrix deﬁned in (4.1), and s1(MW ) its largest singular value. If
+1, then we have
+DN (t)
+
+N σ on W and if
+
+|
+
+| ≥
+
+bn| ≤
+
+|
+
+10
+
+LARRY GUTH AND JAMES MAYNARD
+
+. N 1−2σs1(MW )2.
+
+W
+
+|
+
+|
+
+Proof. Let b be the vector with components bn. Then note that for each t in W ,
+
+DN (t) =
+
+w(n/N )bnnit = (MW b)t.
+
+n
+X
+
+Therefore we can relate the behavior of DN on W (for arbitrary b) to properties
+of the matrix MW , in particular its singular values. We write sj(MW ) for the
+jth singular value of MW , with the convention that s1(MW )
+≥
+sk(MW ). Let MW have singular value decomposition MW = U ΣV , so that Σ is a
+= j, and U , V are unitary
+rectangular matrix with Σii = si(MW ) and Σij = 0 if i
+matrices.
+
+s2(MW )
+
+...
+
+≥
+
+≥
+
+If
+
+|
+
+DN (t)
+
+| ≥
+
+N σ on W , then we see
+
+N 2σ
+
+W
+
+|
+
+|
+
+≤
+
+DN (t)
+|
+
+|
+
+Xt∈W
+
+2 = (MW b)∗MW b = (V b)∗Σ2V b
+
+s1(MW )2
+≤
+= s1(MW )2
+
+k
+
+k
+
+2
+V b
+ℓ2
+k
+2
+ℓ2.
+
+b
+
+k
+
+Finally, if
+and rearranging now gives the result.
+
+2
+ℓ2 . N . Substituting this into the expression above
+(cid:3)
+
+bn| ≤
+
+1 then
+
+b
+
+k
+
+k
+
+|
+
+Now s1(MW ) is equal to the square root of the largest eigenvalue value of the W
+matrix MW M ∗
+
+W , with entries
+
+W
+
+×
+
+(MW M ∗
+
+W )t1,t2 =
+
+w
+
+n
+X
+
+(cid:16)
+
+ni(t1−t2).
+
+n
+N
+
+2
+
+(cid:17)
+
+A simple bound for s1(MW ) is therefore to use the trace: for any integer r
+have
+
+≥
+
+1 we
+
+s1(MW )2 = s1(MW M ∗
+
+W )
+
+k
+
+≤
+
+(cid:16)
+
+j=1
+X
+
+sj(MW M ∗
+
+W )r
+
+1/r
+
+(cid:17)
+
+= tr((MW M ∗
+
+W )r)1/r.
+
+W
+
+1/rN .
+
+W )r)1/r /
+
+One might guess that sj(MW ) / N 1/2 for all j, in which case we would have
+tr((MW M ∗
+If one could establish such a sharp bound on
+W MW )r) for large r, this would give Conjecture 1.5. Unfortunately we do not
+tr((M ∗
+4, so we work with r = 3. In this case,
+know how to obtain good bounds when r
+≥
+even a sharp bound tr((MW M ∗
+/ N 3−3σ,
+1/3N would only yield
+W )3)1/3 /
+W
+|
+which is worse than the bounds established by previous works. To get around this
+issue, we note that if we are in the extreme scenario when
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+6
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+11
+
+si(MW )6 =
+
+1
+k
+
+k
+
+i=1
+X
+
+1
+k
+
+(cid:16)
+
+k
+
+i=1
+X
+
+si(MW )2
+
+3
+
+(cid:17)
+
+W )3)1/6k−1/6, a signiﬁcant improvement on the bound tr((MW M ∗
+
+then in fact we must have that all the singular values are the same, and so s1(MW ) =
+W )3)1/6
+tr((MW M ∗
+W )3) is close to
+we had before. Similarly, we would expect that if tr((MW M ∗
+tr(MW M ∗
+W )3/k2, then we would also get an improved bound on s1(MW ) since
+W )3) would be coming from the many other
+most of the contribution to tr((MW M ∗
+singular values. The following lemma makes this precise, stating that we can essen-
+tially replace tr((MW M ∗
+W )3/k2
+W )3) with the diﬀerence tr((MW M ∗
+for the purposes of bounding s1(MW ).
+
+tr(MW M ∗
+
+W )3)
+
+−
+
+Lemma 4.2 (Bound for singular values in terms of traces). Let A be an m
+complex matrix. Then we have
+
+n
+
+×
+
+s1(A)
+
+≤
+
+2
+
+tr((AA∗)3)
+
+(cid:16)
+
+tr(AA∗)3
+m2
+
+−
+
+1/6
+
++ 2
+
+(cid:17)
+
+(cid:16)
+
+tr(AA∗)
+m
+
+1/2
+
+.
+
+(cid:17)
+
+Proof. Recall that tr((AA∗)j) =
+of the m
+maxi λ1/2
+
+i where λ1, . . . , λm are the eigenvalues
+m matrix AA∗, which are real and non-negative, and that s1(A) =
+×
+. We see that it is suﬃcient to show for any non-negative reals x1, . . . xk
+
+P
+
+m
+
+i=1 λj
+
+i
+
+(4.2)
+
+x1 ≤
+
+2
+
+k
+
+(cid:16)
+
+i=1
+X
+
+x6
+i −
+
+i )3
+
+k
+i=1 x2
+k2
+
+(
+
+P
+
+(cid:17)
+
+1/6
+
++ 2
+
+k
+i=1 x2
+i
+k
+
+(cid:16) P
+
+1/2
+
+.
+
+(cid:17)
+
+By H¨older’s inequality, we have that
+Thus
+
+k
+i=2 x6
+
+i ≥
+
+(
+
+k
+i=2 x2
+
+i )3/(k
+
+1)2
+
+−
+
+(
+
+≥
+
+k
+i=2 x2
+
+i )3/k2.
+
+P
+
+P
+
+P
+
+k
+
+k
+
+k
+
+x6
+1 =
+
+x6
+i −
+
+i=1
+X
+
+i=2
+X
+
+x6
+i ≤
+
+x6
+i −
+
+i=1
+X
+k
+
+(
+
+i )3
+
+k
+i=2 x2
+k2
+
+P
+
+(
+
+x6
+i −
+
+≤
+
+(cid:16)
+
+i=1
+X
+
+i )3
+
+k
+i=1 x2
+k2
+
+(
+
++ 3x2
+1
+
+(cid:17)
+
+P
+
+i )2
+
+k
+i=1 x2
+k2
+
+.
+
+P
+
+This in turn implies (4.2) (if (4.2) failed then x6
+hand side above.)
+
+1 would be larger than the right
+(cid:3)
+
+W )3). In both cases we expand
+Thus we wish to estimate tr(MW M ∗
+the trace and use Poisson summation as a ﬁrst step. In anticipation of this, we
+introduce the function
+
+W ) and tr((MW M ∗
+
+(4.3)
+
+ht(u) := w(u)2uit,
+
+12
+
+LARRY GUTH AND JAMES MAYNARD
+
+which appears in the sums deﬁning the coeﬃcients of MW M ∗
+basic tail estimate for the Fourier transform ˆht.
+Lemma 4.3 (Non-stationary phase). Let ht(u) = w(u)2uit. Then we have
+
+W . We ﬁrst record a
+
+(1) For any integer j
+
+(2) For any integer j
+
+≥
+
+≥
+
+0 we have
+ˆht(ξ) .j (1 +
+0 we have
+ˆht(ξ) .j (1 +
+
+t
+
+|
+
+|
+
+)j/
+
+j.
+
+ξ
+
+|
+
+|
+
+ξ
+
+|
+
+|
+
+)j/
+
+j.
+
+t
+
+|
+
+|
+
+j for all
+0. Thus, by integration by parts (and using that w is compactly supported),
+
+k∞ .j 1 for all j
+
+h(j)
+t k∞ .j 1 +
+
+0, we have that
+
+w(j)
+
+≥
+
+k
+
+k
+
+t
+
+|
+
+|
+
+Proof. Since
+j
+we have that
+
+≥
+
+ˆht(ξ) =
+
+e(
+
+−
+
+Z
+
+ξu)ht(u)du =
+
+1
+ξj
+
+ξu)h(j)
+
+t (u)du .j
+
+e(
+
+−
+
+j
+
+.
+
+1 +
+ξ
+
+|
+
+|
+
+t
+|
+j
+|
+
+Z
+g(j)
+ξ k∞ .j 1 +
+
+j, so integration by parts
+
+ξ
+
+|
+
+|
+
+Similarly, if gξ(u) = e(
+gives
+
+−
+
+ξu)w(u)2 then
+
+k
+
+ˆht(ξ) =
+
+gξ(u)uitdu =
+
+Z
+
+(it + 1)
+
+(it + j)
+
+Z
+
+· · ·
+
+1
+
+Lemma 4.4 (Hibert-Schmidt Norm estimate). If W
+N O(1), then
+
+tr(MW M ∗
+
+W ) = N
+
+W
+
+|
+
+w
+
+k
+
+| k
+
+Proof. Expanding the trace, we see that
+
+⊂
+L2 + O(N −100).
+2
+
+g(j)
+ξ (u)uit+jdu .j
+
+R is a ﬁnite set with
+
+j
+|
+
+. (cid:3)
+
+1 +
+t
+
+|
+
+ξ
+|
+j
+|
+
+W
+
+|
+
+| ≤
+
+tr(MW M ∗
+
+W ) =
+
+w(n/N )2 =
+
+n
+Xt∈W X
+
+h0(n/N ).
+
+W
+
+|
+
+|
+
+Xn∈Z
+
+Because h0 is a smooth compactly supported function, the sum
+R h0(u)dξ = N
+close to the integral N
+Poisson summation, which gives (separating the term m = 0)
+
+n h0(n/N ) is very
+2
+L2. We can get a precise estimate using
+P
+
+w
+
+k
+
+k
+
+R
+
+h0(n/N ) = N
+
+h0(N m) = N
+
+h0(0) + O
+
+h0(N m)
+|
+
+|
+
+.
+
+(cid:17)
+
+(cid:16) Xm6=0
+
+n
+X
+
+m
+X
+
+c
+
+The ﬁrst term on the right hand side is N
+by Lemma 4.3.
+
+w
+
+k
+
+c
+L2 and the second term is O(N −100)
+2
+(cid:3)
+
+c
+
+k
+
+Lemma 4.5 (Expansion of the cubic trace). Let W be T ǫ-separated. Then we have
+
+tr((MW M ∗
+
+W )3) = N 3
+
+W
+
+|
+
+|k
+
+w
+
+k
+
+6
+L2 +
+
+Im + Oǫ(T −100),
+
+Xm∈Z3\{0}
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+13
+
+where
+
+Im := N 3
+
+ˆht1−t2(m1N )ˆht2−t3 (m2N )ˆht3−t1 (m3N ).
+
+Xt1,t2,t3∈W
+
+Proof. First we expand tr((MW M ∗
+
+W )3) as the sum S, given by
+
+S =
+
+=
+
+Xn1,n2,n3∈Z
+
+Xt1,t2,t3∈W
+
+Xt1,t2,t3∈W Xn1,n2,n3∈Z
+
+w
+
+n1
+N
+
+(cid:16)
+ht1−t2
+
+2
+
+w
+
+(cid:17)
+
+(cid:16)
+
+n1
+N
+
+(cid:16)
+
+(cid:17)
+
+n2
+N
+
+2
+
+w
+
+n3
+N
+
+(cid:17)
+ht2−t3
+
+(cid:16)
+n2
+N
+
+(cid:16)
+
+(cid:17)
+
+(cid:17)
+ht3−t1
+
+n3
+N
+
+,
+
+(cid:17)
+
+(cid:16)
+
+2
+
+ni(t1−t2)
+1
+
+ni(t2−t3)
+2
+
+ni(t3−t1)
+3
+
+where, as in (4.3), we have ht(u) = w(u)2uit. We now perform Poisson summation
+in n1, n2, n3, which gives
+
+S = N 3
+
+ˆht1−t2 (m1N )ˆht2−t3(m2N )ˆht3−t1(m3N ) =
+
+Im.
+
+Xm1,m2,m3∈Z
+
+Xt1,t2,t3∈W
+
+Xm∈Z3
+
+Finally, we separate the term m1 = m2 = m3 = 0, which contributes
+
+I0 = N 3
+
+ˆht1−t2(0)ˆht2−t3(0)ˆht3−t1(0).
+
+Xt1,t2,t3∈W
+
+Since W is T ǫ-separated, ˆht1−t2 (0) .ǫ T −200 if t1 6
+terms in the I0 above are negligible unless t1 = t2 = t3, and so
+
+= t2 by Lemma 4.3. Thus the
+
+I0 = N 3
+
+ˆh0(0)3 + Oǫ(T −100) =
+
+Xt∈W
+
+W
+
+|
+
+|k
+
+w
+
+k
+
+L2 + Oǫ(T −100).
+6
+
+Putting this together gives the result.
+
+Putting together Lemmas 4.1-Lemma 4.5, and noting that the N 3
+cancels with tr(MW M ∗
+W )3/
+Proposition 4.6. Let W be T ǫ-separated, and let
+N σ for all t
+
+2, gives the following.
+
+W . Then we have
+
+bn| ≤
+
+W
+
+|
+
+|
+
+|
+
+1 be such that
+
+DN (t)
+|
+
+|
+
+>
+
+∈
+
+.ǫ N 2−2σ + N 1−2σ
+
+W
+
+|
+
+|
+
+1/3
+
+,
+
+Im
+
+(cid:16) Xm∈Z3\{0}
+
+(cid:17)
+
+where Im is the quantity deﬁned in Lemma 4.5.
+
+. N 2−2σ of
+The ﬁrst term above corresponds to the best possible estimate is
+Conjecture 1.5, and so our task is reduced to getting a good bound for the sum of
+Im.
+
+W
+
+|
+
+|
+
+(cid:3)
+
+W
+
+|
+
+|k
+
+w
+
+k
+
+3
+L2 term
+
+14
+
+LARRY GUTH AND JAMES MAYNARD
+
+5. The pieces of the sum S
+
+Recall from Proposition 4.6, we have
+
+W
+
+|
+
+|
+
+3 . N 6−6σ + N 3−6σ
+
+Im,
+
+Xm∈Z3\{0}
+
+where
+
+Im = N 3
+
+ˆht1−t2 (m1N )ˆht2−t3(m2N )ˆht3−t1(m3N ).
+
+Xt1,t2,t3∈W
+
+ˆht1−t2 (mN )
+is easy to understand via
+To get started, we note a few cases when
+|
+|
+Lemma 4.3. Since W is T ǫ-separated, we see that if t1 6
+= t2, by Lemma 4.3 we have
+
+(5.1)
+
+ˆht1−t2 (0)
+|
+
+|
+
+.ǫ T −100.
+
+On the other hand, if t1 = t2, then we have
+
+(5.2)
+
+ˆht1−t2(0) = ˆh0(0) =
+
+w2(u)du
+
+Z
+
+1.
+
+≍
+
+If t1 = t2 but m
+
+= 0, then by Lemma 4.3 we have
+
+(5.3)
+
+ˆht1−t2(mN )
+|
+
+|
+
+. m−100N −100.
+
+Finally, if m > T 1+ǫ/N , then since W is contained in an interval of length T , we
+have by Lemma 4.3 and taking j =
+
++ 100
+
+200/ǫ
+
+⌈
+
+⌉
+
+(5.4)
+
+ˆht1−t2 (mN )
+|
+
+|
+
+.ǫ
+
+T 100
+(mN )100
+
+T
+T 1+ǫ
+
+200/ǫ
+
+. T −100m−100.
+
+(cid:17)
+With this in mind, we divide the sum into pieces
+
+(cid:16)
+
+(5.5)
+
+Im = S1 + S2 + S3,
+
+Xm∈Z3\{0}
+
+where S1 contains the terms where exactly one mi is non-zero, S2 contains the terms
+where exactly two mi are non-zero, and S3 contains the terms where all three mi
+are non-zero.
+
+We will see that S1 is negligible.
+In the next section, we will bound S2 using
+Heath-Brown’s theorem, Theorem 1.6. The main part of the paper is concerned
+with studying S3, which contains most of the terms and is most diﬃcult.
+
+6
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+15
+
+Proposition 5.1 (S1 bound). We have
+
+S1 = Oǫ(T −10).
+
+Proof. By symmetry, we see that
+
+3N 3
+
+S1 ≤
+
+Xt1,t2,t3∈W Xm36=0
+
+ˆht1−t2 (0)ˆht2−t3 (0)ˆht3−t1 (m3N )
+|
+
+.
+
+|
+
+By (5.4) (using the trivial bound
+m3|
+
+> T 1+ǫ/N contribute
+
+|
+
+ˆht(ξ)
+|
+
+|
+
+. 1 for the other factors), terms with
+
+.ǫ N 3
+
+W
+
+|
+
+3
+
+|
+
+Xm>T 1+ǫ/N
+
+T −100m−100 . T −10.
+
+Thus we may restrict attention to terms with
+terms with t1 6
+= t2. Using (5.1) to bound
+for the remaining factors), we see the terms with t1 6
+contribute
+
+m3|
+|
+ˆht1−t2(0)
+|
+
+|
+
+< T 1+ǫ/N . Next we consider
+(and the trivial bound ˆht . 1
+< T 1+ǫ/N
+m3|
+
+= t2 and
+
+|
+
+.ǫ N 3
+
+3 T 1+ǫ
+N
+
+|
+
+W
+
+|
+
+T −100 / T −10.
+
+= t3 contribute Oǫ(T −10). The remaining terms have
+Similarly, the terms with t2 6
+, which shows
+t1 = t2 = t3. For these terms we apply (5.3) to bound
+that the terms with t1 = t2 = t3 also contribute Oǫ(T −10). This gives the result. (cid:3)
+
+ˆht3−t1(m3N )
+|
+
+|
+
+6. The contribution of S2
+
+The aim of this section is to establish the following bound for the sum S2, which
+ultimately relies on Heath-Brown’s estimate 1.6.
+
+Proposition 6.1 (S2 bound). For any choice of k
+
+S2 / N 2
+
+2 + T N
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+2−1/k + N 2
+
+|
+
+W
+
+N
+
+∈
+2
+
+|
+
+|
+
+(cid:16)
+
+1/k
+
+.
+
+T 1/2
+3/4
+W
+
+|
+
+(cid:17)
+
+∈
+
+The proof of this proposition relies on the following consequence of stationary phase,
+which is part of the well-known ‘reﬂection principle’ for Dirichlet polynomials, or
+the approximate functional equation (values of a Dirichlet polynomial of length N
+[T, 2T ] are determined by values of a Dirichlet polynomial of length T /N ).
+at t
+
+Lemma 6.2 (Approximate functional equation). For every t with
+we have
+
+t
+
+|
+
+| ∼
+
+T0 ≥
+
+T ǫ,
+
+ˆht(mN )
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xm6=0
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+1
+T 1/2
+0
+
+Zu/1
+
+Xm/T0/N
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+m−i(t+u)
+
+du + O(T −100).
+
+Although somewhat standard, we will give a detailed proof of Lemma 6.2 below.
+Let us ﬁrst use it to bound S2.
+
+16
+
+LARRY GUTH AND JAMES MAYNARD
+
+Proof of Proposition 6.1 assuming Lemma 6.2. Recall that S2 is the sum of those
+Im where exactly two mi are non-zero. By symmetry, we have
+
+S2 = 3N 3
+
+ˆht1−t2(m1N )ˆht2−t3(m2N )ˆht3−t1 (0).
+
+Xm1,m26=0 Xt1,t2,t3∈W
+
+= t3, then (5.1) shows that the last factor ˆht3−t1 (0) is Oǫ(T −100), and so using
+2 from Lemma 4.3 for the remaining factors, these
+
+If t1 6
+the bound ˆht(u) . (1 +
+2)/
+terms contribute Oǫ(T −10) in total. Therefore we have
+
+u
+
+t
+
+|
+
+|
+
+|
+
+|
+
+S2 = 3N 3ˆh0(0)
+
+ˆht1−t2 (m1N )ˆht2−t1(m2N ) + Oǫ(T −10).
+
+Xm1,m26=0 Xt1,t2∈W
+
+Since ht(u) = w(u)2uit, we have h−t(u) = ht(u), and so ˆh−t(ξ) = ˆht(
+particular,
+
+−
+
+ξ).
+
+In
+
+ˆht2−t1(m2N ) = ˆht1−t2(
+
+−
+
+m2N ).
+
+Therefore, we can simplify the last equation to get
+
+S2 = 3N 3ˆh0(0)
+
+Xt1,t2∈W (cid:12)
+(cid:12)
+(cid:12)
+
+Xm6=0
+
+ˆht1−t2 (mN )
+(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
++ Oǫ(T −10).
+
+Remark. Heath-Brown’s theorem, Theorem 1.6, gives a good estimate for the sum
+2. However we cannot apply it immediately because
+we need to be careful to leave out the term with m = 0. This term is related to I0
+P
+which we handled carefully in the previous section.
+
+m∈Z ˆht1−t2 (mN )
+|
+
+t1,t2∈W |
+
+P
+
+If t1 = t2, then
+sum dyadically according to the size of t1 −
+
+m6=0
+
+P
+
+t2, we ﬁnd
+
+ˆht1−t2 (mN ) is negligible by (5.3) and (5.4). So, splitting the
+
+S2 / N 3
+
+sup
+M=2j
+
+T ǫ/N <M<2T /N Xt16=t2∈W
+
+|t1−t2|∼MN (cid:12)
+(cid:12)
+(cid:12)
+
+2
+
++ Oǫ(T −10).
+
+ˆht1−t2 (mN )
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xm6=0
+
+If
+polynomial of length M . Indeed, by Lemma 6.2, for such t1, t2 we have
+
+ˆht1−t2 (mN ) can be approximated by a Dirichlet
+
+M N , then
+
+t2| ∼
+
+t1 −
+
+m6=0
+
+|
+
+P
+
+ˆht1−t2(mN )
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xm6=0
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+1
+M 1/2N 1/2
+
+Squaring and summing over t1, t2 ∈
+
+Z|u|/1
+
+(cid:12)
+(cid:12)
+(cid:12)
+W with
+
+m−i(t−u)
+
+du + O(T −100).
+(cid:12)
+(cid:12)
+(cid:12)
+N M gives
+
+X1≤m/M
+
+t1 −
+
+|
+
+t2| ∼
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+17
+
+S2 / sup
+
+M≤2T /N
+|u|/1
+
+N 2
+M
+
+2
+
+mi(t−u)
+
++ O(T −10).
+
+Xt16=t2∈W
+|t1−t2|∼MN (cid:12)
+(cid:12)
+(cid:12)
+M N for an upper bound, and split the
+t2| ∼
+We can now drop the condition
+summation range m / M into dyadic intervals. Noting that choosing all am to be
+zero apart from one gives a contribution which dominates the error term, we ﬁnd
+
+X1≤m/M
+
+t1 −
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+|
+
+(6.1)
+
+S2 /
+
+N 2
+M
+
+Xt1,t2∈W (cid:12)
+Xm∼M
+(cid:12)
+(cid:12)
+
+ammi(t1−t2)
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+am| ≤
+
+|
+
+1.
+
+for some choice of M / T /N and some coeﬃcients
+
+We apply H¨older’s inequality to this sum, and rewrite the 2kth power of the Dirichlet
+polynomial as the 2nd power of a bigger Dirichlet polynomial. For any choice of
+positive integer k, we ﬁnd that
+
+(6.2)
+
+ammi(t1−t2)
+
+2
+
+2−2/k
+
+bmmi(t1−t2)
+
+2
+
+1/k
+
+Xm∼M
+
+Xt1,t2∈W (cid:12)
+(cid:12)
+(cid:12)
+for some coeﬃcients bm ≤
+sums of this type. We recall the statement.
+
+(cid:16) Xt1,t2∈W (cid:12)
+(cid:12)
+(cid:12)
+M ok(1) (by the divisor bound). Theorem 1.6 bounds
+
+Xm≍M k
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)
+
+W
+
+≤ |
+
+|
+
+Theorem (Heath-Brown). Let
+interval of length T . Let
+
+T
+
+an|
+
+|
+
+be a 1-separated set of reals, contained in an
+
+/ 1 be a complex sequence. Then
+
+2N
+
+Xn=N
+
+Xt1,t2∈T (cid:12)
+(cid:12)
+(cid:12)
+
+This result implies that
+
+anni(t1−t2)
+
+2
+
+/
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+2N +
+
+N 2 +
+
+|T |
+
+|T |
+
+|T |
+
+5/4T 1/2N.
+
+(6.3)
+
+bmmi(t1−t2)
+
+2
+
+Xt1,t2∈W (cid:12)
+(cid:12)
+(cid:12)
+
+Xm≍M k
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Substituting (6.2) and (6.3) back into (6.1), we see that
+
+W
+
+/k |
+
+|
+
+M 2k +
+
+W
+
+|
+
+2M k +
+|
+
+|
+
+W
+
+5/4T 1/2M k.
+|
+
+S2 /k
+
+N 2
+M
+
+W
+
+(
+|
+
+|
+
+2M + M 2
+
+2−1/k +
+
+W
+
+|
+
+|
+
+W
+
+|
+
+2M T 1/2k
+|
+
+|
+
+W
+
+−3/4k)
+
+(6.4)
+
+/k N 2
+
+W
+
+|
+
+|
+
+2 + T N
+
+W
+
+|
+
+|
+
+2−1/k + N 2
+
+W
+
+|
+
+2
+
+|
+
+T 1/2
+3/4
+W
+
+|
+
+(cid:17)
+
+|
+
+(cid:16)
+
+|
+1/k
+
+.
+
+This gives the result.
+
+(cid:3)
+
+18
+
+LARRY GUTH AND JAMES MAYNARD
+
+Now we return to the proof of Lemma 6.2, which roughly says ˆht(mN ) can be
+thought of as a smoothed version of t−1/2mit supported on m
+
+t/N .
+
+≍
+
+T ǫ we have ˆht(0) = O(T −100)
+Proof of Lemma 6.2. By Lemma 4.3, when
+| ≥
+so we can include the term m = 0 at the cost of an Oǫ(T −100) error term. Let
+w(u)2us−1du be the Mellin transform of w2, which is entire and has
+W (s) :=
+N. Then by Poisson summation and Mellin inversion
+s
+W (s)
+.j |
+R
+|
+|
+(w(u)2 = (2πi)−1
+
+−j for all j
+2+i∞
+
+∈
+
+t
+
+|
+
+|
+
+2−i∞ W (s)u−sds), we have that
+R
+
+(6.5) N 1+it
+
+ˆht(mN ) =
+
+w(n/N )2nit =
+
+m
+X
+
+n
+X
+
+1
+2πi
+
+2+i∞
+
+2−i∞
+
+Z
+
+W (s)N sζ(s
+
+it)ds.
+
+−
+
+We move the line of integration to
+1, picking up a pole at s = 1 + it, and
+then on the remaining contour we use the functional equation of the zeta function
+(see [Da, Chapter 8]), which states that ζ(s) = G(s)ζ(1
+
+s), where
+
+(s) =
+
+−
+
+ℜ
+
+−
+
+G(s) := π−1/2+s
+
+Γ
+
+1−s
+2
+
+(cid:16)
+Γ
+
+s
+2
+
+.
+
+(cid:17)
+
+(cid:16)
+
+(cid:17)
+
+Thus we have (using the rapid decay of W to bound the contribution from the pole)
+
+1
+2πi
+
+2+i∞
+
+2−i∞
+
+Z
+
+W (s)N sζ(s
+
+−
+
+(6.6)
+
+= O(T −100) +
+
+it)ds = N 1+itW (1 + it) +
+
+1
+2πi
+
+−1+i∞
+
+−1−i∞
+
+Z
+
+W (s)N sζ(s
+
+it)ds
+
+−
+
+1
+2πi
+
+−1+i∞
+
+−1−i∞
+
+Z
+
+W (s)N sG(s
+
+it)ζ(1
+
+−
+
+−
+
+s + it)ds.
+
+We ﬁx a small constant η > 0 and split the sum deﬁning ζ(1
+T ηT0/N . More speciﬁcall, write ζ(1
+
+s + it) = Z1(1
+
+s + it) + Z2(1
+
+−
+
+s + it) at M :=
+s + it), where
+
+−
+
+−
+
+−
+
+Z1(s) :=
+
+m−s,
+
+Z2(s) :=
+
+m−s,
+
+X1≤m≤M
+
+Xm>M
+
+noting that Z2(s) converges absolutely when
+the integral above, and then move the integral involving Z1 to
+integral involving Z2 to
+
+2k for a large k
+
+ℜ
+N. This gives
+
+(s) > 1. We substitute this into
+(s) = 1 and the
+
+(s) =
+
+ℜ
+
+ℜ
+
+−
+
+∈
+
+(6.7)
+
+1
+2πi
+
+−1+i∞
+
+−1−i∞
+
+Z
+
+W (s)N sG(s
+
+it)ζ(1
+
+−
+
+−
+
+s + it)ds = I1 + I2,
+
+where (making a change of variables s = 1 + iu in I1 and s =
+
+2k + iv in I2)
+
+−
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+19
+
+∞
+
+−∞
+
+Z
+
+I1 :=
+
+I2 :=
+
+1
+2π
+
+1
+2π
+
+∞
+
+W (
+
+−
+
+−∞
+
+Xm>M Z
+
+W (1 + iu)N 1+iuG(1 + i(u
+
+−
+
+t))
+
+mi(u−t)
+
+du,
+
+2k + iv)N −2k+ivG(
+
+(cid:16) X1≤m≤M
+2k + i(v
+
+−
+
+(cid:17)
+
+t))m−2k−1+i(v−t)dv.
+
+−
+
+From the rapid decay of W (s), we can truncate these integrals to
+/ 1 at
+the cost of an O(T −100) error term. It follows from well-known properties of the
+Gamma function (Stirling’s formula and the functional equation; see [Da, Chapter
+10]) that for
+
+> N we have
+
+/ 1 and
+
+u
+
+u
+
+v
+
+v
+
+t
+
+|
+
+,
+
+,
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+Γ
+
+1+i(u−t)
+2
+
+(cid:16)
+Γ
+
+i(t−u)
+2
+
+(cid:17)
+
+(cid:16)
+
+(cid:17)
+2k+1−i(v−t)
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Γ
+
+−2k+i(v−t)
+2
+
+(cid:16)
+Γ
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)
+
+(cid:17)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+=
+
+1
+1/2 ,
+
+|
+
+t
+
+|
+
+Γ
+
+2k+1−i(v−t)
+2
+
+k−1
+
+(cid:17)
+
+(cid:16)
+Γ
+
+2k+i(v−t)
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+T0, we have G(1 + i(u
+
+(cid:16)
+
+(cid:17)
+
+Yj=−k
+
+j + i(v
+
+t)/2
+
+t
+
+.k |
+
+|
+
+|
+
+−
+
+| −
+
+2k+1/2.
+
+Recalling that
+T 2k+1/2
+0
+
+t)) .k
+. Substituting these bounds in (and recalling M = T ηT0/N ), we ﬁnd that
+
+2k + i(v
+
+and G(
+
+| ∼
+
+−
+
+−
+
+−
+
+t
+
+0
+
+|
+
+t)) . T −1/2
+
+mi(u−t)
+
+du + O(T −100),
+
+I1 .
+
+I2 /k
+
+Z|u|/1
+
+N
+T 1/2
+0
+(cid:12)
+(cid:12)
+T 2k+1/2
+N −2k
+(cid:12)
+0
+(T ηT0/N )2k−1
+
+X1≤m≤T ηM
+
+1
+m2 .
+
+Xm>M
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+If we choose k suﬃciently large in terms of η, we then see that I2 = Oη(T −200).
+Substituting these bounds into (6.7), and combining this with (6.6) and (6.5) gives
+the result on letting η
+(cid:3)
+
+0.
+
+→
+
+7. The contribution of S3: a key cancellation
+
+Now we begin to study S3, which is the most diﬃcult term. Recall that
+
+S3 =
+
+Im,
+
+Xm1,m2,m36=0
+
+where
+
+Im = N 3
+
+ˆht1−t2 (m1N )ˆht2−t3(m2N )ˆht3−t1(m3N ).
+
+Xt1,t2,t3∈W
+
+20
+
+LARRY GUTH AND JAMES MAYNARD
+
+By Lemma 4.3,
+ξ
+when
+
+ˆht(ξ)
+ξ
+/j (
+|
+|
+is much bigger than
+
+|
+
+|
+
+|
+
+|
+|
+
+|
+
++ 1)j/
+, and hence Im is negligible unless
+t
+
+N, and so ˆht is rapidly decaying
+/ T /N . Thus
+m
+
+j for any j
+
+∈
+
+t
+
+|
+
+|
+
+|
+
+|
+
+(7.1)
+
+S3 =
+
+Im + O(T −100).
+
+0<|m1|,|m2|,|m3|/T /N
+X
+
+The ﬁrst step in our argument is an estimate for
+
+. We introduce the function
+
+Im|
+
+|
+
+(7.2)
+
+R(v) :=
+
+vit = ˆW (log v)
+
+Xt∈W
+
+which will play an important role in our analysis of S3.
+
+Proposition 7.1 (Cancellation within the Im integrals). We have
+
+. N 3
+
+Im|
+
+|
+
+Z
+|m1v1+m2v2+m3|/ 1
+N
+v1≍v2≍1
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+R(v1)R
+
+v2
+v1
+
+(cid:16)
+
+R(v2)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)
+
+dv1dv2 + O(T −200).
+
+|
+
+Moreover, if
+
+m2| ≤ |
+
+m1| ≤ |
+
+Im|
+Proof. Expanding the deﬁnition of ˆht as an integral and swapping the order of
+summation and integration, we have
+
+m2| ≍ |
+
+= O(T −200) unless
+
+m3|
+
+m3|
+
+, then
+
+.
+
+|
+
+|
+
+Im = N 3
+
+(7.3)
+
+= N 3
+
+where
+
+(7.4)
+
+N m
+
+e(
+
+−
+
+·
+
+u)w1(u)ui(t1−t2)
+
+1
+
+ui(t2−t3)
+2
+
+ui(t3−t1)
+3
+
+du
+
+R3
+
+Xt1,t2,t3∈W Z
+N m
+e(
+
+−
+
+R3
+
+Z
+
+u)w1(u)R
+
+·
+
+u1
+u3
+
+R
+
+(cid:17)
+
+(cid:16)
+
+u2
+u1
+
+u3
+u2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+du,
+
+w1(u) := w(u1)2w(u2)2w(u3)2,
+
+In (7.3), the R functions depend on u1/u3, u2/u1 and u3/u2. We therefore rewrite
+the integral using these variables. We deﬁne v1 and v2 by
+
+v1 :=
+
+u1
+u3
+
+,
+
+v2 :=
+
+u2
+u3
+
+.
+
+We rewrite the integral Im in terms of the variables v1, v2, u3. When we change
+variables, the R factors depend on v1, v2 but not on u3.
+
+u1
+u3
+
+R
+
+(cid:16)
+
+R
+
+(cid:17)
+
+(cid:16)
+
+u2
+u1
+
+R
+
+(cid:17)
+
+(cid:16)
+
+u3
+u2
+
+(cid:17)
+
+= R(v1)R
+
+v2
+v1
+
+1
+v2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+21
+
+The exponential factor also works out in a nice way in the new variables:
+
+e−N m·u
+
+= e−N (m1u1+m2u2+m3u3) = e−N (m1v1+m2v2+m3)u3 .
+
+And a Jacobian computation shows that
+
+du1du2du3 = u2
+
+3dv1dv2du3.
+
+So in the new variables, our integral Im becomes
+
+N 3
+
+e(
+
+−
+
+R3
+
+Z
+
+N (m1v1 + m2v2 + m3)u3)w1(u)R(v1)R
+
+v2
+v1
+
+1
+v2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+u2
+3dv1dv2du3.
+
+Since the R factors don’t involve u3 we rewrite our formula to do the u3 integral
+ﬁrst:
+
+N 3
+
+e(
+
+−
+
+R2 (cid:18)Z
+R
+
+Z
+
+N (m1v1 + m2v2 + m3)u3)w1(u)u2
+
+3du3
+
+R(v1)R
+
+(cid:19)
+
+v2
+v1
+
+(cid:16)
+
+R
+
+(cid:17)
+
+(cid:16)
+
+1
+v2
+
+(cid:17)
+
+dv1dv2.
+
+N, w1(u)u2
+
+A key observation in our proof is that we can analyze the norm of this inner integral
+very accurately using non-stationary phase. Recalling the deﬁnition (7.4) of w1, we
+3 has jth derivative with respect to u3 bounded by
+see that for any j
+N). Thus for
+k∞ .ℓ 1 for all ℓ
+Oj(1) (since w is supported on [1, 2] with
+any η > 0, the inner integral is Oη(T −300) unless
+T η/N
+by repeated integration by parts. In general, the inner integral has size . 1. In
+addition, w1(u) vanishes unless v1, v2 ∈
+
+m1v1 + m2v2 + m3| ≤
+
+[1/2, 2], because
+
+w(ℓ)
+
+∈
+
+∈
+
+k
+
+|
+
+w1(u) = w(u1)2w(u2)2w(u3)2 = w
+
+u3v1
+
+2
+
+w
+
+u3v2
+
+2
+
+w(u3)2,
+
+and w(u) is supported on u
+[1/2, 2] and v2 ∈
+v1 ∈
+triangle inequality, we see that since η > 0 was arbitrary
+
+(cid:0)
+[1, 2]. Therefore, the inner integral vanishes unless
+[1/2, 2]. Using these bounds for the inner integral and the
+
+∈
+
+(cid:1)
+
+(cid:0)
+
+(cid:1)
+
+. N 3
+
+Im|
+
+|
+
+Z
+|m1v1+m2v2+m3|/ 1
+N
+v1,v2∈[1/2,2]
+
+v2
+v1
+
+1
+v2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+R(v1)R
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+dv1dv2 + O(T −200).
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Since
+important, but it makes later computations cleaner.)
+
+, we can replace R(1/v2) by R(v2).
+
+R(1/v)
+|
+
+R(v)
+|
+
+=
+
+|
+
+|
+
+(This is not really
+
+Finally, this integral vanishes unless we can ﬁnd v1 ≍
+m3|
+m2v2 + m3 is almost zero. If
+. This gives the last claim in the proposition.
+m3|
+
+m1| ≤ |
+
+m2| ≤ |
+
+|
+
+|
+
+1 and v2 ≍
+
+, this can only happen if
+
+1 so that m1v1 +
+m2| ≍
+(cid:3)
+
+|
+
+22
+
+LARRY GUTH AND JAMES MAYNARD
+
+|
+
+D(t) =
+
+m1v1 + m2v2 + m3|
+
+Remark. The cancellation in the inner integral when
+is not
+/ 1/N is one of the key observations in our proof. This cancellation is spe-
+ciﬁc to Dirichlet polynomials as opposed to more general trigonometric polyno-
+mials. For instance, one may consider a ‘generalized’ Dirichlet polynomial of the
+n∼N bneitφ(n), where the function φ(n) has smoothness and con-
+form
+vexity properties similar to those of log n. One can follow the argument above,
+e(N gm,v1,v2(u3))du3 for some function
+but the inner integral will have the form
+gm,v1,v2 (u3). In general, the function gm,v1,v2 (u3) will not be linear in u3. So one
+R
+would have to use stationary phase as opposed to non-stationary phase, and the
+bounds would not work out as they do here.
+
+P
+
+e
+
+Because of the last claim in Proposition 7.1, we can restrict attention to m with
+0 <
+
+. The domain of integration can be rewritten in the form
+
+m1| ≤ |
+
+m2| ≍ |
+
+m3|
+
+|
+
+1
+m2|
+So the domain of integration is essentially the
+v2 = m1v1+m3
+
+m1v1 + m3
+m2
+
+. Therefore,
+
+v2 −
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+−
+
+/
+
+|
+
+−m2
+
+Im|
+
+|
+
+is morally bounded by
+
+N ≍
+
+1
+m3|
+
+|
+
+.
+
+N
+
+1
+
+N |m3| -neighborhood of the curve
+
+N 3
+m3| Zv1≍1
+
+|
+
+N
+
+R(v1)R
+(cid:12)
+(cid:12)
+(cid:12)
+
+m1v1 + m3
+m2v1
+
+−
+
+m1v1 + m3
+m2
+
+−
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+dv1.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+We can make this rigorous by using a smoothed version of R. Suppose that
+is a smooth bump which is
+ψ(j)
+k∞ /j 1 for all j
+
+N). Deﬁne a smoothed version of
+
+/ 1 and supported in
+
+ψ(x)
+/ 1 (i.e. satisfying
+
+x
+|
+|
+R(u)
+|
+
+1 for
+
+x
+|
+
+by
+
+≍
+
+∈
+
+e
+
+k
+
+|
+
+|
+
+e
+
+(7.5)
+
+RM (u) :=
+
+N M
+
+ψ(N M (u
+
+(cid:16) Z
+
+u′))
+
+ψ(eu)
+|
+
+R(u′)
+|
+
+−
+
+2du′
+
+1/2
+
+.
+
+(cid:17)
+
+e
+
+e
+
+e
+
+The following proposition gives an expansion of S3 in terms of such integrals.
+Proposition 7.2 (Expansion of S3). There is a choice of 0 < M1 ≤
+such that
+
+M / T /N
+
+S3 /
+
+N 2
+M
+
+Im + O(T −100),
+
+|m1|∼M1,|m2|,|m3|∼M
+X
+
+e
+
+where
+
+Im :=
+
+R(v1)
+(cid:12)
+(cid:12)
+(cid:12)
+Proof. Recall from (7.1) that S3 is bounded by
+
+Zv1≍1
+
+RM
+
+(cid:16)
+
+e
+
+e
+
+(cid:17)
+
+m1v1 + m3
+m2v1
+
+m1v1 + m3
+m2
+
+RM
+
+(cid:16)
+
+e
+
+dv1.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+23
+
+S3 ≤
+
+0<|m1|,|m2|,|m3|/T /N
+X
+
++ O(T −100).
+
+Im|
+
+|
+
+From (7.3), we have
+
+Im = N 3
+
+R3
+
+Z
+
+N m
+
+e(
+
+−
+
+·
+
+u)w1(u)R
+
+u1
+u3
+
+R
+
+(cid:17)
+
+(cid:16)
+
+u2
+u1
+
+u3
+u2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+
+du.
+
+From the deﬁnition (7.2) for R(v), we see that R(1/v) = R(v). Therefore we
+see that I(m1,m2,m3) = I (m2,m1,m3), and similarly for any other transposition of
+is invariant under any permutation of (m1, m2, m3), and
+(m1, m2, m3). Thus
+Im|
+at the cost of a factor of 6. By
+m3|
+so we can reduce to the case
+. Thus, by choosing
+Proposition 7.1, such terms are negligible unless
+m2| ≍ |
+M /
+dyadic scales to maximize the right hand side, we ﬁnd that there is an M1 ≤
+T /N such that
+
+m2| ≤ |
+
+m1| ≤ |
+
+m3|
+
+|
+
+|
+
+|
+
+(7.6)
+
+S3 /
+
++ O(T −100).
+
+Im|
+
+|
+
+X|m1|∼M1
+|m2|∼M
+|m3|∼M
+
+By Proposition 7.1, we have for m2 ≍
+
+M
+
+. N 3
+
+Im|
+
+|
+
+Zv1≍1 |
+
+R(v1)
+
+|  Z
+
+(cid:12)
+(cid:12)v2− m1v1 +m3
+(cid:12)
+
+m2
+
+(cid:12)
+(cid:12)/ 1
+(cid:12)
+
+−
+
+v2
+v1
+
+R
+
+(cid:16)
+
+(cid:17)
+
+R(v2)
+(cid:12)
+(cid:12)
+(cid:12)
+
+M N (cid:12)
+(cid:12)
+(cid:12)
+
+dv1 + O(T −200).
+
+dv2
+
+!
+
+Using Cauchy-Schwarz, we bound the inner integral by
+
+(cid:12)
+(cid:12)v2− m1v1 +m3
+ Z
+(cid:12)
+
+m2
+
+−
+
+(cid:12)
+(cid:12)
+(cid:12)/ 1
+
+R
+
+v2
+v1
+
+(cid:16)
+
+M N (cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+1
+M N
+
+RM
+
+e
+
+Thus we ﬁnd that
+
+1/2
+
+2
+
+dv2
+
+!
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+m1v1 + m3
+
+(cid:18)
+
+m2v1 (cid:19)
+
+−
+
+(cid:12)
+(cid:12)v2− m1v1 +m3
+ Z
+(cid:12)
+
+m2
+
+−
+
+(cid:12)
+(cid:12)
+(cid:12)/ 1
+
+2
+
+dv2
+
+1/2
+
+!
+
+R(v2)
+(cid:12)
+(cid:12)
+(cid:12)
+
+M N (cid:12)
+(cid:12)
+(cid:12)
+
+m1v1 + m3
+m2
+
+−
+
+.
+
+(cid:17)
+
+(cid:16)
+
+RM
+
+e
+
+Im|
+
+|
+
+.
+
+N 2
+M
+
+Im + O(T −100).
+
+Finally, since we are summing over m2 with
+m2 with
+m2 without changing the overall sum. Substituting this into our expression (7.6)
+for S3 above then gives the result.
+(cid:3)
+
+M , we can replace
+
+m2| ∼
+
+−
+
+|
+
+e
+
+24
+
+LARRY GUTH AND JAMES MAYNARD
+
+8. Basic estimate for the low energy case
+
+In this section, we begin to estimate S3 using Proposition 7.2. Recall that R(v) =
+we can hope for is square root cancella-
+1/2 for all v
+1, then we get
+3/2. We will see more generally that this bound holds
+
+t∈W vit. The best bound for
+1/2.
+R(v)
+tion:
+W
+P
+|
+|
+|
+|
+3/2 / T 2
+S3 / N 2M 2
+|
+whenever the energy of W is very small.
+
+|
+If indeed
+W
+
+R(v)
+|
+R(v)
+
+| ≈ |
+
+.
+W
+
+W
+
+≍
+
+|
+
+|
+
+|
+
+|
+
+|
+
+Proposition 8.1 (S3 controlled by energy). If W is a T ǫ-separated set contained
+in an interval of length T , then
+
+S3 / T 2
+
+W
+
+1/2E(W )1/2.
+
+|
+
+|
+Remark. If we look at the critical case when T = N 5/4 and σ = 3/4, then this
+estimate (together with our bounds for S2) gives an improvement to the basic or-
+7/3. In the special
+thogonality estimate (1.6) when E(W ) is signiﬁcantly below
+2, this Proposition is enough to prove our main theorem,
+case when E(W )
+Theorem 1.1. On the other hand, when E(W ) is very large, then we will get good
+estimates using Theorem 1.6. However there is an intermediate range of energy
+that is not yet covered. In the next two sections, we will develop a strengthening of
+this proposition that gives new estimates for a wider range of energies.
+
+≈ |
+
+W
+
+W
+
+|
+
+|
+
+|
+
+We begin with some basic lemmas about the moments of R.
+
+Lemma 8.2 (L2 bound). Let W be a T ǫ-separated set contained in an interval of
+length T . Then
+
+R(v)
+|
+
+2dv .ǫ |
+
+W
+
+.
+
+|
+
+Zv≍1 |
+
+Proof. Let ψ1(v) be a smooth bump function which majorizes the range of integra-
+ψ(j)
+1 k∞ .j 1
+tion of the integral in the lemma and is supported on v
+for all j
+
+N). Then we have
+
+1 (so satisﬁes
+
+≍
+
+k
+
+∈
+
+2dv
+
+R(v)
+|
+
+≤
+
+Z
+
+Zv≍1 |
+
+ψ1(v)
+|
+
+R(v)
+|
+
+2dv.
+
+Recall from (7.2) that
+
+R(v) =
+
+vit = ˆW (log v),
+
+Xt∈W
+
+and let ψ2(τ ) := eτ ψ1(eτ ). Then, making a change of variables v = eτ
+
+ψ1(v)
+|
+
+R(v)
+|
+
+2dv =
+
+Z
+
+Z
+
+Note that ψ2 is a smooth bump around the origin with
+so
+
+−j for any j
+
+ξ
+
+ˆψ2(ξ)
+|
+
+|
+
+.j |
+
+|
+
+∈
+
+ψ2(τ )
+|
+
+ˆW (τ )
+|
+
+2dτ =
+
+ˆψ2(t1 −
+
+t2).
+
+Xt1,t2∈W
+ψ(j)
+2 k∞ .j 1 for all j
+k
+N. Thus the terms with t1 = t2 contribute .
+
+N,
+W
+
+|
+
+∈
+|
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+25
+
+to the sum above. Since W is T ǫ-separated, if t1 6
+T −100, so the terms with t1 6
+required.
+
+= t2 we have that ˆψ2(t1 −
+W
+= t2 are negligible. Thus the total sum is Oǫ(
+|
+
+t2) .ǫ
+), as
+(cid:3)
+
+|
+
+Lemma 8.3 (L4 bound). For any M we have
+
+RM (v)
+|
+
+Zv≍1 |
+
+e
+
+4dv / E(W )
+
+and
+
+R(v)
+|
+
+Zv≍1 |
+
+4dv / E(W ).
+
+Proof. From the deﬁnition (7.5) of
+
+R and Cauchy-Schwarz, we have
+
+RM (v)
+|
+
+Zv≍1 |
+
+e
+
+e
+
+4dv / N 2M 2
+
+Zv≍1
+|u−v|/1/N M
+|u′−v|/1/N M
+
+R(u′)
+|
+
+|
+
+4du′dudv /
+
+R(u′)
+|
+
+4du′.
+
+Zu′≍1 |
+
+Therefore it suﬃces to prove the result for R. We recall that R(v) = ˆW (log v), so
+by a change of variables τ = ev we see that it suﬃces to show
+
+ˆW (τ )
+|
+
+Zτ ≍1 |
+
+4dτ / E(W ).
+
+Let η > 0 and let ψ be a smooth bump supported on τ . 1 such that ψ(τ /T η)
+majorizes the range of integration. Then we see that
+
+ˆW (τ )
+|
+
+4dτ
+
+Zτ ≍1 |
+
+ψ
+
+Z
+
+(cid:16)
+
+τ
+T η
+
+|
+(cid:17)
+
+≤
+
+=
+
+ˆW (τ )
+|
+
+4dτ
+
+ψ
+
+τ
+T η
+
+Xt1,t2,t3,t4∈W Z
+
+= T η
+
+Xt1,t2,t3,t4∈W
+
+(cid:16)
+ˆψ
+(cid:16)
+
+e(τ (t1 + t2 −
+(cid:17)
+
+t3 −
+
+t4))dτ
+
+T η(t3 + t4 −
+
+t1 −
+
+t2)
+
+.
+
+(cid:17)
+
+Since ˆψ decays rapidly, we may restrict the summation to
+1 at
+the cost of an Oη(T −100) error term. The remaining terms contribute . T ηE(W ).
+Thus, letting η
+
+t1 + t2 −
+
+0 we obtain
+
+t4| ≤
+
+t3 −
+
+|
+
+→
+
+ˆW (τ )
+|
+
+Zτ ≍1 |
+
+4dτ / E(W ).
+
+(cid:3)
+
+We can now quickly prove Proposition 8.1.
+
+Proof of Proposition 8.1. Starting with Proposition 7.2, we have for some M1 ≤
+M / T /N
+
+26
+
+LARRY GUTH AND JAMES MAYNARD
+
+S3 /
+
+X|m1|∼M1
+|m2|,|m3|∼M
+
+N 2
+M
+
+R(v1)
+
+RM
+
+(cid:16)
+
+e
+
+Zv1≍1
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+m1v1 + m3
+m2v1
+
+m1v1 + m3
+m2
+
+RM
+
+(cid:16)
+
+(cid:17)
+
+e
+
+dv1.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Using H¨older’s inequality, we ﬁnd that the integral over v1 is bounded by
+
+1/2
+
+(cid:18)Zv1≍1 |
+
+R(v1)
+|
+
+2dv1
+
+(cid:19)
+
+RM
+
+(cid:16)
+
+e
+
+ Zv1≍1 (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+m1v1 + m3
+m2v1
+
+1/4
+
+4
+
+dv1
+
+!
+
+4
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+m1v1 + m3
+(cid:12)
+m2
+
+1/4
+
+.
+
+dv1
+
+!
+
+RM
+
+(cid:16)
+
+×  Zv1≍1 (cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+e
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+m2v1
+
+In the second integral we do a change of variables u = m1v1+m3
+factor
+Jacobian factor of norm
+
+1. In the third integral we do a change of variables u = m1v1+m3
+M/M1. Therefore we obtain
+
+with Jacobian
+with a
+
+m2
+
+≍
+
+∼
+
+S3 . N 2M 2
+
+R(v1)
+|
+
+2dv1
+
+(cid:18)Zv1≍1 |
+
+(cid:19)
+
+(cid:18)Zu≍1
+
+1/2
+
+Using M / T /N and Lemmas 8.2 and 8.3, we ﬁnd
+
+1/2
+
+4
+
+du
+
+(cid:19)
+
+RM (u)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12) e
+(cid:12)
+
+S3 / T 2
+
+W
+
+|
+
+|
+
+1/2E(W )1/2.
+
+(cid:3)
+
+W
+
+≈ |
+
+2, the bound from Proposition 8.1 is the best bound for S3 we
+When E(W )
+know how to prove. But for larger E(W ), we can improve the bound for S3. Let
+us indicate the general direction here, and then we will develop the tool we need in
+the next section.
+
+|
+
+Ignoring some technical smoothing, we morally have
+
+S3 /
+
+|m1|∼M1,|m2|,|m3|∼M
+X
+
+N 2
+M
+
+Zv1≍1
+
+R(v1)R
+
+m1v1 + m3
+m2v1
+
+m1v1 + m3
+m2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+dv1.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+∼
+
+A1, the second R factor has size
+
+We can split up the domain of integration into pieces where the ﬁrst R factor has
+A2, and the third R factor has size
+size
+∼
+A3. For simplicity, suppose that A1 = A2 = A3 = A, which we expect to
+∼
+be the critical case, and focus on the value of A that dominates the integral. If
+1/2, then we get the bound corresponding to minimal energy. If A is larger,
+A
+≈ |
+by Lemma 8.2. If the simple
+then
+|
+analysis in Proposition 8.1 was sharp, it would mean that for most v
+UA and
+most m1, m2, m3, we have m1v+m3
+UA. We will see that a small set U cannot be
+approximately invariant under this large set of aﬃne transformations. In the next
+
+A for only a small subset UA ⊂ {
+
+W
+|
+R(v)
+
+| ∼
+
+m2
+
+≍
+
+∈
+
+∈
+
+1
+
+}
+
+v
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+27
+
+section, we will prove a precise estimate in this spirit, and then we will use it to
+give stronger bounds for S3 when the energy is greater than
+
+W
+
+2.
+
+|
+
+|
+
+9. Summing over affine transformations
+
+Given M > 0 and a compactly supported smooth function f , we deﬁne
+
+J(f ) :=
+
+sup
+
+f
+
+0<M1,M2,M3<M Z (cid:16)
+
+|m1|∼M1,m2∼M2,|m3|.M3
+X
+
+(cid:16)
+
+m1u + m3
+m2
+
+2
+
+du,
+
+(cid:17)(cid:17)
+
+which is an average of sums of aﬃne transformations of f . The aim of this section
+is to establish the following general bound for J(f ).
+
+Proposition 9.1 (Equidistribution over aﬃne transformations). Suppose that f (u)
+N.
+is non-negative and supported on u
+Then
+
+/T )j for all j
+
+1 and that
+
+ˆf (ξ)
+|
+
+/j (
+|
+
+≍
+
+∈
+
+ξ
+
+|
+
+|
+
+J(f ) / M 6
+
+f (u)du
+
+(cid:16) Z
+
+2
+
+(cid:17)
+
++ M 4
+
+f (u)2du.
+
+Z
+
+|
+
+R
+
+∼
+
+f (u)
+|
+
+Remark. By a simple Cauchy-Schwarz argument, we can bound the left hand side
+2du. This bound is tight if f (u) is a smooth bump on u
+by M 6
+1. But the
+Proposition improves on this bound when f (u) is sparse. To get a sense of what
+it means, it’s good to imagine the example that f = χU where U is a union of
+(smoothed) 1/T -intervals. The proposition says that if
+is much smaller than 1,
+then the sets
+
+}m1,m2,m3∼M cannot overlap too much.
+There are two key examples which correspond to the two terms on the right-hand
+side. If U is a random subset, then the left-hand side is comparable to M 6
+f (u)du
+If U is the 1/T neighborhood of the set of rational numbers p/q with p
+B with
+(cid:1)
+M , then the left-hand side is compara-
+the denominators having a divisor of size
+ble to M 4
+2du (the subsum where m1 divides the denominator of the closest
+such rational to u gives roughly this contribution).
+
+m1U+m3
+m2
+
+f (u)
+|
+
+q
+(cid:0)R
+
+∼
+
+∼
+
+∼
+
+U
+
+{
+
+|
+
+|
+
+|
+
+2
+
+.
+
+R
+
+The following lemma is the main technical result used to prove Proposition 9.1,
+which is based on a fairly long Fourier analytic argument.
+
+Lemma 9.2 (Iterative bound for J(f )). Let f be as in Proposition 9.1. Then there
+is a bump function ψ(x) supported on
+
+/ 1 such that
+
+x
+|
+
+|
+
+J(f ) / M 6
+
+f (u)du
+
++
+
+M 4
+
+f (u)2du
+
+2
+
+1/2
+
+J(
+
+f )1/2.
+
+where
+
+f is deﬁned in terms of ψ(x) by
+
+(cid:18)Z
+
+(cid:19)
+
+(cid:16)
+
+Z
+
+(cid:17)
+
+e
+
+e
+
+28
+
+LARRY GUTH AND JAMES MAYNARD
+
+f (u) :=
+
+T ψ(T (u
+
+Z
+
+u′))f (u′)du′
+
+−
+
+Before we prove Lemma 9.2, we ﬁrst show how to deduce Proposition 9.1 from it.
+
+e
+
+Proof of Proposition 9.1 assuming Lemma 9.2. We wish to show that for any ǫ > 0
+there is a C(ǫ) > 0 such that
+
+(9.1)
+
+J(f )
+
+≤
+
+C(ǫ)T ǫ
+
+M 6
+
+f (u)du
+
+(cid:16)
+
+(cid:16) Z
+
+2
+
+(cid:17)
+
++ M 4
+
+f (u)2du
+
+.
+
+Z
+
+(cid:17)
+
+We wish to prove this by downwards induction on ǫ. As a base case, the result
+clearly holds for ǫ = 100. By induction, we can assume that (9.1) holds with 3ǫ/2
+in place of ǫ and seek to establish (9.1). We ﬁrst apply Lemma 9.2 to give
+
+J(f ) / M 6
+
+f (u)du
+
+2
+
++
+
+M 4
+
+f (u)2du
+
+1/2
+
+J(
+
+f )1/2.
+
+(cid:16) Z
+Since f (u) is supported on u
+is also supported on u
+which shows
+
+≍
+
+(cid:17)
+
+(cid:16)
+
+Z
+
+(cid:17)
+
+≍
+
+1 and ψ(x) is supported on x / 1, we see that
+
+f (u)
+f ),
+1. Thus we may apply the induction hypothesis to J(
+e
+
+e
+
+J(
+
+f ) .ǫ T 3ǫ/2
+
+M 6
+
+f (u)du
+
+2
+
++ M 4
+
+f (u)2du
+
+.
+
+e
+
+(cid:16)
+f is a smoothed version of f , we can bound
+
+(cid:17)
+
+e
+
+e
+
+(cid:16) Z
+
+Z
+
+(cid:17)
+e
+f (u)du /
+
+f (u)du and
+f (u)2du. Substituting these bounds back into our bound for J(f ),
+
+R
+
+e
+
+R
+
+Since
+
+f (u)2du /
+e
+we ﬁnd
+R
+e
+
+R
+
+J(f ) /ǫ T 3ǫ/4
+
+M 6
+
+f (u)du
+
+(cid:16) Z
+
+2
+
+(cid:17)
+
++ M 4
+
+f (u)2du
+
+Z
+
+.
+!
+
+Thus (9.1) holds for C(ǫ) suﬃciently large, which completes the induction.
+
+(cid:3)
+
+We now return to the proof of Lemma 9.2.
+
+Proof of Lemma 9.2. The most interesting situation is when M1 = M2 = M3 = M .
+We encourage the reader to keep this case in mind on ﬁrst reading.
+
+We let ψ1(x) be a smooth bump supported on
+. 1 so that ψ1(m3/M3) majorizes
+the summation condition m3 . M3. Thus we can bound the inner sum in J(f ) by
+
+x
+|
+
+|
+
+g(u) :=
+
+ψ1
+
+m3
+X|m1|∼M1,m2∼M2 X
+
+(cid:16)
+
+m3
+M3
+
+f
+
+(cid:17)
+
+(cid:16)
+
+m1u + m3
+m2
+
+.
+
+(cid:17)
+
+ 
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+29
+
+Squaring and integrating over u, and then applying Plancherel gives (for the choice
+of M1, M2, M3 achieving the supremum)
+
+(9.2)
+
+J(f )
+
+≤
+
+Z
+
+2du =
+
+g(u)
+|
+
+|
+
+Z
+
+2dξ.
+
+ˆg(ξ)
+|
+
+|
+
+We wish to estimate ˆg(ξ). We have
+
+ˆg(ξ) =
+
+ψ1
+
+X|m1|∼M1,m2∼M2 Z X
+m3
+
+(cid:16)
+
+m3
+M3
+
+f
+
+(cid:17)
+
+(cid:16)
+
+m1u + m3
+m2
+
+e(
+
+ξu)du.
+
+−
+
+(cid:17)
+
+We do a change of variables:
+new variables, we get
+
+u = u + m3
+m1
+
+, so that f ( m1u+m3
+
+m2
+
+) = f ( m1 eu
+m2
+
+). In the
+
+e
+
+f
+
+X|m1|∼M1,m2∼M2 (cid:18)Z
+
+(cid:16)
+
+ˆg(ξ) =
+
+e(
+
+ξ
+
+u)d
+
+u
+
+−
+
+(cid:19)  
+e
+
+Xm3∈Z
+
+e
+
+m3
+M3
+
+ψ1
+
+(cid:16)
+
+e
+
+(cid:17)
+
+(cid:16)
+
+m3
+m1
+
+ξ
+
+.
+
+!
+
+(cid:17)
+
+u
+m1
+m2
+e
+ˆf ( m2
+m1
+
+(cid:17)
+
+The integral in parentheses is m2
+m1
+that we can explicitly do the last sum by Poisson summation.
+M3
+)). So all together we have
+
+ξ). The ﬁrst key point in our analysis is
+It is equal to
+
+ˆψ1(M3ℓ
+
+ℓ
+
+ξ
+m1
+
+−
+
+P
+
+ˆg(ξ) =
+
+M3
+
+X|m1|∼M1
+
+Xℓ
+
+ξ
+m1 −
+
+ℓ
+
+M3
+
+ˆψ
+(cid:16)
+
+(cid:16)
+
+(cid:17)(cid:17) Xm2∼M2
+
+m2
+m1
+
+m2
+m1
+
+ˆf
+(cid:16)
+
+ξ
+
+.
+
+(cid:17)
+
+Since ˆψ is rapidly decaying, ˆψ(M3( ξ
+Therefore, we have
+
+m1 −
+
+ℓ)) is negligible unless
+
+ξ
+
+|
+
+ℓm1|
+
+−
+
+/ M1
+M3
+
+.
+
+(9.3)
+
+ˆg(ξ)
+
+| ≤
+
+|
+
+X|m1|∼M1 Xℓ:|ξ−m1ℓ|/
+
+M1
+M3
+
+M3
+
+m2
+m1
+
+ˆf
+(cid:16)
+
+m2
+m1
+
+ξ
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xm2∼M2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
++ O(T −100).
+
+We have to estimate
+integration into the region
+the remainder:
+
+R |
+R
+
+ˆg(ξ)
+|
+ξ
+| ≤
+
+|
+
+2dξ. For a small η > 0, we break up the domain of
+T 2 and
+
+T ηM1/M3, the region T ηM1/M3 <
+
+ξ
+
+|
+
+| ≤
+
+(9.4)
+
+2dξ =
+
+ˆg(ξ)
+|
+
+R |
+
+Z
+
+Z|ξ|≤T η M1
+
+M3
+
+2dξ
+
++
+
+ˆg(ξ)
+|
+
+|
+
+ZT η M1
+
+M3
+
+<|ξ|≤T 2 |
+
+2dξ
+
++
+
+ˆg(ξ)
+|
+
+2dξ
+
+.
+
+ˆg(ξ)
+|
+
+Z|ξ|≥T 2 |
+
+I
+
+II
+
+III
+
+ξ
+
+If
+is negligible and
+
+{z
+> T 2, then since ˆf (ξ) is rapidly decaying for
+|
+. T −100
+
+−2. Thus
+
+{z
+
+}
+
+|
+
+|
+
+ξ
+
+|
+
+|
+
+ξ
+
+|
+
+ˆg(ξ)
+|
+
+|
+
+|
+
+|
+
+}
+
+|
+
+{z
+
+}
+
+> T , we see that ˆf (m2ξ/m1)
+
+30
+
+LARRY GUTH AND JAMES MAYNARD
+
+(9.5)
+
+III = O(T −100).
+
+T ηM1/M3, then in the sum over ℓ in (9.3), the only terms that contribute
+. T η/M3 . T η. Therefore, this sum is O(T η). Thus, by Cauchy-Schwarz
+
+If
+ξ
+| ≤
+|
+ℓ
+have
+|
+|
+we obtain
+
+2 . T 2ηM1
+
+ˆg(ξ)
+|
+
+|
+
+Therefore
+
+M 2
+3
+
+X|m1|∼M1
+
+Xm2∼M2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+m2
+m1
+
+ˆf
+(cid:16)
+
+m2
+m1
+
+ξ
+
+2
+
+≤
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+T 2ηM 4
+
+2 M 2
+
+3 sup
+ξ
+
+ˆf (ξ)
+|
+
+|
+
+2.
+
+I =
+
+Z|ξ|≤T ηM1/M3 |
+
+ˆg(ξ)
+|
+
+(9.6)
+
+2dξ . T 3ηM1M 4
+
+2 M3 sup
+
+ξ
+
+2
+
+ˆf (ξ)
+|
+
+|
+
+. T 3ηM 6
+
+f (u)du
+
+(cid:18)Z
+
+2
+
+.
+
+(cid:19)
+
+|
+
+ξ
+
+| ≤
+
+T 2. We return to (9.3) and consider the
+Now suppose that T ηM1/M3 <
+number of terms in the outer double sum. Let s = m1ℓ. In this range, s must be a
+non-zero integer in the / M1/M3 neighborhood of ξ as soon as T is suﬃciently large
+T 2 and
+in terms of η. The number of such integers s is / 1 + M1/M3. Since
+s is non-zero, each such integer s has / 1 factorizations as s = m1ℓ. All together
+the number of terms in the outer double sum is / 1 + M1/M3. Therefore, we can
+use Cauchy-Schwarz to bound
+
+2 by
+
+| ≤
+
+ξ
+
+|
+
+ˆg(ξ)
+|
+
+|
+
+/
+
+1 +
+
+(cid:18)
+
+M1
+M3 (cid:19) X|m1|∼M1 Xℓ
+
+|ξ−ℓm1|/M1/M3
+
+M 2
+3
+
+m2
+m1
+
+ˆf
+(cid:16)
+
+m2
+m1
+
+ξ
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xm2∼M2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
++ O(T −200).
+
+Therefore the term II satisﬁes
+
+II / (M1M3 + M 2
+3 )
+
+X|m1|∼M1 Xℓ Z|ξ−ℓm1|/M1/M3 (cid:12)
+(cid:12)
+(cid:12)
+
+Xm2∼M2
+
+m2
+m1
+
+ˆf
+(cid:16)
+
+m2
+m1
+
+ξ
+
+2
+
+dξ.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Morally this integral does not depend on m1, and we can make this precise by
+changing variables. For each m1, ℓ, we write ξ = ℓm1 + m1
+τ and do a change of
+M3
+variables to get (extending the range of integration slightly for an upper bound so
+we have a range independent of m1)
+
+II . (M1 + M3)
+
+Xℓ Z|τ |/1
+
+Xm2∼M2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+ℓm2 +
+
+m2
+M3
+
+τ
+
+m2 ˆf
+(cid:16)
+
+2
+
+dτ.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+31
+
+Since ˆf (ξ) = O(T −200) unless
+/ T , we can restrict the sum over ℓ to the range
+/ T /M2 at the cost of a negligible error. We introduce a bump ψ2(x) supported
+ℓ
+|
+|
+on
+/ 1 so that ψ2(M2ℓ/T ) majorizes this summation condition, and bound the
+x
+|
+last sum by
+
+ξ
+
+|
+
+|
+
+|
+
+. (M1 + M3)ΣII + O(T −100),
+
+where
+
+ΣII :=
+
+ψ2
+
+Xℓ
+
+(cid:16)
+
+M2ℓ
+T
+
+(cid:17) Z|τ |/1
+
+ℓm2 +
+
+m2
+M1
+
+τ
+
+m2 ˆf
+(cid:16)
+
+Xm2∼M2
+
+2
+
+dτ.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+We write out ˆf as an integral, expand out the square and bring the summation
+over ℓ and integration over τ on the inside to get
+
+ΣII =
+
+m2m′
+
+2f (u)f (u′)Σ1Σ2du′du,
+
+Z Z Xm2,m′2∼M2
+
+where
+
+Σ1 :=
+
+e
+
+τ
+
+Σ2 :=
+
+Z|τ |/1
+ψ2
+
+Xℓ
+
+(cid:16)
+
+(cid:16)
+(cid:16)
+M2ℓ
+T
+
+m′
+2
+M1
+
+u′
+
+−
+
+m2
+M1
+
+u
+
+dτ,
+
+(cid:17)(cid:17)
+
+e
+
+ℓ
+
+m′
+
+2u′
+
+(cid:17)
+
+(cid:16)
+
+(cid:16)
+
+−
+
+m2u
+
+.
+
+(cid:17)(cid:17)
+
+Trivially we have
+have
+
+Σ1|
+
+|
+
+/ 1. By Poisson summation, and the rapid decay of ˆψ2, we
+
+Σ2 =
+
+=
+
+T
+M2
+
+T
+M2
+
+ˆψ2
+
+j
+
+−
+
+j
+X
+
+(cid:16)
+
+2u′ + m2u
+m′
+M2/T
+
+ˆψ2
+
+j
+X
+|j−m′2u′+m2u|/M2/T
+
+(cid:16)
+
+(cid:17)
+j
+
+−
+
+m′
+2u′ + m2u
+M2/T
+
+(cid:17)
+
++ O(T −100).
+
+Substituting these back into our bound (9.7) for ΣII , we ﬁnd
+
+ΣII / M2
+
+f (u)
+
+T
+
+Z
+
+j
+Xm2,m′2∼M2 X
+
+Z|u′− m2u+j
+m′2
+
+|/ 1
+T
+
+f (u′)du′du.
+
+This gives
+
+II / M2(M1 + M3)
+
+f (u)
+
+T
+
+Z
+
+j
+Xm2,m′2∼M2 X
+
+f (u′)du′du.
+
+Z|u′− m2u+j
+m′2
+
+|/ 1
+T
+
+32
+
+LARRY GUTH AND JAMES MAYNARD
+
+Since ˆf (ξ) rapidly decays for
+> T , f is morally almost constant on intervals of
+length 1/T . We let ψ(x) be a smooth bump function supported on x / 1, and then
+deﬁne
+
+f to be a slightly smoothed version of f given by
+
+ξ
+
+|
+
+|
+
+e
+
+f (u) :=
+
+T ψ(T (u
+
+Z
+
+u′))f (u′)du′
+
+−
+
+e
+
+We can choose ψ such that the integral over u′ in the bound for II above is
+f ( m2u+j
+bounded by
+1
+m′2
+M )
+and M1, M2, M3 ≤
+
+). Thus we ﬁnd (recalling that f is supported on u
+
+≍
+
+e
+
+II / M 2
+
+f (u)
+
+Zu≍1
+
+j
+Xm2,m′2∼M2 X
+
+Now we apply Cauchy-Schwarz to get
+
+m2u + j
+m′
+2
+
+du.
+
+(cid:17)
+
+f
+
+(cid:16)
+e
+
+m2u + j
+m′
+2
+
+2
+
+du
+
+1/2
+
+.
+
+(cid:17)(cid:17)
+
+i
+
+(9.7)
+
+II /
+
+M 4
+
+f (u)2du
+
+1/2
+
+f
+
+h
+
+Z
+
+h Zu≍1
+1 and f (x) is supported on x
+
+i
+
+(cid:16) Xm2,m′2∼M2,j∈Z
+
+(cid:16)
+e
+
+≍
+
+Since u
+1, we may restrict the summation over
+≍
+j to j . M2. Thus we see that the second term in square brackets is bounded by
+J(
+f ). Putting together (9.2), (9.4), (9.5), (9.6) and (9.7) we ﬁnd that for any η > 0,
+provided T is suﬃciently large in terms of η, we have
+
+e
+
+J(f ) / T 3ηM 6
+
+f (u)du
+
++
+
+M 4
+
+f (u)2du
+
+2
+
+1/2
+
+J(
+
+f )1/2.
+
+This now gives the result on letting η
+
+→
+
+(cid:18)Z
+
+(cid:19)
+
+(cid:16)
+
+Z
+
+(cid:17)
+
+0 suﬃciently slowly with T .
+
+(cid:3)
+
+e
+
+10. Further bounds for S3
+
+In this section, we use our bounds for sums over aﬃne transformations to improve
+our bound for S3. We will get the following estimate.
+
+Proposition 10.1 (Reﬁned S3 bound). If W is a T ǫ-separated set contained in an
+interval of length T , then
+
+(10.1)
+
+S3 / T 2
+
+W
+
+|
+
+|
+
+3/2 + T N
+
+W
+
+|
+
+|
+
+1/2E(W )1/2.
+
+|
+
+W
+
+2 both propositions
+Remark. Comparing with Proposition 8.1, when E(W )
+give S3 / T 2
+3/2. But when E(W ) is large, Proposition 10.1 is better by a
+factor of N/T . If we look at the critical case when T = N 5/4 and σ = 3/4, then
+this estimate (together with our bounds for S2) gives an improvement to the basic
+3. In other words,
+orthogonality estimate (1.6) when E(W ) is signiﬁcantly below
+this Proposition gives an improvement unless the energy is essentially maximal. But
+
+≈ |
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+33
+
+when E(W ) is very large, then we will get good estimates in the next section using
+Theorem 1.6.
+
+Proof. Recall from Proposition 7.2 that we have
+
+S3 /
+
+N 2
+M
+
+R(v1)
+|
+
+Zv1≍1 |
+
+X|m1|∼M1
+|m2|,|m3|∼M
+
+RM
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+e
+
+(cid:16)
+
+m1v1 + m3
+m2v1
+
+m1v1 + m3
+m2
+
+RM
+
+(cid:16)
+
+(cid:17)
+
+e
+
+dv1.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+Thus by Cauchy-Schwarz we have
+
+S3 .
+
+N 2
+M
+
+3,1 S1/2
+S1/2
+3,2 ,
+
+where
+
+2dv . W,
+
+R(v)
+|
+
+S3,1 :=
+
+S3,2 :=
+
+Zv≍1 |
+
+R
+
+Zv≍1
+
+|m1|∼M1,|m2|,|m3|∼M(cid:12)
+X
+(cid:12)
+(cid:12) e
+By Cauchy-Schwarz again, we have that
+
+(cid:16)
+
+m3 + m1v
+m2v
+
+(cid:16)
+
+R
+
+(cid:17)
+
+(cid:16)
+
+e
+
+m3 + m1v
+m2
+
+(cid:17)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
+dv.
+
+where
+
+S3,3 :=
+
+S3,4 :=
+
+Zv≍1
+
+(cid:16)
+
+Zv≍1
+
+(cid:16)
+
+S3,2 . S1/2
+
+3,3 S1/2
+3,4 ,
+
+R
+
+|m1|∼M1,|m2|,|m3|∼M(cid:12)
+X
+(cid:12)
+(cid:12) e
+R
+
+(cid:16)
+
+|m1|∼M1,|m2|,|m3|∼M(cid:12)
+X
+(cid:12)
+(cid:12) e
+
+(cid:16)
+
+m3 + m1v
+m2v
+
+m3 + m1v
+m2
+
+2
+
+2
+
+dv,
+
+(cid:17)
+2
+
+2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+dv.
+
+(cid:17)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+We bound S3,3 and S3,4 using Proposition 9.1. To bound S3,4, we use f (v) =
+ψ(v)
+1. To control S3,3, we
+make a change of variables u = 1/v and rewrite S3,3 as
+
+R(v)2, where ψ(v) is a smooth bump supported on v
+
+≍
+
+e
+
+S3,3 .
+
+R
+
+Zu≍1
+
+(cid:16)
+
+|m1|∼M1,|m2|,|m3|∼M(cid:12)
+X
+(cid:12)
+(cid:12) e
+Then we use Proposition 9.1 with f (u) = ψ(u)
+|
+we have to check that ˆf (ξ) is rapidly decaying for
+e
+
+(cid:16)
+
+|
+
+|
+
+m3u + m1
+m2
+
+2
+
+2
+
+du.
+
+(cid:17)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+2. To apply Proposition 9.1,
+R(u)
+|
+R(v)
+ξ
+
+> T . Both R(v) and
+
+e
+
+34
+
+LARRY GUTH AND JAMES MAYNARD
+
+have the desired Fourier decay. Let’s check for
+bump supported on
+
+/ 1 and that
+
+u
+
+|
+
+|
+
+R(v). Recall that
+
+ψ(u) is a smooth
+
+R(v)2 =
+
+M N
+
+ψ(M N (u
+
+Z
+
+e
+
+e
+
+u′))
+|
+
+R(u)
+|
+
+−
+
+2du.
+
+e
+R(v)2 has Fourier transform rapidly decaying when
+
+Therefore,
+> M N , and
+T ' M N . Then it follows that f has the desired Fourier decay. Proposition 9.1
+then gives the bounds
+
+e
+
+ξ
+
+|
+
+|
+
+e
+
+S3,3, S3,4 / M 6
+
+(cid:16) Zv≍1 |
+Applying Lemmas 8.2 and 8.3, we get
+
+R(v)
+|
+
+2dv
+
+2
+
++ M 4
+
+(cid:17)
+
+4dv.
+
+R(v)
+|
+
+Zv≍1 |
+
+S3,3, S3,4 / M 6
+
+W
+
+|
+The same bound holds for S3,2 since S3,2 ≤
+
+|
+
+2 + M 4E(W ).
+
+3,3 S1/2
+S1/2
+
+3,4 . Then we get
+
+S3 /
+
+N 2
+M
+
+S1/2
+3,1 S1/2
+
+3,2 /
+
+W
+
+N 2
+M |
+= N 2M 2
+
+1/2(M 6
+
+W
+
+2 + M 4E(W ))1/2
+
+|
+
+|
+3/2 + N 2M
+
+|
+W
+
+|
+
+|
+
+1/2E(W )1/2.
+
+W
+
+|
+
+|
+
+Since M / T /N , we get
+
+S3 / T 2
+
+W
+
+|
+
+|
+
+3/2 + T N
+
+W
+
+|
+
+|
+
+1/2E(W )1/2.
+
+(cid:3)
+
+11. Energy Bound
+
+In this section, we prove bounds related to the energy of W , which show that a
+Dirichlet polynomial cannot be too large on a set of large energy. These bounds
+ultimately rely on Heath-Brown’s bound Theorem 1.6, and are closely related to
+(and reﬁne) arguments in [HB2]. Recall that in equation (1.7), we deﬁned the
+energy of a ﬁnite set W
+
+R by
+
+⊂
+
+E(W ) := #
+{
+
+t1, t2, t3, t4 ∈
+
+W :
+
+t1 + t2 −
+
+|
+
+t3 −
+
+t4|
+
+< 1
+
+.
+
+}
+
+We will prove two bounds about the behavior of Dirichlet polynomials on sets of
+high energy. The ﬁrst bound is Lemma 1.7. We recall the statement here.
+
+Lemma. Let N
+Suppose W
+
+∈
+
+⊂
+
+[T 2/3, T ], σ > 1/2 and D(t) =
+
+[0, T ] is a 1-separated set such that
+
+2N
+n=N bnnit with
+> N σ for t
+
+bn| ≤
+W . Then
+
+|
+
+1.
+
+∈
+
+D(t)
+|
+P
+
+E(W )
+
+W
+
+|
+
+≤ |
+
+3N 1−2σ+o(1) +
+
+W
+
+|
+
+2N 2−2σ+o(1).
+
+|
+
+|
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+35
+
+Combining Lemma 1.7 with our previous results is enough to get an improvement
+= T 3/5. The second bound
+on previous estimates in the key scenario T = N 4/5,
+is a little more complicated, but it leads to stronger estimates in our applications.
+n∼N bnnit with
+1. Suppose that W is a 1-separated set contained in an interval of length T ,
+
+Proposition 11.1 (Bound for energy). Suppose that DN (t) =
+bn| ≤
+|
+and that
+
+W . If T 3/4
+
+N σ for t
+
+T , then
+
+P
+
+W
+
+N
+
+DN (t)
+
+|
+
+|
+
+|
+
+| ≥
+
+∈
+
+≤
+
+≤
+
+(11.1)
+
+E(W ) /
+
+W
+
+|
+
+|
+
+N 4−4σ +
+
+W
+
+|
+
+|
+
+21/8T 1/4N 1−2σ +
+
+3N 1−2σ.
+
+W
+
+|
+
+|
+
+|
+
+W
+
+3, and if N 2/3
+W
+
+Since the algebra is a little messy, we take a moment to process the bounds. For
+one thing, if E(W ) is very large, we get very strong bounds on σ. For instance,
+N , then Lemma 1.7 gives a sharp estimate:
+if E(W )
+≈ |
+N 2σ / N 2. More important for our application is when
+either N σ / N 1/2 or
+N 2σ . T N . The
+we get an improvement on the basic orthogonality bound
+full equations are a little messy, but if we plug in the key scenario N = T 4/5 and
+3 +ǫ and
+W
+|
+Proposition 11.1 gives an improvement when E(W )
+
+= T 3/5, then Lemma 1.7 gives an improvement when E(W )
+
+7
+3 (for some ǫ > 0).
+
+≥ |
+
+W
+
+W
+
+W
+
+≤
+
+≤
+
+T
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+8
+
+≥ |
+
+|
+
+|
+
+W
+
+W
+
+|
+W
+
+| ≈
+5/8T −6/8)
+|
+
+T N 1−2σ, then the bound in Proposition 11.1 would be (N/T )2
+
+3 +
+If
+4/T . The ﬁrst term will be the most important for us, and
+(
+|
+generally sets the limitations on our bounds. The second term will be negligible in
+practice (and could be improved with a bit more eﬀort). The ﬁnal term corresponds
+to the additive energy of a random set in an interval of length T .
+
+3 +
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+An immediate consequence of Proposition 11.1 is a good bound for the key term
+S3 by substituting the bound of Proposition 11.1 into Proposition 10.1.
+
+Proposition 11.2 (S3 Bound). Let N
+
+T 3/4. Then we have
+
+≥
+
+S3 / T 2
+
+3/2 + T
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+N 3−2σ + T
+
+W
+
+|
+
+|
+
+2N 3/2−σ + T 9/8
+
+29/16N 3/2−σ.
+
+W
+
+|
+
+|
+
+Now we turn to the proof of Proposition 11.1.
+
+Suppose that DN (t) =
+DN (t)
+|
+|
+then morally
+
+P
+
+DN (t1 + t2 −
+
+|
+
+t3)
+|
+
+' N σ if the distance from t to W is . 1. In particular, if
+
+n∼N bnnit and
+
+DN (t)
+
+|
+
+| ≥
+
+N σ on W . Morally, we also have
+/ 1,
+t1+t2−
+
+t3−
+
+t4|
+
+|
+
+' N σ. Therefore morally we should expect that
+
+E(W ) / N −2σ
+
+Xt1,t2,t3∈W (cid:12)
+(cid:12)
+(cid:12)
+
+DN (t1 + t2 −
+
+t3)
+(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
+= N −2σ
+
+R
+
+Xn1,n2∼N
+
+(cid:16)
+
+n1
+n2
+
+2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+n2
+n1
+
+.
+
+(cid:17)
+
+We can make this moral argument literally true by working with a slightly smoothed
+version of DN .
+
+Lemma 11.3 (Dirichlet polynomials do not vary too fast). We have
+
+DN (t)
+|
+
+|
+
+/
+
+DN (u)
+|
+
+Z|u−t|/1 |
+
+du + O(T −100).
+
+36
+
+LARRY GUTH AND JAMES MAYNARD
+
+Proof. Let ψ(x) be a smooth bump which is supported on
+equal to 1 on [(2π)−1 log N, (2π)−1 log 2N ]. Then we have
+
+|
+
+2πx
+
+log N
+
+|
+
+−
+
+. 1 and is
+
+DN (t) =
+
+w(n/N )bnnit =
+
+w(n/N )bnnitψ
+
+n
+X
+
+n
+X
+
+log n
+2π
+
+(cid:16)
+
+=
+
+ˆψ(ξ)DN (t
+
+(cid:17)
+
+Z
+
+ξ)dξ.
+
+−
+
+By the rapid decay of ˆψ we may restrict to
+
+ξ
+
+|
+
+|
+
+/ 1 at the cost of an error O(T −100).
+(cid:3)
+
+Lemma 11.4 (Energy controlled by discrete 3rd moment). We have that
+
+E(W ) / N −2σ
+
+Proof. Since
+
+DN (t)
+|
+
+|
+
+> N σ for t
+
+∈
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+W , we have
+
+n1
+n2
+
+R
+
+(cid:16)
+
+3
+
+.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+E(W ) =
+
+N −2σ
+
+1
+
+≤
+
+Xt1,t2,t3,t4∈W
+|t1+t2−t3−t4|≤1
+
+Xt1,t2,t3,t4∈W
+|t1+t2−t3−t4|≤1
+
+DN (t4)
+|
+
+|
+
+2.
+
+By Lemma 11.3 and Cauchy-Schwarz, we have for
+
+t1 + t2 −
+
+|
+
+t3 −
+
+t4| ≤
+
+1
+
+DN (t4)
+|
+
+|
+
+2 /
+
+DN (u)
+|
+
+2du /
+
+Z|u−t4|/1 |
+
+Z|u−t1+t2−t3|/1 |
+
+DN (u)
+|
+
+2du.
+
+Since W is T ǫ-separated, given t1, t2, t3 there is at most 1 choice of t4 ∈
+that
+
+/ 1. Thus we see that
+
+t1 + t2 −
+
+|
+
+t3 −
+
+t4|
+
+W such
+
+E(W ) / N −2σ
+
+= N −2σ
+
+Xt1,t2,t3∈W Zs/1 |
+n1
+N
+
+w
+
+w
+
+n1,n2
+X
+
+(cid:16)
+
+DN (t1 + t2 −
+n2
+n2
+n1
+N
+
+(cid:17) Zs/1
+
+(cid:16)
+
+t3 −
+
+s)
+|
+
+2ds
+
+is
+
+R
+
+(cid:17)
+
+(cid:16)
+
+n1
+n2
+
+2
+
+R
+
+(cid:17)
+
+(cid:16)
+
+n2
+n1
+
+ds
+
+(cid:17)
+
+/ N −2σ
+
+R
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:16)
+
+(cid:17)
+n1
+n2
+
+3
+
+.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Next we note that Heath-Brown’s theorem (Theorem 1.6) gives bounds for
+
+and also
+
+n1,n2∼N
+
+R
+
+n1
+n2
+
+4
+
+.
+
+(cid:17)(cid:12)
+Lemma 11.5 (Discrete second moment). For any M
+(cid:12)
+(cid:12)
+
+P
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+1,
+
+≥
+
+R
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+n1
+n2
+
+2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+/
+
+W
+
+|
+
+|
+
+M 2 +
+
+2M +
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+5/4T 1/2M.
+
+(cid:3)
+
+n1,n2∼N
+
+P
+
+2
+
+R
+
+n1
+n2
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+37
+
+Proof. We have that
+
+so by Theorem 1.6 this is
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+n1
+n2
+
+R
+
+(cid:16)
+
+2
+
+=
+
+ni(t1−t2)
+
+2
+
+,
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xt1,t2∈W (cid:12)
+(cid:12)
+(cid:12)
+
+Xn∼M
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+/
+
+W
+
+|
+
+|
+
+M 2 +
+
+2M +
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+5/4T 1/2M.
+
+(cid:3)
+
+Lemma 1.7 is now a quick consequence of our arguments so far.
+
+Proof of Lemma 1.7. By Lemma 11.4 and the trivial bound
+
+|
+
+R(x)
+
+n1
+n2
+
+R
+
+(cid:16)
+
+3
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+W
+
+|
+
+≤ |
+
+N −2σ
+
+| ≤ |
+n1
+n2
+
+R
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+we have
+
+W
+
+|
+
+2
+
+.
+
+Lemma 11.5 (which is just Theorem 1.6) now shows for N > T 2/3 we have
+
+E(W ) / N −2σ
+
+E(W ) /
+
+W
+
+|
+
+|
+
+3N 1−2σ +
+
+2N 2−2σ.
+
+W
+
+|
+
+|
+
+(cid:3)
+
+To do better we look at higher moments to avoid the potentially wasteful use of
+the trivial bound
+
+R(x)
+
+W
+
+.
+
+|
+
+| ≤ |
+
+|
+
+Lemma 11.6 (Discrete fourth moment). For any M
+
+1,
+
+≥
+
+n1
+n2
+
+R
+
+(cid:16)
+
+4
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+/ M 2E(W ) +
+
+W
+
+|
+
+|
+
+4M + E(W )3/4
+
+T 1/2M.
+
+W
+
+|
+
+|
+
+Proof. We split the sum in the R function according to the number of representa-
+x, and
+tions of u as approximately t1 −
+deﬁne
+
+denote the largest integer
+
+t2. Let
+
+x
+⌋
+
+≤
+
+⌊
+
+UB :=
+
+u
+
+Z : #
+{
+
+∈
+
+(t1, t2)
+
+∈
+
+n
+Clearly UB is empty if B < 1/2 or if B >
+
+W 2 :
+
+t1 −
+
+⌊
+
+t2⌋
+
+= u
+
+} ∼
+
+B
+
+.
+
+o
+
+. Thus, using Cauchy-Schwarz
+
+W
+
+|
+
+|
+
+4 =
+
+R(x)
+|
+
+|
+
+Xt1,t2∈W
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+xi(t1−t2)
+
+2
+
+=
+
+Xu∈UB Xt1,t2∈W
+⌊t1−t2⌋=u
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+XB=2j
+(cid:12)
+(cid:12)
+(cid:12)
+
+/
+
+2
+
+xi(t1−t2)
+
+(cid:12)
+(cid:12)
+(cid:12)
+xi(t1−t2)
+
+2
+
+.
+
+XB=2j ≤|W |(cid:12)
+(cid:12)
+(cid:12)
+
+Xu∈UB Xt1,t2∈W
+⌊t1−t2⌋=u
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+Taking x = n1/n2 and summing over n1, n2 ∼
+
+M then gives
+
+38
+
+LARRY GUTH AND JAMES MAYNARD
+
+R
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+n1
+n2
+
+4
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+/ sup
+
+B≤|W |
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+Xu∈UB Xt1,t2∈W
+
+⌊t1−t2⌋=u(cid:16)
+
+n1
+n2
+
+i(t1−t2)
+
+2
+
+(cid:17)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+
+1
+
+(cid:17)(cid:16) Xt2,t4∈W
+⌊t2−t4⌋=u2
+
+(cid:17)
+
+ni(u1−u2+s)
+
+2
+
+.
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤
+
+sup
+B≤|W |
+(cid:12)
+(cid:12)
+(cid:12)
+B2
+
+/ sup
+
+Xu1,u2∈UB(cid:16) Xt1,t3∈W
+⌊t1−t3⌋=u1
+
+B≤|W |
+
+Xu1,u2∈UB
+
+sup
+|s|.1
+(cid:12)
+(cid:12)
+(cid:12)
+
+Xn∼M
+
+ni(u1−u2+s)
+
+sup
+|s|.1
+Xn∼M
+(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+By using Lemma 11.3 to replace the supremum with an integral, and then applying
+Theorem 1.6, we ﬁnd
+
+n1
+n2
+
+R
+
+(cid:16)
+
+4
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+/ sup
+
+B2
+
+B≤|W |
+
+/ sup
+
+B2
+
+Zt/1
+M 2
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+B≤|W |
+
+We have that B
+
+UB|
+
+|
+
+/
+
+W
+
+|
+
+|
+
+2 and B2
+
+(cid:16)
+UB|
+
+|
+
+ni(u1−u2+t)
+
+2
+
+dt
+
+Xn∼M
+Xu1,u2∈UB(cid:12)
+(cid:12)
+(cid:12)
+UB|
++
+UB|
+
+|
+
+|
+
+2M + T 1/2
+
+(cid:12)
+(cid:12)
+(cid:12)
+UB|
+
+|
+
+5/4M
+
+.
+
+(cid:17)
+
+/ E(W ), so this gives
+
+n1
+n2
+
+R
+
+(cid:16)
+
+Xn1,n2∼M(cid:12)
+(cid:12)
+(cid:12)
+
+To bound
+
+n1,n2∼N |
+
+P
+
+R
+
+4
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+n1
+n2
+
+(cid:16)
+
+3
+
+/ M 2E(W ) +
+
+W
+
+|
+
+|
+
+4M + E(W )3/4
+
+T 1/2M.
+
+W
+
+|
+
+|
+
+(cid:3)
+
+3, we could use H¨older:
+
+|
+
+(cid:17)
+
+R
+
+n1
+n2
+
+(cid:16)
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+≤ 
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+
+
+1/2
+
+2
+
+
+
+
+
+n1
+n2
+
+R
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+
+
+1/2
+
+4
+
+n1
+n2
+
+R
+
+(cid:16)
+
+
+
+
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+R
+
+1/n′
+
+n1,n2∼N
+
+and then bound the two factors using Lemmas 11.5 and 11.6. However, this H¨older
+2 is a rational number of small height, then the
+step is somewhat lossy.
+p
+p many times – because there are many
+R(n′
+sum
+2. The 4th moment tends to be dominated by n1, n2
+n1, n2 ∼
+P
+with large gcd(n1, n2). But the 2nd moment tends to be dominated by n1, n2 with
+small gcd(n1, n2). Therefore, instead of doing H¨older immediately, we now split
+our argument according to the size of gcd(n1, n2).
+
+If n′
+counts
+1/n′
+
+N with n1/n2 = n′
+(cid:16)
+
+1/n′
+2)
+|
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+n1
+n2
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+|
+
+Let d = gcd(n1, n2) and n1 = n′
+gcd(n′
+mality constraint when d is large)
+
+N/d with
+2) = 1. Thus we have for any choice of parameter D (dropping the copri-
+
+2d for some n′
+
+1d, n2 = n′
+
+1, n′
+
+1, n′
+
+2 ∼
+
+(11.2) E(W )
+
+N −2σ
+
+≤
+
+R
+
+Xd≤D Xn′1,n′2∼N/d
+(cid:12)
+(cid:12)
+gcd(n′1,n′2)=1
+(cid:12)
+
+(cid:16)
+
+n′
+1
+n′
+2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+3
+
++ N −2σ
+
+R
+
+Xd≥D Xn′1,n′2∼N/d(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+n′
+1
+n′
+2
+
+3
+
+.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+39
+
+First we consider small d. When d is small enough, the distinct fractions n′
+very well distributed and so it makes sense to compare our sum with
+
+1/n′
+R(v)
+|
+is locally
+1,
+is morally locally constant at scale 1/T . We make this precise in the following
+
+We recall that W is contained in an interval of length T . Morally,
+constant on intervals of length 1/T . Since R(v) = ˆW (log v), we see that for v
+R(v)
+|
+|
+lemma:
+
+v≍1 |
+ˆW (τ )
+R
+|
+
+2 are
+3dv.
+
+≍
+
+|
+
+Lemma 11.7. For v
+
+1,
+
+≍
+
+R(v)
+|
+
+|
+
+. T
+
+Z|v′−v|/1/T |
+
+R(v′)
+|
+
+dv′ + O(T −100).
+
+Proof. Since v
+prove that
+
+≍
+
+1, we can do a change of variables, τ = log v, and it suﬃces to
+
+ˆW (τ )
+|
+
+|
+
+. T
+
+Z|τ ′−τ |/1/T |
+
+ˆW (τ ′)
+|
+
+dτ ′ + O(T −100).
+
+We know that W is contained in an interval of length T ; call this [T0, T0 + T ]. Let
+ψ be a smooth bump which is 1 on [0, 1]. Then we have
+
+ˆW (τ ) =
+
+tτ ) =
+
+e(
+
+−
+
+Xt∈W
+
+Xt∈W
+
+tτ )ψ
+
+e(
+
+−
+
+T0
+
+t
+
+−
+T
+
+(cid:16)
+
+=
+
+ˆψ(ξ) ˆW
+
+τ
+
+(cid:17)
+
+Z
+
+(cid:16)
+
+ξ
+T
+
+−
+
+T0ξ
+T
+
+e
+
+(cid:17)
+
+(cid:16)
+
+dξ.
+
+(cid:17)
+
+By the rapid decay of ˆψ, we may restrict the integral to ξ / 1 at the cost of an
+O(T −100) error term. Since ˆψ . 1 this then gives the result.
+(cid:3)
+
+Lemma 11.8 (Small GCD terms). We have
+
+R
+
+Xn1,n2∼N
+gcd(n1,n2)≤D(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+3
+
+/
+
+n1
+n2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+DT + N 2
+(cid:16)
+
+|
+
+(cid:17)
+
+W
+
+|
+
+1/2E(W )1/2.
+
+Proof. Let d = gcd(n1, n2) and n1 = n′
+gcd(n′
+
+2) = 1. By Lemma 11.7, we have
+
+1, n′
+
+1d, n2 = n′
+
+2d for some n′
+
+1, n′
+
+N/d with
+
+2 ∼
+
+n′
+1
+n′
+2
+
+R
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn′1,n′2∼N/d
+(cid:12)
+(cid:12)
+gcd(n′1,n′2)=1
+(cid:12)
+
+3
+
+. T
+
+3
+
+R(v)
+|
+
+Zv≍1 |
+
+1
+
+dv.
+
+(cid:16) Xn1,n′2∼N/d
+gcd(n′1,n′2)=1
+|v−n′1/n′2|/1/T
+
+(cid:17)
+
+Since the fractions n′
+1, n′
+n′
+
+2 on the right hand side is / 1 + N 2/(d2T ). Thus we ﬁnd
+
+1/n′
+
+2 are d2/N 2-separated, we have that the inner sum over
+
+40
+
+LARRY GUTH AND JAMES MAYNARD
+
+T +
+
+N 2
+d2
+
+3dv
+
+R(v)
+|
+
+(cid:17) Zv≍1 |
+
+Xd≤D(cid:16)
+
+3
+
+/
+
+n′
+1
+n′
+2
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+T +
+
+N 2
+d2
+
+R
+
+Xd≤D Xn′1,n′2∼N/d
+(cid:12)
+(cid:12)
+gcd(n′1,n′2)=1
+(cid:12)
+
+≤
+
+.
+
+Xd≤D(cid:16)
+DT + N 2
+
+(cid:17) (cid:18)Zv≍1 |
+W
+
+1/2E(W )1/2.
+
+(cid:16)
+
+|
+
+|
+
+(cid:17)
+
+1/2
+
+1/2
+
+2dv
+
+R(v)
+|
+
+(cid:19)
+
+(cid:18)Zv≍1 |
+
+4dv
+
+R(v)
+|
+
+(cid:19)
+
+(cid:3)
+
+We choose D := N 2/T , so this gives
+n1
+n2
+
+(11.3)
+
+R
+
+Xn1,n2∼N
+gcd(n1,n2)≤D(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+3
+
+/ N 2
+
+W
+
+|
+
+|
+
+1/2E(W )1/2.
+
+Lemma 11.9 (Large GCD terms). Let D = N 2/T and N
+
+T 3/4. Then we have
+
+≥
+
+. N
+
+W
+
+|
+
+|
+
+3 + N T 1/4
+
+W
+
+|
+
+|
+
+21/8 + E(W )1/2
+
+1/2N 2.
+
+W
+
+|
+
+|
+
+R
+
+Xn1,n2∼N
+gcd(n1,n2)≥D(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+n1
+n2
+
+3
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Proof. As in the previous lemma, we let d = gcd(n1, n2) and n1 = n′
+When d is large, we keep the discrete summation over n′
+Schwarz directly, giving
+
+1d, n2 = n′
+
+2d.
+2 and apply Cauchy-
+
+1, n′
+
+3
+
+.
+
+R
+
+n′
+1
+n′
+2
+
+(cid:16)
+
+Xn′1,n′2∼N/d(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16) Xn′1,n′2∼N/d(cid:12)
+(cid:12)
+(cid:12)
+
+n′
+1
+n′
+2
+
+R
+
+(cid:16)
+
+4
+
+1/2
+
+(cid:17)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+n′
+1
+n′
+2
+
+R
+
+(cid:16)
+
+2
+
+1/2
+
+.
+
+(cid:17)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16) Xn′1,n′2∼N/d(cid:12)
+(cid:12)
+(cid:12)
+
+Now we can bound the factors on the right-hand side by Lemmas 11.5 and 11.6,
+with M = N/d. This gives
+
+Xn′1,n′2∼N/d(cid:12)
+(cid:12)
+(cid:12)
+
+n′
+1
+n′
+2
+
+R
+
+(cid:16)
+
+3
+
+/
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:18)
+
+×
+
+(cid:18)
+
+N 2
+W
+d2 + |
+|
+
+|
+
+W
+
+2N
+|
+d
+
+W
+
+|
+
++ |
+
+5/4T 1/2N
+
+1/2
+
+d
+
+(cid:19)
+
+N 2E(W )
+d2
+
++
+
+N
+
+4
+
+|
+
+|
+
+W
+d
+
++
+
+E(W )3/4
+
+T 1/2N
+
+W
+|
+d
+
+|
+
+1/2
+
+.
+
+(cid:19)
+
+Summing over d
+gives
+
+≥
+
+D, using Cauchy-Schwarz, and recalling that D = N 2/T then
+
+n1
+n2
+
+R
+
+(cid:16)
+
+3
+
+/
+
+|
+
+(cid:16)
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼N
+gcd(n1,n2)≥D(cid:12)
+(cid:12)
+(cid:12)
+
+W
+
+N 2
+|
+D
+
+2N +
+
++
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+5/4T 1/2N
+
+1/2
+
+(cid:17)
+
+N 2E(W )
+D
+
++ N
+
+W
+
+|
+
+|
+
+4 + E(W )3/4
+
+T 1/2N
+
+W
+
+|
+
+|
+
+1/2
+
+.
+
+(cid:17)
+
+×
+
+(cid:16)
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+41
+
+Next we work on simplifying and organizing the algebra. Recall that we have
+N 2/D,
+N > T 3/4 and D = N 2/T . Therefore, we have
+and we can ignore the ﬁrst term in the ﬁrst factor. Thus the above expression is
+bounded by
+
+5/4T 1/2N >
+|
+
+T =
+
+W
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+(11.4) /
+
+|
+(cid:16)
+
+2N +
+
+W
+
+|
+
+W
+
+|
+
+|
+
+5/4T 1/2N
+
+1/2
+
+E(W )T +N
+
+(cid:17)
+
+(cid:16)
+
+4+E(W )3/4
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+T 1/2N
+
+1/2
+
+.
+
+|
+
+|
+
+W
+
+W
+
+2N >
+
+If
+5/4T 1/2N , and so the ﬁrst factor is dominated by
+> T 2/3, then N
+If
+T 1/2N . Also, since N > T 3/4 > T 1/2, N
+
+There are two main cases, depending on whether
+T 2/3 then
+We turn to the second factor.
+E(W )3/4
+So the second factor is dominated by N
+simpliﬁes to
+
+4 > N
+|
+4 >
+W
+
+4. Therefore, if
+
+> T 2/3 or not.
+
+|
+W
+
+|
+W
+
+W
+
+W
+
+W
+
+W
+
+W
+
+≥
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+W
+≥
+|
+3T
+E(W )T .
+|
+> T 2/3, (11.4)
+
+>
+|
+2N .
+
+(cid:17)
+W
+|
+W
+|
+|
+13/4T 1/2
+
+(11.5)
+
+n1
+n2
+
+R
+
+(cid:16)
+
+3
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼N
+gcd(n1,n2)≥D(cid:12)
+(cid:12)
+(cid:12)
+
+/ N
+
+W
+
+|
+
+3.
+
+|
+
+< T 2/3. Recalling that N > T 3/4 > T 1/2, we see that
+
+5/4T 1/2N , so the ﬁrst factor is dominated by
+
+|
+
+W
+
+Now suppose
+W
+|
+second factor, we see that E(W )3/4
+see that (11.4) simpliﬁes to
+
+|
+
+|
+
+W
+
+|
+
+|
+
+W
+|
+T 1/2N > E(W )T . Thus, if
+
+2N <
+5/4T 1/2N . Turning to the
+< T 2/3 we
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+R
+
+Xn1,n2∼N
+gcd(n1,n2)≥D(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+3
+
+/
+
+W
+
+|
+
+|
+(cid:16)
+
+n1
+n2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+5/4T 1/2N
+
+1/2
+
+N
+
+(cid:17)
+
+(cid:16)
+
+4 + E(W )3/4
+
+W
+
+|
+
+|
+
+W
+
+|
+
+|
+
+1/2
+
+T 1/2N
+
+(11.6)
+
+/ N T 1/4
+
+W
+
+|
+
+|
+
+21/8 + E(W )1/2
+
+1/2N 2
+
+W
+
+|
+
+|
+
+(cid:16)
+
+5/8
+
+T 1/2
+W
+|
+E(W )1/8N
+
+|
+
+(cid:17)
+
+.
+
+(cid:17)
+
+W
+
+5/8 <
+2 and
+Since E(W ) >
+E(W )1/8N , so the ﬁnal term in (11.6) is O(
+1/2E(W )1/2N 2). Thus, combining
+|
+(11.5) and (11.6), we ﬁnd that provided N > T 3/4, regardless of the size of W , we
+have
+
+< T 2/3 and N > T 3/4, we see that T 1/2
+
+W
+
+W
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+R
+
+Xn1,n2∼N
+gcd(n1,n2)≥D(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:16)
+
+n1
+n2
+
+3
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+/ N
+
+W
+
+|
+
+|
+
+3 + N T 1/4
+
+W
+
+|
+
+|
+
+21/8 + E(W )1/2
+
+1/2N 2.
+
+W
+
+|
+
+|
+
+(cid:3)
+
+Proof of Proposition 11.1. First we use Lemma 11.4 to give
+
+E(W ) / N −2σ
+
+n1
+n2
+
+R
+
+(cid:16)
+
+3
+
+.
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+Xn1,n2∼N(cid:12)
+(cid:12)
+(cid:12)
+
+42
+
+LARRY GUTH AND JAMES MAYNARD
+
+Splitting according to whether gcd(n1, n2)
+11.8 and Lemma 11.9 that
+
+≤
+
+D = N 2/T or not, we ﬁnd by Lemma
+
+E(W )
+
+≤
+
+N −2σ
+
+This simpliﬁes to give
+
+N
+
+W
+
+|
+
+|
+
+(cid:16)
+
+3 + N T 1/4
+
+W
+
+|
+
+|
+
+21/8 + E(W )1/2
+
+W
+
+|
+
+|
+
+1/2N 2
+
+.
+
+(cid:17)
+
+E(W ) /
+
+W
+
+|
+
+|
+
+N 4−4σ +
+
+W
+
+|
+
+|
+
+21/8T 1/4N 1−2σ +
+
+3N 1−2σ.
+
+W
+
+|
+
+|
+
+(cid:3)
+
+12. Proof of results on large values of Dirichlet polynomials
+
+In this section we prove our main results on the large values of Dirichlet polynomials
+by assembling the tools in the previous sections.
+
+Proof of Proposition 3.1. Suppose that
+an interval of length T = N 6/5. By Proposition 4.6 and (5.5), we have
+
+DN (t)
+
+| ≥
+
+|
+
+N σ on the set W contained in
+
+.ǫ N 2−2σ + N 1−2σ
+
+W
+
+|
+
+|
+
+1/3
+
+Im
+
+= N 2−2σ + N 1−2σ
+
+S1 + S2 + S3
+
+(cid:16) Xm∈Z3\{0}
+
+(cid:17)
+
+(cid:16)
+
+1/3
+
+.
+
+(cid:17)
+
+By Proposition 5.1, S1 is negligible. We bound S2 by Proposition 6.1, and S3 by
+Proposition 11.2. Therefore we get for any choice of k
+
+N
+
+∈
+
+W
+
+|
+
+|
+
+3N 6σ−3 / N 3 + S2 + S3
+/ N 3 +
+
+W
+
+|
+
++ T
+
+W
+
+|
+
+|
+
+|
+
+2N 2 + T N
+|
+N 3−2σ + T
+
+W
+
+|
+W
+
+2−1/k + N 2
+|
+2N 3/2−σ + T 9/8
+
+2−3/4kT 1/2k + T 2
+|
+29/16N 3/2−σ.
+
+W
+
+W
+
+|
+
+3/2
+
+W
+
+|
+
+|
+
+|
+
+|
+
+|
+
+In this formula k comes from the bound for S2. It is a positive integer that we can
+choose. The last inequality rearranges to give
+
+W
+
+|
+
+|
+
+(12.1)
+
+/ N 2−2σ + N 5−6σ + T
+
+k+1 N (4−6σ) k
+4k+3 T
++ T 1/2N 3−4σ + T N 9/2−7σ + T 18/19N 72/19−112σ/19.
+
+k+1 + N (5−6σ) 4k
+
+k
+
+2
+
+4k+3 + T 4/3N 2−4σ
+
+We choose k = 4. We also simplify the formulas using T = N 6/5.
+
+/ T
+
+W
+
+|
+
+|
+
+N (4−10σ)/5 + N (19−30σ)/5 + N (74−120σ)/25 + N (298−480σ)/95
+
+(cid:16)
+
++ N (12−20σ)/5 + N (9−14σ)/2 + N (354−560σ)/95
+
+/ T N (4−10σ)/5 + T N (12−20σ)/5 + T N (9−14σ)/2.
+
+(cid:17)
+
+If σ
+
+∈
+
+[7/10, 8/10] the ﬁrst and third terms can be dropped and we get
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+/ T N (12−20σ)/5.
+
+W
+
+|
+
+|
+
+43
+
+(cid:3)
+
+When N > T 5/6 the process of going from Proposition 3.1 to Theorem 1.1 is
+somewhat wasteful since it actually bounds the number of large values in [0, N 6/5].
+By using a variation of the above argument, the bound in Theorem 1.1 could be
+improved. We record one such improvement here.
+
+Proposition 12.1 (Large values estimate for N
+(tr)r≤R are as in Theorem 1.1, and that T 5/6
+N
+Then we have
+
+≤
+
+≥
+≤
+
+T 5/6). Suppose (bn)n∈[N,2N ],
+T and V = N σ with σ
+7/10.
+
+≥
+
+R / N 2−2σ + T 1/2N 3−4σ + inf
+k∈N
+
+T
+
+(cid:16)
+
+In particular, we have
+
+k
+
+k+1 N (4−6σ) k
+
+k+1 + N (5−6σ) 4k
+
+4k+3 T
+
+2
+4k+3
+
+.
+
+(cid:17)
+
+R / N 2−2σ + T 1/2N 3−4σ + T (30σ−21)/5N (46−60σ)/5.
+
+Proposition 12.1 implies that the N 18/5V −4 term in Theorem 1.1 can be replaced by
+T 1/2N 3−4σ + T (30σ−21)/5N (46−60σ)/5, which is smaller. When σ = 3/4, Proposition
+12.1 improves on (1.1) by a factor of (T /N )1/2. Since we anticipate the main uses of
+Theorem 1.1 to be when N < T 5/6 we content ourselves to the simpler formulation
+of Theorem 1.1.
+
+Proof. Jutila’s large values estimate [Ju, Theorem (1.4)] with k = 3 gives
+
+R / N 2−2σ + T N (10−16σ)/3 + T N 18−24σ,
+
+which implies our bound for σ
+are then both smaller than T 1/2N 3−4σ. Thus we only need to consider σ
+∈
+[7/10, 39/50]. The bound now follows from (12.1), (1.1) and a little algebra. We
+ﬁnd for σ
+
+39/50 since the second and third terms above
+
+[T 5/6, T ] we have that
+
+[7/10, 39/50] and N
+
+≥
+
+∈
+
+∈
+
+T 1/2N 3−4σ & T 4/3N 2−4σ + T N 9/2−7σ + T 18/19N 72/19−112σ/19.
+
+Therefore the T 1/2N 3−4σ term in (12.1) dominates the 5th, 7th and 8th terms in
+(12.1). We also have
+
+T 1/2N 3−4σ & min(T N 4−6σ, N 2−2σ) + min(T N 1−2σ, N 5−6σ).
+
+Therefore, by combining (12.1) and (1.1) we ﬁnd that
+
+R / N 2−2σ + T 1/2N 3−4σ + inf
+k∈N
+
+T
+
+(cid:16)
+
+k
+
+k+1 N (4−6σ) k
+
+k+1 + N (5−6σ) 4k
+
+4k+3 T
+
+2
+4k+3
+
+.
+
+(cid:17)
+
+44
+
+LARRY GUTH AND JAMES MAYNARD
+
+This gives the ﬁrst bound. For the ﬁnal bound, we note that if N 4−4σ > T then
+T N 1−2σ < T 1/2N 3−4σ so the bound follows from (1.1). Therefore we may assume
+that N 4−4σ
+T 2 and so in the expression in parentheses
+above, the ﬁrst term is decreasing in k and the second term is increasing in k. Thus,
+for the expression to be less than T (30σ−21)/5N (46−60σ)/5 we require
+
+T . In this case N 15−18σ
+
+≤
+
+≤
+
+−
+
+73 + 138n + 90σ
+
+12(1
+
+−
+
+n)(7
+
+−
+
+180nσ
+
+−
+10σ)
+
+k
+
+≤
+
+≤
+
+−
+
+21 + 46n + 30σ
+
+2(1
+
+−
+
+n)(13
+
+−
+
+60nσ
+
+−
+15σ)
+
+where n := log N/ log T . The upper bound of this interval is always at least 1 for
+n
+
+[7/10, 39/50] and the length of this interval is
+
+[5/6, 1), σ
+
+∈
+
+∈
+
+1 +
+
+5(6n
+12(1
+
+−
+−
+
+5)(
+−
+n)(10σ
+
+41 + 123σ
+7)(13
+
+−
+
+90σ2)
+15σ)
+
+.
+
+−
+−
+
+Thus the interval has length at least 1 whenever σ
+a choice of k
+
+N giving the desired bound.
+
+∈
+
+∈
+
+[7/10, 39/50], and so there is
+(cid:3)
+
+13. Applications to Riemann zeta function and prime numbers
+
+13.1. Proof of Theorem 1.2. As noted in the introduction, Theorem 1.2 follows
+from Ingham’s result (1.2) if σ
+8/10, so we
+may assume that σ
+[7/10, 8/10]. Clearly it suﬃces to show the bound of Theorem
+1.2 for zeros with imaginary part in [T, 2T ], since the result for [0, T ] then follows
+by considering T /2, T /4, . . . in place of T .
+
+7/10 and Huxley’s result (1.3) if σ
+
+≤
+
+≥
+
+∈
+
+We now brieﬂy recall the classical zero-detecting methodology, referring the reader
+to [M3, Chapter 12] or [MP, Appendix C] for more complete details. Given a
+parameter N , we let
+
+DN (s) :=
+
+bnn−s,
+
+Xn∈[N,2N ]
+
+bn :=
+
+(cid:16) Xd|n
+d≤2T 1/√log log T
+
+µ(d)
+
+w0
+
+(cid:17)
+
+(cid:16)
+
+n
+N
+
+(cid:17)
+
+exp
+
+−
+
+(cid:16)
+
+n
+T 1/2
+
+.
+
+(cid:17)
+
+Here w0 is a ﬁxed smooth bump function supported on [1, 2].
+
+[T, 2T ] is called
+Then, a non-trivial zero ρ = β + iγ of ζ(s) with β
+∈
+[T 1/ log log T , T 1/2(log T )2] such that
+a ‘Type I zero’ if there is a choice of N
+1/(3 log T ). If it is not a Type I zero then it is a ‘Type II zero’, and the
+DN (ρ)
+T 2−2σ(log T )O(1) by [MP, Lemma 33]. Thus it suﬃces
+number of Type II zeros is
+to bound the number of Type I zeros. There are O(log T ) choices of N so we focus
+on the value of N which gives the largest number of Type I zeros.
+
+σ and γ
+
+≥
+
+≥
+
+≤
+
+∈
+
+We now make a slight modiﬁcation to DN to remove the dependencies on the real
+σ, and let ψ(u) be a smooth
+parts. Let ρ = β + iγ be a Type I zero with β
+
+≥
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+45
+
+function equal to eu(β−σ) on [log N, log 2N ] and supported on [(log N )/2, 2 log N ]
+with
+
+N. We then note that by Fourier expansion
+
+ψ(j)(t)
+
+k
+
+k∞ .j t−j for all j
+
+∈
+
+DN (ρ) =
+
+bnn−σ−iγψ(log n) =
+
+Xn∈[N,2N ]
+
+1
+2πi
+
+ˆψ(ξ)
+(cid:16)
+
+Zξ
+
+DN (σ + i(γ + 2πξ))
+
+dξ.
+
+(cid:17)
+
+Since ˆψ is rapidly decreasing, we may truncate the integral to ξ / 1 at the cost
+of an O(T −100) error term. Therefore we see that if ρ is a Type I zero, we have
+' 1 for some ξ / 1. There are O(log T ) non-trivial zeros ρ = β +iγ
+DN (σ+iγ +iξ)
+|
+|
+[T, 2T ]. Therefore we can ﬁnd a 1-separated set of
+with γ
+∈
+points (sr)r≤R in [T, 2T ] with
+' 1 and the number R of points satisﬁes
+DN (σ+isr)
+|
+|
+N (σ, T ). Let
+R ' N (σ, 2T )
+
+[t, t + 1] for any t
+
+∈
+
+−
+
+N
+n
+
+(cid:16)
+
+σ
+
+bn,
+
+(cid:17)
+
+bn :=
+
+e
+
+DN (t) :=
+
+bnnit = N σDN (σ + it).
+
+e
+
+Xn∈[N,2N ]
+
+e
+
+' N σ, we have
+
+Thus it suﬃces to show that if N < T 1/2+o(1) and W is a 1-separated set in [T, 2T ]
+such that
+
+/ T 15(1−σ)/(3+5σ)+o(1).
+
+|
+If T 5/(3+5σ)
+e
+≤
+N of length N 2, which shows that (noting that σ
+to the Dirichlet polynomial
+[7/10, 8/10] implies that the N 2V −2 term is dominated by the N 18/5V −4 term)
+
+T 75(1−σ)/(54+30σ−100σ2), then we use Theorem 1.1 applied
+
+DN (t)
+|
+N 2
+
+D2
+
+W
+
+≤
+
+∈
+
+|
+
+|
+
+e
+
+W
+
+|
+
+|
+
+/ (T 75(1−σ)/(54+30σ−100σ2))18/5−4σ + T (T 5/(3+5σ))12/5−4σ
+/ T 15(1−σ)/(3+5σ).
+
+If instead N lies outside of these ranges, we can use classical estimates. If T 2/3 <
+N 2 < T 5/(3+5σ) then the Mean Value Theorem applied to
+
+D3
+
+N gives
+
+/ N 6−6σ / T 15(1−σ)/(3+5σ).
+
+W
+
+|
+
+|
+
+e
+
+If T ' N 2 > T 75(1−σ)/(54+30σ−100σ2) then the Mean Value Theorem applied to N 2
+gives
+
+/ T (T 75(1−σ)/(54+30σ−100σ2))1−2σ = T (129−195σ+50σ2)/(54+30σ−100σ2).
+
+W
+
+|
+
+|
+
+A quick calcuation veriﬁes (129
+5σ). Finally, if N < T 1/3, we choose k
+Value Theorem applied to N k and N k+1 gives
+
+195σ + 50σ2)/(54 + 30σ
+3 such that N k
+
+−
+
+≥
+
+100σ2) < 15(1
+
+σ)/(3 +
+−
+N k+1. The Mean
+
+−
+
+T
+
+≤
+
+≤
+
+46
+
+LARRY GUTH AND JAMES MAYNARD
+
+W
+
+|
+
+|
+
+/ min
+
+N (k+1)(2−2σ), T N k(1−2σ)
+
+(cid:16)
+
+N (k+1)(2−2σ)
+
+/
+
+k(2σ
+k+2
+
+1)
+2σ
+
+−
+−
+
+(cid:17)
+
+T N k(1−2σ)
+
+(cid:16)
+
+= T (k(2−2σ)+2−2σ)/(k+2−2σ)
+/ T (4−4σ)/(3−σ).
+
+(cid:17)
+
+(cid:16)
+
+(k+1)(2
+k+2
+
+−
+2σ
+
+2σ)
+
+−
+
+(cid:17)
+
+Here we noted that the penultimate bound is decreasing in k and so maximized at
+k = 3. A quick calculation veriﬁes that (4
+σ)/(3 + 5σ), so
+this gives an acceptable bound too.
+
+σ) < 15(1
+
+4σ)/(3
+
+−
+
+−
+
+−
+
+5/2
+
+W
+
+Remark. For the purposes of proving a zero density estimate of the form N (σ, T ) /
+T A(1−σ) with A a ﬁxed constant as small as possible, the critical case in our work is
+when σ = 7/10, N = T 10/13, we subdivide [0, T ] into intervals of length T1 = T 12/13
+and
+and where the set W of large values on each subinterval has
+4/T1. In this critical situation our bounds for S1 and S2
+E(W )
+are both best possible, and so any further improvement would have to come from
+the S3 term. Our bound for E(W ) is also likely to be diﬃcult to improve since
+4/T1. The argument of Section 9 is
+a random set W would have E(W )
+T 1/2
+also essentially tight if the R function is taking T 2/3
+1
+and the set of these values is highly concentrated on rationals with numerator and
+denominator of size T 1/3
+
+values of size
+
+T 2/3
+1
+
+| ≈
+
+≈ |
+
+≈ |
+
+≈ |
+
+/M
+
+W
+
+W
+
+W
+
+W
+
+≈
+
+.
+
+1
+
+|
+
+|
+
+|
+
+|
+
+|
+
+|
+
+1
+
+13.2. Proof of Corollary 1.3 and Corollary 1.4. These are well-known to follow
+quickly from (1.4), but for completeness we give a proof. By partial summation, it
+suﬃces to prove corresponding results for the Von Mangoldt function in place of the
+prime indicator function. By the explicit formula (see, for example [Da, Chapter
+17]) we have for any choice of T
+
+2
+
+≥
+
+Λ(n) = y
+
+(x + y)ρ
+ρ
+
+xρ
+
+−
+
++ O
+
+(cid:17)
+
+(cid:16)
+
+x(log x)3
+T
+
+.
+
+(cid:17)
+
+−
+
+X|ρ|≤T (cid:16)
+
+Xn∈[x,x+y]
+
+We choose T = xy−1 exp(2 4√log x) so the error term is O(y exp(
+tρ−1dt
+that the term in parentheses is
+1/ log x-separated values of σ, we ﬁnd that
+
+4√log x), and note
+−
+yxℜ(ρ)−1. Therefore, by considering
+
+x+y
+x
+
+≪
+
+R
+
+Λ(n) = y + O
+
+y(log x) sup
+
+xσ−1N (σ, T )
+
+(cid:16)
+
+σ
+
+(cid:17)
+
++ O(y exp(
+
+−
+
+4
+
+log x)).
+
+p
+
+Xn∈[x,x+y]
+
+By combining (1.4) with a slightly stronger result (such as [Ju] or [M3, Theorem
+12.1]) that loses at most logarithmic factors for σ closer to 1, we have the bound
+
+(13.1)
+
+N (σ, T ) . T (30/13+o(1))(1−σ)(log T )O(1).
+
+NEW LARGE VALUE ESTIMATES FOR DIRICHLET POLYNOMIALS
+
+47
+
+Using this and the Vinogradov-Korobov zero-free bound N (σ, T ) = 0 for σ
+1
+11.4], we ﬁnd that
+
+≥
+c(log T )−2/3(log log T )−1/3 (for a suitable constant c > 0; see [M3, Corollary
+
+−
+
+sup
+σ
+
+xσ−1N (σ, T ) . (log T )O(1)
+
+sup
+
+σ≤1−c(log T )−
+
+5/7
+
+.ǫ exp(
+
+−
+
+4
+
+log x)
+
+T 30/13+o(1)
+x
+
+1−σ
+
+(cid:17)
+
+(cid:16)
+
+provided T < x13/30−ǫ/2. Recalling that T = xy−1 exp(2 4√log x) and y
+this gives Corollary 1.3.
+
+p
+
+x17/30+ǫ,
+
+≥
+
+For Corollary 1.4, we ﬁrst let δ = X −13/15+ǫ/2. By splitting [x, x + y] into intervals
+of length δx, we see that
+
+2X
+
+X
+
+Z
+
+(cid:16) Xn∈[x,x+y]
+
+2
+
+dx .
+
+y2
+δ2X 2
+
+Λ(n)
+
+y
+
+−
+
+(cid:17)
+
+2X
+
+X
+
+Z
+
+(cid:16) Xn∈[x,x+δx]
+
+Λ(n)
+
+−
+
+2
+
+δx
+
+(cid:17)
+
+dx + O(δ2X 3).
+
+If the corollary was false, the left hand side would be signiﬁcantly larger than
+y2X exp(
+3 4√log x), so it suﬃces to show that the integral on the right hand side
+is . δ2X 3 exp(
+3 4√log x). Applying the Explicit Formula as above with T =
+δ−1 exp(4 4√log x), we see that it suﬃces to show that
+
+−
+
+−
+
+(13.2)
+
+2X
+
+X
+
+Z
+
+(1 + δ)ρ
+ρ
+
+−
+
+xρ
+
+X|ρ|<T
+
+(cid:16)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+
+2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+dx . δ2X 3 exp(
+
+−
+
+3 4
+
+log x).
+
+p
+
+Expanding the sum, and performing the integral over x, we obtain
+
+(1 + δ)ρ
+ρ1
+
+1 −
+
+1
+
+(cid:17)(cid:16)
+
+(1 + δ)ρ2
+ρ2
+
+1
+
+−
+
+X|ρ1|,|ρ2|≤T (cid:16)
+
+2X
+
+xρ1+ρ2 dx . δ2
+
+X
+
+(cid:17) Z
+
+X|ρ1|,|ρ2|<T
+
+|
+
+xℜ(ρ1)+ℜ(ρ2)+1
+ρ1 + ρ2 + 1
+
+.
+
+|
+
+Since xℜ(ρ1)+ℜ(ρ2)+1
+O(log T ) zeros in a horizontal strip of height 1) we have
+
+x2ℜ(ρ1)+1 + x2ℜ(ρ2)+1, and noting that (since there are
+
+≤
+
+1 + z + ρ2|
+
+|
+
+−1 . (log T )2
+
+X|ρ2|<T
+
+for any
+
+z
+
+|
+
+|
+
+< T with
+
+(z)
+
+ℜ
+
+≥
+
+0. Thus we ﬁnd that
+
+2X
+
+X
+
+Z
+
+(1 + δ)ρ
+ρ
+
+−
+
+xρ
+
+(cid:16)
+
+1
+
+2
+
+(cid:17)(cid:12)
+(cid:12)
+(cid:12)
+
+X|ρ|<T
+(cid:12)
+(cid:12)
+(cid:12)
+
+dx . (log X)2δ2 sup
+σ
+
+x2σ+1N (σ, T ).
+
+As above, applying (1.4) and the zero-free region, we have that
+
+48
+
+LARRY GUTH AND JAMES MAYNARD
+
+sup
+σ
+
+x2σ+1N (σ, T ) . x3
+
+sup
+
+σ≤1−c(log T )−
+
+5/7
+
+(cid:16)
+
+T 30/13+o(1)
+x2
+
+1−σ
+
+(cid:17)
+
+.ǫ x3 exp(
+
+−
+
+10 4
+
+log x),
+
+p
+
+on recalling that T = δ−1 exp(4 4√log x) / x13/15−ǫ/3. Putting this together then
+gives (13.2), as required.
+
+Remark. By using a prime decomposition (such as the Heath-Brown Identity) and
+Mellin inversion, it is possible to relate the count of primes in short intervals directly
+to Dirichlet polynomials. The critical situation for both Corollary 1.3 and Corollary
+1.4 is handling a product of six Dirichlet polynomials each of size roughly x1/6 (this
+was the limiting case in the earlier work of Huxley [Hu] too). As in [HB4], by
+bounding this contribution corresponding to six almost equal sized primes using a
+sieve method, one could obtain an asymptotic estimate in the slightly larger range
+[X 2/15−ǫ, X 0.99] at the cost of a worse error term of
+[x17/30−ǫ, x0.99] and y
+y
+size roughly O(ǫ5y/ log x).
+
+∈
+
+∈
+
+References
+
+[Bo] J. Bourgain, On large values estimates for Dirichlet polynomials and the density hypothesis
+
+for the Riemann zeta function, Internat. Math. Res. Notices, (2000), no. 2, 133–146.
+
+[Ca] F. Carlson. Uber die Nullstellen der Dirichletschen Reihen und der Riemannschen ζ-Funktion.
+
+Ark. Mat. Astron. Fys., 15(20):28 pp., 1921
+
+[Da] H. Davenport, Multiplicative number theory, third ed.. Springer-Verlag, New York, 2000.
+[Ha] G. Halasz, Uber die Mittelwerte multiplikativer zahlentheoretischer Funktionen. Acta Math.
+
+Acad. Sci. Hungaricae 19, 365-403 (1968).
+
+[HT] G. Halasz, and P. Turan, On the distribution of roots of Riemann zeta and allied functions,
+
+I, Journal of Number Theory 1.1 (1969): 121-137.
+
+[HB] D. R. Heath-Brown, A large values estimate for Dirichlet polynomials. Journal of the London
+
+Mathematical Society 2.1 (1979): 8-18.
+
+[HB2] D. R. Heath-Brown, The Diﬀerences between Consecutive Primes, II. Journal of the London
+
+Mathematical Society, 2.19 (1979): 207-220.
+
+[HB3] D. R. Heath-Brown, Zero Density Estimates for the Riemann Zeta-Function and Dirichlet
+
+L-Functions. Journal of the London Mathematical Society, 2.19 (1979): 221-232.
+
+[HB4] D. R. Heath-Brown, Prime Numbers in Short Intervals and a Generalized Vaughan Identity.
+
+Canadian Journal of Mathematics, 34.6 (1982): 1365–1377.
+
+[Hu] M. N. Huxley. On the diﬀerence between consecutive primes. Invent. Math., 15:164-170, 1972
+[In] A. E. Ingham. On the estimation of N (σ, T ). Quart. J. Math. Oxford Ser., 11:291–292, 1940.
+[Iv] A. Ivic. The Riemann Zeta-Function, Wiley, 1985 .
+[IK] H. Iwaniec and E. Kowalski. Analytic number theory, Vol. 53. American Mathematical Soc.,
+
+2021.
+
+[Ju] M. Jutila, Zero-density estimates for L-functions, Acta Arith., 32 (1977), 55–62.
+[MP] J. Maynard and K. Pratt, Half-isolated zeros and zero-density estimates. arXiv preprint
+
+arXiv:2206.11729 (2022).
+
+[M] H. Montgomery, Mean and large values of Dirichlet polynomials. Inventiones mathematicae
+
+8.4 (1969): 334-345.
+
+[M2] H. Montgomery, Ten Lectures On The Interface Between Analytic Number Theory And
+
+Harmonic Analysis, No. 84. American Mathematical Soc., 1994.
+
+[M3] H. Montgomery. Topics in multiplicative number theory. Lecture Notes in Mathematics, Vol.
+
+227. Springer-Verlag, Berlin-New York, 1971.
+
+

@@ -1,0 +1,6765 @@
+5
+2
+0
+2
+
+n
+a
+J
+
+8
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+9
+7
+7
+6
+1
+.
+1
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+NEW EXPONENT PAIRS, ZERO DENSITY ESTIMATES, AND
+ZERO ADDITIVE ENERGY ESTIMATES: A SYSTEMATIC
+APPROACH
+
+TERENCE TAO, TIM TRUDGIAN, AND ANDREW YANG
+
+Abstract. We obtain several new bounds on exponents of interest in analytic
+number theory, including four new exponent pairs, new zero density estimates
+for the Riemann zeta-function, and new estimates for the additive energy of
+zeroes of the Riemann zeta-function. These results were obtained by creating
+the Analytic Number Theory Exponent Database (ANTEDB) to collect results
+and relationships between these exponents, and then systematically optimising
+these relationships to obtain the new bounds. We welcome further contribu-
+tions to the database, which aims to allow easy conversion of new bounds on
+these exponents into optimised bounds on other related exponents of interest.
+
+1. Introduction
+
+In this paper we introduce the Analytic Number Theory Exponent Database (AN-
+TEDB)1, which aims to be a living database that systematically collects, abstracts,
+develops code for, and optimises results and relations for, a number of exponents
+that arise in analytic number theory. By an exponent, we mean one or more real
+numbers, possibly depending on other exponent parameters, that occur as an expo-
+nent in an analytic number theory estimate, for instance as the exponent in some
+scale parameter T that bounds some other quantity of interest.
+For the initial launch of the ANTEDB, we focused on exponents relating to the Rie-
+mann zeta-function ζ(s). More specifically, in this paper we shall restrict attention
+to the exponents listed in the following table.
+
+Informal description
+Exponent pairs
+Dual function to exponent pairs
+Growth exponent for ζ
+Large value exponents
+
+Exponent
+(k, ℓ)
+β(α)
+µ(σ)
+LV(σ, τ )
+LVζ(σ, τ ) Large value exponents for ζ
+A(σ)
+Zero density exponent for ζ
+LV∗(σ, τ ) Large value additive energy exp.
+LV∗
+A∗(σ)
+E
+Eζ
+
+Zero density additive energy exp. for ζ —
+Energy / double zeta sum tuples
+—
+Energy / double zeta sum tuples for ζ —
+
+ζ(σ, τ ) Large value additive energy exp. for ζ
+
+Key conjecture
+Exponent pair conj.
+Exponent pair conj.
+Lindel¨of Hypothesis
+Montgomery conj.
+Lindel¨of Hypothesis
+Density Hypothesis
+—
+Lindel¨of Hypothesis
+
+Date: January 29, 2025.
+2010 Mathematics Subject Classification. Primary: 11L07, 11M06, 11T23.
+Key words and phrases. Exponent pair, exponetial sums, Riemann zeta-function, zero-density
+
+estimate, additive energy, computer assisted proof.
+
+Supported by NSF grant DMS-2347850.
+Supported by ARC grant DP240100186.
+1https://teorth.github.io/expdb/.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+We will review the definitions of these exponents in Section 2.1. The exponents
+(k, ℓ), µ(α), A(σ), (and to a lesser extent, β(α)) are well known2 and extensively
+studied as explicit quantities of interest in many places in the literature (e.g., in
+[Ivi03]). However, many of the other exponents in the above table are only studied
+implicitly, with specific values or bounds on these exponents often appearing in
+auxiliary estimates used to control one of the more explicitly studied exponents
+listed above. One of the objectives of the ANTEDB is to make these exponents
+more explicit, and to identify and abstract the relationships between them that often
+only appear in the literature in special cases (for instance, with certain parameters
+set to specific numerical values).
+The ANTEDB also contains some preliminary data on several other related ex-
+ponents, such as those relating to gaps between primes. However these are less
+developed at present, and we will not report on them in depth here.
+There is a vast literature on bounding these various exponents, and on relating them
+to each other. One resource for this literature is the text of Ivi´c [Ivi03], and many
+of the most recent bounds may be found in a paper [TY23] by the second and third
+authors. However, due to a steady stream of new results in the field (for instance,
+the spectacular zero density estimates of Guth and Maynard [GM24]), any given
+list of bounds in the literature will eventually become out of date. Furthermore,
+many of the key relations between exponents are expressed in the literature in a way
+that is tailored to the best numerical exponents available at the time of publication,
+rather than in a more general and abstract fashion that could be easily applied to
+subsequent work that can utilise improved exponent bounds.
+To address these issues, we have attempted not only to collect all known bounds
+on the above exponents in the ANTEDB, but also to “unpack” the proofs of these
+exponents by abstracting out general relations between exponents that are implicit
+in the literature, but not stated in the most general form suitable for future ap-
+plications. A simple and well known example is the abstraction of the functional
+equation of the Riemann zeta-function as a symmetry relation
+
+(1)
+
+µ(1 − σ) = µ(σ) + σ − 1/2
+
+for the growth rates
+
+(2)
+
+µ(σ) := lim sup
+
+t→∞
+
+log |ζ(σ + it)|
+log t
+
+of the Riemann zeta-function (see, e.g., [Ivi03, (1.23), (1.25)]). A more implicit,
+but also well known, example is the technique of Huxley subdivision, which is a
+commonly used method in the theory of zero density estimates for extending large
+value estimates on short intervals to large value estimates on long intervals. By
+introducing the large value exponent LV(σ, τ ), which we define in Definition 27,
+this subdivision method can be abstracted as the upper Lipschitz bound
+
+LV(σ, τ ′) ≤ LV(σ, τ ) + τ ′ − τ
+whenever 1/2 ≤ σ ≤ 1 and τ ≤ τ ′; see Lemma 28. By identifying these abstract
+relations, one can automate some of the more “routine” processes in the literature,
+such as the “standard arguments” appearing in [GM24] to pass from large value
+theorems to zero density estimates (and thence to bounds on gaps between primes).
+Such abstract relations combine to produce a complicated network of implications,
+which often hinders manual optimisation an exponent bound given a set of known
+results. For instance, an exponent pair (k, ℓ) (defined in Definition 11) may be
+
+2There are some minor variations in notation in the literature regarding whether to permit
+“epsilon losses” or to define the class of phase functions to which exponent pairs apply. See
+Remark 1 and Example 6 below.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+3
+
+implied by other exponent pairs via a number of processes, as well as bounds on
+various exponential sums that themselves depend on exponent pairs. However, this
+paradigm appears to be well-suited for machine-assisted optimisation. In ANTEDB
+we implement a python module that implements the set of known results and their
+relations, as well as routines to find new results implied by a set of hypotheses. A
+number of results recorded in this article were found in this way.
+Thus, each theorem and conjecture in ANTEDB is represented both in human-
+readable form as well as python code. As the literature of exponent bounds grows,
+one may increasingly rely on machine-assistance to maintain an up-to-date record of
+the best known bounds of various exponents, which may either be explicitly derived
+or implied by novel upstream results. The aim of the ANTEDB python module
+is to abstract away the tedious task of computing the consequences of a novel
+intermediate result, thereby freeing up resources for researchers. For instance, if a
+new large value estimate is discovered, one may use the ANTEDB python module
+to find efficiently the best-possible new zero density estimates that are implied, and
+compare these to zero density estimates already in the database.
+
+Remark 1 (General note on notation). Throughout this paper, we adopt notational
+conventions for exponents that allow for “epsilon losses” in the estimates. This is
+done in order to simplify the presentation of the results (which would otherwise
+require various additional ε terms), and for compatibility with the code in the AN-
+TEDB, in which exponents are frequently stored as rational numbers to facilitate
+exact arithmetic. Several of our the results may permit one or more of these ep-
+silons to be replaced with more precise losses such as a logarithmic loss, or even with
+a completely “log-free” estimate, but we have not pursued these refinements here or
+in the ANTEDB. It is possible however that a future expansion of the ANTEDB
+could also address these more refined questions.
+
+1.1. New results. As a demonstration of the effectiveness of this systematic ap-
+proach, we were able to obtain new exponent bounds purely from combining and op-
+timising existing methods, without the introduction of new analytic number theory
+inputs. The discovery of these bounds was very much computer assisted; however,
+in many cases we were able to extract human-readable proofs from these computa-
+tions, which we will present in this paper. We expect that future improvements on
+these exponents coming from new techniques in analytic number theory can be sim-
+ilarly combined with the machinery in the ANTEDB to allow these improvements
+to propagate in an optimised and largely automated fashion.
+Our new results can be summarised as follows:
+
+• Four new exponent pairs (Theorem 20);
+• Several new zero density estimates (Table 2); and
+• New estimates for the additive energy of zeroes (see Theorem 64).
+
+1.2. Future directions. We welcome contributions from the analytic number the-
+ory community to maintain and expand the ANTEDB. Some natural directions of
+expansion could include recording analogous exponents for various L-functions,
+or to record estimates that only lose logarithmic factors rather than epsilon ex-
+ponent losses, or even “log-free” or explicit estimates.
+In the latter aspect, it
+may eventually be possible to unify this database with the Th´eorie Multiplica-
+tive Explicite des nombres / Explicit Multiplicative Number Theory website at
+https://tmeemt.github.io/Chest/.
+Currently, the ANTEDB python module performs computations using routines that
+are not formally certified to be error-free. A natural future direction of the project
+would be to incorporate formal verification in languages such as Lean. Completely
+
+4
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+formalizing the estimates in the ANTEDB would be a significant challenge3; how-
+ever, several conditional calculations deriving one exponent from other exponents
+in the literature could conceivably be formalised within the ANTEDB.
+
+2. Notation
+
+2.1. Asymptotic notation. It is convenient to use a “cheap non-standard analy-
+sis” framework for asymptotic notation, in the spirit of [Tao], as this will reduce the
+amount of “epsilon management” one has to do in the arguments. This framework
+is inspired by non-standard analysis, but we will avoid explicitly using non-standard
+constructions such as ultraproducts in the discussion below, relying instead on the
+more familiar notion of sequential limits. Any result stated here using this non-
+standard framework can be converted without difficulty to a result in standard
+“epsilon-delta” form; see for instance Lemma 10 for a typical example.
+In this framework, we assume there is some ambient index parameter i, which ranges
+over some ambient sequence of natural numbers going to infinity. All mathematical
+objects X (numbers, sequences, sets, functions, etc.), will either be fixed — i.e.,
+independent of i — or variable 4 - i.e., dependent on i. Of course, fixed objects
+can be considered as special cases of variable objects, in which the dependency is
+constant. By default, objects should be understood to be variable if not explicitly
+declared to be fixed. For emphasis, we shall sometimes write X = Xi to indicate
+explicitly that an object X is variable; however, to reduce clutter, we shall generally
+omit mention of the parameter i in most of our arguments. We will often reserve the
+right to refine the ambient sequence to a subsequence as needed, usually in order to
+apply a compactness theorem such as the Bolzano–Weierstrass theorem; we refer
+to this process as “passing to a subsequence if necessary”. When we say that a
+statement involving variable objects is true, we mean that it is true for all i in the
+ambient sequence. For instance, a variable set E of real numbers is a set E = Ei
+indexed by the ambient parameter i, and by an element of such a set, we mean a
+variable real number x = xi such that xi ∈ Ei for all i in the ambient sequence.
+We isolate some special types of variable numerical quantities X = Xi (which could
+be a natural number, real number, or complex number):
+
+• X is bounded if there exists a fixed C such that |X| ≤ C. In this case we
+
+also write X = O(1).
+
+• X is unbounded if |Xi| → ∞ as i → ∞; equivalently, for every fixed C, one
+
+has |X| ≥ C for i sufficiently large.
+
+• X is infinitesimal if |Xi| → 0 as i → ∞; equivalently, for every fixed ε > 0,
+one has |X| ≤ ε for i sufficiently large. In this case we also write X = o(1).
+Note that any quantity X will be either bounded or unbounded, after passing
+to a subsequence if necessary; similarly, by the Bolzano–Weierstrass theorem, any
+bounded (variable) quantity X will be of the form X0 +o(1) for some fixed X0, after
+passing to a subsequence if necessary. Thus, for instance, if T, N > 1 are (variable)
+quantities with N = T O(1) (or equivalently, T −C ≤ N ≤ T C for some fixed C),
+then, after passing to a subsequence if necessary, we may write N = T α+o(1) for
+some fixed real number α. Note that any further passage to subsequences does
+not affect these concepts; quantities that are bounded, unbounded, or infinitesimal
+remain so under any additional restriction to subsequences.
+
+3For instance, the ongoing “Prime Number Theorem and more” project at https://github.
+com/AlexKontorovich/PrimeNumberTheoremAnd, launched in January 2024, took approximately
+four months to formalise the prime number theorem with qualitative error term, with the classical
+error term bound still a work in progress at this time of writing.
+
+4These correspond to the notions of standard and non-standard objects in non-standard
+
+analysis.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+5
+
+We observe the underspill principle: if X, Y are (variable) real numbers, then the
+relation
+
+is equivalent to the relation
+
+X ≤ Y + o(1)
+
+X ≤ Y + ε + o(1)
+
+holding for all fixed ε > 0.
+We can develop other standard asymptotic notation in the natural fashion: given
+two (variable) quantities X, Y , we write X = O(Y ), X ≪ Y , or Y ≫ X if |X| ≤ CY
+for some fixed C, and X = o(Y ) if |X| ≤ cY for some infinitesimal c. We also write
+X ≍ Y for X ≪ Y ≪ X.
+A convenient property of this asymptotic formalism, analogous to the property
+of ω-saturation in non-standard analysis, is that certain asymptotic bounds are
+automatically uniform in variable parameters.
+
+Proposition 2 (Automatic uniformity). Let E = Ei be a non-empty variable set,
+and let f = fi : E → C be a variable function.
+
+(i) Suppose that f (x) = O(1) for all (variable) x ∈ E. Then after passing to a
+subsequence if necessary, the bound is uniform, that is to say, there exists
+a fixed C such that |f (x)| ≤ C for all x ∈ E.
+
+(ii) Suppose that f (x) = o(1) for all (variable) x ∈ E. Then after passing to a
+subsequence if necessary, the bound is uniform, that is to say, there exists
+an infinitesimal c such that |f (x)| ≤ c for all x ∈ E.
+
+Proof. We begin with (i). Suppose that there is no uniform bound. Then for
+any fixed natural number n, one can find arbitrarily large in in the sequence and
+xin ∈ Ein such that |fin (xin)| ≥ n. Clearly one can arrange matters so that the
+sequence in is increasing. If one then restricts to this sequence and sets x to be the
+variable element xin of E, then f (x) is unbounded, a contradiction.
+Now we prove (ii). We can assume for each fixed n that there exists in in the
+ambient sequence such that |fi(xi)| ≤ 1/n for all i ≥ in and xi ∈ Ei, since if this
+were not the case one can construct an x = xi ∈ E such that |fi(xi)| ≥ 1/n for
+i sufficiently large, contradicting the hypothesis. Again, we may take the in to
+be increasing. Restricting to this sequence, and writing cin := 1/n, we see that
+□
+c = o(1) and |f (x)| ≤ c for all x ∈ E, as required.
+
+Remark 3. It is important in Proposition 2 that the hypotheses in (i), (ii) are
+assumed for all variable x ∈ E, rather than merely the fixed x ∈ E. For instance,
+let E = R and consider the variable function fi(x) := x/i. Then f (x) = o(1) for
+any fixed x ∈ E, but the decay rate is not uniform, and we do not have f (x) = o(1)
+for all variable x ∈ E (e.g., xi := i is a counterexample).
+
+Remark 4. There are two caveats with this asymptotic formalism. First, the law
+of the excluded middle is only valid after passing to subsequences. For instance, it
+is possible for a non-standard natural number to be neither even nor odd, since it
+could be even for some i and odd for others. However, one can pass to a subsequence
+in which it becomes either even or odd. Second, one cannot combine the “external”
+concepts of asymptotic notation with the “internal” framework of (variable) set
+theory. For instance, one cannot view the collection of all bounded (variable) real
+numbers as a variable set, since the notion of boundedness is not “pointwise” to
+each index i, but instead describes the “global” behavior of this index set. Thus, for
+instance, set builder notation such as {x : x = O(1)} should be avoided.
+
+6
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+2.2. Phase functions. As a first use of this asymptotic notation, we define our
+notion of phase functions used in the concept of an exponential pair. For simplicity
+we restrict attention to phase functions that are (asymptotically) “monomial func-
+tions” in the sense of [Hux96, Chapter 3], although many of the results discussed
+here can likely be generalised to larger classes of phase functions.
+
+Definition 5 (Phase function). A phase function is a (variable) smooth function
+F : [1, 2] → R. A phase function F will be called a model phase function if there
+exists a fixed exponent σ > 0 with the property that
+
+(3)
+
+F (p+1)(u) −
+
+dp
+dup u−σ = o(1)
+
+for all (variable) u ∈ [1, 2] and all fixed p ≥ 0, where F (p+1) denotes the (p + 1)st
+derivative of F .
+
+Example 6. The function u (cid:55)→ log u is a model phase function (with σ = 1), and
+for any fixed σ ̸= 1, u (cid:55)→ u1−σ/(1 − σ) is also a model phase function. Informally, a
+model phase function is a function which asymptotically behaves like u (cid:55)→ log u (for
+σ = 1) or u (cid:55)→ u1−σ/(1 − σ) (for σ ̸= 1), up to constants. This turns out to be a
+good class for exponential sum estimates, as it is stable under Weyl differencing and
+Legendre transforms, which show up in the van der Corput A-process and B-process
+respectively. Results on exponential pairs can often extend to more general classes
+of phase functions, but this class is sufficient for applications to the Riemann zeta-
+function, and so we will not study any class beyond the model phase function class
+here or in the ANTEDB. (However, such generalisations could be addressed in a
+potential future expansion of the ANTEDB.)
+
+Note from Proposition 2 that the o(1) decay rate in (3) can be made uniform, after
+passing to a subsequence if necessary.
+
+2.3. Additive energy. Additive energy is a concept that appears implicitly in the
+work of Heath-Brown [HB79a], although the terminology of additive energy5 first
+appears in [TV10]. As observed in that paper, controlling the additive energy of
+zeroes of the Riemann zeta-function has implications for the distributions of primes
+in short intervals. Additive energy of large values of Dirichlet series also played a
+key role in the recent zero density estimates in [GM24].
+
+Definition 7 (Additive energy). Let W be a finite multi-set of real numbers. The
+additive energy E1(W ) of such a set is defined to be the number of quadruples
+(t1, t2, t3, t4) ∈ W such that
+
+|t1 + t2 − t3 − t4| ≤ 1.
+One could more generally define Er(W ) for any r > 0 to be the number of quadru-
+ples (t1, t2, t3, t4) ∈ W such that
+
+but from [CT21, Lemma 3.1] we have the comparability relation
+
+|t1 + t2 − t3 − t4| ≤ r,
+
+(4)
+
+E1(W ) ≍ Er(W ) ≍
+
+(cid:13)
+(cid:13)
+(cid:13)
+(cid:13)
+
+(cid:88)
+
+t∈W
+
+1[t−r,t+r]
+
+(cid:13)
+4
+(cid:13)
+(cid:13)
+(cid:13)
+
+U 2
+
+for any fixed r > 0, where the Gowers uniformity norm ∥f ∥U 2 was defined as
+
+∥f ∥4
+
+U 2 :=
+
+(cid:90)
+
+(cid:90)
+
+(cid:90)
+
+R
+
+R
+
+R
+
+f (x) ¯f (x + h) ¯f (x + k)f (x + h + k) dx dh dk.
+
+5Strictly speaking, only the scale zero energy E0(W ) was introduced in [TV10], but the con-
+cepts are related. For instance, if W ′ is the (multi-)set formed from W by rounding to the nearest
+integer, then E1(W ) can be shown to be comparable to E0(W ′), as can be seen from (4) below.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+7
+
+As a consequence, one has a quasi-triangle inequality
+
+(5)
+
+
+
+E1
+
+
+
+J
+(cid:91)
+
+j=1
+
+
+
+1/4
+
+Wj
+
+
+
+≪
+
+J
+(cid:88)
+
+j=1
+
+E1(Wj)1/4
+
+for any (multi-)sets W1, . . . , WJ ⊂ R.
+
+2.4. Double zeta sums. Double zeta sums are a type of exponential sum that
+arise frequently in the study of large value theorems and zero density estimates.
+Given a (multi-)set W and a scale N > 1, let S(N, W ) denote the double zeta sum
+
+S(N, W ) :=
+
+(cid:88)
+
+t,t′∈W
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n−i(t−t′)
+
+n∈[N,2N ]
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+We caution that this normalisation differs from the one in [Ivi03], where n−1/2−i(t−t′)
+is used in place of n−i(t−t′). This sum may also be rearranged as
+
+(6)
+
+S(N, W ) =
+
+(cid:88)
+
+|RW (n/m)|2
+
+n,m∈[N,2N ]
+
+where RW is the exponential sum
+
+RW (x) :=
+
+xit.
+
+(cid:88)
+
+t∈W
+
+From this formulation of the double zeta sum, we have the triangle inequality
+
+
+
+S
+
+N,
+
+J
+(cid:91)
+
+j=1
+
+
+
+1/2
+
+Wj
+
+
+
+≤
+
+J
+(cid:88)
+
+j=1
+
+S(N, Wj)1/2
+
+for any (multi-)sets W1, . . . , WJ ⊂ R.
+
+Remark 8. In [GM24, Section 2], triple zeta sums of the form
+
+(cid:88)
+
+(cid:88)
+
+ni(t1−t2)
+1
+
+ni(t2−t3)
+2
+
+ni(t3−t1)
+3
+
+t1,t2,t3∈W
+
+n1,n2,n3∈[N,2N ]
+
+play a key role in the arguments (actually for technical reasons some diagonal por-
+tions of this sum, in which two of the t1, t2, t3 are close to each other, are removed).
+In principle, estimates on such sums could also be systematically collected by the
+ANTEDB, but we have not attempted to do this.
+
+3. Exponential sum exponents, and exponent pairs
+
+We now use the concept of a phase function to define the exponent sum growth
+exponent function β(α).
+
+Definition 9 (Exponent sum growth exponent). For any fixed α ≥ 0, let β(α) ∈
+R denote the least possible (fixed) exponent for which the following claim holds:
+whenever N, T ≥ 1 are (variable) quantities with T unbounded and N = T α+o(1),
+F is a model phase function, and I ⊂ [N, 2N ] is an interval, then
+
+e(T F (n/N )) ≪ T β(α)+o(1).
+
+(cid:88)
+
+n∈I
+
+It is easy to see that the set of possible candidates for β(α) is closed (thanks to
+underspill), non-empty, and bounded from below, so β is well-defined as a (fixed)
+
+8
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+function from [0, +∞) to R. Specializing to the logarithmic phase F (u) = log u,
+and performing a complex conjugation, we see in particular that
+
+n−iT ≪ T β(α)+o(1)
+
+(cid:88)
+
+n∈I
+
+whenever T is unbounded, N = T α+o(1), and I is an interval in [N, 2N ]. Thus it is
+clear that knowledge of β is relevant to understanding the Riemann zeta-function.
+The quantity β(α) can also be formulated without asymptotic notation, but at the
+cost of introducing some “epsilon and delta” parameters:
+
+Lemma 10 (Non-asymptotic definition of β). Let α ≥ 0 and β ∈ R be fixed. Then
+the following are equivalent:
+
+(i) β(α) ≤ β.
+(ii) For every (fixed) ε > 0 and σ > 0 there exists (fixed) δ > 0, P ≥ 1, C ≥ 1
+with the following property: if T ≥ C, T α−δ ≤ N ≤ T α+δ are (fixed) real
+numbers, I ⊂ [N, 2N ] is a (fixed) interval, and F is a (fixed) phase function
+such that
+
+(7)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+F (p+1)(u) −
+
+dp
+dup u−σ
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ δ
+
+for all (fixed) 0 ≤ p ≤ P and u ∈ [1, 2], then
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+e(T F (n/N ))
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ CT β+ε.
+
+Proof. It is easy to see that (ii) implies (i) by expanding out all the definitions (and
+using Proposition 2 to resolve any uniformity issues). Conversely, suppose that (ii)
+fails. Carefully negating all the quantifiers, we conclude that there exists a fixed
+ε, σ > 0 such that for any (fixed) natural number i, one can find real numbers
+T = Ti ≥ i, T α−1/i ≤ N = Ni ≤ T α+1/i, an interval I = Ii ⊂ [Ni, 2Ni], and a phase
+function F = Fi such that
+
+dp
+dup u−σ
+for all (fixed) 0 ≤ p ≤ i and u ∈ [1, 2], but that
+
+F (p+1)
+
+(u) −
+
+i
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ 1/i
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+e(T F (n/N ))
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ iT β+ε.
+
+But then F = Fi is a model phase function which gives a counterexample to the
+□
+claim β(α) ≤ β.
+
+It will be slightly more convenient technically to work with the asymptotic formu-
+lation in this paper. Furthermore, we will primarily be interested in β in the range
+0 ≤ α ≤ 1; for α > 1 one can use the Euler–Maclaurin formula (see e.g.
+[Tit86,
+(2.1.2)]) to obtain that β(α) = α − 1 in this regime.
+From the L2 mean value theorem (see, e.g. [IK04, Theorem 9.1]) we have
+
+(cid:90) 2T
+
+T
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈[N,2N ]
+
+(cid:12)
+(cid:12)
+e(t log(n/N ))
+(cid:12)
+(cid:12)
+
+2
+
+dt ≍ T N
+
+from which we can conclude the lower bound
+
+β(α) ≥ α/2
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+9
+
+for 0 ≤ α ≤ 1. Conjecturally, this lower bound is sharp; see Conjecture 17 below.
+From the van der Corput inequalities (see [IK04, Theorem 8.20]) we can verify this
+conjecture at the endpoints, thus
+
+(8)
+
+β(0) = 0;
+
+β(1) = 1/2
+
+while from the van der Corput B-process (see, e.g., [Hux96, p 370]) we have the
+symmetry
+
+(9)
+
+β(1 − α) =
+
+1
+2
+
+− α + β(α)
+
+for 0 ≤ α ≤ 1.
+The function β is traditionally studied through the concept of an exponent pair.
+
+Definition 11 (Exponent pair). An exponent pair is a (fixed) element (k, ℓ) of the
+triangle
+
+(10)
+
+{(k, ℓ) ∈ R2 : 0 ≤ k ≤ 1/2 ≤ ℓ ≤ 1, k + ℓ ≤ 1}
+
+with the following property: for all model phase functions F , all T ≥ N ≤ 1, and
+all intervals I ⊂ [N, 2N ], one has
+
+e(T F (n/N )) ≪ (T /N )k+o(1)N ℓ+o(1)
+
+(cid:88)
+
+n∈I
+
+whenever T ≥ N ≥ 1, I is an interval in [N, 2N ], and F ∈ U.
+
+Again, we can phrase this concept non-asymptotically:
+
+Lemma 12 (Non-asymptotic definition of exponent pair). Let (k, ℓ) be a fixed
+element of (10). Then the following are equivalent:
+
+(i) (k, ℓ) is an exponent pair.
+(ii) For every (fixed) ε > 0 there exist (fixed) C, P > 0 such that, whenever
+T ≥ N ≥ 1, I ⊂ [N, 2N ], and F is a phase function obeying (7) for for all
+(fixed) 0 ≤ p ≤ P and u ∈ [1, 2], then
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+e(T F (n/N ))
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≤ C(T /N )k+εN ℓ+ε.
+
+The proof of this lemma is similar to that of Lemma 10 and is omitted.
+We record some known processes that preserve exponent pairs:
+
+Lemma 13 (Exponent pair processes). The space of exponent pairs is preserved
+under the following processes:
+
+(A) The A-process A : (k, ℓ) (cid:55)→ ( k
+2k+2 ,
+(B) The B-process B : (k, ℓ) (cid:55)→ (ℓ − 1
+k
+(C) The C-process C : (k, ℓ) (cid:55)→ (
+
+2k+2 + 1
+2 );
+12(1+4k) ).
+
+12(1+4k) , 11(1+4k)+ℓ
+
+2 , k + 1
+
+2 );
+
+ℓ
+
+Proof. For (A), (B), see for instance [Ivi03, Lemmas 2.8, 2.9]. For (C), see [Sar03,
+□
+Theorem 5].
+
+There exists a further process which almost preserves the space of exponent pairs,
+which may be stated in terms of bounds on β.
+
+Lemma 14 (Sargos D-process). If (k, ℓ) is an exponent pair, then
+(cid:18)
+
+(cid:19)
+
+β(α) ≤ max
+
+k1 + α(ℓ1 − k1),
+
++
+
+α
+
+1
+12
+
+2
+3
+
+for 0 ≤ α ≤ 1, where
+
+(k1, ℓ1) = D(k, ℓ) :=
+
+(cid:16) 5k + ℓ + 2
+
+8(5k + 3ℓ + 2)
+
+,
+
+29k + 21ℓ + 10
+8(5k + 3ℓ + 2)
+
+(cid:17)
+
+.
+
+10
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Proof. See [Sar95, Theorem 7.1].
+
+□
+
+In practice, this lemma implies that if (k, ℓ) is an exponent pair, then so is D(k, ℓ).
+The relation between exponent pairs and the function β can be summarised as
+follows.
+
+Lemma 15 (Duality between exponent pairs and β). Let (k, ℓ) be in the triangle
+(10). Then the following are equivalent:
+(i) (k, ℓ) is an exponent pair.
+(ii) β(α) ≤ k + (ℓ − k)α for all 0 ≤ α ≤ 1.
+
+Proof. If (i) holds, then for any 0 < α < 1, any unbounded T ≥ 1, any N = T α+o(1),
+interval I ⊂ [N, 2N ], and model phase function F , we have from (i) that
+
+e(T F (n/N )) ≪ (T /N )k+o(1)N ℓ+o(1) = T k+(ℓ−k)α+o(1).
+
+(cid:88)
+
+n∈I
+
+From Definition 9 we conclude that β(α) ≤ k + (ℓ − k)α. Also since (k, ℓ) lies in
+(10), we see from (8) that we also have β(α) ≤ k + (ℓ − k)α for α = 0, 1.
+Now suppose that (ii) holds. Let F, T, N, I be as in Definition 11. By underspill it
+suffices to show that
+
+e(T F (n/N )) ≪ (T /N )k+ε+o(1)N ℓ+ε+o(1)
+
+(cid:88)
+
+n∈I
+
+for any fixed ε > 0. We may assume that T ≤ N 1/ε+1, since the claim follows
+from the trivial bound (cid:80)
+n∈I e(T F (n/N )) ≪ N otherwise. We may also assume
+that N is unbounded, since the claim is clear for N bounded; this forces T to be
+unbounded as well.
+By passing to a subsequence we may assume that N = T α+o(1) for some fixed
+0 ≤ α ≤ 1. By Definition 9 we then have
+
+e(T F (n/N )) ≪ T β(α)+o(1)
+
+(cid:88)
+
+n∈I
+
+e(T F (n/N )) ≪ (T /N )k+o(1)N ℓ+o(1)
+
+(cid:88)
+
+n∈I
+
+and hence by (ii)
+
+giving the claim.
+
+□
+
+Remark 16. When applying Lemma 15 in the case ℓ − k ≥ 1/2, it suffices in
+(ii) to restrict to the range 0 ≤ α ≤ 1/2, as the remaining range 1/2 ≤ α ≤ 1 is
+then covered by the symmetry (9). Similarly, when applying Lemma 15 in the case
+ℓ − k ≤ 1/2, it suffices to restrict to the range 1/2 ≤ α ≤ 1.
+
+The main conjecture on exponent pairs and β is then
+
+Conjecture 17 (Exponent pair conjecture).
+
+(i) Every point in the triangle (10) is an exponent pair. In particular, (0, 1/2)
+
+is an exponent pair.
+
+(ii) We have
+
+β(α) =
+
+(cid:40)
+
+0 ≤ α ≤ 1
+
+α/2,
+α − 1, α > 1
+
+.
+
+In view of Lemma 15, the two components of this conjecture are equivalent.
+A large number of bounds on exponential sums can be interpreted as piecewise-
+linear upper bounds on β(α) in various ranges of α; see e.g. [TY23, Table 3] (which
+in turn builds upon [Hux96, Tables 17.1, 19.2]). For many of these results, a larger
+class of phase functions can be treated but we ignore this direction of generalisation
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+11
+
+for simplicity. There are additional bounds in the literature that are not covered
+by these tables. To give just one example, we present
+
+Lemma 18 (Heath-Brown exponent bound).
+
+β(α) ≤ α + max
+
+(cid:18) 1 − kα
+k(k − 1)
+
+, −
+
+α
+k(k − 1)
+
+, −
+
+2α
+k(k − 1)
+
+−
+
+2(1 − kα)
+k2(k − 1)
+
+(cid:19)
+
+for any α > 0 and any natural number k ≥ 3.
+
+Proof. Let T ≥ 1 be unbounded, let N = T α+o(1), let F be a model phase function,
+and I ⊂ [N, 2N ] be an interval. Writing f (x) := T F (x/N ), we see from (3) that
+0 < λk < f (k)(x) ≤ Aλk
+for all x ∈ [N, 2N ] and some λk ≍ T N −k = T 1−kα+o(1) and A ≍ 1. Applying
+[HB17, Theorem 1], we conclude that
+
+e(T F (n/N )) ≪ N 1+ε(λ1/k(k−1)
+
+k
+
++ N −1/k(k−1) + N −2/k(k−1)λ−2/k2(k−1)
+
+k
+
+)
+
+(cid:88)
+
+n∈I
+
+for any fixed ε > 0, and hence by underspill
+e(T F (n/N )) ≪ N 1+o(1)(λ1/k(k−1)
+
+(cid:88)
+
+k
+
++ N −1/k(k−1) + N −2/k(k−1)λ−2/k2(k−1)
+
+k
+
+n∈I
+
+Expressing the right-hand side as a power of T , we obtain
+(cid:88)
+
+e(T F (n/N )) ≪ T β+o(1)
+
+n∈I
+
+where
+
+β := α + max
+
+(cid:18) 1 − kα
+k(k − 1)
+
+, −
+
+α
+k(k − 1)
+
+, −
+
+2α
+k(k − 1)
+
+−
+
+2(1 − kα)
+k2(k − 1)
+
+(cid:19)
+
+.
+
+The claim now follows from Definition 9.
+
+).
+
+□
+
+Remark 19. From the proof of Lemma 18 we see that the result in [HB17, Theorem
+1] is somewhat stronger than the bound on β presented here, because that result
+handles more general phase functions than model phase functions. However, in
+order to combine results from different papers as easily as possible, we have restricted
+attention to model phase functions, as discussed in Example 6.
+(cid:18) 13
+84
+
+(cid:19)
+
+In [Bou17], the exponent pair
+(cid:18) 715
+10238
+
+1.1], the exponent pairs
+
+,
+
+,
+
+55
+84
+7955
+10238
+
+(cid:19)
+
+was established, while in [TY23, Lemma
+(cid:18) 4742
+38463
+
+were established. One
+
+35731
+51284
+
+(cid:19)
+
+,
+
+,
+
+can then combine these with the A, D processes from Lemma 13 and Lemma 14 to
+obtain further pairs, which give bounds on β thanks to Lemma 15. When combined
+with the bounds from [TY23, Table 3], one obtains the upper bounds on β(α) in
+Table 1 (with the bounds already listed in [TY23, Table 3] marked with an asterisk).
+With this improved table of β estimates, one obtains the following four new expo-
+nent pairs, which are plotted in Figure 1 and Figure 2.
+
+Theorem 20 (New exponent pairs). The following are exponent pairs:
+
+(cid:19)
+
+,
+
+997
+1282
+
+,
+
+(cid:18) 89
+1282
+(cid:18) 10769
+351096
+
+,
+
+609317
+702192
+
+,
+
+(cid:18) 652397
+9713986
+(cid:18) 89
+3478
+
+,
+
+(cid:19)
+
+7599781
+9713986
+
+(cid:19)
+
+,
+
+,
+
+15327
+17390
+
+(cid:19)
+
+.
+
+Proof. The claim follows from Lemma 15 after some further computer calculation.
+□
+
+12
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+β(α) bound
+
+α range
+
+Reference
+
+1
+20
+
++
+
+3
+4
+
+α
+
+19
+20
+
+α
+
+α
+
+89
+2706
+1
+66
+9
+217
+
++
+
++
+
++
+
+2243
+2706
+235
+264
+1389
+1736
+
+α
+
+α
+
+0 ≤ α <
+
+≤ α <
+
+1
+4
+890
+3277
+
+≤ α <
+
+199
+716
+754
+2579
+251324
+841245
+
+≤ α <
+
+≤ α <
+
+1
+4
+890
+3277
+120
+419
+
+754
+2579
+
+2371
+43205
+
++
+
+52209
+69128
+
+α
+
+251324
+841245
+
+≤ α <
+
+861996
+2811205
+
+α
+
+α
+
+α
+
+α
+
++
+
++
+
++
+
++
+
++
+
++
+
++
+
++
+
++
+
++
+
++
+
+13
+146
+11
+244
+89
+1282
+29
+280
+1
+32
+18
+199
+569
+2800
+491
+5530
+113
+1345
+2
+9
+1
+12
+13
+84
+
+α
+
+α
+
+47
+73
+191
+244
+454
+641
+173
+280
+103
+128
+521
+796
+1053
+2800
+1812
+2765
+897
+1345
+1
+3
+2
+3
+1
+2
+
+α
+
+α
+
+α
+
+α
+
+α
+
+861996
+2811205
+87
+275
+423
+1295
+227
+601
+12
+31
+1508
+3825
+62831
+155153
+143
+349
+263
+638
+1673
+4038
+5
+12
+3
+7
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+87
+275
+
+423
+1295
+227
+601
+12
+31
+1508
+3825
+62831
+155153
+143
+349
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+≤ α <
+
+263
+638
+1673
+4038
+5
+12
+3
+7
+1
+2
+
+Lemma 18 with k = 5
+
+Lemma 18 with k = 5
+
+[Hux96, Table 17.1]*
+
+[Hux96, Table 17.1]*
+
+Exponent pair
+
+(cid:18) 9
+217
+
+,
+
+Exponent pair
+
+(cid:19)
+
+1461
+1736
+(cid:18) 2371
+43205
+
+= AD
+
+,
+
+280013
+345640
+
+(cid:19)
+*
+
+,
+
+55
+84
+
+(cid:18) 13
+84
+(cid:19)
+
+= A
+
+(cid:18) 4742
+38463
+
+,
+
+35731
+51284
+
+(cid:19)
+
+[Hux96, Table 17.1]*
+
+[Hux96, Table 17.1]*
+
+[Hux96, Table 17.1]*
+
+[Hux96, Table 17.1]*
+
+[Hux96, Table 17.1]*
+
+Exponent pair
+
+(cid:19)
+
+(cid:18) 18
+199
+
+,
+
+593
+796
+
+= D
+
+(cid:19)
+
+(cid:18) 13
+84
+
+,
+
+55
+84
+
+[Hux96, Table 19.2]*
+
+[Hux96, Table 19.2]*
+
+[Hux96, Table 19.2]*
+
+[Bou17, (3.18)]*
+
+[Bou17, (3.18)]*
+
+α
+
+≤ α ≤
+
++
+Table 1. Bounds on β(α). With slight abuse of notation, D(k, ℓ)
+means the exponent pair derived from β estimates obtained by
+applying the D process to (k, ℓ). In each case one may verify that
+an exponent pair is in fact generated.
+
+Exponent pair
+
+*
+
+,
+
+(cid:18) 13
+84
+
+(cid:19)
+
+55
+84
+
+The results in Table 1 were found systematically using a programmable part of the
+ANTEDB implemented in Python, which we briefly introduce here. The library
+records theorems and conjectures from the literature as Hypothesis objects. Each
+Hypothesis either directly references a result from the literature, or contains a de-
+pendency set of other Hypothesis objects as well as a proof attribute that specifies
+how the dependencies are assembled into a proof. For instance, the exponent pair
+(1/6, 2/3) can be represented in the database as a Hypothesis with two dependen-
+cies: one representing the A process (with no dependencies of its own) and another
+representing the (1/2, 1/2) exponent pair.
+Equipped with a (large) set of Hypothesis objects representing known exponent
+pairs and bounds on β, as well as how they relate to one another, one may use a
+number of routines in the ANTEDB to combine those objects optimally. Here, we
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+13
+
+Figure 1. Indicative plot of the new exponent pairs ( 89
+and ( 652397
+9713986 , 7599781
+nent pairs (shaded grey).
+
+1282 , 997
+1282 )
+9713986 ) compared to previously known set of expo-
+
+describe a polytope-based computation that may be easily generalised for optimis-
+ing many other exponents recorded in the database. First, the starting Hypothesis
+set is repeatedly expanded using codified versions of Lemma 13, Lemma 14 and
+Lemma 15 until an equilibrium is reached. The key idea is then to represent each β
+estimate as a polygon containing feasible (α, β) tuples, and then to take the inter-
+section of all such polygons, which is easily achieved via standard boolean polytope
+operations. The resulting polygon may then be converted back into one or more
+Hypothesis objects representing a piecewise-linear bound on β.
+This machine-assisted approach uncovers a number of improvements to manually-
+derived β bounds, particularly those bounds depending on multiple applications of
+exponent pair processes.
+Lastly, for future reference, we also record a weaker exponent pair, needed for
+Theorem 50 below, that can be obtained from older results in the literature:
+
+Theorem 21 (Old exponent pair). ( 3
+
+40 , 31
+Proof. The following proof was obtained by computer assistance, using the earliest
+possible result in the literature.
+It was shown in [Wat89] that W := ( 89
+calculation shows that
+
+560 ) is an exponent pair. Direct
+
+40 ) is an exponent pair.
+
+2 + 89
+
+560 , 1
+
+(cid:19)
+
+(cid:18) 3
+40
+
+,
+
+31
+40
+
+= xyAW + (1 − x)yABAW + (1 − y)W
+
+with x = 37081/40415 and y = 476897/493711. The claim now follows from
+□
+Lemma 13 and the evident convexity of exponent pairs.
+
+4. Growth exponents for the Riemann zeta-function
+
+We record our notation for the growth exponents of the Riemann zeta-function:
+
+14
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+2. Indicative
+Figure
+(cid:1) and (cid:0) 89
+(cid:0) 10769
+351096 , 609317
+set of exponent pairs (shaded grey).
+
+plot
+3478 , 15327
+
+702192
+
+17390
+
+the
+
+of
+pairs
+new exponent
+(cid:1) compared to previously known
+
+Definition 22 (Growth rate of ζ(s)). For any fixed σ ∈ R, let µ(σ) denote the
+least possible (fixed) exponent for which one has the bound
+
+for all unbounded t.
+
+|ζ(σ + it)| ≪ |t|µ(σ)+o(1)
+
+Non-asymptotically, µ(σ) is the least quantity such that for every ε > 0 there exists
+Cε > 0 for which one has the bound
+
+|ζ(σ + it)| ≤ Cε|t|µ(σ)+ε
+
+whenever |t| ≥ Cε. Equivalently, one can define µ by the formula (2).
+It is classical (see, e.g., [Tit86, Chapter 5]) that µ is convex, obeys the functional
+equation (1), and obeys the lower bound
+
+µ(σ) ≥ max(0, 1/2 − σ)
+
+for all σ ∈ R. The Lindel¨of hypothesis asserts that this lower bound is always sharp;
+this is known for σ ≤ 0 or σ ≥ 1. Many partial results towards this conjecture, in
+the form of upper bounds for µ, are known; we refer the reader to the ANTEDB
+for a current listing of all known bounds.
+We have the following well-known relation between exponent pairs and µ:
+
+Lemma 23 (Exponent pairs and µ). If (k, ℓ) is an exponent pair, then µ(ℓ−k) ≤ k.
+
+Proof. See e.g. [Ivi03, (7.57)].
+
+□
+
+Thus for instance the exponent pair conjecture implies the Lindel¨of conjecture. Of
+course, one could combine this lemma with Theorem 20 or Theorem 21. We just
+record the latter combination below.
+
+Corollary 24 (Bound on µ). We have µ(7/10) ≤ 3/40.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+15
+
+5. Large value theorems
+
+It is well known that zero density estimates for ζ(s) (and other L-functions) are
+closely tied to large value theorems for Dirichlet polynomials; see for instance
+[MT24] for some recent discussion of this relationship. We can formalise the latter
+by introducing the concept of a large value pattern, as follows. Call a sequence an
+of complex numbers 1-bounded if |an| ≤ 1 for all n in the sequence, and call a set
+W of real numbers 1-separated if |t − t′| ≥ 1 for all distinct t, t′ ∈ W .
+
+Definition 25 (Large value pattern). A large value pattern is a tuple
+
+(N, T, V, (an)n∈[N,2N ], J, W ),
+where N > 1 and T, V > 0 are real numbers, an is a 1-bounded sequence on [N, 2N ],
+J is an interval of length T , and W is a 1-separated subset of J such that
+
+(11)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+ann−it
+
+n∈[N,2N ]
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ V
+
+for all t ∈ W .
+A zeta large value pattern is a large value pattern in which J = [T, 2T ] and an =
+1I (n) for some interval I ⊂ [N, 2N ], so that
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+n−it
+
+≥ V
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+n∈I
+
+for all t ∈ W .
+
+Remark 26. In the literature, one also considers large value patterns in which the
+sequence an is not controlled in an ℓ∞ sense, but rather in an ℓ2 sense. However,
+the ℓ∞ control is sufficient for many applications of interest, particularly as we are
+permitting epsilon losses in the exponents (which in particular allows one to use
+the elementary divisor bound τ (n) ≪ no(1) to ignore any losses relating to divisor
+sums). Such ℓ2-variants of large value patterns are not currently studied in the
+ANTEDB, but could conceivably be addressed in a future expansion of the database.
+
+The key quantity of interest is then
+
+Definition 27 (Large value exponent). Let 1/2 ≤ σ ≤ 1 and τ ≥ 0 be fixed. We
+define LV(σ, τ ) ∈ [−∞, ∞) to be the least fixed quantity for which the following
+claim is true: whenever (N, T, V, (an)n∈[N,2N ], J, W ) is a large value pattern with
+N > 1 unbounded, T = N τ +o(1), and V = N σ+o(1), then
+
+|W | ≪ N LV(σ,τ )+o(1).
+
+We define LVζ(σ, τ ) similarly, but where (N, T, V, (an)n∈[N,2N ], J, W ) is now re-
+quired to be a zeta large value pattern.
+
+As with previous definitions, this exponent can be expressed non-asymptotically:
+LV(σ, τ ) is the infimum of all real numbers ρ such that for every (fixed) ε > 0 there
+exists C, δ > 0 such that if
+
+(N, T, V, (an)n∈[N,2N ], J, W )
+is a large value pattern with N ≥ C and N τ −δ ≤ T ≤ N τ +δ, N σ−δ ≤ V ≤ N σ+δ,
+then one has
+
+|W | ≤ CN ρ+ε.
+One can define LVζ(σ, τ ) non-asymptotically in a similar fashion. In the definition
+of LV(σ, τ ), one has the freedom to translate the interval J by any shift t0 by
+modulating the coefficients an by n−it0. As such, one can normalise J to be [0, T ]
+
+16
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+without loss of generality for this quantity. However, we do not have this freedom
+for LVζ(σ, τ ), since in that case the coefficients an are required to equal 1.
+We begin with a discussion of the function LV(σ, τ ). It is easy to see that LV(σ, 0) =
+0 for all 1/2 ≤ σ ≤ 1. We can also formalise the Huxley subdivision method (see,
+e.g., [IK04, Corollary 9.9]) as a functional inequality for LV:
+Lemma 28 (Huxley subdivision). If 1/2 ≤ σ ≤ 1 and 0 ≤ τ ≤ τ ′, then
+
+LV(σ, τ ) ≤ LV(σ, τ ′) ≤ LV(σ, τ ) + τ ′ − τ.
+Proof. This is clear since any interval of length N τ ′+o(1) can be subdivided into
+N τ ′−τ +o(1) intervals of length N τ +o(1).
+□
+
+We stress that the subdivision inequality is only available for LV(σ, τ ) and not for
+LVζ(σ, τ ), due to the aforementioned lack of freedom to translate the interval J in
+the latter case.
+Lemma 28 leads to a lower bound for LV(σ, τ ) in general:
+
+Lemma 29 (Lower bound). For σ = 1/2, one has LV(σ, τ ) = τ . For 1/2 < σ ≤ 1,
+one has LV(σ, τ ) ≥ min(2 − 2σ, τ ).
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:80)
+
+Proof. For the σ = 1/2 case, one can set an = ±1 to be random signs, and then
+n∈[N,2N ] ann−it(cid:12)
+(cid:12)
+a routine application of the Chernoff inequality shows that
+(cid:12) =
+N 1/2+o(1) with high probability for any given t, which gives the claim.
+For 1/2 < σ ≤ 1, we can modify this argument as follows. By Lemma 28 it
+suffices to show that LV(σ, 2 − 2σ) ≥ 2 − 2σ. Divide the interval [N, 2N ] into
+≍ N 2−2σ intervals I of length ≍ N 2σ−1. On each interval I, we choose an to
+equal some randomly chosen sign ϵI ∈ {−1, +1}, with the ϵI chosen independently
+n∈I ann−it is equal to ϵI times a deterministic
+in I.
+quantity ct,I of magnitude ≍ N 2σ−1 (the point being that the phase t log n is close
+to constant in this range). By the Chernoff bound, we thus see that for any such t,
+(cid:80)
+n∈[N,2N ] annit will have size ≫ N (2σ−1)+(2−2σ)/2 = N σ with probability ≫ 1. By
+linearity of expectation, we thus see that with positive probability, a ≫ 1 fraction
+□
+of integers t with t = o(N 2−2σ) will have this property, giving the claim.
+
+If t = o(N 2−2σ), then (cid:80)
+
+The Montgomery conjecture essentially asserts that this lower bound is sharp:
+
+Conjecture 30 (Montgomery conjecture). One has LV(σ, τ ) = min(2 − 2σ, τ ) for
+all 1/2 < σ ≤ 1 and τ ≥ 0. Equivalently (thanks to Lemma 29 and the trivial bound
+LV(σ, τ ) ≤ τ ), one has LV(σ, τ ) ≤ 2 − 2σ for all 1/2 < σ ≤ 1 and τ ≥ 0.
+
+One can phrase this conjecture in the equivalent form
+
+(12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+t∈W
+
+(cid:88)
+
+ann−it
+
+n∈[N,2N ]
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≪ N 1+o(1)(T + N )
+
+(cid:18)
+
+(cid:19)2
+
+sup
+n∈[N,2N ]
+
+|an|
+
+for any unbounded N , any coefficients an, and any 1-separated subset W of an
+interval J of length T = N O(1). Indeed, (12) can be easily seen to imply Conjec-
+ture 30 using Markov’s inequality, while, the converse implication follows from a
+standard dyadic decomposition of W into O(log N ) = O(N o(1)) components de-
+pending on the dyadic size of | (cid:80)
+n∈[N,2N ] ann−it|. The conjecture (12) appears (in
+slightly different notation) in [Bou91, (1.6)] and is attributed to Montgomery as a
+correction of his original conjecture in [Mon71], which was shown in the former pa-
+per to be too strong to be completely correct. In that paper it was also shown that
+the conjecture (12) implies the Kakeya conjecture in geometric measure theory.
+From the trivial upper bound LV(σ, τ ) ≤ τ we see that the Montgomery conjecture
+is true for τ ≤ 2 − 2σ. The range of validity of the conjecture can be extended. For
+instance, we have
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+17
+
+Theorem 31 (L2 mean value theorem). For any fixed 1/2 ≤ σ ≤ 1 and τ ≥ 0 one
+has
+
+In particular, the Montgomery conjecture holds for τ ≤ 1.
+
+LV(σ, τ ) ≤ max(2 − 2σ, 1 + τ − 2σ).
+
+Proof. Let (N, T, V, (an)n∈[N,2N ], J, W ) be a large value pattern with T = N τ +o(1),
+V = N σ+o(1). Applying [IK04, Theorem 9.4] (with N , T replaced with 2N , 2T
+respectively and taking an = 0 for n < N ) one has
+
+|W |V 2 ≤
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+t∈W
+
+(cid:88)
+
+ann−it
+
+N ≤n≤2N
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≪ N 1+o(1)(T + N ).
+
+The result follows from comparing exponents.
+
+□
+
+We record some further results of this type in the literature, again valid for any
+fixed 1/2 ≤ σ ≤ 1 and τ ≥ 0:
+
+(i) The Huxley large values theorem [Hux72, Equation (2.9)], in our notation,
+
+gives the upper bound
+
+(13)
+
+LV(σ, τ ) ≤ max(2 − 2σ, 4 + τ − 6σ).
+
+In particular, one has the Montgomery conjecture for τ ≤ 4σ − 2.
+(ii) The Heath-Brown large values theorem [HB79c, p. 226] similarly gives
+
+(14)
+
+LV(σ, τ ) ≤ max(2 − 2σ, 10 + τ − 13σ).
+
+In particular, the Montgomery conjecture holds for τ ≤ 11σ − 8.
+
+(iii) The Jutila large values theorem [Jut77, (1.4)] gives, for any positive integer
+
+k, the bound
+
+(15)
+
+LV(σ, τ ) ≤ max(2 − 2σ, τ + (4 − 2/k) − (6 − 2/k)σ, τ + (6 − 8σ)k).
+
+In particular, the Montgomery conjecture holds for
+
+τ ≤ min((4 − 2/k)σ − (2 − 2/k), (8k − 2)σ − 6k + 2).
+
+There are several further large value theorems in the literature, though not nec-
+essarily of a type that further extends the range of validity of the Montgomery
+conjecture; for instance, the recent result [GM24, Theorem 1.1] of Guth and May-
+nard, in our notation, gives the bound
+
+(16)
+
+LV(σ, τ ) ≤ max(2 − 2σ, 18/5 − 4σ, τ + 12/5 − 4σ).
+
+We refer the reader to the ANTEDB for a current listing of all known large value
+theorems.
+We now record a large value theorem of Bourgain [Bou00], stated here in more
+generality than was explicitly stated in that paper, and restated in our notation for
+compatibility with the other results listed here.
+
+Theorem 32 (Bourgain large values theorem). [Bou00] Let 1/2 < σ < 1 and
+τ > 0, and let ρ := LV(σ, τ ). Let α1, α2 ≥ 0 be real numbers.
+
+(i) Either
+
+(17)
+
+ρ ≤ max(α2 + 2 − 2σ, −α2 + 2τ + 4 − 8σ, −2α1 + τ + 12 − 16σ)
+
+or else there exists s ≥ 0 such that
+
+(18)
+1
+2
+
+max(ρ + 2, 2ρ + 1, 5ρ/4 + τ /2 + 1) +
+
+1
+2
+
+max(s + 2, 2s + 1, 5s/4 + τ /2 + 1) ≥
+
+max(−2α1 + 2σ + s + ρ, −α1 − α2/2 + 2σ + s/2 + 3ρ/2).
+
+18
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+(ii) [Bou00, Lemma 4.60] If we additionally assume ρ ≤ min(1, 4 − 2τ ), then
+
+ρ ≤ max(α2 + 2 − 2σ, α1 + α2/2 + 2 − 2σ, −α2 + 2τ + 4 − 8σ,
+− 2α1 + τ + 12 − 16σ, 4α1 + 2 + max(1, 2τ − 2) − 4σ).
+
+Proof. We begin with (i). By Definition 27, we can find a large value pattern
+(N, T, V, (an)n∈[N,2N ], J, R) with N > 1 unbounded, N ≥ 1, T = N τ +o(1), |R| =
+N ρ+o(1), V = N σ+o(1); we use R here instead of W to be consistent with the
+notation from [Bou00]. Now set δ1 := N −α1, δ2 := N −α2 . From [Bou00, (4.41),
+(4.42)], one has the inequality
+
+for certain sets R(1) and R(2) with the former set obeying the bound
+
+|R| ≤ |R(1)| + |R(2)|
+
+|R(1)| ≪ δ−1
+
+2 N 2V −2 + δ2T 2N 4V −8 + δ2
+
+1T N 12V −16.
+
+Hence, we either have
+
+|R| ≪ δ−1
+
+2 N 2V −2 + δ2T 2N 4V −8 + δ2
+
+1T N 12V −16
+
+which implies (17), or else
+
+(19)
+
+|R| ≪ |R(2)|.
+
+Henceforth we assume that (19) holds. From [Bou00, (4.53), (4.54)] we may bound
+
+(20)
+
+thus
+
+T −εδ′(δ′′)2V 2|S||R(2)| + T −εδ1V 2|S|1/2 (cid:88)
+
+|Rα|3/2
+
+α
+
+≪ T εS(N, R(2))1/2S(N, S)1/2
+for arbitrarily small fixed ε, some δ′, δ′′ > 0 with δ′ > T −ε(δ1/δ′′)2 (see [Bou00,
+(4.37)]), some set S (which will be non-empty by [Bou00, (4.47)]), and some sets
+Rα defined in [Bou00, (4.39)], where the double zeta sums S(N, W ) are defined in
+(6). Applying [HB79b, Theorem 1] or [Ivi03, Lemma 11.5], the latter expression is
+bounded by
+
+≪ T ε(|R|N 2 + |R|2N + |R|5/4T 1/2N )1/2(|S|N 2 + |S|2N + |S|5/4T 1/2N )1/2.
+
+Meanwhile, from [Bou00, (4.57)], the expression (20) is bounded from below by
+
+≫ T −2ε(δ2
+
+1V 2|S||R| + δ1δ1/2
+
+2 V 2|S|1/2|R|3/2).
+
+After passing to a subsequence, we can ensure that |S| = N s+o(1) for some s > 0.
+Combining these bounds and writing all expressions as powers of N , we obtain the
+claim (i) (after sending ε → 0).
+Now we prove (ii). With ρ ≤ min(1, 4 − 2τ ), 5ρ/4 + τ /2 + 1 and 2ρ + 1 are both
+bounded by ρ + 2, hence
+
+max(ρ + 2, 2ρ + 1, 5ρ/4 + τ /2 + 1) = ρ + 2.
+
+Furthermore, 5s/4 + τ + 1 is a convex combination of s + 2 and 2s + 2τ − 2, hence
+
+max(s + 2, 2s + 1, 5s/4 + τ /2 + 1) ≤ max(s + 2, 2s + max(1, 2τ − 2)).
+
+Thus (18) simplifies to
+
+(ρ + 2)/2 + max(s + 2, 2s + max(1, 2τ − 2))/2
+
+≥ max(−2α1 + 2σ + s + ρ, −α1 − α2/2 + 2σ + s/2 + 3ρ/2).
+
+Thus either
+
+or
+
+(ρ + 2)/2 + (s + 2)/2 ≥ −α1 − α2/2 + 2σ + s/2 + 3ρ/2
+
+(ρ + 2)/2 + (2s + max(1, 2τ − 2))/2 ≥ −2α1 + 2σ + s + ρ.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+19
+
+In both cases we may eliminate s and solve for ρ to obtain
+
+ρ ≤ α1 + α2/2 + 2 − 2σ
+
+or
+
+giving the claim.
+
+ρ ≤ 4α1 + 2 + max(1, 2τ − 2) − 4σ,
+
+□
+
+The standard trick of increasing the range of applicability of large value theorems
+by raising Dirichlet series to powers can also be cleanly encoded in our framework:
+
+Lemma 33 (Raising to a power). For any fixed 1/2 ≤ σ ≤ 1, τ ≥ 0, and natural
+number k, one has
+
+LV(σ, kτ ) ≤ kLV(σ, τ ).
+
+Proof. Let (N, T, V, (an)n∈[N,2N ], J, W ) be a large value pattern with T = N kτ +o(1)
+and V = N σ+o(1). Raising (11) to the kth power, we conclude that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈[N k,2kN k]
+
+bnn−it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≥ V k
+
+for all t ∈ W , where bn is the Dirichlet convolution of k copies of an, and thus is
+bounded by N o(1) thanks to divisor bounds. Subdividing [N k, 2kN k] into k intervals
+of the form [N ′, 2N ′] for N ′ ≍ N k and applying Definition 27 (with N, T, V replaced
+by N ′, T, V k/N o(1)) we conclude that
+
+|W | ≪ N kLV(σ,τ )+o(1)
+
+and the claim then follows.
+
+□
+
+5.1. Large value theorems for the zeta-function. Now we discuss the related
+quantity LVζ(σ, τ ). We trivially have the pointwise bound
+
+(21)
+
+LVζ(σ, τ ) ≤ LV(σ, τ ).
+
+We will primarily be interested in this function in the regime τ ≥ 2, as this is the
+region relevant to the Riemann–Siegel formula (or other approximate functional
+equations) for the Riemann zeta-function, and in any event the 1 < τ < 2 range
+can be related to the τ > 2 range using Lemma 34(iii) below.
+Additional bounds are available through pointwise or moment bounds on the zeta-
+function, as well as from the (approximate) functional equation:
+
+Lemma 34 (Additional bounds).
+
+(i) If τ > 0 and 1/2 ≤ σ0 ≤ 1 are fixed, then LVζ(σ, τ ) = −∞ whenever
+
+σ > σ0 + τ µ(σ0).
+
+(ii) If one has a moment estimate of the form
+
+(22)
+
+(cid:90) 2T
+
+T
+
+|ζ(σ0 + it)|A ≪ T M +o(1)
+
+for some fixed 1/2 ≤ σ0 ≤ 1 and A ≥ 1, and all unbounded T , then
+LVζ(σ, τ ) ≤ τ M − A(σ − σ0) for any fixed 1/2 ≤ σ ≤ 1 and τ ≥ 2.
+
+(iii) (Reflection) For fixed 1/2 ≤ σ ≤ 1 and τ > 1, one has
+
+sup
+σ≤σ′≤1
+
+LVζ
+
+=
+
+1
+τ − 1
+
+(cid:18) 1
+2
+
++
+
+1
+τ − 1
+
+(cid:18)
+
+σ′ −
+
+(cid:19)
+
+(cid:19)
+
+1
+2
+
+,
+
+τ
+τ − 1
+
++
+
+1
+τ − 1
+
+(σ′ − σ)
+
+sup
+σ≤σ′≤1
+
+(LVζ(σ′, τ ) + σ′ − σ).
+
+20
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Proof. For (i), observe from [Ivi03, (8.13)] that
+
+1
+
+nσ0+it ≪ |t|µ(σ0)+o(1)
+
+(cid:88)
+
+n∈I
+
+for unbounded N , if I ⊂ [N, 2N ] and |t| = N τ +o(1). By partial summation this
+gives
+
+(cid:88)
+
+n−it ≪ N σ0 |t|µ(σ0)+o(1) = N σ0+τ µ(σ0)+o(1).
+
+n∈I
+
+The claim follows.
+For (ii), let (N, T, V, (an)n∈[N,2N ], J, W ) be a zeta large value pattern with N un-
+bounded, T = N τ +o(1), and V = N σ+o(1), then
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈J
+
+n−it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σ+o(1)
+
+for all t ∈ W . By standard Fourier analysis (or from the Perron formula and contour
+shifting), this gives
+
+(cid:90) 3T
+
+T /2
+
+|ζ(σ0 + it′)|
+
+dt′
+1 + |t′ − t|
+
+≫ N σ−σ0+o(1)
+
+and hence by H¨older
+(cid:90) 3T
+
+so on summing in t
+
+T /2
+
+|ζ(σ0 + it′)|A
+
+dt′
+1 + |t′ − t|
+
+≫ N A(σ−σ0)+o(1)
+
+(cid:90) 3T
+
+T /2
+
+|ζ(σ0 + it)|A dt ≫ |W |N A(σ−σ0)+o(1).
+
+By hypothesis, the left-hand side is ≪ T M +o(1). Since T = N α+o(1), we obtain
+
+|W | ≪ N τ M −A(σ−σ0),
+
+giving the claim.
+Now we turn to (iii). By symmetry it suffices to prove the upper bound. Actually
+it suffices to show
+
+LVζ
+
+(cid:18) 1
+2
+
++
+
+1
+τ − 1
+
+(σ −
+
+1
+2
+
+),
+
+τ
+τ − 1
+
+≤
+
+1
+τ − 1
+
+sup
+σ≤σ′≤1
+
+(LVζ(σ′, τ ) + σ′ − σ)
+
+(cid:19)
+
+as this easily implies the general upper bound.
+Let (N, T, V, (an)n∈[N,2N ], J, W ) be a zeta large value pattern with N unbounded,
+2 )+o(1). By definition, it suffices to show the
+T = N
+bound
+
+τ −1 +o(1), and V = N
+
+τ −1 (σ− 1
+
+2 + 1
+
+τ
+
+1
+
+(23)
+for some σ ≤ σ′ ≤ 1. By definition, an = 1I (n). By a Fourier expansion of (n/N )1/2
+in log n, we can bound
+
+|W | ≪ N
+
+τ −1 (LVζ (σ′,τ )+σ′−σ)+o(1),
+
+1
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n−itr
+
+(cid:90)
+
+≪A N 1/2
+
+(cid:88)
+
+n−1/2−it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+R
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt
+(1 + |t − tr|)−A
+
+n∈I
+
+n∈I
+and hence by the pigeonhole principle, we can find t′ = t + O(N o(1)) for each t ∈ W
+such that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+n−1/2−it′(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N −1/2−o(1)V
+
+for t ∈ W . By refining W by N o(1) if necessary, we may assume that the t′ are
+1-separated.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+21
+
+Now we use the approximate functional equation
+
+ζ(1/2 + it′) =
+
+(cid:88)
+
+n≤x
+
+n−1/2−it′
+
++ χ(1/2 + it′)
+
+(cid:88)
+
+m−1/2+it′
+
++ O(N −1/2) + O((T /N )−1/2)
+
+m≤t′/2πx
+
+for x ≍ N ; see [Ivi03, Theorem 4.1]. Applying this to the two endpoints of I and
+subtracting, we conclude that
+
+n−1/2−it′
+
+= χ(1/2 + it′)
+
+(cid:88)
+
+n∈I
+
+(cid:88)
+
+m∈Jt′
+
+m−1/2+it′
+
++ O(N −1/2) + O((T /N )−1/2)
+
+where Jt′ := {m : t′/2πm ∈ I}. Since χ(1/2 + it′) has magnitude one, we conclude
+that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m−1/2−it′(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N −1/2−o(1)V.
+
+m∈Jr
+1
+τ −1 +o(1), we see that Jr ⊂ [M/10, 10M ] and
+
+Writing M := T /N = N
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m∈Jr
+
+(M/m)1/2m−it′(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ M 1/2N −1/2−o(1)V = M σ+o(1).
+
+Performing a Fourier expansion of (M/m)1/21Jr (m) (smoothed out at scale O(1))
+in log m, we can bound
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m∈Jr
+
+(M/m)1/2m−it′(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+≪
+
+(cid:90) 10T
+
+T /10
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m∈[M/10,10M ]
+
+m−it1
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt1
+1 + |t1 − t′|
+
++ T −10
+
+and hence
+
+(cid:90) 10T
+
+T /10
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m∈[M/10,10M ]
+
+m−it1
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt1
+1 + |t1 − t′|
+
+≫ M σ+o(1).
+
+If we let E denote the set of t1 ∈ [T /10, 10T ] for which | (cid:80)
+M σ−o(1) for a suitably chosen o(1) error, then we have
+
+m∈[M/10,10M ] m−it1| ≥
+
+(cid:90)
+
+E
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m∈[M/10,10M ]
+
+m−it1
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt1
+1 + |t1 − t′|
+
+≫ M σ+o(1).
+
+Summing in t′, we obtain
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:90)
+
+E
+
+(cid:88)
+
+m−it1
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt1 ≫ M σ+o(1)R
+
+m∈[M/10,10M ]
+
+and so by dyadic pigeonholing we can find M σ−o(1) ≪ V ′′ ≪ M and a 1-separated
+subset W ′′ of E such that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m∈[M/10,10M ]
+
+m−it′′(cid:12)
+
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt ≍ V ′′
+
+for all t′′ ∈ W ′′, and
+
+V ′′|W ′′| ≫ M σ+o(1)|W |.
+By passing to a subsequence we may assume that V ′′ = M σ′+o(1) for some σ ≤
+σ′ ≤ 1. Partitioning [M/10, 10M ] into a bounded number of intervals each of which
+lies in a dyadic range [M ′, 2M ′] for some M ′ ≍ M , and Definition 27, we have
+
+and (23) follows.
+
+□
+
+|W ′′| ≪ M LVζ (σ′,τ )+o(1)
+
+22
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Remark 35. The arguments for (ii) can be reversed, in that the optimal exponent
+M in the indicated moment bound can be shown to be
+
+M = sup
+
+(A(σ − σ0) + LVζ(σ, τ ))/τ.
+
+τ ≥2;σ≥1/2
+
+We refer the reader to the ANTEDB for a proof. Thus the moment exponents for
+the zeta-function are in some sense dual to the function LVζ, somewhat analogously
+to the relationship between exponent pairs and the function β in Lemma 15.
+
+Remark 36. We note that in practice, bounds for LVζ(σ′, τ ) + σ′ are monotone
+decreasing6 in σ′, so the reflection property in Lemma 34(iii) morally simplifies7 to
+
+(24)
+
+LVζ
+
+(cid:18) 1
+2
+
++
+
+1
+τ − 1
+
+(cid:18)
+
+σ −
+
+(cid:19)
+
+(cid:19)
+
+1
+2
+
+,
+
+τ
+τ − 1
+
+=
+
+1
+τ − 1
+
+LVζ(σ, τ ).
+
+The well-known twelfth moment bound of Heath–Brown [HB78] gives (22) with
+σ0 = 1/2, A = 12, and M = 2. Combining this with Lemma 34(ii), we see that
+
+(25)
+
+LVζ(σ, τ ) ≤ 2τ − 12(σ − 1/2)
+
+any fixed 1/2 ≤ σ ≤ 1 and τ ≥ 2. In a similar vein, using the specific bound on µ
+in Corollary 24, we concude that
+
+LVζ(σ, τ ) = −∞
+
+(26)
+whenever τ > 0 and 1/2 ≤ σ ≤ 1 are such that σ > 7
+There are several further results in the literature that can be viewed as bounds on
+LVζ, or relationships between LVζ and other quantities such as exponent pairs; we
+refer to the ANTEDB for a current listing of all known results of this type.
+
+10 + 3
+
+40 τ .
+
+Our convention for zero density exponents will be as follows.
+
+6. Zero density estimates
+
+Definition 37 (Zero density exponents). For σ ∈ R and T > 0, let N (σ, T )
+denote the number of zeroes ρ of the Riemann zeta-function with Re(ρ) ≥ σ and
+|Im(ρ)| ≤ T .
+If 1/2 ≤ σ < 1 is fixed, we define the zero density exponent A(σ) ∈ [−∞, ∞) to be
+the infimum of all (fixed) exponents A for which one has
+
+whenever T is unbounded and δ > 0 is infinitesimal.
+
+N (σ − δ, T ) ≪ T A(1−σ)+o(1)
+
+In non-asymptotic terms: A(σ) is the infimum of all A such that for every ε > 0
+there exists C, δ > 0 such that
+
+N (σ − δ, T ) ≤ CT A(1−σ)+ε
+
+whenever T ≥ C. Note that in other literature (e.g., [Ivi03]), the shift by δ is not
+present, but this only affects the value of A(σ) at discontinuities of the function.
+As N (σ, T ) is obviously monotone non-increasing in σ, we certainly have the bound
+N (σ, T ) ≪ T A(σ)(1−σ)+o(1)
+
+for any fixed 1/2 ≤ σ < 1 and unbounded T .
+The key conjecture for this exponent is
+
+Conjecture 38 (Density hypothesis). One has A(σ) ≤ 2 for all 1/2 ≤ σ < 1.
+
+6This reflects the fact that large value theorems usually relate to pth moment bounds for p ≥ 1
+
+(e.g., p = 2, 4, 6, 12) rather than for 0 < p < 1.
+
+7One could redefine LVζ to use smooth cutoffs in the n variable rather than rough cutoffs
+
+1I (n), whence one could obtain the analogue of (24) rigorously, but we do not do so here.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+23
+
+Of course, the Riemann hypothesis gives the even stronger assertion A(σ) = −∞
+for all 1/2 < σ < 1. We refer the reader to [Tit86, Chapter 9] for further discussion
+of the density hypothesis. From the Riemann–von Mangoldt formula one sees that
+
+(27)
+
+A(1/2) = 2
+
+so that the bound of 2 in the density hypothesis cannot be reduced.
+It is well known (see, e.g., [IK04, Chapter 10]) that zero density estimates can be ob-
+tained from large value theorems through the device of zero detecting polynomials.
+We formalise this principle as follows:
+
+Lemma 39 (Zero density from large values). Let 1/2 < σ < 1. Then
+
+A(σ)(1 − σ) ≤ max(sup
+τ ≥2
+
+LVζ(σ, τ )/τ, lim sup
+τ →∞
+
+LV(σ, τ )/τ ).
+
+Proof. Write the right-hand side as B, then B ≥ 0 (from Lemma 29) and we have
+
+(28)
+
+for all τ ≥ 1, and
+
+(29)
+
+LVζ(σ, τ ) ≤ Bτ
+
+LV(σ, τ ) ≤ (B + ε)τ
+
+whenever ε > 0 and τ is sufficiently large depending on ε (and σ). It would suffice
+to show, for any ε > 0, that N (σ − o(1), T ) ≪ T B+O(ε)+o(1) as T → ∞.
+By dyadic decomposition, it suffices to show for large T that the number of zeroes
+with real part at least σ − o(1) and imaginary part in [T, 2T ] is ≪ T B+O(ε)+o(1).
+From the Riemann–von Mangoldt formula, there are only O(log T ) zeroes whose
+imaginary part is within O(1) of a specified ordinate t ∈ [T, 2T ], so it suffices to
+show that given some zeroes σr + itr, r = 1, . . . , R with σ − o(1) ≤ σr < 1 and
+tr ∈ [T, 2T ] 1-separated, that R ≪ T B+O(ε)+o(1).
+Suppose that one has a zero σr +itr of this form. Then by a standard approximation
+to the zeta-function [Ivi03, Theorem 1.8], one has
+
+(cid:88)
+
+n≤T
+
+1
+nσr+itr
+
+≪ T −1/2.
+
+Let 0 < δ1 < ε be a small quantity (independent of T ) to be chosen later, and let
+0 < δ2 < δ1 be sufficiently small depending on δ1, δ2. By the triangle inequality,
+and refining the sequence tr by a factor of at most 2, we either have
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+T δ1 ≤n≤T
+
+1
+nσr+itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ T −δ2
+
+for all r, or
+
+(30)
+
+(cid:88)
+
+n≤T δ1
+
+1
+nσr+itr
+
+≪ T −δ2
+
+for all r.
+Suppose we are in the former (“Type I”) case, we perform a smooth partition of
+unity, and conclude that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+T δ1 ≤n≤T
+
+ψ(n/N )
+nσr+itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ T −δ2−o(1)
+
+for some fixed bump function ψ supported on [1/2, 1], and some T δ1 ≪ N ≪ T .
+We divide into several cases depending on the size of N . First suppose that N ≪
+T 1/2. The variable n is restricted to the interval I := [max(N/2, T δ1), N ]. We have
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+ψ(n/N )(n/N )−σr n−itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σT −δ2−o(1).
+
+24
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Performing a Fourier expansion of ψ(n/N )(n/N )−σr in log n and using the triangle
+inequality, we can bound
+
+ψ(n/N )(n/N )−σr n−itr ≪A
+
+(cid:88)
+
+n∈I
+
+(cid:90)
+
+R
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+1
+nit
+
+(cid:12)
+(cid:12)
+(1 + |t − tr|)−A dt
+(cid:12)
+(cid:12)
+
+for any A > 0, so by the triangle inequality we conclude that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+n−it′
+
+r
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σT −δ2−o(1)
+
+r = tr + O(T o(1)). By refining the tr by a factor of T o(1) if necessary, we
+r are 1-separated, and by passing to a subsequence we may
+
+for some t′
+may assume that the t′
+assume that T = N τ +o(1) for some 2 ≤ τ ≤ 1/δ1, then we conclude that
+(cid:12)
+1
+(cid:12)
+(cid:12)
+nit′
+(cid:12)
+
+≫ N σ−δ2/δ1+o(1)
+
+(cid:88)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+r
+
+n∈I
+
+for all remaining r. By Definition 27 we then have (for δ2 small enough)
+
+R ≪ N LVζ (σ,τ )+ε+o(1) ≪ T LVζ (σ,τ )/τ +ε+o(1)
+
+and the claim follows in this case from (28).
+In the case N ≍ T , a standard application of the Euler–Maclaurin formula yields
+
+(cid:88)
+
+T δ1 ≤n≤T
+
+ψ(n/N )
+nσr+itr
+
+≪ T −σr
+
+which leads to a contradiction. So the only remaining case is when T 1/2 ≪ N ≪
+o(T ). Here we can ignore the cutoffs on n and obtain
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n
+
+ψ(n/N )(n/N )−σr n−itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σT −δ2−o(1).
+
+Applying the van der Corput B-process (see, e.g., [IK04, §8.3]) or the approximate
+functional equation we have
+
+ψ(n/N )(n/N )−σr n−itr = e
+
+(cid:88)
+
+n
+
+(cid:18) tr
+2π
+
+log
+
+tr
+2π
+
+−
+
+tr
+2π
+
++
+
+(cid:19)
+
+1
+8
+
+(cid:88)
+
+×
+
+m
+
+ψ(2πtr/mN )(2πtr/mN )−σr mitr (2πm2/tr)−1/2 + O(T o(1))
+
+and thus
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+m
+
+ψ(2πtr/mN )(2πtr/mN )1−σr m−itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ M 1/2N σ−1/2T −δ2−o(1),
+
+where M := 2πT /N ≪ N 1/2. In particular
+
+(cid:88)
+
+m∈[M/10,10M ]
+
+ψ(2πtr/mN )(2πtr/mN )1−σr m−itr ≫ M σT −δ2−o(1),
+
+since N ≫ T 1/2 and σ ≥ 1/2. Performing a Fourier expansion as before, we
+conclude that
+
+(cid:88)
+
+m−it′
+
+r ≪ M σT −δ2−o(1)
+
+m∈[M/10,10M ]
+
+for some t′
+r = tr +O(T o(1)), and one can argue as in the N ≪ T 1/2 case (partitioning
+[M/10, 10M ] into O(1) intervals each contained in some [M ′, 2M ′] with M ′ ≪
+T 1/2).
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+25
+
+Now suppose instead we are in the latter (“Type II”) case (30). We multiply both
+sides of (30) by the mollifier (cid:80)
+
+1
+
+m≤T δ2 /2
+
+(cid:88)
+
+mσr +itr to obtain
+an
+nσr+itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+= o(1)
+
+T δ2 /2≤n≤T δ1+δ2/2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1 +
+
+where an is some sequence with an ≪ T o(1). By dyadic decomposition and the
+pigeonhole principle, and refining the tr by a factor of O(T o(1)) as needed, we can
+then find an interval I in [N, 2N ] with T δ2/2 ≪ N ≪ T δ1+δ2/2 such that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+an
+nσr+itr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ T −o(1)
+
+and hence by Fourier expansion of
+
+1
+nσr in log n
+an
+nit′
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+r
+
+≫ N σr T −o(1)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+for some t′
+assume that the t′
+for some
+
+1
+
+δ1+δ2/2 ≤ τ ≤ 1
+
+r = tr + O(T o(1)); by refining the tr by a further factor of T o(1) we may
+r are also 1-separated; we can also pigeonhole so that T = N τ +o(1)
+
+δ2/2 . Applying Lemma 27, we conclude that
+R ≪ N LV(σ,τ )+o(1) = T LV(σ,τ )/τ +o(1)
+
+and the claim follows in this case from (29).
+
+□
+
+Recently, a partial converse to the above lemma was established:
+
+Lemma 40 (Large values from zero density). [MT24, Theorem 1.2] If τ > 0 and
+1/2 ≤ σ ≤ 1 are fixed, then
+
+LVζ(σ, τ )/τ ≤ max
+
+(cid:18) 1
+2
+
+,
+
+sup
+σ≤σ′≤1
+
+A(σ′)(1 − σ′) +
+
+σ′ − σ
+2
+
+(cid:19)
+
+.
+
+Proof. Let N ≥ 1 be unbounded, T = N τ +o(1), and I ⊂ [N, 2N ] be an interval,
+and t1, . . . , tR ∈ [T, 2T ] be 1-separated with
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+1
+nitr
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σ−o(1)
+
+uniformly for all r. By [MT24, Theorem 1.2], we have for any fixed δ > 0 that
+
+R ≪ T δ
+
+sup
+σ−δ≤σ′≤1
+
+T
+
+σ′−σ
+
+2 N (σ′, O(T )) + T
+
+1−σ
+
+2 +δ.
+
+Using Definition 37, we conclude that
+
+R ≪ T max( 1
+
+2 ,supσ−δ≤σ′≤1 A(σ′)(1−σ′)+ σ′−σ
+
+2
+
+)+O(δ)
+
+and thus
+
+LVζ(σ, τ ) ≤ τ max
+
+(cid:18) 1
+2
+
+,
+
+sup
+σ−ε≤σ′≤1
+
+A(σ′)(1 − σ′) +
+
+(cid:19)
+
+σ′ − σ
+2
+
++ O(δ).
+
+Here, the implied constant is understood to be uniform in δ. Letting δ go to zero,
+□
+and using the easily verified left-continuity of A, we obtain the claim.
+
+The suprema in Lemma 39 require unbounded values of τ , but thanks to the ability
+to raise to a power, we can reduce to a bounded range of τ . Here is a basic such
+reduction, suited for machine-assisted proofs:
+
+26
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Corollary 41. Let 1/2 < σ < 1 and τ0 > 0. Then
+
+A(σ)(1 − σ) ≤ max
+
+(cid:18)
+
+sup
+2≤τ <τ0
+
+LVζ(σ, τ )/τ,
+
+sup
+τ0≤τ ≤2τ0
+
+LV(σ, τ )/τ
+
+(cid:19)
+
+with the convention that the first supremum is −∞ if it is vacuous (i.e., if τ0 < 2).
+
+Proof. Denote the right-hand side by B, thus
+
+LV(σ, τ ) ≤ Bτ
+
+for all τ0 ≤ τ ≤ 2τ0, and
+
+(31)
+
+LVζ(σ, τ ) ≤ Bτ
+
+whenever 2 ≤ τ < τ0. From Lemma 33 we then have
+
+LV(σ, τ ) ≤ Bτ
+
+for all kτ0 ≤ τ ≤ 2kτ0 and natural numbers k. Note that the intervals [kτ0, 2kτ0]
+cover all of [τ0, ∞), hence we have
+
+for all τ ≥ τ0. In particular
+
+LV(σ, τ ) ≤ Bτ
+
+lim sup
+τ →∞
+
+LV(σ, τ )/τ ≤ B.
+
+Also, combining the previous estimate with (31) and (21) we have
+
+LVζ(σ, τ ) ≤ Bτ
+
+for all τ ≥ 2. By Lemma 34(iii), this implies that
+(cid:18) 1
+2
+
+1
+τ − 1
+
+τ
+τ − 1
+
+LVζ
+
+σ −
+
+1
+2
+
++
+
+(cid:18)
+
+(cid:19)
+
+,
+
+(cid:19)
+
+≤ B
+
+τ
+τ − 1
+
+for τ ≥ 2. Thus
+
+LVζ(σ, τ )
+τ
+
+sup
+τ ≥2
+
+≤ B.
+
+The claim now follows from Lemma 39.
+
+□
+
+For machine assisted proofs, one can simply take τ0 to be a sufficiently large quan-
+tity, e.g., τ0 = 3 for σ not too close to 1, and larger for σ approaching 1, to recover
+the full power of Lemma 39. However, the amount of case analysis required in-
+creases with τ0. For human written proofs, the following version of Corollary 41 is
+more convenient:
+
+Corollary 42. Let 1/2 < σ < 1 and τ0 > 0. Then
+
+A(σ)(1 − σ) ≤ max
+
+(cid:32)
+
+sup
+2≤τ <4τ0/3
+
+LVζ(σ, τ )
+τ
+
+,
+
+sup
+2τ0/3≤τ ≤τ0
+
+(cid:33)
+
+.
+
+LV(σ, τ )
+τ
+
+Proof. Applying Corollary 41 with τ replaced by 4τ0/3, it suffices to show that
+
+sup
+4τ0/3≤τ ≤8τ0/3
+
+LV(σ, τ )
+τ
+
+≤
+
+sup
+2τ0/3≤τ ≤τ0
+
+LV(σ, τ )
+τ
+
+.
+
+But this follows from Lemma 33, since the intervals [2kτ0/3, kτ0] for k = 2, 3 cover
+□
+all of [4τ0/3, 8τ0/3].
+
+The following special case of Corollary 42 is frequently (implicitly) used in practice
+to assist with the human readability of zero density proofs:
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+27
+
+Corollary 43. Let 1/2 < σ < 1 and τ0 > 0. Suppose that one has the bounds
+
+(32)
+
+LV(σ, τ ) ≤ (3 − 3σ)
+
+τ
+τ0
+
+for 2τ0/3 ≤ τ ≤ τ0, and
+
+(33)
+
+LVζ(σ, τ ) ≤ (3 − 3σ)
+
+τ
+τ0
+
+for 2 ≤ τ < 4τ0/3. Then A(σ) ≤ 3
+τ0
+
+.
+
+The reason why this particular special case is convenient is because the inequality
+
+(34)
+
+2 − 2σ ≤ (3 − 3σ)
+
+τ
+τ0
+
+obviously holds for τ ≥ 2τ0/3. That is to say, we automatically verify (32) in
+regimes where the Montgomery conjecture holds. In fact, we can do a bit better,
+thanks to subdivision:
+
+Corollary 44. Let 1/2 < σ < 1 and τ0 > 0. Suppose that one has the bound (33)
+for 2 ≤ τ < 4τ0/3, and the Montgomery conjecture LV(σ, τ ) ≤ 2 − 2σ whenever
+0 ≤ τ ≤ τ0 + σ − 1. Then A(σ) ≤ 3
+τ0
+
+.
+
+Proof. We may assume that τ0 ≥ 3 − 3σ, since otherwise we can use the bound
+
+A(σ)(1 − σ) ≤ A(1/2)(1 − 1/2) = 1
+
+coming from (27) and the monotonicity properties of N (σ, T ). By Lemma 28 we
+have
+
+LV(σ, τ ) ≤ max(2 − 2σ, 3 − 3σ + τ − τ0)
+for all τ ≥ 0. But both expressions on the right-hand side are bounded by (3−3σ) τ
+τ0
+□
+for 2τ3 ≤ τ ≤ τ0 and τ0 ≥ 3 − 3σ, so the claim follows from Corollary 43.
+
+With this machinery we can now quickly recover some existing zero density theo-
+rems, both conditional and unconditional. For instance, we have
+
+Theorem 45. The Montgomery conjecture implies the density hypothesis.
+
+Proof. Apply Corollary 43 with τ0 = 3/2 (so that (33) is vacuously true).
+
+□
+
+Theorem 46. [Ing40], [HT69] The Lindel¨of hypothesis implies the density hypoth-
+esis, and also that A(σ) ≤ 0 for 3/4 < σ ≤ 1.
+
+Proof. We will apply Corollary 42. From Lemma 34(i) and the Lindel¨of hypothesis
+we have
+
+sup
+2≤τ <4τ0/3
+
+LVζ(σ, τ )/τ ≤ 0.
+
+From Theorem 31 and Lemma 33 we have
+
+LV(σ, τ ) ≤ max((2 − 2σ)k, τ + (1 − 2σ)k)
+
+for any natural number k and τ ≥ 1; setting k to be the integer part of τ we
+conclude in particular that
+
+LV(σ, τ ) ≤ (2 − 2σ)τ + O(1),
+and hence by taking τ0 large enough, we can make sup2τ0/3≤τ ≤τ0 LV(σ, τ )/τ bounded
+by 2 − 2σ + ε for any ε > 0. This already gives the density hypothesis bound
+A(σ) ≤ 2. For σ > 3/4, we may additionally apply [HT69, Theorem 1] to obtain
+the Montgomery conjecture in this setting for all τ , thus allowing one to make
+□
+sup2τ0/3≤τ ≤τ0 LV(σ, τ )/τ arbitrarily small, giving the bound A(σ) ≤ 0.
+
+Theorem 47 (Ingham’s bound). [Ing40] For any 1/2 < σ < 1, one has A(σ) ≤
+3
+2−σ .
+
+28
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Proof. We apply Corollary 44 with τ0 := 2 − σ. Here we have 4τ0/3 < 2 since
+σ > 1/2, so the claim (33) is automatic; and the Montgomery conjecture hypothesis
+□
+follows from Theorem 31.
+
+3
+
+Theorem 48 (Huxley bound). [Hux72] For any 1/2 < σ < 1, one has A(σ) ≤
+3σ−1 . (In particular, the density hypothesis holds for σ ≥ 5/6.)
+Proof. We apply Corollary 44 with τ0 := 3σ − 1. The Montgomery conjecture
+hypothesis follows from (13). So it remains to show that (33) holds for 2 ≤ τ <
+4τ0/3. For σ ≤ 5/6 we have 4τ0/3 ≤ 2, so the claim is vacuously true. For σ > 5/6
+6 , 2
+we use Lemma 34(i), Lemma 23 and the classical exponent pair AB(0, 1) = ( 1
+3 )
+to conclude that LVζ(σ, τ ) = −∞ whenever σ > 1/2 + τ /6, but this is precisely
+□
+τ < 6σ − 3. Since 6σ − 3 > 4τ0/3 when σ > 5/6, we obtain the claim.
+
+Theorem 49 (Guth–Maynard bound). For any 1/2 < σ < 1, one has A(σ) ≤
+15
+3+5σ .
+
+Proof. We may assume that 7/10 < σ < 8/10, since the bound follows from the
+Ingham and Huxley bounds otherwise. We apply Corollary 43 with τ0 := 3+5σ
+.
+We have 4τ0/3 < 2, so the claim (33) is vacuous and we only need to establish (32).
+We split into the subranges 13/5 − 2σ ≤ τ < τ0 and 2τ0/3 ≤ τ ≤ 13/5 − 2σ. In the
+former range we use (16) (and (34)), and reduce to showing that
+
+5
+
+and
+
+18/5 − 4σ ≤ (3 − 3σ)
+
+τ
+τ0
+
+,
+
+τ + 12/5 − 4σ ≤ (3 − 3σ)
+
+τ
+τ0
+
+for 13/5 − 2σ ≤ τ < τ0. The first inequality follows from
+
+(35)
+
+18/5 − 4σ ≤ (3 − 3σ)
+
+13/5 − 2σ
+τ0
+
+which can be verified numerically in the range 7/10 < σ < 8/10. Finally, the third
+inequality is actually an equality when τ = τ0 and the right-hand side has a larger
+slope in τ than the left (since τ0 ≥ 3 − 3σ), so the claim follows as well.
+In the remaining region 2τ0/3 ≤ τ ≤ 13/5 − 2σ, we use Theorem 31 and (34) to
+reduce to showing that
+
+τ + 1 − 2σ ≤ (3 − 3σ)
+
+τ
+τ0
+
+in this range. This follows again from (35) which guarantees the inequality at the
+□
+right endpoint τ = 13/5 − 2σ.
+
+6.1. New zero density estimates. The previous zero density estimates were al-
+ready known in the literature. By computer-assisted optimisation, we were able
+to use the same set of tools to obtain some new zero density estimates. The
+optimisation procedure is a higher-dimensional analogue of the program used to
+produce Table 1; however instead of considering feasible (α, β) tuples, one now
+combines known large value estimates into a (σ, τ, LV(σ, τ )) feasible region (and
+zeta large value estimates into a (σ, τ, LVζ(σ, τ )) feasible region). The quantities
+sup2τ0/3≤τ ≤τ0 LV(σ, τ )/τ and sup2≤τ ≤4τ0/3 LVζ(σ, τ )/τ may then be computed as
+solutions to well-defined constrained optimisation problems.
+
+Theorem 50 (Improved Heath-Brown zero density theorem). For any 7/10 < σ ≤
+1, one has
+
+A(σ) ≤
+
+3
+10σ − 7
+
+.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+29
+
+This result was previously obtained in the region 3/4 ≤ σ ≤ 25/28 by Heath-Brown
+[HB79c]. The main new ingredient is the exponent pair in Theorem 21 (leading in
+particular to (26), which was not available at the time of that paper).
+
+Proof. We apply Corollary 44 with τ0 := 10σ − 7.
+To verify (32), we now use Theorem 14 and (34), and reduce to showing that
+
+τ + 10 − 13σ ≤ (3 − 3σ)
+
+τ
+τ0
+
+for 2τ0/3 ≤ τ ≤ τ0. The inequality holds at τ = τ0 since τ0 ≤ 10σ − 7, and hence
+for all smaller τ since τ0 ≥ 3 − 3σ.
+From (26) we have we have LVζ(σ, τ ) = −∞ whenever σ > 3
+τ < 4
+
+10 , or equivalently
+□
+
+3 (10σ − 7), which then immediately gives (33).
+
+40 τ + 7
+
+Next, we recall a well-known result of Bourgain [Bou00] that the density hypothesis
+A(σ) ≤ 2 holds for all σ > 25
+32 . By abstracting and then using computer assistance
+to optimise the arguments in that paper, we were able to improve this bound. Below
+is a translation of the computer-assisted argument to human-readable form.
+
+Theorem 51 (Improved Bourgain density hypothesis bound). For fixed 17/22 ≤
+σ ≤ 4/5, one has
+
+A(σ) ≤ max
+
+(cid:18) 2
+
+,
+
+9
+8(2σ − 1)
+
+(cid:19)
+
+.
+
+9σ − 6
+Thus one has A(σ) ≤ 2/(9σ − 6) for 17/22 ≤ σ ≤ 38/49 and A(σ) ≤ 9/(8(2σ − 1))
+for 38/49 ≤ σ ≤ 4/5.
+
+Proof. We apply Corollary 44 with τ0 := min( 9(3σ−2)
+we note that
+
+2
+
+, 8(2σ−1)
+3
+
+). For future reference
+
+(36)
+
+It suffices to show that
+
+(37)
+
+for 2τ0/3 ≤ τ ≤ τ0, as well as
+
+(38)
+
+1
+3
+
+<
+
+3 − 3σ
+τ0
+
+<
+
+1
+2
+
+.
+
+LV(σ, τ ) ≤
+
+τ
+τ0
+
+(3 − 3σ)
+
+LVζ(σ, τ ) ≤
+
+τ
+τ0
+
+(3 − 3σ)
+
+for 2 ≤ τ < 4τ0/3. For (38) we use the twelfth moment bound (25). Since the slope
+of 2τ − 12(σ − 1/2) in τ exceeds that of τ
+(3 − 3σ) by (36), it suffices to check the
+τ0
+bound at the endpoint, i.e., to show that
+
+8τ0/3 − 12(σ − 1/2) ≤ 4 − 4σ
+
+or equivalently τ0 ≤ 3(4σ−1)
+Now we prove (37). Set ρ := LV(σ, τ ). From the k = 3 case of (15) we have
+
+, which one can easily check to be the case.
+
+4
+
+(39)
+
+ρ ≤ max
+
+2 − 2σ, τ +
+
+(cid:18)
+
+10 − 16σ
+3
+
+, τ + 18 − 24σ
+
+(cid:19)
+
+which implies the required bound ρ ≤ τ
+τ0
+
+(3 − 3σ) unless one has
+
+(40)
+
+τ ≥ − max
+
+(cid:18) 10 − 16σ
+3
+
+(cid:19)
+
+(cid:18)
+
+, 18 − 24σ
+
+/
+
+1 −
+
+(cid:19)
+
+.
+
+3 − 3σ
+τ0
+
+In this regime, one can also check from (39) that
+
+ρ ≤ min(1, 4 − 2τ )
+
+30
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+(with room to spare) so we may apply Theorem 32(ii) to obtain
+
+ρ ≤ max(α2 + 2 − 2σ, α1 + α2/2 + 2 − 2σ, −α2 + 2τ + 4 − 8σ,
+
+− 2α1 + τ + 12 − 16σ, 4α1 + 2 + max(1, 2τ − 2) − 4σ)
+
+for any α1, α2 ≥ 0.
+We first consider the case when 38/49 ≤ σ ≤ 4/5, so that τ0 = 8(2σ − 1)/3. We set
+
+and
+
+α2 := max
+
+(cid:18) 5τ
+4
+
+(cid:19)
+
+− (1 + σ), 0
+
+α1 :=
+
+τ
+3
+
+−
+
+2
+3
+
+(7σ − 5) − α2/6.
+
+With this choice, the expressions α1 + α2/2 + 2 − 2σ and −2α1 + τ + 12 − 16σ are
+both equal to τ
+
+3 , while −α2 + 2τ + 4 − 8σ is equal to
+
+4
+3
+which is less than or equal to the previous expression by definition of α2. Finally,
+the expression 4α1 + 1 + max(2, 2τ − 2) − 4σ is equal to
+
+− (1 + σ)
+
+α2
+3
+
+α2 −
+
+5τ
+4
+
++
+
+−
+
+(cid:18)
+
+(cid:19)
+
+3 + 16−20σ
+τ
+3
+
+3 + α2
+16 − 20σ
+3
+
++
+
+4τ
+3
+
++
+
+46 − 68σ
+3
+
++ max(1, 2τ − 2) −
+
+2α2
+3
+
+.
+
+Thus it remains to show the bounds
+
+(41)
+
+(42)
+
+and
+
+(43)
+
+α2 + 2 − 2σ ≤
+
+τ
+τ0
+
+(3 − 3σ)
+
+τ
+3
+
++
+
+16 − 20σ
+3
+
++
+
+α2
+3
+
+≤
+
+τ
+τ0
+
+(3 − 3σ)
+
+4τ
+3
+
++
+
+46 − 68σ
+3
+
++ max(1, 2τ − 2) −
+
+2α2
+3
+
+≤
+
+τ
+τ0
+
+(3 − 3σ).
+
+For (41), we trivially have 2 − 2σ ≤ τ
+τ0
+4 − (1 + σ) + 2 − 2σ in τ certainly exceeds 3−3σ
+5τ
+τ0
+endpoint
+
+(3 − 3σ) since τ ≥ 2τ0/3, and the slope of
+by (36), so it suffices to check the
+
+5τ0
+4
+
+− (1 + σ) + 2 − 2σ ≤ 3 − 3σ
+
+which one can check to be valid for σ ≤ 4/5. Now we turn to (42). From (36) it
+suffices to show that
+
+and
+
+τ0
+3
+
++
+
+16 − 20σ
+3
+
++
+
+5τ0
+4 − (1 + σ)
+3
+
+≤ 3 − 3σ
+
+τ
+3
+
++
+
+16 − 20σ
+3
+
++
+
+0
+3
+
+≤ 2 − 2σ.
+
+The former is an identity, and the latter simplifies to τ ≥ 14σ − 10, which one can
+check follows from (40) (with some room to spare) in the regime 38/49 ≤ σ ≤ 4/5,
+giving the claim. Finally, for (43) it suffices to show that
+
+4τ
+3
+
++
+
+46 − 68σ
+3
+
++ max(1, 2τ0 − 2) −
+
+2( 5τ
+
+4 − (1 + σ))
+3
+
+≤
+
+τ
+τ0
+
+(3 − 3σ)
+
+which by (36) would follow from
+
+4τ0
+3
+
++
+
+46 − 68σ
+3
+
++ max(1, 2τ0 − 2) −
+
+2( 5τ0
+
+4 − (1 + σ))
+
+3
+
+≤ 3 − 3σ
+
+and one can check that this applies for σ ≥ 38/49.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+Now suppose that we are in the case 16/21 ≤ σ ≤ 38/49, so that τ0 = 9(3σ−2)
+49 < 3
+72
+
+2 (so in particular max(1, 2τ − 2) = 1 for τ ≤ τ0). We set
+
+2
+
+31
+
+≤
+
+and
+
+α2 := max(11 − 16σ + τ, 0)
+
+α1 :=
+
+τ
+3
+
+−
+
+2
+3
+
+(7σ − 5) − α2/6.
+
+Note that for σ ≤ 38/49, one has
+
+(5τ /4 − (1 + σ)) − (11 − 16σ + τ ) ≤ 15σ − 12 − τ0/4 ≤ 0
+
+and hence
+
+α2 ≥ 5τ /4 − (1 + σ).
+
+As before, we conclude that the quantities α1 +α2/2+2−2σ and −2α1 +τ +12−16σ
+3 + α2
+are both equal to τ
+3 , while −α2 + 2τ + 4 − 8σ does not exceed this
+quantity. Thus it suffices to show (41), (42), (43) as before.
+For (41) we argue as before to reduce to showing that
+
+3 + 16−20σ
+
+11 − 16σ + τ0 + 2 − 2σ ≤ 3 − 3σ
+
+which one can check to be true (with room to spare) for σ ≥ 16/21. For (42), we
+use (36) as before to reduce to showing that
+
+and
+
+τ0
+3
+
++
+
+16 − 20σ
+3
+
++
+
+11 − 16σ + τ
+3
+
+≤ 3 − 3σ
+
+τ
+3
+
++
+
+16 − 20σ
+3
+
++
+
+0
+3
+
+≤ 2 − 2σ.
+
+The first inequality is an identity, and the latter again reduces to τ ≥ 14σ − 10
+which one can check follows from (40). For (43) it suffices to show that
+
+4τ
+3
+
++
+
+46 − 68σ
+3
+
++ 1 −
+
+2(11 − 16σ + τ )
+3
+
+≤
+
+τ
+τ0
+
+(3 − 3σ)
+
+which by (36) follows from
+
+4τ0
+3
+
++
+
+46 − 68σ
+3
+
++ 1 −
+
+2(11 − 16σ + τ0)
+3
+
+≤ 3 − 3σ,
+
+but this is an identity.
+
+□
+
+In [Bou95] the following zero density theorem was proven:
+
+Theorem 52 (Bourgain zero density theorem). [Bou95, Proposition 3] Let (k, ℓ)
+be an exponent pair with k < 1/5, ℓ > 3/5, and 15ℓ + 20k > 13. Then, for any
+σ > ℓ+1
+
+2(k+1) , one has
+
+assuming either that k < 11
+
+85 , or that 11
+
+5 and σ > 144k−11ℓ−11
+
+170k−22
+
+.
+
+A(σ) ≤
+
+4k
+2(1 + k)σ − 1 − ℓ
+85 < k < 1
+
+This result was combined with some known exponent pairs to obtain new zero
+density bounds on A(σ). It was remarked in that paper that further exponent pairs
+could be used to improve the bounds. This is easy to achieve computationally in
+our framework, and we record the results here:
+
+32
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Theorem 53 (Optimised Bourgain zero density bound). For fixed σ, one has
+
+A(σ) ≤
+
+
+
+
+
+
+11
+12(4σ − 3)
+
+391
+2493σ − 2014
+
+22232
+163248σ − 134765
+
+356
+2742σ − 2279
+
+2609588
+20732766σ − 17313767
+
+75872
+9(81024σ − 69517)
+
+288
+3616σ − 3197
+86152
+1447460σ − 1311509
+
+,
+
+14
+15
+2841
+3016
+
+,
+
+,
+859
+908
+1625
+,
+1692
+3334585
+3447984
+
+,
+
+< σ ≤
+
+< σ ≤
+
+< σ ≤
+
+< σ ≤
+
+< σ ≤
+
+3
+4
+14
+15
+2841
+3016
+859
+908
+1625
+1692
+3334585
+3447984
+974605
+1005296
+5857
+6032
+
+< σ < 1.
+
+< σ ≤
+
+< σ ≤
+
+,
+
+974605
+1005296
+5857
+6032
+
+,
+
+Proof. Let S(σ) denote the closure of the region
+
+(cid:40)
+
+(k, ℓ) : 0 < k <
+
+1
+5
+
+,
+
+3
+5
+
+< ℓ < 1, 15ℓ + 20k > 13,
+
+ℓ + 1
+2(k + 1)
+
+< σ,
+
+k <
+
+11
+85
+
+(cid:18)
+
+or
+
+k >
+
+11
+85
+
+and
+
+144k − 11ℓ − 11
+170k − 22
+
+(cid:19) (cid:41)
+
+< σ
+
+.
+
+One may verify that S(σ) is a convex polygon for all 3/4 < σ < 1, and thus so is
+S(σ) ∩ H, where H is the convex hull of exponent pairs. Thus
+
+min
+(k,ℓ)∈S(σ)∩H
+
+4k
+2(1 + k)σ − 1 − ℓ
+
+is a convex optimisation problem for each 3/4 < σ < 1. We take the following
+choices of (k, ℓ) (found with the aid of computer assistance).
+(cid:18) 89
+1282
+
+(cid:18) 2779
+38033
+
+(cid:18) 391
+4595
+
+58699
+76066
+
+(cid:18) 11
+85
+
+3461
+4595
+
+997
+1282
+
+59
+85
+
+(cid:19)
+
+(cid:19)
+
+(cid:19)
+
+(cid:19)
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+(cid:18) 652397
+9713986
+
+,
+
+7599781
+9713986
+
+(cid:19)
+
+(cid:18) 2371
+43205
+
+,
+
+,
+
+280013
+345640
+
+(cid:19)
+
+(cid:18) 9
+217
+
+,
+
+,
+
+1461
+1736
+
+(cid:19)
+
+(cid:18) 10769
+351096
+
+,
+
+,
+
+609317
+702192
+
+(cid:19)
+
+.
+
+The desired result follows from applying Theorem 52 and taking a minimum over
+the implied bounds. Note that sharper bounds are possible close to σ = 1 by
+choosing other exponent pairs, however it turns out such results are superseded by
+□
+other zero density estimates.
+
+We record the current best known zero density estimates proven in the literature,
+or in this paper in Table 2.
+
+6.2. A heuristic for zero density estimates. We can now state a rough heuristic
+as to what zero density estimates to expect from a given large value theorem:
+
+Heuristic 54 (Predicting a zero density estimate from a large value theorem).
+Suppose that 1/2 ≤ σ ≤ 1 and τ0 ≥ 1 are such that one can prove LV(σ, τ0) ≤ 3−3σ
+(i.e., the Montgomery conjecture holds here with a multiplicative loss of 3/2). Then
+in principle, one can hope to prove A(σ) ≤ 3/τ0. Conversely, if one cannot prove
+LV(σ, τ0) ≤ 3 − 3σ, then the bound A(σ) ≤ 3/τ0 is likely out of reach.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+33
+
+A(σ) bound
+3
+2 − σ
+15
+3 + 5σ
+9
+8σ − 2
+15
+13σ − 3
+6
+5σ − 1
+2
+9σ − 6
+9
+7σ − 1
+9
+8(2σ − 1)
+3
+2σ
+3
+2σ
+3
+10σ − 7
+24
+30σ − 11
+24
+30σ − 11
+3
+10σ − 7
+11
+48σ − 36
+391
+2493σ − 2014
+22232
+163248σ − 134765
+356
+2742σ − 2279
+3
+24σ − 20
+86152
+1447460σ − 1311509
+2
+15σ − 12
+3
+40σ − 35
+3
+n(1 − 2(n − 1)(1 − σ))
+
+= 0.7
+
+Range
+7
+10
+19
+25
+= 0.7604 . . .
+
+= 0.76
+
+Reference
+
+Theorem 47*
+
+Theorem 49
+
+[Ivi80], [Ivi03, Theorem 11.4]
+
+= 0.7647 . . .
+
+[Ivi80], [Ivi03, Theorem 11.4]
+
+= 0.7727 . . .
+
+[Ivi80], [Ivi03, Theorem 11.4]*
+
+= 0.7735 . . .
+
+Theorem 51
+
+= 0.7777 . . .
+
+[Ivi80], [Ivi03, Theorem 11.4]
+
+= 0.7954 . . .
+
+Theorem 51
+
+≤ σ ≤
+
+1
+2
+7
+10
+≤ σ <
+
+≤ σ <
+
+≤ σ <
+
+19
+25
+127
+167
+13
+17
+17
+22
+41
+53
+≤ σ <
+
+≤ σ <
+127
+167
+13
+17
+17
+22
+41
+53
+7
+9
+1867
+2347
+
+≤ σ <
+
+≤ σ <
+
+7
+9
+
+1867
+2347
+4
+5
+
+= 0.8
+
+4
+5
+= 0.875
+
+≤ σ <
+7
+≤ σ <
+8
+279
+= 0.8885 . . .
+314
+
+≤ σ <
+
+≤ σ <
+155
+174
+< σ ≤
+
+= 0.8908 . . .
+9
+10
+= 0.9117 . . .
+
+= 0.9
+
+7
+8
+279
+314
+
+< σ <
+
+= 0.9333 . . .
+
+≤ σ <
+
+= 0.9419 . . .
+
+≤ σ <
+
+= 0.9460 . . .
+
+≤ σ <
+
+= 0.9583 . . .
+
+155
+174
+≤ σ ≤
+31
+34
+14
+15
+2841
+3016
+859
+908
+23
+24
+2211487
+2274732
+≤ σ <
+41
+42
+59
+60
+≤ σ < 1 −
+
+9
+10
+31
+34
+14
+15
+2841
+3016
+859
+908
+≤ σ <
+2211487
+2274732
+39
+40
+41
+42
+
+23
+24
+
+≤ σ <
+
+= 0.9761 . . .
+
+= 0.9721 . . .
+39
+40
+
+= 0.975
+
+≤ σ <
+1
+2n(n − 1)
+
+1 −
+
+= 0.9833 . . .
+1
+2n(n + 1)
+
+(for integer n ≥ 6)
+
+[Bou02]*
+
+[Ivi80], [Ivi03, Theorem 11.4]*
+
+[HB79c]*
+
+[CDV24]*
+
+[Ivi80], [Ivi03, Theorem 11.2]*
+
+Theorem 50
+
+Corollary 53
+
+Corollary 53
+
+Corollary 53
+
+Corollary 53
+
+[Pin23, Theorem 1]*
+
+Corollary 53
+
+[Pin23, Theorem 1]*
+
+[Pin23, Theorem 1]*
+
+[Pin23, Theorem 1]*
+
+Table 2. Current best upper bound on A(σ). The new results in
+this paper are marked in bold. Results labelled with an asterisk
+also appear in [TY23, Table 2].
+
+We justify this heuristic as follows, though we stress that the arguments that follow
+are not fully rigorous. In the first part, we simply apply Corollary 43. In practice,
+the (32) is often more delicate than (33) and ends up being the limiting factor
+for the bounds; furthermore, within (32), it is the right endpoint τ = τ0 of the
+range 2τ0/3 ≤ τ ≤ τ0 that ends up being the bottleneck; but this is precisely the
+claimed criterion LV(σ, τ0) ≤ 3 − 3σ. We remark that in some cases (particularly
+for σ close to one), the estimate (33) ends up being more of the bottleneck than
+(32), and so one should view 3/τ0 here as a theoretical upper limit of methods
+rather than as a guaranteed bound. (In particular, the need to establish the bound
+LVζ(σ, 4
+3 τ0 − ε) < 4 − 4σ for ε > 0 small can sometimes be a more limiting factor.)
+
+34
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Figure 3. The bounds in Table 2, compared against the existing
+literature bounds on A(σ), with differences shaded grey.
+
+Conversely, suppose that
+
+(44)
+
+LV(σ, τ0) > 3 − 3σ,
+
+but that one still wants to prove the bound A(σ) ≤ 3/τ0. Heuristically, Theorem 40
+suggests that in order to do this, it is necessary to establish the bound LVζ(σ, τ )/τ ≤
+3
+τ0
+
+(1 − σ) for all τ ≥ 2. In particular, one should show that
+
+LVζ(σ, 2τ0) ≤ 6 − 6σ.
+
+Let us consider the various options one has to do this. There are ways to control zeta
+large values that do not apply to general large value estimates, such as moment
+estimates of the zeta-function, exponent pairs, or control of β and µ. However,
+at our current level of understanding, these techniques only control LVζ(σ, τ ) for
+relatively small values of τ , and in practice 2τ0 is too large for these methods to
+apply; this exponent also tends to be too large for direct application of standard
+large value theorems to be useful. Hence, the most viable option in practice is
+raising to a power (Lemma 33), using
+
+LVζ(σ, 2τ0) ≤ kLVζ(σ, 2τ0/k)
+
+for some natural number k ≥ 2. However, the most natural choice k = 2 is blocked
+due to our hypothesis (44), while in practice the k ≥ 3 choice is blocked because of
+Lemma 29. Hence it appears heuristically quite difficult to establish A(σ) ≤ 3/τ0
+with current technology, in the event that (44) occurs.
+In Table 3 we show how some of the large value theorems proven above are in
+agreement with Heuristic 54 for at least some ranges of σ. Further examples can
+be found in the ANTEDB.
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+35
+
+Large value theorem Predicted τ0 Predicted A(σ) Zero density theorem
+
+Theorem 31
+
+(13)
+
+(14)
+
+(16)
+
+2 − σ
+
+3σ − 1
+
+10σ − 7
+5σ−3
+3
+
+3
+2−σ
+3
+3σ−1
+3
+10σ−7
+15
+5σ−3
+
+Theorem 47
+
+Theorem 48
+
+Theorems 50
+
+Theorem 49
+
+Table 3. Examples of large value theorems, the values of τ0 and
+A(σ) they suggest, and rigorous zero density theorems that attain
+the predicted value for at least some ranges of σ.
+
+7. Additive energy
+
+Using the concept of additive energy from Definition 7, we can define additive
+energy versions of the exponents LV(σ, τ ), LVζ(σ, τ ), and A(σ):
+
+Definition 55 (Large value exponent for energy). Let 1/2 ≤ σ ≤ 1 and τ ≥ 0
+be fixed. We define LV∗(σ, τ ) to be the least fixed quantity for which the following
+claim is true: whenever (N, T, V, (an)n∈[N,2N ], J, W ) is a large value pattern with
+N > 1 unbounded, T = N τ +o(1), and V = N σ+o(1), then
+
+E1(W ) ≪ N LV∗(σ,τ )+o(1).
+
+We define LV∗
+quired to be a zeta large value pattern.
+
+ζ(σ, τ ) similarly, but where (N, T, V, (an)n∈[N,2N ], J, W ) is now re-
+
+Definition 56 (Zero density exponents for energy). For σ ∈ R and T > 0, let
+N ∗(σ, T ) denote the additive energy of the imaginary parts of zeroes ρ of the Rie-
+mann zeta-function with Re(ρ) ≥ σ and |Im(ρ)| ≤ T .
+If 1/2 ≤ σ < 1 is fixed, we define the zero density exponent A∗(σ) ∈ [−∞, ∞) to be
+the infimum of all (fixed) exponents A∗ for which one has
+
+N ∗(σ − δ, T ) ≪ T A∗(1−σ)+o(1)
+
+whenever T is unbounded and δ > 0 is infinitesimal.
+
+Remark 57. It is theoretically possible (though not believed to be likely) that two
+zeroes of ζ to the right of the critical line have the same imaginary part, in which
+case the set of imaginary parts may contain multiplicity. However, by the Riemann–
+von Mangoldt formula, this multiplicity can only affect the additive energy by a
+factor of O(logO(1) T ) at most, and thus has no impact on the exponent A∗(σ).
+
+From the easy bounds
+
+|W |2 ≪ E1(W ) ≪ |W |3
+
+we see that
+
+(45)
+
+and
+
+and also
+
+2LV(σ, τ ) ≤ LV∗(σ, τ ) ≤ 3LV(σ, τ )
+
+2LVζ(σ, τ ) ≤ LV∗
+
+ζ(σ, τ ) ≤ 3LVζ(σ, τ )
+
+2A(σ) ≤ A∗(σ) ≤ 3A(σ).
+
+We also trivially have LV∗
+In order to record the interactions between LV∗(σ, τ ), LV∗
+orems, we introduce the following regions.
+
+ζ(σ, τ ) ≤ LV∗(σ, τ ).
+
+ζ(σ) and large value the-
+
+36
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Definition 58 (Large value energy region). The large value energy region E ⊂ R5
+is defined to be the set of all fixed tuples (σ, τ, ρ, ρ∗, s) with 1/2 ≤ σ ≤ 1, τ, ρ, ρ′ ≥ 0,
+such that there exists a large value pattern (N, T, V, (an)n∈[N,2N ], J, W ) with N > 1
+unbounded, V = N σ+o(1), T = N τ +o(1), V = N σ+o(1), |W | = N ρ+o(1), E1(W ) =
+N ρ∗+o(1) and S(N, W ) = N s+o(1).
+We define the zeta large value energy region Eζ ⊂ R5 similarly, but where now
+(N, T, V, (an)n∈[N,2N ], J, W ) is required to be a zeta large value pattern.
+
+By the usual arguments, one can define this region without using asymptotic nota-
+tion:
+
+Lemma 59 (Non-asymptotic form of large value energy region). Let 1/2 ≤ σ ≤ 1,
+τ ≥ 0, ρ, ρ∗ ≥ 0, and s ∈ R be fixed. Then the following are equivalent:
+
+(i) (σ, τ, ρ, ρ∗, s) ∈ E.
+(ii) For every ε > 0 and C > 0, there exists a large value pattern
+
+(N, T, V, (an)n∈[N,2N ], J, W )
+
+with N ≥ C, N τ −δ ≤ T ≤ N τ +δ, N σ−δ ≤ V ≤ N σ+δ, N ρ−ε ≤ |W | ≤
+N ρ+ε, N ρ∗−ε ≤ E1(W ) ≤ N ρ∗+ε, and N s−ε ≤ S(N, W ) ≤ N s+ε.
+
+A similar statement is true with E replaced by Eζ, and with (N, T, V, (an)n∈[N,2N ], J, W )
+required to be a zeta large value pattern.
+
+The quantities LV∗(σ, τ ), LV∗
+by the formulae
+
+ζ(σ, τ ) can now be expressed in terms of these regions
+
+(46)
+
+and
+
+(47)
+
+LV∗(σ, τ ) = sup{ρ∗ : (σ, τ, ρ, ρ∗, s) ∈ E}
+
+LV∗
+
+ζ(σ, τ ) = sup{ρ∗ : (σ, τ, ρ, ρ∗, s) ∈ Eζ}.
+
+We have the following analogue of Lemma 39:
+
+Lemma 60 (Zero density energy from large values energy). Let 1/2 < σ < 1. Then
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18)
+
+sup
+τ ≥1
+
+LV∗
+
+ζ(σ, τ )/τ, lim sup
+τ →∞
+
+LV∗(σ, τ )/τ
+
+(cid:19)
+
+.
+
+Proof. Write the right-hand side as B, then B ≥ 0 (from (45)) and we have
+
+(48)
+
+for all τ ≥ 1, and
+
+(49)
+
+LV∗
+
+ζ(σ, τ ) ≤ Bτ
+
+LV∗(σ, τ ) ≤ (B + ε)τ
+
+whenever ε > 0 and τ is sufficiently large depending on ε (and σ). It would suffice
+to show, for any ε > 0, that N ∗(σ, T ) ≪ T B+O(ε)+o(1) for unbounded T .
+By dyadic decomposition, it suffices to show for unbounded T that the additive
+energy of imaginary parts of zeroes in [T, 2T ] is ≪ T B+O(ε)+o(1). As in the proof
+of Lemma 39, we can assume the imaginary parts are 1-separated (here we take
+advantage of the triangle inequality (5) for additive energy).
+Suppose there is a zero σ′ + it of this form. Then by [Ivi03, Theorem 1.8], one has
+
+(cid:88)
+
+n≤T
+
+1
+
+nσ′+it ≪ T −1.
+
+Let 0 < δ1 < ε be a small fixed quantity to be chosen later, and let 0 < δ2 < δ1 be
+sufficiently small depending on δ1, δ2. By the triangle inequality, and refining the
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+37
+
+sequence t′ by a factor of at most 2, we either have
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+T δ1 ≤n≤T
+
+1
+nσ′+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ T −δ2
+
+for all zeroes, or (30) for all zeroes.
+Suppose we are in the former (“Type I”) case, we can dyadically partition and
+conclude from the pigeonhole principle that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+1
+nσ′+it
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ T −δ2−o(1)
+
+for some interval I in some [N, 2N ] with T δ1 ≪ N ≪ T , with at most O(log T )
+different choices for I. Performing a Fourier expansion of nσ′
+in log n and using the
+triangle inequality one can then deduce that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+n∈I
+
+1
+nit′
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σ′
+
+T −δ2−o(1)
+
+for some t′ = t + O(T o(1)); refining the t by a factor of T o(1) if necessary, we
+may assume that the t′ are 1-separated and that the interval I is independent of
+t′, and by passing to a subsequence we may assume that T = N τ +o(1) for some
+1 ≤ τ ≤ 1/δ1, then
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+1
+nit′
+
+(cid:88)
+
+n∈I
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ N σ−δ2/δ1+o(1)
+
+for all t′. If we let Σ′ denote the set of such t′, then by Definition 55 we then have
+(for δ2 small enough) we have
+
+E1(Σ′) ≪ N LV∗
+
+ζ (σ,τ )+ε+o(1) ≪ T LV∗
+
+ζ (σ,τ )/τ +ε+o(1).
+
+Let Σ denote the set of imaginary parts of zeroes under consideration (after the
+passage to subsequences indicated previously). By construction, each element of Σ
+lies within T o(1) of an element of Σ′, and by the Riemann–von Mangoldt formula
+there are at most T o(1) elements of Σ in any unit interval. Standard additive energy
+calculations (e.g., using (4)) then gives the bound
+
+E1(Σ) ≪ T LV∗
+
+ζ (σ,τ )/τ +ε+o(1).
+
+and the claim follows in this case from (48).
+The Type II case similarly follows from (49) exactly as in the proof of Lemma
+□
+39.
+
+By repeating the proof of Corollary 41, we obtain
+
+Corollary 61. Let 1/2 < σ < 1 and τ0 > 0 be fixed. Then
+(cid:18)
+
+A∗(σ)(1 − σ) ≤ max
+
+sup
+2≤τ <τ0
+
+LV∗
+
+ζ(σ, τ )/τ,
+
+sup
+τ0≤τ ≤2τ0
+
+LV∗(σ, τ )/τ
+
+(cid:19)
+
+.
+
+Thus, to obtain upper bounds on A∗(σ), it suffices to control the quantities LV∗
+ζ(σ, τ ),
+LV∗(σ, τ ), and by (46), (47), it suffices to control the large value energy regions E, Eζ.
+In analogy with Lemma 33, we would expect the region E to be closed under the
+operation (σ, τ, ρ, ρ∗, s) (cid:55)→ (σ, τ /k, ρ/k, ρ∗/k, s/k). Due to some technical issues
+(having to do with the fact that the additive energy or double zeta sum may un-
+expectedly drop when passing to a subsequence), we were not able to prove this
+claim as stated; however we have the following serviceable substitute.
+
+38
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+Lemma 62 (Raising to a power). If (σ, τ, ρ, ρ∗, s) ∈ E, and k ≥ 1, then amongst
+all tuples (σ, τ /k, ρ′, (ρ′)∗, s′) ∈ E with ρ′ ≤ ρ/k, (ρ′)∗ ≤ ρ∗/k, and s′ ≤ s/k, there
+exists a tuple with ρ′ = ρ/k, there exists a tuple with (ρ′)∗ = ρ∗/k, and there exists
+a tuple with s′ = s/k. (These may be three different tuples.)
+
+Proof. By definition, there exists a large value pattern (N, T, V, (an)n∈[N,2N ], J, W )
+with N > 1 unbounded, T = N τ +o(1), V = N σ+o(1), |W | = N ρ+o(1), E1(W ) =
+N ρ∗+o(1), and S(N, W ) = N s+o(1). Observe that
+
+
+
+
+
+
+k
+
+(cid:88)
+
+ann−it
+
+
+
+=
+
+(cid:88)
+
+bnn−it
+
+n∈[N,2N ]
+
+n∈[N k,2kN k]
+
+for some coefficients bn = O(no(1)).
+In particular, partitioning [N k, 2kN k] into
+O(1) sub-intervals [N ′, 2N ′] with N ′ = N k+o(1), we can partition W into O(1)
+subcollections WN ′, such that
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+(cid:88)
+
+bnn−it
+
+n∈[N ′,2N ′]
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+≫ V k = (N ′)σ+o(1)
+
+for all t ∈ WN ′. Again by the pigeonhole principle, one of the WN ′ must have
+cardinality N ρ+o(1), one must have energy N ρ∗+o(1), and one must have double
+zeta sum N s+o(1) (but these may be different WN ′). Each of these WN ′ then give
+□
+the different conclusions to the lemma.
+
+Now we turn to the estimation of additive energy exponent A∗(σ). Besides the triv-
+ial upper bound A∗(σ) ≤ 3A(σ), the best upper bounds for A∗(σ) in the literature
+remain that of Heath–Brown [HB79c], who showed for any fixed 1/2 ≤ σ ≤ 1 that
+A∗(σ) could be bounded by
+
+10 − 11σ
+(2 − σ)(1 − σ)
+18 − 19σ
+(4 − 2σ)(1 − σ)
+
+for 1/2 ≤ σ ≤ 2/3;
+
+for 2/3 ≤ σ ≤ 3/4;
+
+12
+4σ − 1
+
+for 3/4 ≤ σ ≤ 1.
+
+A key input in the analysis was the following relation between additive energy and
+size of a large value pattern:
+
+Theorem 63 (Heath-Brown relation). [HB79c] If (σ, τ, ρ, ρ∗, s) ∈ E, then one has
+τ
+2
+
+ρ∗ ≤ 1 − 2σ +
+
+ρ∗ + 1, 4ρ,
+
+ρ∗ + ρ +
+
+ρ + 1, 2ρ,
+
+max
+
+max
+
+ρ +
+
+τ
+2
+
+1
+2
+
+1
+2
+
+3
+4
+
+5
+4
+
++
+
+(cid:18)
+
+(cid:19)
+
+(cid:19)
+
+(cid:18)
+
+.
+
+Proof. If (σ, τ, ρ, ρ∗, s) ∈ E then by Definition 58, there exists a large value pattern
+(N, T, V, (an)n∈[N,2N ], J, W ) with N > 1 unbounded, V = N σ+o(1), T = N τ +o(1),
+V = N σ+o(1), |W | = N ρ+o(1), E1(W ) = N ρ∗+o(1) and S(N, W ) = N s+o(1). Apply-
+ing [HB79c, (33)] (and adjusting the notation appropriately), we conclude that
+
+E1(W ) ≪ T εN 1−2σ(|W |N + |W |2 + |W |5/4T 1/2)1/2
+
+× (E1(W )N + |W |4 + E1(W )3/4N T 1/2)1/2.
+
+Comparing exponents, we obtain the claim.
+
+□
+
+Given the work on large value estimates since the time of Heath-Brown’s paper,
+it is not surprising that we are able to improve on these bounds in several ranges.
+Our main result (Theorem 64 below) is obtained using an optimisation routine
+that may be viewed as a higher-dimensional analogue of the method used to derive
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+39
+
+Table 1. Each theorem in the literature relating the quantities σ, τ , ρ, ρ∗ and s,
+such as Theorem 63 or any large value estimate, is represented as a five-dimensional
+polytope containing feasible (σ, τ, ρ, ρ∗, s) tuples. The polytopes are combined by
+taking their intersection, then projected onto the (σ, τ, ρ∗) dimensions. For each
+fixed σ, an upper bound of A∗(σ)(1 − σ) may be calculated as sup ρ∗/τ where the
+supremum is taken over all tuples in the polytope projection (with σ fixed).
+This process generates a machine “proof”, which, while not certifiably correct due
+to issues of code fidelity, provides a blueprint for the rough steps required to arrive
+at a formal proof. The machine-generated proofs are then transcribed manually
+into human-readable proofs which are available in the ANTEDB.
+
+Theorem 64 (New additive energy estimates). Let 7/10 ≤ σ < 1 be fixed.
+
+(i) For 3/4 ≤ σ ≤ 5/6 one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 18 − 19σ
+2(3σ − 1)
+
+,
+
+4(10 − 9σ)
+5(4σ − 1)
+
+(cid:19)
+
+.
+
+(ii) For 7/10 ≤ σ ≤ 3/4, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 5(18 − 19σ)
+2(5σ + 3)
+
+,
+
+2(45 − 44σ)
+2σ + 15
+
+(cid:19)
+
+.
+
+(iii) For 173/229 ≤ σ ≤ 443/586, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 173 − 270σ
+
+16(93 − 125σ)
+
+,
+
+653 − 890σ
+10(93 − 125σ)
+
+,
+
+1151 − 1190σ
+20(15σ − 2)
+
+(cid:19)
+
+.
+
+(iv) For 443/586 ≤ σ ≤ 373/493, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 593 − 810σ
+
+5(171 − 230σ)
+
+,
+
+4(266 − 275σ)
+5(55σ − 7)
+
+(cid:19)
+
+.
+
+(v) For 373/493 ≤ σ ≤ 103/136, one has
+(cid:18) 533 − 730σ
+30(26 − 35σ)
+
+A∗(σ)(1 − σ) ≤ max
+
+,
+
+3(26 − 33σ)
+85σ − 62
+
+,
+
+174 − 185σ
+31σ + 2
+
+(cid:19)
+
+.
+
+(vi) For 103/136 ≤ σ ≤ 42/55, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 72 − 91σ
+7(11σ − 8)
+
+,
+
+5(18 − 19σ)
+2(5σ + 3)
+
+(cid:19)
+
+.
+
+(vii) For 42/55 ≤ σ ≤ 79/103, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 18 − 19σ
+
+6(15σ − 11)
+
+(viii) For 79/103 ≤ σ ≤ 84/109, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 18 − 19σ
+
+2(37σ − 27)
+
+,
+
+,
+
+3(18 − 19σ)
+4(4σ − 1)
+
+5(18 − 19σ)
+2(13σ − 3)
+
+(cid:19)
+
+(cid:19)
+
+.
+
+.
+
+(ix) For 84/109 ≤ σ ≤ 5/6, one has
+
+A∗(σ)(1 − σ) ≤ max
+
+(cid:18) 18 − 19σ
+9(3σ − 2)
+
+,
+
+4(10 − 9σ)
+5(4σ − 1)
+
+(cid:19)
+
+.
+
+Proof. We just describe the proof of (i) here; the proofs of the remaining claims use
+similar methods (as well as inputs such as the Guth–Maynard estimates in [GM24])
+and can be found in the ANTEDB.
+Throughout assume that 3/4 ≤ σ ≤ 5/6. Choose
+
+τ0 = 8σ − 4.
+
+40
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+We will show that
+
+(50)
+
+ρ∗/τ ≤
+
+
+
+
+
+
+18 − 19σ
+2(3σ − 1)
+7(1 − σ)
+3σ − 1
+
+,
+
+, 3/4 ≤ σ < 4/5,
+
+4/5 ≤ σ ≤ 5/6,
+
+(51)
+
+ρ∗/τ ≤ max
+
+for all (σ, τ, ρ, ρ∗, s) ∈ E for which τ0 ≤ τ ≤ 2τ0, and that
+4(10 − 9σ)
+5(4σ − 1)
+
+(cid:18) 45 − 46σ
+4(4σ − 1)
+for all (σ, τ, ρ, ρ∗, s) ∈ Eζ such that 2 ≤ τ ≤ τ0. The desired result (i) then follows
+from Corollary 61 and computing the piecewise maximum of (50) and (51).
+First, consider (51). Suppose that (σ, τ, ρ, ρ∗, s) ∈ Eζ with 3/4 ≤ σ ≤ 5/6 and
+2 ≤ τ ≤ τ0. Then, from (25) we have
+
+(cid:19)
+
+,
+
+,
+
+(52)
+
+ρ ≤ 2τ − 12(σ − 1/2).
+
+Furthermore, by (13) and Lemma 33 with k = 2, one has ρ ≤ 2 max(2 − 2σ, 4 −
+6σ + τ /2). However since τ ≤ τ0 = 8σ − 4, this simplifies to
+
+(53)
+
+ρ ≤ 4 − 4σ.
+
+Since σ ≥ 3/4, this also implies that ρ ≤ 1. For future reference we also note that
+
+(54)
+
+4
+5
+
+< max
+
+(cid:18) 45 − 46σ
+4(4σ − 1)
+
+,
+
+4(10 − 9σ)
+5(4σ − 1)
+
+(cid:19)
+
+< 2,
+
+(3/4 ≤ σ ≤ 5/6).
+
+By Theorem 63, one has
+(cid:18)
+
+ρ∗ ≤ 1 − 2σ +
+
+max
+
+ρ + 1, 2ρ,
+
+1
+2
+
+5
+4
+
+ρ +
+
+(cid:19)
+
+τ
+2
+
++
+
+1
+2
+
+(cid:18)
+
+max
+
+ρ∗ + 1, 4ρ,
+
+3
+4
+
+ρ∗ + ρ +
+
+(cid:19)
+
+.
+
+τ
+2
+
+Since ρ ≤ 1, one has ρ + 1 ≥ 2ρ. Thus the middle term in the first maximum may
+be omitted, and we are left with two cases to consider.
+Case 1: If ρ + 1 ≥ 5ρ/4 + τ /2 then
+
+ρ∗ ≤ 1 − 2σ +
+
+ρ + 1
+2
+
++
+
+1
+2
+
+(cid:18)
+
+max
+
+ρ∗ + 1, 4ρ,
+
+3
+4
+
+ρ∗ + ρ +
+
+(cid:19)
+
+.
+
+τ
+2
+
+(cid:19)
+
+(6 − 8σ + τ + 4ρ)
+
+.
+
+Solving for ρ∗ gives
+
+(cid:18)
+
+ρ∗ ≤ max
+
+4 − 4σ + ρ,
+
+3
+2
+
+− 2σ +
+
+5
+2
+
+ρ,
+
+2
+5
+
+Applying (53) to each term,
+
+ρ∗ ≤ max
+
+≤ max
+
+(cid:18)
+
+8 − 8σ,
+
+23
+2
+(cid:18) 45 − 46σ
+4(4σ − 1)
+
+τ,
+
+2
+5
+4(10 − 9σ)
+5(4σ − 1)
+
+(cid:19)
+
+τ
+
+,
+
+− 12σ,
+
+(22 − 24σ + τ )
+
+(cid:19)
+
+i.e. (51) holds. The last inequality may be verified by inspecting the growth rates
+with respect to τ of each term (using (54)), and checking that the desired inequality
+holds at τ = 2.
+Case 2: If ρ + 1 < 5ρ/4 + τ /2, then
+
+ρ∗ ≤ 1 − 2σ +
+
+5
+8
+
+ρ +
+
+Solving for ρ gives
+(cid:18)
+
+ρ∗ ≤ max
+
+3 − 4σ +
+
+τ
+2
+
++
+
+(cid:18)
+
+max
+
++
+
+1
+2
+
+ρ∗ + 1, 4ρ,
+
+3
+4
+
+ρ∗ + ρ +
+
+(cid:19)
+
+.
+
+τ
+2
+
+ρ, 1 − 2σ +
+
+τ
+4
+
++
+
+21
+8
+
+ρ,
+
+8 − 16σ + 4τ + 9ρ
+5
+
+(cid:19)
+
+.
+
+τ
+4
+
+5
+4
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+41
+
+If τ ≥ 4σ − 1, then apply (53) termwise to get
+(cid:18)
+
+ρ∗ ≤ max
+
+8 − 9σ +
+
+τ
+2
+
+,
+
+−
+
++
+
+25
+2
+
+23
+2
+4(10 − 9σ)
+5(4σ − 1)
+
+(11 − 13σ + τ )
+
+(cid:19)
+
+,
+
+τ
+4
+(cid:19)
+
+τ
+
+4
+5
+
+,
+
+≤ max
+
+(cid:18) 45 − 46σ
+4(4σ − 1)
+
+τ,
+
+since the RHS is increasing faster in τ and at τ = 4σ − 1 we have equality.
+On the other hand if τ < 4σ − 1 then we apply (52) termwise to get
+
+ρ∗ ≤ max
+
+(cid:18) 21
+2
+
+− 19σ + 3τ,
+
+67 − 134σ + 22τ
+4
+
+,
+
+2
+5
+
+(31 − 62σ + 11τ )
+
+(cid:19)
+
+≤ max
+
+(cid:18) 45 − 46σ
+4(4σ − 1)
+
+τ,
+
+4(10 − 9σ)
+5(4σ − 1)
+
+τ
+
+(cid:19)
+
+,
+
+by inspecting growth rates in τ and noting that at τ = 4σ − 1 one has equality.
+Thus we have shown that if (σ, τ, ρ, ρ∗, s) ∈ Eζ with 3/4 ≤ σ ≤ 5/6 and 2 ≤ τ ≤
+8σ − 4, then
+
+ρ∗/τ ≤ min
+
+(cid:18) 45 − 46σ
+4(4σ − 1)
+
+,
+
+4(10 − 9σ)
+5(4σ − 1)
+
+(cid:19)
+
+,
+
+which is (51).
+Now consider (50). Suppose that τ0 ≤ τ ≤ 2τ0 and (σ, τ, ρ, ρ∗, s) ∈ E. Note that
+the interval [τ0, 2τ0] is covered by intervals Ik := [(4σ − 2)k, (4σ − 2)(k + 1)] with
+k = 2, 3. Suppose that τ ∈ Ik, and write
+
+Then, by (13) and τ ′ ≥ 4σ − 2 one has
+
+τ ′ := τ /k.
+
+ρ/k ≤ max(2 − 2σ, 4 − 6σ + τ ′) = 4 − 6σ + τ ′.
+
+Also, from (13) and τ ≤ (4σ − 2)(k + 1) one has
+
+ρ/(k + 1) ≤ max(2 − 2σ, 4 − 6σ + τ /(k + 1)) ≤ 2 − 2σ
+
+so that for k = 2, 3 one has ρ/k ≤ (2 − 2σ)(k + 1)/k ≤ 3 − 3σ. In summary,
+
+(55)
+
+ρ/k ≤ min(3 − 3σ, 4 − 6σ + τ ′).
+
+Next, by Lemma 62,
+
+(σ, τ ′, ρ′, ρ∗/k, s′) ∈ E
+
+for τ ′ := τ /k and some ρ′ ≤ ρ/k and s′ ≤ s/k.
+Applying Theorem 63 to this tuple, then applying ρ′ ≤ ρ/k, one has
+
+ρ∗
+k
+
+≤ 1 − 2σ +
+
++
+
+1
+2
+1
+2
+
+max
+
+max
+
+(cid:18) ρ
+k
+(cid:18) ρ∗
+k
+
++ 1,
+
++ 1,
+
+,
+
+2ρ
+k
+4ρ
+k
+
+5ρ
+4k
+3
+4
+
+,
+
++
+
+ρ∗
+k
+
+τ ′
+2
+
++
+
+(cid:19)
+
+ρ
+k
+
++
+
+(cid:19)
+
+.
+
+τ ′
+2
+
+By (55) one has ρ/k ≤ 1 (since σ ≥ 3/4) so there are only two cases to consider:
+Case 1: ρ/k + 1 ≥ 5ρ/(4k) + τ ′/2 then
+
+ρ∗
+k
+
+≤
+
+3
+2
+
+− 2σ +
+
+ρ
+2k
+
++
+
+1
+2
+
+max
+
+(cid:18) ρ∗
+k
+
++ 1,
+
+4ρ
+k
+
+,
+
+3
+4
+
+ρ∗
+k
+
++
+
+ρ
+k
+
++
+
+(cid:19)
+
+.
+
+τ ′
+2
+
+Solving for ρ∗/k, we get
+
+(cid:18)
+
+≤ max
+
+4(1 − σ) +
+
+ρ∗
+k
+
+ρ
+k
+
+,
+
+(3 − 4σ) + 5ρ/k
+2
+
+,
+
+2
+5
+
+((6 − 8σ) + τ ′ +
+
+(cid:19)
+
+.
+
+4ρ
+k
+
+)
+
+If τ ′ ≥ 3σ − 1 then (55) reduces to ρ/k ≤ 3 − 3σ. Substituting this bound gives
+ρ∗/k ≤ max(7 − 7σ, 9 − 19σ/2, 32(1 − σ)/5).
+
+42
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+However the RHS is bounded by
+
+(56)
+
+18 − 19σ
+6σ − 2
+for all τ ′ ≥ 3σ − 1 since the desired bound holds at τ ′ = 3σ − 1 (where one has
+equality).
+On the other hand, if 4σ − 2 ≤ τ ′ ≤ 3σ − 1 then (55) reduces to ρ/k ≤ 4 − 6σ + τ ′.
+Substituting this bound gives
+
+τ ′
+
+(57)
+
+(cid:18)
+
+ρ∗/k ≤ max
+
+8 − 10σ + τ ′,
+
+23 − 34σ + 5τ ′
+2
+
+,
+
+2
+5
+
+(22 − 32σ + 5τ ′)
+
+(cid:19)
+
+≤
+
+18 − 19σ
+6σ − 2
+
+τ ′
+
+where the last inequality may be established by checking that it holds at both
+τ ′ = 4σ − 2 and τ ′ = 3σ − 1 (where one has equality). To summarise, by taking
+k = 2, 3 in the (56) and (57), one has
+18 − 19σ
+6σ − 2
+
+(τ0 ≤ τ ≤ 2τ0)
+
+ρ∗ ≤
+
+τ,
+
+in this case.
+Case 2: ρ/k + 1 < 5ρ/(4k) + τ ′/2 then
+
+ρ∗/k ≤ 1 − 2σ +
+
+5ρ
+8k
+
++
+
+τ ′
+4
+
++
+
+1
+2
+
+max
+
+(cid:18) ρ∗
+k
+
++ 1,
+
+4ρ
+k
+
+,
+
+3
+4
+
+ρ∗
+k
+
++
+
+ρ
+k
+
++
+
+(cid:19)
+
+.
+
+τ ′
+2
+
+Solving for ρ∗/k gives
+
+ρ∗/k ≤ max
+
+(cid:18)
+
+3 − 4σ +
+
+τ ′
+2
+
++
+
+5
+4
+
+ρ
+k
+
+, 1 − 2σ +
+
+τ ′
+4
+
++
+
+21
+8
+
+ρ
+k
+
+,
+
+1
+5
+
+(8 − 16σ + 4τ ′ + 9
+
+(cid:19)
+
+.
+
+ρ
+k
+
+)
+
+Proceeding as before, if τ ′ ≥ 3σ−1 then (55) becomes ρ/k ≤ 3−3σ, and substituting
+gives
+
+ρ∗/k ≤ max
+
+(cid:18) 27 − 31σ
+4
+
++
+
+τ ′
+2
+
+,
+
+71 − 79σ
+8
+
++
+
+τ ′
+4
+
+, 7 −
+
+43
+5
+
+σ +
+
+(cid:19)
+
+.
+
+4
+5
+
+τ ′
+
+One may verify that the RHS is bounded by
+18 − 19σ
+6σ − 2
+
+τ ′
+
+(with some room to spare) by checking at the endpoint τ ′ = 3σ − 1.
+Similarly, if 4σ − 2 ≤ τ ′ ≤ 3σ − 1 then using ρ/k ≤ 4 − 6σ + τ ′ from (55) one has
+
+ρ∗/k ≤ max
+
+(cid:18)
+
+8 −
+
+23σ
+2
+
++
+
+7τ ′
+4
+
+,
+
+23
+2
+
+−
+
+71σ
+4
+
++
+
+23τ ′
+8
+
+,
+
+44 − 70σ + 13τ ′
+5
+
+(cid:19)
+
+.
+
+One can check that the RHS is bounded by
+18 − 19σ
+6σ − 2
+by checking the required inequalities hold at τ ′ = 4σ − 2 and τ ′ = 3σ − 1 (in each
+case, with some room to spare).
+Combining all the cases, by taking k = 2, 3 we have shown that for 3/4 ≤ σ ≤ 4/5
+and τ0 ≤ τ ≤ 2τ0 one has
+
+τ ′
+
+ρ∗ ≤
+
+18 − 19σ
+6σ − 2
+
+τ
+
+which is the first part of (50).
+The case for 4/5 ≤ σ ≤ 5/6 may be treated similarly. Here one needs to verify that
+
+max(7 − 7σ, 9 − 19σ/2, 32(1 − σ)/5) ≤
+
+7(1 − σ)
+3σ − 1
+
+τ ′,
+
+EXPONENT PAIRS AND ZERO DENSITY ESTIMATES
+
+43
+
+Figure 4. Plot of bounds on A∗(σ) in Theorem 64, against exist-
+ing literature bounds.
+
+max
+
+(cid:18) 27 − 31σ
+4
+
++
+
+τ ′
+2
+
+,
+
+71 − 79σ
+8
+
++
+
+τ ′
+4
+
+, 7 −
+
+43
+5
+
+σ +
+
+(cid:19)
+
+4
+5
+
+τ ′
+
+≤
+
+7(1 − σ)
+3σ − 1
+
+τ ′
+
+for τ ′ ≥ 3σ − 1, and that
+(cid:18)
+
+(cid:18)
+
+max
+
+8 − 10σ + τ ′,
+
+23 − 34σ + 5τ ′
+2
+
+2
+5
+23τ ′
+8
+for 4σ − 2 ≤ τ ′ ≤ 3σ − 1. The treatment is analogous to before, so we omit the
+□
+proof.
+
+44 − 70σ + 13τ ′
+5
+
+7(1 − σ)
+3σ − 1
+
+7(1 − σ)
+3σ − 1
+
+(22 − 32σ + 5τ ′)
+
+71σ
+4
+
+23σ
+2
+
+7τ ′
+4
+
+23
+2
+
+max
+
+8 −
+
+τ ′,
+
+τ ′
+
+≤
+
+−
+
++
+
+≤
+
++
+
+(cid:19)
+
+,
+
+,
+
+,
+
+(cid:19)
+
+Further additive energy estimates are recorded in the ANTEDB. Figure 4 displays
+currently known upper bounds on A∗(σ).
+
+References
+
+[Bou91] J. Bourgain. Remarks on Montgomery’s conjectures on Dirichlet sums. In Geometric
+aspects of functional analysis (1989–90), volume 1469 of Lecture Notes in Math., pages
+153–165. Springer, Berlin, 1991.
+
+[Bou95] J. Bourgain. Remarks on Halasz-Montgomery Type Inequalities. In J. Lindenstrauss and
+V. Milman, editors, Geometric Aspects of Functional Analysis, pages 25–39. Birkh¨auser
+Basel, Basel, 1995.
+
+[Bou00] J. Bourgain. On large values estimates for Dirichlet polynomials and the density hy-
+pothesis for the Riemann zeta function. Internat. Math. Res. Notices, no. 3:133–146,
+2000.
+
+[Bou02] J. Bourgain. On the distribution of Dirichlet sums. II. In Number Theory for the Mil-
+lennium, I (Urbana, IL, 2000), pages 87–109. A K Peters, Natick, MA, 2002.
+[Bou17] J. Bourgain. Decoupling, exponential sums and the Riemann zeta function. J. Amer.
+
+Math. Soc., 30(1):205–224, 2017.
+
+[CDV24] B. Chen, G. Debruyne, and J. Vindas. On the density hypothesis for L-functions asso-
+ciated with holomorphic cusp forms. Rev. Mat. Iberoam., April 2024. Published online.
+
+44
+
+T. TAO, T. S. TRUDGIAN, AND A. YANG
+
+[CT21]
+
+L. Cladek and T. Tao. Additive energy of regular measures in one and higher dimensions,
+and the fractal uncertainty principle. Ars Inven. Anal., Paper No. 1, 38, 2021.
+[GM24] L. Guth and J. Maynard. New large value estimates for Dirichlet polynomials, 2024.
+
+Preprint available: arXiv:2405.20552v1.
+
+[HT69] G. Hal´asz and P. Tur´an. On the distribution of roots of Riemann zeta and allied func-
+
+tions, I. J. Number Theory, 1(1):121–137, 1969.
+
+[HB78] D. R. Heath-Brown. The twelfth power moment of the Riemann zeta-function. Q. J.
+
+Math., 29(4):443–462, 1978.
+
+[HB79a] D. R. Heath-Brown. The differences between consecutive primes. II. J. Lond. Math. Soc.
+
+(2), 19(2):207–220, 1979.
+
+[HB79b] D. R. Heath-Brown. A large values estimate for Dirichlet polynomials. J. Lond. Math.
+
+Soc., s2-20(1):8–18, 1979.
+
+[HB79c] D. R. Heath-Brown. Zero Density Estimates for the Riemann Zeta-Function and Dirich-
+
+let L -Functions. J. Lond. Math. Soc., s2-19(2):221–232, 1979.
+
+[HB17] D. R. Heath-Brown. A new kth derivative estimate for exponential sums via Vino-
+
+gradov’s mean value. Proc. Steklov Inst. Math., 296(1):88–103, 2017.
+
+[Hux72] M. N. Huxley. On the difference between consecutive primes. Invent. Math., 15:164–170,
+
+1972.
+
+[Hux96] M. N. Huxley. Area, Lattice Points, and Exponential Sums. Number New Ser., 13 in
+
+Oxford Science Publications. Oxford University Press, Oxford; New York, 1996.
+
+[Ing40] A. E. Ingham. On the estimation of N (σ, t). Q. J. Math., 11(1):201–202, 1940.
+[Ivi80]
+
+A. Ivi´c. Exponent pairs and the zeta function of Riemann. Studia Sci. Math. Hungar.,
+15(1-3):157–181, 1980.
+A. Ivi´c. The Riemann Zeta-function. Dover Publications, Inc., Mineola, NY, 2003.
+Theory and applications, Reprint of the 1985 original [Wiley, New York; MR0792089
+(87d:11062)].
+H. Iwaniec and E. Kowalski. Analytic Number Theory, volume 53 of American Mathe-
+matical Society Colloquium Publications. American Mathematical Society, Providence,
+RI, 2004.
+
+[Ivi03]
+
+[IK04]
+
+[Jut77] M. Jutila. Zero-density estimates for L-functions. Acta Arith., 32(1):55–62, 1977.
+[MT24] K. Matom¨aki and J. Ter¨av¨ainen. A note on zero density results implying large value
+
+estimates for Dirichlet polynomials, 2024. Preprint available at arXiv:2403.13157.
+
+[Mon71] H. L. Montgomery. Topics in Multiplicative Number Theory, volume Vol. 227 of Lecture
+
+[Pin23]
+
+Notes in Mathematics. Springer-Verlag, Berlin-New York, 1971.
+J. Pintz. Density theorems for Riemann’s zeta-function near the line Re s = 1. Acta
+Arith., 208(1):1–13, 2023.
+
+[Sar95] P. Sargos. Points Entiers Au Voisinage D’une Courbe, Sommes Trigonom´etriques Cour-
+tes ET Paires D’exposants. Proc. Lond. Math. Soc., s3-70(2):285–312, 1995.
+[Sar03] P. Sargos. An analog of van der Corput’s a4-process for exponential sums. Acta Arith.,
+
+[Tao]
+
+110(3):219–231, 2003.
+T. Tao. A cheap version of nonstandard analysis. https://terrytao.wordpress.com/
+2012/04/02/a-cheap-version-of-nonstandard-analysis/. Accessed: 2024-08-02.
+
+[Tit86] E. C. Titchmarsh. The Theory of the Riemann Zeta-function. Oxford Science Publica-
+
+tions, Oxford, 1986.
+
+[TV10] T. Tao and V. H. Vu. Additive Combinatorics, volume 105 of Cambridge Studies in
+
+Advanced Mathematics. Cambridge University Press, Cambridge, 2010.
+
+[TY23] T. S. Trudgian and A. Yang. Toward optimal exponent pairs, 2023. To appear in Math.
+
+Comp., preprint available at arXiv:2306.05599.
+
+[Wat89] N. Watt. Exponential Sums and the Riemann Zeta-Function II. J. Lond. Math. Soc.,
+
+s2-39(3):385–404, 1989.
+
+UCLA Department of Mathematics, Los Angeles, CA 90095-1555.
+Email address: tao@math.ucla.edu
+
+School of Science, The University of New South Wales, Canberra, Australia
+Email address: timothy.trudgian@unsw.edu.au
+
+School of Science, The University of New South Wales, Canberra, Australia
+Email address: andrew.yang1@unsw.edu.au
+
+

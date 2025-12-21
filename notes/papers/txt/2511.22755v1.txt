@@ -1,0 +1,4306 @@
+5
+2
+0
+2
+
+v
+o
+N
+7
+2
+
+]
+T
+N
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+5
+5
+7
+2
+2
+.
+1
+1
+5
+2
+:
+v
+i
+X
+r
+a
+
+Zeta Spectral Triples
+
+Alain Connes, Caterina Consani and Henri Moscovici
+
+Abstract
+
+We propose and investigate a strategy toward a proof of the Riemann Hypothesis based on
+a spectral realization of its non-trivial zeros. Our approach constructs self-adjoint operators
+D(λ,N )
+obtained as rank-one perturbations of the spectral triple associated with the scaling
+log
+operator on the interval [λ−1, λ]. The construction only involves the Euler products over the
+primes p ≤ x = λ2 and produces self-adjoint operators whose spectra coincide, with striking
+numerical accuracy, with the lowest non-trivial zeros of ζ( 1
+2 + is), even for small values of x. The
+theoretical foundation rests on the framework introduced in [4] together with the extension in [7]
+of the classical Carath´eodory–Fej´er theorem for Toeplitz matrices, which guarantees the necessary
+self-adjointness. Numerical experiments show that the spectra of the operators D(λ,N )
+converge
+towards the zeros of ζ( 1
+2 + is) as the parameters N, λ → ∞. A rigorous proof of this convergence
+would establish the Riemann Hypothesis. We further compute the regularized determinants
+detreg(D(λ,N )
+log − z) of these operators and discuss the analytic role they play in controlling and
+potentially proving the above result by showing that, suitably normalized, they converge towards
+the Riemann Ξ function.
+
+log
+
+Key Words. Riemann zeta, spectral triples, infrared, explicit formulas, Weil quadratic form,
+Prolate wave operator.
+
+Mathematics Subject Classification 2020.
+
+11M06, 11M55, 58B34, 33D60, 34B20.
+
+1
+
+Introduction
+
+This paper is motivated by the spectral realization initiated in [4] of the low lying zeros of the
+Riemann zeta function, in other words as the infrared part of the spectrum of a selfadjoint operator.
+Another key ingredient is the generalization proved in [7] of a fundamental result on Toeplitz
+matrices which is a corollary of Carath´eodory-Fejer 1911 structure theorem [2]. This generalization
+provides for us a large class of functions whose zeros are located on the critical line ℜ(s) = 1/2
+due to the selfadjointness of relevant matrices and the Hurwitz theorem on zeros of uniform limits
+of holomorphic functions. With these tools at hand one devises a process, perfectly in line with
+Riemann’s paper [10], which associates to the restricted Euler product involving only the primes
+p ≤ x a function whose zeros are on the critical line.
+The great surprise then, is that the zeros of this function give high-precision approximations to the
+first non-trivial zeros of the Riemann zeta function using remarkably few terms of the Euler product.
+For instance using only the primes ≤ 13 one obtains for the first 50 zeros an extraordinary accuracy,
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+2. Preliminaries
+
+with errors ranging from 2.5 × 10−55 for the first zero to approximately 10−3 for the fiftieth. The
+probability of achieving such precise approximations by chance is approximately 10−1235, effectively
+ruling out coincidence and suggesting a deep structural relationship between the restricted Euler
+products and the location of the zeros. The method we use is general as well as the proof that all
+the approximating values lie exactly on the critical line.
+In fact we construct spectral triples associated to rank one perturbations D(λ,N )
+of the scaling
+operator D(λ)
+log on the interval [λ−1, λ] with periodic boundary conditions. This construction is based
+on the restriction QW N
+λ of the Weil quadratic form to the linear space EN = EN (λ) of test functions
+spanned by the 2N + 1 eigenfunctions of D(λ)
+log associated to the 2N + 1 eigenvalues of smallest
+absolute value (i.e. ≤ N π/ log λ), extended by 0 outside the interval [λ−1, λ]. We need to verify that
+the smallest eigenvalue ϵN of QW N
+λ is simple and that the corresponding eigenfunction is ”even” i.e.
+invariant under the symmetry u (cid:55)→ u−1. We let δN ∈ EN be the vector representing the Dirichlet
+kernel, as an approximation to the evaluation on the boundary of the interval [λ−1, λ]. Our main
+result is the following:
+
+log
+
+log − |D(λ)
+
+λ assumed simple and ξ the corresponding
+
+N where on
+N = EN /Cξ the inner product is given by the restriction of the quadratic form
+
+Theorem 1.1. Let ϵN be the smallest eigenvalue of QW N
+eigenvector assumed even, normalized by δN (ξ) = 1.
+(i) The operator D(λ,N )
+log = D(λ)
+the subspace E′
+QW N
+λ − ϵN ⟨|⟩.
+(ii) The regularized determinant of D(λ,N )
+is given by detreg(D(λ,N )
++ | R⟩.
+the Fourier transform of ξ for the duality ⟨R∗
+(iii) The Fourier transform (cid:98)ξ(z) is an entire function, all its zeros are on the real line and coincide
+with the spectrum of D(λ,N )
+
+log ξ⟩⟨δN | is selfadjoint in the direct sum E′
+
+log − z) = −i λ−iz (cid:98)ξ(z) where (cid:98)ξ is
+
+N ⊕ E⊥
+
+log
+
+.
+
+log
+
+log
+
+towards the zeros of the Riemann zeta function ζ (cid:0) 1
+
+In Section 6 we show the striking numerical evidence for the convergence of the eigenvalues of
+2 + is(cid:1) as the
+the selfadjoint operators D(λ,N )
+parameters N and λ tend to infinity.
+In Section 7, we explain the natural strategy to justify the above numerical convergence.
+It
+consists in taking the first steps in trying to show the convergence of the regularized determinants
+detreg(D(λ,N )
+Finally Section 8 describes the missing steps in the above strategy and the perspective that it
+opens, based on [3], on the connections between the world of the Weil quadratic form and that of
+information theory, as developed through the theory of prolate wave functions by D. Slepian and
+his collaborators [15].
+
+log − s) towards the Riemann Ξ function.
+
+2 Preliminaries
+
+2.1 The Banach algebra L1(R, dx)
+
+In this section we shall explain elementary computations preparing the ground for the introduction
+of the Weil quadratic form QWλ and of the matrix encoding this quadratic form in a natural basis.
+
+3
+
+2.2 The basis {Un}n∈Z
+
+Definition 2.1. We let L1(R, dx) be the involutive complex Banach algebra of complex valued
+integrable functions on R with product and involution given by
+
+(cid:90)
+
+f ∗ g(y) :=
+
+f (x)g(y − x)dx
+
+f ∗(y) := f (−y)
+
+(2.1)
+
+(2.2)
+
+We shall use the subalgebra of compactly supported functions. Both operations yield functions with
+compact support. We consider the inclusion L2([0, L]) ⊂ L1(R, dx) obtained by extending functions
+by 0 outside the interval [0, L]. In particular, for f, g ∈ L2[0, L] the support of f ∗ ∗ g is contained in
+[−L, L].
+We shall use inner products ⟨f, g⟩ which are antilinear in the first variable and linear in the second.
+The standard inner product ⟨f, g⟩2 is given by
+
+(cid:90)
+
+⟨f, g⟩2 =
+
+f (x)g(x)dx = (f ∗ ∗ g)(0)
+
+In preparation for more involved inner products, we shall compute expressions of the form
+
+q(f, g)(y) := (f ∗ ∗ g)(y) + (f ∗ ∗ g)(−y)
+
+which is an even function of y depending antilinearly on f and linearly on g. One has
+
+(f ∗ ∗ g)(−y) = (f ∗ ∗ g)∗(y) = (g∗ ∗ f )(y),
+
+(2.3)
+
+(2.4)
+
+hence
+
+q(f, g)(y) = (f ∗ ∗ g)(y) + (g∗ ∗ f )(y).
+
+(2.5)
+
+Let a ∈ R and for any f ∈ L1(R, dx), let fa(x) := f (x − a) denote the translated of f .
+
+Lemma 2.2. For any a ∈ R, f, g ∈ L1(R, dx), one has (fa)∗ ∗ ga = f ∗ ∗ g and q(fa, ga) = q(f, g).
+
+Proof. One has
+
+(fa)∗ ∗ ga(y) =
+
+(cid:90)
+
+(fa)∗(y − x)ga(x)dx =
+
+(cid:90)
+
+=
+
+(fa)(x − y)ga(x)dx =
+
+(cid:90)
+
+f (x − a − y)g(x − a)dx
+
+which is independent of a. The second equality follows from (2.4).
+
+2.2 The basis {Un}n∈Z
+
+A natural orthonormal basis for L2([0, L]) consists of the functions {Un}n∈Z defined by
+
+Un(x) := L− 1
+
+2 exp(2πinx/L),
+
+∀x ∈ [0, L].
+
+(2.6)
+
+4
+
+2.2 The basis {Un}n∈Z
+
+Applying the above operations to the basis functions one obtains, for n ̸= m, y ∈ [0, L],
+
+(U ∗
+
+m ∗ Un)(y) =
+
+(cid:90)
+
+Um(x − y)Un(x)dx =
+
+1
+L
+
+(cid:90) L
+
+y
+
+exp (cid:0)2πim(y − x)/L + 2πinx/L(cid:1)dx
+
+=
+
+exp(2πimy/L)
+L
+
+(cid:90) L
+
+y
+
+exp(2πi(n − m)x/L)dx =
+
+exp(2πimy/L)
+2πi(n − m)
+
+(cid:0) exp(2πi(n − m)x/L)(cid:1)(cid:12)
+(cid:12)
+
+L
+y
+
+=
+
+exp(2πimy/L)
+2πi(n − m)
+
+(cid:0)1 − (cid:0) exp(2πi(n − m)y/L)(cid:1)(cid:1) =
+
+exp(2πimy/L) − exp(2πiny/L)
+2πi(n − m)
+
+so that for n ̸= m, y ∈ [0, L],
+
+(U ∗
+
+m ∗ Un)(y) =
+
+exp(2πimy/L) − exp(2πiny/L)
+2πi(n − m)
+
+The result of (2.7) being symmetric in n, m, it implies using (2.5), that for y ∈ [0, L],
+
+(U ∗
+
+m ∗ Un)(y) + (U ∗
+
+m ∗ Un)(−y) = 2 ℜ
+
+(cid:32)
+
+e2πimy/L − e2πiny/L
+2πi(n − m)
+
+(cid:33)
+
+=
+
+sin(2πmy/L) − sin(2πny/L)
+π(n − m)
+
+(2.7)
+
+(2.8)
+
+so that the even function q(Um, Un) is given by
+
+q(Um, Un)(y) =
+
+sin(2πm|y|/L) − sin(2πn|y|/L)
+π(n − m)
+
+, ∀y ∈ [−L, L].
+
+(2.9)
+
+For m = n one simply has, for y ∈ [0, L],
+
+(U ∗
+
+n ∗ Un)(y) =
+
+1
+L
+
+(cid:90) L
+
+y
+
+exp(2πin(y − x)/L + 2πinx/L)dx = (1 − y/L) exp(2πiny/L),
+
+whence
+
+We thus get
+
+(U ∗
+
+n ∗ Un)(y) + (U ∗
+
+n ∗ Un)(−y) = 2 ℜ ((1 − y/L) exp(2πiny/L)) =
+
+= 2(1 − y/L) cos(2πny/L).
+
+q(Un, Un)(y) = 2(1 − |y|/L) cos(2πny/L), ∀y ∈ [−L, L].
+
+(2.10)
+
+Lemma 2.3. The explicit expression of the even function q(Un, Um)(y) for y ∈ [0, L] is :
+
+m ̸= n
+
+m = n
+
+sin( 2πmy
+
+L )−sin( 2πny
+L )
+π(n−m)
+2(L−y) cos( 2πny
+L )
+L
+
+5
+
+3. The Weil quadratic form QW
+
+3 The Weil quadratic form QW
+
+The sesquilinear form QW derives from Weil’s formulation of the explicit formula in prime numbers
+theory [16], which we recall below. Let us denote by W(R∗
++) the Weil class of complex valued
+functions f on R∗
++, by which we mean the functions having continuous derivative, except at finitely
+many points where both f (x) and f ′(x) may have at most a discontinuity of the first kind; at such
+a point the value of f (x) and f ′(x) is defined as the average of the right and left limits. In addition,
+the functions f ∈ W (R∗
+
++) are assumed to satisfy the estimate
+
+f (x) = O(xδ), for x → 0+, f (x) = O(x−1−δ), for x → +∞,
+
+for some δ > 0. These functions admit a Mellin transform, denoted
+
+˜f (s) :=
+
+(cid:90) ∞
+
+0
+
+f (x)xs−1dx.
+
+(3.1)
+
+With the additional notation f ♯(x) := x−1f (x−1), the Weil’s explicit formula takes the form (cf.[1])
+
+(cid:88)
+
+˜f (ρ) =
+
+ρ
+
+(cid:90) ∞
+
+0
+
+f (x)dx +
+
+(cid:90) ∞
+
+0
+
+f ♯(x)dx −
+
+Wv(f ),
+
+(cid:88)
+
+v
+
+(3.2)
+
+where ρ runs over all complex zeros ρ of the Riemann zeta function, v runs over all rational places
+of Q, the non-archimedean distributions Wp are defined as
+
+Wp(f ) := (log p)
+
+(cid:16)
+
+(cid:17)
+f (pm) + f ♯(pm)
+
+,
+
+∞
+(cid:88)
+
+m=1
+
+and the archimedean distribution is given by
+
+WR(f ) := (log 4π + γ)f (1) +
+
+(cid:90) ∞
+
+1
+
+(cid:18)
+
+f (x) + f ♯(x) −
+
+2
+x
+
+f (1)
+
+(cid:19) dx
+
+x − x−1 .
+
+(3.3)
+
+(3.4)
+
+It should be noted that the sum in the left hand side of (3.2), whose general term is oscillatory, is
+only conditionally convergent. This issue of lack of absolute convergence is an essential feature of
+Riemann’s formula for the function π(x) which is the number of primes less than x. In our situation
+this issue does not appear since we shall only apply the explicit formula to functions which are
+the convolution (for the group R∗
++) of two square integrable functions with compact support, thus
+ensuring the absolute convergence of the sum over the zeros.
+An equivalent formulation, known as Guinand-Weil formula, uses the Fourier transform
+
+(cid:98)F (s) :=
+
+(cid:90)
+
+R∗
++
+
+F (u)u−isd∗u,
+
+d∗u =
+
+du
+u
+
+(3.5)
+
+in place of the Mellin transform (3.1). The passage from one to the other is be obtained by
+implementing the automorphism
+
+f (cid:55)→ ∆1/2f = F,
+
+i .e.
+
+F (x) = x1/2f (x),
+
+(3.6)
+
+6
+
+3. The Weil quadratic form QW
+
+which respects the convolution product and satisfies the equalities
+
+(∆1/2f ♯)(x) = x1/2f ♯(x) = x−1/2f (x−1) = (∆1/2f )(x−1).
+
+For a rational place v, denoting Wv(F ) := Wv(∆−1/2F ), the above distributions Wp take the
+following form:
+
+Wp(F ) = (log p)
+
+p−m/2 (cid:0)F (pm) + F (p−m)(cid:1) ,
+
+(3.7)
+
+∞
+(cid:88)
+
+while the archimedean distribution WR becomes
+
+m=1
+
+WR(F ) := (log 4π + γ)F (1) +
+
+(cid:90) ∞
+
+(cid:16)
+
+1
+
+F (x) + F (x−1) − 2x−1/2F (1)
+
+(cid:17) x1/2
+x − x−1 d∗x,
+
+where d∗x = dx/x. The latter can also be expressed as WR = −W∞, where
+
+and
+
+W∞(F ) =
+
+(cid:90)
+
+R
+
+(cid:98)F (t)
+
+2∂tθ(t)
+2π
+
+dt.
+
+θ(t) = −
+
+t
+2
+
+log π + ℑ log Γ
+
+(cid:18) 1
+4
+
++ i
+
+(cid:19)
+
+t
+2
+
+(3.8)
+
+(3.9)
+
+is the angular Riemann-Siegel function, with log Γ(s) for ℜ(s) > 0 denoting the branch of the
+logarithm which is real for s real.
+
+By polarization, the Weil form gives the sesquilinear expression
+
+QW (f, g) = Ψ(f ∗ ∗ g), Ψ(F ) := W0,2(F ) − WR(F ) −
+
+(cid:88)
+
+p
+
+Wp(F ).
+
+The components WR and Wp are as above, and the functional W0,2 is
+
+W0,2(F ) = (cid:98)F (i/2) + (cid:98)F (−i/2).
+
+(3.10)
+
+(3.11)
+
+There is a rather subtle invariance property of the Weil sesquilinear form, namely its symmetry
+under the inversion ι(u) = u−1, u ∈ R∗, which will play a significant role in its explicit description.
+
+Lemma 3.1. The Weil functional Ψ fulfills
+
+Ψ(h) = Ψ#(h) + Ψ#(h ◦ ι) = Ψ#(h + h ◦ ι),
+
+where Ψ♯ is the distribution on [1, ∞),
+
+Ψ♯ := W #
+
+0,2 − W #
+
+R −
+
+(cid:88)
+
+W #
+p
+
+(3.12)
+
+(3.13)
+
+7
+
+3. The Weil quadratic form QW
+
+with the components given by
+
+W #
+
+0,2(F ) =
+
+W #
+
+R (F ) =
+
+1
+2
+
+(log 4π + γ)F (1) +
+
+(cid:90) ∞
+
+F (x)(x1/2 + x−1/2)d∗x,
+
+1
+(cid:90) ∞
+
+1
+
+x1/2F (x) − F (1)
+x − x−1
+∞
+(cid:88)
+
+d∗x,
+
+W #
+
+p (F ) = (log p)
+
+p−m/2F (pm).
+
+(3.14)
+
+(3.15)
+
+(3.16)
+
+Proof. This follows from the construction of Ψ. Note the factor 1
+
+2 in (3.15).
+
+Proposition 3.2. Let λ > 1, L = 2 log λ.
+(i) The following map is an isometry κ : L2([0, L], dx) → L2([λ−1, λ], d∗u),
+
+m=1
+
+κ(f )(u) = f (log(λu))
+
+(3.17)
+
+which induces an isomorphism C∞([0, L]) → C∞([λ−1, λ]).
+(ii) Let f, g ∈ C∞([0, L]). One has
+
+QW (κ(f ), κ(g)) = Ψ♯(F ), F (u) = q(f, g)(log u).
+
+(3.18)
+
+Proof. (i) Follows since the map u (cid:55)→ log(λu) is a diffeomorphism from [λ−1, λ] to [0, L] transforming
+the measure d∗u into the measure dx.
+(ii) One has, by Lemma 3.1,
+
+QW (κ(f ), κ(g)) = Ψ♯(h + h ◦ ι), h = κ(f )∗ ∗ κ(g).
+
+Let us show that h + h ◦ ι = F . By Lemma 2.2, one has, with a = − L
+2
+
+q(f, g) = q(fa, ga), fa(x) := f (x +
+
+L
+2
+
+), ga(x) := g(x +
+
+L
+2
+
+)
+
+so that fa and ga have support in [− L
+log is the isomorphism of locally compact groups log : R∗
+involutive convolution algebras
+
+2 , L
+
+2 ] and one has κ(f ) = fa ◦ log, κ(g) = ga ◦ log, where the
++ → R. This induces an isomorphism of
+
+◦ log : L1(R, dx) → L1(R∗
+
++, d∗x).
+
+Thus one gets
+
+h = κ(f )∗ ∗ κ(g) = (fa ◦ log)∗ ∗ (ga ◦ log) = (f ∗
+
+a ∗ ga) ◦ log
+
+which using (2.4) gives
+
+h + h ◦ ι = q(fa, ga) ◦ log = q(f, g) ◦ log = F.
+
+and hence the required equality.
+
+8
+
+3.1 The quadratic form QWλ
+
+3.1 The quadratic form QWλ
+
+Let λ > 1. We denote by QWλ the restriction of the quadratic form QW to L2([λ−1, λ], d∗u), where
+d∗u = du
+
+u . One has
+
+QWλ(f, f ) =
+
+(cid:90)
+
+R
+
+| (cid:98)f (t)|2 2∂tθ(t)
+
+2π
+
+(cid:18)
+
+dt + 2ℜ
+
+(cid:98)f (
+
+i
+2
+
+¯
+(cid:98)f (−
+
+)
+
+i
+2
+
+(cid:19)
+)
+
+−
+
+(cid:88)
+
+1<n≤λ2
+
+Λ(n)⟨f | T (n)f ⟩;
+
+(3.19)
+
+here Λ(n) is the von Mangoldt function, and T (n) is the bounded self-adjoint operator in L2([λ−1, λ], d∗u)
+defined by
+
+⟨f | T (n)g⟩ = n−1/2 (cid:0)(f ∗ ∗ g)(n) + (f ∗ ∗ g)(n−1)(cid:1) .
+(3.20)
+Proposition 3.3. ([4, §2]) The quadratic form QWλ is lower bounded and lower semi-continuous.
+Recall that a lower bounded, lower semi-continuous (lsc) quadratic form Q on a Hilbert space H is
+a lower semi-continuous map Q : H → (−∞, +∞], i.e. such that Q(ξ) ≤ lim inf Q(ξn) when ξn → ξ,
+which fulfills Q(λξ) = |λ|2Q(ξ) for all λ ∈ C, satisfies the parallelogram law
+
+Q(ξ + η) + Q(ξ − η) = 2Q(ξ) + 2Q(η)
+
+and also an inequality of the form Q(ξ) ≥ −c∥ξ∥2 for all ξ ∈ H reflecting the lower bound
+of q. The associated sesquilinear form (antilinear in the first variable) is given on the domain
+Dom(Q) := {ξ ∈ H | Q(ξ) < ∞} by
+
+Q(ξ, η) :=
+
+1
+4
+
+(Q(ξ + η) − Q(ξ − η) + iQ(iξ + η) − iQ(iξ − η)) .
+
+Let Vn : [λ−1, λ] → C be the function κ(Un), i.e.
+
+Vn(u) := Un(log(λu)), ∀u ∈ [λ−1, λ]
+
+(3.21)
+
+and let E ⊂ L2([λ−1, λ], d∗u) be the linear subspace generated by the Vn for n ∈ Z.
+Proposition 3.4. ([4, Prop. 2.3]) The space E is a core for the quadratic form QWλ : L2([λ−1, λ], d∗u) →
+(−∞, +∞], which satisfies, for any f ∈ L2([λ−1, λ], d∗u),
+
+QWλ(f, f ) = lim inf
+gn→f
+
+QWλ(gn, gn), gn ∈ E.
+
+(3.22)
+
+In particular, the lower bound of QWλ is the limit, when N → ∞, of the smallest eigenvalue of the
+restriction of QWλ to the linear span EN of the functions Vk with |k| ≤ N .
+
+3.2 Discrete spectrum of the semilocal Weil quadratic form QWλ
+
+At this juncture we appeal to a basic result from the general theory of quadratic forms. Adopting
+the notation in [12, Ch. 10], to a quadratic form t one associates a mapping t′ : H → R ∪ {+∞} by
+setting t′[x] = t[x] if x is in D(t) and t′[x] = +∞ if x is not in D(t). According to [12, Proposition
+10.1] the following four conditions are equivalent:
+
+9
+
+3.2 Discrete spectrum of the semilocal Weil quadratic form QWλ
+
+1. t is closed.
+
+2. If (xn)n∈N is a sequence from D(t) such that limn→∞ xn = x in H for some x ∈ H and
+
+limn,k→∞ t [xn − xk] = 0, then x ∈ D(t) and limn→∞ t [xn − x] = 0.
+
+3. t′ is a lower semicontinuous function on H.
+
+4. If (xn)n∈N is a sequence from D(t) such that limn→∞ xn = x in H for some x ∈ H and the set
+
+{t [xn] : n ∈ N} is bounded, then we have x ∈ D(t) and t[x] ≤ lim inf n→∞ t [xn].
+
+By Proposition 3.3 the condition (3) is fulfilled by the semilocal Weil quadratic form QWλ, and
+therefore Theorem 10.7 in [12], reproduced below, applies.
+Representation theorem for semibounded forms – If t is a densely defined lower semibounded
+closed form on H, then the operator At is self-adjoint, and t is equal to the form t(At) associated
+with At.
+
+Thus, for each λ > 1, there is a canonical lower bounded unbounded selfadjoint operator Aλ in the
+Hilbert space L2 (cid:0)(cid:2)λ−1, λ(cid:3) , d∗u(cid:1) such that
+
+QWλ(f, f ) = ⟨Aλf | f ⟩.
+
+(3.23)
+
+By construction the unbounded selfadjoint operator Aλ is lower bounded. The issue is to show that
+it has discrete spectrum. We use the following from [12], Proposition 10.6,
+
+Proposition 3.5. Suppose that A ≥ mA is a lower semibounded self-adjoint operator and m < mA.
+Then the following assertions are equivalent:
+
+1. The embedding map ItA : (D[A], ∥ · ∥tA) → (H, ∥ · ∥) is compact.
+
+2. The resolvent Rλ(A) is compact for one, hence for all, λ ∈ ρ(A).
+
+3. (A − mI)−1/2 is compact.
+
+4. A has a purely discrete spectrum.
+
+Theorem 3.6. The selfadjoint operator Aλ has discrete lower bounded spectrum.
+
+Proof. By the proof of the lower boundedness in [4], the contribution of the non-archimedean primes
+to the operator Aλ is bounded as well as the contribution of the evaluation of the Fourier transform
+at the poles. Thus it is enough to deal, for any λ > 1 with the contribution of the archimedean
+place to Aλ in the Hilbert space L2 (cid:0)(cid:2)λ−1, λ(cid:3) , d∗u(cid:1). It is given, after Fourier transform, by the
+multiplication by
+
+∂tθ(t) =
+
+(log(|t|) − log(2) − log(π)) −
+
+(3.24)
+
+1
+
+48t2 + O (cid:0)t−4(cid:1)
+
+1
+2
+
+whose asymptotic expansion allows one to use instead the operator L of multiplication (in Fourier)
+by the function which is 1 for |t| ≤ e and log(|t|) otherwise. Note that the factor 1
+2π is taken care of
+since the unitary Fourier transform has a factor
+
+1√
+
+.
+
+2π
+
+10
+
+3.2 Discrete spectrum of the semilocal Weil quadratic form QWλ
+
+By Proposition 3.5, it is enough to show that the embedding map I : (D[L ], ∥ · ∥tL) → (H, ∥ · ∥) is
+compact. The map I is of norm ≤ 1 by construction and it is enough to show that the image of the
+unit ball is precompact in the following sense:
+Let E be a metric space. If any of the following three properties is satisfied, then all three are
+satisfied, and E is said to be precompact:
+1. For every ε > 0, E can be covered by a finite number of balls of radius ε;
+2. For every ε > 0, E can be covered by a finite number of subsets with diameter less than ε;
+3. Every sequence in E has a Cauchy subsequence.
+We shall show that for any positive increasing function ρ : [0, ∞) → [1, ∞) such that ρ(u) → ∞
+when u → ∞ the embedding Iρ of the Hilbert space Dρ in L2 (cid:0)(cid:2)λ−1, λ(cid:3) , d∗u(cid:1) is compact, where the
+norm square in Dρ is given by
+
+(cid:90)
+
+∥f ∥2
+
+ρ :=
+
+| ˆf (t)|2 ρ(t)
+2π
+
+dt
+
+(3.25)
+
+In fact one can use the logarithm-exponential isomorphism and replace the Hilbert space L2 (cid:0)(cid:2)λ−1, λ(cid:3) , d∗u(cid:1)
+by H = L2 ([−L, L] , dx) and use the ordinary Fourier transform in (3.25). It is enough to show that
+the image Iρ(B) of the unit ball B of Dρ is precompact in H. Let then ϵ > 0 and let us show that
+one can cover Iρ(B) by finitely many balls of radius ϵ for the norm of H. Since ρ(u) → ∞ when
+u → ∞ there exists T < ∞ such that
+
+∥f ∥2
+
+ρ ≤ 1 ⇒
+
+(cid:90)
+
+|t|≥T
+
+| ˆf (t)|2 dt
+2π
+
+≤ (ϵ/4)2
+
+(3.26)
+
+Next, the operator (cid:99)PT PL is a compact operator in L2(R) and hence the image (cid:99)PT PL(C) of the unit
+ball C of L2(R) is precompact in L2(R). By construction Iρ(B) ⊂ H = L2 ([−L, L] , dx) = PLL2(R),
+thus the map
+
+is compact. Thus there exists a finite set of functions {fj}j∈J ⊂ B ⊂ Dρ, such that
+
+(cid:99)PT Iρ : Dρ → L2(R)
+
+∀f ∈ B, ∃j | ∥ (cid:99)PT (f − fj)∥2 ≤ (ϵ/2)2.
+
+Thus one has
+
+∀f ∈ B, ∃j ∈ J such that
+
+(cid:90)
+
+|t|≤T
+
+| ˆf (t) − ˆfj(t)|2 dt
+2π
+
+≤ (ϵ/2)2
+
+By (3.26) it follows that for any f ∈ B there exists j such that
+
+(cid:90)
+
+H =
+
+∥f − fj∥2
+(cid:90)
+
+=
+
+|t|≤T
+
+| ˆf (t) − ˆfj(t)|2 dt
+2π
+
+=
+
+| ˆf (t) − ˆfj(t)|2 dt
+2π
+(cid:90)
+| ˆf (t) − ˆfj(t)|2 dt
+2π
+
++
+
+|t|≥T
+
+≤ (ϵ/2)2 + (ϵ/2)2 < ϵ2,
+
+where we used (3.26) and the triangle inequality to get
+
+(cid:32)(cid:90)
+
+|t|≥T
+
+|( ˆf (t) − ˆfj)(t)|2 dt
+2π
+
+(cid:33)1/2
+
+≤ ϵ/4 + ϵ/4 = ϵ/2.
+
+11
+
+4. The matrix of QWλ in the basis Vn
+
+Corollary 3.7. Let λ > 1. There exists an element ϕ ∈ L2 (cid:0)(cid:2)λ−1, λ(cid:3) , d∗u(cid:1) such that Aλ(ϕ) = µλ ϕ
+where µλ is the largest lower bound of the spectrum of Aλ.
+
+Note that we cannot assert that µλ ≥ 0. One has however
+
+λ > λ′ ⇒ µλ ≤ µλ′
+
+(3.27)
+
+Indeed first note that the test functions which are piecewise smooth form a core for the Weil
+quadratic form QWλ since the smooth ones already do by [4] and moreover the Fourier transform
+of piecewise smooth functions f with compact support are O(|s|−1) since the derivative f ′ is a
+bounded measure, so the piecewise smooth functions are in the domain of QWλ. One then uses the
+equivalence (with f piecewise smooth)
+
+ν ≤ µλ ⇐⇒ QWλ(f, f ) ≥ ν∥f ∥2, ∀f | support(f ) ⊂ (cid:2)λ−1, λ(cid:3)
+
+Corollary 3.8. If the limit when λ → ∞ of the decreasing function µλ is equal to 0 then RH holds.
+
+4 The matrix of QWλ in the basis Vn
+
+We now compute the matrix of the sesquilinear form QWλ(f, g) = Ψ(f ∗ ∗ g) in the basis {Vn}n∈Z.
+By Proposition 3.2 and the equality Vn = κ(Un) we get
+
+QWλ(Vn, Vm) = Ψ#(F ), where F (x) = q(Un, Um)(log x)
+
+(4.1)
+
+and Ψ♯ was defined in (3.13).
+Next, we proceed to describe the contribution to the matrix QWλ(Vn, Vm) of each term in (3.13).
+
+4.1 The matrix W0,2(Vn, Vm)
+
+The following lemma shows that the terms W0,2(Vn, Vm) contribute by a rank two matrix.
+Lemma 4.1. Let n, m ∈ Z. Let F (x) = q(Un, Um)(log x), then one has :
+
+W0,2(Vn, Vm) = W #
+
+0,2(F ) =
+
+32L sinh2 (cid:0) L
+(cid:1) (cid:0)L2 − 16π2mn(cid:1)
+4
+(L2 + 16π2m2) (L2 + 16π2n2)
+
+(4.2)
+
+Proof. This is best verified by direct computation.
+
+4.2 The matrix Wp(Vn, Vm)
+
+The contribution of the non archimedean primes is given by (3.16), i.e.
+
+(cid:88)
+
+Wp(Vn, Vm) =
+
+(cid:88)
+
+Λ(k)k−1/2q(Un, Um)(log k).
+
+(4.3)
+
+1<k≤exp(L)
+
+12
+
+4.3 The matrix WR(Vn, Vm)
+
+4.3 The matrix WR(Vn, Vm)
+
+Let ω(x) = q(Un, Um)(x), then(3.15) gives
+
+WR(Vn, Vm) =
+
+(cid:90) L
+
+0
+
+exp (cid:0) x
+(cid:1) ω(x) − ω(0)
+2
+exp (x) − exp (−x)
+
+dx − ω(0)
+
+(cid:90) ∞
+
+L
+
+dx
+exp (x) − exp (−x)
+
++
+
+1
+2
+
+(γ + log(4π))ω(0).
+
+Since
+
+one obtains
+
+(cid:90) ∞
+
+L
+
+dx
+exp (x) − exp (−x)
+
+=
+
+1
+2
+
+log
+
+(cid:19)
+
+(cid:18) eL + 1
+eL − 1
+
+WR(Vn, Vm) =
+
+(cid:19)(cid:19)
+
+eL − 1
+eL + 1
+
+(cid:18)
+
+(cid:18)
+
+4π
+
+γ + log
+
+ω(0)
+2
+(cid:1) ω(x) − ω(0)
+exp (cid:0) x
+2
+exp (x) − exp (−x)
+
+(cid:90) L
+
++
+
+0
+
+dx.
+
+(4.4)
+
+The explicit expression for ω(x) = q(Un, Um)(x) for x ∈ [0, L], is given by Lemma 2.3. The next
+step is to compute the integrals involved, they are given in terms of known functions in the following
+proposition 4.2. We let
+
+ρ(x) :=
+
+exp(x/2)
+exp(x) − exp(−x)
+
+We let ψ(z) = Γ′(z)/Γ(z) be the digamma function and ψ(1) be its derivative. We use the standard
+notation for hypergeometric functions. We use the notation Φ for the Hurwitz-Lerch function
+
+Φ(z, 2, x) =
+
+1
+x2 +
+
+z
+(x + 1)2 +
+
+z2
+(x + 2)2 +
+
+z3
+(x + 3)2 +
+
+z4
+
+(x + 4)2 + . . .
+
+An important feature of the formulas is that the parameter e−2L in the various series involved is of
+modulus < 1 thus ensuring the convergence and in fact fast numerical convergence for L of order 10.
+
+13
+
+4.3 The matrix WR(Vn, Vm)
+
+Proposition 4.2. We use the symbols ℜ(z) and ℑ(z) for the real and imaginary parts of a complex
+number z. One has
+
+(cid:90) L
+
+0
+
+sin(2πnx/L)ρ(x)dx =
+
+e−L/2ℑ(
+
+2L
+
+L + 4πin 2F1(1,
+
+πin
+L
+
++
+
+1
+4
+
+;
+
+πin
+L
+
++
+
+5
+4
+
+; e−2L)) +
+
+1
+2
+
+ℑ(ψ(
+
+πin
+L
+
++
+
+1
+4
+
+)).
+
+(cid:90) L
+
+0
+
+(cid:90) L
+
+0
+
+x cos(2πnx/L)ρ(x)dx =
+
+− Le−L/2ℑ
+
+(cid:18)
+
+−
+
+e−L/2
+4
+
+ℜ
+
+Φ
+
+(cid:18)
+
+2L
+
+(cid:18)
+
+4πn − iL 2F1
+(cid:18)
+iπn
+L
+
+e−2L, 2,
+
+1,
+
++
+
+1
+4
+
++
+
+1
+4
+(cid:19)(cid:19)
+
+inπ
+L
+
+;
+
+5
+4
+
++
+
+inπ
+L
+
+; e−2L
+
+(cid:19)(cid:19)
+
++
+
+1
+4
+
+ℜ
+
+(cid:18)
+
+ψ(1)
+
+(cid:18) πin
+L
+
++
+
+1
+4
+
+(cid:19)(cid:19)
+
+.
+
+(cos(2πnx/L) − 1)ρ(x)dx =
+
+− e−L/2ℜ
+
++ 2e−L/2
+
+(cid:18)
+
+2L
+
+L + 4πin 2F1
+(cid:18) 1
+4
+
+, 1;
+
+5
+4
+
+; e−2L
+
+2F1
+
+(cid:18)
+
+1,
+
+(cid:19)
+
+;
+
+1
+4
+(cid:18)
+
+πin
+L
+
++
+
+−
+
+1
+2
+
+ℜ
+
+πin
+L
+πin
+L
+
+ψ(
+
++
+
+5
+4
+1
+4
+
+(cid:19)(cid:19)
+
++
+
+; e−2L
+
+) − ψ(
+
+(cid:19)
+
+.
+
+1
+4
+
+)
+
+(4.5)
+
+(4.6)
+
+(4.7)
+
+Proof. In each case one first changes variables to y = 2πx/L and then expand, with a := L
+2π
+
+ρ(x) =
+
+exp (cid:0) ay
+2
+exp(ay) − exp(−ay)
+
+(cid:1)
+
+=
+
+∞
+(cid:88)
+
+k=0
+
+exp(b(k)y), b(k) =
+
+−a(1 + 4k)
+2
+
+The change of variables introduces an overall factor ( L
+2π ) for the
+others. One obtains in this way for each integral a sum of terms indexed by k ∈ N and which are
+
+2π )2 for the middle integral and ( L
+
+(cid:90) 2π
+
+exp(bx) sin(nx) dx =
+
+0
+(cid:90) 2π
+
+0
+
+x exp(bx) cos(nx) dx =
+
+(cid:90) 2π
+
+0
+
+exp(bx)(cos(nx) − 1) dx =
+
+n − e2πbn
+b2 + n2
+2πe2πbb − e2πb + 1
+b2 + n2
+n2 − e2πbn2
+b3 + bn2
+
+−
+
+2n2 (cid:0)1 − e2πb(cid:1)
+(b2 + n2)2
+
+(4.8)
+
+(4.9)
+
+(4.10)
+
+All these expressions are affine in e2πb whose coefficient gives the general term of a sum over k ∈ N
+using
+
+e2πb(k) = exp(−
+
+(1 + 4k)) = e−L/2zk, z = e−2L.
+
+L
+2
+
+14
+
+4.3 The matrix WR(Vn, Vm)
+
+One then recognizes the series in z involved and obtains the following expressions
+
+sin(2πnx/L)ρ(x)dx =
+
+(cid:90) L
+
+0
+
+e−L/2
+
+(cid:32)
+
+(iL) 2F1
+
+(cid:0)1, 1
+
+4 − inπ
+
+L ; e−2L(cid:1)
+
+(iL) 2F1
+
+−
+
+(cid:0)1, iπn
+
+L + 1
+4 ; iπn
+L + 4iπn
+
+L + 5
+
+4 ; e−2L(cid:1)
+
+(cid:33)
+
+4 − inπ
+L ; 5
+L − 4iπn
+(cid:19)
+
+− ψ(0)
+
++
+
+1
+4
+
+i
+
+(cid:18)
+
+ψ(0)
+
+(cid:18) 1
+4
+
+−
+
+inπ
+L
+
+(cid:19)(cid:19)
+
+(cid:18) iπn
+L
+
++
+
+1
+4
+
+x cos(2πnx/L)ρ(x)dx =
+
+(cid:18)
+
+Φ
+
+e−2L, 2,
+
+(cid:18)
+
+−
+
+1
+8
+(cid:32)
+
++ e−L/2
+
+iL2
+
+2F1
+
+(cid:18)
+
+(cid:19)
+
+Φ
+
+−
+
+1
+8
+4 ; e−2L(cid:1)
+L + 5
+
+e−2L, 2,
+
+−
+
+1
+4
+iL2
+
+(cid:19)(cid:19)
+
+iπn
+L
+(cid:0)1, 1
+
+2F1
+
+−
+
+4 − iπn
+
+L ; e−2L(cid:1)
+
+(cid:33)
+
+L ; 5
+4 − iπn
+4πn + iL
+
+(cid:90) L
+
+0
+
+e−L/2
+
++
+
+1
+8
+(cid:90) L
+
+0
+
+(cid:18)
+
+ψ(1)
+
+(cid:18) iπn
+L
+
++
+
+(cid:19)(cid:19)
+
+−
+
+iπn
+L
+
+(cos(2πnx/L) − 1)ρ(x)dx =
+
++
+
+1
+iπn
+4
+L
+(cid:0)1, iπn
+L + 1
+4 ; iπn
+4πn − iL
+(cid:18) 1
+4
+
++ ψ(1)
+
+1
+4
+
+(cid:19)
+
+4 ; iπn
+L + 1
+L + 4iπn
+(cid:19)
+
+(cid:32)
+
+L 2F1
+
+(cid:0)1, iπn
+
+e−L/2
+
+−
+
+L + 5
+
+4 ; e−2L(cid:1)
+
+L 2F1
+
+−
+
+(cid:0)1, 1
+
+4 − inπ
+
+4 − inπ
+
+L ; e−2L(cid:1)
+
+(cid:33)
+
++ 2e−L/2
+
+2F1
+
+(cid:18) 1
+4
+
+5
+4
+
+, 1;
+
+; e−2L
+
++
+
+(cid:18)
+
+−ψ(0)
+
+(cid:18) iπn
+L
+
++
+
+(cid:19)
+
+1
+4
+
+1
+4
+
+(cid:19)
+
+inπ
+L
+
++ 2ψ(0)
+
+(cid:19)(cid:19)
+
+(cid:18) 1
+4
+
+L ; 5
+L − 4iπn
+(cid:18) 1
+4
+
+−
+
+− ψ(0)
+
+Using the real and imaginary parts to simplify these expressions one obtains the required result.
+
+For the last integral we have computed a simplified form of the required expression which is
+
+(cid:90) L
+
+0
+
+(cos(2πnx/L) − exp(−x/2))ρ(x)dx =
+
+(cid:90) L
+
+0
+
+(cos(2πnx/L) − 1)ρ(x)dx + c(L)
+
+(4.11)
+
+where the correction term is
+
+c(L) =
+
+(cid:90) L
+
+0
+
+1 − exp (cid:0)− x
+2
+exp(x) − exp(−x)
+
+(cid:1)
+
+dx =
+
+(cid:16)
+
+log
+
+eL/2 + 1
+
+(cid:17)
+
++
+
+1
+4
+
+(cid:0)−2 log (cid:0)eL + 1(cid:1) − π − log(4)(cid:1) + tan−1 (cid:16)
+
+eL/2(cid:17)
+
+In fact we need to add the following to take into account the full Weil principal value
+
+w(L) =
+
+1
+2
+
+(γ + log(4π)) −
+
+1
+2
+
+log
+
+(cid:19)
+
+(cid:18) eL + 1
+eL − 1
+
+15
+
+We then obtain
+
+5. The infrared spectral triples
+
+c(L) + w(L) =
+
+(cid:32)
+
+1
+2
+
+log
+
+eL/2 − 1
+eL/2 + 1
+
+(cid:33)
+
++ tan−1 (cid:16)
+
+eL/2(cid:17)
+
+−
+
+π
+4
+
++
+
+γ
+2
+
++
+
+1
+2
+
+log(8π)
+
+To get lighter notations we let
+
+(4.12)
+
+(4.13)
+
+(4.14)
+
+αL(n) :=
+
+sin(2πnx/L)ρ(x)dx,
+
+(cid:90) L
+
+0
+(cid:90) L
+
+1
+π
+1
+L
+(cid:90) L
+
+βL(n) :=
+
+x cos(2πnx/L)ρ(x)dx,
+
+γL(n) :=
+
+0
+
+(cos(2πnx/L) − exp(−x/2))ρ(x)dx + c(L) + w(L)
+
+0
+
+Using these notations, Proposition 4.2 and (4.4), one obtains
+
+Proposition 4.3. The matrix WR(Vn, Vm) is given by the following table
+
+m ̸= n
+m = n
+
+αL(m)−αL(n)
+n−m
+2γL(n) − 2βL(n)
+
+Proof. Follows from Lemma 2.3.
+
+5 The infrared spectral triples
+
+In this section we shall construct infrared spectral triples naturally associated to the scaling operator
+in L2([λ−1, λ], d∗u) with periodic boundary conditions. The intent is to modify the periodic boundary
+conditions in order to insert in the kernel of the modified scaling operator the eigenvector which
+realizes the minimum of the Weil quadratic form in the Hilbert space L2([λ−1, λ], d∗u). In order to
+obtain this perturbation we work at the truncated level and use instead of the evaluation on the
+boundary of the interval [λ−1, λ] an approximation to this evaluation which is given by the Dirichlet
+kernel. We then show the existence and uniqueness of the perturbed scaling operator, together with
+two fundamental facts. The first is that this operator becomes self-adjoint provided one modifies
+the inner product using the Weil quadratic form. The second point is that one can compute the
+spectrum of this operator using the Fourier transform of the minimal eigenvector.
+
+5.1 Truncation of QWλ
+
+Let λ > 1, L = 2 log λ, Un as defined in (2.6) and Vn = κ(Un) the orthonormal basis of
+L2([λ−1, λ], d∗u) given in (3.21). Let N ∈ N, we consider the quadratic form QW N
+λ obtained
+by restricting the Weil quadratic form QWλ to the finite dimensional space of test functions spanned
+by the functions Vn for |n| ≤ N .
+By (3.18), the matrix elements of T = QW N
+
+λ in the basis Vn are given by
+
+τn,m =
+
+(cid:90) L
+
+0
+
+q(Un, Um)(y)D(y)
+
+i, j ∈ {−N, . . . , N }
+
+(5.1)
+
+16
+
+5.2 Properties of truncated matrices
+
+where D is the real distribution D = log∗(Ψ♯) on the interval [0, L].
+Lemma 5.1. The matrix τn,m is a real symmetric matrix of the form
+
+τi,i = ai,
+
+∀i,
+
+τi,j =
+
+bi − bj
+i − j
+
+,
+
+∀j ̸= i;
+
+i, j ∈ {−N, . . . , N }
+
+(5.2)
+
+where the real scalars ai fulfill a−j = aj and b−j = −bj for all j ∈ {−N, . . . , N }.
+
+Proof. This follows from the computation of the functions q(Un, Um)(y) for y ∈ [0, L] in (2.8) and
+(2.10), which gives for n ̸= m
+
+τn,m =
+
+(cid:90) L
+
+0
+
+sin(2πmy/L) − sin(2πny/L)
+π(n − m)
+
+D(y) =⇒
+
+bn = −
+
+1
+π
+
+(cid:90) L
+
+0
+
+sin(2πny/L)D(y)
+
+τn,n = 2
+
+(cid:90) L
+
+0
+
+(1 − y/L) cos(2πny/L)D(y) = an
+
+and for n = m,
+
+5.2 Properties of truncated matrices
+
+In this section we let N be a positive integer, EN be the Hilbert space with orthonormal basis
+{Vn, n ∈ {−N, . . . , N }} and T a real symmetric matrix of the form (5.2). We recall the basic
+properties of [7] for matrices of this form.
+
+Lemma 5.2. (i) Let γ such that γ(Vj) := V−j ∀j ∈ {−N, . . . , N }. One has γ2 = id and T γ = γT .
+(ii) Let D be defined by D(Vn) := n Vn for all n ∈ {−N, . . . , N }. One has Dγ = −γD and
+
+D T − T D = |β⟩⟨η| − |η⟩⟨β|, β =
+
+(cid:88)
+
+bj Vj, η =
+
+(cid:88)
+
+Vj.
+
+(5.3)
+
+Proof. (i) One has q−i,−j = qi,j for all i, j ∈ {−N, . . . , N }.
+(ii) The diagonal elements of the diagonal matrix D are antisymmetric which gives Dγ = −γD. Let
+us prove (5.3). One has
+
+(DT )i,j = iτi,j, (T D)i,j = jτi,j
+
+so that (D T − T D)i,j = (bi − bj) for all i, j ∈ {−N, . . . , N }. Similarly one has
+
+(|β⟩⟨η|)i,j = |β⟩i⟨η|j = bi,
+
+(|η⟩⟨β|)i,j = |η⟩i⟨β|j = bj
+
+which gives the required equality.
+
+Definition 5.3. A real symmetric matrix T commuting with the Z/2-grading γ is even-simple if
+its smallest eigenvalue is simple and the corresponding eigenvector ξ satisfies γξ = ξ.
+
+17
+
+5.2 Properties of truncated matrices
+
+We now assume that T is even simple and positive and let ξ ∈ ker T , ξ ̸= 0. The real symmetric
+positive matrix T defines an inner product on R2N +1 and its radical consists of the one dimensional
+subspace generated by ξ. Let us first show that we can normalize ξ by the condition
+
+If Dξ = 0 then V0 ∈ ker T fulfills (5.4). So we can assume that Dξ ̸= 0. One has T Dξ ̸= 0 since Dξ
+is odd and linearly independent of ξ while ker T is one-dimensional. By (5.3) one has
+
+⟨ξ | η⟩ = 1
+
+(5.4)
+
+0 ̸= (D T − T D)(ξ) = |β⟩⟨η|ξ⟩ − |η⟩⟨β|ξ⟩ = |β⟩⟨η|ξ⟩.
+
+Thus one can normalize ξ so that ⟨η|ξ⟩ = 1.
+Lemma 5.4. Assume T ≥ 0 and Ker T = Cξ where γξ = ξ and ⟨ξ | η⟩ = 1.
+(i) One has T D ξ = −β.
+(ii) The operator D′ := D − |D ξ⟩⟨η| induces a selfadjoint operator D” in the Hilbert space associated
+to the inner product defined by T , as quotient by null vectors.
+(iii) One has, denoting by ξj the components of ξ,
+
+Det(D” − s) = Det(D − s)
+
+N
+(cid:88)
+
+j=−N
+
+(j − s)−1ξj.
+
+(5.5)
+
+Proof. (i) We apply (5.3) and get, using T ξ = 0 and ⟨β|ξ⟩ = 0 since the two eigenspaces of γ are
+orthogonal,
+
+−T D ξ = (D T − T D)ξ = |β⟩⟨η|ξ⟩ − |η⟩⟨β|ξ⟩ = β.
+
+(ii) The inner product defined by T is given by
+
+⟨f | g⟩T = ⟨T f | g⟩.
+
+We first show that
+
+One has, with R = −|D ξ⟩⟨η|
+
+⟨D′f | g⟩T = ⟨f | D′g⟩T , ∀f, g
+
+(5.6)
+
+⟨D′f | g⟩T = ⟨T D′f | g⟩ = ⟨T Df | g⟩ + ⟨T Rf | g⟩.
+
+By (i), one has T R = −|T Dξ⟩⟨η| = |β⟩⟨η|. Thus
+
+T D′ = T D + |β⟩⟨η|
+
+Moreover by (5.3), one has T D − DT = −|β⟩⟨η| + |η⟩⟨β|. Thus
+
+T D′ = DT + |η⟩⟨β|,
+
+⟨D′f | g⟩T = ⟨DT f | g⟩ + ⟨R′f | g⟩, R′ = |η⟩⟨β|.
+
+18
+
+5.2 Properties of truncated matrices
+
+Moreover, using that both T and D are selfadjoint,
+
+⟨f | D′g⟩T = ⟨T f | Dg⟩ + ⟨T f | Rg⟩ = ⟨DT f | g⟩ + ⟨f | T Rg⟩
+
+and the required equality follows from
+
+T Rg = (−T Dξ)⟨η|g⟩ = β⟨η|g⟩
+
+⟨f | T Rg⟩ = ⟨f | (|β⟩⟨η|g⟩ = ⟨f | β⟩⟨η|g⟩ = ⟨R′f | g⟩.
+The Hilbert space H obtained from EN using the inner product ⟨f | g⟩T is the quotient of EN by
+the radical Ker T = Cξ. By construction one has D′ξ = 0 so that D′ induces an operator D” in H
+and D” is selfadjoint by (7.3).
+(iii) Let vj be an orthonormal basis of H of eigenvectors for D” with eigenvalues λj. Let wj ∈ EN
+be lifts of the vj. One has D”(vj) = λjvj and hence D′(wj) = λjwj + sjξ for some scalars sj. Thus
+in the basis of EN formed by ξ and the wj, the matrix of D′ is triangular, with 0 and the λj on the
+diagonal. Thus one gets
+
+Det(D′ − s) = −s
+
+(cid:89)
+
+(λj − s) = −s Det(D” − s)
+
+(5.7)
+
+We now compute Det(D′ − s). We start by writing, in terms of R = −⟨Dξ⟩⟨η|:
+
+D′ − s = D + R − s = (D − s) (cid:0)id + (D − s)−1R(cid:1)
+
+Consequently
+
+Det(D′ − s) = Det(D − s)Det(id + (D − s)−1R).
+
+To compute the second determinant we use the identity
+
+Det(id + A) =
+
+(cid:16)
+
+∧kA
+
+(cid:17)
+
+Tr
+
+∞
+(cid:88)
+
+k=0
+
+applied to the rank one operator A = (D − s)−1R. The higher exterior powers ∧kA vanish for k > 1
+thus
+
+Det(id + (D − s)−1R) = 1 − Tr (cid:0)|(D − s)−1Dξ⟩⟨η|(cid:1) = −s⟨η|(D − s)−1ξ⟩,
+
+using (D − s)−1Dξ = ξ + s(D − s)−1ξ and ⟨η|ξ⟩ = 1. Hence,
+
+Det(D′ − s) = −s Det(D − s)⟨η|(D − s)−1ξ⟩ = −s Det(D − s)
+
+N
+(cid:88)
+
+j=−N
+
+(j − s)−1ξj.
+
+Thus one obtains (5.5) using (5.7).
+
+19
+
+5.3 The Dirichlet Kernel δN as an approximation of the Dirac Delta
+
+5.3 The Dirichlet Kernel δN as an approximation of the Dirac Delta
+
+The Dirichlet kernel approximates the Dirac delta function as N → ∞. It is
+
+DN (x) =
+
+N
+(cid:88)
+
+n=−N
+
+exp(2πinx/L), ∀x ∈ [0, L]
+
+This can be simplified using the geometric series formula:
+
+DN (x) = sin
+
+(cid:18) π(2N + 1)x
+L
+
+(cid:19)
+
+/ sin
+
+(cid:17)
+
+(cid:16) πx
+L
+
+(5.8)
+
+(5.9)
+
+for x ̸= 0 (mod L) while DN (0) = DN (L) = 2N + 1.
+Lemma 5.5. Let D = −i∂L be the selfadjoint operator of differentiation on L2([0, L], dx) with
+periodic boundary conditions. Let f ∈ Dom D. Then
+
+lim
+N→∞
+
+1
+L
+
+(cid:90) L
+
+0
+
+DN (x)f (x) dx = f (0)
+
+(5.10)
+
+Proof. Let ˆf (n) = 1
+L
+theorem, with a constant c > 0:
+
+(cid:82) L
+0 f (x)e−2πinx/L dx be the Fourier coefficients of f . We have by Parseval’s
+
+∞
+(cid:88)
+
+n=−∞
+
+|n|2| ˆf (n)|2 = c ∥f ′∥2
+
+L2 < ∞
+
+Since DN (x) = (cid:80)N
+
+n=−N e2πinx/L, we have:
+
+1
+L
+
+(cid:90) L
+
+0
+
+DN (x)f (x) dx =
+
+N
+(cid:88)
+
+n=−N
+
+ˆf (n)
+
+So we need to prove that the Fourier series of f converges at x = 0:
+
+N
+(cid:88)
+
+n=−N
+
+ˆf (n) → f (0)
+
+as N → ∞
+
+(5.11)
+
+(5.12)
+
+(5.13)
+
+By the Cauchy-Schwarz inequality:
+
+| ˆf (n)| =
+
+(cid:88)
+
+n̸=0
+
+(cid:88)
+
+n̸=0
+
+
+1
+|n|
+
+· |n|| ˆf (n)|
+
+≤
+
+
+
+(cid:88)
+
+n̸=0
+
+
+
+1/2 
+
+
+
+
+
+1
+n2
+
+(cid:88)
+
+n̸=0
+
+
+
+1/2
+
+n2| ˆf (n)|2
+
+
+
+< ∞
+
+20
+
+5.4 The perturbed scaling operator
+
+Therefore the Fourier series (cid:80)∞
+x, hence:
+
+n=−∞
+
+ˆf (n)e2πinx/L converges absolutely and uniformly to f (x) for all
+
+N
+(cid:88)
+
+n=−N
+
+ˆf (n) → f (0)
+
+as N → ∞
+
+The scaling operator is defined as
+
+D(λ)
+
+log = −iu
+
+∂
+∂u
+
+= −i
+
+∂
+∂ log u
+
+(5.14)
+
+acting on L2([λ−1, λ], d∗u) subject to periodic boundary conditions.
+Corollary 5.6. Let Vn(u) := Un(log(λu)) as in (3.21), D(λ)
+boundary conditions in L2([λ−1, λ], d∗u) and f ∈ Dom D(λ)
+log .
+
+log be the scaling operator with periodic
+
+lim
+N →∞
+
+⟨δN | f ⟩ = f (λ), δN :=
+
+1
+√
+L
+
+N
+(cid:88)
+
+Vn
+
+n=−N
+
+(5.15)
+
+Proof. This follows from Lemma 5.5 using the isometry κ of (3.17) to pass from L2([λ−1, λ], d∗u)
+to L2([0, L], dx), and the equality
+
+DN =
+
+1
+√
+L
+
+N
+(cid:88)
+
+Un
+
+n=−N
+
+which follows from (5.8) and (2.6).
+
+5.4 The perturbed scaling operator
+
+The perturbed scaling operator D(λ,N )
+
+log
+
+is obtained from the following :
+
+Proposition 5.7. Let λ > 1 and N such that the truncated Weil quadratic form is even simple.
+Let ξ be the corresponding even eigenvector. There exists a unique operator D(λ,N )
+with the same
+domain as D(λ)
+
+log which agrees with this operator on the kernel of δN and such that D(λ,N )
+Proof. The Hilbert space L2([λ−1, λ], d∗u) is the direct sum of the finite dimensional subspace
+EN spanned by the Vn for |n| ≤ N and its orthogonal complement E⊥
+N . Since the Vn form an
+orthonormal basis of eigenvectors for D(λ)
+log , this operator splits as the direct sum of its restrictions to
+EN and E⊥
+N and ξ ∈ EN by construction. Thus the existence
+and uniqueness of D(λ,N )
+is reduced to the finite dimensional subspace EN . One has δN (ξ) ̸= 0 so
+log
+KerδN and Cξ span EN and the equality
+
+N . The linear form δN vanishes on E⊥
+
+(ξ) = 0.
+
+log
+
+log
+
+D(λ,N )
+log
+
+(β) = D(λ)
+
+log (α), ∀β = α + xξ, α ∈ KerδN , x ∈ C
+
+uniquely determines the operator D(λ,N )
+
+log
+
+.
+
+21
+
+5.5 Regularized Determinant
+
+5.5 Regularized Determinant
+
+The regularized determinant is defined by
+
+detreg(D − s) = exp (cid:0)−ζ ′
+
+D(0; s)(cid:1)
+
+(5.16)
+
+where ζD(z; s) := (cid:80)(λ − s)−z is the spectral zeta function. There is an ambiguity in the definition
+of the zeta function (see [13], §7.1) since raising λ − s to the power −z implies the choice of a
+determination of log(λ − s). There is a clear such choice for eigenvalues λ → +∞ but in the negative
+direction one needs to make a choice for (−1)−z and this choice of the spectral cut affects the result
+in the following basic example. Note that, in this example and taking for simplicity L = 2π, one
+could guess the regularized determinant from the Euler product as given by the sine function sin(πs)
+but this would violate the spectral invariance s → s + 1. The phase factor in front of the sine
+function repairs this violation.
+
+Lemma 5.8. Let L > 0. The regularized determinant for the Dirac operator D with spectrum 2π
+L
+is given, using (−1)−z := e−iπz, by
+
+Z
+
+Proof. We first take L = 2π to simplify notations. The spectral zeta function is given by
+
+detreg(D − s) = 1 − e−iLs
+
+ζD(z; s) =
+
+(cid:88)
+
+(n − s)−z
+
+n∈Z
+
+This converges for Re(z) > 1. One has
+
+ζD(z; s) =
+
+∞
+(cid:88)
+
+(n − s)−z +
+
+0
+(cid:88)
+
+(n − s)−z
+
+n=1
+
+n=−∞
+
+For the second sum, substitute n → −m with m ≥ 0 and use (−1)−z := e−iπz
+
+0
+(cid:88)
+
+(n − s)−z =
+
+∞
+(cid:88)
+
+(−m − s)−z = e−iπz
+
+n=−∞
+
+m=0
+
+∞
+(cid:88)
+
+(m + s)−z
+
+m=0
+
+So that using the Hurwitz zeta function:
+
+ζ(z, a) =
+
+∞
+(cid:88)
+
+(n + a)−z
+
+n=0
+
+one obtains
+
+∞
+(cid:88)
+
+ζD(z; s) =
+
+(n + 1 − s)−z + e−iπz
+
+∞
+(cid:88)
+
+(m + s)−z = ζ(z, 1 − s) + e−iπzζ(z, s)
+
+n=0
+
+m=0
+
+(5.17)
+
+(5.18)
+
+(5.19)
+
+(5.20)
+
+(5.21)
+
+22
+
+5.6 Spectrum and regularized determinant of D(λ,N )
+
+log
+
+Thus one gets the equality
+
+D(0; s) = ζ ′(0, 1 − s) − iπζ(0, s) + ζ ′(0, s)
+ζ ′
+
+Moreover one has the classical expressions
+
+ζ(0, a) =
+
+1
+2
+
+− a, ζ ′(0, a) = log Γ(a) −
+
+1
+2
+
+log(2π)
+
+which give
+
+ζ ′
+D(0; s) = − log(2π) + log Γ(s) + log Γ(1 − s) − iπ(
+
+exp (cid:0)−ζ ′
+
+D(0; s)(cid:1) =
+
+2π
+Γ(s)Γ(1 − s)
+
+(cid:18)
+
+exp
+
+iπ(
+
+1
+2
+
+= 2i sin(πs)e−iπs = 1 − e−2iπs
+
+1
+2
+(cid:19)
+
+− s)
+
+=
+
+(5.22)
+
+(5.23)
+
+− s)
+
+(5.24)
+
+The general case follows using ζD(0; s) = 0. One has indeed, for a > 0
+
+ζaD(z; as) = a−zζD(z; s) =⇒ ζ ′
+
+aD(0; as) = − log a ζD(0; s) + ζ ′
+
+D(0; s)
+
+which gives the required result for a = 2π/L.
+
+5.6 Spectrum and regularized determinant of D(λ,N )
+
+log
+
+In this section we prove the fundamental properties of D(λ,N )
+and show that its spectrum is real
+and that its regularized determinant is (up to a phase factor) the Fourier transform of the minimal
+eigenvector ξ.
+We first compute the Fourier transform of functions on [λ−1, λ] extended by 0 to R∗
+transform for the duality ⟨R∗
+
++. The Fourier
+
+log
+
++ | R⟩ is defined by
+(cid:90)
+
+Fµ(f )(s) :=
+
+f (u)u−isd∗u.
+
+R∗
++
+
+Proposition 5.9. Let λ > 1, L = 2 log λ, N ∈ N, ξj ∈ C for j ∈ {−N, . . . , N },
+
+ξ(u) :=
+
+(cid:88)
+
+{−N,...,N }
+
+ξk Vk(u), ∀u ∈ [λ−1, λ], ξ(u) = 0, ∀u /∈ [λ−1, λ].
+
+The Fourier transform (cid:98)ξ = Fµ(ξ) is the entire function given by
+
+(cid:98)ξ(z) = 2 L−1/2 sin (zL/2)
+
+
+
+
+
+(cid:88)
+
+{−N,...,N }
+
+ξj
+z − 2πj/L
+
+
+
+ .
+
+(5.25)
+
+23
+
+5.6 Spectrum and regularized determinant of D(λ,N )
+
+log
+
+Proof. One has for k ∈ Z, using x = log(λu), u−is = λis exp(−isx), d∗u = dx,
+
+(cid:90) λ
+
+λ−1
+
+Vk(u)u−isd∗u =
+
+(cid:90) λ
+
+λ−1
+
+Uk(log(λu))u−isd∗u =
+
+= L−1/2λis
+
+(cid:90) L
+
+0
+
+exp(2πikx/L) exp(−isx) dx = −i
+
+1 − e−isL
+s − 2πk/L
+
+L−1/2eisL/2.
+
+Thus the Fourier transform of ξ(u) is
+
+(cid:98)ξ(z) = 2 L−1/2 sin (zL/2)
+
+
+
+
+
+(cid:88)
+
+{−N,...,N }
+
+ξj
+z − 2πj/L
+
+
+
+ .
+
+The zeros z ∈ 2πZ/L of sin (sL/2) cancell the poles at 2πj/L which occur when ξj ̸= 0 and remain
+as zeros of (cid:98)ξ(z) otherwise.
+
+Theorem 5.10. Let ϵN be the smallest eigenvalue of QW N
+eigenvector assumed even, normalized by δN (ξ) = 1.
+(i) The operator D(λ,N )
+the inner product is given by the restriction of the quadratic form QW N
+(ii) The regularized determinant of D(λ,N )
+
+is selfadjoint in the direct sum E′
+
+is given by
+
+N ⊕E⊥
+
+log
+
+log
+
+λ assumed simple and ξ the corresponding
+
+N where on the subspace E′
+
+N = EN /Cξ
+
+λ − ϵN ⟨|⟩.
+
+detreg(D(λ,N )
+
+log − z) = −i λ−iz (cid:98)ξ(z)
+
+where (cid:98)ξ is the Fourier transform of ξ for the duality ⟨R∗
+(iii) The Fourier transform (cid:98)ξ(z) is an entire function, all its zeros are on the real line and coincide
+with the spectrum of D(λ,N )
+
++ | R⟩.
+
+.
+
+log
+
+Proof. (i) We apply Lemma 5.4 to T := QW N
+λ − ϵN id where ϵN is the smallest eigenvalue of QW N
+λ
+which is assumed to be simple and even. Let D, D′ and D” be the associated operators. One has
+
+D(λ)
+
+log |EN =
+
+2π
+L
+
+D, D(λ,N )
+
+log
+
+|EN =
+
+2π
+L
+
+D′, D(λ,N )
+
+log
+
+|E′
+
+N
+
+=
+
+2π
+L
+
+D”
+
+(5.26)
+
+By construction the operator D(λ,N )
+the result follows from Lemma 5.4, (ii).
+(ii) By (5.26) one has
+
+log
+
+decomposes the direct sum in the direct sum E′
+
+N ⊕ E⊥
+
+N . Hence
+
+Det(D(λ)
+
+log |EN −
+
+s) = (
+
+)2N +1Det(D − s)
+
+Det(D(λ,N )
+
+log
+
+|E′
+
+N
+
+−
+
+s) = (
+
+)2N Det(D” − s)
+
+2π
+L
+2π
+L
+
+2π
+L
+2π
+L
+
+24
+
+5.6 Spectrum and regularized determinant of D(λ,N )
+
+log
+
+We now apply Lemma 5.4, (iii), but note that the normalization of ξ given by δN (ξ) = 1 differs
+from ⟨ξ′ | η⟩ = 1. One has δN = L−1/2η by Corollary 5.6 thus giving ξ′ = L−1/2ξ. Lemma 5.4, (iii)
+shows that
+
+Det(D(λ,N )
+
+log
+
+|E′
+
+N
+
+−
+
+2π
+L
+
+s) =
+
+L
+2π
+
+Det(D(λ)
+
+log |EN −
+
+2π
+L
+
+s)
+
+N
+(cid:88)
+
+j=−N
+
+(j − s)−1ξ′
+j
+
+which with ξ′ = L−1/2ξ, z = 2π
+
+L s gives
+
+Det(D(λ,N )
+
+log
+
+|E′
+
+N
+
+− z) = Det(D(λ)
+
+log |EN − z)
+
+L1/2
+2π
+
+N
+(cid:88)
+
+j=−N
+
+(j −
+
+L
+2π
+
+z)−1ξj
+
+It then follows from the multiplicativity of the regularized determinant that
+
+detreg(D(λ,N )
+
+log − z) = L−1/2 detreg(D(λ)
+
+log − z)
+
+
+
+
+
+(cid:88)
+
+{−N,...,N }
+
+ξj
+2πj/L − z
+
+
+
+
+
+(5.27)
+
+By (5.25), the Fourier transform of ξ(u) is
+
+(cid:98)ξ(z) = 2 L−1/2 sin (zL/2)
+
+
+
+
+
+(cid:88)
+
+{−N,...,N }
+
+ξj
+z − 2πj/L
+
+
+
+
+
+By (5.17) one has
+
+detreg(D(λ)
+
+log − z) = 1 − exp(−iz L) = 2i exp(−iz L/2) sin (zL/2) ,
+
+thus (5.27) gives
+
+detreg(D(λ,N )
+
+log − z) = L−1/2 (1 − exp(−iz L))
+
+
+
+
+
+(cid:88)
+
+{−N,...,N }
+
+ξj
+2πj/L − z
+
+
+
+ =
+
+= −i exp(−iz L/2) (cid:98)ξ(z) = −i λ−iz (cid:98)ξ(z)
+(iii) The Fourier transform (cid:98)ξ is an entire function since ξ is an L1-function with compact support.
+The regularized determinant detreg(D(λ,N )
+
+log − z) is the product of the determinants
+
+detreg(D(λ,N )
+
+log − z) = Det(D(λ,N )
+
+log
+
+|E′
+
+N
+
+− z) detreg(D(λ)
+
+log |E⊥
+
+N
+
+− z)
+
+In this factorization the first term is the characteristic polynomial of a selfadjoint matrix and hence
+all its zeros are real. The zeros of the second term form the set
+
+which gives the required result.
+
+{2πj/L | j ∈ Z, |j| > N }
+
+25
+
+6. Numerical results
+
+6 Numerical results
+
+One computes using the above formulas the matrix of the Weil quadratic form and the spectrum of
+the operator D(λ,N )
+. These computations require high precision but are easily preformed using 200
+digits accuracy due to the fast convergence of the special functions involved. The first case is λ = 3
+and one takes N = 120.
+
+log
+
+Figure 1: This shows the differences between the first twenty zeros of ζ (cid:0) 1
+of the operator D(λ,N )
+for λ = 3 and N = 120.
+
+log
+
+2 + is(cid:1) and the eigenvalues
+
+We then consider the first fifty zeros of zeta, use still N = 120 and the values of λ given by
+
+√
+
+λ =
+
+12 ∼ 3.4641, λ =
+
+√
+
+13 ∼ 3.60555, λ =
+
+√
+
+14 ∼ 3.74166.
+
+We get the following table giving an upper bound on the absolute value of the difference between the
+2 + is(cid:1) and the eigenvalues of the operator D(λ,N )
+nontrivial zeros of the Riemann zeta function ζ (cid:0) 1
+.
+
+log
+
+(ρ1)*(ρ2)*(ρ3)*(ρ4)*(ρ5)*(ρ6)*(ρ7)*(ρ8)*(ρ9)*(ρ10)*(ρ11)*(ρ12)*(ρ13)*(ρ14)*(ρ15)*(ρ16)*(ρ17)*(ρ18)*(ρ19)*(ρ20)*1.6×10-342.1×10-311.5×10-298.3×10-271.3×10-251.2×10-237.5×10-226.6×10-211.2×10-188.8×10-187.3×10-172.2×10-159.7×10-142.7×10-136.3×10-125.6×10-112.9×10-101.2×10-95.6×10-82.4×10-726
+
+6. Numerical results
+
+√
+
+λ =
+12
+3.41 × 10−50
+5.89 × 10−47
+5.18 × 10−45
+4.2 × 10−42
+7.84 × 10−41
+1.07 × 10−38
+9.42 × 10−37
+1.05 × 10−35
+3.25 × 10−33
+2.99 × 10−32
+3.76 × 10−31
+1.87 × 10−29
+1.28 × 10−27
+4.47 × 10−27
+2.18 × 10−25
+2.76 × 10−24
+2.3 × 10−23
+1.59 × 10−22
+1.59 × 10−20
+9.55 × 10−20
+2.36 × 10−19
+6.7 × 10−18
+5.24 × 10−17
+8.4 × 10−16
+1.94 × 10−15
+2.42 × 10−14
+6.05 × 10−13
+1.26 × 10−12
+3.15 × 10−12
+2.72 × 10−11
+3.57 × 10−10
+1.7 × 10−9
+2.33 × 10−9
+1.2 × 10−7
+2.89 × 10−7
+4.1 × 10−7
+9.11 × 10−7
+2.78 × 10−6
+3.53 × 10−5
+1.83 × 10−4
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+
+√
+
+λ =
+13
+2.44 × 10−55
+4.5 × 10−52
+4.16 × 10−50
+3.65 × 10−47
+7.11 × 10−46
+1.06 × 10−43
+1. × 10−41
+1.19 × 10−40
+4.12 × 10−38
+3.98 × 10−37
+5.5 × 10−36
+3.04 × 10−34
+2.29 × 10−32
+8.46 × 10−32
+4.82 × 10−30
+6.61 × 10−29
+6.08 × 10−28
+4.66 × 10−27
+5.5 × 10−25
+3.54 × 10−24
+9.75 × 10−24
+3.31 × 10−22
+2.86 × 10−21
+5.32 × 10−20
+1.33 × 10−19
+2.07 × 10−18
+5.94 × 10−17
+1.34 × 10−16
+4.09 × 10−16
+4.21 × 10−15
+6.61 × 10−14
+3.6 × 10−13
+5.66 × 10−13
+4.03 × 10−11
+1.04 × 10−10
+1.85 × 10−10
+4.92 × 10−10
+1.94 × 10−9
+3.24 × 10−8
+2. × 10−7
+
+√
+
+λ =
+14
+1.07 × 10−60
+2.08 × 10−57
+2. × 10−55
+1.89 × 10−52
+3.81 × 10−51
+6.13 × 10−49
+6.17 × 10−47
+7.66 × 10−46
+2.94 × 10−43
+2.96 × 10−42
+4.42 × 10−41
+2.68 × 10−39
+2.19 × 10−37
+8.43 × 10−37
+5.48 × 10−35
+8.02 × 10−34
+8.02 × 10−33
+6.73 × 10−32
+9.11 × 10−30
+6.19 × 10−29
+1.86 × 10−28
+7.38 × 10−27
+6.89 × 10−26
+1.45 × 10−24
+3.89 × 10−24
+7.23 × 10−23
+2.33 × 10−21
+5.58 × 10−21
+2.01 × 10−20
+2.39 × 10−19
+4.33 × 10−18
+2.62 × 10−17
+4.6 × 10−17
+4.23 × 10−15
+1.16 × 10−14
+2.45 × 10−14
+7.53 × 10−14
+3.61 × 10−13
+7.44 × 10−12
+5.24 × 10−11
+
+27
+
+7. Outlook
+
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+
+1.83 × 10−4
+1.67 × 10−4
+2.97 × 10−4
+2.19 × 10−3
+4.35 × 10−3
+1.19 × 10−2
+1.27 × 10−2
+2.87 × 10−2
+1.43 × 10−1
+1.98 × 10−1
+9.02 × 10−2
+
+2. ×10−7
+2.12 × 10−7
+5.66 × 10−7
+5.49 × 10−6
+1.35 × 10−5
+5.3 × 10−5
+6.88 × 10−5
+3.01 × 10−4
+2. × 10−3
+3.01 × 10−3
+2.04 × 10−3
+
+5.24 × 10−11
+6.22 × 10−11
+2.23 × 10−10
+2.64 × 10−9
+7.51 × 10−9
+3.8 × 10−8
+5.65 × 10−8
+3.66 × 10−7
+2.98 × 10−6
+5.34 × 10−6
+4.78 × 10−6
+
+7 Outlook
+
+These numerical results provide evidence that the spectra of the operators D(λ,N )
+nontrivial zeros of the Riemann zeta function ζ( 1
+would amount to a proof of the Riemann Hypothesis.
+One can be even more ambitious using Theorem 5.10 together with the observation of [4] that
+the eigenfunction associated with the lowest eigenvalue of QWλ is well approximated by prolate
+spheroidal wave functions. As we explain now this suggests that the regularized determinants
+detreg(D(λ,N )
+
+tend1 to the
+2 + is). Establishing this convergence rigorously
+
+log − s) behave as follows
+
+log
+
+• For fixed λ, the functions detreg(D(λ,N )
+
+log − s) converge2 when N → ∞ to the function
+−i λ−iz (cid:98)ξλ(z) where ξλ is the eigenfunction of QWλ for the smallest eigenvalue, normalized by
+ξ(λ) = 1.
+
+• When λ → ∞ the functions (cid:98)ξλ(z) multiplied by suitable constants, converge uniformly on
+
+closed substrips of the open strip ℑ(z) < 1
+
+2 towards the Ξ-function of Riemann
+
+Ξ(s) = ξ(1/2 + is), ξ(z) =
+
+z(z − 1)π−z/2Γ(z/2)ζ(z)
+
+1
+2
+
+In other words the regularized determinants detreg(D(λ,N )
+log − s) suitably multiplied by a factor of
+the form ea+ibs converge towards Ξ(s). This convergence would entail RH using Hurwitz theorem
+on the zeros of limits of holomorphic functions.
+We now give more details to give substance to this strategy. First when reading Riemann’s paper
+[10] one finds that, using modern terminology, he understood his Ξ-function as the Fourier transform
+for the duality ⟨R∗
+
++ | R⟩ of the function
+
+k(u) = E(h)(u), h(u) =
+
+u2 (cid:0)2πu2 − 3(cid:1) e−πu2
+
+.
+
+π
+2
+
+(7.1)
+
+1when N → ∞ and λ → ∞
+2uniformly on compact subsets of C
+
+28
+
+where one uses the following map E:
+
+E(f )(u) := u1/2
+
+∞
+(cid:88)
+
+1
+
+f (nu)
+
+7. Outlook
+
+(7.2)
+
+The function h(u) can be characterized as follows. One considers the Hermite operator (harmonic
+oscillator)
+
+Hf (u) := −f ′′(u) + 4π2u2f (u)
+
+(7.3)
+
+and lets hn be the normalized eigenfunction for the eigenvalue 2π(1 + 2n). These functions are even
+for n even and, for n multiple of 4, invariant under the Fourier transform for the duality ⟨R | R⟩
+which is defined by
+
+FeR(f )(y) :=
+
+f (x)e2πixy dx.
+
+(cid:90)
+
+R
+Lemma 7.1. The Ξ function of Riemann is the Fourier transform of k = E(h) where h is, up to a
+multiplicative scalar, the only linear combination of h0, h4 with vanishing integral. More precisely
+one has, in terms of the normalized hn
+
+√
+
+h =
+
+3
+211/4
+
+h4 −
+
+3
+217/4
+
+h0, and ∥h∥ =
+
+√
+
+33
+217/4
+
+.
+
+(7.4)
+
+Proof. The normalized forms of h0, h4 are
+
+h0(x) = 21/4e−πx2
+
+, h4(x) =
+
+(cid:18) 16π2x4 − 24πx2 + 3
+√
+2 4
+2
+
+√
+3
+
+(cid:19)
+
+e−πx2
+
+Thus
+
+3
+217/4
+
+h0(x) =
+
+3
+16
+
+e−πx2
+
+,
+
+√
+
+3
+211/4
+
+h4(x) =
+
+(cid:18)
+
+π2x4 −
+
+(cid:19)
+
+3πx2
+2
+
++
+
+3
+16
+
+e−πx2
+
+which gives the required result using (7.1).
+
+We recall the construction of [4] of an educated guess kλ for an approximation of a scalar multiple
+of ξλ. It is based on the deformation of the harmonic oscillator called the prolate wave operator
+(cid:0)(λ2 − x2)∂x
+
+(cid:1) + (2πλx)2.
+
+P Wλ := −∂x
+
+(7.5)
+
+The eigenfunctions hn,λ(u) of P Wλ have the same labelling as the Hermite functions hn, they are
+even for n even and invariant under the Fourier transform for n multiple of 4. In agreement with
+Lemma 7.1, the educated guess kλ is
+
+kλ(u) := E(hλ)(u), ∀u ∈ [λ−1, λ]
+
+(7.6)
+
+where hλ is, up to a multiplicative scalar, the only linear combination of h0,λ, h4,λ with vanishing
+integral. We refer to [4], Section 3, for the motivation behind the formula for kλ and the numerical
+evidence showing that it gives an approximation of a scalar multiple of ξλ. Justifying rigorously
+this step is the main remaining obstacle to our approach to RH.
+We now use the educated guess (7.6) and evaluate its convergence in the next lemma 7.3. We shall
+first describe an estimate from [9].
+
+29
+
+7. Outlook
+
+Lemma 7.2. (i) The eigenfunctions hn,λ of P Wλ, suitably normalized, fulfill for n = 0, 4 an
+estimate of the form (with c < ∞)
+
+max
+x∈[−λ,λ]
+
+|hn,λ(x) − hn(x)| ≤ c λ−2
+
+(7.7)
+
+(ii) Let hλ be the suitably normalized linear combination of h0,λ, h4,λ with vanishing integral. One
+has an estimate of the form (with c < ∞)
+
+max
+x∈[−λ,λ]
+
+|hλ(x) − h(x)| ≤ c λ−2
+
+(7.8)
+
+Proof. (i) This follows from [9], Satz 9, page 243, Section 3.2. entitled ”Die Sph¨aroidfunktionen
+psm
+n
+
+(cid:0)z; γ2(cid:1)” which asserts that uniformly for z ∈ [−1, 1] one has the estimate
+
+psm
+n
+
+(cid:0)z; γ2(cid:1) = (−1)m
+
+(cid:19) 1
+4
+
+(cid:18) 4γ
+π
+
+1
+(n − m)!
+
+(cid:18) (n + m)!
+2n + 1
+
+(cid:19) 1
+
+2 (cid:0)1 − z2(cid:1)m/2
+
+Dn−m
+
+(cid:16)
+
+(2γ)
+
+1
+2 z
+
+(cid:17)
+
+(cid:16)
+
+γ− 3
+
+4
+
+(cid:17)
+
++ O
+
+We need to explain carefully the notations of [9]. The differential equation defining the prolate
+spheroidal functions uses the operator
+
+Fγy ≡
+
+d
+dz
+
+(cid:20)
+(cid:0)1 − z2(cid:1) dy
+dz
+
+(cid:21)
+
++
+
+(cid:20) −m2
+1 − z2 + γ2 (cid:0)1 − z2(cid:1)
+
+(cid:21)
+
+y
+
+and we are only interested in the case when the angular parameter m = 0. In that case the operator
+simplifies to
+
+(cid:20)
+
+Fγy ≡
+
+d
+dz
+
+(cid:0)1 − z2(cid:1) dy
+dz
+
+(cid:21)
+
++ γ2 (cid:0)1 − z2(cid:1) y
+
+We first relate this operator (for m = 0) to the prolate wave operator of (7.5). One lets z = x/λ
+which gives
+
+(cid:19)2
+
+(cid:18) d
+dz
+
+(cid:55)→ λ2 (∂x)2 , −γ2 z2 (cid:55)→ −γ2/λ2 x2
+
+Thus we need an overall minus sign and also
+
+γ2/λ2 = 4π2λ2 =⇒ γ = 2πλ2
+
+(7.9)
+
+The prolate spherical functions psn := ps0
+
+n are related to those in Mathematica by
+(cid:0)s; γ2(cid:1) = P S(n, 0, γ, s)
+
+psn
+
+The statement in [9] Satz 9 simplifies for m = 0 to the estimate, uniform for z ∈ [−1, 1],
+
+(cid:0)z; γ2(cid:1) =
+
+psn
+
+(cid:18) 4γ
+π
+
+(cid:19) 1
+
+4 (cid:18)
+
+(cid:19) 1
+2
+
+1
+(2n + 1)n!
+
+(cid:16)
+
+(2γ)
+
+1
+2 z
+
+(cid:17)
+
+(cid:16)
+
+γ− 3
+
+4
+
+(cid:17)
+
++ O
+
+Dn
+
+30
+
+7. Outlook
+
+which gives uniformly in the interval [−λ, λ]
+
+(cid:19)− 1
+4
+
+(cid:18) 4γ
+π
+
+(cid:0)x/λ; γ2(cid:1) =
+
+psn
+
+(cid:18)
+
+1
+(2n + 1)n!
+
+(cid:19) 1
+2
+
+(cid:16)
+
+Dn
+
+(2γ)
+
+1
+2 x/λ
+
+(cid:17)
+
++ O (cid:0)γ−1(cid:1)
+
+(7.10)
+
+The hermite functions Dn are defined in [9] by the equation
+
+Dp(x) = (−1)pe
+
+x2
+4
+
+In our case we have γ = 2πλ2, which gives
+
+dp
+dxp e− x2
+
+2 , D0(x) = e− x2
+
+4
+
+(2γ)
+
+1
+2 /λ = (4π)
+
+1
+
+2 =⇒ Dn
+
+(cid:16)
+
+(2γ)
+
+1
+2 x/λ
+
+(cid:17)
+
+= Dn
+
+(cid:16)
+
+(cid:17)
+
+1
+2 x
+
+(4π)
+
+One has in particular
+
+(cid:16)
+
+(cid:17)
+
+1
+2 x
+
+(4π)
+
+D0
+
+= e−πx2
+
+, D4
+
+(cid:16)
+
+(cid:17)
+
+1
+2 x
+
+(4π)
+
+= e−πx2 (cid:0)16π2x4 − 24πx2 + 3(cid:1)
+
+Thus in terms of the normalized Hermite functions hn we have
+
+(cid:16)
+
+(cid:17)
+
+1
+2 x
+
+(4π)
+
+D0
+
+= 2−1/4h0(x), D4
+
+(cid:16)
+
+(cid:17)
+
+1
+2 x
+
+(4π)
+
+= 25/4
+
+√
+
+3 h4(x)
+
+We can thus use (7.10) to normalize the products hn,λ = cnλ−1/2 psn
+
+(cid:0)x/λ; γ2(cid:1) so that
+
+max
+x∈[−λ,λ]
+
+|hn,λ(x) − hn(x)| ≤ c λ−2, n = 0, 4.
+
+(7.11)
+
+(7.12)
+
+(ii) By (i), we control the values hn,λ(0) for n = 0, 4. The fundamental property of the prolate
+wave functions is that they are eigenfunctions of the compression of the Fourier transform by the
+orthogonal projection Pλ of L2(R)even on the subspace of functions with support in the interval
+[−λ, λ]. Moreover for small values of n such as n = 0, 4 the eigenvalues χ(λ) are such that 1 − χ(λ)
+decays extremely fast when λ → ∞. For instance for n = 4, by [8], Theorem 1, one has
+
+Moreover we have
+
+(cid:90)
+
+1 − χ(λ) ∼
+
+√
+
+214
+3
+
+2π5e−4πλ2+9 log(λ)
+
+hn,λ(x)dx = (cid:100)hn,λ(0) = χn(λ)hn,λ(0)
+
+By (7.12) we control the differences |hn,λ(0) − hn(0)| and hence the differences
+
+(cid:90)
+
+|
+
+hn,λ(x)dx − hn(0)| = O(λ−2)
+
+It follows that we obtain a linear combination hλ of h0,λ and h4,λ which has vanishing integral and
+fulfills (7.8).
+
+31
+
+7. Outlook
+
+In fact we show in the following two Figures the behavior of the functions
+
+en(λ2) := λ2 max
+x∈[−λ,λ]
+
+|hn,λ(x) − hn(x)|
+
+Figure 2: Graph of e0(µ) for µ ≤ 36.
+
+Figure 3: Graph of e4(µ) for µ ≤ 36.
+
+We now show the following convergence:
+
+Lemma 7.3. The Fourier transform of kλ converges, when λ → ∞, towards the Ξ-function of
+Riemann uniformly on closed substrips of the open strip |ℑ(z)| < 1
+2 .
+
+Proof. We now investigate what happens when we apply the map E while the variable is restricted
+to the interval [λ−1, λ]. For u in this interval, the number of integers n such that nu ≤ λ is at most
+λ/u, thus with
+
+δ(λ) := max
+
+x∈[−λ,λ]
+
+|hλ(x) − h(x)|
+
+32
+
+8. The missing steps
+
+one gets, using the definition of E which involves u1/2
+
+|E(hλ)(u) − E(h)(u)| ≤ u1/2δ(λ)
+
+λ
+u
+
+We now evaluate the Mellin transform of kλ on the critical strip, i.e.
+
+M(kλ)(s) =
+
+(cid:90) ∞
+
+0
+
+us−1kλ(u)du, ℜ(s) ∈ [−
+
+1
+2
+
+,
+
+1
+2
+
+]
+
+We use the following estimate, where the exponent −2 in u−2 comes from two sources, and α = ℜ(s)
+
+|M(kλ)(s) −
+
+(cid:90) λ
+
+λ−1
+
+k(u)us−1du| ≤ λδ(λ)
+
+(cid:90) λ
+
+λ−1
+
+uαu1/2u−2du
+
+One has
+
+(cid:90) λ
+
+1
+λ
+
+2
+
+uα+ 1
+u2 du =
+
+2(λ
+
+1
+
+2 −α − λα− 1
+2 )
+1 − 2α
+
+and since α ∈ (− 1
+
+2 , 1
+
+2 ) one has 1 − 2α > 0, 1
+
+2 − α > α − 1
+
+2 which gives using (7.8), i.e. δ(λ) ≤ c λ−2
+
+|M(kλ)(s) −
+
+(cid:90) λ
+
+λ−1
+
+k(u)us−1du| ≤ 2cλ−1λ
+
+1
+
+2 −α(1 − 2α)−1 = 2cλ− 1
+
+2 −α(1 − 2α)−1
+
+Hence, since α ∈ (− 1
+
+2 , 1
+
+2 ), one has 1
+
+2 + α > 0 and one obtains, for fixed α
+
+|M(kλ)(s) −
+
+(cid:90) λ
+
+λ−1
+
+k(u)us−1du| = O(λ− 1
+
+2 −α)
+
+It remains to control the remainder in the Mellin transform of k. By the Poisson formula one has
+k(u) = k(u−1) and thus it is enough to control
+
+(cid:90) ∞
+
+λ
+
+k(u)us−1du
+
+but this tends to 0 when λ → ∞ due to the convergence of the integral.
+
+8 The missing steps
+
+There are two essential steps still missing to justify our tentative proof of the Riemann Hypothesis.
+The first is that, in order to apply Theorem 5.10 to the Weil quadratic form QWλ, one must prove
+that its smallest eigenvalue—whose existence is ensured by Theorem 3.6—is simple and that its
+corresponding eigenvector ξλ is even. The second step is to establish that kλ provides a sufficiently
+accurate approximation to (a scalar multiple of) ξλ, in order to justify the convergence of the zeros
+of (cid:98)ξλ towards the non-trivial zeros of ζ( 1
+There are, however, three indications supporting the feasibility of these steps.
+(1) The “simple-even” condition holds for all values of λ for the prolate-wave operator P Wλ.
+
+2 + is).
+
+33
+
+8. The missing steps
+
+(2) The extremely small numbers ελ that occur as eigenvalues of the Weil quadratic form QWλ also
+appear—see Figure 4—when evaluating the discrepancy for hλ to belong simultaneously to Pλ and
+(cid:98)Pλ.
+(3) The numerical evidence for the proximity between kλ and ξλ extends to the higher eigenfunctions
+of the Weil quadratic form.
+
+Figure 4: Graphs of log(ϵλ)) and log(1 − χ(λ))) as functions of µ = λ2.
+
+It remains possible that our strategy for proving convergence towards the zeros of ζ( 1
+2 + is) will
+face significant obstacles. Nevertheless, it provides a strong motivation to further develop the
+relationship, first uncovered in [3], between the Weil quadratic form QWλ and the prolate-wave
+operator P Wλ. The cornerstone of this development is the trace formula established in [3], which
+relates Pλ, (cid:98)Pλ, and the map E to QWλ. Yet, regardless of how far one can progress along this path,
+the present approach naturally opens the way to a deeper exploration of the unexpected relationship
+between two seemingly distant mathematical worlds.
+
+The world of the Weil quadratic form. A key discovery of Andr´e Weil is the following
+remarkable fact: the Riemann Hypothesis is equivalent to the positivity of certain quadratic forms
+that involve only finitely many primes. This is striking, since one might expect that addressing the
+Riemann Hypothesis would require control over the entire infinite set of primes. Here, however,
+the problem acquires a local character, reducing to finite collections at a time. Moreover, in this
+framework, as we have seen, one can exploit our general construction of functions whose zeros lie
+entirely on the critical line.
+
+The world of prolate wave functions. Developed by David Slepian and collaborators, and
+rooted in Claude Shannon’s work on communication theory, this theory exhibits the miraculous
+relationship between the orthogonal projections that define time and frequency limitations in signal
+analysis and a classical second-order differential operator on the real line: the prolate wave operator,
+itself obtained as a confluence from the Heun equation—an object entirely familiar within Riemann’s
+mathematical universe.
+
+The prolate operator plays a dual role. In the infrared regime, it provides a tool for approximating
+
+34
+
+REFERENCES
+
+the minimal eigenvector of the Weil quadratic form. At the opposite, ultraviolet, end it also
+furnishes—cf. [6]—a model of a self-adjoint operator whose spectrum reflects the high-frequency
+(ultraviolet) behavior of the zeros of the Riemann zeta function. This duality emphasizes how ideas
+from information theory, spectral analysis, and number theory converge within a unified framework,
+turning the relation between QWλ and P Wλ into a fertile ground for further exploration.
+
+References
+
+[1] E. Bombieri, The Riemann Hypothesis, in: The Millennium Prize Problems, J. Carlson, A. Jaffe, and A. Wiles
+
+(eds.), Clay Math. Inst./AMS, 2006, 107–124. 3
+
+[2] C. Carath´eodory und L. Fej´er, ¨uber den Zusammenhang der Extreme von Harmonischen Funktionen mit ihren
+
+Koeffizienten und ¨uber den Picard-Landauschen Satz. Rend. Circ. Mat. Palermo 32 (1911)218-239. 1
+
+[3] A. Connes, Trace formula in noncommutative geometry and the zeros of the Riemann zeta function, Selecta Math.
+
+(N.S.) 5 (1999), no. 1, 29–106. 1, 8
+
+[4] A. Connes, C. Consani, Spectral triples and ζ–cycles. Enseign. Math. 69 (2023), no. 1–2, 93-148. (document), 1,
+
+3.3, 3.4, 3.2, 3.2, 7, 7, 7
+
+[5] A. Connes, C. Consani, H. Moscovici, Zeta zeros and prolate wave operators, ArXiv :2310.18423.
+
+[6] A. Connes, H. Moscovici, The UV prolate spectrum matches the zeros of zeta. Proc. Natl. Acad. Sci. USA 119
+
+(2022), no. 22. 8
+
+[7] A. Connes and W. van Suijlekom, Quadratic Forms, Real Zeros and Echoes of the Spectral Action, Commun.
+
+Math. Phys. (2025) 406:312, volume dedicated to H. Araki. (document), 1, 5.2
+
+[8] Fuchs, W. H. J. On the eigenvalues of an integral equation arising in the theory of band-limited signals. J. Math.
+
+Anal. Appl. 9 (1964), 317-330. 7
+
+[9] J. Meixner and F. W. Sch¨afke, Mathieusche Funktionen und Sph¨aroidfunktionen. Springer, Berlin, 1954. 7, 7, 7, 7
+[10] B. Riemann, ¨Uber die Anzahl der Primzahlen unter einer gegebenen Gr¨oße, Monatsberichte der K¨oniglich
+
+Preußischen Akademie der Wissenschaften zu Berlin (1859), 671–680. 1, 7
+
+[11] B. Riemann, ¨Uber die Darstellbarkeit einer Function durch eine trigonometrische Reihe (On the Representability
+of a Function by a Trigonometric Series) Abhandlungen der K¨oniglichen Gesellschaft der Wissenschaften zu
+G¨ottingen, vol. 13 (1867), pp. 87-132.
+
+[12] K. Schm¨udgen, Unbounded Self-adjoint operators on Hilbert Space, Graduate Texts in Mathematics 265. Springer.
+
+3.2, 3.2, 3.2
+
+[13] S. G. Scott and K. P. Wojciechowski, The ζ-Determinant and Quillen determinant for a Dirac operator on a
+
+manifold with boundary. GAFA, Geom. funct. anal. Vol. 10 (2000) 1202 – 1236. 5.5
+
+[14] B. Simon, The classical moment problem as a self-adjoint finite difference operator, Adv. Math., 137 (1998),
+
+82-203.
+
+[15] D. Slepian and H. Pollack, Prolate spheroidal wave functions, Fourier analysis and uncertainty, Bell Syst. Tech. J.
+
+(1961), 43–63. 1
+
+[16] A. Weil, Sur les formules explicites de la th´eorie des nombres premiers, Comm. S´em. Math. Univ. Lund, 1952,
+
+252–265. 3
+
+Alain Connes
+Coll`ege de France
+3 Rue d’Ulm
+75005 Paris
+France
+alain@connes.org
+
+Caterina Consani
+Department of Mathematics
+Johns Hopkins University
+Baltimore, MD 21218
+USA
+cconsan1@jhu.edu
+
+Henri Moscovici
+Department of Mathematics
+Ohio State University
+Columbus, OH 43210
+USA
+moscovici.1@osu.edu
+
+

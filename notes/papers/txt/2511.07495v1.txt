@@ -1,0 +1,1417 @@
+5
+2
+0
+2
+
+v
+o
+N
+0
+1
+
+]
+
+M
+G
+.
+h
+t
+a
+m
+
+[
+
+1
+v
+5
+9
+4
+7
+0
+.
+1
+1
+5
+2
+:
+v
+i
+X
+r
+a
+
+From Bernoulli Numbers to Selector Kernels:
+Fredholm Determinants, ζ–Regularization, and the Bridge
+Between Discrete and Continuous Spectra
+
+Ken Nagai∗
+
+Abstract
+
+We construct a unified analytic framework connecting Bernoulli numbers, ζ–regularization,
+and Fredholm determinants associated with trigonometric selector kernels. Starting from the
+Bernoulli–Stirling algebra, Euler–Maclaurin corrections are reinterpreted as spectral traces of
+compact operators. This bridge transforms discrete combinatorial data into continuous spec-
+tral quantities, showing that their determinants interpolate between finite–rank projectors
+and the sine–kernel of random–matrix theory. In the continuum limit the Fredholm determi-
+nant becomes a Painlevé–V τ –function, revealing a hierarchy in which Bernoulli coefficients
+and ζ–constants jointly describe the local–global asymptotics of analytic regularization.
+
+Primary classification: math-ph. Secondary: math.CA, math.NT. Comments: 27 pages,
+6 figures, v1.1 (bridging exposition).
+
+1
+
+Introduction and Motivation
+
+The purpose of this note is to clarify how three apparently distant frameworks—Bernoulli num-
+bers and the Euler–Maclaurin formula, ζ–regularization of spectral products, and Fredholm
+determinants of trigonometric kernels—form parts of a single analytic bridge between discrete
+and continuous mathematics.
+
+Historically, Bernoulli numbers emerged as the coefficients that correct an integral approxi-
+
+mation of a finite sum,
+
+N
+(cid:88)
+
+k=1
+
+f (k) =
+
+(cid:90) N
+
+0
+
+f (x) dx +
+
+f (N ) + f (0)
+2
+
+(cid:88)
+
++
+
+m≥1
+
+B2m
+(2m)!
+
+(cid:0)f (2m−1)(N ) − f (2m−1)(0)(cid:1).
+
+(1.1)
+
+Each B2m measures how the discrete sum deviates from its continuum integral (see [6] for his-
+torical background). When the same coefficients reappear in the short–time asymptotics of heat
+kernels, they acquire a spectral meaning: they quantify how discrete eigenvalues approximate a
+continuous spectrum.
+
+In parallel, ζ–regularized determinants Detζ A = exp[−ζ ′
+
+A(0)] extend products of eigenvalues
+to infinite–dimensional settings, while Fredholm determinants detF (I + λT ) compactly encode
+all spectral moments of trace–class operators.
+
+∗Email: tknagai@outlook.com. Independent Researcher.
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+f (x)
+
+continuous (cid:82) f (x)dx
+
+discrete (cid:80) f (k)
+
+x
+
+Figure 1: Schematic view of the Euler–Maclaurin bridge: rectangles (discrete sums) versus area
+(integral). Bernoulli numbers measure their difference.
+
+Three parallel regularizations.
+
+Domain
+
+Object
+
+Regularization idea
+
+Discrete sums
+
+Spectral sums
+
+Spectral products
+
+(cid:88)
+
+(cid:88)
+
+(cid:89)
+
+f (k)
+λ−s
+j
+
+Euler–Maclaurin ⇒ Bernoulli corrections
+
+analytic continuation ⇒ ζ–function
+
+(1 + λµj)
+
+trace expansion ⇒ Fredholm determinant
+
+Bernoulli / Euler–Maclaurin
+
+ζ–regularization
+
+Fredholm determinant
+
+Figure 2: Triangular correspondence among the three regularizations: local (Bernoulli), global
+(ζ), and operator (Fredholm).
+
+Remark 1.1 (Bridge in one sentence). Bernoulli numbers regularize sums, ζ–functions regularize
+spectra, and Fredholm determinants regularize products; all three follow the same analytic–
+continuation principle.
+
+finite array
+
+limit N → ∞
+
+continuum limit
+
+infinite matrix
+
+integral kernel
+
+matrix ↔ kernel viewpoint
+
+Figure 3: From discrete arrays to kernels: the passage from combinatorics to operator theory.
+
+The central message is that these constructions are not merely analogous but are algebraic
+shadows of a common mechanism: regularization as analytic continuation. Bernoulli numbers
+act locally (corrections near the diagonal), ζ–regularization acts globally (over spectra), and
+Fredholm determinants mediate between the two.
+
+Aim. We reinterpret the Bernoulli–Stirling algebra as a discrete prototype of a Fredholm inte-
+λ and
+gral operator. Its regularized determinant reproduces the trigonometric factors sin
+cos
+λ from the Gelfand–Yaglom formula[1], while its periodicized version becomes the finite–
+rank selector kernel whose large–J limit is the sine kernel of random–matrix theory[3].
+
+λ/
+
+√
+
+√
+
+√
+
+2
+
+discrete sums −→ ζ–regularization −→ Fredholm determinants −→ random–matrix kernels.
+
+2 Bernoulli–Stirling Continuation
+
+The Bernoulli and Stirling numbers form dual triangular arrays that connect finite differences
+with power sums[6]. Their analytic continuation naturally leads to kernel–like integral forms.
+
+2.1 Generalized Bernoulli (Nörlund) polynomials
+
+For α ∈ C, define
+
+tαext
+(et − 1)α =
+
+(cid:88)
+
+n≥0
+
+B(α)
+
+n (x)
+
+tn
+n!
+
+.
+
+(2.1)
+
+At α = 1 one recovers the classical Bernoulli polynomials Bn(x) = B(1)
+α = −k, these yield the Stirling numbers of the second kind:
+
+n (x). At negative integers,
+
+S(n, k) =
+
+(cid:19)
+
+(cid:18)n
+k
+
+B(−k)
+
+n−k (0).
+
+Example 2.1 (Quick check). For (n, k) = (3, 2) one finds B(−2)
+as expected from the combinatorial definition.
+
+1
+
+(0) = 1
+
+2 , hence S(3, 2) = 3!
+
+2! · 1
+
+2 = 3,
+
+2.2 Analytic kernel representation
+
+Analytic continuation extends S(n, k) to complex arguments (s, t) via
+
+S(s, t) =
+
+Γ(s + 1)
+Γ(t + 1)
+
+1
+2πi
+
+(cid:73)
+
+γ
+
+(ez − 1)t
+zs+1
+
+dz,
+
+(2.2)
+
+where γ is a small contour around z = 0. For integer (s, t) this reproduces the discrete Stirling
+matrix, while for complex parameters it defines the smooth analytic Stirling kernel
+
+K(s, t) =
+
+Γ(s + 1)
+Γ(t + 1)
+
+1
+2πi
+
+(cid:73)
+
+γ
+
+(ez − 1)t
+zs+1
+
+dz.
+
+Remark 2.2 (From array to operator). Equation (2.2) converts a combinatorial array into an
+integral kernel whose finite truncations reproduce discrete matrices and whose continuum limits
+yield trace–class operators. It is, in effect, the analytic extension of the Stirling table.
+
+2.3 Exponent–to–angle substitution
+
+Introducing the trigonometric parametrization
+
+ez − 1 = 2i eiθ/2 sin
+
+θ
+2
+
+,
+
+θ ∈ [−π, π],
+
+(2.3)
+
+3
+
+transforms (2.2) into a kernel with oscillatory phase ei(2m+1)(θ−φ)/2. This is precisely the struc-
+ture of the finite–J selector kernel
+
+SJ (θ, φ) =
+
+1
+J
+
+J−1
+(cid:88)
+
+m=0
+
+ei(2m+1)(θ−φ)/2.
+
+Hence the Stirling kernel under the map (2.3) acts as a continuous generating function for the
+trigonometric selectors that govern finite spectral projections.
+
+Remark 2.3 (Takeaway). The Bernoulli–Stirling algebra is the discrete skeleton of a Fredholm
+theory: its generating functions already possess the contour integrals and trigonometric phases
+that become kernels, resolvents, and determinants in the continuum limit.
+
+3 From Finite Matrices to Fredholm Operators
+
+The passage from finite combinatorial data to analytic operator formulations follows the same
+pattern as the limit from discrete sums to integrals. Finite arrays such as the Stirling matrix can
+be viewed as Gram matrices of basis functions, which in the continuum limit become integral
+kernels acting on a Hilbert space.
+
+3.1 Matrices, kernels, and the continuum limit
+
+A matrix represents a linear map between finite–dimensional spaces. When the dimension tends
+to infinity, the same algebraic intuition remains valid if we replace column vectors by square–
+integrable functions on an interval. Symbolically,
+
+vectors (vk) −→ f (x),
+
+sums
+
+(cid:90)
+
+vk −→
+
+f (x) dx,
+
+(cid:88)
+
+k
+
+matrices (ajk) −→ K(x, y).
+
+The correspondence is summarized in Fig. 4.
+
+continuum limit N → ∞
+
+finite matrix Ajk
+
+integral kernel K(x, y)
+
+entries ⇒ continuous variables
+
+Figure 4: Matrix → kernel correspondence: as dimension grows, discrete indices (j, k) become
+continuous variables (x, y).
+
+Given a continuous kernel K(x, y) on [0, 1]2, define the integral operator
+
+(T f )(x) =
+
+(cid:90) 1
+
+0
+
+K(x, y)f (y) dy.
+
+(3.1)
+
+This operator plays the role of an infinite matrix. When K(x, y) = K(y, x), the operator is
+self–adjoint.
+
+4
+
+Example 3.1 (A canonical kernel). For K(x, y) = min(x, y) one finds
+
+(T f )(x) =
+
+(cid:90) 1
+
+0
+
+min(x, y) f (y) dy,
+
+whose eigenfunctions are sin((n− 1
+
+2 )πx) with eigenvalues λn =
+
+of the Dirichlet–Neumann Laplacian on (0, 1).
+
+1
+1
+2 )2π2
+
+(n−
+
+. This is the Green kernel
+
+3.2 Traces and determinants
+
+For a finite n × n matrix A with eigenvalues µi,
+
+Tr(A) =
+
+(cid:88)
+
+µi,
+
+i
+
+det(I + λA) =
+
+n
+(cid:89)
+
+i=1
+
+(1 + λµi).
+
+If the operator T in (3.1) is trace–class (that is, (cid:80)
+
+j |µj| < ∞), both quantities extend naturally:
+
+Tr(T ) =
+
+(cid:88)
+
+j≥1
+
+µj,
+
+detF (I + λT ) =
+
+(cid:89)
+
+(1 + λµj).
+
+j≥1
+
+The second expression defines the Fredholm determinant.
+
+Definition 3.2 (Fredholm determinant). Let T be a trace–class operator on a separable Hilbert
+space H with eigenvalues {µj}. The Fredholm determinant of I + λT is defined by
+
+detF (I + λT ) = exp
+
+(cid:32) ∞
+(cid:88)
+
+n=1
+
+(−1)n+1
+n
+
+(cid:33)
+
+λn Tr(T n)
+
+=
+
+∞
+(cid:89)
+
+(1 + λµj).
+
+j=1
+
+(3.2)
+
+Remark 3.3 (Analogy to the zeta determinant). The series in (3.2) mirrors ζA(s) = (cid:80)
+j λ−s
+:
+j
+both encode spectral data through power sums of eigenvalues. The Fredholm determinant regu-
+larizes products, while ζ–regularization acts on sums.
+
+3.3 The Fredholm alternative
+
+If K is a compact operator on a Banach space X, then for any λ ∈ C,
+
+(I − λK)f = g
+
+has a solution f if and only if g is orthogonal to all solutions of the adjoint homogeneous equation
+(I − λK∗)h = 0. Either (I − λK) is invertible or the homogeneous equation has nontrivial
+solutions, but not both.
+In finite dimensions this reduces to the statement that a matrix is
+invertible iff its determinant is nonzero; for compact operators the Fredholm determinant in (3.2)
+plays the same role.
+
+3.4 Finite–rank intuition
+
+Two simple examples illustrate the analogy between finite matrices and their operator limits.
+
+5
+
+Example 3.4 (Rank–one kernel). If T = α u⊗v with (T f )(x) = α ⟨f, v⟩u, then T 2 = α ⟨u, v⟩T
+and T has one nonzero eigenvalue µ = α ⟨u, v⟩. Hence
+
+detF (I + λT ) = 1 + λµ.
+
+This recovers the expected linear determinant for a rank–one matrix.
+
+Example 3.5 (Orthogonal projector). Let P be a rank–r projection (P 2 = P , P ∗ = P ). Then
+Spec(P ) = {1} of multiplicity r, and
+
+detF (I − λP ) = (1 − λ)r.
+
+Such projectors approximate finite–band selectors in the trigonometric kernel examples below.
+
+3.5 Operator traces and Bernoulli echoes
+
+For trace–class T , the power traces Tr(T n) entering (3.2) act as spectral moments. When T is de-
+rived from a smooth kernel, Tr(T n) can be expressed as multiple integrals of K(x1, x2) · · · K(xn, x1).
+In discretized form these reduce to finite sums—and once again Bernoulli numbers appear as the
+coefficients correcting those sums to their continuum limits. Thus the same Euler–Maclaurin
+mechanism governs both the analytic continuation of (cid:80) f (k) and the convergence of Tr(T n) for
+smooth kernels.
+
+finite Gram matrix
+
+integral kernel K(x, y)
+
+continuum limit
+
+“det”
+
+“detF (·)”
+
+Fredholm determinant detF (I + λT )
+
+Figure 5: From finite determinants to Fredholm determinants: matrix det extends analytically
+to operators detF (·).
+
+Remark 3.6 (Key picture). Finite matrices ⇒ integral kernels ⇒ Fredholm determinants—this
+is the analytic bridge from combinatorial algebra to spectral analysis. In the next section, this
+bridge will take a trigonometric form through the selector kernel, which connects the analytic
+Stirling kernel of Section 2 to the sine kernel of random–matrix theory.
+
+4 Selector Kernels and Periodicization
+
+The transition from the analytic Stirling kernel of Section 2 to the trigonometric kernels of
+spectral analysis is achieved by a periodic substitution. This step transforms an exponentially
+generated structure into an oscillatory one, closing the bridge between combinatorial and spectral
+formalisms.
+
+4.1 Exponent–to–angle correspondence
+
+Recall the substitution introduced in (2.3),
+
+ez − 1 = 2i eiθ/2 sin
+
+θ
+2
+
+,
+
+θ ∈ [−π, π].
+
+6
+
+Under this mapping, the contour integral of the analytic Stirling kernel becomes a Fourier–type
+integral on the circle. The exponential weight (ez − 1)t translates to a trigonometric oscillation
+[sin( θ
+2 )]t, and the variables (s, t) acquire a spectral interpretation: s acts as a differentiation order
+and t as a mode number.
+
+exponential ez − 1
+
+periodicization map
+
+trigonometric 2ieiθ/2 sin( θ
+2 )
+
+z (cid:55)→ iθ (complex contour → unit circle)
+
+Figure 6: Exponent–to–angle substitution: periodicizing the analytic Stirling kernel.
+
+This mapping effectively “wraps” the analytic kernel around the unit circle, producing periodic
+boundary conditions and thereby embedding the combinatorial kernel into a Hilbert space of
+2π–periodic functions. In this picture, discrete differences correspond to angular modes, and the
+natural integral operator acts on L2[−π, π].
+
+4.2 Definition of the selector kernel
+
+Let J ∈ N. The selector kernel is the finite–rank operator on L2[−π, π] defined by
+
+SJ (θ, φ) =
+
+1
+J
+
+J−1
+(cid:88)
+
+m=0
+
+e i(2m+1) θ−φ
+
+2 =
+
+sin(J θ−φ
+2 )
+J sin( θ−φ
+2 )
+
+cos
+
+θ − φ
+2
+
+.
+
+(4.1)
+
+It acts as a projector onto the subspace spanned by the odd Fourier modes {e i(2m+1)θ/2}J−1
+m=0.
+The kernel SJ thus selects a discrete band of 2J trigonometric modes centered around 0.
+
+Example 4.1 (Small J cases). For J = 1, S1(θ, φ) = cos θ−φ
+
+2 ; for J = 2,
+
+S2(θ, φ) = 1
+2
+
+(cid:0)ei(θ−φ)/2 + e3i(θ−φ)/2(cid:1) = cos(θ − φ) cos θ−φ
+2 .
+
+In general, SJ oscillates with period 4π/J and becomes sharply peaked at θ = φ as J increases.
+
+4.3 Kernel normalization and properties
+
+The normalization by 1/J in (4.1) ensures that
+
+(cid:90) π
+
+−π
+
+SJ (θ, φ) SJ (φ, ψ)
+
+dφ
+2π
+
+= SJ (θ, ψ),
+
+so that SJ is an orthogonal projector: S 2
+
+J = SJ . Moreover,
+
+Tr(SJ ) =
+
+(cid:90) π
+
+−π
+
+SJ (θ, θ)
+
+dθ
+2π
+
+= 1.
+
+These properties identify SJ as a finite–rank selector in the sense of spectral truncation.
+
+7
+
+SJ
+
+J = 3
+
+peaked around θ = φ
+
+θ − φ
+
+Figure 7: Shape of SJ (θ, φ) for J = 3: a trigonometric kernel sharply localized near θ = φ.
+
+4.4 Connection with the Stirling kernel
+
+Through the exponential–angle substitution (2.3), the integrand of the analytic Stirling ker-
+nel (2.2) acquires the same trigonometric structure as SJ in (4.1). Formally,
+
+S(s, t) ∝
+
+(cid:90) π
+
+−π
+
+[sin( θ
+[sin( θ
+
+2 )]t
+2 )]s+1
+
+e i(s−t)θ/2 dθ,
+
+which exhibits the same sin( θ
+2 ) dependence as the numerator and denominator of SJ . The
+selector kernel can thus be interpreted as a periodicized Stirling kernel with discrete indices
+s, t ∈ {0, . . . , J − 1}.
+
+4.5 Periodic boundary conditions and physical meaning
+
+Periodicization has a physical analogue. For an operator L = −d2/dx2 on (0, 1), Dirichlet
+boundary conditions yield eigenvalues (nπ)2, producing determinants proportional to sin
+λ.
+If the interval is wrapped into a circle, periodic boundary conditions yield trigonometric kernels
+whose continuum limit is the sine kernel
+
+λ/
+
+√
+
+√
+
+Ksine(θ, φ) =
+
+sin(cid:0)J(θ − φ)/2(cid:1)
+2π sin(cid:0)(θ − φ)/2(cid:1) .
+
+The selector kernel (4.1) therefore plays the role of a finite–rank discretization of Ksine, bridging
+the combinatorial and random–matrix frameworks[2, 3].
+
+Remark 4.2 (Summary of the bridge).
+
+Level
+
+Object Structure
+
+Combinatorial
+
+S(n, k)
+
+Analytic
+
+Trigonometric
+
+Spectral (limit) Ksine
+
+discrete triangular array
+integral kernel on C
+
+S(s, t)
+SJ (θ, φ) finite–rank projector on L2[−π, π]
+continuous kernel of RMT
+
+The progression of these four levels constitutes the “selector bridge” connecting Bernoulli
+
+combinatorics, analytic continuation, Fredholm theory, and random–matrix statistics.
+
+5
+
+ζ–Regularized Determinants and Painlevé Structures
+
+Having established the selector kernel as the finite–rank analogue of the sine kernel, we now
+turn to its determinant and its connection to ζ–regularization. This section explains how spec-
+
+8
+
+tral products are analytically continued, and how their logarithmic derivatives satisfy nonlinear
+differential equations of Painlevé type.
+
+5.1 From eigenvalue products to ζ–determinants
+
+For a positive self–adjoint operator L with discrete eigenvalues {λn}, define the spectral ζ–
+function
+
+ζL(s) =
+
+(cid:88)
+
+λ−s
+n .
+
+(5.1)
+
+Analytic continuation of ζL(s) to s = 0 allows one to define the ζ–regularized determinant
+
+n≥1
+
+Detζ L = exp(cid:2)−ζ ′
+
+L(0)(cid:3) =
+
+(cid:89)
+
+n≥1
+
+λn
+
+(regularized product).
+
+(5.2)
+
+This construction transforms divergent eigenvalue products into well–defined analytic quantities.
+The method was introduced by Ray and Singer, and popularized in physics through the Gelfand–
+Yaglom approach[1].
+
+Remark 5.1 (Comparison). For finite rank T , the Fredholm determinant detF (I + λT ) of (3.2)
+(cid:0)I − λL−1(cid:1)
+is an entire function of λ. When T = L−1 for an elliptic differential operator L, detF
+and Detζ(L − λ) coincide up to a normalization factor. The two formalisms therefore describe
+the same analytic structure from complementary viewpoints.
+
+5.2 Example: Dirichlet Laplacian on (0, 1)
+
+Let L = −d2/dx2 on (0, 1) with Dirichlet–Dirichlet boundary conditions.
+λn = (nπ)2, so that
+
+Its eigenvalues are
+
+Using the known value ζ ′(0) = − 1
+
+2 log(2π), one obtains
+
+ζL(s) = π−2s ζ(2s).
+
+Detζ L = 2π.
+
+The corresponding normalized determinant ratio
+
+Detζ(L − λ)
+Detζ L
+
+=
+
+sin
+√
+
+√
+
+λ
+
+λ
+
+recovers the classical trigonometric expression appearing in the Gelfand–Yaglom formula. For
+λ, as summarized in Table 1.
+Neumann–Neumann or mixed boundary conditions the result is cos
+
+√
+
+Table 1: Trigonometric determinants for basic boundary conditions.
+
+Detζ(L − λ)
+Detζ L
+√
+√
+λ/
+√
+√
+λ/
+√
+
+sin
+sin
+
+λ
+λ
+
+cos
+
+λ
+
+BC type
+
+Eigenvalues λn
+
+D–D
+N–N
+D–N / N–D
+
+(nπ)2
+(nπ)2
+((n − 1
+
+2 )π)2
+
+9
+
+These trigonometric determinants already contain Bernoulli information: expanding log(sin x/x)
+
+yields
+
+log
+
+sin x
+x
+
+= −
+
+(cid:88)
+
+m≥1
+
+ζ(2m)
+m π2m x2m,
+
+ζ(2m) = (−1)m+1 B2m(2π)2m
+
+2(2m)!
+
+.
+
+Thus the Bernoulli–ζ coefficients govern the short–wavelength expansion of spectral determi-
+nants.
+
+5.3 From the sine kernel to Painlevé V
+
+For the continuous sine kernel
+
+Ks(x, y) =
+
+sin(cid:0)s(x − y)(cid:1)
+π(x − y)
+
+,
+
+x, y ∈ (−1, 1),
+
+Tracy and Widom[2] showed that the corresponding Fredholm determinant
+
+D(s) = det(I − Ks)
+
+satisfies a nonlinear ordinary differential equation of Painlevé V type. Defining the auxiliary
+function
+
+q(s) = −
+
+d2
+ds2 log D(s),
+
+one obtains
+
+and
+
+(s q′′)2 + 4(cid:0)s q′ − q(cid:1)(cid:0)s q′ − q + q′2(cid:1) = 0,
+
+(5.3)
+
+d
+ds
+
+log D(s) = −
+
+(cid:90) ∞
+
+s
+
+q(t) dt.
+
+The function D(s) therefore acts as a Painlevé V τ –function.
+
+logarithmic derivative q(s) = −∂2
+Fredholm determinant D(s) Painlevé V τ –function
+
+s log D
+
+Figure 8: From the sine–kernel determinant to the Painlevé V system.
+
+5.4 Discrete approximation via selector kernels
+
+For finite J, define
+
+DJ (λ) = det(cid:0)I − λ SJ
+
+(cid:1),
+
+with SJ as in (4.1). As J → ∞, SJ converges weakly to the sine kernel Ks with s ≃ J/2. Hence
+DJ (λ) provides a finite–dimensional approximation to D(s). Expanding log DJ (λ) in powers
+of 1/J yields coefficients that again involve ζ(2m), reproducing the Bernoulli pattern seen in
+log(sin x/x). Symbolically,
+
+log DJ (λ) ∼ −
+
+J 2
+2π2 λ −
+
+log J
+4
+
+(cid:88)
+
++
+
+m≥1
+
+cm(λ) J −2m,
+
+cm ∝ ζ(2m).
+
+10
+
+This asymptotic continuity between DJ and D(s) demonstrates how the selector kernel inherits
+the same Painlevé V hierarchy in the large–J limit.
+
+Remark 5.2 (Bridge completed). The analytic bridge may now be summarized as follows:
+
+Stage
+
+Representation Characteristic object
+
+Combinatorial
+
+Bn, S(n, k)
+
+discrete coefficients
+
+Analytic
+
+S(s, t)
+
+ζ–regularized kernel
+
+Trigonometric
+
+SJ
+
+Continuum limit Ksine
+
+finite–rank Fredholm operator
+
+Painlevé V τ –function
+
+Each level reproduces the previous one by analytic continuation or continuum limit, establishing
+a coherent path from Bernoulli combinatorics to integrable spectral dynamics.
+
+6 Asymptotics: Bernoulli–ζ Correspondence
+
+The Bernoulli numbers reappear in the asymptotic behaviour of ζ–regularized and Fredholm
+determinants. Their coefficients capture local geometric corrections near the diagonal of a kernel,
+while the global normalization constants are governed by the values of the Riemann ζ–function
+at negative integers. This section makes that correspondence explicit.
+
+6.1 Small–s expansion: local Bernoulli structure
+
+For the sine–kernel determinant D(s) = det(I − Ks), the short–distance (small–s) expansion
+
+log D(s) ∼ −
+
+s2
+2π2 −
+
+log s
+4
+
+(cid:88)
+
++
+
+cms−2m,
+
+m≥1
+
+s → ∞,
+
+involves coefficients cm that are rational multiples of ζ(2m). By comparison,
+
+log
+
+sin x
+x
+
+= −
+
+(cid:88)
+
+m≥1
+
+ζ(2m)
+m π2m x2m.
+
+Hence the same even–ζ values—and therefore the same Bernoulli numbers through ζ(2m) =
+(−1)m+1 B2m(2π)2m
+2(2m)! —govern both the discrete trigonometric determinants and the continuum
+spectral asymptotics.
+
+Example 6.1 (Bernoulli reappearance). Expanding sin
+
+√
+
+√
+
+λ/
+
+λ gives
+
+√
+
+sin
+√
+
+λ
+
+= 1 −
+
+λ
+6
+
++
+
+λ2
+120
+
+−
+
+λ3
+5040
+
++ · · · = 1 +
+
+(cid:88)
+
+m≥1
+
+B2m
+(2m)!
+
+(−λ)m,
+
+λ
+
+so that the Bernoulli sequence (B2, B4, B6, . . .) directly controls the determinant expansion near
+λ = 0.
+
+The coefficients cm of log D(s) therefore play the role of analytic Bernoulli coefficients in the
+continuum setting. They encode the curvature of the logarithmic spectrum at small s, serving
+as a bridge between discrete combinatorial corrections and continuous spectral geometry.
+
+11
+
+6.2 Large–s expansion: global ζ constants
+
+At the opposite extreme, the constant terms in log D(s) and ζ ′
+of ζ(s) at negative integers [7]:
+
+L(0) are controlled by the values
+
+ζ(−1) = −
+
+1
+12
+
+,
+
+ζ ′(−1) = −
+
+1
+12
+
+log(2π) + log A,
+
+where A ≃ 1.2824271291 is the Glaisher–Kinkelin constant. These constants determine the
+overall normalization of ζ–regularized determinants and appear in the logarithmic term of the
+Fredholm asymptotics.
+
+asymptotic matching / analytic continuation
+global regime
+local regime
+ζ ′(−1), log π, A
+Bernoulli B2m
+
+Figure 9: Local–global duality: Bernoulli numbers govern short–scale (local) curvature, while
+ζ–constants fix large–scale (global) normalization.
+
+6.3 Dual interpretation
+
+Aspect
+
+Local
+
+Global
+
+Mathematical object power–series coefficients B2m
+
+constants ζ ′(−1), log π
+
+Analytic origin
+
+Euler–Maclaurin corrections
+
+spectral determinant normalization
+
+Geometric meaning
+
+curvature near the diagonal of kernel
+
+total spectral volume
+
+Physical analogue
+
+ultraviolet behaviour
+
+infrared scaling constant
+
+The correspondence between these two regimes mirrors the relation between local countert-
+erms and global anomalies in quantum field theory: both stem from the same analytic continu-
+ation of a divergent product.
+
+6.4 Asymptotic hierarchy and universality
+
+Combining the small– and large–s regimes, one obtains the asymptotic hierarchy
+
+log D(s) = −
+
+s2
+2π2 −
+
+log s
+4
+
++ C0 +
+
+(cid:88)
+
+m≥1
+
+cms−2m,
+
+where C0 involves ζ ′(−1) and cm involve ζ(2m). The structure
+
+(cid:8)ζ(2m)(cid:9)
+
+m≥1 ←→ (cid:8)ζ ′(−1), log π(cid:9)
+
+summarizes the Bernoulli–ζ correspondence:
+Bernoulli numbers from ζ(2m) also governs the global constants from ζ ′(−1).
+
+the same analytic continuation that generates
+
+Remark 6.2 (Universality). The appearance of even–ζ values and of ζ ′(−1) is universal across
+a wide range of integrable determinants: Airy and Bessel kernels (Painlevé II and III) exhibit
+
+12
+
+the same Bernoulli–ζ hierarchy. This universality suggests that the Bernoulli pattern encodes a
+canonical asymptotic geometry underlying all ζ–regularized Fredholm systems.
+
+7 Outlook and Generalizations
+
+The constructions developed above suggest that the interplay between Bernoulli numbers, ζ–
+regularization, and Fredholm determinants is not accidental but the manifestation of a deeper
+analytic symmetry. We close this note by outlining a few directions in which the present bridge
+may naturally extend.
+
+7.1 Analytic Bernoulli functions
+
+A natural continuum counterpart of the discrete Bernoulli numbers is the analytic Bernoulli
+function
+
+B(s; x) := −s ζ(1 − s, x),
+
+where ζ(s, x) denotes the Hurwitz zeta function[6]. For integer s = n ∈ N, B(s; x) = Bn(x)
+recovers the ordinary Bernoulli polynomial, while for complex s the function B(s; x) interpolates
+smoothly between orders. Under Fourier expansion one finds
+
+B(s; x) =
+
+Γ(s + 1)
+(2π)s
+
+(cid:88)
+
+n̸=0
+
+e2πinx
+(2πin)s ,
+
+which already resembles the Fourier structure of the selector kernel. Replacing integer indices
+by a continuous spectral parameter thus opens a path to a fully analytic Fredholm formalism
+driven by B(s; x).
+
+Remark 7.1 (Analytic continuation of selectors). The trigonometric selector kernel SJ (θ, φ)
+can be formally viewed as the restriction of a continuous family S(s; θ, φ) obtained by replacing
+the integer index J with a complex variable s. The analytic Bernoulli function B(s; x) provides
+the natural generating object for such a continuation.
+
+7.2 Umbral operators and Appell–Hermite systems
+
+The connection between Bernoulli and Hermite structures can be made explicit by introducing
+an umbral operator F ∗ that acts as a transform between Appell families:
+
+F ∗ : Bn(x) (cid:55)−→ Hn(x),
+
+dx Bn(x) = nBn−1(x) maps to the quantum–harmonic relation d
+
+where Hn(x) are the Hermite polynomials. Under this correspondence, the differential recur-
+rence d
+dx Hn(x) = 2nHn−1(x).
+The operator F ∗ therefore provides an analytic continuation from Bernoulli combinatorics to
+Gaussian–Hermite spectral theory. Such umbral translations may encode the same Painlevé–
+Fredholm hierarchies in a more algebraic form.
+
+7.3 Resurgent and spectral extensions
+
+Beyond the polynomial regime, one can pursue a resurgent extension in which ζ–regularized deter-
+minants and Painlevé τ –functions are regarded as resurgent trans–series[4, 5]. The Bernoulli co-
+
+13
+
+efficients then appear as Stokes data governing the connection problem between different asymp-
+totic sectors. This viewpoint naturally relates the present framework to the Écalle resurgence
+program and to the exact WKB analysis of Schrödinger operators with analytic potentials.
+
+Resurgent / WKB
+
+Bernoulli / Stirling
+
+Fredholm / Painlevé
+
+Hermite / Umbral
+
+Figure 10: Possible extensions of the Fredholm–Bernoulli bridge: algebraic (umbral), spectral
+(Hermite), and asymptotic (resurgent) directions.
+
+7.4 Numerical and computational perspectives
+
+On the computational side, the selector kernels SJ (θ, φ) provide a convenient laboratory for
+testing ζ–regularized spectral sums. Their determinants can be evaluated numerically with high
+precision and compared with the asymptotic series involving ζ(2m) and ζ ′(−1). Such comparisons
+may yield efficient regularization techniques for finite–rank approximants of integrable kernels
+and could be extended to other classes (Airy, Bessel, or sinh kernels).
+
+7.5 Closing remarks
+
+The Fredholm–Bernoulli correspondence offers a unified analytic language for discrete combina-
+torics, spectral determinants, and integrable hierarchies. Its simplicity lies in the observation
+that every regularization is an analytic continuation. Through this lens, the Bernoulli numbers
+serve as infinitesimal regulators, the ζ–function provides their global extension, and the Fredholm
+determinant acts as the functional envelope that binds them into a single analytic geometry.
+
+From the arithmetic of Bn to the analysis of ζ(s) to the geometry of Fredholm determinants,
+the same continuation principle governs all.
+
+This note has aimed to outline the skeleton of that principle. Its details—umbral translations,
+analytic Bernoulli functions, and resurgent completions—will be developed in subsequent works
+of the hoge & fuga series.
+
+Acknowledgments
+
+The authors thank the collaborative discussions and numerical verifications carried out within
+the hoge & fuga series (2025).
+
+References
+
+[1] I. M. Gelfand and A. M. Yaglom, Integration in functional spaces and its applications in
+
+quantum physics, J. Math. Phys. 1 (1960), 48–69.
+
+14
+
+[2] C. A. Tracy and H. Widom, Level
+Comm. Math. Phys. 159 (1994), 151–174.
+
+spacing distributions and the Airy kernel,
+
+[3] P. J. Forrester, Log-Gases and Random Matrices, Princeton Univ. Press, 2010.
+
+[4] E. A. Galapon, Finite-part integration and the missing Cauchy principal value integrals,
+
+Ann. Phys. 447 (2022), 169136.
+
+[5] T. Rivoal, Rational zeta series with shifted dennominators, J. Number Theory 253 (2024),
+
+1–29.
+
+[6] T. M. Apostol, Introduction to Analytic Number Theory, Springer GTM 85, 1976.
+
+[7] L. Lewin, Polylogarithms and Associated Functions, North-Holland, 1981.
+
+15
+
+
