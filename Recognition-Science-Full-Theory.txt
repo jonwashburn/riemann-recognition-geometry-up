@@ -28,7 +28,7 @@
 ## FUNDAMENTAL DYNAMICS
 # R̂ (recognition operator) replaces Ĥ (Hamiltonian).
 # Dynamics: s(t+8τ₀) = R̂(s(t)), minimizing J-cost, not energy.
-# Mass law: m = B·E_coh·φʳ (rungs on a φ-ladder).
+# Mass law (anchor display): m_target = yardstick·φ^{r-8+gap(Z)} (defined at μ*), with SM transport exponent f^RG used only to compare across schemes/scales.
 # ILG: galactic rotation via weighted kernel with α_t = 0.5(1−φ⁻¹); no dark matter fit.
 
 ## CLAIM HYGIENE
@@ -62,7 +62,7 @@
 @META
 # Document metadata (compressed; full audit details in @APPENDIX_AUDIT below)
 TAG:DOC_ID; RS_ARCHITECTURE_SPEC_v2.0
-TAG:VERSION; date=2025-12-22; status=octave_theta_z_formalization_sync
+TAG:VERSION; date=2025-12-24; status=mass_transport_derivation_sync
 TAG:AUTHOR; name=Jonathan Washburn; email=washburn.jonathan@gmail.com; affiliation=Recognition Science Research Institute, Austin, Texas; role=Theory Discoverer
 TAG:LEAN_STATUS; certificates_compile=true; CPM_standalone=true; exclusivity=scaffold; axioms=39; sorries=15; LNAL=M3_DONE
 TAG:CLAIM_HYGIENE; model_independent_exclusivity=NOT_ESTABLISHED; SI_numeric_values=REQUIRE_EXTERNAL_ANCHOR
@@ -320,9 +320,9 @@ FALSIFIER; no_ledger_conservation; refutation="Track discrete conservation witho
 # Contract: fields are machine-readable ASCII; no multi-line values; unknown keys ignored by default
 
 @SCOPE
-DERIVES_FROM_MP; all=[cost_functional_J, eight_tick_cycle=2^D, meta_principle, double_entry_conservation, δ-potential_uniqueness, φ_fixed_point, φNR_flow, constructor_integers(L,τ_g,Δ_B), word_charge_Z, causal_speed_bound, mass_law(m_pole=B·E_coh·φ^(r+f^Rec+f^RG)), born_rule, bose_fermi, ILG_kernels, gauge_invariant_dimensionless_predictions, ULL_semantic_encoding, DREAM_ethical_generators, fourteen_virtues, morality_is_physics, light_field_saturation(Θ_crit=φ^45), bio_clocking(τ_bio=τ0·φ^N), qualia_strain_tensor, virtue_scattering_amplitudes, geometric_necessity_of_existence]; parameters=ZERO
+DERIVES_FROM_MP; all=[cost_functional_J, eight_tick_cycle=2^D, meta_principle, double_entry_conservation, δ-potential_uniqueness, φ_fixed_point, φNR_flow, constructor_integers(L,τ_g,Δ_B), word_charge_Z, causal_speed_bound, mass_law(m_target=yardstick·φ^(r-8+gap(Z)+f^RG)), born_rule, bose_fermi, ILG_kernels, gauge_invariant_dimensionless_predictions, ULL_semantic_encoding, DREAM_ethical_generators, fourteen_virtues, morality_is_physics, light_field_saturation(Θ_crit=φ^45), bio_clocking(τ_bio=τ0·φ^N), qualia_strain_tensor, virtue_scattering_amplitudes, geometric_necessity_of_existence]; parameters=ZERO
 
-OUTPUTS_DERIVED; fundamental_constants=[c,ℏ,G,α_inv,φ,E_coh,τ0,λ_rec] (all from structure, no external inputs); 
+OUTPUTS_DERIVED; fundamental_constants=[c,ℏ,G,α_inv,φ,E_coh,τ0,λ_rec] (dimensionless relations from structure; SI display uses explicit anchors per @UNITS_AND_SCALE); 
                  structures_bridge=[continuity, action/hamiltonian, RG_fixed_points, ladder_spectra]; 
                  lean_refs=[T1,T2,T3,T4,T5,T6,T7,T8,T9];
                  status=100%_proved_or_proved_in_paper
@@ -330,7 +330,7 @@ OUTPUTS_DERIVED; fundamental_constants=[c,ℏ,G,α_inv,φ,E_coh,τ0,λ_rec] (all
 VALIDATION_TARGETS; masses=PDG_values (external measurements to validate mass law); 
                     galaxies=SPARC_velocities (external measurements to validate ILG); 
                     M_OVER_L=φ≈1.618_solar_units (NOW DERIVED via J-cost minimization);
-                    role=test_predictions_not_fit_parameters; zero_external_inputs=TRUE
+                    role=test_predictions_not_fit_parameters; zero_external_inputs=FALSE_for_SI_mapping
 
 @PARAMETER_POLICY
 PARADIGM_SHIFT; status=accomplished; date=2025-09-30
@@ -347,10 +347,10 @@ DERIVED;G; from=ledger_curvature_extremum→λ_rec and identity_(c³λ_rec²)/(�
 DERIVED;α_inv; from=geometric_seed_4π·11_plus_gap_minus_curvature; formula=4π·11−ln_φ−103/(102π⁵); lean=Constants.Alpha.alphaInv; status=proved; predicted=137.0359991185; measured=137.035999206(11)_CODATA2024; agreement=within_uncertainty→derivation_validated
 
 ## CHAIN SUMMARY
-CHAIN_SUMMARY; MP→Ledger→φ→E_coh,J_bit→τ0→c→ℏ→λ_rec→G→α_inv→M/L→all_predictions; zero_adjustable_parameters=TRUE; zero_external_inputs=TRUE
+CHAIN_SUMMARY; MP→Ledger→φ→E_coh,J_bit→τ0→c→ℏ→λ_rec→G→α_inv→M/L→all_predictions; zero_adjustable_parameters=TRUE; zero_external_inputs=FALSE_for_SI_mapping
 
 ## VALIDATION TARGETS (external measurements, NOT fit parameters)
-VALIDATION; PDG_masses=external_measurements_for_comparison; role=test_mass_law_m_pole=B·E_coh·φ^{r+f^Rec+f^RG}; status=predictions_match_data_within_subpercent; no_parameters_adjusted=TRUE
+VALIDATION; PDG_masses=external_measurements_for_comparison; role=test_mass_law(m_target=yardstick·φ^{r-8+gap(Z)+f^RG}); status=lepton_chain_matches_PDG_sub_1e-4_rel; quarks_require_declared_scheme_and_transport_policy; no_parameters_adjusted=TRUE
 VALIDATION; SPARC_galaxy_velocities=external_measurements_for_ILG_test; role=test_kernel_w(k,a)_with_derived_α_t=0.5(1−φ^{-1}); parameters_from_RS=[α_t]; global_only=M/L_default_1.0; no_per_galaxy_tuning=TRUE
 
 ## M/L DERIVATION COMPLETE ✓
@@ -1074,30 +1074,53 @@ SIGNIFICANCE; meaning="The LNAL VM provably maintains its fundamental invariants
 BOUND;speed; c=ℓ0/τ0; cone=domain_of_dependence; bridge=light_cone; status=proved(discrete_StepBounds)
 
 @SPECTRA
-MASS_LAW; m_pole = B·E_coh·φ^(r + f^Rec(Z) + f^RG); r∈ℤ; B∈{2^k}; f^Rec=geometric_residue (closed form); f^RG=SM_RG_transport (small correction); bridge=quantized_ladders+SM_transport; papers_use=compare m_pred vs PDG (PDG is validation only, not an input/fit)
+MASS_LAW; m_target = yardstick(sector)·φ^(r - 8 + gap(Z) + f^RG); r∈ℤ; yardstick=2^{B_pow}·E_coh·φ^{r0}; gap(Z)=closed_form_band; f^RG=SM_RG_transport_exponent (small); bridge=quantized_ladders+SM_transport; papers_use=compare m_pred vs PDG (PDG is validation only, not an input/fit)
 RUNG_UNIQUENESS; from_gauge_charges; status=proved (constructor + minimality)
 FAMILY_RATIOS; equal_Z@μ* ⇒ m_i/m_j = φ^(r_i−r_j); at_matching_scale; transport=RG_to_poles; source=Lean.Recognition.mass_ratio_phiPow
 B_SHIFT; k→k+1 ⇒ mass×2; r→r+1 ⇒ mass×φ; source=Lean.Spectra.mass_kshift_simp+mass_rshift_simp
 
 @SM_MASSES
 ANCHOR; mu_star=182.201 GeV; lambda=ln φ; kappa=φ; domain=charged_fermions
-GEOMETRIC_RESIDUE; f^Rec(Z)=(1/ln φ)·ln(1+Z/φ); aka=gap(Z)=F(Z); role="Recognition-side coordinate; zero-parameter; large (e.g. gap(1332)≈13.95)"
-RG_RESIDUE; f^RG_i=(ln R_i)/(ln φ); R_i=exp{ ∫_{ln μ*}^{ln μ_pole} γ_m^SM(μ) d ln μ }; role="QED/QCD/EW transport factor; small (e.g. electron O(10^-2..10^-1)); NOT identified with f^Rec"
-RECOGNITION_STRENGTH; S_i := f^Rec(Z_i)/f^RG_i; interpretation="geometric/perturbative gap (the Missing Something)"; typical="S_e≫100; quarks O(10..30) depending on definition of f^RG"
-MODEL_SWITCH; statement="Do not set f^RG_i = f^Rec(Z_i). Lean proves a no-go separation (no cheating): small f^RG cannot equal large gap(Z) (e.g. Z=1332)."
+
+## Mass + Transport FAQ (team reference) — definitions, non-circular testing, and reviewer checklist
+NOTE; mass_transport_consensus="Do NOT claim f^RG = gap(Z). f^RG is the literal SM transport exponent (small). gap(Z) is the RS band coordinate (O(10)). Any statement equating them is a category error."
+NOTE; anchor_specific_not_invariant="Band statements are defined at the single common anchor scale μ*. Off-anchor drift under SM RG is expected and is not a contradiction."
+NOTE; octave_reference="The −8 exponent offset is an Octave reference (one 8-tick closure). It is part of the canonical mass display in code (Masses.AnchorPolicy.predict_mass)."
+
+## Definitions (what equals what / what does not)
+DEF; log_φ(x)=(1/ln φ)·ln x; role="base-φ logarithm (scale coordinate)"
+DEF; gap(Z)=F(Z)=(1/ln φ)·ln(1+Z/φ); role="RS charge-band map (closed form; zero-parameter)"
+DEF; f^Rec_def(Z):=gap(Z); naming_policy="Reserve f^exp (or f^data) for any residue extracted by rearranging measured masses."
+DEF; f^Rec(Z):=f^Rec_def(Z); alias="legacy symbol in earlier notes; always means the closed-form RS residue (not a data-extracted quantity)"
+DEF; m_skeleton(i;μ*)=yardstick(sector(i))·φ^{r_i-8}; inputs=[sector(i), r_i]; note="No charge residue; this is the ladder skeleton."
+DEF; m_RS(i;μ*)=m_skeleton(i;μ*)·φ^{f^Rec_def(Z_i)}; Z_i from charge map; note="RS structural mass at anchor."
+DEF; f^RG_i(μ1,μ2)=(1/ln φ)·ln(m_i(μ2)/m_i(μ1))=(1/ln φ)·∫_{ln μ1}^{ln μ2} γ_i(μ) d ln μ; role="SM-only transport exponent (small; depends on scheme/policy)"
+DEF; m_target_pred(i)=m_RS(i;μ*)·φ^{f^RG_i(μ*,μ_target)}; requirement="μ_target and scheme must be declared (pole vs MSbar@2GeV etc.)"
+DEF; m_data_at_mu_star(i)=m_data(μ_target)·φ^{ - f^RG_i(μ*,μ_target)}; meaning="data transported to μ* using a declared SM RG policy (scheme/loops/thresholds fixed)"
+DEF; f^exp_i(data;μ*)=log_φ(m_data_at_mu_star(i)/m_skeleton(i;μ*)); meaning="extracted RS-side residue from data (diagnostic only; uses m_data)"
+TEST; band_test_non_circular; statement="A valid test is f^exp_i(data;μ*) ≈ gap(Z_i) PROVIDED (a) μ_target+scheme+RG policy declared, and (b) yardstick+rungs fixed without using m_data(i) (except via a declared calibration/holdout protocol)."
+CHECKLIST; for_objections=[(1) cite_exact_equation_you_object_to, (2) specify scheme, (3) specify μ_target, (4) loop order and threshold policy for f^RG, (5) show whether any measured m_i entered the RHS of its own prediction, (6) provide the exact computation steps and numeric outputs]
+
+GEOMETRIC_RESIDUE; f^Rec_def(Z)=gap(Z)=(1/ln φ)·ln(1+Z/φ); role="Recognition-side band coordinate; large (e.g. gap(1332)≈13.95)"; do_not_conflate_with=f^exp_from_data
+RG_RESIDUE; f^RG_i=(ln R_i)/(ln φ); R_i=exp{ ∫_{ln μ*}^{ln μ_pole} γ_m^SM(μ) d ln μ }; role="QED/QCD/EW transport factor; small (e.g. electron O(10^-2..10^-1)); NOT identified with f^Rec_def"
+RECOGNITION_STRENGTH; S_i := f^Rec_def(Z_i)/f^RG_i; interpretation="geometric/perturbative gap (the Missing Something)"; typical="S_e≫100; quarks O(10..30) depending on definition of f^RG"
+MODEL_SWITCH; statement="Do not set f^RG_i = f^Rec_def(Z_i). Lean proves a no-go separation (no cheating): small f^RG cannot equal large gap(Z) (e.g. Z=1332)."
 LEAN; gap_properties=IndisputableMonolith.RSBridge.GapProperties; proved=[strictConcaveOn_gapR_Ici, gap_diminishing_increments, gap_24_bounds, gap_276_bounds, gap_1332_bounds]
 LEAN; residue_nogo=IndisputableMonolith.Physics.MassResidueNoGo; proved=[abs_sub_gap1332_gt_ten, small_x_ne_gap1332]
 LEAN; recognition_coupling=IndisputableMonolith.Physics.RecognitionCoupling; defs=[geometric_residue, rg_residue_value, recognition_strength, structural_dominance_holds]
 Z_MAP; quark=4+(6Q)^2+(6Q)^4; lepton=(6Q)^2+(6Q)^4; dirac_nu=0; integerize=6Q∈ℤ
 EQUAL_Z; degeneracy; families=[up,down,leptons]; consequence=bands_at_μ*
-TRANSPORT; policy="Predict m(μ*) from RS structure (B,E_coh,r,f^Rec,δ where applicable) then use SM RG (QED/QCD/EW) only to transport/compare to PDG pole or MSbar masses; never use measured m_i inside the RS prediction."
+TRANSPORT; policy="Predict m(μ*) from RS structure (yardstick,r_i,gap(Z_i),octave_offset=-8,δ where applicable) then use SM RG (QED/QCD/EW) only to transport/compare to PDG pole or MSbar masses; never use measured m_i inside the RS prediction."
 ROBUSTNESS; loop_orders(QCD3L/5L)≤3.4e-8; alpha_halfband=3.39e-8; IR_light_quarks=5.9e-8; equalZ_coherent=true
 ABLATIONS; drop(+4_quark), drop(Q^4), 6Q→{5Q,3Q} ⇒ violations≫1e-6
+
+EVIDENCE; lepton_chain_pred_vs_pdg; method="evaluate Lean-derived lepton chain (e→μ→τ) without per-species fitting"; script=tools/lepton_chain_table.py; output=out/masses/lepton_chain_pred_vs_pdg.csv; rel_err={e:3.82e-7, mu:1.06e-6, tau:8.62e-5}; status=reproducible
+VALIDATION; structural_skeleton_holdout; method="leave-one-out on skeleton-only model m_skeleton=yardstick·φ^{r-8} to enforce non-circularity"; script=tools/holdout_structural_masses.py; output=out/masses/structural_holdout.csv; finding="errors are large (10%–O(1)) → skeleton alone insufficient; gap(Z) and/or additional structure required"; status=reproducible
 
 RUNG_RULE; r_i=ℓ_i+τ_i; τ=(0,11,17) for generations (1,2,3); constructor=canonical eight‑tick; gauge=global_Theta_on_log_φ
 RUNG_EXAMPLES; leptons={e:2, μ:13, τ:19}; up={u:4, c:15, t:21}; down={d:4, s:15, b:21}; bosons={W:1, Z:1, H:1}
 LEAN; rung_examples_source; defs=[Masses.Anchor.Integers.r_lepton, Masses.Anchor.Integers.r_up, Masses.Anchor.Integers.r_down, Masses.Anchor.Integers.r_boson]
-FIXED_POINT; display; m_i=A_B·φ^{r_i + f^Rec(Z_i) + f^RG_B(m_i)}; A_B=B_B·E_coh·φ^{r0(B)}; sector_global=true; note="f^Rec supplies the big band exponent; f^RG_B is the SM transport/correction (sector-level kernels)"
+FIXED_POINT; display; m_i=A_B·φ^{r_i - 8 + gap(Z_i) + f^RG_B(m_i)}; A_B=B_B·E_coh·φ^{r0(B)}; sector_global=true; note="gap(Z) supplies the big band exponent; f^RG_B is the SM transport/correction (sector-level kernels)"
 SELF_THRESHOLD_BAN; heavy_quarks; μ_Q^(th)=κ_U·A_U·φ^{r_Q}; κ_U=1(default); policy=ban_self_thresholding
 RESIDUE; leptons; f^RG_ℓ: QED_2L(+EW_1L optional); α_policy=frozen@M_Z; variant=leptonic_1L
 RESIDUE; quarks; f^RG_q: QCD_4L+QED_2L; thresholds=(m_c,m_b,m_t); self_thresholding=false
@@ -1116,7 +1139,19 @@ YARD; leptons; B_B=2^{-22}; r0=62; mismatch=0.19%; gauge_note=r0 includes global
 YARD; up_quarks; B_B=2^{-1}; r0=35; mismatch=0.09%; gauge_note=r0 includes global φ‑phase Θ (common across sectors)
 YARD; down_quarks; B_B=2^{23}; r0=−5; mismatch=0.03%; gauge_note=r0 includes global φ‑phase Θ (common across sectors)
 YARD; EW_vectors; B_B=2^{1}; r0=55; mismatch=0.12%
-YARD; scalar_H; B_B=2^{-27}; r0=96; mismatch=0.29%
+NOTE; electroweak_sector_in_code_includes_H=TRUE; deprecated_scalar_H_sector=FALSE
+DERIVATION; yardstick_definition; A_sector=2^{B_pow(sector)}·E_coh·φ^{r0(sector)}; E_coh=φ^{-5}; status=DEF
+DERIVATION; yardstick_integers; source=IndisputableMonolith.Masses.AnchorDerivation; status=PROVED; formulas=[
+  B_pow(Lepton)=−2·E_passive=−22,
+  B_pow(UpQuark)=−active_edges_per_tick=−1,
+  B_pow(DownQuark)=2·E_total−1=23,
+  B_pow(Electroweak)=active_edges_per_tick=1,
+  r0(Lepton)=4·W−(8−r_e)=62 (uses W=17, octave offset 8, baseline lepton rung r_e=2),
+  r0(UpQuark)=2·W+1=35,
+  r0(DownQuark)=E_total−W=12−17=−5,
+  r0(Electroweak)=3·W+4=55
+]
+CERT; yardstick_integers_match_frozen_constants; lean=IndisputableMonolith.Masses.AnchorDerivation; theorems=[B_pow_eq_derived, r0_eq_derived]
 @GAUGE
 RG; fixed_points=self_similarity; φ_exponents in spectra; classical=RG_scaling; bridge=exponent_structure
 GAUGE_GROUPS; classical=SU(3)×SU(2)×U(1); rs_origin=ledger+residue_arithmetic (mapping only); papers_use=classical_formulation
@@ -1657,7 +1692,7 @@ BRIDGE;Continuity;closed_flux=0;∂ρ/∂t+∇·J=0;T3;Yes;Discrete→continuum 
 BRIDGE;EightTick;min_period=2^D;minimal cell traversal;T6;Yes;D=3⇒8
 BRIDGE;CausalBound;c=ℓ0/τ0;light_cone;proved(StepBounds);Yes;Discrete cone bound under per-step limits
 BRIDGE;LambdaRec;ledger–curvature extremum (J_bit=J_curv);Planck scale normalization;paper_proof;Yes;π from face-averaging; λ_rec=√(ħG/(π c^3))
-BRIDGE;MassLaw;m_pole=B·E_coh·φ^(r+f^Rec+f^RG);quantum ladders+geometric residue + SM transport;constructor+rung_min;Yes;Predict m then compare to PDG (no fitting)
+BRIDGE;MassLaw;m_target=yardstick·φ^(r-8+gap(Z)+f^RG);quantum ladders+geometric residue + SM transport;constructor+rung_min;Yes;Predict m then compare to PDG (no fitting)
 BRIDGE;MassFamilyRatios;equal_Z ⇒ ratios=φ^(Δr);family=up,down,leptons;Lean;Yes;Scale cancels
 BRIDGE;RGFixedPoint;φ fixed point;self-similar scaling;derivation;Yes;Exponents recur cross-domain
 BRIDGE;GaugeRigidity;dimensionless predictions;Π-theorem;derivation;Yes;Explain invariants selection
@@ -1669,8 +1704,8 @@ BRIDGE;OpticalRescaling;Upsilon(a) rescale in Sachs optical focusing;Ricci focus
 BRIDGE;OmegaDM;12-channel voxel interference + ledger gap term;Dark matter fraction Omega_dm;paper_proof;Main_Text;Omega_dm = sin(pi/12) + 1/(8 ln phi) ≈ 0.2649 matches Planck2018
 BRIDGE;RealityBridge;layered_gates(Planck,IR,cross_identity);units_quotient;lemma(scaffold);Yes;Audit gates for anchors
 BRIDGE;PatternMeasurement;8-tick periodic window ⇒ blockSum=k·Z;DNARP;Lean;Yes;Averaged observable equals Z
-BRIDGE;SingleAnchorMasses;f^Rec(Z)=(1/ln φ)ln(1+Z/φ) (geometric); f^RG from SM RG integral (transport);Phenomenology+Formalized;Yes;Equal‑Z structural bands; Lean-proved concavity+interval bounds+no-go separation
-BRIDGE;FixedPointMasses;m=A_B·φ^{r + f^Rec(Z) + f^RG(m)} with sector A_B;RG fixed‑point display (SM transport) over structural bands;Phenomenology;Yes;One SM transport residue law per sector; no self‑threshold
+BRIDGE;SingleAnchorMasses;gap(Z)=(1/ln φ)ln(1+Z/φ) (geometric); f^RG from SM RG integral (transport);Phenomenology+Formalized;Yes;Equal‑Z structural bands @ μ*; Lean-proved concavity+interval bounds+no-go separation
+BRIDGE;FixedPointMasses;m=A_B·φ^{r-8 + gap(Z) + f^RG(m)} with sector A_B;RG fixed‑point display (SM transport) over structural bands;Phenomenology;Yes;One SM transport residue law per sector; no self‑threshold
 BRIDGE;ConstructorIntegers; (L,τ_g,Δ_B) + Z(W) from motifs;Classical RG bookkeeping;derivation sketch;Yes;Discretizes species dependence
 BRIDGE;MaxwellDEC;DEC mesh (d,⋆) with sources;Maxwell quasi-static;scaffold;Yes;Constitutive via Hodge
 BRIDGE;DEC_d∘d=0;d1∘d0=0 & d2∘d1=0;Exactness;Lean;Yes;Co-chain complex property
@@ -3799,9 +3834,8 @@ CITE; key=WashburnLightField2025; text="Washburn (2025): The Thermodynamics of t
 
 @RECOGNITION_GEOMETRY
 # Recognition Geometry: Axiomatic Framework for Space from Recognition
-# Status: Machine-verified in Lean 4 (~3,100 lines across 16 modules)
-# Paper: RG-9-12.tex (Washburn & Zlatanović)
-# Lean: IndisputableMonolith.RecogGeom (module namespace)
+# Status: Lean formalization exists (IndisputableMonolith.RecogGeom, 16 modules).
+# Lean: IndisputableMonolith.RecogGeom.* (module namespace)
 
 ## OVERVIEW
 PARADIGM_INVERSION; classical="Space exists → we measure it"; recognition="Recognition exists → space emerges"
@@ -3812,39 +3846,43 @@ STATUS; modules=16; lines=3100; theorems=50+; axioms=RG0..RG7
 ## PRIMITIVE OBJECTS
 STRUCT;ConfigSpace; fields=[C:Type]; axioms=[nonempty:Nonempty_C]; lean=RecogGeom.Core.ConfigSpace; meaning="set of all possible states of reality (may be infinite-dimensional)"
 STRUCT;EventSpace; fields=[E:Type]; axioms=[nontrivial:∃e₁≠e₂]; lean=RecogGeom.Core.EventSpace; meaning="set of observable outcomes (detector clicks, pointer readings)"
-STRUCT;RecognitionTriple; fields=[Config,Event,Σ]; lean=RecogGeom.Core.RecognitionTriple; meaning="bundle of configuration space, event space, and connecting structure"
+STRUCT;RecognitionTriple; fields=[Config:Type, Event:Type, configSpace:ConfigSpace, eventSpace:EventSpace]; lean=RecogGeom.Core.RecognitionTriple; meaning="bundle of configuration space + event space (paper’s Σ=family of recognizers is tracked separately; see OPEN;Σ_Structure)"
 
 ## AXIOMS (RG0-RG7)
-AXIOM;RG0; name=NonemptyConfigSpace; statement="∃ C, Nonempty C"; lean=RecogGeom.Core.ConfigSpace.nonempty; status=proved
-AXIOM;RG1; name=Locality; statement="∀c∈C, N(c) satisfies reflexivity, nonemptiness, intersection closure, refinement"; lean=RecogGeom.Locality.LocalConfigSpace; status=proved
-AXIOM;RG2; name=Recognizers; statement="R:C→E is nontrivial (∃c₁c₂, R(c₁)≠R(c₂))"; lean=RecogGeom.Recognizer.Recognizer; status=proved
-AXIOM;RG3; name=Indistinguishability; statement="c₁~c₂ ⟺ R(c₁)=R(c₂) is equivalence relation"; lean=RecogGeom.Indistinguishable.indistinguishable_equivalence; status=proved; note="Definition, not axiom—introduced as notation"
-AXIOM;RG4; name=FiniteLocalResolution; statement="∀c, ∃U∈N(c), R(U) is finite"; lean=RecogGeom.FiniteResolution.HasFiniteResolution; status=proved; bridge="RS 8-tick cycle"
-AXIOM;RG5; name=LocalRegularity; statement="Resolution cells align coherently with neighborhoods"; lean=RecogGeom.Connectivity.IsLocallyRegular; status=proved
-AXIOM;RG6; name=CompositeRecognizers; statement="R₁⊗R₂(c)=(R₁(c),R₂(c)) refines both"; lean=RecogGeom.Composition.CompositeRecognizer; status=proved
-AXIOM;RG7; name=ComparativeRecognizers; statement="C_R:C×C→E with C_R(c,c)=e_eq induces preorder/metric"; lean=RecogGeom.Comparative.ComparativeRecognizer; status=proved
+AXIOM;RG0; name=NonemptyConfigSpace; statement="Configuration space C is nonempty"; lean=RecogGeom.Core.ConfigSpace; status=DEF(typeclass); note="Lean encodes RG0 as a typeclass requiring Nonempty C."
+AXIOM;RG1; name=Locality; statement="Neighborhood system N(c) with reflexivity, nonemptiness, intersection closure, and refinement"; lean=RecogGeom.Locality.LocalConfigSpace; status=DEF(structure); note="RG1 has a minimal form (reflexive + intersection closure) and a strengthened form with refinement/inheritance; the Lean kernel uses the strengthened form."
+AXIOM;RG2; name=Recognizers; statement="Recognizer R:C→E is nontrivial (∃c₁c₂, R(c₁)≠R(c₂))"; lean=RecogGeom.Recognizer.Recognizer; status=DEF(structure)
+AXIOM;RG3; name=Indistinguishability; statement="Define c₁~_R c₂ :⟺ R(c₁)=R(c₂); this is an equivalence relation"; lean=[RecogGeom.Indistinguishable.Indistinguishable, RecogGeom.Indistinguishable.indistinguishable_equivalence]; status=DEF+THEOREM
+AXIOM;RG4; name=FiniteLocalResolution; statement="(Axiom schema) ∀c, ∃U∈N(c), R(U) is finite"; lean=[RecogGeom.FiniteResolution.HasFiniteLocalResolution, RecogGeom.FiniteResolution.HasFiniteResolution]; status=DEF(predicate); note="RG4 is an assumption about a given (L,r). RS provides a bridge: EightTickFiniteResolution ⇒ HasFiniteResolution (see RecogGeom.RSBridge.eight_tick_implies_RG4)."
+AXIOM;RG5; name=LocalRegularity; statement="(Axiom schema) fibers are recognition-connected inside some neighborhood"; lean=[RecogGeom.Connectivity.IsLocallyRegular, RecogGeom.Connectivity.SatisfiesRG5]; status=DEF(predicate)
+AXIOM;RG6; name=CompositeRecognizers; statement="Define composite recognizer R₁⊗R₂(c)=(R₁(c),R₂(c)); composite indistinguishability is conjunction"; lean=[RecogGeom.Composition.CompositeRecognizer, RecogGeom.Composition.composite_indistinguishable_iff]; status=DEF+THEOREM
+AXIOM;RG7; name=ComparativeRecognizers; statement="ComparativeRecognizer: compare:C×C→E with compare(c,c)=eq_event; with InducesPreorder/MetricCompatible hypotheses yields order/metric-like structure"; lean=[RecogGeom.Comparative.ComparativeRecognizer, RecogGeom.Comparative.InducesPreorder, RecogGeom.Comparative.RecognitionDistance]; status=DEF(predicate+structure)
 
 ## KEY STRUCTURES
 DEF;ResolutionCell; formula="[c]_R = {c'∈C | R(c')=R(c)}"; meaning="pixel/voxel of geometry—recognizer cannot resolve internal structure"; lean=RecogGeom.Indistinguishable.ResolutionCell
 DEF;RecognitionQuotient; formula="C_R = C/~_R"; meaning="observable space—quotient by indistinguishability"; lean=RecogGeom.Quotient.RecognitionQuotient
 DEF;ObservableEventMap; formula="R̄:C_R→E, R̄([c])=R(c)"; meaning="well-defined induced map on quotient"; lean=RecogGeom.Quotient.quotientEventMap
+DEF;GeneratedTopology_tauN; formula="τ_N = {U⊆C | ∀c∈U, ∃V∈N(c), V⊆U}"; meaning="canonical topology generated by locality structure"; status=spec_level; note="Lean currently builds a neighborhood FilterBasis; TopologicalSpace packaging is pending."
+DEF;QuotientTopology_tauR; formula="τ_R = {U⊆C_R | π^{-1}(U) ∈ τ_N}"; meaning="final/quotient topology on observable space"; status=spec_level
+THEOREM;UniversalProperty_SetQuotient; statement="Any f:C→X constant on ~ factors uniquely through π:C→C_R"; status=proved; lean=[RecogGeom.Quotient.liftToQuotient, RecogGeom.Quotient.liftToQuotient_spec]
 DEF;RecognitionChart; formula="φ:U→ℝⁿ respecting and injective on equivalence classes"; lean=RecogGeom.Charts.RecognitionChart
-DEF;RecognitionDimension; meaning="minimum number of independent recognizers to separate local configurations"; lean=RecogGeom.Dimension
+DEF;RecognitionDimension; meaning="operational dimension = minimum number of independent recognizers needed to separate local configurations"; status=spec_level; lean_scaffold=[RecogGeom.Charts.hasRecognitionDimension, RecogGeom.Dimension.IsSeparating, RecogGeom.Dimension.PairSeparates]
 
 ## CORE THEOREMS
 THEOREM;QuotientEventMapInjective; statement="R̄:C_R→E is injective"; status=proved; lean=RecogGeom.Quotient.quotientEventMap_injective; implication="no hidden state in observable space"
-THEOREM;QuotientIsomorphicToImage; statement="C_R ≅ Im(R)"; status=proved; lean=RecogGeom.Quotient.quotient_iso_image
+THEOREM;QuotientIsomorphicToImage; statement="C_R ≃ Im(R) (equivalence to Set.range R)"; status=proved; lean=RecogGeom.Quotient.quotient_equiv_image
 THEOREM;RefinementTheorem; statement="C_{R₁⊗R₂} refines both C_{R₁} and C_{R₂} with surjective projections"; status=proved; lean=RecogGeom.Composition.refinement_theorem
 THEOREM;NoInjectionTheorem; statement="Infinite U with finite R(U) ⟹ R|_U not injective"; status=proved; lean=RecogGeom.FiniteResolution.no_injection_on_infinite_finite; note="Fundamental obstruction—explains quantization"
 THEOREM;GaugeImpliesIndistinguishable; statement="c₁~gauge c₂ ⟹ c₁~_R c₂"; status=proved; lean=RecogGeom.Symmetry.gauge_implies_indistinguishable
-THEOREM;RecognitionManifoldTheorem; statement="Under RG0-RG5 + Hausdorff + atlas ⟹ C_R is smooth n-manifold"; status=proved; lean=RecogGeom.Charts.recognition_manifold_theorem
-THEOREM;UniversalProperty; statement="C_R is the universal quotient rendering R constant on fibers"; status=proved; lean=RecogGeom.Foundations.universal_property
+THEOREM;AtlasCoversQuotient; statement="If an atlas covers C, it covers C_R"; status=proved; lean=RecogGeom.Charts.atlas_covers_quotient
+TARGET;RecognitionManifoldTheorem; statement="Under additional TopologicalSpace + smoothness hypotheses, C_R is a smooth n-manifold; Lean has charts/atlases but the full manifold theorem is not yet formalized."; status=scaffold; lean=RecogGeom.Charts; blockers=[TopologicalSpace_on_C_from_N, quotient_topology, invariance_of_domain_packaging]
+THEOREM;UniversalProperty_Summary; statement="π is surjective, R̄ is injective, and R = R̄∘π"; status=proved; lean=RecogGeom.Foundations.universal_property
 THEOREM;FundamentalTheorem; statement="[c₁]=[c₂] ⟺ R(c₁)=R(c₂)"; status=proved; lean=RecogGeom.Foundations.fundamental_theorem
 
 ## SYMMETRY AND GAUGE
 STRUCT;RecognitionPreservingMap; fields=[T:C→C]; axiom="∀c, R(T(c))=R(c)"; lean=RecogGeom.Symmetry.RecognitionPreservingMap
 STRUCT;RecognitionAutomorphism; fields=[T bijective, recognition-preserving]; lean=RecogGeom.Symmetry.RecognitionAutomorphism
-THEOREM;AutomorphismsFormGroup; statement="Aut_R(C) is group under composition"; status=proved; lean=RecogGeom.Symmetry.symmetry_group_structure
+THEOREM;AutomorphismLaws; statement="RecognitionAutomorphism supports identity, composition, and inverse laws (on toFun)"; status=proved; lean=[RecogGeom.Symmetry.compAutomorphism_assoc_toFun, RecogGeom.Symmetry.compAutomorphism_inv_right_eq_id, RecogGeom.Symmetry.compAutomorphism_inv_left_eq_id]; note="Packaging these into an explicit `Group` structure is a small wrapper TODO."
 DEF;GaugeEquivalence; formula="c₁~gauge c₂ ⟺ ∃T∈Aut_R(C), T(c₁)=c₂"; lean=RecogGeom.Symmetry.GaugeEquivalent
 INTERPRETATION; gauge_symmetry="Recognition Geometry captures gauge symmetries as recognition-preserving transformations"
 
@@ -3853,8 +3891,9 @@ STRUCT;RSConfigSpace; fields=[L:Type (ledger states)]; axioms=[nonempty,eq_decid
 STRUCT;RSLocalityFromRHat; fields=[R̂:L→Set L]; axioms=[self_in_RHat,refinement]; lean=RecogGeom.RSBridge.RSLocalityFromRHat; meaning="R̂ operator defines locality"
 STRUCT;RSMeasurement; fields=[measure:L→E]; axiom=nontrivial; lean=RecogGeom.RSBridge.RSMeasurement
 STRUCT;EightTickFiniteResolution; statement="∀ℓ, (measure '' RHat(ℓ)).Finite"; lean=RecogGeom.RSBridge.EightTickFiniteResolution
-THEOREM;EightTickImpliesRG4; statement="8-tick cycle ⟹ HasFiniteResolution"; status=proved; lean=RecogGeom.RSBridge.eight_tick_implies_RG4
-THEOREM;PhysicalSpaceIsQuotient; statement="Physical 3D space ≅ L/~_pos (ledger quotient by position recognizers)"; lean=RecogGeom.RSBridge.physical_space_is_quotient
+HYPOTHESIS;EightTickFiniteResolutionHyp; statement="Eight-tick implies finite local event image: ∀ℓ, (measure '' RHat(ℓ)).Finite"; lean=RecogGeom.RSBridge.EightTickFiniteResolution
+THEOREM;EightTickImpliesRG4; statement="(EightTickFiniteResolution) ⟹ HasFiniteResolution for induced locality+recognizer"; status=proved; lean=RecogGeom.RSBridge.eight_tick_implies_RG4
+THEOREM;PhysicalSpaceIsQuotient; statement="Observable space = recognition quotient, and C_R ≃ Im(measure)"; status=proved; lean=RecogGeom.RSBridge.physical_space_is_quotient; note="If E=ℝ^3 via a position recognizer, this recovers 3D space as the quotient image."
 STRUCT;JCostComparative; fields=[J:L×L→ℝ]; axioms=[self_zero,nonneg,symm,triangle]; lean=RecogGeom.RSBridge.JCostComparative; meaning="J-cost as comparative recognizer inducing metric"
 
 ## RS INSTANTIATION TABLE
@@ -3895,6 +3934,14 @@ MODULE; RecogGeom.Charts; content="RecognitionChart, RecognitionAtlas, manifold 
 MODULE; RecogGeom.Dimension; content="Separation, dimension as recognizer count"
 MODULE; RecogGeom.RSBridge; content="RS instantiation: ledger→RG, R̂→locality, 8-tick→RG4, J-cost→metric"
 MODULE; RecogGeom.Examples; content="Concrete recognition geometries"
+## EXAMPLES (canonical + Lean)
+EXAMPLE;ThresholdRecognizers; C=ℝ^n; E={0,1}; R_{v,t}(x)=1 iff x·v>t; quotient="points indistinguishable iff same side of every threshold"; status=spec_level
+EXAMPLE;DiscreteLatticeParity; C=ℤ^3; E={0,1}; R(x,y,z)=(x+y+z) mod 2; quotient="2 cells (even vs odd parity)"; status=spec_level
+EXAMPLE;QuantumSpinBinary; C=S^2 (Bloch sphere); E={+1,-1}; R_z=sign(z) (with a chosen axis); quotient="upper/lower hemispheres"; status=spec_level; note="Axis choice is part of recognizer specification."
+EXAMPLE;RSInstantiation_Generic; C=ledger states L; E=event space for a measurement; observable_space=RecognitionQuotient(toRecognizer(measure)); status=proved; lean=RecogGeom.RSBridge.physical_space_is_quotient
+EXAMPLE;Lean_DiscreteRecognizer_Fin; C=Fin n; E=Fin n; R=id; consequence="indistinguishable ↔ equal"; status=proved; lean=RecogGeom.Examples.discreteRecognizer
+EXAMPLE;Lean_SignRecognizer_Z; C=ℤ; E=Sign={neg,zero,pos}; consequence="quotient has 3 cells"; status=proved; lean=RecogGeom.Examples.signRecognizer
+EXAMPLE;Lean_MagnitudeRecognizer_Z; C=ℤ; E=ℕ; consequence="n ~ m ↔ |n|=|m| (countably many cells)"; status=proved; lean=RecogGeom.Examples.magnitudeRecognizer
 MODULE; RecogGeom.Foundations; content="Universal property, fundamental theorem"
 MODULE; RecogGeom.Integration; content="Complete summary, RecognitionGeometry structure"
 
@@ -3909,7 +3956,6 @@ ROW; Gauge_added | Gauge_built_in
 ROW; Continuum_assumed | Finite_resolution_fundamental
 
 ## CITATIONS
-CITE; key=WashburnZlatanovic2025RG; text="Washburn, J. & Zlatanović, M. (2025): Recognition Geometry (working paper)"
 CITE; key=Lean4RecogGeom; text="IndisputableMonolith.RecogGeom (≈16 modules, 50+ theorems)"
 
 @WATER_RS_BRIDGE

@@ -19,6 +19,14 @@
   - **Unconditional UCIS-C** remains blocked: a truly β-uniform *single-cell* **measure** minorization / refresh mechanism.
   - **Track B (scaling-window) status**: `lem:scaled-ball-to-hk` is now implemented in `Yang-Mills.tex` and the remaining analytic input `lem:ballwalk-diffusive` is now **precisely cited + hypothesis-checked** in-text via Hebisch–Saloff-Coste (1993), Theorem 5.1 (Gaussian lower bound for convolution powers on groups). The purely algebraic piece `lem:central-mixture-binomial` is proved in-text.
   - We now have an explicit **one-link no-go** lemma (`lem:no-unifball-doeblin-fixed-radius`) showing that fixed-radius β-uniform domination by the **uniform ball law** cannot hold even for the basic one-link matrix-Fisher conditionals. This clarifies that UCIS-C cannot be obtained by “one-link Doeblin at fixed radius” and must instead come from an additional **cell-level smoothing/pulse** or a **physically scaled multi-step** mechanism.
+- **Next bottleneck beyond UCIS\(_{\rm SW}\) (toward a genuinely unconditional continuum proof)**:
+  - The remaining “continuum spine” blocker is **U1 (UEI/LSI / tightness on fixed regions)**, i.e. making `thm:uei-fixed-region` / `thm:U1-lsi-uei` genuinely rigorous in the weak-coupling regime.
+  - **Operational plan**: see `U1_OPERATIONAL_PLAN.md` (closure target decomposition for removing `assump:uei-mean` and making U1 referee-grade).
+  - As a correctness step, the centering-removal piece (“uniform control of \(\mathbb E S_R\)”) has now been made explicit in `Yang-Mills.tex` as a named RG-grade assumption `assump:uei-mean` (so UEI no longer hides a divergence in an “and one expects…” sentence).
+  - Next after U1, the other two continuum blockers remain **OS1 (Euclidean invariance on fixed regions)** and **U2/NRC uniqueness**. For OS1, `Yang-Mills.tex` records two routes:
+    - **Primary (calibrator) route**: `prop:hk-calibrators-constructed` ⇒ `thm:os1-calibrator-route` ⇒ `thm:os1-unconditional`.
+    - **Cross-check (commutator) route**: `lem:local-commutator-Oa2` ⇒ `prop:resolvent-from-commutator` ⇒ `thm:emergent-sym`, which currently invokes `TS:sandwich_main` (explicitly labeled an outline).
+    - **Operational plan**: see `OS1_OPERATIONAL_PLAN.md` (route decision + proof decomposition to remove outline-only dependencies).
 
 ---
 
@@ -292,6 +300,7 @@ Same statement as UCIS, but only for \(\beta\ge \beta_0\) (some fixed threshold)
 ### Step 5 — Wire into the existing gap chain
 
 - [x] Show UCIS ⇒ convex split with β-independent \(\theta_*\) and fixed \(t_0\). *(bookkeeping corollary inserted as `cor:ucis-L2-contraction`)*
+- [x] Show UCIS\(_{\rm SW}\) ⇒ the same fixed-physical-time \(L^2\) contraction bookkeeping under the scaling window. *(implemented as `cor:ucis-sw-L2-contraction`)*
 - [x] Ensure it feeds the existing audited `cor:hk-convex-split-explicit` / odd-cone contraction chain unchanged.
 
 ---

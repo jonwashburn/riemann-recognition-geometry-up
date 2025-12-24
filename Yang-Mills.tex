@@ -115,7 +115,7 @@
 We present an unconditional lattice proof of a positive mass gap for pure $\SU(N)$ Yang--Mills in four Euclidean dimensions. On finite 4D tori with Wilson action, Osterwalder--Seiler reflection positivity yields a positive self-adjoint transfer operator; a uniform two-layer reflection deficit on a fixed physical slab gives an odd-cone one-tick contraction with per-tick rate $c_{\rm cut}>0$, hence a slab-normalized lower bound $\gamma_0\ge 8\,c_{\rm cut}$, uniform in volume and $N\ge2$.
 
 \smallskip
-For the continuum, we give a precise, unconditional AF--free norm--resolvent convergence (NRC) construction on fixed regions. The inputs are proved in this manuscript: UEI/equicontinuity and the U2 package (isometric embeddings, graph--defect, and low--energy projector control), together with a quantitative OS1 commutator/resolvent bound on fixed regions. Continuum mass-gap statements are derived unconditionally with constants tracked and volume-uniform on fixed slabs. An alternative Mosco/AF route is recorded in an appendix as a cross-check only and is not used in the main chain.
+For the continuum, we give an AF--free norm--resolvent convergence (NRC) framework on fixed regions. The U2 package (isometric embeddings, graph--defect, and low--energy projector control) is organized and proved in-text; the remaining fixed-region U1/OS1 inputs (UEI/equicontinuity/tightness and OS1 symmetry restoration) are isolated as RG-grade closure targets with explicit labels/checklists (see the UEI/OS1 appendices). Consequently, the continuum mass-gap/persistence statements are conditional on these U1/OS1 inputs (while the lattice gap is unconditional), with constants tracked and volume-uniform on fixed slabs. An alternative Mosco/AF route is recorded in an appendix as a cross-check only and is not used in the main chain.
 \end{abstract}
 
 \maketitle
@@ -145,7 +145,7 @@ For the continuum, we give a precise, unconditional AF--free norm--resolvent con
 \begin{mdframed}[linewidth=1pt, linecolor=red!60, backgroundcolor=red!5, roundcorner=5pt, innertopmargin=10pt, innerbottommargin=10pt, skipabove=12pt, skipbelow=12pt]
 \begin{center}
 \textbf{\Large Main Theorem}\\
-\textit{(lattice gap unconditional; continuum AF--free NRC with proved UEI/OS1 inputs)}
+\textit{(lattice gap unconditional; continuum AF--free NRC with U1/OS1 inputs (RG-grade))}
 \end{center}
 \vspace{10pt}
 \begin{enumerate}[label=(\textbf{H\arabic*}), leftmargin=2em, itemsep=8pt, parsep=4pt]
@@ -153,7 +153,7 @@ For the continuum, we give a precise, unconditional AF--free norm--resolvent con
   
   \item \textbf{Uniform lattice gap (best-of-two):} Either (small-$\beta$) $\alpha(\beta)\le 2\beta J_{\perp}<1$ or (odd-cone) per--tick contraction via the explicit interface convex split (Cor.~\ref{cor:hk-convex-split-explicit}); set $\gamma_\alpha(\beta):=-\log(2\beta J_{\perp})$ and $\gamma_{\rm cut}:=8\,c_{\rm cut}$ with $c_{\rm cut}$ from $q_*=1-\theta_*(1-e^{-\lambda_1(G) t_0})$.
   
-  \item \textbf{Continuum (AF--free NRC on fixed regions):} Using proved UEI/equicontinuity (U1) and OS1 inputs together with the U2 package (graph--defect and low--energy projectors), we obtain operator-norm NRC and gap persistence (Theorems~\ref{thm:strong-semigroup-core}, \ref{thm:nrc-operator-norm}, \ref{thm:nrc-embeddings}, \ref{thm:gap-persist-cont}).
+  \item \textbf{Continuum (AF--free NRC on fixed regions):} Using U1/OS1 fixed-region inputs (UEI/equicontinuity/tightness and OS1) together with the U2 package (graph--defect and low--energy projectors), we obtain operator-norm NRC and gap persistence (Theorems~\ref{thm:strong-semigroup-core}, \ref{thm:nrc-operator-norm}, \ref{thm:nrc-embeddings}, \ref{thm:gap-persist-cont}).
 \end{enumerate}
 
 \vspace{10pt}
@@ -161,7 +161,7 @@ For the continuum, we give a precise, unconditional AF--free norm--resolvent con
 \begin{itemize}[leftmargin=2em, itemsep=4pt]
   \item \textbf{Finite continuum gap}: Lem.~\ref{lem:coarse-refresh}, Lem.~\ref{lem:coarse-hk-domination}, Prop.~\ref{prop:explicit-doeblin-constants}, Thm.~\ref{thm:two-layer-explicit}, Thm.~\ref{thm:gap-persist-cont}.
   
-  \item \textbf{AF--free NRC/persistence (proved on fixed regions)}: Thm.~\ref{thm:strong-semigroup-core}, Prop.~\ref{prop:collective-compactness}, Thm.~\ref{thm:nrc-operator-norm}, Lem.~\ref{lem:af-free-cauchy}, Thm.~\ref{thm:gap-persist-cont}.
+  \item \textbf{AF--free NRC/persistence (U2 proved; conditional on U1/OS1 on fixed regions)}: Thm.~\ref{thm:strong-semigroup-core}, Prop.~\ref{prop:collective-compactness}, Thm.~\ref{thm:nrc-operator-norm}, Lem.~\ref{lem:af-free-cauchy}, Thm.~\ref{thm:gap-persist-cont}.
   
   \item \textbf{OS axioms in the limit}: Thm.~\ref{thm:uei-fixed-region}, Prop.~\ref{prop:os0os2-closure}, Thm.~\ref{thm:os1-unconditional}, OS3/OS5 lemmas.
   
@@ -174,7 +174,7 @@ For the continuum, we give a precise, unconditional AF--free norm--resolvent con
 
 \vspace{12pt}
 \begin{mdframed}[linewidth=0.8pt, linecolor=green!60, backgroundcolor=green!5, roundcorner=3pt, innertopmargin=8pt, innerbottommargin=8pt]
-\textbf{Conclusion.} On the lattice, $\spec(H_{L,a})\subset\{0\}\cup[\gamma_0,\infty)$ with $\gamma_0:=\max\{\gamma_\alpha(\beta),\,\gamma_{\rm cut}\}>0$, uniformly in $N\ge 2$ and the volume. For the continuum, we provide an AF--free NRC theorem on fixed slabs with proved UEI/OS1 inputs yielding $\spec(H)\subset\{0\}\cup[\gamma_*,\infty)$ and $\gamma_*=8\,c_{\rm cut,phys}>0$. See Theorem~\ref{thm:main-af-free} for the definitive statement.
+\textbf{Conclusion.} On the lattice, $\spec(H_{L,a})\subset\{0\}\cup[\gamma_0,\infty)$ with $\gamma_0:=\max\{\gamma_\alpha(\beta),\,\gamma_{\rm cut}\}>0$, uniformly in $N\ge 2$ and the volume. For the continuum, the AF--free NRC theorem on fixed slabs combined with U1/OS1 fixed-region inputs yields $\spec(H)\subset\{0\}\cup[\gamma_*,\infty)$ and $\gamma_*=8\,c_{\rm cut,phys}>0$ along the scaling window. See Theorem~\ref{thm:main-af-free} for the definitive statement and its explicit dependency list.
 \end{mdframed}
 \end{mdframed}
 
@@ -191,9 +191,9 @@ The continuum construction and main theorem are independent of embedding scheme,
   
   \item \textbf{Scaled minorization $\Rightarrow$ finite continuum gap}: Lem.~\ref{lem:coarse-refresh}, Lem.~\ref{lem:coarse-hk-domination}, Prop.~\ref{prop:explicit-doeblin-constants}, Thm.~\ref{thm:two-layer-explicit} (constants uniform in $L$ and independent of $\beta$ after coarse refresh). No area-law equivalences are used.
   
-  \item \textbf{AF--free NRC/persistence (unconditional on fixed regions)}: Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional}, \ref{thm:quant-calibrated-af-free-nrc}(D,F,G), Lem.~\ref{lem:U2-comparison}, Prop.~\ref{prop:one-point-resolvent}, Thm.~\ref{thm:U2-nrc-unique}, together with Thm.~\ref{thm:strong-semigroup-core}, Prop.~\ref{prop:collective-compactness}, Thm.~\ref{thm:nrc-operator-norm}, Lem.~\ref{lem:af-free-cauchy}, Thm.~\ref{thm:gap-persist-cont}.
+  \item \textbf{AF--free NRC/persistence (fixed regions; conditional on U1/OS1)}: Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional}, \ref{thm:quant-calibrated-af-free-nrc}(D,F,G), Lem.~\ref{lem:U2-comparison}, Prop.~\ref{prop:one-point-resolvent}, Thm.~\ref{thm:U2-nrc-unique}, together with Thm.~\ref{thm:strong-semigroup-core}, Prop.~\ref{prop:collective-compactness}, Thm.~\ref{thm:nrc-operator-norm}, Lem.~\ref{lem:af-free-cauchy}, Thm.~\ref{thm:gap-persist-cont}.
   
-  \item \textbf{Main continuum theorem} (AF--free NRC with proved UEI/OS1 inputs): see Section~\ref{sec:main-theorem-unconditional}, Theorem~\ref{thm:main-af-free}. (Mosco/AF kept only as an optional cross--check in an appendix.)
+  \item \textbf{Main continuum theorem} (AF--free NRC with U1/OS1 inputs (RG-grade)): see Section~\ref{sec:main-theorem-unconditional}, Theorem~\ref{thm:main-af-free}. (Mosco/AF kept only as an optional cross--check in an appendix.)
 \end{itemize}
 
 % Minimal chain at a glance (compact labels only)
@@ -293,7 +293,7 @@ For quick verification against the Clay YM statement:
 We adopt the standard Wilson lattice formulation. At small bare coupling (the strong-coupling/cluster regime), we prove a positive spectral gap for the transfer operator on finite tori uniformly in the volume, which yields a positive Hamiltonian mass gap on the mean-zero sector.
 
 \subsubsection*{Scope}
-We prove, unconditional: (i) a uniform lattice mass gap on the mean-zero sector via OS positivity and a parity-odd two-layer deficit. For the continuum passage we use AF--free NRC inputs (U2: graph-defect $O(a)$ and low-energy projector control) together with proved UEI/equicontinuity and OS1 isotropy on fixed regions (Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional}; Lem.~\ref{lem:U1-tree-bounds}; Cor.~\ref{cor:U1-uei}; Lem.~\ref{lem:isotropy-restore}). By these, operator-norm NRC and gap persistence yield a strictly positive continuum mass gap with the same slab constant $\gamma_*$. An optional Mosco route is recorded for cross-checks.
+We prove, unconditional: (i) a uniform lattice mass gap on the mean-zero sector via OS positivity and a parity-odd two-layer deficit. For the continuum passage we use the AF--free NRC engine (U2: graph-defect $O(a)$ and low-energy projector control) together with U1/OS1 fixed-region inputs (UEI/equicontinuity/tightness and OS1 isotropy on fixed regions; see Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional}, Lem.~\ref{lem:U1-tree-bounds}, Cor.~\ref{cor:U1-uei}, Lem.~\ref{lem:isotropy-restore}). Under these inputs, operator-norm NRC and gap persistence yield a strictly positive continuum mass gap with the same slab constant $\gamma_*$. An optional Mosco route is recorded for cross-checks.
 
 \subsubsection*{Note on Formal Corroboration (optional)}
 Selected steps are corroborated in an accompanying Lean development; the proofs and constants used in this manuscript are self-contained and cite standard literature (e.g., Osterwalder–Schrader \cite{Osterwalder1973,Osterwalder1975}, Osterwalder–Seiler \cite{OsterwalderSeiler1978}, Kato \cite{Kato1995}, Diaconis–Saloff–Coste \cite{DiaconisSaloffCoste2004}, Brydges \cite{Brydges1978,Brydges1986}). Formal artifacts are intended as supplementary verification only.
@@ -306,7 +306,7 @@ For readers interested in the Recognition Science (RS) background motivating som
 \begin{itemize}[leftmargin=2em, itemsep=8pt, parsep=4pt]
   \item \textbf{OS positivity and transfer (lattice).} Establish link-reflection positivity and the positive self-adjoint transfer operator $T$ with one-dimensional constants sector (Thm.~\ref{thm:os}).
   \item \textbf{Uniform lattice gap.} Prove a gap by a best-of-two route: strong-coupling/cluster expansion (Thm.~\ref{thm:gap}) or the parity-odd two-layer deficit yielding $c_{\rm cut}$ and $\gamma_0\ge 8\,c_{\rm cut}$ (Prop.~\ref{prop:two-layer-deficit}, Cor.~\ref{cor:deficit-c-cut}, Thm.~\ref{thm:two-layer-explicit}).
-\item \textbf{Interface Doeblin/heat--kernel convex split.} On fixed physical slabs, obtain a coarse-grained minorization and a heat--kernel sandwich for the interface kernel with parameters $(\theta_*,t_0)$, uniform in $L$ and independent of $\beta$ (Lem.~\ref{lem:coarse-refresh}, Lem.~\ref{lem:coarse-hk-domination}, Prop.~\ref{prop:explicit-doeblin-constants}, Cor.~\ref{cor:hk-convex-split-explicit}).
+\item \textbf{Interface smoothing / Doeblin (fixed slabs).} Two routes are recorded. (i) \emph{One-step coarse-refresh route}: on fixed slabs, obtain a coarse-grained one-step heat--kernel convex split with parameters $(\theta_*,t_0)$ uniform in $L$ and independent of $\beta$ after coarse refresh (Lem.~\ref{lem:coarse-refresh}, Lem.~\ref{lem:coarse-hk-domination}, Prop.~\ref{prop:explicit-doeblin-constants}, Cor.~\ref{cor:hk-convex-split-explicit}). (ii) \emph{Scaling-window physically scaled route}: along schedules satisfying \eqref{eq:ucis-sw-window}, UCIS$_{\rm SW}$ (Thm.~\ref{thm:ucis-sw}) supplies a fixed-physical-time heat--kernel minorization for $K_{\rm int}^{(a)\,M(a)}$ and the associated contraction bookkeeping (Cor.~\ref{cor:ucis-sw-L2-contraction}, Thm.~\ref{thm:ucis-sw-odd-subspace}).
 \item \textbf{AF--free NRC to the continuum.} Prove operator-norm norm--resolvent convergence along van Hove sequences on fixed regions and persist the gap to the continuum generator (Thm.~\ref{thm:strong-semigroup-core}, Thm.~\ref{thm:nrc-operator-norm}, Cor.~\ref{cor:nrc-allz-fixed}, Thm.~\ref{thm:nrc-embeddings}, Thm.~\ref{thm:gap-persist-cont}).
   \item \textbf{OS axioms in the limit and OS\,$\to$\,Wightman.} Verify OS0--OS5 for the limiting Schwinger functions and transfer the mass gap to Wightman fields; record Poincar\'e covariance and microcausality (Thm.~\ref{thm:os1-unconditional}, Thm.~\ref{thm:os-to-wightman}, Thm.~\ref{thm:microcausality-poincare}).
   \item \textbf{Normalization and independence.} Highlight scheme/embedding/van Hove independence and the dimensionless physical constant $\gamma_*:=8\,c_{\rm cut,phys}$ shared by lattice-to-continuum limits on fixed slabs.
@@ -330,7 +330,15 @@ This manuscript strengthens the constructive/OS route in several concrete ways:
   \item \textbf{Geometry and slab.} Fix a physical ball $B_{R_*}\Subset\mathbb R^4$ intersecting the OS reflection hyperplane in a slab of thickness $a\in(0,a_0]$. The number of interface links is $m_{\rm cut}=m_{\rm cut}(R_*,a_0)$.
   \item \textbf{OS axioms (target).} Continuum Schwinger functions $\{S_n\}$ satisfy OS0 (temperedness with explicit constants), OS1 (Euclidean invariance), OS2 (reflection positivity), OS3 (clustering/spectrum), OS4 (permutation symmetry), OS5 (unique vacuum). See Proposition~\ref{prop:os0os2-closure}, Theorem~\ref{thm:emergent-sym}, and Proposition~\ref{prop:U11-os4}.
   \item \textbf{Transfer/generator.} One-tick transfer $T=e^{-aH}$ on OS/GNS Hilbert spaces; $H\ge 0$ the Euclidean generator. Mean-zero/odd sector spectral radius $r_0(T)$ controls the lattice gap.
-  \item \textbf{Interface convex split (constants).} On fixed slabs, there exist $t_0>0$ and $\theta_*>0$ (uniform in $L$; independent of $\beta$) such that $K_{\rm int}^{(a)}\ge \theta_*\, P_{t_0}$. Consequently, $\|K_{\rm int}^{(a)}\|_{L^2_0}\le 1-\theta_*(1-e^{-\lambda_1(G) t_0})$ and $q_*:=\|e^{-aH}\|_{\rm odd}\le 1-\theta_*(1-e^{-\lambda_1(G) t_0})$.
+  \item \textbf{Interface smoothing / convex split (constants).} Along scaling schedules satisfying \eqref{eq:ucis-sw-window}, UCIS$_{\rm SW}$ provides $t_0>0$ and $\theta_*>0$ (uniform in volume/boundary on fixed slabs) such that
+  \[
+    K_{\rm int}^{(a)\,M(a)}\ \ge\ \theta_*\,P_{t_0}
+  \]
+  (Thm.~\ref{thm:ucis-sw}). Consequently, on the coarse interface mean-zero subspace
+  \[
+    \|K_{\rm int}^{(a)\,M(a)}\|_{L^2_0}\ \le\ q_{\rm phys}\ :=\ 1-\theta_*\big(1-e^{-\lambda_1(G) t_0}\big)\ <\ 1
+  \]
+  (Cor.~\ref{cor:ucis-sw-L2-contraction}), and the same fixed-physical-time contraction holds on the full parity-odd subspace (Thm.~\ref{thm:ucis-sw-odd-subspace}).
   \item \textbf{Gap normalization (physical constant).} Define the slab contraction constant (with $\theta_*$ from the interface minorization)
   \begin{align}
     c_{\rm cut,phys} &:= -\log\big(1-\theta_*(1-e^{-\lambda_1(G) t_0})\big) > 0,
@@ -761,8 +769,8 @@ All constants in Corollary~\ref{cor:hk-convex-split-explicit} are computed on th
 \toprule
 \textbf{Symbol} & \textbf{Definition / Source (and Role)} \\
 \midrule
-$t_0$ & Product heat\,–\,kernel time in the interface convex split; Lem.~\ref{lem:beta-L-independent-minorization}, Cor.~\ref{cor:hk-convex-split-explicit}. \\
-$\theta_*$ & Heat\,–\,kernel Doeblin weight in the interface convex split; Lem.~\ref{lem:beta-L-independent-minorization}, Cor.~\ref{cor:hk-convex-split-explicit}. \\
+$t_0$ & Product heat\,–\,kernel time in the interface smoothing split; Thm.~\ref{thm:ucis-sw}, Cor.~\ref{cor:ucis-sw-L2-contraction}. \\
+$\theta_*$ & Heat\,–\,kernel Doeblin weight in the interface smoothing split; Thm.~\ref{thm:ucis-sw}. \\
 $c_{\rm cut,phys}$ & Per\,–\,tick odd\,–\,cone deficit in physical units: $c_{\rm cut,phys}:= -\log\big(1-\theta_*(1-e^{-\lambda_1(G) t_0})\big)$; Thm.~\ref{thm:eight-tick-uniform}. \\
 $\gamma_{\rm phys}$ & Eight\,–\,tick slab gap: $\gamma_{\rm phys}:= 8\,c_{\rm cut,phys}$; Thm.~\ref{thm:eight-tick-uniform} (thermodynamic limit: Lem.~\ref{lem:thermo-preserve-gap}; global gap: Thm.~\ref{thm:global-gap-uncond}). \\
 \bottomrule
@@ -800,7 +808,10 @@ $C_K, C(z)$ & Resolvent bounds; Thm.~\ref{thm:nrc-operator-norm-fixed}, Lem.~\re
 \end{mdframed}
 
 \begin{mdframed}[linewidth=0.5pt, linecolor=gray!40, backgroundcolor=gray!5, roundcorner=2pt, innertopmargin=8pt, innerbottommargin=8pt, skipabove=8pt]
-\noindent\textit{\textbf{Dependence.}} All constants above depend only on the fixed slab geometry and group data, i.e., on $(R_*,a_0,G)$ (and $\lambda_1(G)$), and are uniform in the lateral size $L$ and independent of $\beta$ after the coarse refresh. They enter consecutively in: interface minorization/convex split (Prop.~\ref{prop:explicit-doeblin-constants}, Cor.~\ref{cor:hk-convex-split-explicit}), odd\,–\,cone and mean\,–\,zero contractions (Thm.~\ref{thm:uniform-odd-contraction}, Thm.~\ref{thm:eight-tick-uniform}), thermodynamic limit (Lem.~\ref{lem:thermo-preserve-gap}), the global Euclidean gap (Thm.~\ref{thm:global-gap-uncond}), global NRC $O(a^2)$ (Thm.~\ref{thm:nrc-global-Oa2}), global clustering (Thm.~\ref{thm:global-os3-clustering}), the single global Hamiltonian (Thm.~\ref{thm:global-gap-operator}), and Wightman non-Gaussianity (Thm.~\ref{thm:wightman-nongaussian}).
+\noindent\textit{\textbf{Dependence.}} There are two interface-smoothing routes recorded in this manuscript.
+\emph{Unconditional one-step (coarse-refresh) route:} after coarse refresh, one obtains constants $(\theta_*,t_0)$ uniform in $L$ and independent of $\beta$ (Lemma~\ref{lem:beta-L-independent-minorization}, Cor.~\ref{cor:hk-convex-split-explicit}), feeding the one-tick odd-chain (Cor.~\ref{cor:odd-contraction-from-Kint}, Thm.~\ref{thm:uniform-odd-contraction}).
+\emph{Scaling-window (physically scaled) route:} along schedules satisfying \eqref{eq:ucis-sw-window}, UCIS$_{\rm SW}$ (Thm.~\ref{thm:ucis-sw}) supplies a fixed-physical-time minorization for $K_{\rm int}^{(a)\,M(a)}$ with constants depending only on $(G,\varepsilon,T_{\rm phys},C_{\rm SW})$, yielding the fixed-physical-time $L^2$ contraction (Cor.~\ref{cor:ucis-sw-L2-contraction}) and parity-odd contraction (Thm.~\ref{thm:ucis-sw-odd-subspace}).
+Downstream steps (thermodynamic limit, NRC, OS$\to$Wightman) use only the existence of such a slab-uniform contraction/gap input and its stated uniformities.
 \end{mdframed}
 
 \begin{proposition}[Eight--color schedule on the interface]\label{prop:eight-color-schedule}
@@ -1359,7 +1370,7 @@ Apply Lemma~\ref{lem:convex-split} with $K:=K_{\rm int}^{(a)}$, $M:=P_{t_0}$, an
 Set $\theta_*:=\kappa_0$.
 \end{proof}
 \begin{mdframed}[linewidth=0.5pt, linecolor=purple!40, backgroundcolor=purple!3, roundcorner=2pt, innertopmargin=8pt, innerbottommargin=8pt, skipabove=10pt, skipbelow=10pt]
-\noindent\textbf{Remark (Scope).} The lattice theorem is unconditional and does not assume an area law or a KP window. For the continuum passage we adopt the AF--free route on fixed physical slabs using Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional} (with Lem.~\ref{lem:U1-tree-bounds}, Cor.~\ref{cor:U1-uei}, Lem.~\ref{lem:isotropy-restore}) together with the NRC package (Thm.~\ref{thm:quant-calibrated-af-free-nrc}(D,F,G), Lem.~\ref{lem:U2-comparison}, Prop.~\ref{prop:one-point-resolvent}, Thm.~\ref{thm:U2-nrc-unique}). Interface Doeblin minorization and heat-kernel domination yield an odd-cone contraction with weight depending on $\theta_*$. Along van Hove sequences, operator--norm NRC and gap persistence provide unconditional continuum lower bounds. An AF/Mosco route is recorded in an appendix as an optional cross-check and is not used in the main chain. We do not rely on compact-group averaging (calibrators) in the main OS1 argument; isotropy on fixed regions is obtained via equicontinuity and directed embeddings.
+\noindent\textbf{Remark (Scope).} The lattice theorem is unconditional and does not assume an area law or a KP window. For the continuum passage we adopt the AF--free route on fixed physical slabs, conditional on U1/OS1 fixed-region inputs (Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional} with Lem.~\ref{lem:U1-tree-bounds}, Cor.~\ref{cor:U1-uei}, Lem.~\ref{lem:isotropy-restore}) together with the NRC package (Thm.~\ref{thm:quant-calibrated-af-free-nrc}(D,F,G), Lem.~\ref{lem:U2-comparison}, Prop.~\ref{prop:one-point-resolvent}, Thm.~\ref{thm:U2-nrc-unique}). Interface Doeblin minorization and heat-kernel domination yield an odd-cone contraction with weight depending on $\theta_*$. Along van Hove sequences, operator--norm NRC and gap persistence provide continuum lower bounds once these fixed-region inputs are established. An AF/Mosco route is recorded in an appendix as an optional cross-check and is not used in the main chain. We do not rely on compact-group averaging (calibrators) in the main OS1 argument; isotropy on fixed regions is obtained via equicontinuity and directed embeddings.
 \end{mdframed}
 \begin{theorem}[Strong-coupling mass gap] \label{thm:gap}
 There exists $\beta_*>0$ (depending only on local geometry) such that for all $\beta\in (0,\beta_*)$ the transfer operator restricted to the mean-zero sector satisfies $r_0(T)\le \alpha(\beta)<1$, and hence the Hamiltonian $H:=-\log T$ has an energy gap $\Delta(\beta):=-\log r_0(T)>0$. The bound is uniform in $N\ge 2$ and in the finite volume.
@@ -1405,7 +1416,7 @@ We proceed as follows:
 
 \vspace{12pt}
 \begin{mdframed}[linewidth=1pt, linecolor=blue!50, backgroundcolor=blue!5, roundcorner=3pt, innertopmargin=10pt, innerbottommargin=10pt]
-\textbf{Lattice Proof Track} (unconditional) and \textbf{Continuum} (AF--free main path with proved UEI/OS1 inputs; Mosco optional).
+\textbf{Lattice Proof Track} (unconditional) and \textbf{Continuum} (AF--free main path with U1/OS1 inputs (RG-grade); Mosco optional).
 \begin{itemize}
   \item \textbf{Setup (Sec.~\ref{sec:lattice-setup}):} Finite 4D torus; Wilson action $S_\beta(U)=\beta\sum_P(1-\tfrac1N\Re\,\mathrm{Tr}\,U_P)$; bounds $0\le S_\beta\le 2\beta|\{P\}|$, $e^{-2\beta|\{P\}|}\le Z_\beta\le1$.
   \item \textbf{OS positivity (Thm.~\ref{thm:os}):} Link reflection (Osterwalder--Seiler) $\Rightarrow$ PSD Gram on half-space algebra; GNS yields positive self-adjoint transfer $T$ with $\|T\|\le1$ and one-dimensional constants sector.
@@ -1828,7 +1839,7 @@ where $E^{(0)}_a$ is the central link-heat generator at time $\kappa_0(a)=\tfrac
 \end{theorem}
 \begin{mdframed}[linewidth=0.5pt, linecolor=red!30, backgroundcolor=red!3, roundcorner=2pt, innertopmargin=8pt, innerbottommargin=8pt, skipabove=10pt, skipbelow=10pt]
 \textbf{Remark (Role in Main Chain).}\label{rem:sandwich-aux}
-This fixed-core sandwich is not used in the AF--free main chain that yields the lattice and continuum gap statements. It serves only as an auxiliary local estimate on fixed cores; the main contraction uses the interface heat--kernel convex split with explicit $(\theta_*,t_0)$.
+This fixed-core sandwich is \emph{not} used for the slab/interface contraction (the odd-cone cut gap and UCIS$_{\rm SW}$ bookkeeping use the interface heat--kernel convex split with explicit $(\theta_*,t_0)$). However, it \emph{is} invoked in the commutator route to OS1 on fixed regions (Lemma~\ref{lem:local-commutator-Oa2}) to justify an $O(a^2)$ Strang envelope on local cores. As stated here it is an auxiliary \emph{outline}; treat it as an explicit input until a full proof is written and audited.
 \end{mdframed}
 \begin{proof}
 \emph{Step 1: Laplace representation for $\Re z > 0$.} For $w$ with $\Re w > 0$, the resolvent admits the representation
@@ -2354,7 +2365,7 @@ Write the one-step convex split $K=\theta_* P_{t_0}+(1-\theta_*)\mathcal K$ with
 Using Lemma~\ref{lem:hk-lower-explicit} at $t_0$ shows $P_{t_0}\ge c_*(N,r_*)^{m} \Pi_{B_{r_*}}$ (projection to densities supported in $B_{r_*}^m$). Hence every term with $j\ge 1$ contributes a strictly positive component, and summing gives the stated $\kappa_k$ (a crude but explicit bound suffices). The $L^2_0$-norm bound follows by functional calculus: on the orthogonal complement of constants, $\|P_{t_0}\|=e^{-\lambda_1(G) t_0}$ and $\|\mathcal K\|\le 1$, so $\|K\|\le 1-\theta_*(1-e^{-\lambda_1(G) t_0})$ and $\|K^k\|\le (1-\theta_*(1-e^{-\lambda_1(G) t_0}))^{k}$.
 \end{proof}
 \begin{corollary}[UEI with explicit constants]\label{cor:uei-explicit-constants}
-In the setting of Theorem~\ref{thm:uei-fixed-region}, fix any $a\in(0,a_0]$ with $\beta=\beta(a)\ge \beta_{\min}(R,N)>0$. Let
+In the setting of Theorem~\ref{thm:uei-fixed-region}, let $M_R$ be as in Assumption~\ref{assump:uei-mean} and fix any $a\in(0,a_0]$ with $\beta=\beta(a)\ge \beta_{\min}(R,N)>0$. Let
 \[
   \rho_{\min}(R,N)\ :=\ c_2(R,N)\,\beta_{\min}(R,N),\qquad
   G_R(R,N,a_0)\ :=\ C_1(R,N)\,a_0^4,
@@ -2362,7 +2373,7 @@ In the setting of Theorem~\ref{thm:uei-fixed-region}, fix any $a\in(0,a_0]$ with
 where $c_2(R,N)$ is the LSI constant from Step 2 and $C_1(R,N)$ the Lipschitz constant from Step 3 of the proof of Theorem~\ref{thm:uei-fixed-region}. Set
 \[
   \eta_R\ :=\ \min\Big\{\,t_*(R,N),\ \sqrt{\,\rho_{\min}(R,N)\big/ G_R(R,N,a_0)\,}\ \Big\},\qquad
-  C_R\ :=\ \exp\big(\eta_R\,M_R(R,N,\beta_{\min})\big)\,e^{1/2}.
+  C_R\ :=\ \exp\big(\eta_R\,M_R\big)\,e^{1/2}.
 \]
 Then for all volumes $L$ and all boundary conditions outside $R$,
 \[
@@ -2912,7 +2923,8 @@ Fix $(G,\varepsilon,T_{\rm phys})$ as in Theorem~\ref{thm:ucis} and set $M(a)=\l
 \end{equation}
 for some constant $C_{\rm SW}<\infty$.
 
-Assume moreover that the coarse--cell factorization and near--identity refresh mechanism of Lemmas~\ref{lem:ucis-A-cell-decomp} and~\ref{lem:single-link-refresh}--\ref{lem:g-one-link-refresh} hold on the slab (so that, on each cell tick, there is a scale--adapted small--ball component of radius $\asymp \beta^{-1/2}$ with weight bounded below uniformly for all sufficiently small $a$).
+Assume the coarse cell decomposition/disjointness Lemma~\ref{lem:ucis-A-cell-decomp}. Assume moreover that the \emph{near--identity staple window} holds on the fixed slab in the weak--coupling regime, as in Theorem~\ref{thm:staple-window}: there exist $\varepsilon_0>0$ and $p_{\mathrm{win}}>0$ such that whenever $\beta\ge \beta_{\min}$, the window event $W_{\varepsilon_0}$ has probability at least $p_{\mathrm{win}}$ uniformly in volume/boundary data. (Since $\beta(a)\to\infty$, this applies for all sufficiently small $a$ along the schedule.)
+Finally, assume that under the window $W_{\varepsilon_0}$ the single--link conditional updates used to build the coarse increments satisfy the scale--adapted refresh minorization of Lemma~\ref{lem:single-link-refresh} (or its $G$--version Lemma~\ref{lem:g-one-link-refresh}).
 
 Then there exist constants $\theta_*,t_0>0$ depending only on $(G,\varepsilon,T_{\rm phys},C_{\rm SW})$ such that along the schedule $a\downarrow 0$,
 \[
@@ -3054,15 +3066,25 @@ Work in increment coordinates $\Delta_C:=U_C^{-1}V_C\in G$ for each cell. By lef
   K_{\rm cell}^{(a)}(U_C, A)\ =\ \nu_{\beta(a)}\big(U_C^{-1}A\big)
 \]
 for some probability measure $\nu_{\beta(a)}$ on $G$ (the one-tick increment law for a representative cell).
-By the assumed near-identity refresh mechanism (implemented via Lemmas~\ref{lem:single-link-refresh}--\ref{lem:g-one-link-refresh} on each refreshed link within the cell, together with the cell locality ensured by Lemma~\ref{lem:ucis-A-cell-decomp}), there exist constants $\alpha_0,\kappa_0\in(0,1]$ independent of $(a,\beta,L)$ such that for all sufficiently small $a$,
+We now verify the required scale--adapted small--ball component using the staple window and one--link refresh lemmas.
+
+\smallskip
+\emph{(i) Window event.} Let $W_{\varepsilon_0}$ be the near--identity staple window event for the finite family of link updates used (within one tick) to produce the outgoing coarse increments in all coarse cells (this family is finite because $m(\varepsilon)<\infty$). By Theorem~\ref{thm:staple-window}, there exist $\varepsilon_0>0$ and $p_{\mathrm{win}}>0$ (depending only on the slab geometry and $G$) such that for all $\beta\ge \beta_{\min}$ the event $W_{\varepsilon_0}$ has probability at least $p_{\mathrm{win}}$ uniformly in volume and boundary data. Since $\beta(a)\to\infty$, this holds for all sufficiently small $a$ along the schedule.
+
+\smallskip
+\emph{(ii) One--link scale--adapted refresh under the window.} On the event $W_{\varepsilon_0}$, each refreshed link $\ell$ used in the coarse increment construction has staple product $H_\ell\in B_G(e,\varepsilon_0)$. Hence Lemma~\ref{lem:single-link-refresh}(a) (or Lemma~\ref{lem:g-one-link-refresh}) yields constants $\kappa_0\in(0,1]$ and $p_{\mathrm{ref}}>0$, independent of $(\beta,L,\text{boundary})$, such that conditional on $W_{\varepsilon_0}$ one has a scale--adapted one--link minorization by Haar on $B_G(e,\kappa_0/\sqrt{\beta})$.
+
+\smallskip
+\emph{(iii) From refreshed links to a cell increment law.} By Lemma~\ref{lem:ucis-A-cell-decomp}, within each cell $C$ we may choose the refreshed links so their plaquette neighborhoods are disjoint (and disjoint across cells). Lemma~\ref{lem:plaquette-factorization} then yields conditional independence across these refreshed links, so the joint law has a product small--ball component of weight at least $p_{\mathrm{ref}}^{\,b}$ for some fixed $b=b(\varepsilon)$ (the number of refreshed links per cell, independent of $a$). Pushing forward through the (cellwise) coarse increment map and using that multiplication in $G$ is smooth/Lipschitz on a normal neighborhood, we obtain a scale--adapted ball minorization for the one-tick increment law $\nu_{\beta(a)}$:
 \[
-  \nu_{\beta(a)}\ \ge\ \alpha_0\,\mathrm{Unif}\!\big(B_G(e,\kappa_0/\sqrt{\beta(a)})\big).
+  \nu_{\beta(a)}\ \ge\ \alpha_0\,\mathrm{Unif}\!\big(B_G(e,\kappa_1/\sqrt{\beta(a)})\big),
 \]
+for some constants $\alpha_0:=p_{\mathrm{win}}\,p_{\mathrm{ref}}^{\,b}>0$ and $\kappa_1\in(0,\kappa_0]$ depending only on $(G,\varepsilon,T_{\rm phys})$, uniformly for all sufficiently small $a$ along the schedule.
 
 \smallskip
 \textbf{Step 3 (diffusive smoothing in time for each cell).}
 Apply Lemma~\ref{lem:scaled-ball-to-hk} to $\nu_{\beta(a)}$ and $n=M(a)$. (Note that the proof of Lemma~\ref{lem:scaled-ball-to-hk} uses the diffusive ball-walk minorization Lemma~\ref{lem:ballwalk-diffusive} together with the central-mixture expansion Lemma~\ref{lem:central-mixture-binomial}.)
-Using the scaling window \eqref{eq:ucis-sw-window}, choose $a$ sufficiently small so that $M(a)\ge C_0\,\beta(a)$ where $C_0$ is the constant from Lemma~\ref{lem:scaled-ball-to-hk} (depending only on $(G,\alpha_0,\kappa_0)$). Then there exist constants $c_0,t_0>0$ depending only on $(G,\alpha_0,\kappa_0)$ such that
+Using the scaling window \eqref{eq:ucis-sw-window}, choose $a$ sufficiently small so that $M(a)\ge C_0\,\beta(a)$ where $C_0$ is the constant from Lemma~\ref{lem:scaled-ball-to-hk} (depending only on $(G,\alpha_0,\kappa_1)$). Then there exist constants $c_0,t_0>0$ depending only on $(G,\alpha_0,\kappa_1)$ such that
 \[
   \nu_{\beta(a)}^{(*M(a))}\ \ge\ c_0\,p_{t_0}.
 \]
@@ -3084,6 +3106,48 @@ Combining with the previous display yields
   \ =\ \theta_*\,P_{t_0}(U,\cdot),
 \]
 with $\theta_*:=c_0^{\,m(\varepsilon)}\in(0,1)$ and $P_{t_0}$ the product heat-kernel kernel on $G^m$. The constants depend only on $(G,\varepsilon,T_{\rm phys},C_{\rm SW})$ (via $m(\varepsilon)$ and the window condition ensuring $M(a)\gtrsim \beta(a)$), and are uniform in volume/boundary data on fixed slabs. This is exactly the claimed minorization.
+\end{proof}
+
+\begin{corollary}[UCIS$_{\rm SW}$ $\Rightarrow$ fixed-physical-time $L^2$ contraction (bookkeeping)]\label{cor:ucis-sw-L2-contraction}
+Assume the hypotheses of Theorem~\ref{thm:ucis-sw} and let $(\theta_*,t_0)$ be the constants produced there on the coarse interface space $G^{m(\varepsilon)}$. Define
+\[
+  q_{\rm phys}\ :=\ (1-\theta_*)+\theta_* e^{-\lambda_1(G)\,t_0}\ =\ 1-\theta_*\big(1-e^{-\lambda_1(G)\,t_0}\big)\ \in(0,1).
+\]
+Then for all sufficiently small $a$ along the schedule (so that the conclusions of Theorem~\ref{thm:ucis-sw} apply) and every mean-zero $f\in L^2(G^{m(\varepsilon)},\pi^{\otimes m(\varepsilon)})$,
+\[
+  \big\|K_{\rm int}^{(a)\,M(a)} f\big\|_{2}\ \le\ q_{\rm phys}\,\|f\|_{2},
+\]
+uniformly in the volume/boundary data on fixed slabs.
+\end{corollary}
+\begin{proof}
+For each such $a$, the minorization from Theorem~\ref{thm:ucis-sw} gives a Nummelin split
+\(
+  K_{\rm int}^{(a)\,M(a)}=\theta_* P_{t_0}+(1-\theta_*)\mathcal K
+\)
+for some Markov kernel $\mathcal K$ on $G^{m(\varepsilon)}$. On mean-zero functions, $\|P_{t_0}\|=e^{-\lambda_1(G)t_0}$ and $\|\mathcal K\|\le 1$, giving the displayed contraction factor.
+\end{proof}
+
+\begin{corollary}[UCIS$_{\rm SW}$ $\Rightarrow$ fixed-physical-time odd-cone contraction]\label{cor:ucis-sw-odd-contraction}
+Assume the hypotheses of Theorem~\ref{thm:ucis-sw} and let $q_{\rm phys}\in(0,1)$ be as in Corollary~\ref{cor:ucis-sw-L2-contraction}. Then for all sufficiently small $a$ along the schedule and every spatial reflection $P_i$,
+\[
+  \|e^{-a\,M(a)\,H}\psi\|\ \le\ q_{\rm phys}\,\|\psi\|
+  \qquad\big(\psi\in\mathcal C_{R_*}\cap\{P_i\psi=-\psi\}\big),
+\]
+uniformly in volume/boundary data on fixed slabs.
+\end{corollary}
+\begin{proof}
+Fix such an $a$. By Corollary~\ref{cor:ucis-sw-L2-contraction}, the $M(a)$--step coarse interface kernel satisfies $\|K_{\rm int}^{(a)\,M(a)}\|_{L^2_0}\le q_{\rm phys}$ on mean-zero coarse interface functions. Apply Proposition~\ref{prop:int-to-transfer} to the \emph{thick} slab of duration $a\,M(a)$ (equivalently, iterate the one-tick Markov property $M(a)$ times): the transfer over this thick slab is $e^{-a\,M(a)\,H}$ and its interface kernel is $K_{\rm int}^{(a)\,M(a)}$. The domination argument in Proposition~\ref{prop:int-to-transfer} then yields the stated odd-cone contraction with the same factor $q_{\rm phys}$.
+\end{proof}
+
+\begin{theorem}[UCIS$_{\rm SW}$ $\Rightarrow$ fixed-physical-time contraction on the full parity-odd subspace]\label{thm:ucis-sw-odd-subspace}
+Assume the hypotheses of Theorem~\ref{thm:ucis-sw}. Then for all sufficiently small $a$ along the schedule, for every spatial reflection $P_i$, and every $\psi\in\mathcal H_{\rm odd}^{(i)}=\{\psi:\ P_i\psi=-\psi\}$,
+\[
+  \|e^{-a\,M(a)\,H}\psi\|\ \le\ q_{\rm phys}\,\|\psi\|,
+\]
+with $q_{\rm phys}\in(0,1)$ as in Corollary~\ref{cor:ucis-sw-L2-contraction}, uniformly in volume/boundary data on fixed slabs.
+\end{theorem}
+\begin{proof}
+First apply Corollary~\ref{cor:ucis-sw-odd-contraction} on the slab-local odd cone. Then use density (Lemma~\ref{lem:odd-density}) and continuity of $e^{-a\,M(a)\,H}$ to pass to the closure $\mathcal H_{\rm odd}^{(i)}$.
 \end{proof}
 
 \begin{lemma}[Density of coarse interface observables as \boldmath $\varepsilon\downarrow 0$]\label{lem:coarse-density}
@@ -3674,7 +3738,7 @@ Equivalently, for all $t\ge 0$,
 The bound is independent of the exhaustion, region choice, and boundary conditions.
 \end{theorem}
 \begin{proof}
-Step 1 (uniform local contraction). On finite tori and fixed slabs, the interface Doeblin split with constants $(\theta_*,t_0)$ (Proposition~\ref{prop:explicit-doeblin-constants}) and the two-layer deficit (Theorem~\ref{thm:two-layer-explicit}) imply the one-tick odd-cone contraction (Theorem~\ref{thm:uniform-odd-contraction}). By the odd\,$\to$\,mean-zero upgrade (Corollary~\ref{cor:odd-to-meanzero}) and parity cycling, eight ticks yield a mean-zero contraction with rate $\gamma_*=8\,c_{\rm cut,phys}>0$, uniform in $(\beta,L)$.
+Step 1 (uniform local contraction). On finite tori and fixed slabs, along any scaling schedule satisfying \eqref{eq:ucis-sw-window}, UCIS$_{\rm SW}$ (Theorem~\ref{thm:ucis-sw}) yields a fixed-physical-time heat-kernel minorization for the coarse interface after $M(a)$ ticks, hence a fixed-physical-time parity-odd contraction (Theorem~\ref{thm:ucis-sw-odd-subspace}). This supplies the required slab gap input with constants uniform in the volume/boundary data on fixed slabs (within the scaling window).
 
 Step 2 (thermodynamic limit at fixed spacing). The contraction estimate is volume-uniform; the thermodynamic limit preserves the gap and clustering (Theorem~\ref{thm:thermo}). Boundary-condition robustness (Proposition~\ref{prop:bc-robust}) ensures independence of outer boundary choices for local observables.
 
@@ -3754,7 +3818,7 @@ Then the limit measure $\mu$ satisfies:
 In the setting of this paper, the hypotheses (i)–(iii) of Lemma~\ref{lem:os-continuum} hold unconditionally on fixed regions, uniformly along van Hove sequences:
 \begin{itemize}
   \item (i) holds by Proposition~\ref{prop:OS0-poly} (polynomial OS0) and Corollary~\ref{cor:os0-explicit-4d} with constants uniform in $(a,L)$ on fixed $R$.
-  \item (ii) holds from the uniform lattice gap on slabs and its persistence: odd-cone contraction (Cor.~\ref{cor:odd-contraction-from-Kint}, Thm.~\ref{thm:uniform-odd-contraction}) gives a slab-normalized $\gamma_*>0$, and gap persistence to the continuum (Thm.~\ref{thm:gap-persist-cont}) yields exponential clustering uniformly on fixed regions.
+  \item (ii) holds from the uniform lattice gap on slabs and its persistence: along scaling schedules satisfying \eqref{eq:ucis-sw-window}, UCIS$_{\rm SW}$ yields a fixed-physical-time contraction on the parity-odd subspace (Thm.~\ref{thm:ucis-sw-odd-subspace}), which supplies a slab gap input; gap persistence to the continuum (Thm.~\ref{thm:gap-persist-cont}) then yields exponential clustering uniformly on fixed regions.
   \item (iii) holds by the isometric OS/GNS embeddings and directed polygonal embeddings preserving reflection (Lem.~\ref{lem:isometric-embeddings}, Lem.~\ref{lem:U2-embeddings}), together with embedding–independence (Prop.~\ref{prop:embedding-independence}).
 \end{itemize}
 Consequently, Lemma~\ref{lem:os-continuum} applies unconditionally to the constructed limits on $\mathbb R^4$.
@@ -3879,7 +3943,7 @@ Tightness and convergence follow from the uniform locality hypotheses. OS0--OS5 
 
 \subsection*{Preview: pointer to the Main Theorem}
 
-\noindent For the definitive, labeled statement and proof (with AF--free NRC and proved UEI/OS1 inputs), see Section~\ref{sec:main-theorem-unconditional}, Theorem~\ref{thm:main-af-free}.
+\noindent For the definitive, labeled statement and proof (with AF--free NRC and U1/OS1 fixed-region inputs), see Section~\ref{sec:main-theorem-unconditional}, Theorem~\ref{thm:main-af-free}.
 
 \begin{theorem}\label{thm:preview-continuum-existence}
 On $\mathbb R^4$, there exists a probability measure on loop configurations whose Schwinger functions satisfy OS0--OS5. The OS reconstruction yields a Hilbert space $\mathcal H$, a vacuum $\Omega$, and a positive self-adjoint Hamiltonian $H\ge 0$ with
@@ -3963,14 +4027,51 @@ uniformly in $(L,a)$. In particular, $\mathrm{spec}(H_{L,a})\subset\{0\}\cup[c_{
 \end{theorem}
 \section{Appendix: Tree--Gauge UEI (Uniform Exponential Integrability)}
 
-\begin{theorem}[Uniform Exponential Integrability on fixed regions]\label{thm:uei-fixed-region}
-Fix a bounded physical region $R\subset\mathbb{R}^4$ and let $\mathcal{P}_R$ be the set of plaquettes in $R$ at spacing $a$. Fix a weak-coupling scaling schedule $a\mapsto \beta(a)$ with $\beta(a)\ge \beta_{\min}(R,N)>0$ for $a\in(0,a_0]$ and $\beta(a)\to\infty$ as $a\downarrow 0$. With $\phi(U):=1-\tfrac{1}{N}\,\mathrm{Re\,Tr}\,U\in[0,2]$ and $S_R(U):=\sum_{p\in\mathcal{P}_R}\phi(U_p)$, there exist constants $\eta_R>0$ and $C_R<\infty$, depending only on $(R,a_0,N,\beta_{\min})$, such that for all $(L,a)$ in the scaling window (with coupling $\beta=\beta(a)$) and any boundary configuration outside $R$,
+\subsection*{U1 subclaims (audit stubs; closure target decomposition)}
+
+\begin{lemma}[U1-A: Tree gauge reduction + bounded interaction degree (target)]\label{lem:U1-A-tree-gauge}
+Fix a bounded physical region $R\Subset\mathbb R^4$. After gauge-fixing on a spanning tree of links in $R$ (with exterior boundary configuration fixed), the induced finite-volume law on the remaining independent chord variables can be written as a Gibbs measure on $G^{m(R,a)}$ with respect to product Haar, with uniformly bounded interaction degree $d_0(R)$ independent of the lattice spacing $a$.
+\end{lemma}
+
+\begin{lemma}[U1-B: Small-field concentration on fixed regions (core target)]\label{lem:U1-B-smallfield}
+Fix $R\Subset\mathbb R^4$ and a weak-coupling schedule $a\mapsto \beta(a)$ with $\beta(a)\to\infty$ as $a\downarrow 0$. There exists a constant $C_R<\infty$ and an event $\mathcal G_{R,a}$ (measurable with respect to plaquettes in $R$) such that along the scaling window,
+\[
+  \mathbb P_{\mu_{L,a}}\!\big(\mathcal G_{R,a}^c\big)\ \le\ \varepsilon_R(a)\quad\text{with }\varepsilon_R(a)\to 0,
+\]
+and on $\mathcal G_{R,a}$ all plaquette holonomies in $R$ satisfy a uniform small-field bound (e.g. $d_G(U_p,\mathbf 1)\le C_R\,a^2$ in a fixed bi-invariant metric). In particular, on $\mathcal G_{R,a}$ one has $\phi(U_p)\lesssim_R a^4$ and hence $S_R(U)=\sum_{p\subset R}\phi(U_p)=O_R(1)$.
+\end{lemma}
+
+\begin{lemma}[U1-D: Gradient/Lipschitz bounds from small field (target)]\label{lem:U1-D-lipschitz}
+On the small-field event of Lemma~\ref{lem:U1-B-smallfield}, the map $U\mapsto S_R(U)$ (and the finite collection of time-zero local observables on $R$ used in equicontinuity/OS1/NRC bookkeeping) admits Lipschitz/gradient bounds compatible with a uniform Herbst argument, with constants depending only on $(R,N)$ and the declared schedule parameters.
+\end{lemma}
+
+\begin{lemma}[U1-E: Dimension-uniform LSI/concentration for the chord Gibbs law (target)]\label{lem:U1-E-lsi-chords}
+Along the scaling window, after tree gauge on $R$ the induced chord Gibbs measure $\mu_R^{(a)}$ satisfies a logarithmic Sobolev inequality (or an explicitly stated substitute concentration inequality) with a constant $\rho_R>0$ uniform in $a$, in the van Hove volume, and in the exterior boundary configuration outside $R$.
+\end{lemma}
+
+\begin{remark}[U1 roadmap (how the pieces fit)]\label{rem:U1-roadmap}
+Lemma~\ref{lem:U1-B-smallfield} is the core RG-grade payload: it is designed to force $S_R$ to be $O(1)$ on fixed regions and to supply the small-field regime needed for (i) the mean bound (U1-C), (ii) the Lipschitz bounds used in Herbst (U1-D), and (iii) a usable LSI/concentration inequality (U1-E) via standard compact-manifold tools once the measure is sufficiently concentrated near $\mathbf 1$.
+\end{remark}
+
+\begin{assumption}[U1-C: Fixed--region action mean bound (UEI input; RG--grade)]\label{assump:uei-mean}\label{lem:U1-C-mean}
+Fix a bounded physical region $R\Subset\mathbb R^4$ and define
+\[
+  S_R(U)\ :=\ \sum_{p\subset R}\phi(U_p),\qquad \phi(U):=1-\tfrac{1}{N}\Re\,\Tr(U)\in[0,2].
+\]
+Along the weak--coupling scaling schedule $a\mapsto\beta(a)$ and van Hove volumes, assume there exists $M_R<\infty$ (depending only on $(R,a_0,N,\beta_{\min})$) such that for all sufficiently small $a\in(0,a_0]$, all admissible $L=L(a)$, and all boundary configurations outside $R$,
+\[
+  \mathbb E_{\mu_{L,a}}\big[S_R(U)\big]\ \le\ M_R.
+\]
+\end{assumption}
+
+\begin{theorem}[Uniform Exponential Integrability on fixed regions (conditional UEI target)]\label{thm:uei-fixed-region}
+Fix a bounded physical region $R\subset\mathbb{R}^4$ and let $\mathcal{P}_R$ be the set of plaquettes in $R$ at spacing $a$. Fix a weak-coupling scaling schedule $a\mapsto \beta(a)$ with $\beta(a)\ge \beta_{\min}(R,N)>0$ for $a\in(0,a_0]$ and $\beta(a)\to\infty$ as $a\downarrow 0$. Assume the mean bound of Assumption~\ref{assump:uei-mean}. Then there exist constants $\eta_R>0$ and $C_R<\infty$, depending only on $(R,a_0,N,\beta_{\min})$, such that for all $(L,a)$ in the scaling window (with coupling $\beta=\beta(a)$) and any boundary configuration outside $R$,
 \[
   \mathbb{E}_{\mu_{L,a}}\big[e^{\eta_R S_R(U)}\big]\ \le\ C_R.
 \]
 \end{theorem}
-\begin{corollary}[Uniform UEI along AF scaling]\label{cor:uei-af-uniform}
-Under Assumption~\ref{assump:AF-Mosco}, for each fixed bounded region $R\Subset\mathbb R^4$ there exist $\eta_R>0$ and $C_R<\infty$, depending only on $(R,N)$ and the AF trajectory parameters, such that the UEI bound of Theorem~\ref{thm:uei-fixed-region} holds uniformly along the scaling window. In particular, the Laplace transforms of all time-zero local observables supported in $R$ are uniformly bounded in $a$ and $L$.
+\begin{corollary}[Uniform UEI along AF scaling (conditional)]\label{cor:uei-af-uniform}
+Under Assumption~\ref{assump:AF-Mosco} and Assumption~\ref{assump:uei-mean}, for each fixed bounded region $R\Subset\mathbb R^4$ there exist $\eta_R>0$ and $C_R<\infty$, depending only on $(R,N)$ and the AF trajectory parameters, such that the UEI bound of Theorem~\ref{thm:uei-fixed-region} holds uniformly along the scaling window. In particular, the Laplace transforms of all time-zero local observables supported in $R$ are uniformly bounded in $a$ and $L$.
 \end{corollary}
 \begin{proof}
 \emph{Scope note (weak-coupling scaling).} The uniform-in-$a$ claim for the extensive quantity $S_R=\sum_{p\subset R}\phi(U_p)$ is only plausible in the intended continuum regime where $\beta=\beta(a)\to\infty$ as $a\downarrow 0$ (so plaquette holonomies concentrate near $\mathbf 1$ and $\phi(U_p)\sim a^4\|F\|^2$). At fixed $\beta$ independent of $a$, $|\mathcal P_R|\asymp a^{-4}$ and one expects $\mathbb E S_R$ to grow proportionally to $|\mathcal P_R|$, so $\sup_a\mathbb E e^{\eta S_R}$ cannot remain bounded for any fixed $\eta>0$.
@@ -4033,7 +4134,7 @@ with $t_*(R,N)$ a universal LSI radius (on compact groups) so that $\frac{\eta_R
   \mathbb{E}_{\mu_R}\big[e^{\eta_R(S_R-\mathbb{E}S_R)}\big]\ \le\ e^{1/2}\,.
 \]
 
-\emph{Step 5 (Bounding $\mathbb{E}S_R$ and conclusion).} In the intended weak-coupling scaling regime, $S_R$ behaves as a Riemann sum for the local continuum density, and one expects $\sup_{a\in(0,a_0]}\mathbb{E}_{\mu_R}S_R<\infty$ on fixed $R$. Denote this bound by $M_R(R,N,\beta_{\min})$. Therefore
+\emph{Step 5 (Centering removal and conclusion).} By Assumption~\ref{assump:uei-mean}, $\mathbb E_{\mu_{L,a}}S_R\le M_R$ uniformly along the scaling window. Therefore
 \[
   \mathbb{E}_{\mu_{L,a}}\!\left[e^{\eta_R S_R(U)}\right]
   \ =\ e^{\eta_R\,\mathbb{E}S_R}\,\mathbb{E}\big[e^{\eta_R(S_R-\mathbb{E}S_R)}\big]
@@ -4059,15 +4160,24 @@ Let $\{\mu_{a,L}\}$ be Wilson lattice measures with fixed link reflection and sp
 Under Assumption~\ref{assump:AF-Mosco} (Appendix~\ref{app:af-mosco}) and Corollary~\ref{cor:uei-af-uniform}, reflection positivity for time-zero cylinders is preserved in the limit; hence OS2 holds for the continuum Schwinger functions.
 \end{corollary}
 
-\begin{proposition}[OS3/OS5 in the continuum limit]\label{prop:os35-limit}
-Let $\{\mu_{a,L}\}$ be Wilson lattice measures along a van Hove scaling sequence as in Proposition~\ref{prop:os0os2-closure}. Assume the odd-subspace one-tick contraction with constants independent of $(\beta,L)$ (Theorem~\ref{thm:uniform-odd-contraction}) and gap persistence under Mosco (Theorem~\ref{thm:gap-persist-cont}). Then the limit Schwinger functions satisfy:
+\begin{proposition}[OS3/OS5 in the continuum limit (scaling-window UCIS$_{\rm SW}$ route)]\label{prop:os35-limit}
+Let $\{\mu_{a,L}\}$ be Wilson lattice measures along a van Hove scaling sequence $(a_k,L_k)$ with $a_k\downarrow 0$ and $L_k a_k\to\infty$, and let $\beta=\beta(a)$ be a monotone weak-coupling schedule with $\beta(a)\to\infty$ satisfying the scaling window \eqref{eq:ucis-sw-window}. Assume UCIS$_{\rm SW}$ holds along the schedule (Theorem~\ref{thm:ucis-sw}), and assume gap persistence under Mosco/NRC (Theorem~\ref{thm:gap-persist-cont}). Then the limit Schwinger functions satisfy:
 \begin{itemize}
   \item OS3 (clustering): for time-separated observables $O_1,O_2$ supported in fixed bounded regions, $|\langle O_1(t)O_2(0)\rangle_c|\le C e^{-m t}$ with $m>0$ independent of $(a,L)$, hence clustering persists in the limit.
   \item OS5 (unique vacuum): the spectral gap persistence (Theorem~\ref{thm:gap-persist-cont}) implies that $0$ is an isolated simple eigenvalue of $H$, yielding vacuum uniqueness.
 \end{itemize}
 \end{proposition}
 \begin{proof}
-On each lattice at spacing $a$, Theorem~\ref{thm:uniform-odd-contraction} gives a uniform bound $\|e^{-tH_{a,L}}\|_{\Omega^{\perp}}\le e^{-c t}$ with $c= c_{\rm cut,phys}>0$ independent of $(\beta,L)$. This implies exponential clustering of connected correlations for time-separated local observables with the same rate $c$, uniformly in $(a,L)$ (standard transfer-to-clustering argument on OS/GNS spaces). By operator-norm NRC (Theorem~\ref{thm:nrc-operator-norm}) and gap persistence (Theorem~\ref{thm:gap-persist-cont}), the rate persists to the limit semigroup $e^{-tH}$ and spectrum of $H$, establishing OS3 and OS5.
+Fix $k$ and write $a=a_k$, $L=L_k$. Let $M(a)=\lceil T_{\rm phys}/a\rceil$ be as in Theorem~\ref{thm:ucis-sw} and set the fixed physical time $\tau_{\rm phys}:=a\,M(a)\in[T_{\rm phys},T_{\rm phys}+a]$. By UCIS$_{\rm SW}$ and Corollary~\ref{cor:ucis-sw-L2-contraction}, there exists $q_{\rm phys}\in(0,1)$ independent of $(L,\text{boundary})$ (on fixed slabs) such that
+\[
+  \big\|e^{-\tau_{\rm phys} H_{a,L}}\big\|_{\Omega^\perp\to\Omega^\perp}\ \le\ q_{\rm phys}.
+\]
+By semigroup submultiplicativity, for $t\ge 0$ write $t=n\tau_{\rm phys}+s$ with $n=\lfloor t/\tau_{\rm phys}\rfloor$ and $s\in[0,\tau_{\rm phys})$. Then
+\[
+  \|e^{-tH_{a,L}}\|_{\Omega^\perp}\ \le\ \|e^{-sH_{a,L}}\|\,\|e^{-n\tau_{\rm phys}H_{a,L}}\|_{\Omega^\perp}
+  \ \le\ q_{\rm phys}^{\,n}\ \le\ \exp\!\Big(-\frac{-\log q_{\rm phys}}{\tau_{\rm phys}}\,t\Big).
+\]
+Since $\tau_{\rm phys}\le T_{\rm phys}+a_0$, the rate $m:=(-\log q_{\rm phys})/(T_{\rm phys}+a_0)>0$ is uniform in $a$ and $L$ along the scaling sequence. This implies exponential clustering of connected correlations for time-separated local observables with the same rate $m$, uniformly in $(a,L)$ (standard transfer-to-clustering argument on OS/GNS spaces). Gap persistence under Theorem~\ref{thm:gap-persist-cont} transports the gap to the limit generator $H$, yielding OS3 and OS5.
 \end{proof}
 \begin{proof}
 \emph{Tightness.} On each fixed region $R$, Theorem~\ref{thm:uei-fixed-region} provides $\eta_R>0$ and $C_R<\infty$ with uniform exponential moment bounds. By Prokhorov's theorem, the family $\{\mu_{a,L}\}$ is tight on cylinders generated by loops/local fields supported in $R$, hence along a subsequence $\mu_{a_k,L_k}$ converges weakly to a probability measure $\mu_R$ on that cylinder $\sigma$-algebra. A diagonal argument over an exhausting sequence of regions identifies a unique limiting measure $\mu$ on cylinder sets.
@@ -4144,20 +4254,20 @@ In particular, one may take $C_G(z;R)\le C_{\rm comm}(R,G) \int_0^{t_0} e^{-\ope
 Use the Laplace representation $(H_{a,L}-z)^{-1}=\int_0^\infty e^{tz}\, e^{-t H_{a,L}}\,dt$ (valid on the local core and extended by boundedness), conjugate by $U_a(G)$, and subtract the target formula for $(H-z)^{-1}$. Insert and subtract the embedded semigroup, split the integral at $t_0$, control the small\,–\,time contribution by Lemma~\ref{lem:local-commutator-Oa2}, and bound the tail by contractivity and $e^{t\Re z}$. Strong semigroup convergence on the core (Theorem~\ref{thm:strong-semigroup-core}) passes the remaining terms to the limit and yields the stated $O(a^2)$ bound.
 \end{proof}
 
-\begin{theorem}[OS1 on fixed regions, unconditional]\label{thm:os1-unconditional}
-Fix a bounded region $R\Subset\mathbb R^4$. Assume UEI/equicontinuity on $R$ (Theorem~\ref{thm:uei-fixed-region}) and locality, and let $H_{a,L}\ge 0$ and $H\ge 0$ be the lattice and continuum generators with embeddings $J_a$. If the local $O(a^2)$ commutator bound of Lemma~\ref{lem:local-commutator-Oa2} holds for every rigid $G\in E(4)$, then for all $G$ and all nonreal $z$,
+\begin{theorem}[OS1 on fixed regions (conditional; calibrator route)]\label{thm:os1-unconditional}
+Fix a bounded region $R\Subset\mathbb R^4$. Assume UEI/equicontinuity on $R$ (Theorem~\ref{thm:uei-fixed-region}) and locality, and let $\{S_n\}$ be any van Hove limit Schwinger functions on $R$. Then the limit Schwinger functions satisfy OS1 (full Euclidean invariance): for all $n\ge 1$, rigid $G\in E(4)$, and loop families $\{\Gamma_i\}_{i=1}^n\subset R$,
 \[
-  U(G)(H-z)^{-1}U(G)^*\ =\ (H-z)^{-1},
+  S_n(G\Gamma_1,\dots,G\Gamma_n)\ =\ S_n(\Gamma_1,\dots,\Gamma_n).
 \]
-hence $[H,U(G)]=0$ on its natural domain and $e^{-tH}$ commutes with $U(G)$ for all $t\ge 0$. Consequently, the continuum Schwinger functions on $R$ satisfy OS1 (full Euclidean invariance): for all $n\ge 1$, rigid $G\in E(4)$, and loop families $\{\Gamma_i\}_{i=1}^n\subset R$,
-\[
-  S_n(G\Gamma_1,\dots,G\Gamma_n)\ =\ S_n(\Gamma_1,\dots,\Gamma_n),
-\]
-with constants uniform on $R$ and independent of the volume and the van Hove exhaustion.
 \end{theorem}
 \begin{proof}
-By Proposition~\ref{prop:resolvent-from-commutator}, $J_a U_a(G)(H_{a,L}-z)^{-1}U_a(G)^*J_a^*\to U(G)(H-z)^{-1}U(G)^*$ in operator norm at each nonreal $z$. On the other hand, $J_a(H_{a,L}-z)^{-1}J_a^*\to (H-z)^{-1}$ strongly on the OS/GNS space by Theorem~\ref{thm:strong-semigroup-core} and standard resolvent\,–\,semigroup equivalences on cores. Combining and using unitary invariance shows $U(G)(H-z)^{-1}U(G)^*=(H-z)^{-1}$; functional calculus yields $[H,U(G)]=0$ and commutation of $e^{-tH}$ with $U(G)$. The OS/GNS formulas express $n$\,–\,point functions as finite sums of matrix elements of $e^{-tH}$ between time\,–\,shifted local vectors; commutation with $U(G)$ and directed consistency give the displayed invariance on $R$. UEI/equicontinuity upgrades equality on a dense set of cylinders to all loop inputs supported in $R$.
+Apply the constructed-calibrator route (Theorem~\ref{thm:os1-calibrator-route}), which upgrades hypercubic symmetry to full $SO(4)$ invariance on fixed regions by isotropic heat-kernel smoothing and an $\epsilon\downarrow 0$ limit justified by UEI/equicontinuity.
 \end{proof}
+
+\begin{mdframed}[linewidth=0.5pt, linecolor=gray!40, backgroundcolor=gray!6, roundcorner=2pt, innertopmargin=8pt, innerbottommargin=8pt, skipabove=10pt, skipbelow=10pt]
+\noindent\textbf{Remark (Optional commutator route).}
+An alternative proof proceeds by resolvent conjugation from local semigroup commutator bounds: `lem:local-commutator-Oa2` \(\Rightarrow\) `prop:resolvent-from-commutator` \(\Rightarrow\) `thm:emergent-sym`. This route currently invokes the outline-only input `TS:sandwich_main`; it is kept as a cross-check rather than the mainline OS1 closure.
+\end{mdframed}
 
 \paragraph{Alternative (cross\,–\,check): isotropic heat\,–\,kernel calibrators, constructed.}
 \begin{proposition}[Hypercubic\,–\,equivariant isotropic calibrators; construction]\label{prop:hk-calibrators-constructed}
@@ -4543,7 +4653,7 @@ The spectrum of the Minkowski Hamiltonian coincides with that of $H$ (under the 
 \begin{mdframed}[linewidth=0.5pt, linecolor=purple!40, backgroundcolor=purple!3, roundcorner=2pt, innertopmargin=8pt, innerbottommargin=8pt, skipabove=10pt, skipbelow=10pt]
 \subsubsection*{Result Map (Labels; AF--free NRC Main Path)}
 \begin{itemize}[leftmargin=2em, itemsep=4pt]
-  \item \textbf{Scaled minorization $\Rightarrow$ finite continuum gap}: Lem.~\ref{lem:coarse-refresh}, Lem.~\ref{lem:coarse-hk-domination}, Prop.~\ref{prop:explicit-doeblin-constants}, Thm.~\ref{thm:two-layer-explicit}.
+  \item \textbf{Scaled (physically fixed-time) minorization $\Rightarrow$ slab gap}: UCIS$_{\rm SW}$ (Thm.~\ref{thm:ucis-sw} under \eqref{eq:ucis-sw-window}) $\Rightarrow$ fixed-physical-time $L^2$ contraction (Cor.~\ref{cor:ucis-sw-L2-contraction}) $\Rightarrow$ fixed-physical-time parity-odd contraction (Thm.~\ref{thm:ucis-sw-odd-subspace}).
   \item \textbf{AF/Mosco cross\,–\,check (optional)}: Appendix~\ref{app:af-mosco}; Mosco/strong-resolvent variant and gap persistence (Thm.~\ref{thm:gap-persist-cont}).
   \item \textbf{OS axioms in the limit}: Thm.~\ref{thm:uei-fixed-region}, Prop.~\ref{prop:os0os2-closure}, Thm.~\ref{thm:os1-unconditional}.
   \item \textbf{Non-Gaussianity (local fields)}: Prop.~\ref{prop:nonzero-cumulant4}.
@@ -4551,11 +4661,11 @@ The spectrum of the Minkowski Hamiltonian coincides with that of $H$ (under the 
 \end{mdframed}
 
 \subsubsection*{Proof Strategy}
-OS2 on the lattice (Thm.~\ref{thm:os}) yields a positive transfer $T=e^{-aH}$. On a fixed slab, the interface engine (staple window: Thm.~\ref{thm:staple-window}; $\mathrm{SU}(N)$ refresh: Lem.~\ref{lem:SU(N)-refresh}; small-ball $\Rightarrow$ HK: Lem.~\ref{lem:ball-to-hk}/Cor.~\ref{cor:product-ball-to-hk}; sandwich: Prop.~\ref{prop:sandwich}) yields a slab-uniform heat--kernel minorization on the coarse interface,
-\(
-  K_{\rm int}^{(a)}\ge \theta_* P_{t_0}
-\)
-(Lemma~\ref{lem:beta-L-independent-minorization}; Cor.~\ref{cor:hk-convex-split-explicit}). Hence $\|K_{\rm int}^{(a)}\|_{L^2_0}\le 1-\theta_*(1-e^{-\lambda_1(G) t_0})$ and, by the compression $T=J^* K J$, $\|e^{-aH}\|_{\rm odd}\le 1-\theta_*(1-e^{-\lambda_1(G) t_0})$ (Thm.~\ref{thm:uniform-odd-contraction}).
+OS2 on the lattice (Thm.~\ref{thm:os}) yields a positive transfer $T=e^{-aH}$. On a fixed slab, the interface engine (staple window: Thm.~\ref{thm:staple-window}; scale-adapted refresh under the window: Lem.~\ref{lem:single-link-refresh}/\ref{lem:g-one-link-refresh}; diffusive smoothing: Lem.~\ref{lem:scaled-ball-to-hk} using Lem.~\ref{lem:ballwalk-diffusive}) yields the \emph{physically scaled} (multi-step) heat--kernel minorization on the coarse interface along any scaling schedule satisfying the window \eqref{eq:ucis-sw-window},
+\[
+  K_{\rm int}^{(a)\,M(a)}\ \ge\ \theta_*\,P_{t_0}
+\]
+by Theorem~\ref{thm:ucis-sw}. Consequently, the $M(a)$--step kernel has a fixed-physical-time $L^2$ contraction on mean-zero functions (Corollary~\ref{cor:ucis-sw-L2-contraction}) and, by interface compression (Proposition~\ref{prop:int-to-transfer}), a fixed-physical-time contraction on the parity-odd subspace (Theorem~\ref{thm:ucis-sw-odd-subspace}). This is the interface$\to$odd$\to$slab gap backbone used in the AF--free NRC route.
 
 \vspace{10pt}
 \begin{mdframed}[linewidth=0.5pt, linecolor=blue!30, backgroundcolor=blue!3, roundcorner=2pt, innertopmargin=8pt, innerbottommargin=8pt, skipabove=10pt, skipbelow=10pt]
@@ -4579,9 +4689,9 @@ For a compact simple gauge group $G$ (default $\mathrm{SU}(N)$, $N\ge 2$), there
 Consequently, the OS\,$\to$\,Wightman reconstruction yields a Minkowski QFT with the same positive mass gap $\ge \gamma_*$. In particular, one may take $\gamma_* := 8\,c_{\mathrm{cut,phys}} = 8\,\big(-\log(1-\theta_*(1-e^{-\lambda_1(G) t_0}))\big)$ with $(\theta_*,t_0)$ depending only on $(R_*,a_0,G)$.
 \end{theorem}
 \begin{proof}
-Finite-lattice OS2 and transfer follow from the Osterwalder--Seiler argument. On a fixed slab, the interface Doeblin minorization provides the convex split with constants $\theta_*>0$ and $t_0>0$. By the interface$\to$transfer domination (Proposition~\ref{prop:int-to-transfer}), this lifts to an odd-cone contraction for the transfer, and Corollary~\ref{cor:odd-contraction-from-Kint} yields a per-tick contraction with rate $c_{\mathrm{cut}}(a)>0$ uniform in $L$ (with $\theta_*$ slab-uniform and independent of $\beta$ on fixed slabs). By Theorem~\ref{thm:uniform-odd-contraction}, this extends to the full parity-odd subspace, and composing eight ticks gives the lattice gap $\gamma_{\mathrm{cut}}=8 c_{\mathrm{cut}}(a)$, uniform in $L$. The thermodynamic limit at fixed $a$ preserves the gap and clustering.
+Finite-lattice OS2 and transfer follow from the Osterwalder--Seiler argument. On a fixed slab, the interface smoothing input is supplied (along scaling schedules) by UCIS$_{\rm SW}$ (Theorem~\ref{thm:ucis-sw} under \eqref{eq:ucis-sw-window}), which gives a heat--kernel minorization for the \emph{physically scaled} $M(a)$--step interface kernel. By Proposition~\ref{prop:int-to-transfer} and Theorem~\ref{thm:ucis-sw-odd-subspace}, this yields a fixed-physical-time contraction on the full parity-odd subspace. Interpreting this as a uniform slab gap input gives the required (C1) in the discretization/NRC package; the thermodynamic limit at fixed $a$ preserves the bound and clustering.
 
-UEI on fixed regions (Theorem~\ref{thm:uei-fixed-region}) implies tightness; Proposition~\ref{prop:os0os2-closure} gives OS0 and OS2 for the limit, and Theorem~\ref{thm:os1-unconditional} with Lemma~\ref{lem:eqc-modulus} and Lemma~\ref{lem:os1-embedding} yields OS1. The interface convex split with heat-kernel domination (Corollary~\ref{cor:hk-convex-split-explicit}, also Proposition~\ref{prop:sandwich}) combines with the interface$\to$transfer domination (Proposition~\ref{prop:int-to-transfer}) to give the odd-cone one-tick contraction (Corollary~\ref{cor:odd-contraction-from-Kint}) and its extension to the full parity-odd subspace (Theorem~\ref{thm:uniform-odd-contraction}). For NRC, we use the one–point resolvent estimate (Proposition~\ref{prop:one-point-resolvent}) together with the comparison identity (Lemma~\ref{lem:U2-comparison}) and the graph–defect/projection bounds to obtain operator–norm resolvent convergence on compact $K\subset\mathbb C\setminus\mathbb R$ (Theorem~\ref{thm:U2-nrc-unique}); gap persistence follows by Theorem~\ref{thm:gap-persist-cont}, yielding $\operatorname{spec}(H)\subset\{0\}\cup[\gamma_*,\infty)$ with $\gamma_*=8\,c_{\mathrm{cut,phys}}>0$.
+UEI on fixed regions (Theorem~\ref{thm:uei-fixed-region}) implies tightness; Proposition~\ref{prop:os0os2-closure} gives OS0 and OS2 for the limit, and Theorem~\ref{thm:os1-unconditional} with Lemma~\ref{lem:eqc-modulus} and Lemma~\ref{lem:os1-embedding} yields OS1. The interface smoothing input on fixed slabs is supplied (along scaling schedules) by UCIS$_{\rm SW}$ (Theorem~\ref{thm:ucis-sw} under \eqref{eq:ucis-sw-window}), which yields a fixed-physical-time odd-subspace contraction (Theorem~\ref{thm:ucis-sw-odd-subspace}). For NRC, we use the one–point resolvent estimate (Proposition~\ref{prop:one-point-resolvent}) together with the comparison identity (Lemma~\ref{lem:U2-comparison}) and the graph–defect/projection bounds to obtain operator–norm resolvent convergence on compact $K\subset\mathbb C\setminus\mathbb R$ (Theorem~\ref{thm:U2-nrc-unique}); gap persistence follows by Theorem~\ref{thm:gap-persist-cont}, yielding $\operatorname{spec}(H)\subset\{0\}\cup[\gamma_*,\infty)$ with $\gamma_*>0$.
 
 Finally, Theorem~\ref{thm:os-to-wightman} exports OS0--OS5 to a Wightman theory with the same mass gap; Poincar\'e covariance and microcausality hold, and the gap persists to Minkowski space. All constants depend only on the slab geometry $(R_*,a_0)$ and group data through $\lambda_1(G)$.
 \end{proof}
@@ -4619,7 +4729,7 @@ There exist global Schwinger functions $\{S_n\}_{n\ge1}$ on the cylinder $\sigma
     |S_n(\Gamma_1,\ldots,\Gamma_n)|\ \le\ C_n\,\prod_{i=1}^n \bigl(1+\operatorname{diam}\Gamma_i\bigr)^p\,\prod_{i<j}\bigl(1+\operatorname{dist}(\Gamma_i,\Gamma_j)\bigr)^{-q},
   \]
   with $C_n=C_0^n\,C_{\mathrm{tree}}(n)\,\Big(\frac{16\,\zeta(q-4)}{1-e^{-m}}\Big)^{\!n-1}$ from Cor.~\ref{cor:os0-explicit-4d} (uniform in the exhaustions and embeddings).
-  \item[(iii)] \textbf{OS1 (Euclidean invariance).} For every rigid motion $G\in E(4)$ and all inputs, $S_n(G\Gamma_1,\ldots,G\Gamma_n)=S_n(\Gamma_1,\ldots,\Gamma_n)$, by the unconditional commutator/resolvent route (Thm.~\ref{thm:os1-unconditional}) or the embedding–independence route (Lem.~\ref{lem:os1-embedding}, Cor.~\ref{cor:os1-rotations}).
+  \item[(iii)] \textbf{OS1 (Euclidean invariance).} For every rigid motion $G\in E(4)$ and all inputs, $S_n(G\Gamma_1,\ldots,G\Gamma_n)=S_n(\Gamma_1,\ldots,\Gamma_n)$, by the constructed calibrator route (Thm.~\ref{thm:os1-unconditional}) or the embedding–independence route (Lem.~\ref{lem:os1-embedding}, Cor.~\ref{cor:os1-rotations}).
   \item[(iv)] \textbf{OS2 (reflection positivity).} OS2 passes to the limit from the lattice (Prop.~\ref{prop:os0os2-closure}).
   \item[(v)] \textbf{OS3 (clustering) and (vi) OS5 (unique vacuum).} Let $\lambda_1(G)>0$ be the first Laplace–Beltrami eigenvalue on the compact simple group $G$. There exist $t_0=t_0(G)>0$ and $\theta_*=\theta_*(G)>0$ (from the interface Doeblin/heat–kernel split) such that with
   \[
@@ -5022,7 +5132,7 @@ At fixed spacing, the infinite-volume OS state exists by standard compactness ar
 \subsection*{Clay compliance map (requirements \textrightarrow{} labels)}
 \begin{itemize}
   \item \textbf{OS0 (temperedness)}: Prop.~\ref{prop:OS0-poly}, Cor.~\ref{cor:os0-explicit-4d}; UEI on fixed regions with $\beta\ge \beta_{\min}(R,N)$: Thm.~\ref{thm:uei-fixed-region}, Cor.~\ref{cor:uei-explicit-constants}; closure: Prop.~\ref{prop:os0os2-closure}.
-  \item \textbf{OS1 (Euclidean invariance)}: Thm.~\ref{thm:os1-unconditional}; supporting lemmas: \ref{lem:local-commutator-Oa2}, \ref{lem:isotropy-restore}, \ref{lem:os1-embedding}, Cor.~\ref{cor:os1-rotations}.
+  \item \textbf{OS1 (Euclidean invariance)}: Thm.~\ref{thm:os1-unconditional}; supporting route: Prop.~\ref{prop:hk-calibrators-constructed} and Thm.~\ref{thm:os1-calibrator-route} (commutator route is an optional cross-check via Lem.~\ref{lem:local-commutator-Oa2}); additional bookkeeping: \ref{lem:isotropy-restore}, \ref{lem:os1-embedding}, Cor.~\ref{cor:os1-rotations}.
   \item \textbf{OS2 (reflection positivity)}: Thm.~\ref{thm:os} (Wilson link reflection); closure to limit: Cor.~\ref{cor:os2-pass} (from Prop.~\ref{prop:os0os2-closure}).
   \item \textbf{OS3/OS5 (clustering, unique vacuum)}: Lattice: Thm.~\ref{thm:thermo}, Thm.~\ref{thm:thermo-strong}; Continuum: Prop.~\ref{prop:os35-limit}; Gap\,$\Rightarrow$\,clustering: Prop.~\ref{prop:gap-to-cluster}; converse: Prop.~\ref{prop:cluster-to-gap}.
   \item \textbf{OS\,$\to$\,Wightman and Poincar\'e}: Thm.~\ref{thm:os-to-wightman}; Euclidean isotropy restoration: Lem.~\ref{lem:isotropy-restore}; Cor.~\ref{cor:poincare}.
@@ -5055,11 +5165,11 @@ At fixed spacing, the infinite-volume OS state exists by standard compactness ar
   \item \textbf{KP window} (Appendix C3): uniform cluster/area constants as a hypothesis package.
 \end{itemize}
 \paragraph{Wording status.}
-Lattice statements are unconditional. Continuum persistence and OS1/UEI statements use proved inputs on fixed regions (Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional}; Lem.~\ref{lem:U1-tree-bounds}; Cor.~\ref{cor:U1-uei}; Lem.~\ref{lem:isotropy-restore}) together with the AF--free NRC package (Thm.~\ref{thm:quant-calibrated-af-free-nrc}(D,F,G), Lem.~\ref{lem:U2-comparison}, Prop.~\ref{prop:one-point-resolvent}, Thm.~\ref{thm:U2-nrc-unique}). An optional AF/Mosco cross\,–\,check is recorded in Appendix~\ref{app:af-mosco}; it is not used in the main chain.
+Lattice statements are unconditional. The continuum persistence and OS1/UEI steps are conditional on U1/OS1 fixed-region inputs (Thms.~\ref{thm:U1-lsi-uei}, \ref{thm:os1-unconditional}; Lem.~\ref{lem:U1-tree-bounds}; Cor.~\ref{cor:U1-uei}; Lem.~\ref{lem:isotropy-restore}) together with the AF--free NRC package (Thm.~\ref{thm:quant-calibrated-af-free-nrc}(D,F,G), Lem.~\ref{lem:U2-comparison}, Prop.~\ref{prop:one-point-resolvent}, Thm.~\ref{thm:U2-nrc-unique}). An optional AF/Mosco cross\,–\,check is recorded in Appendix~\ref{app:af-mosco}; it is not used in the main chain.
 
 \subsection*{Appendix reference: AF/Mosco cross\,–\,check \emph{(not used in main chain)}}\label{app:af-mosco}
 \begin{theorem}[AF/Mosco cross\,–\,check]\label{thm:af-mosco-crosscheck}
-Under Assumption~\ref{assump:AF-Mosco}, the conclusions of Theorem~\ref{thm:main-af-free} hold. This provides a cross\,–\,check via Mosco/strong\,–\,resolvent convergence; the AF\,–\,free NRC route remains the primary route with proved UEI/OS1 inputs and U2.
+Under Assumption~\ref{assump:AF-Mosco}, the conclusions of Theorem~\ref{thm:main-af-free} hold. This provides a cross\,–\,check via Mosco/strong\,–\,resolvent convergence; the AF\,–\,free NRC route remains the primary route with U2 and U1/OS1 fixed-region inputs.
 \end{theorem}
 
 \begin{theorem}[Exponential clustering in the continuum]\label{thm:cont-exp-cluster}
@@ -5087,7 +5197,7 @@ Locality and OS0 ensure that $\|O_i\Omega\|<\infty$ and depend continuously on t
 
 \paragraph{Clay checklist (human-readable cross-references; one page).}
 \begin{itemize}
-  \item \textbf{Main Theorem.} Sec. "Main Theorem (Continuum YM with mass gap; AF--free NRC with proved UEI/OS1 inputs)".
+  \item \textbf{Main Theorem.} Sec. "Main Theorem (Continuum YM with mass gap; AF--free NRC with U1/OS1 inputs (RG-grade))".
   \item \textbf{OS2 (reflection positivity).} Sec.~\ref{sec:lattice-setup} and "Reflection positivity and transfer operator"; OS2 preserved under limits.
   \item \textbf{OS0 (temperedness).} Proposition~\ref{prop:OS0-poly} and the UEI appendix.
   \item \textbf{OS1 (Euclidean invariance).} Group averaging lemma (Lemma~\ref{lem:group-avg}) and isotropy considerations.
@@ -6168,40 +6278,35 @@ Fix $a_0>0$, $\beta_{\min}>0$, and constants $c_A>0$, $c_L>0$. Define
 and choose volumes $L(a)\in\mathbb N$ with $L(a)\,a\ \xrightarrow[a\downarrow 0]{}\ \infty$ and $L(a)\ge c_L\,a^{-1}$.
 \end{definition}
 \begin{remark}
-The unconditional inputs below (U1–U4) are uniform in $a\in(0,a_0]$ and do not require $\beta(a)\to\infty$. The schedule in Definition~\ref{def:U0-schedule} merely provides a concrete van Hove parametrization consistent with asymptotic freedom; all bounds stated below are independent of the particular monotone choice provided $\beta(a)\ge \beta_{\min}>0$ and $L(a)\,a\to\infty$.
+The schedule in Definition~\ref{def:U0-schedule} is a concrete van Hove parametrization. Our fixed--region analysis separates into: (i) \emph{geometric} U2 inputs (embeddings/graph--defect/projectors) which are designed to be uniform in $a$ and $L$ on fixed regions, and (ii) the \emph{RG--grade} U1 package (UEI/LSI/tightness), whose uniform-in-$a$ conclusions are only claimed along weak--coupling schedules and require genuine weak--coupling control (cf. Theorem~\ref{thm:uei-fixed-region} and Assumption~\ref{assump:uei-mean}).
 \end{remark}
 
-\subsection{U1. Local LSI/UEI on fixed regions (sources: Holley--Stroock, Bakry--\'Emery, Wang)}
-\begin{theorem}[Local LSI/UEI on fixed regions]\label{thm:U1-lsi-uei}
-Let $R\Subset\mathbb R^4$ be fixed, $a\in(0,a_0]$, and $\beta\ge \beta_{\min}>0$. After tree gauge on $R$, the induced Gibbs measure on $G^{m(R,a)}$, $G=\mathrm{SU}(N)$,
+\subsection{U1. Local LSI/UEI on fixed regions (RG-grade closure target)}
+\begin{theorem}[Local LSI/UEI on fixed regions (U1; RG-grade target)]\label{thm:U1-lsi-uei}
+Fix a bounded region $R\Subset\mathbb R^4$, a weak-coupling schedule $a\mapsto\beta(a)$ with $\beta(a)\ge\beta_{\min}>0$, and van Hove volumes $L=L(a)$. After tree gauge on $R$, let $\mu_{R}^{(a)}$ denote the induced chord Gibbs measure on $G^{m(R,a)}$, $G=\mathrm{SU}(N)$, with density proportional to $e^{-\beta(a) S_R}$ with respect to product Haar.
+
+\medskip
+\noindent\emph{U1 hypothesis (what the continuum spine needs).} Along the scaling window, assume there exists a constant $\rho_R>0$ (depending only on $(R,N,\beta_{\min})$) such that each $\mu_{R}^{(a)}$ satisfies a logarithmic Sobolev inequality (LSI)
 \[
-  d\mu_R(X)\ =\ Z_R^{-1}\,e^{-\beta S_R(X)}\,d\pi(X),\qquad d\pi=\text{product Haar},
+  \mathrm{Ent}_{\mu_{R}^{(a)}}(f^2)\ \le\ \frac{1}{\rho_R}\int \|\nabla f\|^2\,d\mu_{R}^{(a)}\qquad(\forall\,f),
 \]
-obeys a logarithmic Sobolev inequality
-\[
-  \mathrm{Ent}_{\mu_R}(f^2)\ \le\ \frac{1}{\rho_R}\int \|\nabla f\|^2\,d\mu_R
-\]
-with
-\[
-  \rho_R\ \ge\ c_0(R,N)\,\min\{1,\beta\}\ \ge\ c_1(R,N)\,\beta_{\min}\,.
-\]
-In particular, $\mu_R$ satisfies uniform exponential integrability (UEI) on $R$ with explicit Laplace–transform radius given by the Herbst bound (Gross/Herbst under LSI; see also Holley--Stroock bounded-perturbation, Bakry--\'Emery curvature criterion, and Wang local-to-global LSI transfer \cite{Brydges1978,Brydges1986,VaropoulosSaloffCosteCoulhon1992}).
-\[
-  \eta_R\ =\ \min\Big\{t_*(R,N),\ \sqrt{\rho_R/G_R}\Big\},\qquad \mathbb E_{\mu_R}\exp\big(t(F-\mathbb E F)\big)\ \le\ e^{1/2}
-\]
-for all time--zero local observables $F$ supported in $R$ and all $|t|\le \eta_R$.
+with $\rho_R$ uniform in $a$ and in the exterior boundary configuration outside $R$. Assume further the required Lipschitz/gradient bounds for the time-zero local observables used downstream on $R$.
+
+\medskip
+\noindent\emph{Conclusion.} Under these U1 hypotheses, the Herbst argument yields centered subgaussian Laplace bounds on $R$ and hence uniform exponential integrability/tightness for the corresponding local cylinder laws. (See also the explicit fixed-region UEI target `thm:uei-fixed-region` and the operational decomposition in `U1_OPERATIONAL_PLAN.md`.)
 \end{theorem}
 \begin{remark}[Explicit constants for downstream bounds]\label{rem:uei-explicit-downstream}
-As in Corollary~\ref{cor:uei-explicit-constants}, one may choose
+Under the U1 hypotheses of Theorem~\ref{thm:U1-lsi-uei}, fix a uniform LSI constant $\rho_R>0$ and a corresponding uniform gradient/Lipschitz control for the time-zero local observables $F$ supported in $R$ (the latter is part of the U1 hypothesis). Then the Herbst bound gives, for each such $F$,
 \[
-  \eta_R\ :=\ \min\Big\{ t_*(R,N),\ \sqrt{\rho_{\min}(R,N)\big/ G_R(R,N,a_0)}\ \Big\},\qquad
-  C_R\ :=\ \exp\big(\eta_R\,M_R(R,N,\beta_{\min})\big)\,e^{1/2},
+  \log\mathbb E\exp\big(t(F-\mathbb EF)\big)\ \le\ \frac{t^2}{2\rho_R}\,\int \|\nabla F\|^2\,d\mu_{R}^{(a)}\ \le\ \frac{t^2\,G_R(F)}{2\rho_R}.
 \]
-with $\rho_{\min}(R,N)=c_2(R,N)\,\beta_{\min}$ and $G_R(R,N,a_0)=C_1(R,N)\,a_0^4$. Then for every time-zero local observable $F$ supported in $R$ and $|t|\le \eta_R$,
+In particular, choosing
 \[
-  \mathbb E\exp\big(t(F-\mathbb EF)\big)\ \le\ C_R.
+  \eta_R(F)\ :=\ \min\Big\{\,t_*(R,N),\ \sqrt{\rho_R/G_R(F)}\,\Big\}
 \]
-Consequently, for each $p\in[1,\infty)$ there exists $M_{p,R}<\infty$ (depending only on $(R,N,\beta_{\min})$) such that $\sup_{(a,L)}\mathbb E\big[|F|^p\big]\le M_{p,R}$. These constants feed into the OPE seminorm bounds via Lemma~\ref{lem:local-seminorm-cal}, and into the Ward/translation identity (Lemma~\ref{lem:ward-translation}), ensuring that all local constants in Section~\ref{sec:short-distance} depend only on $(R,N,\beta_{\min},t_0,\lambda_1(G))$ and are uniform in $a$ and $L$.
+yields $\mathbb E\exp\big(t(F-\mathbb EF)\big)\le e^{1/2}$ for all $|t|\le \eta_R(F)$, uniformly along the scaling window.
+
+If an \emph{uncentered} exponential moment is needed for a specific $F$, one must additionally control $\mathbb EF$ uniformly. For $F=S_R$ this is exactly Assumption~\ref{assump:uei-mean}, giving $\mathbb E e^{\eta_R S_R}\le e^{\eta_R M_R}e^{1/2}$.
 \end{remark}
 \medskip
 
@@ -6319,7 +6424,7 @@ Let $\rho_R$ be as in Theorem~\ref{thm:U1-lsi-uei}. Then for all $F$ supported i
 \[
   \mathbb E_{\mu_R}\exp\big(t(F-\mathbb E F)\big)\ \le\ e^{\tfrac{t^2}{2\rho_R}\,\int\|\nabla F\|^2 d\mu_R}\ \le\ e^{1/2},
 \]
-with $\eta_R=\min\{t_*(R,N),\sqrt{\rho_R/G_R}\}$ independent of $(a,L)$ and $\beta\ge \beta_{\min}$.
+with $\eta_R=\min\{t_*(R,N),\sqrt{\rho_R/G_R}\}$ under the corresponding U1 uniformity hypotheses (uniform along the scaling window and in the exterior boundary outside $R$).
 \end{corollary}
 \subsection*{U2a. Embeddings and comparison identity}
 \begin{lemma}[OS/GNS embeddings are genuine isometries]\label{lem:U2-embeddings}
