@@ -3139,6 +3139,9 @@ B. Ferrero and L. C. Washington, The Iwasawa invariant $\mu_p$ vanishes for abel
 \bibitem{GreenbergVatsal2000}
 R. Greenberg and V. Vatsal, On the Iwasawa invariants of elliptic curves, Invent. Math. 142 (2000). (Preprint `arXiv:math/9906215`.)
 
+\bibitem{Vatsal1999}
+V. Vatsal, Canonical periods and congruence formulae, Duke Math. J. 98 (1999), no. 2, 397--419. (Author PDF: \texttt{https://www.math.ubc.ca/~vatsal/research/bah.PDF}.)
+
 \bibitem{OukhabaViguie2013}
 H. Oukhaba and S. Vigui\'e, On the $\mu$-invariant of Katz $p$-adic $L$ functions attached to imaginary quadratic fields and applications, preprint, `arXiv:1311.3565` (2013).
 
@@ -3860,6 +3863,37 @@ Then $p\nmid L_p(E,T)$ in $\Lambda$ implies $\mu(X_p) \le \mu(L_p) = 0$, so $\mu
 
 \paragraph{Step 3 (where the universal goal blocks).}
 The certificate above is prime-by-prime. To deduce \emph{universal} $\mu_p(E)=0$ for all primes $p$ one would need a theorem producing such a primitivity witness for \emph{each} $p$ (ordinary/signed/improved as appropriate). No such all-$p$ theorem is proved in this manuscript, and the standard propagation results in the literature treat cyclotomic $\mu=0$ as an \emph{input} rather than an output. Hence universal $\mu=0$ remains **BLOCKED** at this point.
+
+\medskip
+\noindent\emph{Route 2 (internal proof program; current state-of-the-art).}
+One can reduce the missing analytic primitivity input to a single congruence-theoretic bridge statement, at the cost of isolating the exact structural inputs (multiplicity one, Ihara lemma, Gorenstein/freeness) needed to make integral Hecke/cohomology identifications.
+
+\begin{definition}[Congruence ideal / congruence number $C(E)$ (Wiles)]\label{def:wiles-congruence-ideal}
+Let $f$ be the weight--$2$ newform attached to $E$ of level $N$. Let $\mathbf{T}_{\mathbb{Z}}$ be the (commutative) Hecke algebra acting on $S_2(\Gamma_0(N),\mathbb{Z})$, let $\lambda_f:\mathbf{T}_{\mathbb{Z}}\to\mathbb{Z}$ be the eigencharacter, and let $I_f=\ker(\lambda_f)$. Define the congruence ideal
+\[
+  \mathfrak c(f)\ :=\ \lambda_f\!\big(\mathrm{Ann}_{\mathbf{T}_{\mathbb{Z}}}(I_f)\big)\ \subseteq\ \mathbb{Z},
+\]
+and let $C(E)\in\mathbb{Z}_{>0}$ denote the positive generator of $\mathfrak c(f)$.
+\end{definition}
+
+\begin{lemma}[Congruence ideal controls cyclotomic primitivity (Route 2 target; BLOCKED)]\label{lem:congruence-ideal-primitivity}
+Let $p\nmid N$ be a good ordinary prime. If $p\nmid C(E)$, then $L_p(E,T)\notin p\Lambda$ (equivalently $L_p(E,T)\not\equiv 0\pmod p$ in $(\mathbb{Z}/p)\llbracket T\rrbracket$), hence $\mu_p(E)=0$.
+
+Equivalently (contrapositive): if $L_p(E,T)\in p\Lambda$, then $p\mid C(E)$.
+\end{lemma}
+
+\paragraph{Sub-blockers needed to prove Lemma~\ref{lem:congruence-ideal-primitivity}.}
+Each item below is a genuine missing input unless imported with precise hypotheses/citations:
+\begin{itemize}
+\item[\textbf{(A3a)}] \textbf{Integral modular-symbol/measure map.} Define an integral cohomology eigenclass $\delta_f\in H^1_{\mathrm{par}}(\Gamma_1(Np),\mathbb{Z}_p)_{\mathfrak m}$ and a modular-symbol measure map $\mathrm{MS}_p$ with $\mathrm{MS}_p(\delta_f)\doteq L_p(E,T)$ up to $\Lambda^\times$.
+\item[\textbf{(A3b)}] \textbf{Span/duality (mod-$p$ detection).} Prove that cyclotomic specialization classes (Manin symbols / $\Lambda(\chi)$ for $p$-power conductor characters) span the localized mod-$p$ homology dual; this is where mod-$p$ multiplicity one and Ihara-lemma style inputs enter.
+\item[\textbf{(A3c)}] \textbf{Detection lemma.} If $\mathrm{MS}_p(\delta)\equiv 0\pmod p$ in $(\mathbb{Z}/p)\llbracket T\rrbracket$, then $\delta\equiv 0\pmod p$ in localized parabolic cohomology.
+\item[\textbf{(A3d)}] \textbf{Freeness/Gorenstein control.} Show $p\nmid C(E)$ implies the relevant localized Hecke/cohomology module is $\mathbb{Z}_p$-torsion-free and $\delta_f\not\equiv 0\pmod p$.
+\item[\textbf{(A3e)}] \textbf{Congruence ideal dictionary.} Identify “failure of freeness/Gorenstein at $\mathfrak m$” with $p\mid\mathfrak c(f)$ for Definition~\ref{def:wiles-congruence-ideal}.
+\end{itemize}
+
+\noindent
+Vatsal’s canonical-period congruence machinery \cite[Thm.~(1.10)]{Vatsal1999} supplies the correct \emph{shape} of the Weierstrass upgrade “infinitely many congruent specializations $\Rightarrow$ congruent $p$-adic $L$-functions”, but it does not, by itself, supply the cyclotomic primitivity bridge in Lemma~\ref{lem:congruence-ideal-primitivity}. The current internal execution surface for Route 2 is `MU0_DREAM_THEOREMS_EXECUTION.md`.
 
 \subsection*{F.pw. $p$--adic wedge certificate on cyclotomic layers: $\mu=0$ (draft)}
 

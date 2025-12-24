@@ -2567,6 +2567,71 @@ Applying this with $A$ replaced by $A\cap B_G(e,r)$ gives
 as claimed.
 \end{proof}
 
+\begin{lemma}[One--link fixed-radius ball mass near the polar maximizer (uniform in $\beta$)]\label{lem:one-link-ball-maximizer-unif}
+Let $G=\mathrm{SU}(N)$ with Haar probability $\pi$ and a fixed bi-invariant Riemannian metric $d_G$. Fix a radius $r>0$. Then there exists a constant $p_{\mathrm{ball}}=p_{\mathrm{ball}}(N,r)>0$ such that for all $\beta\ge 0$ and all $S\in G$, the one--link conditional law $K_S$ satisfies
+\[
+  K_S\!\big(B_G(S^{-1},r)\big)\ \ge\ p_{\mathrm{ball}}.
+\]
+In particular, if $S\in B_G(e,\delta)$ with $\delta<r$, then $B_G(S^{-1},r)\subseteq B_G(e,r+\delta)$ and hence
+\[
+  K_S\!\big(B_G(e,r+\delta)\big)\ \ge\ p_{\mathrm{ball}}.
+\]
+\end{lemma}
+\begin{proof}
+Fix $r>0$ and let $f(g):=\Re\,\tr(g)$, a continuous class function on $G$ with unique maximum $f(e)=N$. By compactness, there exists $\tau\in(-N,N)$ such that the superlevel set
+\[
+  A_\tau\ :=\ \{g\in G:\ f(g)\ge \tau\}
+\]
+is contained in the ball $B_G(e,r)$ and has Haar mass $\pi(A_\tau)>0$.
+
+Now fix $\beta\ge 0$ and $S\in G$. By Haar right-invariance and the change of variables $V:=US$, the law of $V$ under $K_S$ has density proportional to $e^{\beta f(V)}$ with respect to Haar, i.e. it is the exponential tilt of Haar by the one-dimensional statistic $f(V)$. Therefore
+\[
+  K_S\!\big(B_G(S^{-1},r)\big)\ =\ \mathbb P_\beta\big(V\in B_G(e,r)\big)\ \ge\ \mathbb P_\beta(V\in A_\tau),
+\]
+where $\mathbb P_\beta$ denotes the tilted law with density $\propto e^{\beta f(V)}$.
+
+Since $A_\tau=\{f\ge \tau\}$ is a superlevel event of the tilt statistic, $\beta\mapsto \mathbb P_\beta(V\in A_\tau)$ is nondecreasing (likelihood-ratio order for exponential tilts). Hence
+\[
+  \mathbb P_\beta(V\in A_\tau)\ \ge\ \mathbb P_0(V\in A_\tau)\ =\ \pi(A_\tau)\ =:\ p_{\mathrm{ball}}(N,r)\ >\ 0,
+\]
+uniformly in $\beta\ge 0$ and $S\in G$. This proves the first claim; the second follows from the triangle inequality $d_G(e,S^{-1})=d_G(e,S)$ and the inclusion $B_G(S^{-1},r)\subseteq B_G(e,r+\delta)$ when $d_G(e,S)\le \delta$.
+\end{proof}
+
+\begin{lemma}[No $\beta$-uniform fixed-radius domination by the uniform ball law (one link)]\label{lem:no-unifball-doeblin-fixed-radius}
+Let $G=\mathrm{SU}(N)$ with Haar probability $\pi$ and fix any radius $r>0$. There does not exist a constant $p>0$ such that for all $\beta\ge 0$ and all $S\in G$, the one-link conditional law $K_S$ satisfies the fixed-radius Doeblin minorization
+\[
+  K_S(\cdot)\ \ge\ p\,\nu_r(S^{-1}\cdot),
+\]
+where $\nu_r$ is normalized Haar restricted to $B_G(e,r)$.
+\end{lemma}
+\begin{proof}
+Assume toward a contradiction that such $p>0$ exists for some fixed $r>0$.
+By definition of $\nu_r$, the minorization implies that $K_S$ has a density $k_{\beta,S}$ with respect to Haar satisfying
+\[
+  k_{\beta,S}(U)\ \ge\ \frac{p}{\pi(B_G(e,r))}\qquad\text{for all }U\in B_G(S^{-1},r).
+\]
+By Haar invariance, after the change of variables $V:=US$ the law of $V$ under $K_S$ has density
+\(
+  \widetilde k_\beta(V)\propto e^{\beta\,\Re\tr(V)}
+\)
+independent of $S$. In particular the above bound implies
+\[
+  \widetilde k_\beta(V)\ \ge\ \frac{p}{\pi(B_G(e,r))}\qquad\text{for all }V\in B_G(e,r).
+\]
+
+Pick $V_0\in B_G(e,r)\setminus\{e\}$, so $\Re\tr(V_0)<\Re\tr(e)=N$ by strict maximality of $\Re\tr(\cdot)$ at $e$.
+Choose $\delta>0$ so small that $\Re\tr(V)\ge N-\delta$ for all $V\in B_G(e,\delta)$ (continuity).
+Then the normalizing constant satisfies
+\[
+  Z(\beta)\ :=\ \int_G e^{\beta\,\Re\tr(V)}\,\pi(dV)\ \ge\ \pi(B_G(e,\delta))\,e^{\beta(N-\delta)}.
+\]
+Hence
+\[
+  \widetilde k_\beta(V_0)\ =\ \frac{e^{\beta\,\Re\tr(V_0)}}{Z(\beta)}\ \le\ \pi(B_G(e,\delta))^{-1}\,e^{-\beta\big((N-\delta)-\Re\tr(V_0)\big)}.
+\]
+Since $(N-\delta)-\Re\tr(V_0)>0$ by choice of $\delta$, the right-hand side tends to $0$ as $\beta\to\infty$, contradicting the claimed uniform lower bound on $\widetilde k_\beta(V_0)$.
+\end{proof}
+
 \begin{lemma}[Coarse refresh probability bound]\label{lem:coarse-refresh}
 For $\varepsilon\in(0,\varepsilon_0]$ fixed, there exist $c_{\mathrm{ref}}(\varepsilon,R_*,N)>0$, a probability law $\nu_{\varepsilon}$ on $G^{m(\varepsilon)}$, and $a_1\in(0,a_0]$ such that for all $a\in(0,a_1]$, all volumes $L$, all $\beta\ge 0$, and all boundary conditions outside the slab, the induced coarse one\,–\,tick kernel satisfies, for every coarse state $x$,
 \[
@@ -2762,26 +2827,32 @@ where $\nu_{r_*}$ is normalized Haar restricted to $B_G(\mathbf 1,r_*)$. In part
 \)
 \end{lemma}
 \begin{proof}[Proof sketch / placement]
-This is the analytic core: a $\beta$--uniform lower bound for a fixed-radius small-ball event for a finite-dimensional Wilson conditional law on a cell. One route is via tree gauge, explicit one-link conditional laws of matrix-Fisher type, and a coarse “refresh” mechanism that does not lose mass as $\beta\to\infty$.
+This is the analytic core: a \emph{$\beta$--uniform} small-ball \emph{measure} minorization for a finite-dimensional Wilson conditional law on a cell.
+
+\smallskip
+\noindent\textbf{Important nuance.} For a single link, one can obtain $\beta$--uniform \emph{mass} in a fixed-radius ball around the polar maximizer (Lemma~\ref{lem:one-link-ball-maximizer-unif}), but a $\beta$--uniform \emph{domination by the \emph{uniform} ball law} at fixed radius is much stronger (it requires controlling the minimum of the density on the whole ball, which can be exponentially small at the boundary as $\beta\to\infty$). The existing scale--adapted one--link minorization (Lemma~\ref{lem:SU(N)-refresh}) produces a \emph{shrinking} ball of radius $\asymp (1+\beta)^{-1/2}$ with explicit weight, which is compatible with weak-coupling Gaussian scaling but does not directly yield a fixed-radius, $\beta$--uniform ball reference.
+
+\smallskip
+\noindent\textbf{What is needed for UCIS-C.} One needs an additional \emph{cell-level} refresh/smoothing mechanism (e.g. a genuinely $\beta$--uniform window + pulse sandwich, or a physically scaled multi-step smoothing statement) that upgrades local mass near maximizers into a fixed-radius minorization \emph{for the coarse increment}, uniformly in boundary conditions.
 \end{proof}
 
 \begin{lemma}[UCIS-D: Cell factorization $\Rightarrow$ product small-ball component (target)]\label{lem:ucis-D-product-ball}
 Assuming Lemmas~\ref{lem:ucis-A-cell-decomp} and \ref{lem:ucis-C-cell-ball}, the joint conditional law of the coarse outgoing interface increments admits the product minorization
 \[
-  K_{\mathrm{int}}^{(a)}(U,\cdot)\ \ge\ p_*^{\,m(\varepsilon)}\,\nu_{r_*}^{\otimes m(\varepsilon)}(\cdot),
+  K_{\mathrm{int}}^{(a)}(U,\cdot)\ \ge\ p_*^{\,m(\varepsilon)}\,\nu_{r_*}^{\otimes m(\varepsilon)}(U^{-1}\cdot),
 \]
 uniformly in $(a,\beta,L)$ on fixed slabs. In particular, the joint law has a product small-ball component on $G^{m(\varepsilon)}$ with weight at least $p_*^{\,m(\varepsilon)}$.
 \end{lemma}
 \begin{proof}
 Fix a coarse cell decomposition as in Lemma~\ref{lem:ucis-A-cell-decomp}. For each cell $C$, let $E_C$ denote the set of link variables used to define the cell increment (e.g. the selected links $\{\ell_{C,1},\dots,\ell_{C,m_*}\}$). By Lemma~\ref{lem:ucis-A-cell-decomp} and Lemma~\ref{lem:cell-disjoint-links}, the families $\{E_C\}$ are disjoint and no plaquette contains links from two distinct $E_C$’s. Therefore Lemma~\ref{lem:plaquette-factorization} implies that, conditional on the complement variables, the joint conditional law on $\prod_C E_C$ factorizes across cells.
 
-By Lemma~\ref{lem:ucis-C-cell-ball}, in each cell the conditional law of the coarse increment dominates $p_*\,\nu_{r_*}$. Since factorization is exact and the pushforward under the (cellwise) coarse increment map preserves tensor products, the joint conditional law of the coarse increments dominates the product measure $p_*^{m(\varepsilon)}\,\nu_{r_*}^{\otimes m(\varepsilon)}$. This yields the stated product minorization.
+By Lemma~\ref{lem:ucis-C-cell-ball}, in each cell the conditional law of the coarse increment dominates $p_*\,\nu_{r_*}$ (in increment coordinates, i.e. after translating by the incoming coarse state). Since factorization is exact and the pushforward under the (cellwise) coarse increment map preserves tensor products, the joint conditional law of the coarse increments dominates $p_*^{m(\varepsilon)}\,\nu_{r_*}^{\otimes m(\varepsilon)}(U^{-1}\cdot)$. This yields the stated product minorization.
 \end{proof}
 
 \begin{lemma}[UCIS-E: Product small-ball $\Rightarrow$ heat-kernel minorization (target)]\label{lem:ucis-E-ball-to-hk}
 Assume that a Markov kernel $K$ on $G^{m(\varepsilon)}$ satisfies the product small-ball minorization
 \[
-  K(U,\cdot)\ \ge\ \kappa\,\nu_{r_*}^{\otimes m(\varepsilon)}(\cdot)
+  K(U,\cdot)\ \ge\ \kappa\,\nu_{r_*}^{\otimes m(\varepsilon)}(U^{-1}\cdot)
 \]
 for all $U\in G^{m(\varepsilon)}$, for some $\kappa\in(0,1]$ and some $r_*>0$ below the injectivity radius. Then there exist an integer $m_*\ge 1$, a time $t_0>0$, and a constant $\theta_*>0$ depending only on $(G,m(\varepsilon),r_*)$ such that
 \[
@@ -2790,7 +2861,11 @@ for all $U\in G^{m(\varepsilon)}$, for some $\kappa\in(0,1]$ and some $r_*>0$ be
 for all $U\in G^{m(\varepsilon)}$, where $P_{t_0}$ is the product heat-kernel kernel on $G^{m(\varepsilon)}$.
 \end{lemma}
 \begin{proof}
-Let $R$ be the “refresh” kernel on $G^{m(\varepsilon)}$ defined by $R(U,\cdot):=\nu_{r_*}^{\otimes m(\varepsilon)}(\cdot)$ (independent of $U$). The hypothesis is exactly $K\ge \kappa R$ as positive kernels. By positivity and induction, for any $n\ge 1$,
+Define the (left-translation) product small-ball Markov kernel $R$ on $G^{m(\varepsilon)}$ by
+\[
+  R(U,A)\ :=\ \nu_{r_*}^{\otimes m(\varepsilon)}(U^{-1}A),\qquad U\in G^{m(\varepsilon)}.
+\]
+Then $R$ is convolution by $\nu_{r_*}^{\otimes m(\varepsilon)}$ (componentwise), and the hypothesis is exactly $K\ge \kappa R$ as positive kernels. By positivity and induction, for any $n\ge 1$,
 \[
   K^{n}\ \ge\ \kappa^{n}\,R^{n}.
 \]
@@ -2827,6 +2902,51 @@ uniformly in $(\beta,L)$ on fixed slabs.
 \end{corollary}
 \begin{proof}
 By UCIS, $K_{\rm int}^{(a)\,M(a)}=\theta_* P_{t_0}+(1-\theta_*)\mathcal K$ for some Markov kernel $\mathcal K$ (Nummelin split). On mean-zero functions, $\|P_{t_0}\|=e^{-\lambda_1(G)t_0}$ and $\|\mathcal K\|\le 1$, giving the displayed contraction factor.
+\end{proof}
+
+\medskip
+\begin{theorem}[Scaling--window UCIS (UCIS$_{\rm SW}$; physically scaled multi--step smoothing; target)]\label{thm:ucis-sw}
+Fix $(G,\varepsilon,T_{\rm phys})$ as in Theorem~\ref{thm:ucis} and set $M(a)=\lceil T_{\rm phys}/a\rceil$. Let $\beta=\beta(a)$ be a monotone schedule with $\beta(a)\to\infty$ and assume the \emph{scaling window}
+\begin{equation}\label{eq:ucis-sw-window}
+  \beta(a)\ \le\ C_{\rm SW}\,M(a)\qquad\text{for all }a\in(0,a_0]
+\end{equation}
+for some constant $C_{\rm SW}<\infty$.
+
+Assume moreover that the coarse--cell factorization and near--identity refresh mechanism of Lemmas~\ref{lem:ucis-A-cell-decomp} and~\ref{lem:single-link-refresh}--\ref{lem:g-one-link-refresh} hold on the slab (so that, on each cell tick, there is a scale--adapted small--ball component of radius $\asymp \beta^{-1/2}$ with weight bounded below uniformly for all sufficiently small $a$).
+
+Then there exist constants $\theta_*,t_0>0$ depending only on $(G,\varepsilon,T_{\rm phys},C_{\rm SW})$ such that along the schedule $a\downarrow 0$,
+\[
+  K_{\rm int}^{(a)\,M(a)}(U,\cdot)\ \ge\ \theta_*\,P_{t_0}(U,\cdot)
+\]
+as kernels on the coarse interface space $G^{m(\varepsilon)}$, uniformly in $U$ and in the volume/boundary data on fixed slabs.
+\end{theorem}
+
+\begin{remark}[Why UCIS$_{\rm SW}$ is the right replacement target for UCIS--C]\label{rem:ucis-sw-why}
+Lemma~\ref{lem:no-unifball-doeblin-fixed-radius} shows that a one--step \emph{fixed--radius} $\beta$--uniform Doeblin lower bound cannot hold even for a single link conditional. The scale--adapted refresh lemmas instead naturally yield a small--step component at radius $\asymp \beta^{-1/2}$, which requires $\gtrsim \beta$ steps to accumulate $O(1)$ dispersion. The window \eqref{eq:ucis-sw-window} precisely ensures $M(a)\asymp 1/a$ is large enough to contain $\Theta(\beta(a))$ effective diffusion steps inside a fixed physical slab.
+\end{remark}
+
+\begin{lemma}[Scale--adapted small--step convolution $\Rightarrow$ fixed--time heat--kernel minorization (Track~B core)]\label{lem:scaled-ball-to-hk}
+Let $G$ be a compact connected Lie group with bi--invariant metric. There exist constants $c_0,C_0,t_0>0$ depending only on $G$ such that the following holds.
+
+For each $\beta\ge 1$ let $\nu_\beta$ be a probability measure on $G$ satisfying a scale--adapted small--ball lower bound
+\[
+  \nu_\beta\ \ge\ \alpha_0\,\mathrm{Unif}\!\big(B_G(e,\kappa_0/\sqrt{\beta})\big)
+\]
+for some fixed constants $\alpha_0,\kappa_0>0$ independent of $\beta$. Then for every integer $n\ge C_0\,\beta$ one has
+\[
+  \nu_\beta^{(*n)}\ \ge\ c_0\,p_{t_0}
+\]
+as measures on $G$, where $p_{t_0}$ is the heat kernel at time $t_0$.
+\end{lemma}
+\begin{proof}
+\emph{Target (to be proved).} This is a quantitative local CLT / mixing statement for small--step random walks on compact Lie groups: after $n\asymp\beta$ steps of size $\asymp \beta^{-1/2}$ the walk dominates the heat kernel at a fixed time $t_0\asymp 1$ with constants bounded away from $0$ uniformly in $\beta$.
+
+\smallskip
+One approach is to combine (i) comparison of $\nu_\beta$ to an isotropic small--step increment with second moment $\asymp 1/\beta$, (ii) a spectral comparison on each irreducible representation (Fourier analysis on $G$) yielding $\|\widehat{\nu_\beta}(\pi)\|\le e^{-c\,\lambda_\pi/\beta}$ for nontrivial $\pi$, and (iii) inversion/heat kernel bounds to upgrade the spectral decay after $n\ge C_0\beta$ steps to a pointwise lower bound by $p_{t_0}$ (choose $t_0\simeq c\,n/\beta$ and then freeze $t_0$ by taking $n=C_0\beta$). A second approach is via coupling to Brownian motion using Stroock--Varadhan support and a parametrix on $G$, producing a uniform two--sided bound once $n/\beta$ exceeds a fixed threshold.
+\end{proof}
+
+\begin{proof}[Proof sketch of Theorem~\ref{thm:ucis-sw}]
+Replace UCIS--C by Lemma~\ref{lem:scaled-ball-to-hk}. On each coarse cell, Lemmas~\ref{lem:single-link-refresh}--\ref{lem:g-one-link-refresh} provide a scale--adapted ball component of radius $\asymp \beta^{-1/2}$ with uniform weight; by disjoint support (Lemma~\ref{lem:ucis-A-cell-decomp}) and plaquette factorization the coarse increment law tensorizes across cells as in Lemma~\ref{lem:ucis-D-product-ball}. Under the scaling window \eqref{eq:ucis-sw-window}, the physical slab contains $n\ge C_0\beta(a)$ effective ticks per refreshed cell; apply Lemma~\ref{lem:scaled-ball-to-hk} on each factor and tensorize to obtain a product heat--kernel component $P_{t_0}$ with a uniform weight $\theta_*$, yielding the claimed minorization.
 \end{proof}
 
 \begin{lemma}[Density of coarse interface observables as \boldmath $\varepsilon\downarrow 0$]\label{lem:coarse-density}

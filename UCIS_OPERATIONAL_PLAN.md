@@ -5,6 +5,100 @@
 
 ---
 
+## Current implementation status (in this repo)
+
+- **Wired into the manuscript**:
+  - UCIS is now present in `Yang-Mills.tex` as `thm:ucis`, with lemma stubs `lem:ucis-A-*` … `lem:ucis-E-*` and a bookkeeping corollary `cor:ucis-L2-contraction`.
+  - The chosen Track B replacement is now also wired in as the **scaling-window** variant `thm:ucis-sw` (UCIS\(_{\rm SW}\)), together with its core analytic target `lem:scaled-ball-to-hk` and window hypothesis `eq:ucis-sw-window`.
+- **Proved/reduced pieces**:
+  - **UCIS-A** is now proved as a reduction to existing coarse-interface geometry (`lem:coarse-interface-construction`, `lem:cell-disjoint-links`).
+  - **UCIS-D** is proved as a clean reduction to factorization (`lem:plaquette-factorization`) once UCIS-C holds.
+  - **UCIS-E** is now proved as a reduction to compact-group smoothing (`lem:ball-conv-lower`) in increment coordinates consistent with `P_{t_0}(U,·)`.
+  - Added an unconditional one-link helper lemma `lem:one-link-ball-maximizer-unif` (β-uniform *mass* near the polar maximizer), useful for diagnosing why fixed-radius **measure** minorization is harder.
+- **Still open (core blocker)**:
+  - **Unconditional UCIS-C** remains blocked: a truly β-uniform *single-cell* **measure** minorization / refresh mechanism.
+  - **Track B core blocker (now explicit)**: `lem:scaled-ball-to-hk` (scale-adapted small-step convolution ⇒ fixed-time heat-kernel minorization after \(n\asymp\beta\) steps with constants uniform in \(\beta\)).
+  - We now have an explicit **one-link no-go** lemma (`lem:no-unifball-doeblin-fixed-radius`) showing that fixed-radius β-uniform domination by the **uniform ball law** cannot hold even for the basic one-link matrix-Fisher conditionals. This clarifies that UCIS-C cannot be obtained by “one-link Doeblin at fixed radius” and must instead come from an additional **cell-level smoothing/pulse** or a **physically scaled multi-step** mechanism.
+
+---
+
+## UCIS-C replacement mechanisms: Pulse/Sandwich vs Physically Scaled Multi-Step (work-through + best track)
+
+We now need to decide how to replace UCIS-C with something that can plausibly be proved classically and that actually plugs into the existing contraction/gap chain.
+
+### Track A — Pulse/Sandwich route (smoothing-based)
+
+**Target shape.** Prove a *cell/interface-level* lower bound by a strictly positive “pulse” kernel (ideally a heat-kernel pulse) with constants independent of \((\beta,L,a)\), e.g.
+\[
+  K_{\mathrm{cell}}^{M}(U,\cdot)\ \ge\ c_*\,P_{t_*}(U,\cdot).
+\]
+
+**What exists in `Yang-Mills.tex` today.**
+- `prop:sandwich-pulse` shows: **if** you already have an operator inequality \(K^{\circ M}\ge c_*\mathcal H_{t_*}\), then you get a Doeblin/minorization event for a block.
+- `prop:sandwich` works with a **smoothed kernel** \(\widetilde K:=\mathsf S_\rho\circ K\circ\mathsf S_\rho\) and is currently labeled “external input”.
+
+**Key obstacle (why this track is not yet closing UCIS-C).**
+- Any pulse mechanism that is *not already present in the physical Wilson kernel* must be connected back to the original kernel by a **comparison theorem** (e.g. “gap of smoothed kernel ⇒ gap of original kernel” or “original kernel dominates a pulse kernel”). That comparison theorem is currently missing and is itself nontrivial.
+- If the smoothing uses a compactly supported ball-average, it does not automatically remove β-dependence; at large β the unsmoothed kernel can remain extremely concentrated and smoothing may not yield uniform-in-β lower bounds without additional structure.
+
+**When Track A would win.**
+- If we can prove an inequality of the form
+  \[
+    K_{\rm int}^{(a)\,M}(U,\cdot)\ \ge\ c_*\,\mathcal H_{t_*}(U,\cdot)
+  \]
+  (or a direct \(P_{t_*}\) minorization) **for the actual Wilson kernel**, uniformly in \(\beta\), then UCIS-C becomes solvable.
+
+### Track B — Physically scaled multi-step route (diffusive accumulation)
+
+**Target shape.** Replace “one-step fixed-radius Doeblin” by a statement that after physical time \(T_{\rm phys}\) (i.e. \(M(a)=\lceil T_{\rm phys}/a\rceil\) ticks), the coarse increment has accumulated enough dispersion to yield a β-uniform smoothing component.
+
+**What exists in `Yang-Mills.tex` today.**
+- Scale-adapted refresh lemmas (`lem:single-link-refresh`, `lem:g-one-link-refresh`) naturally produce “small-step” mass at radius \(\asymp \beta^{-1/2}\), **uniformly in β** (for β large).
+
+**Key obstacle (why Track B is inherently a scaling-window statement).**
+- A step size \(\asymp \beta^{-1/2}\) typically needs \(\gtrsim \beta\) steps to achieve \(O(1)\) dispersion.
+- With \(M(a)\sim 1/a\), this suggests a condition like \(M(a)\gg \beta\), i.e. \(\beta(a)\ll 1/a\), to get a schedule-compatible, physically fixed \(T_{\rm phys}\) smoothing theorem.
+- Therefore, Track B most naturally yields a **scaling-window UCIS**: prove UCIS along an admissible schedule \(\beta=\beta(a)\) satisfying a growth condition that makes \(M(a)\) dominate the mixing time.
+
+### Best track (recommendation)
+
+- For a genuinely **unconditional** statement “uniform for all \(\beta\ge 0\) and all \(a\in(0,a_0]\)”, both tracks are extremely hard; the one-link no-go lemma shows why naïve fixed-radius Doeblin cannot work.
+- For the most **implementable classical progress** with minimal new machinery, **Track B (physically scaled multi-step)** is the best next move, but it should be implemented explicitly as a **scaling-window theorem** (i.e. it will require an explicit hypothesis tying \(\beta\) to \(a\) so that \(M(a)\) is large enough).
+- Track A can be kept as an optional route, but it likely requires adding a new comparison theorem connecting the smoothed/pulsed dynamics back to the original Wilson kernel before it can close UCIS-C.
+
+---
+
+### Track B — Concrete “scaling-window UCIS” statement (what we should implement next)
+
+To operationalize Track B, define an explicit **admissible scaling window** hypothesis on \((a,\beta)\) that guarantees enough steps for diffusion to accumulate:
+
+- **(SW)** There exists a constant \(C_{\rm SW}>0\) such that along the schedule \(\beta=\beta(a)\),
+  \[
+    \beta(a)\ \le\ C_{\rm SW}\,M(a)\ \asymp\ \frac{C_{\rm SW}\,T_{\rm phys}}{a}.
+  \]
+
+Then the target replacement theorem becomes:
+
+> **UCIS\(_{\rm SW}\)**: Under (SW) (plus the existing near-identity window + scale-adapted refresh lemmas), there exist \(\theta_*,t_0>0\) depending only on \((G,\varepsilon,T_{\rm phys},C_{\rm SW})\) such that  
+> \[
+>   K_{\rm int}^{(a)\,M(a)}(U,\cdot)\ \ge\ \theta_*\,P_{t_0}(U,\cdot)
+> \]
+> holds along the schedule \(a\downarrow 0\).
+
+**Repo implementation note (current).**
+- The scaling-window theorem is now inserted into `Yang-Mills.tex` as `thm:ucis-sw`, with the window hypothesis labeled `eq:ucis-sw-window`.
+- The Track B core analytic target is now a single labeled lemma `lem:scaled-ball-to-hk` (also in `Yang-Mills.tex`).
+
+**What this reduces UCIS-C to proving (Track B core lemma).**
+
+You need a quantitative random-walk/diffusion statement on compact Lie groups of the following flavor:
+
+- If a one-step increment kernel has a scale-adapted small-ball component at radius \(r(\beta)\asymp \beta^{-1/2}\) with weight bounded below uniformly in \(\beta\), then after \(n\asymp \beta\) steps the \(n\)-fold increment law dominates a fixed heat kernel \(p_{t_0}\) with constants independent of \(\beta\).
+
+In other words, Track B shifts the difficulty from “one-step fixed-radius measure minorization” to “multi-step diffusion/mixing at the correct time scale”, which is closer to known local CLT / spectral-gap technology for random walks on compact groups.
+
+---
+
 ## Goal (what “DONE” means)
 
 - **Goal**: Prove a **β-uniform, scaling-compatible minorization** for the *coarse* interface Markov kernel on a fixed physical slab, strong enough to feed the existing chain:
@@ -165,40 +259,46 @@ Same statement as UCIS, but only for \(\beta\ge \beta_0\) (some fixed threshold)
 
 ### Step 0 — Decide which target we pursue
 
-- [ ] **Target choice**: UCIS (full β-uniform) vs UCIS(β≥β₀) (staged).
+- [x] **Target choice (current)**: pursue **Track B / scaling-window** UCIS\(_{\rm SW}\) (`thm:ucis-sw`) as the implementable classical next step.
+- [ ] **Stretch target**: UCIS (full β-uniform, all \(\beta\ge 0\), all \(a\in(0,a_0]\)) via a true cell-level pulse/sandwich comparison (Track A), or a new β-uniform refresh mechanism.
+- [ ] **Fallback lattice-only target**: UCIS(\(\beta\ge\beta_0\)) staged target (useful for lattice gap bookkeeping, but not by itself a continuum closure).
 
 ### Step 1 — Add theorem skeletons to the manuscript
 
-- [ ] Add a new theorem statement in `Yang-Mills.tex` with a stable label, e.g. `thm:ucis`.
-- [ ] Add lemma stubs (A–E) with labels and clearly stated dependencies.
-- [ ] Update `YANG_MILLS_PROOF_TRACK.md`:
+- [x] Add a new theorem statement in `Yang-Mills.tex` with a stable label, e.g. `thm:ucis`.
+- [x] Add lemma stubs (A–E) with labels and clearly stated dependencies.
+- [x] Add the scaling-window replacement theorem `thm:ucis-sw` plus its window label `eq:ucis-sw-window` and Track-B core lemma `lem:scaled-ball-to-hk`.
+- [x] Update `YANG_MILLS_PROOF_TRACK.md`:
   - add UCIS to the “Main-chain claim map”
   - link UCIS as the replacement for ledger #12–#13 blockers
+  - register `thm:ucis-sw` and the new core blocker `lem:scaled-ball-to-hk`
 
 ### Step 2 — Prove the geometry/combinatorics lemmas (A–B)
 
-- [ ] Lemma A (disjoint support)
-- [ ] Lemma B (controlled Jacobian)
+- [x] Lemma A (disjoint support) *(implemented as a reduction in `Yang-Mills.tex` via `lem:ucis-A-cell-decomp`)*
+- [ ] Lemma B (controlled Jacobian) *(Track A–style ingredient; not currently needed for UCIS\(_{\rm SW}\) as implemented)*
 
 ### Step 3 — Prove the analytic single-cell lemma (C)
 
-- [ ] Lemma C (β-uniform ball-density pushforward)
+- [ ] Lemma C (β-uniform ball-density pushforward) *(unconditional UCIS route; blocked by the one-link no-go at fixed radius)*
+- [ ] Track B replacement: `lem:scaled-ball-to-hk` (scale-adapted small-step \(\Rightarrow\) fixed-time heat-kernel minorization after \(n\asymp\beta\) steps, constants uniform in \(\beta\))
 
 ### Step 4 — Prove smoothing upgrade (D–E)
 
-- [ ] Lemma D (cell factorization ⇒ product ball)
-- [ ] Lemma E (ball ⇒ heat kernel)
+- [x] Lemma D (cell factorization ⇒ product ball) *(implemented as a reduction once the cell-level smoothing input is available)*
+- [x] Lemma E (ball ⇒ heat kernel) *(implemented as a reduction to `lem:ball-conv-lower`)*
 
 ### Step 5 — Wire into the existing gap chain
 
-- [ ] Show UCIS ⇒ convex split with β-independent \(\theta_*\) and fixed \(t_0\).
-- [ ] Ensure it feeds the existing audited `cor:hk-convex-split-explicit` / odd-cone contraction chain unchanged.
+- [x] Show UCIS ⇒ convex split with β-independent \(\theta_*\) and fixed \(t_0\). *(bookkeeping corollary inserted as `cor:ucis-L2-contraction`)*
+- [x] Ensure it feeds the existing audited `cor:hk-convex-split-explicit` / odd-cone contraction chain unchanged.
 
 ---
 
 ## Acceptance criteria (non-negotiable)
 
-- **Uniformities**: constants \(\theta_*, t_0\) depend only on \((G,\varepsilon,T_{\mathrm{phys}})\), not on \((a,\beta,L)\) or boundary conditions.
+- **Uniformities (UCIS)**: constants \(\theta_*, t_0\) depend only on \((G,\varepsilon,T_{\mathrm{phys}})\), not on \((a,\beta,L)\) or boundary conditions.
+- **Uniformities (UCIS\(_{\rm SW}\))**: constants \(\theta_*, t_0\) depend only on \((G,\varepsilon,T_{\mathrm{phys}},C_{\rm SW})\), and the minorization holds along schedules satisfying `eq:ucis-sw-window`.
 - **Correct scaling**: \(M(a)=\lceil T_{\mathrm{phys}}/a\rceil\) must be present; no “fixed power” statements that silently break as \(a\downarrow 0\).
 - **Kernel form**: \(P_{t_0}(U,\cdot)\) must be the product heat kernel on \(G^m\) (or an explicitly equivalent smoothing reference).
 - **No hidden assumptions**: no appeal to area law, confinement, or AF/Mosco as an “input” in the main line unless explicitly moved to a conditional appendix.
